@@ -1661,7 +1661,7 @@
                       <ul class="suggestion-list">
                         <li><span class="priority-high">●●●</span> Previous bail precedents in economic offense cases</li>
                         <li><span class="priority-medium">●●</span> Clear criminal record of the accused</li>
-                        <li><span class="priority-low">●</span> Cooperation with investigation</li>
+                        <li><span class="priority-low">��</span> Cooperation with investigation</li>
                       </ul>
                     </div>
 
@@ -1849,95 +1849,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeAddHearingModal()">Cancel</button>
             <button type="button" class="btn btn-primary" onclick="saveHearing()">Save Hearing</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Edit Case Modal -->
-      <div class="modal-overlay" id="editCaseModal" style="display: none;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3>Edit Case Details</h3>
-            <button class="modal-close" onclick="closeEditCaseModal()">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="editCaseForm">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="editCaseTitle">Case Title *</label>
-                  <input type="text" id="editCaseTitle" name="caseTitle" required>
-                </div>
-                <div class="form-group">
-                  <label for="editCaseNumber">Case Number *</label>
-                  <input type="text" id="editCaseNumber" name="caseNumber" required>
-                </div>
-                <div class="form-group">
-                  <label for="editCourtName">Court Name</label>
-                  <input type="text" id="editCourtName" name="courtName">
-                </div>
-                <div class="form-group">
-                  <label for="editJudgeName">Judge Name</label>
-                  <input type="text" id="editJudgeName" name="judgeName">
-                </div>
-                <div class="form-group">
-                  <label for="editCaseType">Case Type</label>
-                  <select id="editCaseType" name="caseType">
-                    <option value="Criminal">Criminal</option>
-                    <option value="Civil">Civil</option>
-                    <option value="Corporate">Corporate</option>
-                    <option value="Family">Family</option>
-                    <option value="Property">Property</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="editCaseStatus">Case Status</label>
-                  <select id="editCaseStatus" name="caseStatus">
-                    <option value="Active">Active</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Disposed">Disposed</option>
-                    <option value="On Hold">On Hold</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="editClientName">Client Name</label>
-                  <input type="text" id="editClientName" name="clientName">
-                </div>
-                <div class="form-group">
-                  <label for="editClientContact">Client Contact</label>
-                  <input type="text" id="editClientContact" name="clientContact">
-                </div>
-                <div class="form-group">
-                  <label for="editOpponentName">Opponent Name</label>
-                  <input type="text" id="editOpponentName" name="opponentName">
-                </div>
-                <div class="form-group">
-                  <label for="editSeniorAdvocate">Senior Advocate</label>
-                  <input type="text" id="editSeniorAdvocate" name="seniorAdvocate">
-                </div>
-                <div class="form-group">
-                  <label for="editNextHearing">Next Hearing Date</label>
-                  <input type="datetime-local" id="editNextHearing" name="nextHearing">
-                </div>
-                <div class="form-group">
-                  <label for="editFiledDate">Filed Date</label>
-                  <input type="date" id="editFiledDate" name="filedDate">
-                </div>
-              </div>
-              <div class="form-group full-width">
-                <label for="editCaseSummary">Case Summary</label>
-                <textarea id="editCaseSummary" name="caseSummary" rows="4" placeholder="Brief description of the case..."></textarea>
-              </div>
-              <div class="form-group full-width">
-                <label for="editClientAddress">Client Address</label>
-                <textarea id="editClientAddress" name="clientAddress" rows="2" placeholder="Full address of the client..."></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeEditCaseModal()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="saveCaseChanges()">Save Changes</button>
           </div>
         </div>
       </div>
