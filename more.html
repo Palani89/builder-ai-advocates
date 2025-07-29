@@ -1175,6 +1175,42 @@
           closeNotifications();
         }
       });
+
+      // Legal Research function
+      function openLegalResearch() {
+        // For now, show alert with coming functionality
+        alert('Legal Research Module\n\nFeatures:\n• Case law database\n• Statute search\n• Legal precedents\n• Research documents\n\nComing soon...');
+      }
+
+      // Legal Templates function
+      function openLegalTemplates() {
+        alert('Legal Templates Library\n\nCategories:\n• Client Onboarding\n• Court-Related\n• Contracts & Agreements\n• Family Law\n• Corporate Law\n• Property & Real Estate\n• Criminal Law\n\nComing soon...');
+      }
+
+      // File Upload function
+      function openFileUpload() {
+        // Create file input element
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.multiple = true;
+        fileInput.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png,.txt';
+
+        fileInput.onchange = function(e) {
+          const files = e.target.files;
+          if (files.length > 0) {
+            alert(`Selected ${files.length} file(s) for upload:\n${Array.from(files).map(f => f.name).join('\n')}\n\nUpload functionality coming soon...`);
+          }
+        };
+
+        fileInput.click();
+      }
+
+      // Contacts function
+      function openContacts() {
+        alert('Contacts Directory\n\nFeatures:\n• View all lawyer contacts\n• Add new contacts\n• Import contacts from CSV\n• Contact management\n\nRedirecting to contacts page...');
+        // For now, redirect to team page as it has contact functionality
+        window.location.href = 'team.html';
+      }
     </script>
   </body>
 </html>
