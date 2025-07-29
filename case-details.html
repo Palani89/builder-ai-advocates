@@ -1853,6 +1853,159 @@
         </div>
       </div>
 
+      <!-- Edit Case Modal -->
+      <div class="modal-overlay" id="editCaseModal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Edit Case Details</h3>
+            <button class="modal-close" onclick="closeEditCaseModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editCaseForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="editCaseTitle">Case Title *</label>
+                  <input type="text" id="editCaseTitle" name="caseTitle" required>
+                </div>
+                <div class="form-group">
+                  <label for="editCaseNumber">Case Number *</label>
+                  <input type="text" id="editCaseNumber" name="caseNumber" required>
+                </div>
+                <div class="form-group">
+                  <label for="editCourtName">Court Name</label>
+                  <input type="text" id="editCourtName" name="courtName">
+                </div>
+                <div class="form-group">
+                  <label for="editJudgeName">Judge Name</label>
+                  <input type="text" id="editJudgeName" name="judgeName">
+                </div>
+                <div class="form-group">
+                  <label for="editCaseType">Case Type</label>
+                  <select id="editCaseType" name="caseType">
+                    <option value="Criminal">Criminal</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Family">Family</option>
+                    <option value="Property">Property</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="editCaseStatus">Case Status</label>
+                  <select id="editCaseStatus" name="caseStatus">
+                    <option value="Active">Active</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Disposed">Disposed</option>
+                    <option value="On Hold">On Hold</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="editClientName">Client Name</label>
+                  <input type="text" id="editClientName" name="clientName">
+                </div>
+                <div class="form-group">
+                  <label for="editClientContact">Client Contact</label>
+                  <input type="text" id="editClientContact" name="clientContact">
+                </div>
+                <div class="form-group">
+                  <label for="editOpponentName">Opponent Name</label>
+                  <input type="text" id="editOpponentName" name="opponentName">
+                </div>
+                <div class="form-group">
+                  <label for="editSeniorAdvocate">Senior Advocate</label>
+                  <input type="text" id="editSeniorAdvocate" name="seniorAdvocate">
+                </div>
+                <div class="form-group">
+                  <label for="editNextHearing">Next Hearing Date</label>
+                  <input type="datetime-local" id="editNextHearing" name="nextHearing">
+                </div>
+                <div class="form-group">
+                  <label for="editFiledDate">Filed Date</label>
+                  <input type="date" id="editFiledDate" name="filedDate">
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label for="editCaseSummary">Case Summary</label>
+                <textarea id="editCaseSummary" name="caseSummary" rows="4" placeholder="Brief description of the case..."></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label for="editClientAddress">Client Address</label>
+                <textarea id="editClientAddress" name="clientAddress" rows="2" placeholder="Full address of the client..."></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeEditCaseModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="saveCaseChanges()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Update Modal -->
+      <div class="modal-overlay" id="addUpdateModal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Add Case Update</h3>
+            <button class="modal-close" onclick="closeAddUpdateModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addUpdateForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="updateTitle">Update Title *</label>
+                  <input type="text" id="updateTitle" name="updateTitle" placeholder="e.g., Document Submitted, Hearing Completed" required>
+                </div>
+                <div class="form-group">
+                  <label for="updateDate">Update Date *</label>
+                  <input type="datetime-local" id="updateDate" name="updateDate" required>
+                </div>
+                <div class="form-group">
+                  <label for="updateCategory">Category</label>
+                  <select id="updateCategory" name="updateCategory">
+                    <option value="">Select Category</option>
+                    <option value="Hearing">Hearing</option>
+                    <option value="Document">Document</option>
+                    <option value="Payment">Payment</option>
+                    <option value="Client Meeting">Client Meeting</option>
+                    <option value="Research">Research</option>
+                    <option value="Court Filing">Court Filing</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="updateStatus">Priority</label>
+                  <select id="updatePriority" name="updatePriority">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group full-width">
+                <label for="updateNotes">Update Notes *</label>
+                <textarea id="updateNotes" name="updateNotes" rows="4" placeholder="Detailed notes about this update..." required></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label for="nextAction">Next Action Required</label>
+                <textarea id="nextAction" name="nextAction" rows="2" placeholder="What needs to be done next..."></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label for="documentsAttached">Documents Attached</label>
+                <input type="text" id="documentsAttached" name="documentsAttached" placeholder="List any documents related to this update">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeAddUpdateModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="saveUpdate()">Add Update</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-items">
