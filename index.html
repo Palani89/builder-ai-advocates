@@ -483,7 +483,7 @@
                 <option value="en">English</option>
                 <option value="hi">हिंदी (Hindi)</option>
                 <option value="ta">தமிழ் (Tamil)</option>
-                <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                <option value="kn">ಕನ��ನಡ (Kannada)</option>
                 <option value="mr">मराठी (Marathi)</option>
                 <option value="bn">বাংলা (Bengali)</option>
                 <option value="gu">ગુજરાતી (Gujarati)</option>
@@ -738,7 +738,7 @@
         kn: {
           tagline: "ಆಧುನಿಕ ಕಾನೂನು ಅಭ್ಯಾಸಕ್ಕಾಗಿ ನಿಮ್ಮ AI-ಚಾಲಿತ ಕಾನೂನು ಪಾಲುದಾರ",
           "otp-tagline": "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗೆ ಕಳುಹಿಸಲಾದ OTP ಅನ್ನು ನಮೂದಿಸಿ",
-          "preferred-language": "ಆದ್ಯತೆಯ ಭಾಷೆ",
+          "preferred-language": "ಆದ���ಯತೆಯ ಭಾಷೆ",
           "advocate-id": "ವಕೀಲ ID",
           mobile: "ಮೊಬೈಲ್",
           email: "ಇಮೇಲ್",
@@ -758,7 +758,7 @@
         },
         mr: {
           tagline: "आधुनिक कायदेशीर सरावासाठी तुमचा AI-चालित कायदेशीर भागीदार",
-          "otp-tagline": "तुमच्या मोबाइल नंबरवर पाठवलेला OTP टाका",
+          "otp-tagline": "तु���च्या मोबाइल नंबरवर पाठवलेला OTP टाका",
           "preferred-language": "पसंतीची भाषा",
           "advocate-id": "वकील ID",
           mobile: "मोबाइल",
@@ -918,6 +918,9 @@
       function handleSignIn() {
         const activeTab = $(".tab-button.active").data("tab");
         const submitButton = $('#signin-form button[type="submit"]');
+
+        // Save current language globally before redirect
+        setGlobalLanguage(currentLanguage);
 
         // Show loading
         submitButton.addClass("loading");
