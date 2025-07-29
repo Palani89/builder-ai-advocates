@@ -378,7 +378,7 @@ const APP_TRANSLATIONS = {
     "legal-templates": "कायदेशीर टेम्प्लेट्स",
     "assign-task": "कार्य सोपवा",
     contact: "संपर्क",
-  }
+  },
 };
 
 // Global function to apply translations
@@ -431,23 +431,23 @@ if (typeof jQuery !== "undefined") {
 
 // Function to apply navigation translations automatically to common elements
 function applyNavigationTranslations() {
-  const savedLanguage = localStorage.getItem('app-language') || 'en';
+  const savedLanguage = localStorage.getItem("app-language") || "en";
   const translations = APP_TRANSLATIONS[savedLanguage] || APP_TRANSLATIONS.en;
 
   // Auto-translate common navigation text without requiring data-lang attributes
   const elementsToTranslate = [
-    { selector: 'a[href="home.html"]', text: 'Home', key: 'home' },
-    { selector: 'a[href="team.html"]', text: ['My Team', 'Team'], key: 'team' },
-    { selector: 'a[href="cases.html"]', text: 'Cases', key: 'cases' },
-    { selector: 'a[href="calendar.html"]', text: 'Calendar', key: 'calendar' },
-    { selector: 'a[href="more.html"]', text: 'More', key: 'more' },
-    { selector: '.logout', text: ['Log Out', 'Logout'], key: 'logout' },
+    { selector: 'a[href="home.html"]', text: "Home", key: "home" },
+    { selector: 'a[href="team.html"]', text: ["My Team", "Team"], key: "team" },
+    { selector: 'a[href="cases.html"]', text: "Cases", key: "cases" },
+    { selector: 'a[href="calendar.html"]', text: "Calendar", key: "calendar" },
+    { selector: 'a[href="more.html"]', text: "More", key: "more" },
+    { selector: ".logout", text: ["Log Out", "Logout"], key: "logout" },
   ];
 
-  elementsToTranslate.forEach(item => {
-    document.querySelectorAll(item.selector).forEach(el => {
+  elementsToTranslate.forEach((item) => {
+    document.querySelectorAll(item.selector).forEach((el) => {
       const textToReplace = Array.isArray(item.text) ? item.text : [item.text];
-      textToReplace.forEach(text => {
+      textToReplace.forEach((text) => {
         if (el.textContent.includes(text) && translations[item.key]) {
           el.innerHTML = el.innerHTML.replace(text, translations[item.key]);
         }
