@@ -1533,11 +1533,17 @@
             <i class="fas fa-edit"></i>
             Edit Case
           </button>
-          <button class="action-btn add-update-btn" onclick="openAddUpdateModal()">
+          <button
+            class="action-btn add-update-btn"
+            onclick="openAddUpdateModal()"
+          >
             <i class="fas fa-plus"></i>
             Add Update
           </button>
-          <button class="action-btn move-case-btn" onclick="openMoveCaseModal()">
+          <button
+            class="action-btn move-case-btn"
+            onclick="openMoveCaseModal()"
+          >
             <i class="fas fa-exchange-alt"></i>
             Move case
           </button>
@@ -4198,12 +4204,12 @@
 
       // Move Case Modal Functions
       function openMoveCaseModal() {
-        $('#moveCaseModal').css('display', 'flex');
+        $("#moveCaseModal").css("display", "flex");
       }
 
       function closeMoveCaseModal() {
-        $('#moveCaseModal').hide();
-        $('.advocate-item').removeClass('selected');
+        $("#moveCaseModal").hide();
+        $(".advocate-item").removeClass("selected");
         selectedAdvocateId = null;
       }
 
@@ -4211,30 +4217,36 @@
 
       function selectAdvocate(advocateId) {
         selectedAdvocateId = advocateId;
-        $('.advocate-item').removeClass('selected');
-        $(`.advocate-item[data-advocate-id="${advocateId}"]`).addClass('selected');
+        $(".advocate-item").removeClass("selected");
+        $(`.advocate-item[data-advocate-id="${advocateId}"]`).addClass(
+          "selected",
+        );
       }
 
       function assignCase() {
         if (!selectedAdvocateId) {
-          alert('Please select an advocate to assign the case');
+          alert("Please select an advocate to assign the case");
           return;
         }
 
-        const advocateName = $(`.advocate-item[data-advocate-id="${selectedAdvocateId}"] .advocate-name`).text();
+        const advocateName = $(
+          `.advocate-item[data-advocate-id="${selectedAdvocateId}"] .advocate-name`,
+        ).text();
 
-        if (confirm(`Are you sure you want to move this case to ${advocateName}?`)) {
+        if (
+          confirm(`Are you sure you want to move this case to ${advocateName}?`)
+        ) {
           // Here you would normally send the data to your backend
           alert(`Case successfully moved to ${advocateName}!`);
           closeMoveCaseModal();
 
           // Update the senior advocate in the case details
-          $('#seniorAdvocate').text(advocateName);
+          $("#seniorAdvocate").text(advocateName);
         }
       }
 
       // Close move case modal when clicking overlay
-      $('#moveCaseModal').on('click', function(e) {
+      $("#moveCaseModal").on("click", function (e) {
         if (e.target === this) {
           closeMoveCaseModal();
         }
@@ -4252,80 +4264,125 @@
     <div class="move-case-modal" id="moveCaseModal">
       <div class="move-case-content">
         <div class="move-case-header">
-          <h3><i class="fas fa-exchange-alt" style="margin-right: 0.5rem; color: #8b5cf6;"></i>Move Case to Another Advocate</h3>
+          <h3>
+            <i
+              class="fas fa-exchange-alt"
+              style="margin-right: 0.5rem; color: #8b5cf6"
+            ></i
+            >Move Case to Another Advocate
+          </h3>
           <button class="move-case-close" onclick="closeMoveCaseModal()">
             <i class="fas fa-times"></i>
           </button>
         </div>
         <div class="move-case-body">
-          <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-            Select an advocate to transfer this case to. The selected advocate will become the new lead advocate for this case.
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem">
+            Select an advocate to transfer this case to. The selected advocate
+            will become the new lead advocate for this case.
           </p>
 
           <div class="advocate-list">
-            <div class="advocate-item" data-advocate-id="rajesh_kumar" onclick="selectAdvocate('rajesh_kumar')">
+            <div
+              class="advocate-item"
+              data-advocate-id="rajesh_kumar"
+              onclick="selectAdvocate('rajesh_kumar')"
+            >
               <div class="advocate-avatar">RK</div>
               <div class="advocate-info">
                 <div class="advocate-name">Rajesh Kumar</div>
                 <div class="advocate-role">Senior Advocate</div>
-                <div class="advocate-specialization">Criminal Law, Constitutional Law</div>
+                <div class="advocate-specialization">
+                  Criminal Law, Constitutional Law
+                </div>
               </div>
               <span class="advocate-status available">Available</span>
             </div>
 
-            <div class="advocate-item" data-advocate-id="amit_jain" onclick="selectAdvocate('amit_jain')">
+            <div
+              class="advocate-item"
+              data-advocate-id="amit_jain"
+              onclick="selectAdvocate('amit_jain')"
+            >
               <div class="advocate-avatar">AJ</div>
               <div class="advocate-info">
                 <div class="advocate-name">Amit Jain</div>
                 <div class="advocate-role">Junior Advocate</div>
-                <div class="advocate-specialization">Civil Law, Property Law</div>
+                <div class="advocate-specialization">
+                  Civil Law, Property Law
+                </div>
               </div>
               <span class="advocate-status available">Available</span>
             </div>
 
-            <div class="advocate-item" data-advocate-id="neha_gupta" onclick="selectAdvocate('neha_gupta')">
+            <div
+              class="advocate-item"
+              data-advocate-id="neha_gupta"
+              onclick="selectAdvocate('neha_gupta')"
+            >
               <div class="advocate-avatar">NG</div>
               <div class="advocate-info">
                 <div class="advocate-name">Neha Gupta</div>
                 <div class="advocate-role">Junior Advocate</div>
-                <div class="advocate-specialization">Family Law, Corporate Law</div>
+                <div class="advocate-specialization">
+                  Family Law, Corporate Law
+                </div>
               </div>
               <span class="advocate-status busy">Busy</span>
             </div>
 
-            <div class="advocate-item" data-advocate-id="suresh_patel" onclick="selectAdvocate('suresh_patel')">
+            <div
+              class="advocate-item"
+              data-advocate-id="suresh_patel"
+              onclick="selectAdvocate('suresh_patel')"
+            >
               <div class="advocate-avatar">SP</div>
               <div class="advocate-info">
                 <div class="advocate-name">Suresh Patel</div>
                 <div class="advocate-role">Case Researcher</div>
-                <div class="advocate-specialization">Legal Research, Documentation</div>
+                <div class="advocate-specialization">
+                  Legal Research, Documentation
+                </div>
               </div>
               <span class="advocate-status available">Available</span>
             </div>
 
-            <div class="advocate-item" data-advocate-id="kavita_singh" onclick="selectAdvocate('kavita_singh')">
+            <div
+              class="advocate-item"
+              data-advocate-id="kavita_singh"
+              onclick="selectAdvocate('kavita_singh')"
+            >
               <div class="advocate-avatar">KS</div>
               <div class="advocate-info">
                 <div class="advocate-name">Kavita Singh</div>
                 <div class="advocate-role">Senior Advocate</div>
-                <div class="advocate-specialization">Labor Law, Employment Law</div>
+                <div class="advocate-specialization">
+                  Labor Law, Employment Law
+                </div>
               </div>
               <span class="advocate-status available">Available</span>
             </div>
 
-            <div class="advocate-item" data-advocate-id="ravi_sharma" onclick="selectAdvocate('ravi_sharma')">
+            <div
+              class="advocate-item"
+              data-advocate-id="ravi_sharma"
+              onclick="selectAdvocate('ravi_sharma')"
+            >
               <div class="advocate-avatar">RS</div>
               <div class="advocate-info">
                 <div class="advocate-name">Ravi Sharma</div>
                 <div class="advocate-role">Junior Advocate</div>
-                <div class="advocate-specialization">Tax Law, Commercial Law</div>
+                <div class="advocate-specialization">
+                  Tax Law, Commercial Law
+                </div>
               </div>
               <span class="advocate-status available">Available</span>
             </div>
           </div>
         </div>
         <div class="move-case-footer">
-          <button class="btn btn-secondary" onclick="closeMoveCaseModal()">Cancel</button>
+          <button class="btn btn-secondary" onclick="closeMoveCaseModal()">
+            Cancel
+          </button>
           <button class="btn btn-primary" onclick="assignCase()">
             <i class="fas fa-check"></i>
             Assign Case
@@ -4333,6 +4390,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

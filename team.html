@@ -1761,42 +1761,46 @@
 
       // Assignment Modal Functions
       function openAssignTaskModal(memberName, memberId) {
-        $('#assignmentModal').css('display', 'flex');
-        $('#assignedMemberName').text(memberName);
-        $('#assignedMemberId').val(memberId);
+        $("#assignmentModal").css("display", "flex");
+        $("#assignedMemberName").text(memberName);
+        $("#assignedMemberId").val(memberId);
       }
 
       function closeAssignTaskModal() {
-        $('#assignmentModal').hide();
-        $('#assignmentForm')[0].reset();
+        $("#assignmentModal").hide();
+        $("#assignmentForm")[0].reset();
       }
 
       function createAssignment() {
-        const form = $('#assignmentForm')[0];
+        const form = $("#assignmentForm")[0];
         const formData = new FormData(form);
 
         // Basic validation
-        if (!formData.get('selectCase') || !formData.get('taskType') || !formData.get('dueDate')) {
-          alert('Please fill in all required fields');
+        if (
+          !formData.get("selectCase") ||
+          !formData.get("taskType") ||
+          !formData.get("dueDate")
+        ) {
+          alert("Please fill in all required fields");
           return;
         }
 
         // Create assignment object
         const assignment = {
-          memberId: formData.get('assignedMemberId'),
-          memberName: $('#assignedMemberName').text(),
-          case: formData.get('selectCase'),
-          taskType: formData.get('taskType'),
-          priority: formData.get('priority'),
-          dueDate: formData.get('dueDate'),
-          taskId: formData.get('taskId') || 'AUTO-' + Date.now(),
-          instructions: formData.get('instructions'),
-          createdBy: 'Current User',
-          createdAt: new Date().toISOString()
+          memberId: formData.get("assignedMemberId"),
+          memberName: $("#assignedMemberName").text(),
+          case: formData.get("selectCase"),
+          taskType: formData.get("taskType"),
+          priority: formData.get("priority"),
+          dueDate: formData.get("dueDate"),
+          taskId: formData.get("taskId") || "AUTO-" + Date.now(),
+          instructions: formData.get("instructions"),
+          createdBy: "Current User",
+          createdAt: new Date().toISOString(),
         };
 
         // Here you would normally send the data to your backend
-        console.log('Assignment created:', assignment);
+        console.log("Assignment created:", assignment);
 
         // Show success message
         alert(`Task assigned successfully to ${assignment.memberName}!`);
@@ -1814,30 +1818,62 @@
       }
 
       // Close assignment modal when clicking overlay
-      $('#assignmentModal').on('click', function(e) {
+      $("#assignmentModal").on("click", function (e) {
         if (e.target === this) {
           closeAssignTaskModal();
         }
       });
 
       // Add event handlers for all assign task and contact buttons
-      $(document).ready(function() {
+      $(document).ready(function () {
         // Contact button handlers with phone numbers
-        $('.contact-btn').each(function(index) {
-          const phoneNumbers = ['+91 9876543210', '+91 9876543211', '+91 9876543212', '+91 9876543213', '+91 9876543214', '+91 9876543215', '+91 9876543216'];
-          const memberNames = ['Priya Sharma', 'Amit Jain', 'Neha Gupta', 'Suresh Patel', 'Ravi Singh', 'Meera Patel', 'Arjun Kumar'];
+        $(".contact-btn").each(function (index) {
+          const phoneNumbers = [
+            "+91 9876543210",
+            "+91 9876543211",
+            "+91 9876543212",
+            "+91 9876543213",
+            "+91 9876543214",
+            "+91 9876543215",
+            "+91 9876543216",
+          ];
+          const memberNames = [
+            "Priya Sharma",
+            "Amit Jain",
+            "Neha Gupta",
+            "Suresh Patel",
+            "Ravi Singh",
+            "Meera Patel",
+            "Arjun Kumar",
+          ];
 
-          $(this).on('click', function() {
+          $(this).on("click", function () {
             contactMember(phoneNumbers[index], memberNames[index]);
           });
         });
 
         // Assign task button handlers
-        $('.assign-btn').each(function(index) {
-          const memberNames = ['Priya Sharma', 'Amit Jain', 'Neha Gupta', 'Suresh Patel', 'Ravi Singh', 'Meera Patel', 'Arjun Kumar'];
-          const memberIds = ['priya_sharma', 'amit_jain', 'neha_gupta', 'suresh_patel', 'ravi_singh', 'meera_patel', 'arjun_kumar'];
+        $(".assign-btn").each(function (index) {
+          const memberNames = [
+            "Priya Sharma",
+            "Amit Jain",
+            "Neha Gupta",
+            "Suresh Patel",
+            "Ravi Singh",
+            "Meera Patel",
+            "Arjun Kumar",
+          ];
+          const memberIds = [
+            "priya_sharma",
+            "amit_jain",
+            "neha_gupta",
+            "suresh_patel",
+            "ravi_singh",
+            "meera_patel",
+            "arjun_kumar",
+          ];
 
-          $(this).on('click', function() {
+          $(this).on("click", function () {
             openAssignTaskModal(memberNames[index], memberIds[index]);
           });
         });
@@ -1849,7 +1885,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3>
-            <i class="fas fa-tasks" style="color: var(--primary);"></i>
+            <i class="fas fa-tasks" style="color: var(--primary)"></i>
             Assignment Details
           </h3>
           <button class="modal-close" onclick="closeAssignTaskModal()">
@@ -1857,23 +1893,47 @@
           </button>
         </div>
         <div class="modal-body">
-          <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem;">
-            Configure task assignment for <span id="assignedMemberName" style="font-weight: 600; color: var(--primary);"></span>
+          <p
+            style="
+              color: var(--text-secondary);
+              margin-bottom: 1.5rem;
+              font-size: 0.875rem;
+            "
+          >
+            Configure task assignment for
+            <span
+              id="assignedMemberName"
+              style="font-weight: 600; color: var(--primary)"
+            ></span>
           </p>
 
           <form id="assignmentForm">
-            <input type="hidden" id="assignedMemberId" name="assignedMemberId">
+            <input
+              type="hidden"
+              id="assignedMemberId"
+              name="assignedMemberId"
+            />
 
             <div class="assignment-form-grid">
               <div class="assignment-form-group">
                 <label for="selectCase">Select Case *</label>
                 <select id="selectCase" name="selectCase" required>
                   <option value="">Choose a case</option>
-                  <option value="state-vs-john-doe">State vs. John Doe - CC/1234/2024</option>
-                  <option value="smith-property-dispute">Smith Property Dispute - CS/5678/2024</option>
-                  <option value="abc-vs-xyz">ABC vs. XYZ Industries - CS/9876/2024</option>
-                  <option value="employment-dispute">Employment Dispute - LC/4567/2024</option>
-                  <option value="land-acquisition">Land Acquisition Appeal - HA/7890/2024</option>
+                  <option value="state-vs-john-doe">
+                    State vs. John Doe - CC/1234/2024
+                  </option>
+                  <option value="smith-property-dispute">
+                    Smith Property Dispute - CS/5678/2024
+                  </option>
+                  <option value="abc-vs-xyz">
+                    ABC vs. XYZ Industries - CS/9876/2024
+                  </option>
+                  <option value="employment-dispute">
+                    Employment Dispute - LC/4567/2024
+                  </option>
+                  <option value="land-acquisition">
+                    Land Acquisition Appeal - HA/7890/2024
+                  </option>
                 </select>
               </div>
 
@@ -1887,7 +1947,9 @@
                   <option value="Court Appearance">Court Appearance</option>
                   <option value="Document Drafting">Document Drafting</option>
                   <option value="Case Analysis">Case Analysis</option>
-                  <option value="Evidence Collection">Evidence Collection</option>
+                  <option value="Evidence Collection">
+                    Evidence Collection
+                  </option>
                   <option value="Witness Interview">Witness Interview</option>
                   <option value="Filing">Court Filing</option>
                   <option value="Other">Other</option>
@@ -1906,23 +1968,34 @@
 
               <div class="assignment-form-group">
                 <label for="dueDate">Due Date *</label>
-                <input type="date" id="dueDate" name="dueDate" required>
+                <input type="date" id="dueDate" name="dueDate" required />
               </div>
 
               <div class="assignment-form-group full-width">
                 <label for="taskId">Task ID (Optional)</label>
-                <input type="text" id="taskId" name="taskId" placeholder="Auto-generated if left empty">
+                <input
+                  type="text"
+                  id="taskId"
+                  name="taskId"
+                  placeholder="Auto-generated if left empty"
+                />
               </div>
 
               <div class="assignment-form-group full-width">
                 <label for="instructions">Instructions & Notes</label>
-                <textarea id="instructions" name="instructions" placeholder="Detailed instructions, requirements, and any specific notes for the assigned advocate(s)..."></textarea>
+                <textarea
+                  id="instructions"
+                  name="instructions"
+                  placeholder="Detailed instructions, requirements, and any specific notes for the assigned advocate(s)..."
+                ></textarea>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeAssignTaskModal()">Cancel</button>
+          <button class="btn btn-secondary" onclick="closeAssignTaskModal()">
+            Cancel
+          </button>
           <button class="btn btn-primary" onclick="createAssignment()">
             <i class="fas fa-check"></i>
             Create Assignment
@@ -1930,6 +2003,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>

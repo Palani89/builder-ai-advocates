@@ -438,7 +438,10 @@
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title">
-          <i class="fas fa-search" style="color: var(--primary); margin-right: 0.75rem;"></i>
+          <i
+            class="fas fa-search"
+            style="color: var(--primary); margin-right: 0.75rem"
+          ></i>
           Legal Research
         </h1>
         <p class="page-subtitle">
@@ -450,7 +453,12 @@
       <div class="search-section">
         <div class="search-container">
           <i class="fas fa-search search-icon"></i>
-          <input type="text" class="search-input" placeholder="Search case laws, statutes, precedents..." id="searchInput">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search case laws, statutes, precedents..."
+            id="searchInput"
+          />
         </div>
         <button class="btn btn-primary" onclick="openAddDocumentModal()">
           <i class="fas fa-plus"></i>
@@ -467,12 +475,18 @@
               <i class="fas fa-gavel"></i>
             </div>
             <div class="research-info">
-              <div class="research-title">Kesavananda Bharati vs State of Kerala</div>
-              <div class="research-meta">Supreme Court • 1973 • Landmark Case</div>
+              <div class="research-title">
+                Kesavananda Bharati vs State of Kerala
+              </div>
+              <div class="research-meta">
+                Supreme Court • 1973 • Landmark Case
+              </div>
             </div>
           </div>
           <div class="research-description">
-            Established the basic structure doctrine of the Indian Constitution. This case is fundamental for constitutional law practice and judicial review principles.
+            Established the basic structure doctrine of the Indian Constitution.
+            This case is fundamental for constitutional law practice and
+            judicial review principles.
           </div>
           <div class="research-tags">
             <span class="tag">Constitutional Law</span>
@@ -502,11 +516,15 @@
             </div>
             <div class="research-info">
               <div class="research-title">Indian Penal Code Section 420</div>
-              <div class="research-meta">Statute • IPC 1860 • Cheating and Fraud</div>
+              <div class="research-meta">
+                Statute • IPC 1860 • Cheating and Fraud
+              </div>
             </div>
           </div>
           <div class="research-description">
-            Deals with cheating and dishonestly inducing delivery of property. Essential reference for criminal law practitioners handling fraud cases.
+            Deals with cheating and dishonestly inducing delivery of property.
+            Essential reference for criminal law practitioners handling fraud
+            cases.
           </div>
           <div class="research-tags">
             <span class="tag">Criminal Law</span>
@@ -535,12 +553,17 @@
               <i class="fas fa-balance-scale"></i>
             </div>
             <div class="research-info">
-              <div class="research-title">Mohinder Singh Gill vs Chief Election Commissioner</div>
-              <div class="research-meta">Supreme Court • 1978 • Election Law</div>
+              <div class="research-title">
+                Mohinder Singh Gill vs Chief Election Commissioner
+              </div>
+              <div class="research-meta">
+                Supreme Court • 1978 • Election Law
+              </div>
             </div>
           </div>
           <div class="research-description">
-            Important precedent on free and fair elections, election commission powers, and constitutional interpretation of Article 324.
+            Important precedent on free and fair elections, election commission
+            powers, and constitutional interpretation of Article 324.
           </div>
           <div class="research-tags">
             <span class="tag">Election Law</span>
@@ -569,12 +592,15 @@
               <i class="fas fa-file-alt"></i>
             </div>
             <div class="research-info">
-              <div class="research-title">Cyber Crime Laws in India: A Comprehensive Guide</div>
+              <div class="research-title">
+                Cyber Crime Laws in India: A Comprehensive Guide
+              </div>
               <div class="research-meta">Research Article • 2024 • IT Law</div>
             </div>
           </div>
           <div class="research-description">
-            Detailed analysis of Information Technology Act 2000, cyber crime provisions, and recent amendments for digital age legal practice.
+            Detailed analysis of Information Technology Act 2000, cyber crime
+            provisions, and recent amendments for digital age legal practice.
           </div>
           <div class="research-tags">
             <span class="tag">Cyber Law</span>
@@ -604,11 +630,14 @@
             </div>
             <div class="research-info">
               <div class="research-title">Vishaka vs State of Rajasthan</div>
-              <div class="research-meta">Supreme Court • 1997 • Women's Rights</div>
+              <div class="research-meta">
+                Supreme Court • 1997 • Women's Rights
+              </div>
             </div>
           </div>
           <div class="research-description">
-            Landmark judgment establishing guidelines for prevention of sexual harassment at workplace, foundational for employment law.
+            Landmark judgment establishing guidelines for prevention of sexual
+            harassment at workplace, foundational for employment law.
           </div>
           <div class="research-tags">
             <span class="tag">Employment Law</span>
@@ -638,11 +667,14 @@
             </div>
             <div class="research-info">
               <div class="research-title">Companies Act 2013 - Section 149</div>
-              <div class="research-meta">Statute • Corporate Law • Board Composition</div>
+              <div class="research-meta">
+                Statute • Corporate Law • Board Composition
+              </div>
             </div>
           </div>
           <div class="research-description">
-            Provisions relating to independent directors, their appointment, qualifications, and duties under corporate governance framework.
+            Provisions relating to independent directors, their appointment,
+            qualifications, and duties under corporate governance framework.
           </div>
           <div class="research-tags">
             <span class="tag">Corporate Law</span>
@@ -710,18 +742,33 @@
 
         // Action button handlers
         $(".action-btn.view").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Opening: ${title}\n\nThis would open the document viewer in a real implementation.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Opening: ${title}\n\nThis would open the document viewer in a real implementation.`,
+          );
         });
 
         $(".action-btn.download").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Downloading: ${title}\n\nThis would initiate the download in a real implementation.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Downloading: ${title}\n\nThis would initiate the download in a real implementation.`,
+          );
         });
 
         $(".action-btn.bookmark").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Bookmarked: ${title}\n\nThis document has been added to your bookmarks.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Bookmarked: ${title}\n\nThis document has been added to your bookmarks.`,
+          );
         });
 
         // Navigation
@@ -734,12 +781,14 @@
       });
 
       function openAddDocumentModal() {
-        alert('Add Legal Document\n\nFeatures:\n• Upload new research documents\n• Categorize by law type\n• Add tags and descriptions\n• Organize by practice area\n\nFunctionality coming soon...');
+        alert(
+          "Add Legal Document\n\nFeatures:\n• Upload new research documents\n• Categorize by law type\n• Add tags and descriptions\n• Organize by practice area\n\nFunctionality coming soon...",
+        );
       }
 
       function logoutFromApp() {
-        if (confirm('Are you sure you want to logout?')) {
-          alert('Logout functionality would be implemented here');
+        if (confirm("Are you sure you want to logout?")) {
+          alert("Logout functionality would be implemented here");
         }
       }
     </script>

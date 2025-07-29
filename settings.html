@@ -571,7 +571,10 @@
       <!-- Header -->
       <div class="header">
         <div class="header-left">
-          <button class="menu-toggle" onclick="window.location.href='more.html'">
+          <button
+            class="menu-toggle"
+            onclick="window.location.href='more.html'"
+          >
             <i class="fas fa-arrow-left"></i>
           </button>
           <div class="logo-container">
@@ -601,7 +604,10 @@
             <span class="breadcrumb-item">Settings</span>
           </nav>
           <h1 class="page-title">
-            <i class="fas fa-cog" style="color: var(--primary); margin-right: 0.75rem;"></i>
+            <i
+              class="fas fa-cog"
+              style="color: var(--primary); margin-right: 0.75rem"
+            ></i>
             Settings
           </h1>
           <p class="page-subtitle">
@@ -610,7 +616,10 @@
         </div>
 
         <div class="page-actions">
-          <button class="btn btn-secondary" onclick="window.location.href='more.html'">
+          <button
+            class="btn btn-secondary"
+            onclick="window.location.href='more.html'"
+          >
             <i class="fas fa-arrow-left"></i>
             Back to More
           </button>
@@ -620,8 +629,12 @@
       <!-- Tab Navigation -->
       <div class="tab-navigation">
         <div class="tab-buttons">
-          <button class="tab-btn active" data-tab="profile">Profile Information</button>
-          <button class="tab-btn" data-tab="security">Security & Password</button>
+          <button class="tab-btn active" data-tab="profile">
+            Profile Information
+          </button>
+          <button class="tab-btn" data-tab="security">
+            Security & Password
+          </button>
         </div>
       </div>
 
@@ -637,11 +650,9 @@
               </div>
               <h2 class="card-title">Profile Picture</h2>
             </div>
-            
+
             <div class="profile-section">
-              <div class="profile-avatar">
-                A
-              </div>
+              <div class="profile-avatar">A</div>
               <div class="profile-info">
                 <div class="profile-name">Advocate Admin</div>
                 <div class="profile-role">Senior Advocate & Practice Owner</div>
@@ -661,28 +672,59 @@
               </div>
               <h2 class="card-title">Basic Information</h2>
             </div>
-            
+
             <form id="profileForm">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="firstName">First Name *</label>
-                  <input type="text" id="firstName" name="firstName" value="Advocate" required>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value="Advocate"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label for="lastName">Last Name *</label>
-                  <input type="text" id="lastName" name="lastName" value="Admin" required>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value="Admin"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label for="email">Email Address *</label>
-                  <input type="email" id="email" name="email" value="admin@aiadvocates.com" required>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="admin@aiadvocates.com"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" value="+91 9876543210" required>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value="+91 9876543210"
+                    required
+                  />
                 </div>
                 <div class="form-group">
-                  <label for="barCouncilNumber">Bar Council Registration No.</label>
-                  <input type="text" id="barCouncilNumber" name="barCouncilNumber" value="D/1234/2020">
+                  <label for="barCouncilNumber"
+                    >Bar Council Registration No.</label
+                  >
+                  <input
+                    type="text"
+                    id="barCouncilNumber"
+                    name="barCouncilNumber"
+                    value="D/1234/2020"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="specialization">Specialization</label>
@@ -693,22 +735,28 @@
                     <option value="Family Law">Family Law</option>
                     <option value="Labor Law">Labor Law</option>
                     <option value="Tax Law">Tax Law</option>
-                    <option value="Constitutional Law">Constitutional Law</option>
+                    <option value="Constitutional Law">
+                      Constitutional Law
+                    </option>
                   </select>
                 </div>
               </div>
-              
+
               <div class="form-group full-width">
                 <label for="address">Office Address</label>
-                <textarea id="address" name="address" rows="3">123, Legal Plaza, Connaught Place, New Delhi - 110001</textarea>
+                <textarea id="address" name="address" rows="3">
+123, Legal Plaza, Connaught Place, New Delhi - 110001</textarea
+                >
               </div>
-              
+
               <div class="form-group full-width">
                 <label for="bio">Professional Bio</label>
-                <textarea id="bio" name="bio" rows="4">Experienced legal professional with over 15 years of expertise in criminal and civil law. Committed to providing comprehensive legal solutions and maintaining the highest standards of professional ethics.</textarea>
+                <textarea id="bio" name="bio" rows="4">
+Experienced legal professional with over 15 years of expertise in criminal and civil law. Committed to providing comprehensive legal solutions and maintaining the highest standards of professional ethics.</textarea
+                >
               </div>
-              
-              <div style="text-align: right; margin-top: 2rem;">
+
+              <div style="text-align: right; margin-top: 2rem">
                 <button type="submit" class="btn btn-primary">
                   <i class="fas fa-save"></i>
                   Save Profile
@@ -725,41 +773,73 @@
               </div>
               <h2 class="card-title">Practice Information</h2>
             </div>
-            
+
             <form id="practiceForm">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="practiceName">Practice/Firm Name</label>
-                  <input type="text" id="practiceName" name="practiceName" value="AI Advocates Legal Services">
+                  <input
+                    type="text"
+                    id="practiceName"
+                    name="practiceName"
+                    value="AI Advocates Legal Services"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="establishedYear">Established Year</label>
-                  <input type="number" id="establishedYear" name="establishedYear" value="2008" min="1950" max="2024">
+                  <input
+                    type="number"
+                    id="establishedYear"
+                    name="establishedYear"
+                    value="2008"
+                    min="1950"
+                    max="2024"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="clientCapacity">Total Clients</label>
-                  <input type="number" id="clientCapacity" name="clientCapacity" value="150" readonly>
+                  <input
+                    type="number"
+                    id="clientCapacity"
+                    name="clientCapacity"
+                    value="150"
+                    readonly
+                  />
                 </div>
                 <div class="form-group">
                   <label for="activeCases">Active Cases</label>
-                  <input type="number" id="activeCases" name="activeCases" value="45" readonly>
+                  <input
+                    type="number"
+                    id="activeCases"
+                    name="activeCases"
+                    value="45"
+                    readonly
+                  />
                 </div>
                 <div class="form-group">
                   <label for="teamSize">Team Size</label>
-                  <input type="number" id="teamSize" name="teamSize" value="8" readonly>
+                  <input
+                    type="number"
+                    id="teamSize"
+                    name="teamSize"
+                    value="8"
+                    readonly
+                  />
                 </div>
                 <div class="form-group">
                   <label for="practiceType">Practice Type</label>
                   <select id="practiceType" name="practiceType">
-                    <option value="Individual Practice">Individual Practice</option>
+                    <option value="Individual Practice">
+                      Individual Practice
+                    </option>
                     <option value="Small Firm" selected>Small Firm</option>
                     <option value="Medium Firm">Medium Firm</option>
                     <option value="Large Firm">Large Firm</option>
                   </select>
                 </div>
               </div>
-              
-              <div style="text-align: right; margin-top: 2rem;">
+
+              <div style="text-align: right; margin-top: 2rem">
                 <button type="submit" class="btn btn-primary">
                   <i class="fas fa-save"></i>
                   Update Practice Info
@@ -779,23 +859,38 @@
               </div>
               <h2 class="card-title">Change Password</h2>
             </div>
-            
+
             <form id="passwordForm">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="currentPassword">Current Password *</label>
-                  <input type="password" id="currentPassword" name="currentPassword" required>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    name="currentPassword"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label for="newPassword">New Password *</label>
-                  <input type="password" id="newPassword" name="newPassword" required>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label for="confirmPassword">Confirm New Password *</label>
-                  <input type="password" id="confirmPassword" name="confirmPassword" required>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    required
+                  />
                 </div>
               </div>
-              
+
               <div class="password-requirements">
                 <h4>Password Requirements:</h4>
                 <ul class="requirement-list">
@@ -821,8 +916,8 @@
                   </li>
                 </ul>
               </div>
-              
-              <div style="text-align: right; margin-top: 2rem;">
+
+              <div style="text-align: right; margin-top: 2rem">
                 <button type="submit" class="btn btn-primary">
                   <i class="fas fa-key"></i>
                   Update Password
@@ -839,26 +934,95 @@
               </div>
               <h2 class="card-title">Two-Factor Authentication</h2>
             </div>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+              "
+            >
               <div>
-                <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">Enable 2FA</h3>
-                <p style="color: var(--text-secondary); font-size: 0.875rem;">Add an extra layer of security to your account</p>
+                <h3
+                  style="
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 0.25rem;
+                  "
+                >
+                  Enable 2FA
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.875rem">
+                  Add an extra layer of security to your account
+                </p>
               </div>
-              <label style="position: relative; display: inline-block; width: 60px; height: 34px;">
-                <input type="checkbox" id="twoFactorToggle" style="opacity: 0; width: 0; height: 0;">
-                <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px;"></span>
-                <span style="position: absolute; content: ''; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+              <label
+                style="
+                  position: relative;
+                  display: inline-block;
+                  width: 60px;
+                  height: 34px;
+                "
+              >
+                <input
+                  type="checkbox"
+                  id="twoFactorToggle"
+                  style="opacity: 0; width: 0; height: 0"
+                />
+                <span
+                  style="
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    transition: 0.4s;
+                    border-radius: 34px;
+                  "
+                ></span>
+                <span
+                  style="
+                    position: absolute;
+                    content: &quot;&quot;;
+                    height: 26px;
+                    width: 26px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: white;
+                    transition: 0.4s;
+                    border-radius: 50%;
+                  "
+                ></span>
               </label>
             </div>
-            
-            <div style="background: var(--background); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border);">
-              <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">
-                <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
+
+            <div
+              style="
+                background: var(--background);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                border: 1px solid var(--border);
+              "
+            >
+              <p
+                style="
+                  color: var(--text-secondary);
+                  font-size: 0.875rem;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                <i
+                  class="fas fa-info-circle"
+                  style="color: var(--primary); margin-right: 0.5rem"
+                ></i>
                 Two-factor authentication is currently <strong>disabled</strong>
               </p>
-              <p style="color: var(--text-secondary); font-size: 0.875rem;">
-                When enabled, you'll need to enter a code from your authenticator app in addition to your password.
+              <p style="color: var(--text-secondary); font-size: 0.875rem">
+                When enabled, you'll need to enter a code from your
+                authenticator app in addition to your password.
               </p>
             </div>
           </div>
@@ -871,37 +1035,112 @@
               </div>
               <h2 class="card-title">Active Sessions</h2>
             </div>
-            
-            <div style="space-y: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--background); border-radius: 0.5rem; border: 1px solid var(--border); margin-bottom: 1rem;">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                  <div style="width: 40px; height: 40px; background: var(--success); color: white; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+
+            <div style="space-y: 1rem">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 1rem;
+                  background: var(--background);
+                  border-radius: 0.5rem;
+                  border: 1px solid var(--border);
+                  margin-bottom: 1rem;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 1rem">
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: var(--success);
+                      color: white;
+                      border-radius: 0.5rem;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
                     <i class="fas fa-desktop"></i>
                   </div>
                   <div>
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">Current Session</div>
-                    <div style="color: var(--text-secondary); font-size: 0.875rem;">Chrome on Windows • Delhi, India</div>
-                    <div style="color: var(--text-muted); font-size: 0.75rem;">Active now</div>
+                    <div style="font-weight: 600; margin-bottom: 0.25rem">
+                      Current Session
+                    </div>
+                    <div
+                      style="color: var(--text-secondary); font-size: 0.875rem"
+                    >
+                      Chrome on Windows • Delhi, India
+                    </div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem">
+                      Active now
+                    </div>
                   </div>
                 </div>
-                <span style="background: var(--success); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500;">CURRENT</span>
+                <span
+                  style="
+                    background: var(--success);
+                    color: white;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 9999px;
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                  "
+                  >CURRENT</span
+                >
               </div>
-              
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--background); border-radius: 0.5rem; border: 1px solid var(--border); margin-bottom: 1rem;">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                  <div style="width: 40px; height: 40px; background: var(--text-muted); color: white; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 1rem;
+                  background: var(--background);
+                  border-radius: 0.5rem;
+                  border: 1px solid var(--border);
+                  margin-bottom: 1rem;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 1rem">
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: var(--text-muted);
+                      color: white;
+                      border-radius: 0.5rem;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
                     <i class="fas fa-mobile-alt"></i>
                   </div>
                   <div>
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">Mobile Session</div>
-                    <div style="color: var(--text-secondary); font-size: 0.875rem;">Safari on iPhone • Mumbai, India</div>
-                    <div style="color: var(--text-muted); font-size: 0.75rem;">2 hours ago</div>
+                    <div style="font-weight: 600; margin-bottom: 0.25rem">
+                      Mobile Session
+                    </div>
+                    <div
+                      style="color: var(--text-secondary); font-size: 0.875rem"
+                    >
+                      Safari on iPhone • Mumbai, India
+                    </div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem">
+                      2 hours ago
+                    </div>
                   </div>
                 </div>
-                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">Revoke</button>
+                <button
+                  class="btn btn-secondary"
+                  style="padding: 0.5rem 1rem; font-size: 0.75rem"
+                >
+                  Revoke
+                </button>
               </div>
-              
-              <div style="text-align: center; margin-top: 1.5rem;">
+
+              <div style="text-align: center; margin-top: 1.5rem">
                 <button class="btn btn-secondary">
                   <i class="fas fa-sign-out-alt"></i>
                   Sign Out All Other Sessions
@@ -942,45 +1181,45 @@
     <script>
       $(document).ready(function () {
         // Tab switching
-        $('.tab-btn').on('click', function() {
-          const tab = $(this).data('tab');
+        $(".tab-btn").on("click", function () {
+          const tab = $(this).data("tab");
           switchTab(tab);
         });
 
         // Form submissions
-        $('#profileForm').on('submit', function(e) {
+        $("#profileForm").on("submit", function (e) {
           e.preventDefault();
-          alert('Profile updated successfully!');
+          alert("Profile updated successfully!");
         });
 
-        $('#practiceForm').on('submit', function(e) {
+        $("#practiceForm").on("submit", function (e) {
           e.preventDefault();
-          alert('Practice information updated successfully!');
+          alert("Practice information updated successfully!");
         });
 
-        $('#passwordForm').on('submit', function(e) {
+        $("#passwordForm").on("submit", function (e) {
           e.preventDefault();
-          const currentPassword = $('#currentPassword').val();
-          const newPassword = $('#newPassword').val();
-          const confirmPassword = $('#confirmPassword').val();
+          const currentPassword = $("#currentPassword").val();
+          const newPassword = $("#newPassword").val();
+          const confirmPassword = $("#confirmPassword").val();
 
           if (newPassword !== confirmPassword) {
-            alert('New passwords do not match!');
+            alert("New passwords do not match!");
             return;
           }
 
           if (!validatePassword(newPassword)) {
-            alert('Password does not meet requirements!');
+            alert("Password does not meet requirements!");
             return;
           }
 
-          alert('Password updated successfully!');
-          $('#passwordForm')[0].reset();
-          updatePasswordRequirements('');
+          alert("Password updated successfully!");
+          $("#passwordForm")[0].reset();
+          updatePasswordRequirements("");
         });
 
         // Password validation
-        $('#newPassword').on('input', function() {
+        $("#newPassword").on("input", function () {
           const password = $(this).val();
           updatePasswordRequirements(password);
         });
@@ -996,12 +1235,12 @@
 
       function switchTab(tabName) {
         // Remove active class from all tabs and panes
-        $('.tab-btn').removeClass('active');
-        $('.tab-pane').removeClass('active');
-        
+        $(".tab-btn").removeClass("active");
+        $(".tab-pane").removeClass("active");
+
         // Add active class to selected tab and pane
-        $(`[data-tab="${tabName}"]`).addClass('active');
-        $(`#${tabName}-tab`).addClass('active');
+        $(`[data-tab="${tabName}"]`).addClass("active");
+        $(`#${tabName}-tab`).addClass("active");
       }
 
       function validatePassword(password) {
@@ -1010,36 +1249,36 @@
           uppercase: /[A-Z]/.test(password),
           lowercase: /[a-z]/.test(password),
           number: /\d/.test(password),
-          special: /[!@#$%^&*]/.test(password)
+          special: /[!@#$%^&*]/.test(password),
         };
 
-        return Object.values(requirements).every(req => req);
+        return Object.values(requirements).every((req) => req);
       }
 
       function updatePasswordRequirements(password) {
         const requirements = {
-          'length-req': password.length >= 8,
-          'uppercase-req': /[A-Z]/.test(password),
-          'lowercase-req': /[a-z]/.test(password),
-          'number-req': /\d/.test(password),
-          'special-req': /[!@#$%^&*]/.test(password)
+          "length-req": password.length >= 8,
+          "uppercase-req": /[A-Z]/.test(password),
+          "lowercase-req": /[a-z]/.test(password),
+          "number-req": /\d/.test(password),
+          "special-req": /[!@#$%^&*]/.test(password),
         };
 
         Object.entries(requirements).forEach(([id, valid]) => {
           const element = $(`#${id}`);
           if (valid) {
-            element.removeClass('invalid').addClass('valid');
-            element.find('i').removeClass('fa-times').addClass('fa-check');
+            element.removeClass("invalid").addClass("valid");
+            element.find("i").removeClass("fa-times").addClass("fa-check");
           } else {
-            element.removeClass('valid').addClass('invalid');
-            element.find('i').removeClass('fa-check').addClass('fa-times');
+            element.removeClass("valid").addClass("invalid");
+            element.find("i").removeClass("fa-check").addClass("fa-times");
           }
         });
       }
 
       function logoutFromApp() {
-        if (confirm('Are you sure you want to logout?')) {
-          alert('Logout functionality would be implemented here');
+        if (confirm("Are you sure you want to logout?")) {
+          alert("Logout functionality would be implemented here");
         }
       }
     </script>
