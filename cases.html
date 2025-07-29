@@ -1252,8 +1252,15 @@
       $(document).ready(function () {
         // Tab switching
         $(".tab").on("click", function () {
+          const tabName = $(this).data("tab");
+
+          // Update active tab
           $(".tab").removeClass("active");
           $(this).addClass("active");
+
+          // Update active tab pane
+          $(".tab-pane").removeClass("active");
+          $("#" + tabName + "-tab").addClass("active");
         });
 
         // Navigation
