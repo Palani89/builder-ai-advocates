@@ -548,6 +548,271 @@
         font-size: 0.875rem;
       }
 
+      /* Hearings Styles */
+      .hearings-container {
+        padding: 0;
+      }
+
+      .hearings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+      }
+
+      .hearings-header h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .hearings-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .hearings-section {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .hearings-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .hearing-item {
+        background: var(--background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        transition: all 0.2s ease;
+      }
+
+      .hearing-item:hover {
+        border-color: var(--border-active);
+        box-shadow: var(--shadow);
+      }
+
+      .hearing-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .hearing-date {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 1rem;
+      }
+
+      .hearing-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .hearing-status.scheduled {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      .hearing-status.completed {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .hearing-status.adjourned {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .hearing-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .hearing-detail {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hearing-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+      }
+
+      .hearing-value {
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .hearing-notes {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .hearing-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .action-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .action-btn.edit {
+        background: var(--warning);
+        color: white;
+      }
+
+      .action-btn.view {
+        background: var(--primary);
+        color: white;
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .modal-content {
+        background: var(--surface);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-xl);
+        width: 100%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .modal-header h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .modal-close {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-radius: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-close:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Form Styles */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .form-group label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
       /* Bottom Navigation */
       .bottom-nav {
         position: fixed;
@@ -593,33 +858,6 @@
         background: rgba(79, 70, 229, 0.1);
       }
 
-      /* Full width containers for non-overview tabs */
-      .documents-container,
-      .timeline-container {
-        background: var(--surface);
-        border-radius: 1rem;
-        padding: 1.5rem;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border);
-      }
-
-      .empty-state {
-        text-align: center;
-        padding: 3rem 1rem;
-        color: var(--text-muted);
-      }
-
-      .empty-state i {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        opacity: 0.5;
-      }
-
-      .empty-state p {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-      }
-
       /* Responsive Design */
       @media (max-width: 768px) {
         .app-container {
@@ -652,6 +890,14 @@
           gap: 1.5rem;
         }
 
+        .hearings-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hearing-info {
+          grid-template-columns: 1fr;
+        }
+
         .tab-buttons {
           flex-wrap: wrap;
         }
@@ -659,6 +905,362 @@
         .tab-btn {
           flex: 1;
           min-width: 120px;
+        }
+
+        .modal-content {
+          margin: 1rem;
+          max-width: calc(100vw - 2rem);
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Full width containers for non-overview tabs */
+      .documents-container,
+      .timeline-container {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-muted);
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      .empty-state p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      /* AI Assistant Styles */
+      .ai-assistant-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: calc(100vh - 300px);
+      }
+
+      .ai-summary-section {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .ai-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-left: auto;
+      }
+
+      .ai-summary-content {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .case-summary-card {
+        background: var(--background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .case-summary-card h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+      }
+
+      .summary-text {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .risk-assessment {
+        background: var(--background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .risk-assessment h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      .risk-score-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+      }
+
+      .risk-progress {
+        height: 100%;
+        background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%);
+        transition: width 0.3s ease;
+      }
+
+      .risk-value {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        float: right;
+      }
+
+      .ai-suggestions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        background: var(--background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .suggestion-column h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      .suggestion-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .suggestion-list li {
+        padding: 0.5rem 0;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+
+      .priority-high {
+        color: #ef4444;
+      }
+
+      .priority-medium {
+        color: #f59e0b;
+      }
+
+      .priority-low {
+        color: #10b981;
+      }
+
+      /* AI Chat Styles */
+      .ai-chat-section {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 400px;
+      }
+
+      .chat-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin-top: 1rem;
+      }
+
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 0.75rem;
+        border: 1px solid var(--border);
+        margin-bottom: 1rem;
+        max-height: 300px;
+      }
+
+      .message {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .message.user-message {
+        flex-direction: row-reverse;
+      }
+
+      .message-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        flex-shrink: 0;
+      }
+
+      .ai-message .message-avatar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .user-message .message-avatar {
+        background: var(--primary);
+        color: white;
+      }
+
+      .message-content {
+        flex: 1;
+        max-width: 80%;
+      }
+
+      .message-text {
+        background: var(--surface);
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        line-height: 1.5;
+        font-size: 0.875rem;
+      }
+
+      .user-message .message-text {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .message-time {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+        padding: 0 1rem;
+      }
+
+      .user-message .message-time {
+        text-align: right;
+      }
+
+      .chat-input-area {
+        margin-top: auto;
+      }
+
+      .quick-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .quick-action-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-radius: 0.5rem;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .quick-action-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .chat-input-container {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .chat-input-container input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        background: var(--surface);
+      }
+
+      .chat-input-container input:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .send-btn {
+        padding: 0.75rem 1.5rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .send-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      /* Responsive adjustments for AI Assistant */
+      @media (max-width: 768px) {
+        .ai-assistant-container {
+          height: auto;
+        }
+
+        .ai-suggestions {
+          grid-template-columns: 1fr;
+        }
+
+        .quick-actions {
+          grid-template-columns: 1fr 1fr;
+          display: grid;
+        }
+
+        .quick-action-btn {
+          justify-content: center;
+        }
+
+        .message-content {
+          max-width: 85%;
         }
       }
     </style>
@@ -957,127 +1559,296 @@
             </div>
           </div>
 
-          <!-- Other tabs content would go here -->
-          <!-- For brevity, I'm showing the basic structure -->
+          <!-- Hearings Tab -->
           <div class="tab-pane" id="hearings-tab">
-            <div class="documents-container">
-              <div class="section-header">
-                <i class="fas fa-calendar section-icon"></i>
-                <h3 class="section-title">Case Hearings</h3>
+            <div class="hearings-container">
+              <div class="hearings-header">
+                <h2>Case Hearings</h2>
+                <button class="btn btn-primary" onclick="openAddHearingModal()">
+                  <i class="fas fa-plus"></i>
+                  Add Hearing
+                </button>
               </div>
-              <div class="empty-state">
-                <i class="fas fa-calendar-alt"></i>
-                <p>Hearings information will be displayed here</p>
+
+              <div class="hearings-grid">
+                <!-- Upcoming Hearings -->
+                <div class="hearings-section">
+                  <h3 class="section-title">
+                    <i class="fas fa-calendar-plus"></i>
+                    Upcoming Hearings
+                  </h3>
+                  <div class="hearings-list" id="upcomingHearings">
+                    <!-- Upcoming hearings will be populated here -->
+                  </div>
+                </div>
+
+                <!-- Past Hearings -->
+                <div class="hearings-section">
+                  <h3 class="section-title">
+                    <i class="fas fa-history"></i>
+                    Past Hearings
+                  </h3>
+                  <div class="hearings-list" id="pastHearings">
+                    <!-- Past hearings will be populated here -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
+          <!-- Documents Tab -->
           <div class="tab-pane" id="documents-tab">
             <div class="documents-container">
               <div class="section-header">
                 <i class="fas fa-folder section-icon"></i>
                 <h3 class="section-title">All Documents</h3>
+                <button class="btn btn-primary" style="margin-left: auto;">
+                  <i class="fas fa-plus"></i>
+                  Add Document
+                </button>
               </div>
-              <div class="document-list">
-                <div class="document-item">
-                  <div class="document-info">
-                    <div class="document-icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="document-details">
-                      <div class="document-name">FIR Copy</div>
-                      <div class="document-meta">PDF • 2.3 MB • Uploaded Dec 20, 2023</div>
-                    </div>
-                  </div>
-                  <div class="document-actions">
-                    <button class="doc-action-btn" title="Download">
-                      <i class="fas fa-download"></i>
-                    </button>
-                    <button class="doc-action-btn" title="View">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="document-item">
-                  <div class="document-info">
-                    <div class="document-icon">
-                      <i class="fas fa-file-word"></i>
-                    </div>
-                    <div class="document-details">
-                      <div class="document-name">Bail Application</div>
-                      <div class="document-meta">DOC • 1.8 MB • Uploaded Dec 22, 2023</div>
-                    </div>
-                  </div>
-                  <div class="document-actions">
-                    <button class="doc-action-btn" title="Download">
-                      <i class="fas fa-download"></i>
-                    </button>
-                    <button class="doc-action-btn" title="View">
-                      <i class="fas fa-eye"></i>
-                    </button>
-                  </div>
+              <div class="section-content">
+                <div class="document-list" id="allDocuments">
+                  <!-- Documents will be populated here -->
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- Timeline Tab -->
           <div class="tab-pane" id="timeline-tab">
             <div class="timeline-container">
               <div class="section-header">
                 <i class="fas fa-history section-icon"></i>
                 <h3 class="section-title">Complete Case Timeline</h3>
               </div>
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-content">
-                    <div class="timeline-header">
-                      <span class="timeline-title">Bail Application Filed</span>
-                      <span class="timeline-date">Dec 22, 2023</span>
+              <div class="section-content">
+                <div class="timeline" id="fullTimeline">
+                  <!-- Timeline will be populated here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Assistant Tab -->
+          <div class="tab-pane" id="ai-assistant-tab">
+            <div class="ai-assistant-container">
+              <!-- AI Case Summary Section -->
+              <div class="ai-summary-section">
+                <div class="section-header">
+                  <i class="fas fa-robot section-icon"></i>
+                  <h3 class="section-title">AI Case Summary</h3>
+                  <span class="ai-badge">AI-generated analysis and recommendations</span>
+                </div>
+
+                <div class="ai-summary-content">
+                  <div class="case-summary-card">
+                    <h4>AI Case Summary</h4>
+                    <p class="summary-text">Criminal case involving economic offense under Section 420 IPC. Client seeking anticipatory bail.</p>
+                  </div>
+
+                  <div class="risk-assessment">
+                    <h4>Risk Score</h4>
+                    <div class="risk-score-bar">
+                      <div class="risk-progress" style="width: 65%;"></div>
                     </div>
-                    <div class="timeline-description">
-                      Bail application submitted to the court for the accused.
+                    <span class="risk-value">65/100</span>
+                  </div>
+
+                  <div class="ai-suggestions">
+                    <div class="suggestion-column">
+                      <h4>Suggested Arguments</h4>
+                      <ul class="suggestion-list">
+                        <li><span class="priority-high">●●●</span> Previous bail precedents in economic offense cases</li>
+                        <li><span class="priority-medium">●●</span> Clear criminal record of the accused</li>
+                        <li><span class="priority-low">●</span> Cooperation with investigation</li>
+                      </ul>
+                    </div>
+
+                    <div class="suggestion-column">
+                      <h4>Suggested Documents</h4>
+                      <ul class="suggestion-list">
+                        <li>• Character witness affidavits</li>
+                        <li>• Property documents for surety</li>
+                        <li>• Employment verification letter</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-                <div class="timeline-item">
-                  <div class="timeline-content">
-                    <div class="timeline-header">
-                      <span class="timeline-title">FIR Received</span>
-                      <span class="timeline-date">Dec 20, 2023</span>
+              </div>
+
+              <!-- AI Assistant Chat Section -->
+              <div class="ai-chat-section">
+                <div class="section-header">
+                  <i class="fas fa-comments section-icon"></i>
+                  <h3 class="section-title">AI Assistant Chat</h3>
+                  <span class="ai-badge">Chat with AI for case-specific guidance and analysis</span>
+                </div>
+
+                <div class="chat-container">
+                  <div class="chat-messages" id="chatMessages">
+                    <!-- Initial AI message -->
+                    <div class="message ai-message">
+                      <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                      </div>
+                      <div class="message-content">
+                        <div class="message-text">
+                          Hello! I'm your AI assistant for this case. I can help you with legal research, draft arguments, suggest case strategies, and analyze documents. What would you like to discuss about "State vs. John Doe"?
+                        </div>
+                        <div class="message-time">AI Assistant • Just now</div>
+                      </div>
                     </div>
-                    <div class="timeline-description">
-                      Copy of FIR obtained from the police station.
+
+                    <!-- Sample user message -->
+                    <div class="message user-message">
+                      <div class="message-content">
+                        <div class="message-text">
+                          What are the chances of getting bail approved for this economic offense case?
+                        </div>
+                        <div class="message-time">You • 2 min ago</div>
+                      </div>
+                      <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                      </div>
+                    </div>
+
+                    <!-- Sample AI response -->
+                    <div class="message ai-message">
+                      <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                      </div>
+                      <div class="message-content">
+                        <div class="message-text">
+                          Based on the case details, here's my analysis for bail prospects:
+                          <br><br>
+                          <strong>• Positive factors:</strong> Clean criminal record, cooperation with investigation
+                          <br><strong>• Challenges:</strong> Economic offense under Section 420 IPC
+                          <br><strong>• Recommendation:</strong> Strong surety and property documents will improve chances
+                          <br><br>
+                          Would you like me to draft arguments or suggest specific legal precedents?
+                        </div>
+                        <div class="message-time">AI Assistant • Just now</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-content">
-                    <div class="timeline-header">
-                      <span class="timeline-title">Case Filed</span>
-                      <span class="timeline-date">Dec 18, 2023</span>
+
+                  <div class="chat-input-area">
+                    <div class="quick-actions">
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Analyze Documents')">
+                        <i class="fas fa-file-alt"></i> Analyze Documents
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Suggest Arguments')">
+                        <i class="fas fa-balance-scale"></i> Suggest Arguments
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Draft Motion')">
+                        <i class="fas fa-edit"></i> Draft Motion
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Risk Assessment')">
+                        <i class="fas fa-chart-line"></i> Risk Assessment
+                      </button>
                     </div>
-                    <div class="timeline-description">
-                      Initial case registration and client consultation completed.
+
+                    <div class="chat-input-container">
+                      <input type="text" id="chatInput" placeholder="Ask AI about case strategy, legal precedents, document review..." />
+                      <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="tab-pane" id="ai-assistant-tab">
-            <div class="documents-container">
-              <div class="section-header">
-                <i class="fas fa-robot section-icon"></i>
-                <h3 class="section-title">AI Assistant</h3>
+      <!-- Add Hearing Modal -->
+      <div class="modal-overlay" id="addHearingModal" style="display: none;">
+        <div class="modal-content add-hearing-modal">
+          <div class="modal-header">
+            <h3>Add New Hearing</h3>
+            <button class="modal-close" onclick="closeAddHearingModal()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addHearingForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="hearingDate">Hearing Date *</label>
+                  <input type="datetime-local" id="hearingDate" name="hearingDate" required>
+                </div>
+                <div class="form-group">
+                  <label for="courtName">Court Name *</label>
+                  <input type="text" id="courtName" name="courtName" placeholder="e.g. Delhi District Court" required>
+                </div>
+                <div class="form-group">
+                  <label for="courtRoom">Court Hall/Room No.</label>
+                  <input type="text" id="courtRoom" name="courtRoom" placeholder="e.g. Court Room 7">
+                </div>
+                <div class="form-group">
+                  <label for="judgeName">Bench/Judge Name</label>
+                  <input type="text" id="judgeName" name="judgeName" placeholder="e.g. Hon'ble Justice XYZ">
+                </div>
+                <div class="form-group">
+                  <label for="hearingType">Hearing Type</label>
+                  <select id="hearingType" name="hearingType">
+                    <option value="">Select Type</option>
+                    <option value="Status">Status</option>
+                    <option value="Evidence">Evidence</option>
+                    <option value="Bail">Bail</option>
+                    <option value="Arguments">Arguments</option>
+                    <option value="Judgment">Judgment</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="caseStage">Case Stage</label>
+                  <select id="caseStage" name="caseStage">
+                    <option value="">Select Stage</option>
+                    <option value="Pre-trial">Pre-trial</option>
+                    <option value="Trial">Trial</option>
+                    <option value="Post-trial">Post-trial</option>
+                    <option value="Appeal">Appeal</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="hearingStatus">Hearing Status</label>
+                  <select id="hearingStatus" name="hearingStatus">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Adjourned">Adjourned</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="nextHearingDate">Next Hearing Date</label>
+                  <input type="datetime-local" id="nextHearingDate" name="nextHearingDate">
+                </div>
+                <div class="form-group">
+                  <label for="appearedBy">Appeared By</label>
+                  <input type="text" id="appearedBy" name="appearedBy" placeholder="Lawyer name who appeared">
+                </div>
               </div>
-              <div class="empty-state">
-                <i class="fas fa-robot"></i>
-                <p>AI Assistant features will be available here</p>
-                <small>Get AI-powered legal assistance and case analysis</small>
+              <div class="form-group full-width">
+                <label for="hearingNotes">Notes/Outcome</label>
+                <textarea id="hearingNotes" name="hearingNotes" rows="4" placeholder="What happened during the hearing..."></textarea>
               </div>
-            </div>
+              <div class="form-group full-width">
+                <label for="documentsDiscussed">Documents Discussed</label>
+                <textarea id="documentsDiscussed" name="documentsDiscussed" rows="3" placeholder="List of documents discussed in the hearing..."></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label for="aiSummary">AI Summary</label>
+                <textarea id="aiSummary" name="aiSummary" rows="3" placeholder="AI-generated summary of the hearing..."></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeAddHearingModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="saveHearing()">Save Hearing</button>
           </div>
         </div>
       </div>
@@ -1085,7 +1856,7 @@
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-items">
-          <a href="index.html" class="nav-item">
+          <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
             Home
           </a>
@@ -1097,7 +1868,7 @@
             <i class="fas fa-file-alt"></i>
             Cases
           </a>
-          <a href="index.html" class="nav-item">
+          <a href="calendar.html" class="nav-item">
             <i class="fas fa-calendar"></i>
             Calendar
           </a>
@@ -1110,7 +1881,78 @@
     </div>
 
     <script>
+      // Sample hearings data
+      let hearingsData = [
+        {
+          id: 1,
+          date: "2024-01-15T10:30:00",
+          courtName: "District Court, Delhi",
+          courtRoom: "Court Room 7",
+          judgeName: "Hon'ble Justice A.K. Sharma",
+          hearingType: "Bail",
+          caseStage: "Pre-trial",
+          status: "scheduled",
+          appearedBy: "Priya Sharma",
+          notes: "Bail application to be presented",
+          documentsDiscussed: "Bail application, Surety documents",
+          aiSummary: "",
+          nextHearingDate: ""
+        },
+        {
+          id: 2,
+          date: "2024-01-18T14:00:00",
+          courtName: "District Court, Delhi",
+          courtRoom: "Court Room 5",
+          judgeName: "Hon'ble Justice B.K. Patel",
+          hearingType: "Evidence",
+          caseStage: "Trial",
+          status: "scheduled",
+          appearedBy: "Amit Jain",
+          notes: "Witness examination scheduled",
+          documentsDiscussed: "Evidence files, Witness statements",
+          aiSummary: "",
+          nextHearingDate: ""
+        },
+        {
+          id: 3,
+          date: "2023-12-20T11:00:00",
+          courtName: "District Court, Delhi",
+          courtRoom: "Court Room 7",
+          judgeName: "Hon'ble Justice A.K. Sharma",
+          hearingType: "Status",
+          caseStage: "Pre-trial",
+          status: "completed",
+          appearedBy: "Priya Sharma",
+          notes: "Initial hearing completed. Case registered successfully. Next hearing for bail application scheduled.",
+          documentsDiscussed: "FIR copy, Complaint application, Legal notice",
+          aiSummary: "First hearing conducted successfully. Court registered the case and scheduled next hearing for bail application. All initial documents were submitted and accepted by the court.",
+          nextHearingDate: "2024-01-15T10:30:00"
+        },
+        {
+          id: 4,
+          date: "2023-12-22T15:30:00",
+          courtName: "District Court, Delhi",
+          courtRoom: "Court Room 7",
+          judgeName: "Hon'ble Justice A.K. Sharma",
+          hearingType: "Status",
+          caseStage: "Pre-trial",
+          status: "adjourned",
+          appearedBy: "Neha Gupta",
+          notes: "Hearing adjourned due to judge unavailability. Rescheduled for next week.",
+          documentsDiscussed: "None",
+          aiSummary: "Hearing was adjourned and rescheduled due to court calendar conflicts.",
+          nextHearingDate: "2024-01-15T10:30:00"
+        }
+      ];
+
       $(document).ready(function () {
+        // Load case details and hearings
+        loadCaseDetails();
+        loadHearings();
+        loadDocuments();
+        loadTimeline();
+        initializeAIAssistant();
+
         // Tab functionality
         $('.tab-btn').on('click', function() {
           const tab = $(this).data('tab');
@@ -1124,9 +1966,6 @@
             window.location.href = href;
           }
         });
-
-        // Load case details based on URL parameter
-        loadCaseDetails();
       });
 
       function switchTab(tabName) {
@@ -1139,16 +1978,390 @@
         $(`#${tabName}-tab`).addClass('active');
       }
 
+      function loadHearings() {
+        const now = new Date();
+        const upcomingHearings = hearingsData.filter(hearing => new Date(hearing.date) > now);
+        const pastHearings = hearingsData.filter(hearing => new Date(hearing.date) <= now);
+
+        // Load upcoming hearings
+        const upcomingContainer = $('#upcomingHearings');
+        if (upcomingHearings.length === 0) {
+          upcomingContainer.html(`
+            <div class="empty-state">
+              <i class="fas fa-calendar-alt"></i>
+              <p>No upcoming hearings scheduled</p>
+            </div>
+          `);
+        } else {
+          upcomingContainer.html(upcomingHearings.map(hearing => createHearingCard(hearing)).join(''));
+        }
+
+        // Load past hearings
+        const pastContainer = $('#pastHearings');
+        if (pastHearings.length === 0) {
+          pastContainer.html(`
+            <div class="empty-state">
+              <i class="fas fa-history"></i>
+              <p>No past hearings recorded</p>
+            </div>
+          `);
+        } else {
+          pastContainer.html(pastHearings.map(hearing => createHearingCard(hearing)).join(''));
+        }
+      }
+
+      function createHearingCard(hearing) {
+        const hearingDate = new Date(hearing.date);
+        const formattedDate = hearingDate.toLocaleDateString('en-IN', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        const formattedTime = hearingDate.toLocaleTimeString('en-IN', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        return `
+          <div class="hearing-item">
+            <div class="hearing-header">
+              <div>
+                <div class="hearing-date">${formattedDate}</div>
+                <div style="color: var(--text-secondary); font-size: 0.875rem;">${formattedTime}</div>
+              </div>
+              <span class="hearing-status ${hearing.status}">${hearing.status}</span>
+            </div>
+            
+            <div class="hearing-info">
+              <div class="hearing-detail">
+                <div class="hearing-label">Court</div>
+                <div class="hearing-value">${hearing.courtName}</div>
+              </div>
+              <div class="hearing-detail">
+                <div class="hearing-label">Room</div>
+                <div class="hearing-value">${hearing.courtRoom || 'N/A'}</div>
+              </div>
+              <div class="hearing-detail">
+                <div class="hearing-label">Judge</div>
+                <div class="hearing-value">${hearing.judgeName || 'N/A'}</div>
+              </div>
+              <div class="hearing-detail">
+                <div class="hearing-label">Type</div>
+                <div class="hearing-value">${hearing.hearingType || 'N/A'}</div>
+              </div>
+              <div class="hearing-detail">
+                <div class="hearing-label">Stage</div>
+                <div class="hearing-value">${hearing.caseStage || 'N/A'}</div>
+              </div>
+              <div class="hearing-detail">
+                <div class="hearing-label">Appeared By</div>
+                <div class="hearing-value">${hearing.appearedBy || 'N/A'}</div>
+              </div>
+            </div>
+            
+            ${hearing.notes ? `<div class="hearing-notes">${hearing.notes}</div>` : ''}
+            
+            <div class="hearing-actions">
+              <button class="action-btn edit" onclick="editHearing(${hearing.id})">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="action-btn view" onclick="viewHearingDetails(${hearing.id})">
+                <i class="fas fa-eye"></i> View Details
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      function loadDocuments() {
+        const documents = [
+          {
+            name: "FIR Copy",
+            type: "PDF",
+            size: "2.3 MB",
+            date: "2023-12-20",
+            icon: "fas fa-file-pdf"
+          },
+          {
+            name: "Bail Application",
+            type: "DOC",
+            size: "1.8 MB",
+            date: "2023-12-22",
+            icon: "fas fa-file-word"
+          },
+          {
+            name: "Evidence Photos",
+            type: "JPG",
+            size: "5.2 MB",
+            date: "2023-12-25",
+            icon: "fas fa-file-image"
+          },
+          {
+            name: "Witness Statement",
+            type: "PDF",
+            size: "1.1 MB",
+            date: "2024-01-05",
+            icon: "fas fa-file-pdf"
+          }
+        ];
+
+        const documentsContainer = $('#allDocuments');
+        documentsContainer.html(documents.map(doc => `
+          <div class="document-item">
+            <div class="document-info">
+              <div class="document-icon">
+                <i class="${doc.icon}"></i>
+              </div>
+              <div class="document-details">
+                <div class="document-name">${doc.name}</div>
+                <div class="document-meta">${doc.type} • ${doc.size} • Uploaded ${doc.date}</div>
+              </div>
+            </div>
+            <div class="document-actions">
+              <button class="doc-action-btn" title="Download">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="doc-action-btn" title="View">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        `).join(''));
+      }
+
+      function loadTimeline() {
+        const timelineEvents = [
+          {
+            title: "Bail Application Filed",
+            date: "Dec 22, 2023",
+            description: "Bail application submitted to the court for the accused."
+          },
+          {
+            title: "FIR Received",
+            date: "Dec 20, 2023",
+            description: "Copy of FIR obtained from the police station."
+          },
+          {
+            title: "Case Filed",
+            date: "Dec 18, 2023",
+            description: "Initial case registration and client consultation completed."
+          },
+          {
+            title: "Client Consultation",
+            date: "Dec 15, 2023",
+            description: "First meeting with client to understand case details."
+          }
+        ];
+
+        const timelineContainer = $('#fullTimeline');
+        timelineContainer.html(timelineEvents.map(event => `
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-title">${event.title}</span>
+                <span class="timeline-date">${event.date}</span>
+              </div>
+              <div class="timeline-description">${event.description}</div>
+            </div>
+          </div>
+        `).join(''));
+      }
+
+      function openAddHearingModal() {
+        $('#addHearingModal').show();
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(10, 0);
+        $('#hearingDate').val(tomorrow.toISOString().slice(0, 16));
+      }
+
+      function closeAddHearingModal() {
+        $('#addHearingModal').hide();
+        $('#addHearingForm')[0].reset();
+      }
+
+      function saveHearing() {
+        const form = $('#addHearingForm')[0];
+        const formData = new FormData(form);
+        
+        // Basic validation
+        if (!formData.get('hearingDate') || !formData.get('courtName')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Create new hearing object
+        const newHearing = {
+          id: hearingsData.length + 1,
+          date: formData.get('hearingDate'),
+          courtName: formData.get('courtName'),
+          courtRoom: formData.get('courtRoom'),
+          judgeName: formData.get('judgeName'),
+          hearingType: formData.get('hearingType'),
+          caseStage: formData.get('caseStage'),
+          status: formData.get('hearingStatus'),
+          appearedBy: formData.get('appearedBy'),
+          notes: formData.get('hearingNotes'),
+          documentsDiscussed: formData.get('documentsDiscussed'),
+          aiSummary: formData.get('aiSummary'),
+          nextHearingDate: formData.get('nextHearingDate')
+        };
+
+        // Add to hearings data
+        hearingsData.push(newHearing);
+        
+        // Reload hearings
+        loadHearings();
+        
+        // Close modal
+        closeAddHearingModal();
+        
+        alert('Hearing added successfully!');
+      }
+
+      function editHearing(hearingId) {
+        const hearing = hearingsData.find(h => h.id === hearingId);
+        if (hearing) {
+          // Populate form with hearing data
+          $('#hearingDate').val(hearing.date);
+          $('#courtName').val(hearing.courtName);
+          $('#courtRoom').val(hearing.courtRoom);
+          $('#judgeName').val(hearing.judgeName);
+          $('#hearingType').val(hearing.hearingType);
+          $('#caseStage').val(hearing.caseStage);
+          $('#hearingStatus').val(hearing.status);
+          $('#appearedBy').val(hearing.appearedBy);
+          $('#hearingNotes').val(hearing.notes);
+          $('#documentsDiscussed').val(hearing.documentsDiscussed);
+          $('#aiSummary').val(hearing.aiSummary);
+          $('#nextHearingDate').val(hearing.nextHearingDate);
+          
+          // Update modal title and save function
+          $('.modal-header h3').text('Edit Hearing');
+          openAddHearingModal();
+        }
+      }
+
+      function viewHearingDetails(hearingId) {
+        const hearing = hearingsData.find(h => h.id === hearingId);
+        if (hearing) {
+          // Create a detailed view of the hearing
+          const hearingDate = new Date(hearing.date);
+          const formattedDate = hearingDate.toLocaleDateString('en-IN', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+
+          let details = `
+            <strong>Date & Time:</strong> ${formattedDate}<br>
+            <strong>Court:</strong> ${hearing.courtName}<br>
+            <strong>Room:</strong> ${hearing.courtRoom || 'N/A'}<br>
+            <strong>Judge:</strong> ${hearing.judgeName || 'N/A'}<br>
+            <strong>Type:</strong> ${hearing.hearingType || 'N/A'}<br>
+            <strong>Stage:</strong> ${hearing.caseStage || 'N/A'}<br>
+            <strong>Status:</strong> ${hearing.status}<br>
+            <strong>Appeared By:</strong> ${hearing.appearedBy || 'N/A'}<br><br>
+          `;
+          
+          if (hearing.notes) {
+            details += `<strong>Notes:</strong><br>${hearing.notes}<br><br>`;
+          }
+          
+          if (hearing.documentsDiscussed) {
+            details += `<strong>Documents Discussed:</strong><br>${hearing.documentsDiscussed}<br><br>`;
+          }
+          
+          if (hearing.aiSummary) {
+            details += `<strong>AI Summary:</strong><br>${hearing.aiSummary}`;
+          }
+
+          alert(details);
+        }
+      }
+
       function loadCaseDetails() {
         // Get case ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const caseId = urlParams.get("id");
 
         if (caseId) {
-          // Update page with case-specific data
-          console.log("Loading case details for ID:", caseId);
+          const caseData = getCaseDataById(caseId);
+          if (caseData) {
+            populateCaseDetails(caseData);
+          }
         }
       }
+
+      function getCaseDataById(caseId) {
+        // Sample case data - in reality this would come from your backend
+        const casesData = {
+          1: {
+            title: "State vs. John Doe",
+            subtitle: "Client: John Doe | Opponent: State of Delhi",
+            caseNumber: "CC/1234/2024",
+            court: "District Court, Delhi",
+            judge: "Hon'ble Justice A.K. Sharma",
+            nextHearing: "January 15, 2024",
+            filedDate: "December 20, 2023",
+            seniorAdvocate: "Priya Sharma",
+            status: "Active",
+            type: "Criminal",
+          },
+          2: {
+            title: "Smith Property Dispute",
+            subtitle: "Client: Mr. Smith | Opponent: ABC Developers",
+            caseNumber: "CS/5678/2024",
+            court: "High Court, Delhi",
+            judge: "Hon'ble Justice B.K. Patel",
+            nextHearing: "January 18, 2024",
+            filedDate: "December 15, 2023",
+            seniorAdvocate: "Rajesh Kumar",
+            status: "Pending",
+            type: "Civil",
+          },
+        };
+
+        return casesData[caseId] || casesData["1"]; // Default to case 1 if not found
+      }
+
+      function populateCaseDetails(caseData) {
+        // Update the page with actual case data
+        $("#caseTitle").text(caseData.title);
+        $("#caseSubtitle").text(caseData.subtitle);
+        $("#caseNumber").text(caseData.caseNumber);
+        $("#courtName").text(caseData.court);
+        $("#judgeName").text(caseData.judge);
+        $("#nextHearing").text(caseData.nextHearing);
+        $("#filedDate").text(caseData.filedDate);
+        $("#seniorAdvocate").text(caseData.seniorAdvocate);
+
+        // Update status badges based on case data
+        updateStatusBadges(caseData.status, caseData.type);
+      }
+
+      function updateStatusBadges(status, type) {
+        // Update status badges dynamically
+        const statusBadges = document.querySelectorAll(".status-badge");
+        statusBadges.forEach((badge) => {
+          if (badge.textContent === status || badge.textContent === type) {
+            // Keep existing badges that match
+            return;
+          }
+        });
+      }
+
+      // Modal overlay click to close
+      $('#addHearingModal').on('click', function(e) {
+        if (e.target === this) {
+          closeAddHearingModal();
+        }
+      });
 
       // Document actions
       $(document).on('click', '.doc-action-btn', function(e) {
@@ -1160,6 +2373,117 @@
           alert(`Downloading ${documentName}...`);
         } else if (action === 'View') {
           alert(`Opening ${documentName} for viewing...`);
+        }
+      });
+
+      // AI Assistant initialization
+      function initializeAIAssistant() {
+        // Initialize chat with welcome message
+        console.log('AI Assistant initialized');
+      }
+
+      // AI Assistant Chat Functions
+      function sendMessage() {
+        const input = $('#chatInput');
+        const message = input.val().trim();
+
+        if (message) {
+          addUserMessage(message);
+          input.val('');
+
+          // Simulate AI response after a short delay
+          setTimeout(() => {
+            addAIResponse(message);
+          }, 1000);
+        }
+      }
+
+      function sendQuickMessage(action) {
+        addUserMessage(action);
+
+        // Simulate AI response based on the action
+        setTimeout(() => {
+          let response = '';
+          switch(action) {
+            case 'Analyze Documents':
+              response = 'I\'ve analyzed the case documents. The FIR shows strong evidence, but there are opportunities for defense. The bail application is well-drafted. Would you like me to suggest improvements?';
+              break;
+            case 'Suggest Arguments':
+              response = 'Based on similar cases, I recommend focusing on: 1) Clean criminal record, 2) Cooperation with investigation, 3) Economic hardship if denied bail. Shall I draft detailed arguments?';
+              break;
+            case 'Draft Motion':
+              response = 'I can help draft a bail motion. Key points to include: precedent cases, constitutional rights, and surety arrangements. What specific motion would you like me to prepare?';
+              break;
+            case 'Risk Assessment':
+              response = 'Current risk assessment shows 65/100. Main risks: Economic offense charges. Mitigation factors: Clean record, cooperation. Recommendations: Strong surety, community ties evidence.';
+              break;
+            default:
+              response = 'I\'m here to help with your case. Please let me know what specific assistance you need.';
+          }
+          addAIResponse(response, true);
+        }, 1500);
+      }
+
+      function addUserMessage(message) {
+        const chatMessages = $('#chatMessages');
+        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
+
+        const messageHtml = `
+          <div class="message user-message">
+            <div class="message-content">
+              <div class="message-text">${message}</div>
+              <div class="message-time">You • ${timestamp}</div>
+            </div>
+            <div class="message-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        `;
+
+        chatMessages.append(messageHtml);
+        chatMessages.scrollTop(chatMessages[0].scrollHeight);
+      }
+
+      function addAIResponse(message, isQuickAction = false) {
+        const chatMessages = $('#chatMessages');
+        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
+
+        // Generate contextual AI responses based on user input
+        let aiResponse = message;
+        if (!isQuickAction) {
+          if (message.toLowerCase().includes('bail')) {
+            aiResponse = 'Regarding bail prospects: Based on the Section 420 charges, courts typically consider factors like flight risk, criminal history, and community ties. Given the clean record and cooperation shown, I\'d recommend preparing strong surety documentation and character references. Would you like me to draft a bail application outline?';
+          } else if (message.toLowerCase().includes('evidence')) {
+            aiResponse = 'For evidence analysis: The case appears to rely heavily on documentary evidence and witness testimony. I\'ve reviewed the FIR and related documents. The prosecution\'s case has some gaps we can exploit. Shall I provide a detailed evidence analysis with defense strategies?';
+          } else if (message.toLowerCase().includes('precedent') || message.toLowerCase().includes('case law')) {
+            aiResponse = 'Regarding legal precedents: I can find relevant case law for Section 420 IPC cases. Similar economic offense cases have shown favorable outcomes when defendants demonstrate cooperation and have clean records. Would you like me to compile relevant judgments and citations?';
+          } else if (message.toLowerCase().includes('strategy')) {
+            aiResponse = 'For case strategy: I recommend a multi-pronged approach: 1) Challenge evidence admissibility, 2) Emphasize cooperation and clean record, 3) Highlight economic hardship arguments. We should also prepare for anticipatory bail immediately. What aspect would you like me to elaborate on?';
+          } else {
+            aiResponse = `I understand you\'re asking about "${message}". Based on the case details for State vs. John Doe, I can provide specific analysis and recommendations. Could you be more specific about what aspect you\'d like me to focus on - legal strategy, document analysis, or case law research?`;
+          }
+        }
+
+        const messageHtml = `
+          <div class="message ai-message">
+            <div class="message-avatar">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+              <div class="message-text">${aiResponse}</div>
+              <div class="message-time">AI Assistant • ${timestamp}</div>
+            </div>
+          </div>
+        `;
+
+        chatMessages.append(messageHtml);
+        chatMessages.scrollTop(chatMessages[0].scrollHeight);
+      }
+
+      // Enter key to send message
+      $('#chatInput').on('keypress', function(e) {
+        if (e.which === 13) {
+          sendMessage();
         }
       });
     </script>
