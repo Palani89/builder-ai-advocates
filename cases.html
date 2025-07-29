@@ -759,8 +759,11 @@
           </div>
         </div>
 
-        <!-- Cases List -->
-        <div class="cases-list">
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Today's Cases Tab -->
+          <div class="tab-pane active" id="todays-tab">
+            <div class="cases-list">
           <!-- Case 1 -->
           <div class="case-card">
             <div class="case-header">
@@ -911,6 +914,255 @@
             </div>
 
             <div class="case-meta">Last updated: 2024-01-08</div>
+          </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Cases Tab -->
+          <div class="tab-pane" id="upcoming-tab">
+            <div class="cases-list">
+              <!-- Upcoming Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Estate Planning Matter</div>
+                    <div class="case-subtitle">
+                      Client: Mrs. Verma | Opponent: Legal Heirs
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge pending">Upcoming</span>
+                    <span class="status-badge civil">Civil</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">District Court, Mumbai</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice R.K. Singh</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Next Hearing</span>
+                    <span class="detail-value">2024-01-25</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('3')">
+                    View Details
+                  </button>
+                  <button class="action-btn dispose-btn" onclick="disposeCase('3')">Dispose Case</button>
+                </div>
+                <div class="case-meta">Last updated: 2024-01-12</div>
+              </div>
+
+              <!-- Upcoming Case 2 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Contract Breach Litigation</div>
+                    <div class="case-subtitle">
+                      Client: Tech Solutions Ltd | Opponent: Global Corp
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge pending">Upcoming</span>
+                    <span class="status-badge commercial">Commercial</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">Commercial Court, Bangalore</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice S.P. Reddy</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Next Hearing</span>
+                    <span class="detail-value">2024-01-30</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('4')">
+                    View Details
+                  </button>
+                  <button class="action-btn dispose-btn" onclick="disposeCase('4')">Dispose Case</button>
+                </div>
+                <div class="case-meta">Last updated: 2024-01-11</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Cases Tab -->
+          <div class="tab-pane" id="pending-tab">
+            <div class="cases-list">
+              <!-- Pending Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Employment Dispute</div>
+                    <div class="case-subtitle">
+                      Client: Mr. Patel | Opponent: XYZ Industries
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge pending">Pending</span>
+                    <span class="status-badge labor">Labor</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">Labor Court, Pune</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice M.A. Khan</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Status</span>
+                    <span class="detail-value">Awaiting Documents</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('5')">
+                    View Details
+                  </button>
+                  <button class="action-btn dispose-btn" onclick="disposeCase('5')">Dispose Case</button>
+                </div>
+                <div class="case-meta">Last updated: 2024-01-05</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disposed Cases Tab -->
+          <div class="tab-pane" id="disposed-tab">
+            <div class="cases-list">
+              <!-- Disposed Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Traffic Violation Case</div>
+                    <div class="case-subtitle">
+                      Client: Mr. Kumar | Opponent: Traffic Police
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge disposed">Disposed</span>
+                    <span class="status-badge criminal">Criminal</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">Magistrate Court, Delhi</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice L.M. Gupta</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Disposal Date</span>
+                    <span class="detail-value">2023-12-15</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('6')">
+                    View Details
+                  </button>
+                  <button class="action-btn archive-btn">Archive Case</button>
+                </div>
+                <div class="case-meta">Disposed on: 2023-12-15</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appealed Cases Tab -->
+          <div class="tab-pane" id="appealed-tab">
+            <div class="cases-list">
+              <!-- Appealed Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Land Acquisition Appeal</div>
+                    <div class="case-subtitle">
+                      Client: Farmers Union | Opponent: State Government
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge appealed">Appealed</span>
+                    <span class="status-badge civil">Civil</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Appeal Court</span>
+                    <span class="detail-value">High Court, Delhi</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice D.K. Jain</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Appeal Date</span>
+                    <span class="detail-value">2024-01-20</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('7')">
+                    View Details
+                  </button>
+                  <button class="action-btn dispose-btn" onclick="disposeCase('7')">Dispose Case</button>
+                </div>
+                <div class="case-meta">Appeal filed: 2024-01-02</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settled Cases Tab -->
+          <div class="tab-pane" id="settled-tab">
+            <div class="cases-list">
+              <!-- Settled Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Family Property Settlement</div>
+                    <div class="case-subtitle">
+                      Client: Sharma Family | Opponent: Extended Family
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge settled">Settled</span>
+                    <span class="status-badge family">Family</span>
+                  </div>
+                </div>
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Mediation Center</span>
+                    <span class="detail-value">Lok Adalat, Chennai</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Mediator</span>
+                    <span class="detail-value">Justice (Retd.) A.R. Krishnan</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Settlement Date</span>
+                    <span class="detail-value">2023-12-20</span>
+                  </div>
+                </div>
+                <div class="case-actions">
+                  <button class="action-btn view-btn" onclick="viewCaseDetails('8')">
+                    View Details
+                  </button>
+                  <button class="action-btn archive-btn">Archive Case</button>
+                </div>
+                <div class="case-meta">Settled on: 2023-12-20</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
