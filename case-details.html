@@ -1915,64 +1915,344 @@
 
       <!-- Add Update Modal -->
       <div class="modal-overlay" id="addUpdateModal" style="display: none;">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 900px; max-height: 95vh; overflow-y: auto;">
           <div class="modal-header">
-            <h3>Add Case Update</h3>
+            <h3><i class="fas fa-edit"></i> Add Case Update</h3>
             <button class="modal-close" onclick="closeAddUpdateModal()">
               <i class="fas fa-times"></i>
             </button>
           </div>
           <div class="modal-body">
             <form id="addUpdateForm">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="updateTitle">Update Title *</label>
-                  <input type="text" id="updateTitle" name="updateTitle" placeholder="e.g., Document Submitted, Hearing Completed" required>
-                </div>
-                <div class="form-group">
-                  <label for="updateDate">Update Date *</label>
-                  <input type="datetime-local" id="updateDate" name="updateDate" required>
-                </div>
-                <div class="form-group">
-                  <label for="updateCategory">Category</label>
-                  <select id="updateCategory" name="updateCategory">
-                    <option value="">Select Category</option>
-                    <option value="Hearing">Hearing</option>
-                    <option value="Document">Document</option>
-                    <option value="Payment">Payment</option>
-                    <option value="Client Meeting">Client Meeting</option>
-                    <option value="Research">Research</option>
-                    <option value="Court Filing">Court Filing</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="updateStatus">Priority</label>
-                  <select id="updatePriority" name="updatePriority">
-                    <option value="Low">Low</option>
-                    <option value="Medium" selected>Medium</option>
-                    <option value="High">High</option>
-                    <option value="Urgent">Urgent</option>
-                  </select>
+              <!-- Section 1: Basic Update Information -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Basic Update Information
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="updateTitle">Update Title *</label>
+                    <input type="text" id="updateTitle" name="updateTitle" placeholder="e.g., Hearing Attended, Document Filed" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="updateDate">Date & Time *</label>
+                    <input type="datetime-local" id="updateDate" name="updateDate" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="updateCategory">Update Type *</label>
+                    <select id="updateCategory" name="updateCategory" required>
+                      <option value="">Select Update Type</option>
+                      <option value="Next Hearing Date">Next Hearing Date Update</option>
+                      <option value="Case Status">Case Status Change</option>
+                      <option value="Court Order">Court Order/Decision</option>
+                      <option value="Document Submitted">Document Submitted</option>
+                      <option value="Client Instructions">Client Instructions/Notes</option>
+                      <option value="Lawyer Notes">Lawyer Strategy Notes</option>
+                      <option value="Adjournment">Adjournment Update</option>
+                      <option value="Billing Update">Fee/Billing Update</option>
+                      <option value="Opposing Counsel">Opposing Lawyer Info</option>
+                      <option value="Evidence Update">Evidence Submission</option>
+                      <option value="Reminder Task">Reminder/To-do Task</option>
+                      <option value="Settlement">Settlement/Mediation</option>
+                      <option value="Client Communication">Client Communication Log</option>
+                      <option value="Next Steps">Next Action Items</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="updatePriority">Priority Level</label>
+                    <select id="updatePriority" name="updatePriority">
+                      <option value="Low">Low</option>
+                      <option value="Medium" selected>Medium</option>
+                      <option value="High">High</option>
+                      <option value="Urgent">Urgent</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-              <div class="form-group full-width">
-                <label for="updateNotes">Update Notes *</label>
-                <textarea id="updateNotes" name="updateNotes" rows="4" placeholder="Detailed notes about this update..." required></textarea>
+
+              <!-- Section 2: Case Progress Updates -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-tasks" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Case Progress & Status
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="caseStatus">New Case Status</label>
+                    <select id="caseStatus" name="caseStatus">
+                      <option value="">No Status Change</option>
+                      <option value="Filed">Filed</option>
+                      <option value="Under Trial">Under Trial</option>
+                      <option value="Evidence Stage">Evidence Stage</option>
+                      <option value="Arguments Stage">Arguments Stage</option>
+                      <option value="Judgment Reserved">Judgment Reserved</option>
+                      <option value="Judgment Delivered">Judgment Delivered</option>
+                      <option value="Appeal Filed">Appeal Filed</option>
+                      <option value="Settled">Settled</option>
+                      <option value="Dismissed">Dismissed</option>
+                      <option value="Withdrawn">Withdrawn</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="nextHearingUpdate">Next Hearing Date</label>
+                    <input type="datetime-local" id="nextHearingUpdate" name="nextHearingUpdate">
+                  </div>
+                  <div class="form-group">
+                    <label for="hearingType">Hearing Type</label>
+                    <select id="hearingType" name="hearingType">
+                      <option value="">Select if applicable</option>
+                      <option value="Status Update">Status Update</option>
+                      <option value="Evidence">Evidence Presentation</option>
+                      <option value="Arguments">Arguments</option>
+                      <option value="Bail Application">Bail Application</option>
+                      <option value="Witness Examination">Witness Examination</option>
+                      <option value="Judgment">Judgment</option>
+                      <option value="Settlement Conference">Settlement Conference</option>
+                      <option value="Case Management">Case Management</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="adjournmentReason">Adjournment Reason (if applicable)</label>
+                    <select id="adjournmentReason" name="adjournmentReason">
+                      <option value="">Not Applicable</option>
+                      <option value="Judge Unavailable">Judge Unavailable</option>
+                      <option value="Lawyer Request">Lawyer Request</option>
+                      <option value="Client Request">Client Request</option>
+                      <option value="Documents Pending">Documents Pending</option>
+                      <option value="Witness Unavailable">Witness Unavailable</option>
+                      <option value="Settlement Discussions">Settlement Discussions</option>
+                      <option value="Other Court Priority">Other Court Priority</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div class="form-group full-width">
-                <label for="nextAction">Next Action Required</label>
-                <textarea id="nextAction" name="nextAction" rows="2" placeholder="What needs to be done next..."></textarea>
+
+              <!-- Section 3: Court Orders & Decisions -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-gavel" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Court Orders & Legal Decisions
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label for="courtOrder">Court Order Summary</label>
+                    <textarea id="courtOrder" name="courtOrder" rows="3" placeholder="Summary of any court order or decision..."></textarea>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="judgmentDetails">Judgment/Order Details</label>
+                    <textarea id="judgmentDetails" name="judgmentDetails" rows="3" placeholder="Detailed explanation of court's decision or judgment..."></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="orderType">Order Type</label>
+                    <select id="orderType" name="orderType">
+                      <option value="">Select if applicable</option>
+                      <option value="Interim Order">Interim Order</option>
+                      <option value="Final Order">Final Order</option>
+                      <option value="Bail Order">Bail Order</option>
+                      <option value="Injunction">Injunction</option>
+                      <option value="Stay Order">Stay Order</option>
+                      <option value="Direction">Court Direction</option>
+                      <option value="Dismissal">Case Dismissal</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="orderDate">Order Date</label>
+                    <input type="date" id="orderDate" name="orderDate">
+                  </div>
+                </div>
               </div>
-              <div class="form-group full-width">
-                <label for="documentsAttached">Documents Attached</label>
-                <input type="text" id="documentsAttached" name="documentsAttached" placeholder="List any documents related to this update">
+
+              <!-- Section 4: Documents & Evidence -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-file-alt" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Documents & Evidence Updates
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="documentsSubmitted">Documents Submitted</label>
+                    <select id="documentsSubmitted" name="documentsSubmitted" multiple>
+                      <option value="Petition">Petition</option>
+                      <option value="Affidavit">Affidavit</option>
+                      <option value="Reply">Reply</option>
+                      <option value="Written Arguments">Written Arguments</option>
+                      <option value="Evidence">Evidence Documents</option>
+                      <option value="Witness Statement">Witness Statement</option>
+                      <option value="Expert Report">Expert Report</option>
+                      <option value="Financial Records">Financial Records</option>
+                      <option value="Medical Records">Medical Records</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="evidenceStatus">Evidence Status</label>
+                    <select id="evidenceStatus" name="evidenceStatus">
+                      <option value="">No Evidence Update</option>
+                      <option value="Submitted">Evidence Submitted</option>
+                      <option value="Accepted">Evidence Accepted</option>
+                      <option value="Rejected">Evidence Rejected</option>
+                      <option value="Under Review">Under Court Review</option>
+                      <option value="Additional Required">Additional Evidence Required</option>
+                    </select>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="documentsDescription">Document Details</label>
+                    <textarea id="documentsDescription" name="documentsDescription" rows="3" placeholder="Describe the documents submitted or discussed..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 5: Client Communication & Instructions -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-comments" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Client Communication & Instructions
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="clientCommunication">Communication Type</label>
+                    <select id="clientCommunication" name="clientCommunication">
+                      <option value="">No Client Communication</option>
+                      <option value="Phone Call">Phone Call</option>
+                      <option value="Email">Email</option>
+                      <option value="WhatsApp">WhatsApp Chat</option>
+                      <option value="In-Person Meeting">In-Person Meeting</option>
+                      <option value="Video Call">Video Call</option>
+                      <option value="SMS">SMS</option>
+                      <option value="Written Letter">Written Letter</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="clientNotified">Client Notified?</label>
+                    <select id="clientNotified" name="clientNotified">
+                      <option value="No">No</option>
+                      <option value="Yes">Yes</option>
+                      <option value="Pending">Notification Pending</option>
+                      <option value="Will Notify">Will Notify Later</option>
+                    </select>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="clientInstructions">Client Instructions/Notes</label>
+                    <textarea id="clientInstructions" name="clientInstructions" rows="3" placeholder="Any instructions received from client or notes shared with client..."></textarea>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="communicationSummary">Communication Summary</label>
+                    <textarea id="communicationSummary" name="communicationSummary" rows="3" placeholder="Summary of conversation or communication with client..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 6: Legal Strategy & Next Steps -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-chess" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Legal Strategy & Action Items
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label for="lawyerNotes">Lawyer Strategy Notes</label>
+                    <textarea id="lawyerNotes" name="lawyerNotes" rows="3" placeholder="Internal strategy notes, legal approach, or tactical decisions..."></textarea>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="nextSteps">Next Action Items *</label>
+                    <textarea id="nextSteps" name="nextSteps" rows="3" placeholder="What needs to be done before next hearing or milestone?
+• Action 1
+• Action 2
+• Action 3" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="actionDeadline">Action Deadline</label>
+                    <input type="date" id="actionDeadline" name="actionDeadline">
+                  </div>
+                  <div class="form-group">
+                    <label for="assignedTo">Assigned To</label>
+                    <select id="assignedTo" name="assignedTo">
+                      <option value="Self">Self</option>
+                      <option value="Junior Advocate">Junior Advocate</option>
+                      <option value="Senior Advocate">Senior Advocate</option>
+                      <option value="Paralegal">Paralegal</option>
+                      <option value="Case Researcher">Case Researcher</option>
+                      <option value="Client">Client</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 7: Financial & Billing Updates -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-rupee-sign" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Billing & Fee Updates
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="feeUpdate">Fee Update Type</label>
+                    <select id="feeUpdate" name="feeUpdate">
+                      <option value="">No Fee Update</option>
+                      <option value="Payment Received">Payment Received</option>
+                      <option value="Pending Payment">Payment Pending</option>
+                      <option value="Fee Adjustment">Fee Adjustment</option>
+                      <option value="Additional Charges">Additional Charges</option>
+                      <option value="Expense Incurred">Court/Travel Expenses</option>
+                      <option value="Bill Generated">Bill Generated</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="feeAmount">Amount (₹)</label>
+                    <input type="number" id="feeAmount" name="feeAmount" placeholder="0" min="0" step="0.01">
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="feeDescription">Fee/Expense Description</label>
+                    <textarea id="feeDescription" name="feeDescription" rows="2" placeholder="Description of payment, expense, or fee adjustment..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 8: Additional Notes -->
+              <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                  <i class="fas fa-sticky-note" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  Additional Details & Notes
+                </h4>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="opposingCounsel">Opposing Counsel Info</label>
+                    <input type="text" id="opposingCounsel" name="opposingCounsel" placeholder="Name/firm of opposing lawyer (if changed)">
+                  </div>
+                  <div class="form-group">
+                    <label for="settlementStatus">Settlement/Mediation Status</label>
+                    <select id="settlementStatus" name="settlementStatus">
+                      <option value="">Not Applicable</option>
+                      <option value="Settlement Proposed">Settlement Proposed</option>
+                      <option value="Under Negotiation">Under Negotiation</option>
+                      <option value="Mediation Scheduled">Mediation Scheduled</option>
+                      <option value="Settlement Reached">Settlement Reached</option>
+                      <option value="Settlement Failed">Settlement Failed</option>
+                      <option value="Alternative Dispute Resolution">ADR Proceeding</option>
+                    </select>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="updateNotes">Detailed Update Notes *</label>
+                    <textarea id="updateNotes" name="updateNotes" rows="4" placeholder="Comprehensive notes about this update, what happened, decisions made, etc..." required></textarea>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="internalNotes">Internal Notes (Private)</label>
+                    <textarea id="internalNotes" name="internalNotes" rows="3" placeholder="Private notes for internal use only, not visible to client..."></textarea>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeAddUpdateModal()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="saveUpdate()">Add Update</button>
+            <button type="button" class="btn btn-primary" onclick="saveUpdate()">
+              <i class="fas fa-save"></i>
+              Add Update
+            </button>
           </div>
         </div>
       </div>
