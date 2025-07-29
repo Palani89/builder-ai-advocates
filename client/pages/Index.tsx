@@ -68,26 +68,26 @@ export default function Index() {
         </div>
 
         <nav className="side-menu-nav">
-          <a href="#" className="side-menu-item">
+          <Link to="/" className="side-menu-item">
             <i className="fas fa-home side-menu-icon"></i>
             Home
-          </a>
-          <a href="#" className="side-menu-item">
+          </Link>
+          <Link to="/team" className="side-menu-item">
             <i className="fas fa-users side-menu-icon"></i>
             My Team
-          </a>
-          <a href="#" className="side-menu-item">
+          </Link>
+          <Link to="/cases" className="side-menu-item">
             <i className="fas fa-file-alt side-menu-icon"></i>
             Cases
-          </a>
-          <a href="#" className="side-menu-item active">
+          </Link>
+          <Link to="/calendar" className="side-menu-item active">
             <i className="fas fa-calendar side-menu-icon"></i>
             Calendar
-          </a>
-          <a href="#" className="side-menu-item">
+          </Link>
+          <Link to="/more" className="side-menu-item">
             <i className="fas fa-th side-menu-icon"></i>
             More
-          </a>
+          </Link>
           <button className="side-menu-item logout" onClick={logoutFromApp}>
             <i className="fas fa-sign-out-alt side-menu-icon"></i>
             Log Out
