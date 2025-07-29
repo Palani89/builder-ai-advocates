@@ -1092,6 +1092,135 @@
           }
         });
 
+        // History file upload handling
+        $(document).on("change", ".history-file-upload", function () {
+          const files = this.files;
+          if (files.length > 0) {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
+              );
+          } else {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
+              );
+          }
+        });
+
+        // Case history toggle
+        $("#hasHistory").on("change", function () {
+          if ($(this).val() === "yes") {
+            $("#caseHistorySection").show();
+          } else {
+            $("#caseHistorySection").hide();
+          }
+        });
+
+        // Add history entry
+        $("#addHistoryEntry").on("click", function () {
+          const historyEntryHtml = `
+            <div class="history-entry" style="border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; background: var(--surface);">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Date of Event <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="history_date[]" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Event Type <span class="required">*</span></label>
+                  <select class="form-select" name="history_event_type[]" required>
+                    <option value="">Select Event Type</option>
+                    <option value="Hearing">Hearing</option>
+                    <option value="Filing">Filing</option>
+                    <option value="Adjournment">Adjournment</option>
+                    <option value="Evidence Submission">Evidence Submission</option>
+                    <option value="Order Received">Order Received</option>
+                    <option value="Notice Served">Notice Served</option>
+                    <option value="Settlement Discussion">Settlement Discussion</option>
+                    <option value="Appeal Filed">Appeal Filed</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Court Name</label>
+                  <input type="text" class="form-input" name="history_court[]" placeholder="Name of the court">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judge Name</label>
+                  <input type="text" class="form-input" name="history_judge[]" placeholder="Presiding judge">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Next Hearing Date</label>
+                  <input type="date" class="form-input" name="history_next_hearing[]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Document Reference Type</label>
+                  <select class="form-select" name="history_doc_type[]">
+                    <option value="">Select Document Type</option>
+                    <option value="Order Copy">Order Copy</option>
+                    <option value="Affidavit">Affidavit</option>
+                    <option value="Submission Note">Submission Note</option>
+                    <option value="Evidence Document">Evidence Document</option>
+                    <option value="Notice">Notice</option>
+                    <option value="Application">Application</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Appeal Status</label>
+                  <select class="form-select" name="history_appeal_status[]">
+                    <option value="Not Applicable">Not Applicable</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Notify Client?</label>
+                  <select class="form-select" name="history_notify_client[]">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label">Remarks / Summary <span class="required">*</span></label>
+                <textarea class="form-textarea" name="history_remarks[]" placeholder="Notes, updates, or brief explanation of the event" style="min-height: 80px;" required></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Order Summary / Decision</label>
+                <textarea class="form-textarea" name="history_order_summary[]" placeholder="Outcome of the hearing or order (if applicable)" style="min-height: 60px;"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Upload Documents</label>
+                <div class="file-upload">
+                  <input type="file" name="history_documents[]" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" class="history-file-upload">
+                  <div class="file-upload-btn">
+                    <i class="fas fa-upload"></i>
+                    Choose Files (PDF, DOC, DOCX, JPG, PNG)
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: right; margin-top: 1rem;">
+                <button type="button" class="btn btn-secondary remove-history-entry" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                  <i class="fas fa-trash"></i> Remove Entry
+                </button>
+              </div>
+            </div>
+          `;
+          $("#historyEntries").append(historyEntryHtml);
+        });
+
+        // Remove history entry
+        $(document).on("click", ".remove-history-entry", function () {
+          if ($("#historyEntries .history-entry").length > 1) {
+            $(this).closest(".history-entry").remove();
+          } else {
+            alert("At least one history entry is required.");
+          }
+        });
+
         // Cancel button
         $("#cancelBtn").on("click", function () {
           if (
