@@ -1301,6 +1301,81 @@
       function logoutFromApp() {
         alert("Logout functionality would be implemented here");
       }
+
+      // Load case data for editing
+      function loadCaseDataForEdit(caseId) {
+        // Sample case data - in reality this would come from your backend
+        const casesData = {
+          1: {
+            case_title: "State vs. John Doe",
+            case_type: "Criminal",
+            court_name: "District Court, Delhi",
+            judge_name: "Hon'ble Justice A.K. Sharma",
+            case_number: "CC/1234/2024",
+            filing_date: "2023-12-20",
+            client_name: "John Doe",
+            client_type: "Individual",
+            client_phone: "+91 9876543210",
+            client_email: "johndoe@email.com",
+            ipc_sections: "420, 406, 34",
+            acts: "IPC",
+            next_hearing_date: "2024-01-15",
+            status: "Active",
+            case_summary: "The case involves allegations of cheating and criminal breach of trust against the accused John Doe.",
+            senior_advocate: "priya_sharma",
+            junior_advocate: "amit_jain",
+            fee_agreed: "250000",
+            payment_status: "Partial",
+            internal_notes: "Client is cooperative. Need to prepare strong bail application."
+          },
+          2: {
+            case_title: "Smith Property Dispute",
+            case_type: "Civil",
+            court_name: "High Court, Delhi",
+            judge_name: "Hon'ble Justice B.K. Patel",
+            case_number: "CS/5678/2024",
+            filing_date: "2023-12-15",
+            client_name: "Mr. Smith",
+            client_type: "Individual",
+            client_phone: "+91 9876543211",
+            client_email: "smith@email.com",
+            ipc_sections: "",
+            acts: "Transfer of Property Act",
+            next_hearing_date: "2024-01-18",
+            status: "Pending",
+            case_summary: "Property dispute regarding ownership and possession rights.",
+            senior_advocate: "rajesh_kumar",
+            junior_advocate: "neha_gupta",
+            fee_agreed: "150000",
+            payment_status: "Paid",
+            internal_notes: "Strong documentary evidence available."
+          }
+        };
+
+        const caseData = casesData[caseId] || casesData["1"];
+
+        // Populate form fields with case data
+        $('input[name="case_title"]').val(caseData.case_title);
+        $('select[name="case_type"]').val(caseData.case_type);
+        $('input[name="court_name"]').val(caseData.court_name);
+        $('input[name="judge_name"]').val(caseData.judge_name);
+        $('input[name="case_number"]').val(caseData.case_number);
+        $('input[name="filing_date"]').val(caseData.filing_date);
+        $('input[name="client_name"]').val(caseData.client_name);
+        $('select[name="client_type"]').val(caseData.client_type);
+        $('input[name="client_phone"]').val(caseData.client_phone);
+        $('input[name="client_email"]').val(caseData.client_email);
+        $('input[name="ipc_sections"]').val(caseData.ipc_sections);
+        $('input[name="acts"]').val(caseData.acts);
+        $('input[name="next_hearing_date"]').val(caseData.next_hearing_date);
+        $('select[name="status"]').val(caseData.status);
+        $('textarea[name="case_summary"]').val(caseData.case_summary);
+        $('select[name="senior_advocate"]').val(caseData.senior_advocate);
+        $('select[name="junior_advocate"]').val(caseData.junior_advocate);
+        $('input[name="fee_agreed"]').val(caseData.fee_agreed);
+        $('select[name="payment_status"]').val(caseData.payment_status);
+        $('textarea[name="internal_notes"]').val(caseData.internal_notes);
+      }
     </script>
   </body>
 </html>
