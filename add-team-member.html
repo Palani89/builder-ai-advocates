@@ -1,0 +1,1276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Team Member - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .menu-toggle:hover {
+        background: var(--background);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .page-title-section h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.75rem 0 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .breadcrumb-item:hover {
+        color: var(--primary);
+      }
+
+      .breadcrumb-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .breadcrumb-separator {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      /* Form Styles */
+      .form-container {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+
+      .form-section {
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .form-section:last-child {
+        border-bottom: none;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .section-icon {
+        color: var(--primary);
+        font-size: 1.125rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .required {
+        color: var(--error);
+      }
+
+      .form-input {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        transition: border-color 0.2s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-select {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        cursor: pointer;
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .checkbox-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .checkbox-item input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+      }
+
+      .checkbox-item span,
+      .checkbox-item label {
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        cursor: pointer;
+      }
+
+      /* Action Buttons */
+      .form-actions {
+        padding: 2rem;
+        background: var(--background);
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--text-muted);
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .side-menu.open {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .side-menu-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .side-menu-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .side-menu-close:hover {
+        background: var(--background);
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+      }
+
+      .side-menu-item.active {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .side-menu-item.logout {
+        color: var(--error);
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+      }
+
+      .side-menu-item.logout:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .side-menu-icon {
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .form-section {
+          padding: 1.5rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+
+        .form-actions {
+          flex-direction: column;
+          padding: 1.5rem;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .checkbox-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item active">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>
+              <i class="fas fa-user-plus"></i>
+              Add New Team Member
+            </h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="home.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <a href="team.html" class="breadcrumb-item">
+                <i class="fas fa-users"></i>
+                Team
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-user-plus"></i>
+                Add Member
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Add a new advocate, lawyer, or intern to your legal team
+            </p>
+          </div>
+        </div>
+
+        <!-- Team Member Form -->
+        <div class="form-container">
+          <form id="teamMemberForm" enctype="multipart/form-data">
+            <!-- Basic Information -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-user section-icon"></i>
+                <span class="section-title">Basic Information</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Full Name <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="full_name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Email <span class="required">*</span></label
+                  >
+                  <input
+                    type="email"
+                    class="form-input"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Mobile Number <span class="required">*</span></label
+                  >
+                  <input
+                    type="tel"
+                    class="form-input"
+                    name="mobile_number"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Gender</label>
+                  <select class="form-select" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" class="form-input" name="date_of_birth" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Profile Image</label>
+                  <input
+                    type="file"
+                    class="form-input"
+                    name="profile_image"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Professional Information -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-briefcase section-icon"></i>
+                <span class="section-title">Professional Information</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Position Title <span class="required">*</span></label
+                  >
+                  <select class="form-select" name="position_title" required>
+                    <option value="">Select Position</option>
+                    <option value="Senior Advocate">Senior Advocate</option>
+                    <option value="Junior Advocate">Junior Advocate</option>
+                    <option value="Senior Lawyer">Senior Lawyer</option>
+                    <option value="Junior Lawyer">Junior Lawyer</option>
+                    <option value="Intern">Intern</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bar Council ID</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="bar_council_id"
+                    placeholder="Required for advocates/lawyers"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Years of Experience</label>
+                  <input
+                    type="number"
+                    class="form-input"
+                    name="years_of_experience"
+                    min="0"
+                    max="50"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Law School</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="law_school"
+                    placeholder="Educational institution"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Specialization</label>
+                <div class="checkbox-grid">
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="specialization"
+                      value="Civil"
+                    />
+                    <span>Civil Law</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="specialization"
+                      value="Criminal"
+                    />
+                    <span>Criminal Law</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="specialization"
+                      value="Corporate"
+                    />
+                    <span>Corporate Law</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="specialization" value="IPR" />
+                    <span>Intellectual Property</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="specialization"
+                      value="Family"
+                    />
+                    <span>Family Law</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="specialization"
+                      value="Labour"
+                    />
+                    <span>Labour Law</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Languages Known</label>
+                <div class="checkbox-grid">
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="English"
+                      checked
+                    />
+                    <span>English</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="Hindi"
+                    />
+                    <span>Hindi</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="Tamil"
+                    />
+                    <span>Tamil</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="Telugu"
+                    />
+                    <span>Telugu</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="Marathi"
+                    />
+                    <span>Marathi</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="languages_known"
+                      value="Bengali"
+                    />
+                    <span>Bengali</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department & Team -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-building section-icon"></i>
+                <span class="section-title">Department & Team</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Department</label>
+                  <select class="form-select" name="department">
+                    <option value="">Select Department</option>
+                    <option value="Litigation">Litigation</option>
+                    <option value="Documentation">Documentation</option>
+                    <option value="Research">Research</option>
+                    <option value="Support">Support</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Team Lead</label>
+                  <select class="form-select" name="team_lead_id">
+                    <option value="">Select Team Lead</option>
+                    <option value="priya_sharma">
+                      Priya Sharma - Senior Advocate
+                    </option>
+                    <option value="rajesh_kumar">
+                      Rajesh Kumar - Senior Advocate
+                    </option>
+                    <option value="anil_verma">
+                      Anil Verma - Senior Advocate
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Location</label>
+                  <select class="form-select" name="location">
+                    <option value="">Select Location</option>
+                    <option value="Head Office">Head Office</option>
+                    <option value="Branch">Branch Office</option>
+                    <option value="Remote">Remote</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Role & Access Level -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-key section-icon"></i>
+                <span class="section-title">Role & Access Level</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >App Role <span class="required">*</span></label
+                  >
+                  <select class="form-select" name="app_role" required>
+                    <option value="">Select Role</option>
+                    <option value="Admin">
+                      Admin - Full access to all data and controls
+                    </option>
+                    <option value="Editor">
+                      Editor - Can modify case details, assign tasks, upload
+                      docs
+                    </option>
+                    <option value="Viewer">
+                      Viewer - Read-only access to assigned cases
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Visibility</label>
+                  <select class="form-select" name="case_visibility">
+                    <option value="All Firm Cases">All Firm Cases</option>
+                    <option value="Assigned Cases Only">
+                      Assigned Cases Only
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Custom Permissions</label>
+                <div class="checkbox-grid">
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="view_cases" checked />
+                    <span>View Cases</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="edit_cases" />
+                    <span>Edit Cases</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="assign_tasks" />
+                    <span>Assign Tasks</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="upload_documents" checked />
+                    <span>Upload Documents</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="view_client_info" />
+                    <span>View Client Info</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="access_billing" />
+                    <span>Access Billing</span>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" name="manage_team" />
+                    <span>Manage Team</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" form="teamMemberForm">
+              <i class="fas fa-user-plus"></i>
+              Add Team Member
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item active">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Position title change handler (to show/hide bar council ID requirement)
+        $("select[name='position_title']").on("change", function () {
+          const position = $(this).val();
+          const barCouncilField = $("input[name='bar_council_id']");
+          const barCouncilLabel = barCouncilField.prev("label");
+
+          if (position === "Intern") {
+            barCouncilLabel.html(
+              "Bar Council ID <small>(Optional for interns)</small>",
+            );
+            barCouncilField.removeAttr("required");
+          } else if (
+            position.includes("Advocate") ||
+            position.includes("Lawyer")
+          ) {
+            barCouncilLabel.html(
+              'Bar Council ID <span class="required">*</span>',
+            );
+            barCouncilField.attr("required", true);
+          } else {
+            barCouncilLabel.html("Bar Council ID");
+            barCouncilField.removeAttr("required");
+          }
+        });
+
+        // App role change handler (to set default permissions)
+        $("select[name='app_role']").on("change", function () {
+          const role = $(this).val();
+
+          // Reset all permissions
+          $(
+            "input[name^='view_cases'], input[name^='edit_cases'], input[name^='assign_tasks'], input[name^='upload_documents'], input[name^='view_client_info'], input[name^='access_billing'], input[name^='manage_team']",
+          ).prop("checked", false);
+
+          // Set permissions based on role
+          if (role === "Admin") {
+            $(
+              "input[name^='view_cases'], input[name^='edit_cases'], input[name^='assign_tasks'], input[name^='upload_documents'], input[name^='view_client_info'], input[name^='access_billing'], input[name^='manage_team']",
+            ).prop("checked", true);
+          } else if (role === "Editor") {
+            $(
+              "input[name^='view_cases'], input[name^='edit_cases'], input[name^='upload_documents'], input[name^='assign_tasks']",
+            ).prop("checked", true);
+          } else if (role === "Viewer") {
+            $("input[name^='view_cases']").prop("checked", true);
+          }
+        });
+
+        // Team Member Form submission
+        $("#teamMemberForm").on("submit", function (e) {
+          e.preventDefault();
+          saveTeamMember();
+        });
+
+        // Cancel button
+        $("#cancelBtn").on("click", function () {
+          if (
+            confirm(
+              "Are you sure you want to cancel? All entered data will be lost.",
+            )
+          ) {
+            window.location.href = "team.html";
+          }
+        });
+
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
+        });
+
+        // Logout functionality
+        $(".fa-sign-out-alt")
+          .parent()
+          .on("click", function () {
+            logoutFromApp();
+          });
+      });
+
+      function saveTeamMember() {
+        const formData = new FormData(
+          document.getElementById("teamMemberForm"),
+        );
+        const teamMemberData = {};
+
+        // Process form data
+        for (let [key, value] of formData.entries()) {
+          if (
+            key.includes("specialization") ||
+            key.includes("languages_known") ||
+            key.includes("available_days") ||
+            key.includes("court_appearance_days")
+          ) {
+            if (!teamMemberData[key]) {
+              teamMemberData[key] = [];
+            }
+            teamMemberData[key].push(value);
+          } else {
+            teamMemberData[key] = value;
+          }
+        }
+
+        // Add system fields
+        teamMemberData.member_id =
+          "MEMBER_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 5).toUpperCase();
+        teamMemberData.created_by = "current_admin_id";
+        teamMemberData.created_on = new Date().toISOString();
+        teamMemberData.last_updated = new Date().toISOString();
+
+        // Process checkboxes that weren't checked (they won't be in FormData)
+        const checkboxFields = [
+          "view_cases",
+          "edit_cases",
+          "assign_tasks",
+          "upload_documents",
+          "view_client_info",
+          "access_billing",
+          "manage_team",
+        ];
+
+        checkboxFields.forEach((field) => {
+          if (!teamMemberData[field]) {
+            teamMemberData[field] = false;
+          } else {
+            teamMemberData[field] = true;
+          }
+        });
+
+        // Validate required fields
+        if (
+          !teamMemberData.full_name ||
+          !teamMemberData.email ||
+          !teamMemberData.mobile_number ||
+          !teamMemberData.position_title ||
+          !teamMemberData.app_role
+        ) {
+          alert("Please fill in all required fields.");
+          return;
+        }
+
+        // Validate bar council ID for advocates/lawyers
+        if (
+          (teamMemberData.position_title.includes("Advocate") ||
+            teamMemberData.position_title.includes("Lawyer")) &&
+          teamMemberData.position_title !== "Intern" &&
+          !teamMemberData.bar_council_id
+        ) {
+          alert("Bar Council ID is required for advocates and lawyers.");
+          return;
+        }
+
+        // Here you would normally send the data to your backend
+        console.log("Team Member Data:", teamMemberData);
+
+        alert("Team member added successfully!");
+        window.location.href = "team.html";
+      }
+
+      // Side menu functions
+      function openSideMenu() {
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
+      }
+
+      function logoutFromApp() {
+        window.location.href = "ai-advocs-webapp.html";
+      }
+
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
+    </script>
+  </body>
+</html>
