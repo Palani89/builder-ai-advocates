@@ -342,6 +342,27 @@
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
       }
 
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background: var(--background);
+        border-radius: 8px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary);
+      }
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
       .file-upload {
         position: relative;
         display: inline-block;
@@ -421,6 +442,304 @@
         border-color: var(--text-muted);
       }
 
+      /* Dynamic Lists */
+      .dynamic-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .list-item {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        position: relative;
+      }
+
+      .list-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .list-item-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .remove-item-btn {
+        background: var(--error);
+        color: white;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .remove-item-btn:hover {
+        background: #dc2626;
+      }
+
+      .add-item-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .add-item-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .advocate-role-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .advocate-role-badge.senior {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .advocate-role-badge.junior {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+      }
+
+      .document-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        margin-top: 0.5rem;
+      }
+
+      .document-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .document-type-select {
+        padding: 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 0.75rem;
+        background: var(--surface);
+        margin-left: 0.5rem;
+      }
+
+      .article-link-preview {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        background: var(--background);
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+
+      .article-link-preview a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .article-link-preview a:hover {
+        text-decoration: underline;
+      }
+
+      .article-type-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .reference-sources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+
+      .reference-source-item {
+        padding: 0.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+
+      .url-input-group {
+        position: relative;
+      }
+
+      .url-validate-btn {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 0.25rem;
+      }
+
+      .url-validate-btn:hover {
+        color: var(--primary);
+      }
+
+      .url-validate-btn.valid {
+        color: var(--success);
+      }
+
+      .url-validate-btn.invalid {
+        color: var(--error);
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .side-menu.open {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .side-menu-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .side-menu-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .side-menu-close:hover {
+        background: var(--background);
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+      }
+
+      .side-menu-item.active {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .side-menu-item.logout {
+        color: var(--error);
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+      }
+
+      .side-menu-item.logout:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .side-menu-icon {
+        width: 20px;
+        text-align: center;
+      }
+
       /* Bottom Navigation */
       .bottom-nav {
         background: var(--surface);
@@ -497,6 +816,54 @@
     </style>
   </head>
   <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item active">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
     <div class="app-container">
       <!-- Header -->
       <div class="header">
@@ -535,7 +902,7 @@
 
             <!-- Breadcrumb -->
             <nav class="breadcrumb">
-              <a href="index.html" class="breadcrumb-item">
+              <a href="home.html" class="breadcrumb-item">
                 <i class="fas fa-home"></i>
                 Home
               </a>
@@ -640,10 +1007,192 @@
                     required
                   />
                 </div>
+                <div class="form-group">
+                  <label class="form-label">Status</label>
+                  <select class="form-select" name="status">
+                    <option value="Active">Active</option>
+                    <option value="Disposed">Disposed</option>
+                    <option value="Appeal Filed">Appeal Filed</option>
+                    <option value="Pending">Pending</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Jurisdiction</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="jurisdiction"
+                    placeholder="e.g., Delhi East"
+                  />
+                </div>
               </div>
             </div>
 
-            <!-- Section 2: Client Details -->
+            <!-- Section 2: Parties Involved -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-users section-icon"></i>
+                <span class="section-title">Parties Involved</span>
+              </div>
+
+              <!-- Petitioners -->
+              <div style="margin-bottom: 2rem">
+                <h4
+                  style="
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                    color: var(--text-primary);
+                  "
+                >
+                  <i class="fas fa-user"></i> Petitioners
+                </h4>
+                <div class="dynamic-list" id="petitionersList">
+                  <div class="list-item">
+                    <div class="list-item-header">
+                      <span class="list-item-title">
+                        <i class="fas fa-user"></i>
+                        Petitioner 1
+                      </span>
+                    </div>
+                    <div class="form-grid">
+                      <div class="form-group">
+                        <label class="form-label"
+                          >Name <span class="required">*</span></label
+                        >
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="petitioners[0][name]"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input
+                          type="tel"
+                          class="form-input"
+                          name="petitioners[0][phone]"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input
+                          type="email"
+                          class="form-input"
+                          name="petitioners[0][email]"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" name="petitioners[0][type]">
+                          <option value="Individual">Individual</option>
+                          <option value="Company">Company</option>
+                          <option value="Organization">Organization</option>
+                          <option value="Government">Government</option>
+                        </select>
+                      </div>
+                      <div class="form-group" style="grid-column: 1 / -1">
+                        <label class="form-label">Address</label>
+                        <textarea
+                          class="form-textarea"
+                          name="petitioners[0][address]"
+                          placeholder="Complete address"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="add-item-btn"
+                  id="addPetitionerBtn"
+                >
+                  <i class="fas fa-plus"></i>
+                  Add Another Petitioner
+                </button>
+              </div>
+
+              <!-- Respondents -->
+              <div>
+                <h4
+                  style="
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                    color: var(--text-primary);
+                  "
+                >
+                  <i class="fas fa-user-tie"></i> Respondents
+                </h4>
+                <div class="dynamic-list" id="respondentsList">
+                  <div class="list-item">
+                    <div class="list-item-header">
+                      <span class="list-item-title">
+                        <i class="fas fa-user-tie"></i>
+                        Respondent 1
+                      </span>
+                    </div>
+                    <div class="form-grid">
+                      <div class="form-group">
+                        <label class="form-label"
+                          >Name <span class="required">*</span></label
+                        >
+                        <input
+                          type="text"
+                          class="form-input"
+                          name="respondents[0][name]"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input
+                          type="tel"
+                          class="form-input"
+                          name="respondents[0][phone]"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input
+                          type="email"
+                          class="form-input"
+                          name="respondents[0][email]"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" name="respondents[0][type]">
+                          <option value="Individual">Individual</option>
+                          <option value="Company">Company</option>
+                          <option value="Organization">Organization</option>
+                          <option value="Government">Government</option>
+                        </select>
+                      </div>
+                      <div class="form-group" style="grid-column: 1 / -1">
+                        <label class="form-label">Address</label>
+                        <textarea
+                          class="form-textarea"
+                          name="respondents[0][address]"
+                          placeholder="Complete address"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="add-item-btn"
+                  id="addRespondentBtn"
+                >
+                  <i class="fas fa-plus"></i>
+                  Add Another Respondent
+                </button>
+              </div>
+            </div>
+
+            <!-- Section 3: Client Details -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-user section-icon"></i>
@@ -651,15 +1200,8 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label"
-                    >Client Name <span class="required">*</span></label
-                  >
-                  <input
-                    type="text"
-                    class="form-input"
-                    name="client_name"
-                    required
-                  />
+                  <label class="form-label">Client Name</label>
+                  <input type="text" class="form-input" name="client_name" />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Client Type</label>
@@ -681,11 +1223,11 @@
               </div>
             </div>
 
-            <!-- Section 3: Legal Details -->
+            <!-- Section 4: Legal Sections & Acts -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-gavel section-icon"></i>
-                <span class="section-title">Legal Details</span>
+                <span class="section-title">Legal Sections & Acts</span>
               </div>
               <div class="form-grid">
                 <div class="form-group">
@@ -706,6 +1248,25 @@
                     placeholder="e.g., CrPC, CPC, Indian Evidence Act"
                   />
                 </div>
+                <div class="form-group" style="grid-column: 1 / -1">
+                  <label class="form-label">Custom Tags</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="custom_tags"
+                    placeholder="e.g., Bail, Interim Order, Notice Served"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Hearing & Scheduling -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-calendar section-icon"></i>
+                <span class="section-title">Hearing & Scheduling</span>
+              </div>
+              <div class="form-grid">
                 <div class="form-group">
                   <label class="form-label">Next Hearing Date</label>
                   <input
@@ -715,114 +1276,484 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Status</label>
-                  <select class="form-select" name="status">
-                    <option value="Active">Active</option>
-                    <option value="Disposed">Disposed</option>
-                    <option value="Appeal Filed">Appeal Filed</option>
-                    <option value="Pending">Pending</option>
+                  <label class="form-label">Courtroom Number</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="courtroom_number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Purpose</label>
+                  <select class="form-select" name="hearing_purpose">
+                    <option value="">Select Purpose</option>
+                    <option value="For Arguments">For Arguments</option>
+                    <option value="For Evidence">For Evidence</option>
+                    <option value="Order Reserved">Order Reserved</option>
+                    <option value="Final Hearing">Final Hearing</option>
+                    <option value="Bail Application">Bail Application</option>
                   </select>
                 </div>
+                <div class="form-group">
+                  <label class="form-label">Assigned Judge</label>
+                  <input type="text" class="form-input" name="assigned_judge" />
+                </div>
               </div>
-              <div class="form-group" style="margin-top: 1.5rem">
-                <label class="form-label">Case Summary</label>
-                <textarea
-                  class="form-textarea"
-                  name="case_summary"
-                  placeholder="Brief description of the case..."
-                  style="min-height: 120px"
-                ></textarea>
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="auto_reminder"
+                  name="auto_reminder"
+                />
+                <label for="auto_reminder" class="checkbox-label"
+                  >Enable auto reminder for hearing dates</label
+                >
               </div>
             </div>
 
-            <!-- Section 4: Documents -->
+            <!-- Section 6: Documents -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-file section-icon"></i>
                 <span class="section-title">Documents</span>
               </div>
-              <div class="form-group">
-                <label class="form-label">Upload Documents</label>
-                <div class="file-upload">
-                  <input
-                    type="file"
-                    name="documents"
-                    multiple
-                    accept=".pdf,.doc,.docx,.jpg,.png,.jpeg"
-                    id="documentUpload"
-                  />
-                  <div class="file-upload-btn">
-                    <i class="fas fa-upload"></i>
-                    Choose Files (PDF, DOC, DOCX, JPG, PNG)
+
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1">
+                  <label class="form-label">Upload Documents</label>
+                  <div class="file-upload">
+                    <input
+                      type="file"
+                      name="documents"
+                      multiple
+                      accept=".pdf,.doc,.docx,.jpg,.png,.jpeg"
+                      id="documentUpload"
+                    />
+                    <div class="file-upload-btn">
+                      <i class="fas fa-upload"></i>
+                      Choose Files (PDF, DOC, DOCX, JPG, PNG)
+                    </div>
                   </div>
+                  <small
+                    style="
+                      color: var(--text-muted);
+                      margin-top: 0.75rem;
+                      display: block;
+                    "
+                  >
+                    Upload case-related documents. You can categorize each
+                    document after selection.
+                  </small>
                 </div>
-                <small
+              </div>
+
+              <!-- Document Categories Guide -->
+              <div
+                style="
+                  margin: 1.5rem 0;
+                  padding: 1rem;
+                  background: var(--background);
+                  border-radius: 8px;
+                "
+              >
+                <h5
                   style="
-                    color: var(--text-muted);
-                    margin-top: 0.75rem;
-                    display: block;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    margin-bottom: 0.75rem;
+                    color: var(--text-primary);
                   "
                 >
-                  Upload case-related documents like FIR, petitions, evidence, etc.
-                </small>
+                  <i class="fas fa-info-circle"></i> Document Categories
+                </h5>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 0.75rem;
+                    font-size: 0.8rem;
+                    color: var(--text-secondary);
+                  "
+                >
+                  <div><strong>FIR:</strong> First Information Report</div>
+                  <div>
+                    <strong>Petition:</strong> Main case petition/plaint
+                  </div>
+                  <div>
+                    <strong>Evidence:</strong> Supporting evidence documents
+                  </div>
+                  <div>
+                    <strong>Notice:</strong> Legal notices served/received
+                  </div>
+                  <div><strong>Order:</strong> Court orders and judgments</div>
+                  <div><strong>Affidavit:</strong> Sworn statements</div>
+                  <div><strong>Contract:</strong> Agreements and contracts</div>
+                  <div>
+                    <strong>Identity:</strong> ID proofs and certificates
+                  </div>
+                  <div>
+                    <strong>Financial:</strong> Bank statements, receipts
+                  </div>
+                  <div><strong>Other:</strong> Miscellaneous documents</div>
+                </div>
+              </div>
+
+              <!-- Uploaded Documents List -->
+              <div id="uploadedDocumentsList" style="margin-top: 1.5rem"></div>
+            </div>
+
+            <!-- Section 6.5: Reference Articles -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-link section-icon"></i>
+                <span class="section-title">Reference Articles & Links</span>
+              </div>
+
+              <div style="margin-bottom: 1.5rem">
+                <p
+                  style="
+                    color: var(--text-secondary);
+                    font-size: 0.875rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  Select relevant articles from your article database or add new
+                  ones.
+                </p>
+                <button
+                  type="button"
+                  onclick="window.open('articles.html', '_blank')"
+                  style="
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    padding: 0.5rem 1rem;
+                    border-radius: 6px;
+                    font-size: 0.875rem;
+                    cursor: pointer;
+                    color: var(--primary);
+                  "
+                >
+                  <i class="fas fa-external-link-alt"></i>
+                  Manage Articles
+                </button>
+              </div>
+
+              <div class="dynamic-list" id="referenceArticlesList">
+                <div class="list-item">
+                  <div class="list-item-header">
+                    <span class="list-item-title">
+                      <i class="fas fa-newspaper"></i>
+                      Reference Article 1
+                    </span>
+                  </div>
+                  <div class="form-grid">
+                    <div class="form-group" style="grid-column: 1 / -1">
+                      <label class="form-label"
+                        >Select Article <span class="required">*</span></label
+                      >
+                      <select
+                        class="form-select"
+                        name="reference_articles[0]"
+                        id="articleSelect0"
+                        required
+                      >
+                        <option value="">
+                          Choose an article from your database
+                        </option>
+                        <!-- Articles will be populated here -->
+                      </select>
+                    </div>
+                  </div>
+                  <div
+                    id="selectedArticlePreview0"
+                    style="
+                      margin-top: 1rem;
+                      padding: 1rem;
+                      background: var(--background);
+                      border-radius: 8px;
+                      display: none;
+                    "
+                  >
+                    <!-- Selected article preview will appear here -->
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="add-item-btn"
+                id="addReferenceArticleBtn"
+              >
+                <i class="fas fa-plus"></i>
+                Add Another Reference Article
+              </button>
+            </div>
+
+            <!-- Section 7: AI Smart Options -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-robot section-icon"></i>
+                <span class="section-title">AI Smart Options</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Summary Language</label>
+                  <select class="form-select" name="language_of_summary">
+                    <option value="English">English</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Tamil">Tamil</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-top: 1rem">
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="generate_case_summary"
+                    name="generate_case_summary"
+                  />
+                  <label for="generate_case_summary" class="checkbox-label"
+                    >Auto-generate case summary using uploaded documents</label
+                  >
+                </div>
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="auto_extract_legal_sections"
+                    name="auto_extract_legal_sections"
+                  />
+                  <label
+                    for="auto_extract_legal_sections"
+                    class="checkbox-label"
+                    >AI scan and extract legal sections from text</label
+                  >
+                </div>
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="enable_ai_drafting"
+                    name="enable_ai_drafting"
+                  />
+                  <label for="enable_ai_drafting" class="checkbox-label"
+                    >Enable AI suggestions for notices & replies</label
+                  >
+                </div>
               </div>
             </div>
 
-            <!-- Section 5: Team Assignment -->
+            <!-- Section 8: Team Assignment -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-user-friends section-icon"></i>
                 <span class="section-title">Team Assignment</span>
               </div>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label class="form-label"
-                    >Senior Advocate <span class="required">*</span></label
-                  >
-                  <select class="form-select" name="senior_advocate" required>
-                    <option value="">Select Senior Advocate</option>
-                    <option value="priya_sharma">
-                      Priya Sharma - Senior Advocate (Criminal Law)
-                    </option>
-                    <option value="rajesh_kumar">
-                      Rajesh Kumar - Senior Advocate (Corporate Law)
-                    </option>
-                    <option value="anil_verma">
-                      Anil Verma - Senior Advocate (Civil Law)
-                    </option>
-                    <option value="kavita_singh">
-                      Kavita Singh - Senior Advocate (Family Law)
-                    </option>
-                  </select>
+
+              <!-- Senior Advocate -->
+              <div style="margin-bottom: 2rem">
+                <h4
+                  style="
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                    color: var(--text-primary);
+                  "
+                >
+                  <i class="fas fa-user-graduate"></i> Senior Advocate (Lead)
+                </h4>
+                <div class="list-item">
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label class="form-label"
+                        >Senior Advocate <span class="required">*</span></label
+                      >
+                      <select
+                        class="form-select"
+                        name="senior_advocate"
+                        required
+                      >
+                        <option value="">Select Senior Advocate</option>
+                        <option value="priya_sharma">
+                          Priya Sharma - Senior Advocate (Criminal Law)
+                        </option>
+                        <option value="rajesh_kumar">
+                          Rajesh Kumar - Senior Advocate (Corporate Law)
+                        </option>
+                        <option value="anil_verma">
+                          Anil Verma - Senior Advocate (Civil Law)
+                        </option>
+                        <option value="kavita_singh">
+                          Kavita Singh - Senior Advocate (Family Law)
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Role</label>
+                      <div style="padding: 0.75rem">
+                        <span class="advocate-role-badge senior"
+                          >Senior Advocate</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="senior_can_edit"
+                      name="senior_permissions[can_edit]"
+                      checked
+                    />
+                    <label for="senior_can_edit" class="checkbox-label"
+                      >Full case management access</label
+                    >
+                  </div>
+                  <div class="checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="senior_can_sign"
+                      name="senior_permissions[can_sign]"
+                      checked
+                    />
+                    <label for="senior_can_sign" class="checkbox-label"
+                      >Can sign documents and notices</label
+                    >
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Junior Advocate</label>
-                  <select class="form-select" name="junior_advocate">
-                    <option value="">Select Junior Advocate</option>
-                    <option value="amit_jain">
-                      Amit Jain - Junior Advocate (Criminal Law)
-                    </option>
-                    <option value="neha_gupta">
-                      Neha Gupta - Junior Advocate (Civil Law)
-                    </option>
-                    <option value="rohit_sharma">
-                      Rohit Sharma - Junior Advocate (Corporate Law)
-                    </option>
-                    <option value="pooja_verma">
-                      Pooja Verma - Junior Advocate (Tax Law)
-                    </option>
-                  </select>
+              </div>
+
+              <!-- Junior Advocates -->
+              <div>
+                <h4
+                  style="
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 1rem;
+                    color: var(--text-primary);
+                  "
+                >
+                  <i class="fas fa-users"></i> Junior Advocates
+                </h4>
+                <div class="dynamic-list" id="juniorAdvocatesList">
+                  <div class="list-item">
+                    <div class="list-item-header">
+                      <span class="list-item-title">
+                        <i class="fas fa-user"></i>
+                        Junior Advocate 1
+                        <span class="advocate-role-badge junior">Junior</span>
+                      </span>
+                    </div>
+                    <div class="form-grid">
+                      <div class="form-group">
+                        <label class="form-label">Junior Advocate</label>
+                        <select
+                          class="form-select"
+                          name="junior_advocates[0][advocate_id]"
+                        >
+                          <option value="">Select Junior Advocate</option>
+                          <option value="sunita_patel">
+                            Sunita Patel - Advocate (Family Law)
+                          </option>
+                          <option value="amit_jain">
+                            Amit Jain - Junior Advocate (Criminal Law)
+                          </option>
+                          <option value="neha_gupta">
+                            Neha Gupta - Junior Advocate (Civil Law)
+                          </option>
+                          <option value="rohit_sharma">
+                            Rohit Sharma - Junior Advocate (Corporate Law)
+                          </option>
+                          <option value="pooja_verma">
+                            Pooja Verma - Junior Advocate (Tax Law)
+                          </option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Primary Responsibility</label>
+                        <select
+                          class="form-select"
+                          name="junior_advocates[0][responsibility]"
+                        >
+                          <option value="">Select Responsibility</option>
+                          <option value="research">Legal Research</option>
+                          <option value="documentation">Documentation</option>
+                          <option value="client_interaction">
+                            Client Interaction
+                          </option>
+                          <option value="court_appearance">
+                            Court Appearance
+                          </option>
+                          <option value="case_preparation">
+                            Case Preparation
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="margin-top: 1rem">
+                      <div class="checkbox-group">
+                        <input
+                          type="checkbox"
+                          name="junior_advocates[0][permissions][can_edit]"
+                        />
+                        <label class="checkbox-label"
+                          >Can edit case details</label
+                        >
+                      </div>
+                      <div class="checkbox-group">
+                        <input
+                          type="checkbox"
+                          name="junior_advocates[0][permissions][can_upload_docs]"
+                        />
+                        <label class="checkbox-label"
+                          >Can upload documents</label
+                        >
+                      </div>
+                      <div class="checkbox-group">
+                        <input
+                          type="checkbox"
+                          name="junior_advocates[0][permissions][can_view_notes]"
+                        />
+                        <label class="checkbox-label"
+                          >Can view internal notes</label
+                        >
+                      </div>
+                      <div class="checkbox-group">
+                        <input
+                          type="checkbox"
+                          name="junior_advocates[0][permissions][can_appear]"
+                        />
+                        <label class="checkbox-label"
+                          >Can appear in court</label
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <button
+                  type="button"
+                  class="add-item-btn"
+                  id="addJuniorAdvocateBtn"
+                >
+                  <i class="fas fa-plus"></i>
+                  Add Another Junior Advocate
+                </button>
               </div>
             </div>
 
-            <!-- Section 6: Billing -->
+            <!-- Section 9: Billing & Time Tracking -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-rupee-sign section-icon"></i>
-                <span class="section-title">Billing Information</span>
+                <span class="section-title">Billing & Time Tracking</span>
               </div>
               <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Billing Type</label>
+                  <select class="form-select" name="billing_type">
+                    <option value="">Select Billing Type</option>
+                    <option value="Fixed">Fixed</option>
+                    <option value="Hourly">Hourly</option>
+                    <option value="Retainer">Retainer</option>
+                  </select>
+                </div>
                 <div class="form-group">
                   <label class="form-label">Fee Agreed (INR)</label>
                   <input
@@ -840,10 +1771,18 @@
                     <option value="Partial">Partial</option>
                   </select>
                 </div>
+                <div class="form-group">
+                  <label class="form-label">Invoice Due Date</label>
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="client_invoice_due_date"
+                  />
+                </div>
               </div>
             </div>
 
-            <!-- Section 7: Case History -->
+            <!-- Section 10: Case History -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-history section-icon"></i>
@@ -856,7 +1795,7 @@
                   <option value="yes">Yes</option>
                 </select>
               </div>
-
+              
               <div id="caseHistorySection" style="display: none;">
                 <!-- Previous Advocate Details -->
                 <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
@@ -1005,20 +1944,41 @@
               </div>
             </div>
 
-            <!-- Section 8: Notes -->
+            <!-- Section 11: Notes & Instructions -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-sticky-note section-icon"></i>
-                <span class="section-title">Additional Notes</span>
+                <span class="section-title">Notes & Instructions</span>
               </div>
-              <div class="form-group">
-                <label class="form-label">Internal Notes</label>
-                <textarea
-                  class="form-textarea"
-                  name="internal_notes"
-                  placeholder="Notes for advocate's eyes only"
-                  style="min-height: 120px"
-                ></textarea>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1">
+                  <label class="form-label">Internal Notes</label>
+                  <textarea
+                    class="form-textarea"
+                    name="internal_notes"
+                    placeholder="Notes for advocate's eyes only"
+                    style="min-height: 120px"
+                  ></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1">
+                  <label class="form-label">Client Instructions</label>
+                  <textarea
+                    class="form-textarea"
+                    name="client_instructions"
+                    placeholder="Instructions from client about how to proceed"
+                    style="min-height: 120px"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="sensitive_case"
+                  name="sensitive_case"
+                />
+                <label for="sensitive_case" class="checkbox-label"
+                  >Mark as sensitive case (restricted access)</label
+                >
               </div>
             </div>
           </form>
@@ -1040,7 +2000,7 @@
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-items">
-          <a href="index.html" class="nav-item">
+          <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
             Home
           </a>
@@ -1052,7 +2012,7 @@
             <i class="fas fa-file-alt"></i>
             Cases
           </a>
-          <a href="index.html" class="nav-item">
+          <a href="calendar.html" class="nav-item">
             <i class="fas fa-calendar"></i>
             Calendar
           </a>
@@ -1093,40 +2053,9 @@
           }
         });
 
-        // File upload handling
-        $("#documentUpload").on("change", function () {
-          const files = this.files;
-          if (files.length > 0) {
-            $(this)
-              .siblings(".file-upload-btn")
-              .html(
-                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
-              );
-          } else {
-            $(this)
-              .siblings(".file-upload-btn")
-              .html(
-                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
-              );
-          }
-        });
-
-        // History file upload handling
-        $(document).on("change", ".history-file-upload", function () {
-          const files = this.files;
-          if (files.length > 0) {
-            $(this)
-              .siblings(".file-upload-btn")
-              .html(
-                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
-              );
-          } else {
-            $(this)
-              .siblings(".file-upload-btn")
-              .html(
-                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
-              );
-          }
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
         });
 
         // Case history toggle
@@ -1240,6 +2169,384 @@
           }
         });
 
+        // History file upload handling
+        $(document).on("change", ".history-file-upload", function () {
+          const files = this.files;
+          if (files.length > 0) {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
+              );
+          } else {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
+              );
+          }
+        });
+
+        // Dynamic Petitioners
+        let petitionerCount = 1;
+        $("#addPetitionerBtn").on("click", function () {
+          const petitionerHtml = `
+            <div class="list-item">
+              <div class="list-item-header">
+                <span class="list-item-title">
+                  <i class="fas fa-user"></i>
+                  Petitioner ${petitionerCount + 1}
+                </span>
+                <button type="button" class="remove-item-btn" onclick="removeListItem(this)">
+                  <i class="fas fa-times"></i>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="petitioners[${petitionerCount}][name]" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" class="form-input" name="petitioners[${petitionerCount}][phone]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-input" name="petitioners[${petitionerCount}][email]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Type</label>
+                  <select class="form-select" name="petitioners[${petitionerCount}][type]">
+                    <option value="Individual">Individual</option>
+                    <option value="Company">Company</option>
+                    <option value="Organization">Organization</option>
+                    <option value="Government">Government</option>
+                  </select>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Address</label>
+                  <textarea class="form-textarea" name="petitioners[${petitionerCount}][address]" placeholder="Complete address"></textarea>
+                </div>
+              </div>
+            </div>
+          `;
+          $("#petitionersList").append(petitionerHtml);
+          petitionerCount++;
+        });
+
+        // Dynamic Respondents
+        let respondentCount = 1;
+        $("#addRespondentBtn").on("click", function () {
+          const respondentHtml = `
+            <div class="list-item">
+              <div class="list-item-header">
+                <span class="list-item-title">
+                  <i class="fas fa-user-tie"></i>
+                  Respondent ${respondentCount + 1}
+                </span>
+                <button type="button" class="remove-item-btn" onclick="removeListItem(this)">
+                  <i class="fas fa-times"></i>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="respondents[${respondentCount}][name]" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" class="form-input" name="respondents[${respondentCount}][phone]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-input" name="respondents[${respondentCount}][email]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Type</label>
+                  <select class="form-select" name="respondents[${respondentCount}][type]">
+                    <option value="Individual">Individual</option>
+                    <option value="Company">Company</option>
+                    <option value="Organization">Organization</option>
+                    <option value="Government">Government</option>
+                  </select>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Address</label>
+                  <textarea class="form-textarea" name="respondents[${respondentCount}][address]" placeholder="Complete address"></textarea>
+                </div>
+              </div>
+            </div>
+          `;
+          $("#respondentsList").append(respondentHtml);
+          respondentCount++;
+        });
+
+        // Dynamic Junior Advocates
+        let juniorAdvocateCount = 1;
+        $("#addJuniorAdvocateBtn").on("click", function () {
+          const juniorAdvocateHtml = `
+            <div class="list-item">
+              <div class="list-item-header">
+                <span class="list-item-title">
+                  <i class="fas fa-user"></i>
+                  Junior Advocate ${juniorAdvocateCount + 1}
+                  <span class="advocate-role-badge junior">Junior</span>
+                </span>
+                <button type="button" class="remove-item-btn" onclick="removeListItem(this)">
+                  <i class="fas fa-times"></i>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Junior Advocate</label>
+                  <select class="form-select" name="junior_advocates[${juniorAdvocateCount}][advocate_id]">
+                    <option value="">Select Junior Advocate</option>
+                    <option value="sunita_patel">Sunita Patel - Advocate (Family Law)</option>
+                    <option value="amit_jain">Amit Jain - Junior Advocate (Criminal Law)</option>
+                    <option value="neha_gupta">Neha Gupta - Junior Advocate (Civil Law)</option>
+                    <option value="rohit_sharma">Rohit Sharma - Junior Advocate (Corporate Law)</option>
+                    <option value="pooja_verma">Pooja Verma - Junior Advocate (Tax Law)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Primary Responsibility</label>
+                  <select class="form-select" name="junior_advocates[${juniorAdvocateCount}][responsibility]">
+                    <option value="">Select Responsibility</option>
+                    <option value="research">Legal Research</option>
+                    <option value="documentation">Documentation</option>
+                    <option value="client_interaction">Client Interaction</option>
+                    <option value="court_appearance">Court Appearance</option>
+                    <option value="case_preparation">Case Preparation</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-top: 1rem;">
+                <div class="checkbox-group">
+                  <input type="checkbox" name="junior_advocates[${juniorAdvocateCount}][permissions][can_edit]" id="junior_edit_${juniorAdvocateCount}">
+                  <label for="junior_edit_${juniorAdvocateCount}" class="checkbox-label">Can edit case details</label>
+                </div>
+                <div class="checkbox-group">
+                  <input type="checkbox" name="junior_advocates[${juniorAdvocateCount}][permissions][can_upload_docs]" id="junior_upload_${juniorAdvocateCount}">
+                  <label for="junior_upload_${juniorAdvocateCount}" class="checkbox-label">Can upload documents</label>
+                </div>
+                <div class="checkbox-group">
+                  <input type="checkbox" name="junior_advocates[${juniorAdvocateCount}][permissions][can_view_notes]" id="junior_view_${juniorAdvocateCount}">
+                  <label for="junior_view_${juniorAdvocateCount}" class="checkbox-label">Can view internal notes</label>
+                </div>
+                <div class="checkbox-group">
+                  <input type="checkbox" name="junior_advocates[${juniorAdvocateCount}][permissions][can_appear]" id="junior_appear_${juniorAdvocateCount}">
+                  <label for="junior_appear_${juniorAdvocateCount}" class="checkbox-label">Can appear in court</label>
+                </div>
+              </div>
+            </div>
+          `;
+          $("#juniorAdvocatesList").append(juniorAdvocateHtml);
+          juniorAdvocateCount++;
+        });
+
+        // Enhanced File upload handling
+        $("#documentUpload").on("change", function () {
+          const files = this.files;
+          const filesList = $("#uploadedDocumentsList");
+
+          if (files.length > 0) {
+            // Update button text
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
+              );
+
+            // Clear previous list
+            filesList.empty();
+
+            // Add each file with categorization
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              const fileItem = `
+                <div class="document-item" data-file-index="${i}">
+                  <div class="document-info">
+                    <i class="fas fa-file"></i>
+                    <span style="font-weight: 500;">${file.name}</span>
+                    <small style="color: var(--text-muted);">(${formatFileSize(file.size)})</small>
+                    <select class="document-type-select" name="document_types[${i}]" required>
+                      <option value="">Select Type</option>
+                      <option value="FIR">FIR</option>
+                      <option value="Petition">Petition</option>
+                      <option value="Evidence">Evidence</option>
+                      <option value="Notice">Notice</option>
+                      <option value="Order">Order/Judgment</option>
+                      <option value="Affidavit">Affidavit</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Identity">Identity Proof</option>
+                      <option value="Financial">Financial Document</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <button type="button" class="remove-item-btn" onclick="removeDocument(this, ${i})">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              `;
+              filesList.append(fileItem);
+            }
+          } else {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
+              );
+            filesList.empty();
+          }
+        });
+
+        // Sample articles data (same as articles.html)
+        const articlesDatabase = [
+          {
+            id: 1,
+            title: "Supreme Court Judgment on Bail Rights in Criminal Cases",
+            type: "Case Law",
+            url: "https://www.example.com/sc-bail-judgment",
+            author: "Supreme Court of India",
+            date: "2024-01-15",
+            summary:
+              "A landmark judgment establishing new precedents for bail applications in criminal cases, emphasizing the right to liberty and due process.",
+            tags: ["bail", "criminal law", "supreme court", "precedent"],
+          },
+          {
+            id: 2,
+            title: "New Amendments to Civil Procedure Code 2024",
+            type: "Legal Article",
+            url: "https://www.example.com/cpc-amendments",
+            author: "Bar & Bench",
+            date: "2024-02-01",
+            summary:
+              "Comprehensive analysis of the latest amendments to the Civil Procedure Code and their impact on civil litigation.",
+            tags: ["civil procedure", "amendments", "litigation"],
+          },
+          {
+            id: 3,
+            title:
+              "Digital Evidence in Indian Courts: Guidelines and Best Practices",
+            type: "Academic Paper",
+            url: "https://www.example.com/digital-evidence-guidelines",
+            author: "National Law University",
+            date: "2024-01-20",
+            summary:
+              "Research paper on the admissibility and handling of digital evidence in Indian courts with practical guidelines for practitioners.",
+            tags: ["digital evidence", "cybercrime", "evidence act"],
+          },
+        ];
+
+        // Populate article dropdowns
+        function populateArticleDropdown(selectElement) {
+          const currentOptions = selectElement.innerHTML;
+          const baseOption =
+            '<option value="">Choose an article from your database</option>';
+
+          const articleOptions = articlesDatabase
+            .map(
+              (article) =>
+                `<option value="${article.id}" data-article='${JSON.stringify(article)}'>${article.title} (${article.type})</option>`,
+            )
+            .join("");
+
+          selectElement.innerHTML = baseOption + articleOptions;
+        }
+
+        // Handle article selection
+        function handleArticleSelection(selectElement, previewElement) {
+          const selectedOption =
+            selectElement.options[selectElement.selectedIndex];
+
+          if (selectedOption.value && selectedOption.dataset.article) {
+            const article = JSON.parse(selectedOption.dataset.article);
+
+            const previewHtml = `
+              <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                <div style="flex: 1;">
+                  <h4 style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">${article.title}</h4>
+                  <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+                    <span class="article-type" style="padding: 0.25rem 0.5rem; border-radius: 12px; background: rgba(79, 70, 229, 0.1); color: var(--primary);">${article.type}</span>
+                    ${article.author ? `<span><i class="fas fa-user"></i> ${article.author}</span>` : ""}
+                    ${article.date ? `<span><i class="fas fa-calendar"></i> ${formatDate(article.date)}</span>` : ""}
+                  </div>
+                  ${article.summary ? `<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">${article.summary}</p>` : ""}
+                  ${article.url ? `<p style="font-size: 0.8rem;"><a href="${article.url}" target="_blank" style="color: var(--primary); text-decoration: none;"><i class="fas fa-external-link-alt"></i> View Article</a></p>` : ""}
+                </div>
+              </div>
+            `;
+
+            previewElement.innerHTML = previewHtml;
+            previewElement.style.display = "block";
+          } else {
+            previewElement.style.display = "none";
+          }
+        }
+
+        // Dynamic Reference Articles
+        let referenceArticleCount = 1;
+
+        // Populate initial dropdown
+        populateArticleDropdown(document.getElementById("articleSelect0"));
+
+        // Handle initial dropdown change
+        $(document).on("change", "#articleSelect0", function () {
+          handleArticleSelection(
+            this,
+            document.getElementById("selectedArticlePreview0"),
+          );
+        });
+
+        $("#addReferenceArticleBtn").on("click", function () {
+          const articleHtml = `
+            <div class="list-item">
+              <div class="list-item-header">
+                <span class="list-item-title">
+                  <i class="fas fa-newspaper"></i>
+                  Reference Article ${referenceArticleCount + 1}
+                </span>
+                <button type="button" class="remove-item-btn" onclick="removeListItem(this)">
+                  <i class="fas fa-times"></i>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Select Article <span class="required">*</span></label>
+                  <select class="form-select" name="reference_articles[${referenceArticleCount}]" id="articleSelect${referenceArticleCount}" required>
+                    <option value="">Choose an article from your database</option>
+                  </select>
+                </div>
+              </div>
+              <div id="selectedArticlePreview${referenceArticleCount}" style="margin-top: 1rem; padding: 1rem; background: var(--background); border-radius: 8px; display: none;">
+                <!-- Selected article preview will appear here -->
+              </div>
+            </div>
+          `;
+          $("#referenceArticlesList").append(articleHtml);
+
+          // Populate the new dropdown
+          populateArticleDropdown(
+            document.getElementById(`articleSelect${referenceArticleCount}`),
+          );
+
+          // Add event listener for the new dropdown
+          $(`#articleSelect${referenceArticleCount}`).on("change", function () {
+            handleArticleSelection(
+              this,
+              document.getElementById(
+                `selectedArticlePreview${referenceArticleCount}`,
+              ),
+            );
+          });
+
+          referenceArticleCount++;
+        });
+
         // Cancel button
         $("#cancelBtn").on("click", function () {
           if (
@@ -1281,12 +2588,39 @@
           console.log("Case Data:", caseData);
 
           // Show success message
-          alert("Case created successfully!");
+          const isEdit = mode === 'edit';
+          alert(isEdit ? "Case updated successfully!" : "Case created successfully!");
 
-          // Redirect to cases page
-          window.location.href = "cases.html";
+          // Redirect to appropriate page
+          if (isEdit && caseId) {
+            window.location.href = `case-details.html?id=${caseId}`;
+          } else {
+            window.location.href = "cases.html";
+          }
         });
+
+        // Logout functionality
+        $(".fa-sign-out-alt")
+          .parent()
+          .on("click", function () {
+            logoutFromApp();
+          });
       });
+
+      // Side menu functions
+      function openSideMenu() {
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
 
       // Generate unique case ID
       function generateCaseId() {
@@ -1298,8 +2632,38 @@
         );
       }
 
-      function logoutFromApp() {
-        alert("Logout functionality would be implemented here");
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
+
+      // Utility functions
+      function removeListItem(button) {
+        $(button).closest(".list-item").remove();
+      }
+
+      function removeDocument(button, index) {
+        $(button).closest(".document-item").remove();
+        // Note: In a real implementation, you'd also need to update the file input
+        // This is a simplified version for demonstration
+      }
+
+      function formatFileSize(bytes) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-IN", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
       }
 
       // Load case data for editing
