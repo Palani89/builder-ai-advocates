@@ -1321,6 +1321,14 @@
       function viewCaseDetails(caseId) {
         window.location.href = `case-details.html?id=${caseId}`;
       }
+
+      // Dispose case function
+      function disposeCase(caseId) {
+        if (confirm('Are you sure you want to dispose this case? This will mark the case as disposed and move it to the disposed tab.')) {
+          // Redirect to edit case page with dispose mode
+          window.location.href = `create-case.html?mode=edit&id=${caseId}&action=dispose`;
+        }
+      }
     </script>
   </body>
 </html>
