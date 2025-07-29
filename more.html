@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>More - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item active">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>More Features</h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="index.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-th"></i>
+                More
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Access all AI Advocates features and settings
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="feature-section">
+          <h2 class="section-title">Quick Actions</h2>
+          <div class="feature-grid">
+            <div class="feature-card" onclick="handleFeatureClick('Add Article')">
+              <div class="feature-icon primary">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Add Article</div>
+                <div class="feature-description">Create new legal articles</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Add Hearing')">
+              <div class="feature-icon success">
+                <i class="fas fa-calendar-plus"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Add Hearing</div>
+                <div class="feature-description">Schedule court hearings</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Create Invoice')">
+              <div class="feature-icon warning">
+                <i class="fas fa-file-invoice"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Create Invoice</div>
+                <div class="feature-description">Generate client invoices</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Ask AI')">
+              <div class="feature-icon blue">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Ask AI</div>
+                <div class="feature-description">
+                  Get AI-powered legal assistance
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools & Resources -->
+        <div class="feature-section">
+          <h2 class="section-title">Tools & Resources</h2>
+          <div class="tools-grid">
+            <div class="feature-card" onclick="handleFeatureClick('Legal Research')">
+              <div class="feature-icon error">
+                <i class="fas fa-search"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Legal Research</div>
+                <div class="feature-description">Case laws & statutes</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Legal Templates')">
+              <div class="feature-icon purple">
+                <i class="fas fa-file-contract"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Legal Templates</div>
+                <div class="feature-description">Drafts & formats</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('File Upload')">
+              <div class="feature-icon indigo">
+                <i class="fas fa-upload"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">File Upload</div>
+                <div class="feature-description">Import documents</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings & Support -->
+        <div class="feature-section">
+          <h2 class="section-title">Settings & Support</h2>
+          <div class="tools-grid">
+            <div class="feature-card" onclick="handleFeatureClick('Settings')">
+              <div class="feature-icon primary">
+                <i class="fas fa-cog"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Settings</div>
+                <div class="feature-description">App preferences</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Notifications')">
+              <div class="feature-icon warning">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Notifications</div>
+                <div class="feature-description">Alerts & reminders</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Privacy & Security')">
+              <div class="feature-icon pink">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Privacy & Security</div>
+                <div class="feature-description">Data protection</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Help & Support')">
+              <div class="feature-icon green">
+                <i class="fas fa-question-circle"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Help & Support</div>
+                <div class="feature-description">Get assistance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial & Analytics -->
+        <div class="feature-section">
+          <h2 class="section-title">Financial & Analytics</h2>
+          <div class="feature-grid">
+            <div class="feature-card" onclick="handleFeatureClick('Billing & Payments')">
+              <div class="feature-icon pink">
+                <i class="fas fa-credit-card"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Billing & Payments</div>
+                <div class="feature-description">Invoice & fee tracking</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Analytics')">
+              <div class="feature-icon blue">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Analytics</div>
+                <div class="feature-description">Performance insights</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Team Analytics')">
+              <div class="feature-icon purple">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Team Analytics</div>
+                <div class="feature-description">Team performance metrics</div>
+              </div>
+            </div>
+
+            <div class="feature-card" onclick="handleFeatureClick('Time Tracking')">
+              <div class="feature-icon orange">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="feature-info">
+                <div class="feature-title">Time Tracking</div>
+                <div class="feature-description">Track billable hours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item active">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Side menu functions
+      function openSideMenu() {
+        document.getElementById("sideMenu").classList.add("open");
+        document.getElementById("sideMenuOverlay").classList.add("show");
+      }
+
+      function closeSideMenu() {
+        document.getElementById("sideMenu").classList.remove("open");
+        document.getElementById("sideMenuOverlay").classList.remove("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      function handleFeatureClick(featureTitle) {
+        console.log("Feature clicked:", featureTitle);
+
+        switch (featureTitle) {
+          case "Settings":
+            alert("Settings feature would open here");
+            break;
+          case "Legal Research":
+            alert("Legal research tool would open here");
+            break;
+          case "Add Article":
+            alert("Article creation form would open here");
+            break;
+          default:
+            alert(`Opening ${featureTitle}...`);
+        }
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking overlay
+        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+      });
+    </script>
+  </body>
+</html>
