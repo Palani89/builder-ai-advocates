@@ -2610,13 +2610,20 @@
 
           // Show success message
           const isEdit = mode === 'edit';
-          alert(isEdit ? "Case updated successfully!" : "Case created successfully!");
+          const isDispose = action === 'dispose';
 
-          // Redirect to appropriate page
-          if (isEdit && caseId) {
-            window.location.href = `case-details.html?id=${caseId}`;
-          } else {
+          if (isDispose) {
+            alert("Case disposed successfully! The case has been moved to the disposed tab.");
             window.location.href = "cases.html";
+          } else {
+            alert(isEdit ? "Case updated successfully!" : "Case created successfully!");
+
+            // Redirect to appropriate page
+            if (isEdit && caseId) {
+              window.location.href = `case-details.html?id=${caseId}`;
+            } else {
+              window.location.href = "cases.html";
+            }
           }
         });
 
