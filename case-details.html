@@ -1529,8 +1529,55 @@
                     <h3 class="section-title">Case History</h3>
                   </div>
                   <div class="section-content">
-                    <div class="timeline" id="caseHistoryTimeline">
-                      <!-- Case history will be populated here -->
+                    <!-- Previous Advocate Information -->
+                    <div id="previousAdvocateInfo" style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid var(--border);">
+                      <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                        <i class="fas fa-user-tie" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                        Previous Advocate Details
+                      </h4>
+                      <div class="detail-grid">
+                        <div class="detail-item">
+                          <span class="detail-label">Previous Advocate</span>
+                          <span class="detail-value" id="prevAdvocateName">Mr. Rajesh Kumar</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label">Registration No.</span>
+                          <span class="detail-value" id="prevAdvocateReg">D/1234/2015</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label">Law Firm</span>
+                          <span class="detail-value" id="prevLawFirm">Kumar & Associates</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label">Period Handled</span>
+                          <span class="detail-value" id="prevPeriod">Jan 2023 - Nov 2023</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label">Transfer Reason</span>
+                          <span class="detail-value" id="transferReason">Specialization Required</span>
+                        </div>
+                        <div class="detail-item">
+                          <span class="detail-label">Handover Date</span>
+                          <span class="detail-value" id="handoverDate">December 15, 2023</span>
+                        </div>
+                      </div>
+                      <div style="margin-top: 1rem;">
+                        <span class="detail-label">Handover Remarks</span>
+                        <p style="margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.5; font-size: 0.875rem;" id="handoverRemarks">
+                          Case was transferred due to requirement of specialized expertise in economic offenses. All documents have been properly handed over along with complete case history and client briefing notes.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Historical Events Timeline -->
+                    <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                      <h4 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1rem; font-weight: 600;">
+                        <i class="fas fa-clock" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                        Historical Events
+                      </h4>
+                      <div class="timeline" id="caseHistoryTimeline">
+                        <!-- Case history events will be populated here -->
+                      </div>
                     </div>
                   </div>
                 </div>
