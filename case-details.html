@@ -1294,15 +1294,23 @@
               <i class="fas fa-arrow-left"></i>
               Back to Cases
             </button>
-            <button class="btn btn-warning" onclick="editCase()">
-              <i class="fas fa-edit"></i>
-              Edit Case
-            </button>
-            <button class="btn btn-primary" onclick="openAddUpdateModal()">
-              <i class="fas fa-plus"></i>
-              Add Update
-            </button>
           </div>
+        </div>
+
+        <!-- Action Buttons Row -->
+        <div class="action-buttons-row">
+          <button class="action-btn edit-case-btn" onclick="editCase()">
+            <i class="fas fa-edit"></i>
+            Edit Case
+          </button>
+          <button class="action-btn add-update-btn" onclick="openAddUpdateModal()">
+            <i class="fas fa-plus"></i>
+            Add Update
+          </button>
+          <button class="action-btn move-case-btn" onclick="openMoveCaseModal()">
+            <i class="fas fa-exchange-alt"></i>
+            Move case
+          </button>
         </div>
 
         <!-- Case Header Card -->
