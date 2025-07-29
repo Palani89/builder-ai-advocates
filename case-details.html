@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Details - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="app-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-info">
+            <nav class="breadcrumb">
+              <span class="breadcrumb-item">Dashboard</span>
+              <span class="breadcrumb-item">Cases</span>
+              <span class="breadcrumb-item">
+                <i class="fas fa-eye"></i>
+                Case Details
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Complete case information and proceedings
+            </p>
+          </div>
+
+          <div class="page-actions">
+            <button class="btn btn-secondary" onclick="window.location.href='cases.html'">
+              <i class="fas fa-arrow-left"></i>
+              Back to Cases
+            </button>
+            <button class="btn btn-warning">
+              <i class="fas fa-edit"></i>
+              Edit Case
+            </button>
+            <button class="btn btn-primary">
+              <i class="fas fa-plus"></i>
+              Add Update
+            </button>
+          </div>
+        </div>
+
+        <!-- Case Header Card -->
+        <div class="case-header-card">
+          <div class="case-title-section">
+            <h2 class="case-title" id="caseTitle">State vs. John Doe</h2>
+            <p class="case-subtitle" id="caseSubtitle">
+              Client: John Doe | Opponent: State of Delhi
+            </p>
+
+            <div class="case-status-row">
+              <span class="status-badge active">Active</span>
+              <span class="status-badge criminal">Criminal</span>
+              <div class="tags-container">
+                <span class="tag">Bail Application</span>
+                <span class="tag">Section 420</span>
+                <span class="tag">Economic Offense</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-quick-info">
+            <div class="quick-info-item">
+              <span class="info-label">Case Number</span>
+              <span class="info-value" id="caseNumber">CC/1234/2024</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="info-label">Court</span>
+              <span class="info-value" id="courtName">District Court, Delhi</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="info-label">Judge</span>
+              <span class="info-value" id="judgeName">Hon'ble Justice A.K. Sharma</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="info-label">Next Hearing</span>
+              <span class="info-value" id="nextHearing">January 15, 2024</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="info-label">Filed Date</span>
+              <span class="info-value" id="filedDate">December 20, 2023</span>
+            </div>
+            <div class="quick-info-item">
+              <span class="info-label">Senior Advocate</span>
+              <span class="info-value" id="seniorAdvocate">Priya Sharma</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="overview">Overview</button>
+            <button class="tab-btn" data-tab="hearings">Hearings</button>
+            <button class="tab-btn" data-tab="documents">Documents</button>
+            <button class="tab-btn" data-tab="timeline">Timeline</button>
+            <button class="tab-btn" data-tab="ai-assistant">AI Assistant</button>
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Overview Tab -->
+          <div class="tab-pane active" id="overview-tab">
+            <div class="content-container">
+              <!-- Main Details Column -->
+              <div class="main-details">
+                <!-- Case Information -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-info-circle section-icon"></i>
+                    <h3 class="section-title">Case Information</h3>
+                  </div>
+                  <div class="section-content">
+                    <div class="detail-grid">
+                      <div class="detail-item">
+                        <span class="detail-label">Case Type</span>
+                        <span class="detail-value">Criminal</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Jurisdiction</span>
+                        <span class="detail-value">Delhi East</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Police Station</span>
+                        <span class="detail-value">Laxmi Nagar PS</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">FIR Number</span>
+                        <span class="detail-value">FIR/456/2023</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">IPC Sections</span>
+                        <span class="detail-value">420, 406, 34</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Stage</span>
+                        <span class="detail-value">Trial Stage</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Case Summary -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-file-text section-icon"></i>
+                    <h3 class="section-title">Case Summary</h3>
+                  </div>
+                  <div class="section-content">
+                    <p style="color: var(--text-secondary); line-height: 1.6">
+                      The case involves allegations of cheating and criminal breach
+                      of trust against the accused John Doe. The complainant alleges
+                      that the accused fraudulently obtained Rs. 5,00,000 by
+                      promising to deliver construction materials for a residential
+                      project but failed to deliver as per the agreement. The
+                      accused has been charged under IPC Sections 420 (cheating),
+                      406 (criminal breach of trust), and 34 (common intention). The
+                      matter is currently at the trial stage with the prosecution
+                      examining witnesses.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sidebar -->
+              <div class="sidebar">
+                <!-- Team Assignment -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-user-friends section-icon"></i>
+                    <h3 class="section-title">Team Assignment</h3>
+                  </div>
+                  <div class="section-content">
+                    <div class="detail-item" style="margin-bottom: 1rem">
+                      <span class="detail-label">Senior Advocate</span>
+                      <span class="detail-value">Priya Sharma</span>
+                    </div>
+                    <div class="detail-item" style="margin-bottom: 1rem">
+                      <span class="detail-label">Junior Advocates</span>
+                      <span class="detail-value">Amit Jain, Neha Gupta</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Case Researcher</span>
+                      <span class="detail-value">Suresh Patel</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Financial Information -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-rupee-sign section-icon"></i>
+                    <h3 class="section-title">Financial Details</h3>
+                  </div>
+                  <div class="section-content">
+                    <div class="detail-item" style="margin-bottom: 1rem">
+                      <span class="detail-label">Total Fee</span>
+                      <span class="detail-value">₹2,50,000</span>
+                    </div>
+                    <div class="detail-item" style="margin-bottom: 1rem">
+                      <span class="detail-label">Amount Paid</span>
+                      <span class="detail-value">₹1,50,000</span>
+                    </div>
+                    <div class="detail-item" style="margin-bottom: 1rem">
+                      <span class="detail-label">Balance Due</span>
+                      <span class="detail-value" style="color: var(--error)">₹1,00,000</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Payment Status</span>
+                      <span class="detail-value">Partial</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hearings Tab -->
+          <div class="tab-pane" id="hearings-tab">
+            <div class="hearings-container">
+              <div class="hearings-header">
+                <h2>Case Hearings</h2>
+                <button class="btn btn-primary" onclick="openAddHearingModal()">
+                  <i class="fas fa-plus"></i>
+                  Add Hearing
+                </button>
+              </div>
+
+              <div class="hearings-grid">
+                <!-- Upcoming Hearings -->
+                <div class="hearings-section">
+                  <h3 class="section-title">
+                    <i class="fas fa-calendar-plus"></i>
+                    Upcoming Hearings
+                  </h3>
+                  <div class="hearings-list" id="upcomingHearings">
+                    <div class="hearing-item">
+                      <div class="hearing-header">
+                        <div>
+                          <div class="hearing-date">Monday, January 15, 2024</div>
+                          <div style="color: var(--text-secondary); font-size: 0.875rem">10:30 AM</div>
+                        </div>
+                        <span class="hearing-status scheduled">Scheduled</span>
+                      </div>
+                      
+                      <div class="hearing-info">
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Court</div>
+                          <div class="hearing-value">District Court, Delhi</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Room</div>
+                          <div class="hearing-value">Court Room 7</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Judge</div>
+                          <div class="hearing-value">Hon'ble Justice A.K. Sharma</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Type</div>
+                          <div class="hearing-value">Bail Application</div>
+                        </div>
+                      </div>
+                      
+                      <div class="hearing-notes">Bail application to be presented with supporting documents</div>
+                      
+                      <div class="hearing-actions">
+                        <button class="action-btn edit">
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="action-btn view">
+                          <i class="fas fa-eye"></i> View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Past Hearings -->
+                <div class="hearings-section">
+                  <h3 class="section-title">
+                    <i class="fas fa-history"></i>
+                    Past Hearings
+                  </h3>
+                  <div class="hearings-list" id="pastHearings">
+                    <div class="hearing-item">
+                      <div class="hearing-header">
+                        <div>
+                          <div class="hearing-date">Wednesday, December 20, 2023</div>
+                          <div style="color: var(--text-secondary); font-size: 0.875rem">11:00 AM</div>
+                        </div>
+                        <span class="hearing-status completed">Completed</span>
+                      </div>
+                      
+                      <div class="hearing-info">
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Court</div>
+                          <div class="hearing-value">District Court, Delhi</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Room</div>
+                          <div class="hearing-value">Court Room 7</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Judge</div>
+                          <div class="hearing-value">Hon'ble Justice A.K. Sharma</div>
+                        </div>
+                        <div class="hearing-detail">
+                          <div class="hearing-label">Type</div>
+                          <div class="hearing-value">Initial Hearing</div>
+                        </div>
+                      </div>
+                      
+                      <div class="hearing-notes">Initial hearing completed successfully. Case registered and next hearing scheduled for bail application.</div>
+                      
+                      <div class="hearing-actions">
+                        <button class="action-btn view">
+                          <i class="fas fa-eye"></i> View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Documents Tab -->
+          <div class="tab-pane" id="documents-tab">
+            <div class="documents-container">
+              <div class="section-header">
+                <i class="fas fa-folder section-icon"></i>
+                <h3 class="section-title">All Documents</h3>
+                <button class="btn btn-primary" style="margin-left: auto;">
+                  <i class="fas fa-plus"></i>
+                  Add Document
+                </button>
+              </div>
+              <div class="section-content">
+                <div class="document-list" id="allDocuments">
+                  <div class="document-item">
+                    <div class="document-info">
+                      <div class="document-icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </div>
+                      <div class="document-details">
+                        <div class="document-name">FIR Copy</div>
+                        <div class="document-meta">PDF • 2.3 MB • Uploaded 2023-12-20</div>
+                      </div>
+                    </div>
+                    <div class="document-actions">
+                      <button class="doc-action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                      <button class="doc-action-btn" title="View">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="document-item">
+                    <div class="document-info">
+                      <div class="document-icon">
+                        <i class="fas fa-file-word"></i>
+                      </div>
+                      <div class="document-details">
+                        <div class="document-name">Bail Application</div>
+                        <div class="document-meta">DOC • 1.8 MB • Uploaded 2023-12-22</div>
+                      </div>
+                    </div>
+                    <div class="document-actions">
+                      <button class="doc-action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                      <button class="doc-action-btn" title="View">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="document-item">
+                    <div class="document-info">
+                      <div class="document-icon">
+                        <i class="fas fa-file-image"></i>
+                      </div>
+                      <div class="document-details">
+                        <div class="document-name">Evidence Photos</div>
+                        <div class="document-meta">JPG • 5.2 MB • Uploaded 2023-12-25</div>
+                      </div>
+                    </div>
+                    <div class="document-actions">
+                      <button class="doc-action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                      </button>
+                      <button class="doc-action-btn" title="View">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Tab -->
+          <div class="tab-pane" id="timeline-tab">
+            <div class="timeline-container">
+              <div class="section-header">
+                <i class="fas fa-history section-icon"></i>
+                <h3 class="section-title">Complete Case Timeline</h3>
+              </div>
+              <div class="section-content">
+                <div class="timeline" id="fullTimeline">
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <div class="timeline-header">
+                        <span class="timeline-title">Bail Application Filed</span>
+                        <span class="timeline-date">Dec 22, 2023</span>
+                      </div>
+                      <div class="timeline-description">
+                        Bail application submitted to the court for the accused.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <div class="timeline-header">
+                        <span class="timeline-title">FIR Received</span>
+                        <span class="timeline-date">Dec 20, 2023</span>
+                      </div>
+                      <div class="timeline-description">
+                        Copy of FIR obtained from the police station.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-content">
+                      <div class="timeline-header">
+                        <span class="timeline-title">Case Filed</span>
+                        <span class="timeline-date">Dec 18, 2023</span>
+                      </div>
+                      <div class="timeline-description">
+                        Initial case registration and client consultation completed.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Assistant Tab -->
+          <div class="tab-pane" id="ai-assistant-tab">
+            <div class="ai-assistant-container">
+              <!-- AI Case Summary Section -->
+              <div class="ai-summary-section">
+                <div class="section-header">
+                  <i class="fas fa-robot section-icon"></i>
+                  <h3 class="section-title">AI Case Summary</h3>
+                  <span class="ai-badge">AI-generated analysis and recommendations</span>
+                </div>
+
+                <div class="ai-summary-content">
+                  <div class="case-summary-card">
+                    <h4>AI Case Summary</h4>
+                    <p class="summary-text">Criminal case involving economic offense under Section 420 IPC. Client seeking anticipatory bail.</p>
+                  </div>
+
+                  <div class="risk-assessment">
+                    <h4>Risk Score</h4>
+                    <div class="risk-score-bar">
+                      <div class="risk-progress" style="width: 65%;"></div>
+                    </div>
+                    <span class="risk-value">65/100</span>
+                  </div>
+
+                  <div class="ai-suggestions">
+                    <div class="suggestion-column">
+                      <h4>Suggested Arguments</h4>
+                      <ul class="suggestion-list">
+                        <li><span class="priority-high">●●●</span> Previous bail precedents in economic offense cases</li>
+                        <li><span class="priority-medium">●●</span> Clear criminal record of the accused</li>
+                        <li><span class="priority-low">●</span> Cooperation with investigation</li>
+                      </ul>
+                    </div>
+
+                    <div class="suggestion-column">
+                      <h4>Suggested Documents</h4>
+                      <ul class="suggestion-list">
+                        <li>• Character witness affidavits</li>
+                        <li>• Property documents for surety</li>
+                        <li>• Employment verification letter</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Assistant Chat Section -->
+              <div class="ai-chat-section">
+                <div class="section-header">
+                  <i class="fas fa-comments section-icon"></i>
+                  <h3 class="section-title">AI Assistant Chat</h3>
+                  <span class="ai-badge">Chat with AI for case-specific guidance and analysis</span>
+                </div>
+
+                <div class="chat-container">
+                  <div class="chat-messages" id="chatMessages">
+                    <!-- Initial AI message -->
+                    <div class="message ai-message">
+                      <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                      </div>
+                      <div class="message-content">
+                        <div class="message-text">
+                          Hello! I'm your AI assistant for this case. I can help you with legal research, draft arguments, suggest case strategies, and analyze documents. What would you like to discuss about "State vs. John Doe"?
+                        </div>
+                        <div class="message-time">AI Assistant • Just now</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="chat-input-area">
+                    <div class="quick-actions">
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Analyze Documents')">
+                        <i class="fas fa-file-alt"></i> Analyze Documents
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Suggest Arguments')">
+                        <i class="fas fa-balance-scale"></i> Suggest Arguments
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Draft Motion')">
+                        <i class="fas fa-edit"></i> Draft Motion
+                      </button>
+                      <button class="quick-action-btn" onclick="sendQuickMessage('Risk Assessment')">
+                        <i class="fas fa-chart-line"></i> Risk Assessment
+                      </button>
+                    </div>
+
+                    <div class="chat-input-container">
+                      <input type="text" id="chatInput" placeholder="Ask AI about case strategy, legal precedents, document review..." />
+                      <button class="send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item active">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Global variables
+      let activeTab = 'overview';
+      let chatMessages = [
+        {
+          type: "ai",
+          text: "Hello! I'm your AI assistant for this case. I can help you with legal research, draft arguments, suggest case strategies, and analyze documents. What would you like to discuss about \"State vs. John Doe\"?",
+          time: "Just now"
+        }
+      ];
+
+      // Tab switching
+      function switchTab(tabName) {
+        activeTab = tabName;
+        
+        // Remove active class from all tabs and panes
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        
+        // Add active class to selected tab and pane
+        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        document.getElementById(`${tabName}-tab`).classList.add('active');
+      }
+
+      // AI Chat functions
+      function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+
+        if (message) {
+          addUserMessage(message);
+          input.value = '';
+
+          // Simulate AI response after a short delay
+          setTimeout(() => {
+            addAIResponse(message);
+          }, 1000);
+        }
+      }
+
+      function sendQuickMessage(action) {
+        addUserMessage(action);
+
+        // Simulate AI response based on the action
+        setTimeout(() => {
+          let response = '';
+          switch(action) {
+            case 'Analyze Documents':
+              response = 'I\'ve analyzed the case documents. The FIR shows strong evidence, but there are opportunities for defense. The bail application is well-drafted. Would you like me to suggest improvements?';
+              break;
+            case 'Suggest Arguments':
+              response = 'Based on similar cases, I recommend focusing on: 1) Clean criminal record, 2) Cooperation with investigation, 3) Economic hardship if denied bail. Shall I draft detailed arguments?';
+              break;
+            case 'Draft Motion':
+              response = 'I can help draft a bail motion. Key points to include: precedent cases, constitutional rights, and surety arrangements. What specific motion would you like me to prepare?';
+              break;
+            case 'Risk Assessment':
+              response = 'Current risk assessment shows 65/100. Main risks: Economic offense charges. Mitigation factors: Clean record, cooperation. Recommendations: Strong surety, community ties evidence.';
+              break;
+            default:
+              response = 'I\'m here to help with your case. Please let me know what specific assistance you need.';
+          }
+          addAIResponse(response);
+        }, 1500);
+      }
+
+      function addUserMessage(message) {
+        const chatContainer = document.getElementById('chatMessages');
+        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
+
+        const messageHtml = `
+          <div class="message user-message">
+            <div class="message-content">
+              <div class="message-text">${message}</div>
+              <div class="message-time">You • ${timestamp}</div>
+            </div>
+            <div class="message-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        `;
+
+        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      function addAIResponse(message) {
+        const chatContainer = document.getElementById('chatMessages');
+        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
+
+        // Generate contextual AI responses based on user input
+        let aiResponse = message;
+        if (typeof message === 'string') {
+          if (message.toLowerCase().includes('bail')) {
+            aiResponse = 'Regarding bail prospects: Based on the Section 420 charges, courts typically consider factors like flight risk, criminal history, and community ties. Given the clean record and cooperation shown, I\'d recommend preparing strong surety documentation and character references. Would you like me to draft a bail application outline?';
+          } else if (message.toLowerCase().includes('evidence')) {
+            aiResponse = 'For evidence analysis: The case appears to rely heavily on documentary evidence and witness testimony. I\'ve reviewed the FIR and related documents. The prosecution\'s case has some gaps we can exploit. Shall I provide a detailed evidence analysis with defense strategies?';
+          } else if (message.toLowerCase().includes('precedent') || message.toLowerCase().includes('case law')) {
+            aiResponse = 'Regarding legal precedents: I can find relevant case law for Section 420 IPC cases. Similar economic offense cases have shown favorable outcomes when defendants demonstrate cooperation and have clean records. Would you like me to compile relevant judgments and citations?';
+          } else if (message.toLowerCase().includes('strategy')) {
+            aiResponse = 'For case strategy: I recommend a multi-pronged approach: 1) Challenge evidence admissibility, 2) Emphasize cooperation and clean record, 3) Highlight economic hardship arguments. We should also prepare for anticipatory bail immediately. What aspect would you like me to elaborate on?';
+          } else if (typeof message === 'string') {
+            aiResponse = `I understand you're asking about "${message}". Based on the case details for State vs. John Doe, I can provide specific analysis and recommendations. Could you be more specific about what aspect you'd like me to focus on - legal strategy, document analysis, or case law research?`;
+          }
+        }
+
+        const messageHtml = `
+          <div class="message ai-message">
+            <div class="message-avatar">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+              <div class="message-text">${aiResponse}</div>
+              <div class="message-time">AI Assistant • ${timestamp}</div>
+            </div>
+          </div>
+        `;
+
+        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      function openAddHearingModal() {
+        alert('Add hearing modal would open here');
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const tab = this.getAttribute('data-tab');
+            switchTab(tab);
+          });
+        });
+
+        // Enter key to send message
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+
+        // Load case details based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get('id');
+        if (caseId) {
+          console.log(`Loading case details for case ${caseId}`);
+        }
+      });
+    </script>
+  </body>
+</html>
