@@ -3003,29 +3003,113 @@
         const formData = new FormData(form);
 
         // Basic validation
-        if (!formData.get('updateTitle') || !formData.get('updateNotes')) {
-          alert('Please fill in all required fields');
+        if (!formData.get('updateTitle') || !formData.get('updateNotes') || !formData.get('nextSteps')) {
+          alert('Please fill in all required fields (Title, Update Notes, and Next Action Items)');
           return;
         }
 
-        // Create new update object
+        // Create comprehensive update object
         const newUpdate = {
+          // Basic Info
           title: formData.get('updateTitle'),
           date: formData.get('updateDate'),
           category: formData.get('updateCategory'),
           priority: formData.get('updatePriority'),
-          notes: formData.get('updateNotes'),
-          nextAction: formData.get('nextAction'),
-          documents: formData.get('documentsAttached')
+
+          // Case Progress
+          caseStatus: formData.get('caseStatus'),
+          nextHearingUpdate: formData.get('nextHearingUpdate'),
+          hearingType: formData.get('hearingType'),
+          adjournmentReason: formData.get('adjournmentReason'),
+
+          // Court Orders
+          courtOrder: formData.get('courtOrder'),
+          judgmentDetails: formData.get('judgmentDetails'),
+          orderType: formData.get('orderType'),
+          orderDate: formData.get('orderDate'),
+
+          // Documents & Evidence
+          documentsSubmitted: Array.from(formData.getAll('documentsSubmitted')),
+          evidenceStatus: formData.get('evidenceStatus'),
+          documentsDescription: formData.get('documentsDescription'),
+
+          // Client Communication
+          clientCommunication: formData.get('clientCommunication'),
+          clientNotified: formData.get('clientNotified'),
+          clientInstructions: formData.get('clientInstructions'),
+          communicationSummary: formData.get('communicationSummary'),
+
+          // Strategy & Actions
+          lawyerNotes: formData.get('lawyerNotes'),
+          nextSteps: formData.get('nextSteps'),
+          actionDeadline: formData.get('actionDeadline'),
+          assignedTo: formData.get('assignedTo'),
+
+          // Financial
+          feeUpdate: formData.get('feeUpdate'),
+          feeAmount: formData.get('feeAmount'),
+          feeDescription: formData.get('feeDescription'),
+
+          // Additional
+          opposingCounsel: formData.get('opposingCounsel'),
+          settlementStatus: formData.get('settlementStatus'),
+          updateNotes: formData.get('updateNotes'),
+          internalNotes: formData.get('internalNotes'),
+
+          // Metadata
+          updatedBy: 'Current User',
+          updateId: generateUpdateId(),
+          timestamp: new Date().toISOString()
         };
 
-        // Add to timeline (you can extend this to add to a global updates array)
+        // Update case details if necessary
+        updateCaseDetails(newUpdate);
+
+        // Add to timeline
         addUpdateToTimeline(newUpdate);
 
         // Close modal
         closeAddUpdateModal();
 
-        alert('Update added successfully!');
+        alert('Comprehensive case update added successfully!');
+      }
+
+      function updateCaseDetails(update) {
+        // Update next hearing date if provided
+        if (update.nextHearingUpdate) {
+          const hearingDate = new Date(update.nextHearingUpdate);
+          const formattedDate = hearingDate.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          $('#nextHearing').text(formattedDate);
+        }
+
+        // Update case status if changed
+        if (update.caseStatus) {
+          // Update status badge (this would typically update in your backend)
+          console.log('Case status updated to:', update.caseStatus);
+        }
+
+        // Update opposing counsel if provided
+        if (update.opposingCounsel) {
+          // Find and update opposing counsel display
+          const opposingCounselElement = $('[data-field="opposing-counsel"]');
+          if (opposingCounselElement.length) {
+            opposingCounselElement.text(update.opposingCounsel);
+          }
+        }
+
+        // Update financial information if provided
+        if (update.feeUpdate && update.feeAmount) {
+          console.log('Financial update:', update.feeUpdate, 'Amount:', update.feeAmount);
+          // This would typically update financial summary in sidebar
+        }
+      }
+
+      function generateUpdateId() {
+        return "UPD_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
       }
 
       function addUpdateToTimeline(update) {
