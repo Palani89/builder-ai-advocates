@@ -4196,6 +4196,50 @@
         }
       }
 
+      // Move Case Modal Functions
+      function openMoveCaseModal() {
+        $('#moveCaseModal').css('display', 'flex');
+      }
+
+      function closeMoveCaseModal() {
+        $('#moveCaseModal').hide();
+        $('.advocate-item').removeClass('selected');
+        selectedAdvocateId = null;
+      }
+
+      let selectedAdvocateId = null;
+
+      function selectAdvocate(advocateId) {
+        selectedAdvocateId = advocateId;
+        $('.advocate-item').removeClass('selected');
+        $(`.advocate-item[data-advocate-id="${advocateId}"]`).addClass('selected');
+      }
+
+      function assignCase() {
+        if (!selectedAdvocateId) {
+          alert('Please select an advocate to assign the case');
+          return;
+        }
+
+        const advocateName = $(`.advocate-item[data-advocate-id="${selectedAdvocateId}"] .advocate-name`).text();
+
+        if (confirm(`Are you sure you want to move this case to ${advocateName}?`)) {
+          // Here you would normally send the data to your backend
+          alert(`Case successfully moved to ${advocateName}!`);
+          closeMoveCaseModal();
+
+          // Update the senior advocate in the case details
+          $('#seniorAdvocate').text(advocateName);
+        }
+      }
+
+      // Close move case modal when clicking overlay
+      $('#moveCaseModal').on('click', function(e) {
+        if (e.target === this) {
+          closeMoveCaseModal();
+        }
+      });
+
       // Modal overlay clicks to close
       $("#addUpdateModal").on("click", function (e) {
         if (e.target === this) {
