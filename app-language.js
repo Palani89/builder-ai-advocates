@@ -122,7 +122,7 @@ const APP_TRANSLATIONS = {
     // Home Page
     "welcome-back": "वापसी पर स्वागत",
     dashboard: "डैशबोर्ड",
-    "quick-actions": "त्वरित कार्य",
+    "quick-actions": "त्��रित कार्य",
     "create-case": "मामला बनाएं",
     "schedule-hearing": "सुनवाई निर्धारित करें",
     "add-appointment": "अपॉइंटमेंट जोड़ें",
@@ -144,7 +144,7 @@ const APP_TRANSLATIONS = {
     "client-name": "मुवक्किल का नाम",
     "case-number": "मामला संख्या",
     "filing-date": "दाखिल करने की तारीख",
-    "case-priority": "मामले की प���राथमिकता",
+    "case-priority": "मामल��� की प्राथमिकता",
     high: "उच्च",
     medium: "मध्यम",
     low: "कम",
@@ -177,7 +177,7 @@ const APP_TRANSLATIONS = {
     precedents: "पूर्व उदाहरण",
     articles: "लेख",
     "research-documents": "अनुसंधान दस्तावेज",
-    "add-document": "दस्तावे�� जोड़ें",
+    "add-document": "दस्तावेज जोड़ें",
 
     // Legal Templates
     "legal-templates": "कानूनी टेम्प्लेट्स",
@@ -208,7 +208,7 @@ const APP_TRANSLATIONS = {
     home: "முகப்பு",
     team: "எனது குழு",
     cases: "வழக்குகள்",
-    calendar: "நாட்காட்டி",
+    calendar: "நாட���காட்டி",
     more: "மேலும்",
     logout: "வெளியேறு",
     settings: "அமைப்புகள்",
@@ -234,7 +234,7 @@ const APP_TRANSLATIONS = {
     "upcoming-hearings": "வரும் விசாரணைகள்",
     "wallet-balance": "வாலெட் இருப்பு",
     recharge: "ரீசார்ஜ்",
-    "active-cases": "செயலில் உள்ள வழக்குகள்",
+    "active-cases": "ச���யலில் உள்ள வழக்குகள்",
     "completed-cases": "முடிந்த வழக்குகள்",
     "total-earnings": "மொத்த வருமானம்",
     "pending-payments": "நிலுவை பணம்",
@@ -259,7 +259,7 @@ const APP_TRANSLATIONS = {
     "add-member": "உறுப்பினர் சேர்",
     "assign-task": "பணி ஒதுக்கு",
     contact: "தொடர்பு",
-    role: "பாத்திரம்",
+    role: "பாத்திரம��",
     experience: "அனுபவம்",
     specialization: "சிறப்பு",
     availability: "கிடைக்கும் தன்மை",
@@ -273,6 +273,15 @@ const APP_TRANSLATIONS = {
     hearing: "விசாரணை",
     meeting: "கூட்டம்",
     reminder: "நினைவூட்டல்",
+
+    // Form fields and common elements
+    "first-name": "முதல் பெயர்",
+    "last-name": "கடைசி பெயர்",
+    "email-address": "மின்னஞ்சல் முகவரி",
+    "create-account": "கணக்கு உருவாக்கு",
+    bookmark: "புக்மார்க்",
+    "legal-research": "சட்ட ஆராய்ச்சி",
+    "legal-templates": "சட்ட டெம்ப்ளேட்கள்",
   },
 
   kn: {
@@ -339,7 +348,7 @@ const APP_TRANSLATIONS = {
     "create-case": "प्रकरण तयार करा",
     "schedule-hearing": "सुनावणी निर्धारित करा",
     "add-appointment": "भेटीची वेळ जोडा",
-    "recent-cases": "अलीकडील प्रकरणे",
+    "recent-cases": "अलीकडील प्रकर���े",
     "upcoming-hearings": "येणाऱ्या सुनावणी",
     "wallet-balance": "वॉलेट शिल्लक",
     recharge: "रीचार्ज",
