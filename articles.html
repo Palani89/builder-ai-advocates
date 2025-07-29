@@ -1,0 +1,1516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articles - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .page-title-section h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.75rem 0 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .breadcrumb-item:hover {
+        color: var(--primary);
+      }
+
+      .breadcrumb-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .breadcrumb-separator {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      /* Action Buttons */
+      .page-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--text-muted);
+      }
+
+      /* Search and Filters */
+      .search-section {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .search-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .search-input {
+        flex: 1;
+        min-width: 300px;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .filter-select {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        cursor: pointer;
+        min-width: 150px;
+      }
+
+      /* Articles Grid */
+      .articles-container {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .articles-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--background);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .articles-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .articles-count {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .articles-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .article-item {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+      }
+
+      .article-item:hover {
+        background: var(--background);
+      }
+
+      .article-item:last-child {
+        border-bottom: none;
+      }
+
+      .article-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.75rem;
+      }
+
+      .article-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .article-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      .article-type {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .article-date {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .article-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .action-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .action-btn:hover {
+        background: var(--background);
+      }
+
+      .action-btn.view {
+        color: var(--primary);
+      }
+
+      .action-btn.edit {
+        color: var(--warning);
+      }
+
+      .action-btn.delete {
+        color: var(--error);
+      }
+
+      .article-summary {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+      }
+
+      .article-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        padding: 0.25rem 0.5rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
+
+      /* Empty State */
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+      }
+
+      .empty-state h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      /* Modal */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--surface);
+        border-radius: 12px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+      }
+
+      .modal-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .modal-close:hover {
+        background: var(--background);
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .required {
+        color: var(--error);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        transition: border-color 0.2s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        cursor: pointer;
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .modal-footer {
+        padding: 1.5rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .side-menu.open {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .side-menu-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .side-menu-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .side-menu-close:hover {
+        background: var(--background);
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+      }
+
+      .side-menu-item.active {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .side-menu-item.logout {
+        color: var(--error);
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+      }
+
+      .side-menu-item.logout:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .side-menu-icon {
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+
+        .search-row {
+          flex-direction: column;
+        }
+
+        .search-input {
+          min-width: auto;
+        }
+
+        .article-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: flex-start;
+        }
+
+        .article-actions {
+          align-self: flex-end;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <!-- Add/Edit Article Modal -->
+    <div class="modal" id="articleModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalTitle">Add New Article</h3>
+          <button class="modal-close" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form id="articleForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label"
+                >Article Title <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                class="form-input"
+                id="articleTitle"
+                name="title"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label"
+                >Article Type <span class="required">*</span></label
+              >
+              <select class="form-select" id="articleType" name="type" required>
+                <option value="">Select Type</option>
+                <option value="Case Law">Case Law</option>
+                <option value="Legal Article">Legal Article</option>
+                <option value="News Report">News Report</option>
+                <option value="Government Notice">Government Notice</option>
+                <option value="Academic Paper">Academic Paper</option>
+                <option value="Legal Blog">Legal Blog</option>
+                <option value="Court Circular">Court Circular</option>
+                <option value="Legal Database">Legal Database</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">URL/Link</label>
+              <input
+                type="url"
+                class="form-input"
+                id="articleUrl"
+                name="url"
+                placeholder="https://example.com/article"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Author/Source</label>
+              <input
+                type="text"
+                class="form-input"
+                id="articleAuthor"
+                name="author"
+                placeholder="e.g., Supreme Court of India, Legal Times"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Publication Date</label>
+              <input
+                type="date"
+                class="form-input"
+                id="articleDate"
+                name="date"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Summary/Description</label>
+              <textarea
+                class="form-textarea"
+                id="articleSummary"
+                name="summary"
+                placeholder="Brief description of the article..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Tags</label>
+              <input
+                type="text"
+                class="form-input"
+                id="articleTags"
+                name="tags"
+                placeholder="e.g., bail, criminal law, precedent (comma separated)"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()"
+            >
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i>
+              Save Article
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- View Article Modal -->
+    <div class="modal" id="viewModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Article Details</h3>
+          <button class="modal-close" onclick="closeViewModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body" id="viewModalBody">
+          <!-- Article details will be populated here -->
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeViewModal()"
+          >
+            <i class="fas fa-times"></i>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>
+              <i class="fas fa-newspaper"></i>
+              Articles
+            </h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="home.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <a href="more.html" class="breadcrumb-item">
+                <i class="fas fa-th"></i>
+                More
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-newspaper"></i>
+                Articles
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Manage your legal articles and references
+            </p>
+          </div>
+
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openAddModal()">
+              <i class="fas fa-plus"></i>
+              Add New Article
+            </button>
+          </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-section">
+          <div class="search-row">
+            <input
+              type="text"
+              class="search-input"
+              id="searchInput"
+              placeholder="Search articles by title, author, or tags..."
+            />
+            <select class="filter-select" id="typeFilter">
+              <option value="">All Types</option>
+              <option value="Case Law">Case Law</option>
+              <option value="Legal Article">Legal Article</option>
+              <option value="News Report">News Report</option>
+              <option value="Government Notice">Government Notice</option>
+              <option value="Academic Paper">Academic Paper</option>
+              <option value="Legal Blog">Legal Blog</option>
+              <option value="Court Circular">Court Circular</option>
+              <option value="Legal Database">Legal Database</option>
+              <option value="Other">Other</option>
+            </select>
+            <button class="btn btn-secondary" onclick="clearFilters()">
+              <i class="fas fa-times"></i>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Articles Container -->
+        <div class="articles-container">
+          <div class="articles-header">
+            <h3 class="articles-title">My Articles</h3>
+            <span class="articles-count" id="articlesCount">0 articles</span>
+          </div>
+          <div class="articles-list" id="articlesList">
+            <!-- Articles will be populated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item active">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample articles data
+      let articles = [
+        {
+          id: 1,
+          title: "Supreme Court Judgment on Bail Rights in Criminal Cases",
+          type: "Case Law",
+          url: "https://www.example.com/sc-bail-judgment",
+          author: "Supreme Court of India",
+          date: "2024-01-15",
+          summary:
+            "A landmark judgment establishing new precedents for bail applications in criminal cases, emphasizing the right to liberty and due process.",
+          tags: ["bail", "criminal law", "supreme court", "precedent"],
+          createdAt: "2024-01-20",
+        },
+        {
+          id: 2,
+          title: "New Amendments to Civil Procedure Code 2024",
+          type: "Legal Article",
+          url: "https://www.example.com/cpc-amendments",
+          author: "Bar & Bench",
+          date: "2024-02-01",
+          summary:
+            "Comprehensive analysis of the latest amendments to the Civil Procedure Code and their impact on civil litigation.",
+          tags: ["civil procedure", "amendments", "litigation"],
+          createdAt: "2024-02-05",
+        },
+        {
+          id: 3,
+          title:
+            "Digital Evidence in Indian Courts: Guidelines and Best Practices",
+          type: "Academic Paper",
+          url: "https://www.example.com/digital-evidence-guidelines",
+          author: "National Law University",
+          date: "2024-01-20",
+          summary:
+            "Research paper on the admissibility and handling of digital evidence in Indian courts with practical guidelines for practitioners.",
+          tags: ["digital evidence", "cybercrime", "evidence act"],
+          createdAt: "2024-01-25",
+        },
+      ];
+
+      let currentEditId = null;
+
+      $(document).ready(function () {
+        renderArticles();
+        setupEventListeners();
+      });
+
+      function setupEventListeners() {
+        // Search functionality
+        $("#searchInput").on("input", function () {
+          filterArticles();
+        });
+
+        // Type filter
+        $("#typeFilter").on("change", function () {
+          filterArticles();
+        });
+
+        // Article form submission
+        $("#articleForm").on("submit", function (e) {
+          e.preventDefault();
+          saveArticle();
+        });
+
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
+        });
+
+        // Logout functionality
+        $(".fa-sign-out-alt")
+          .parent()
+          .on("click", function () {
+            logoutFromApp();
+          });
+      }
+
+      function renderArticles(articlesToRender = articles) {
+        const articlesList = $("#articlesList");
+        const articlesCount = $("#articlesCount");
+
+        articlesCount.text(
+          `${articlesToRender.length} article${articlesToRender.length !== 1 ? "s" : ""}`,
+        );
+
+        if (articlesToRender.length === 0) {
+          articlesList.html(`
+            <div class="empty-state">
+              <i class="fas fa-newspaper"></i>
+              <h3>No Articles Found</h3>
+              <p>Start building your legal knowledge base by adding your first article.</p>
+            </div>
+          `);
+          return;
+        }
+
+        const articlesHtml = articlesToRender
+          .map(
+            (article) => `
+          <div class="article-item" data-id="${article.id}">
+            <div class="article-header">
+              <div>
+                <div class="article-title">${article.title}</div>
+                <div class="article-meta">
+                  <span class="article-type">${article.type}</span>
+                  <span class="article-date">
+                    <i class="fas fa-calendar"></i>
+                    ${formatDate(article.date)}
+                  </span>
+                  ${article.author ? `<span><i class="fas fa-user"></i> ${article.author}</span>` : ""}
+                </div>
+              </div>
+              <div class="article-actions">
+                <button class="action-btn view" onclick="viewArticle(${article.id})" title="View Article">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="action-btn edit" onclick="editArticle(${article.id})" title="Edit Article">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="action-btn delete" onclick="deleteArticle(${article.id})" title="Delete Article">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            ${article.summary ? `<div class="article-summary">${article.summary}</div>` : ""}
+            ${
+              article.tags && article.tags.length > 0
+                ? `
+              <div class="article-tags">
+                ${article.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+              </div>
+            `
+                : ""
+            }
+          </div>
+        `,
+          )
+          .join("");
+
+        articlesList.html(articlesHtml);
+      }
+
+      function filterArticles() {
+        const searchTerm = $("#searchInput").val().toLowerCase();
+        const typeFilter = $("#typeFilter").val();
+
+        const filtered = articles.filter((article) => {
+          const matchesSearch =
+            !searchTerm ||
+            article.title.toLowerCase().includes(searchTerm) ||
+            article.author?.toLowerCase().includes(searchTerm) ||
+            article.tags?.some((tag) => tag.toLowerCase().includes(searchTerm));
+
+          const matchesType = !typeFilter || article.type === typeFilter;
+
+          return matchesSearch && matchesType;
+        });
+
+        renderArticles(filtered);
+      }
+
+      function clearFilters() {
+        $("#searchInput").val("");
+        $("#typeFilter").val("");
+        renderArticles();
+      }
+
+      function openAddModal() {
+        currentEditId = null;
+        $("#modalTitle").text("Add New Article");
+        $("#articleForm")[0].reset();
+        $("#articleModal").addClass("show");
+      }
+
+      function editArticle(id) {
+        const article = articles.find((a) => a.id === id);
+        if (!article) return;
+
+        currentEditId = id;
+        $("#modalTitle").text("Edit Article");
+
+        $("#articleTitle").val(article.title);
+        $("#articleType").val(article.type);
+        $("#articleUrl").val(article.url || "");
+        $("#articleAuthor").val(article.author || "");
+        $("#articleDate").val(article.date || "");
+        $("#articleSummary").val(article.summary || "");
+        $("#articleTags").val(article.tags ? article.tags.join(", ") : "");
+
+        $("#articleModal").addClass("show");
+      }
+
+      function saveArticle() {
+        const formData = {
+          title: $("#articleTitle").val(),
+          type: $("#articleType").val(),
+          url: $("#articleUrl").val(),
+          author: $("#articleAuthor").val(),
+          date: $("#articleDate").val(),
+          summary: $("#articleSummary").val(),
+          tags: $("#articleTags")
+            .val()
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter((tag) => tag),
+        };
+
+        if (currentEditId) {
+          // Update existing article
+          const index = articles.findIndex((a) => a.id === currentEditId);
+          if (index !== -1) {
+            articles[index] = { ...articles[index], ...formData };
+          }
+        } else {
+          // Add new article
+          const newArticle = {
+            id: Date.now(),
+            ...formData,
+            createdAt: new Date().toISOString().split("T")[0],
+          };
+          articles.unshift(newArticle);
+        }
+
+        closeModal();
+        renderArticles();
+
+        // Show success message
+        alert(
+          currentEditId
+            ? "Article updated successfully!"
+            : "Article added successfully!",
+        );
+      }
+
+      function viewArticle(id) {
+        const article = articles.find((a) => a.id === id);
+        if (!article) return;
+
+        const viewHtml = `
+          <div style="space-y: 1rem;">
+            <div>
+              <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Title</h4>
+              <p>${article.title}</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Type</h4>
+                <span class="article-type">${article.type}</span>
+              </div>
+              ${
+                article.author
+                  ? `
+                <div>
+                  <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Author/Source</h4>
+                  <p>${article.author}</p>
+                </div>
+              `
+                  : ""
+              }
+            </div>
+
+            ${
+              article.date
+                ? `
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Publication Date</h4>
+                <p>${formatDate(article.date)}</p>
+              </div>
+            `
+                : ""
+            }
+
+            ${
+              article.url
+                ? `
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">URL/Link</h4>
+                <p><a href="${article.url}" target="_blank" style="color: var(--primary); text-decoration: none;">${article.url}</a></p>
+              </div>
+            `
+                : ""
+            }
+
+            ${
+              article.summary
+                ? `
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Summary</h4>
+                <p style="line-height: 1.6;">${article.summary}</p>
+              </div>
+            `
+                : ""
+            }
+
+            ${
+              article.tags && article.tags.length > 0
+                ? `
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Tags</h4>
+                <div class="article-tags">
+                  ${article.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                </div>
+              </div>
+            `
+                : ""
+            }
+          </div>
+        `;
+
+        $("#viewModalBody").html(viewHtml);
+        $("#viewModal").addClass("show");
+      }
+
+      function deleteArticle(id) {
+        const article = articles.find((a) => a.id === id);
+        if (!article) return;
+
+        if (
+          confirm(
+            `Are you sure you want to delete "${article.title}"? This action cannot be undone.`,
+          )
+        ) {
+          articles = articles.filter((a) => a.id !== id);
+          renderArticles();
+          alert("Article deleted successfully!");
+        }
+      }
+
+      function closeModal() {
+        $("#articleModal").removeClass("show");
+        $("#articleForm")[0].reset();
+        currentEditId = null;
+      }
+
+      function closeViewModal() {
+        $("#viewModal").removeClass("show");
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-IN", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+      }
+
+      // Side menu functions
+      function openSideMenu() {
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
+      }
+
+      function logoutFromApp() {
+        window.location.href = "ai-advocs-webapp.html";
+      }
+
+      // Close modals when clicking outside
+      $(window).on("click", function (e) {
+        if ($(e.target).hasClass("modal")) {
+          closeModal();
+          closeViewModal();
+        }
+      });
+
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
+    </script>
+  </body>
+</html>
