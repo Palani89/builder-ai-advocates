@@ -2246,6 +2246,86 @@
         `).join(''));
       }
 
+      function loadCaseHistory() {
+        // Sample case history data - would come from backend
+        const caseHistory = [
+          {
+            date: "Nov 15, 2023",
+            eventType: "Filing",
+            court: "Magistrate Court, Delhi",
+            judge: "Hon'ble Magistrate R.K. Singh",
+            remarks: "Initial complaint filed by State against accused. Case registered under Section 420 IPC.",
+            orderSummary: "Case registered and cognizance taken. Summons issued to accused.",
+            docType: "Complaint Application",
+            appealStatus: "Not Applicable",
+            previousAdvocate: "Adv. Ramesh Gupta"
+          },
+          {
+            date: "Nov 20, 2023",
+            eventType: "Hearing",
+            court: "Magistrate Court, Delhi",
+            judge: "Hon'ble Magistrate R.K. Singh",
+            remarks: "First hearing. Accused appeared through previous counsel. Matter adjourned for filing reply.",
+            orderSummary: "Accused granted 15 days time to file written reply. Next date fixed.",
+            docType: "Order Copy",
+            appealStatus: "No",
+            previousAdvocate: "Adv. Ramesh Gupta"
+          },
+          {
+            date: "Dec 05, 2023",
+            eventType: "Evidence Submission",
+            court: "Magistrate Court, Delhi",
+            judge: "Hon'ble Magistrate R.K. Singh",
+            remarks: "Documentary evidence submitted by prosecution. Bank statements and transaction records filed.",
+            orderSummary: "Evidence marked as exhibits. Copy provided to defense counsel.",
+            docType: "Evidence Document",
+            appealStatus: "No",
+            previousAdvocate: "Adv. Ramesh Gupta"
+          },
+          {
+            date: "Dec 10, 2023",
+            eventType: "Adjournment",
+            court: "Magistrate Court, Delhi",
+            judge: "Hon'ble Magistrate R.K. Singh",
+            remarks: "Case transferred to current advocate. Previous counsel withdrew appearance. Adjournment granted.",
+            orderSummary: "New advocate allowed to file appearance. Case adjourned for preparation.",
+            docType: "Order Copy",
+            appealStatus: "No",
+            previousAdvocate: "Adv. Ramesh Gupta (Withdrew)"
+          }
+        ];
+
+        const historyContainer = $('#caseHistoryTimeline');
+
+        if (caseHistory.length === 0) {
+          historyContainer.html(`
+            <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+              <i class="fas fa-history" style="font-size: 2rem; opacity: 0.5; margin-bottom: 1rem; display: block;"></i>
+              <p>No previous case history available</p>
+            </div>
+          `);
+        } else {
+          historyContainer.html(caseHistory.map(item => `
+            <div class="timeline-item">
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">${item.eventType} - ${item.court}</span>
+                  <span class="timeline-date">${item.date}</span>
+                </div>
+                <div class="timeline-description">
+                  <strong>Judge:</strong> ${item.judge}<br>
+                  <strong>Event:</strong> ${item.remarks}<br>
+                  ${item.orderSummary ? `<strong>Order/Decision:</strong> ${item.orderSummary}<br>` : ''}
+                  ${item.docType ? `<strong>Document Type:</strong> ${item.docType}<br>` : ''}
+                  ${item.previousAdvocate ? `<strong>Handled By:</strong> ${item.previousAdvocate}<br>` : ''}
+                  <strong>Appeal Status:</strong> ${item.appealStatus}
+                </div>
+              </div>
+            </div>
+          `).join(''));
+        }
+      }
+
       function openAddHearingModal() {
         $('#addHearingModal').show();
         // Set default date to tomorrow
