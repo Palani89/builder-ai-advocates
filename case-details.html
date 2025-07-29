@@ -2640,58 +2640,14 @@
         }
       });
 
-      // Edit Case Modal Functions
-      function openEditCaseModal() {
-        // Populate form with current case data
-        $('#editCaseTitle').val($('#caseTitle').text());
-        $('#editCaseNumber').val($('#caseNumber').text());
-        $('#editCourtName').val($('#courtName').text());
-        $('#editJudgeName').val($('#judgeName').text());
-        $('#editSeniorAdvocate').val($('#seniorAdvocate').text());
-        $('#editNextHearing').val('2024-01-15T10:30');
-        $('#editFiledDate').val('2023-12-20');
+      // Edit Case Function - Redirect to create-case.html in edit mode
+      function editCase() {
+        // Get current case ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get("id") || "1";
 
-        // Show modal
-        $('#editCaseModal').show();
-      }
-
-      function closeEditCaseModal() {
-        $('#editCaseModal').hide();
-        $('#editCaseForm')[0].reset();
-      }
-
-      function saveCaseChanges() {
-        const form = $('#editCaseForm')[0];
-        const formData = new FormData(form);
-
-        // Basic validation
-        if (!formData.get('caseTitle') || !formData.get('caseNumber')) {
-          alert('Please fill in all required fields');
-          return;
-        }
-
-        // Update the page with new values
-        $('#caseTitle').text(formData.get('caseTitle'));
-        $('#caseNumber').text(formData.get('caseNumber'));
-        $('#courtName').text(formData.get('courtName'));
-        $('#judgeName').text(formData.get('judgeName'));
-        $('#seniorAdvocate').text(formData.get('seniorAdvocate'));
-
-        // Update other fields as needed
-        if (formData.get('nextHearing')) {
-          const nextHearingDate = new Date(formData.get('nextHearing'));
-          $('#nextHearing').text(nextHearingDate.toLocaleDateString('en-IN'));
-        }
-
-        if (formData.get('filedDate')) {
-          const filedDate = new Date(formData.get('filedDate'));
-          $('#filedDate').text(filedDate.toLocaleDateString('en-IN'));
-        }
-
-        // Close modal
-        closeEditCaseModal();
-
-        alert('Case details updated successfully!');
+        // Redirect to create-case.html with edit mode and case ID
+        window.location.href = `create-case.html?mode=edit&id=${caseId}`;
       }
 
       // Add Update Modal Functions
