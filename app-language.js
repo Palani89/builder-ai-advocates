@@ -115,7 +115,7 @@ const APP_TRANSLATIONS = {
     edit: "संपादन",
     delete: "हटाएं",
     add: "जोड़ें",
-    view: "देखें",
+    view: "���ेखें",
     download: "डाउनलोड",
     upload: "अपलोड",
 
@@ -140,7 +140,7 @@ const APP_TRANSLATIONS = {
     "case-type": "मामले का प्रकार",
     "court-name": "न्यायालय का नाम",
     "next-hearing": "अगली सुनवाई",
-    "case-details": "मामले का विवरण",
+    "case-details": "मामले का ���िवरण",
     "client-name": "मुवक्किल का नाम",
     "case-number": "मामला संख्या",
     "filing-date": "दाखिल करने की तारीख",
@@ -230,7 +230,7 @@ const APP_TRANSLATIONS = {
     "create-case": "வழக்கு உருவாக்கு",
     "schedule-hearing": "விசாரணை திட்டமிடு",
     "add-appointment": "அப்பாயிண்ட்மென்ட் சேர்",
-    "recent-cases": "சமீபத்திய வழக்குகள்",
+    "recent-cases": "சமீ��த்திய வழக்குகள்",
     "upcoming-hearings": "வரும் விசாரணைகள்",
     "wallet-balance": "வாலெட் இருப்பு",
     recharge: "ரீசார்ஜ்",
@@ -367,7 +367,18 @@ const APP_TRANSLATIONS = {
     "completed-cases": "पूर्ण झालेली प्रकरणे",
     "total-earnings": "एकूण कमाई",
     "pending-payments": "प्रलंबित देयके",
-  },
+
+    // Form fields and common elements
+    "first-name": "पहिले नाव",
+    "last-name": "आडनाव",
+    "email-address": "ईमेल पत्ता",
+    "create-account": "खाते तयार करा",
+    bookmark: "बुकमार्क",
+    "legal-research": "कायदेशीर संशोधन",
+    "legal-templates": "कायदेशीर टेम्प्लेट्स",
+    "assign-task": "कार्य सोपवा",
+    contact: "संपर्क",
+  }
 };
 
 // Global function to apply translations
