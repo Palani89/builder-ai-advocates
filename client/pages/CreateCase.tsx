@@ -14,9 +14,11 @@ export default function CreateCase() {
     // Set default date to tomorrow
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const dateInput = document.getElementById('filing_date') as HTMLInputElement;
+    const dateInput = document.getElementById(
+      "filing_date",
+    ) as HTMLInputElement;
     if (dateInput) {
-      dateInput.value = tomorrow.toISOString().split('T')[0];
+      dateInput.value = tomorrow.toISOString().split("T")[0];
     }
   }, []);
 
@@ -43,36 +45,36 @@ export default function CreateCase() {
   };
 
   const addPetitioner = () => {
-    setPetitionerCount(prev => prev + 1);
+    setPetitionerCount((prev) => prev + 1);
   };
 
   const addRespondent = () => {
-    setRespondentCount(prev => prev + 1);
+    setRespondentCount((prev) => prev + 1);
   };
 
   const addJuniorAdvocate = () => {
-    setJuniorAdvocateCount(prev => prev + 1);
+    setJuniorAdvocateCount((prev) => prev + 1);
   };
 
   const addReferenceArticle = () => {
-    setReferenceArticleCount(prev => prev + 1);
+    setReferenceArticleCount((prev) => prev + 1);
   };
 
   const removeListItem = (itemType: string, index: number) => {
-    if (itemType === 'petitioner' && petitionerCount > 1) {
-      setPetitionerCount(prev => prev - 1);
-    } else if (itemType === 'respondent' && respondentCount > 1) {
-      setRespondentCount(prev => prev - 1);
-    } else if (itemType === 'junior' && juniorAdvocateCount > 1) {
-      setJuniorAdvocateCount(prev => prev - 1);
-    } else if (itemType === 'article' && referenceArticleCount > 1) {
-      setReferenceArticleCount(prev => prev - 1);
+    if (itemType === "petitioner" && petitionerCount > 1) {
+      setPetitionerCount((prev) => prev - 1);
+    } else if (itemType === "respondent" && respondentCount > 1) {
+      setRespondentCount((prev) => prev - 1);
+    } else if (itemType === "junior" && juniorAdvocateCount > 1) {
+      setJuniorAdvocateCount((prev) => prev - 1);
+    } else if (itemType === "article" && referenceArticleCount > 1) {
+      setReferenceArticleCount((prev) => prev - 1);
     }
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Collect form data
     const formData = new FormData(e.target as HTMLFormElement);
     const caseData: any = {};
@@ -97,17 +99,24 @@ export default function CreateCase() {
 
     console.log("Case Data:", caseData);
     alert("Case created successfully!");
-    navigate('/cases');
+    navigate("/cases");
   };
 
   const handleCancel = () => {
-    if (confirm("Are you sure you want to cancel? All entered data will be lost.")) {
-      navigate('/cases');
+    if (
+      confirm("Are you sure you want to cancel? All entered data will be lost.")
+    ) {
+      navigate("/cases");
     }
   };
 
   const generateCaseId = () => {
-    return "CASE_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
+    return (
+      "CASE_" +
+      Date.now() +
+      "_" +
+      Math.random().toString(36).substr(2, 5).toUpperCase()
+    );
   };
 
   // Sample articles database
@@ -118,7 +127,8 @@ export default function CreateCase() {
       type: "Case Law",
       author: "Supreme Court of India",
       date: "2024-01-15",
-      summary: "A landmark judgment establishing new precedents for bail applications in criminal cases.",
+      summary:
+        "A landmark judgment establishing new precedents for bail applications in criminal cases.",
     },
     {
       id: 2,
@@ -126,7 +136,8 @@ export default function CreateCase() {
       type: "Legal Article",
       author: "Bar & Bench",
       date: "2024-02-01",
-      summary: "Comprehensive analysis of the latest amendments to the Civil Procedure Code.",
+      summary:
+        "Comprehensive analysis of the latest amendments to the Civil Procedure Code.",
     },
   ];
 
@@ -141,10 +152,10 @@ export default function CreateCase() {
               Petitioner {i + 1}
             </span>
             {i > 0 && (
-              <button 
-                type="button" 
-                className="remove-item-btn" 
-                onClick={() => removeListItem('petitioner', i)}
+              <button
+                type="button"
+                className="remove-item-btn"
+                onClick={() => removeListItem("petitioner", i)}
               >
                 <i className="fas fa-times"></i>
                 Remove
@@ -153,16 +164,31 @@ export default function CreateCase() {
           </div>
           <div className="form-grid">
             <div className="form-group">
-              <label className="form-label">Name <span className="required">*</span></label>
-              <input type="text" className="form-input" name={`petitioners[${i}][name]`} required />
+              <label className="form-label">
+                Name <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-input"
+                name={`petitioners[${i}][name]`}
+                required
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Phone</label>
-              <input type="tel" className="form-input" name={`petitioners[${i}][phone]`} />
+              <input
+                type="tel"
+                className="form-input"
+                name={`petitioners[${i}][phone]`}
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Email</label>
-              <input type="email" className="form-input" name={`petitioners[${i}][email]`} />
+              <input
+                type="email"
+                className="form-input"
+                name={`petitioners[${i}][email]`}
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Type</label>
@@ -173,16 +199,16 @@ export default function CreateCase() {
                 <option value="Government">Government</option>
               </select>
             </div>
-            <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+            <div className="form-group" style={{ gridColumn: "1 / -1" }}>
               <label className="form-label">Address</label>
-              <textarea 
-                className="form-textarea" 
-                name={`petitioners[${i}][address]`} 
+              <textarea
+                className="form-textarea"
+                name={`petitioners[${i}][address]`}
                 placeholder="Complete address"
               ></textarea>
             </div>
           </div>
-        </div>
+        </div>,
       );
     }
     return petitioners;
@@ -199,10 +225,10 @@ export default function CreateCase() {
               Respondent {i + 1}
             </span>
             {i > 0 && (
-              <button 
-                type="button" 
-                className="remove-item-btn" 
-                onClick={() => removeListItem('respondent', i)}
+              <button
+                type="button"
+                className="remove-item-btn"
+                onClick={() => removeListItem("respondent", i)}
               >
                 <i className="fas fa-times"></i>
                 Remove
@@ -211,16 +237,31 @@ export default function CreateCase() {
           </div>
           <div className="form-grid">
             <div className="form-group">
-              <label className="form-label">Name <span className="required">*</span></label>
-              <input type="text" className="form-input" name={`respondents[${i}][name]`} required />
+              <label className="form-label">
+                Name <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                className="form-input"
+                name={`respondents[${i}][name]`}
+                required
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Phone</label>
-              <input type="tel" className="form-input" name={`respondents[${i}][phone]`} />
+              <input
+                type="tel"
+                className="form-input"
+                name={`respondents[${i}][phone]`}
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Email</label>
-              <input type="email" className="form-input" name={`respondents[${i}][email]`} />
+              <input
+                type="email"
+                className="form-input"
+                name={`respondents[${i}][email]`}
+              />
             </div>
             <div className="form-group">
               <label className="form-label">Type</label>
@@ -231,16 +272,16 @@ export default function CreateCase() {
                 <option value="Government">Government</option>
               </select>
             </div>
-            <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+            <div className="form-group" style={{ gridColumn: "1 / -1" }}>
               <label className="form-label">Address</label>
-              <textarea 
-                className="form-textarea" 
-                name={`respondents[${i}][address]`} 
+              <textarea
+                className="form-textarea"
+                name={`respondents[${i}][address]`}
                 placeholder="Complete address"
               ></textarea>
             </div>
           </div>
-        </div>
+        </div>,
       );
     }
     return respondents;
@@ -249,13 +290,13 @@ export default function CreateCase() {
   return (
     <div>
       {/* Side Menu Overlay */}
-      <div 
-        className={`side-menu-overlay ${sideMenuOpen ? 'show' : ''}`} 
+      <div
+        className={`side-menu-overlay ${sideMenuOpen ? "show" : ""}`}
         onClick={closeSideMenu}
       ></div>
 
       {/* Side Menu */}
-      <div className={`side-menu ${sideMenuOpen ? 'open' : ''}`}>
+      <div className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <div className="side-menu-logo">
             <div className="logo-icon">
@@ -263,7 +304,9 @@ export default function CreateCase() {
             </div>
             <div>
               <span className="logo-text">AI Advocates</span>
-              <div className="side-menu-subtitle">Legal Practice Management</div>
+              <div className="side-menu-subtitle">
+                Legal Practice Management
+              </div>
             </div>
           </div>
           <button className="side-menu-close" onClick={closeSideMenu}>
@@ -374,7 +417,9 @@ export default function CreateCase() {
                 </div>
                 <div className="form-grid">
                   <div className="form-group">
-                    <label className="form-label">Case Title <span className="required">*</span></label>
+                    <label className="form-label">
+                      Case Title <span className="required">*</span>
+                    </label>
                     <input
                       type="text"
                       className="form-input"
@@ -384,7 +429,9 @@ export default function CreateCase() {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Case Type <span className="required">*</span></label>
+                    <label className="form-label">
+                      Case Type <span className="required">*</span>
+                    </label>
                     <select className="form-select" name="case_type" required>
                       <option value="">Select Case Type</option>
                       <option value="Criminal">Criminal</option>
@@ -398,7 +445,9 @@ export default function CreateCase() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Court Name <span className="required">*</span></label>
+                    <label className="form-label">
+                      Court Name <span className="required">*</span>
+                    </label>
                     <input
                       type="text"
                       className="form-input"
@@ -426,7 +475,9 @@ export default function CreateCase() {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Filing Date <span className="required">*</span></label>
+                    <label className="form-label">
+                      Filing Date <span className="required">*</span>
+                    </label>
                     <input
                       type="date"
                       className="form-input"
@@ -446,14 +497,23 @@ export default function CreateCase() {
                 </div>
 
                 {/* Petitioners */}
-                <div style={{ marginBottom: '2rem' }}>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                <div style={{ marginBottom: "2rem" }}>
+                  <h4
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      color: "var(--text-primary)",
+                    }}
+                  >
                     <i className="fas fa-user"></i> Petitioners
                   </h4>
-                  <div className="dynamic-list">
-                    {renderPetitioners()}
-                  </div>
-                  <button type="button" className="add-item-btn" onClick={addPetitioner}>
+                  <div className="dynamic-list">{renderPetitioners()}</div>
+                  <button
+                    type="button"
+                    className="add-item-btn"
+                    onClick={addPetitioner}
+                  >
                     <i className="fas fa-plus"></i>
                     Add Another Petitioner
                   </button>
@@ -461,13 +521,22 @@ export default function CreateCase() {
 
                 {/* Respondents */}
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                  <h4
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      color: "var(--text-primary)",
+                    }}
+                  >
                     <i className="fas fa-user-tie"></i> Respondents
                   </h4>
-                  <div className="dynamic-list">
-                    {renderRespondents()}
-                  </div>
-                  <button type="button" className="add-item-btn" onClick={addRespondent}>
+                  <div className="dynamic-list">{renderRespondents()}</div>
+                  <button
+                    type="button"
+                    className="add-item-btn"
+                    onClick={addRespondent}
+                  >
                     <i className="fas fa-plus"></i>
                     Add Another Respondent
                   </button>
@@ -483,7 +552,11 @@ export default function CreateCase() {
                 <div className="form-grid">
                   <div className="form-group">
                     <label className="form-label">Client Name</label>
-                    <input type="text" className="form-input" name="client_name" />
+                    <input
+                      type="text"
+                      className="form-input"
+                      name="client_name"
+                    />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Client Type</label>
@@ -496,11 +569,19 @@ export default function CreateCase() {
                   </div>
                   <div className="form-group">
                     <label className="form-label">Client Phone</label>
-                    <input type="tel" className="form-input" name="client_phone" />
+                    <input
+                      type="tel"
+                      className="form-input"
+                      name="client_phone"
+                    />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Client Email</label>
-                    <input type="email" className="form-input" name="client_email" />
+                    <input
+                      type="email"
+                      className="form-input"
+                      name="client_email"
+                    />
                   </div>
                 </div>
               </div>
@@ -530,7 +611,7 @@ export default function CreateCase() {
                       placeholder="e.g., CrPC, CPC, Indian Evidence Act"
                     />
                   </div>
-                  <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <div className="form-group" style={{ gridColumn: "1 / -1" }}>
                     <label className="form-label">Custom Tags</label>
                     <input
                       type="text"
@@ -550,7 +631,7 @@ export default function CreateCase() {
                 </div>
 
                 <div className="form-grid">
-                  <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <div className="form-group" style={{ gridColumn: "1 / -1" }}>
                     <label className="form-label">Upload Documents</label>
                     <div className="file-upload">
                       <input
@@ -570,14 +651,20 @@ export default function CreateCase() {
 
                 {/* Uploaded Documents List */}
                 {uploadedDocuments.length > 0 && (
-                  <div style={{ marginTop: '1.5rem' }}>
+                  <div style={{ marginTop: "1.5rem" }}>
                     {uploadedDocuments.map((file, index) => (
                       <div key={index} className="document-item">
                         <div className="document-info">
                           <i className="fas fa-file"></i>
-                          <span style={{ fontWeight: '500' }}>{file.name}</span>
-                          <small style={{ color: 'var(--text-muted)' }}>({formatFileSize(file.size)})</small>
-                          <select className="document-type-select" name={`document_types[${index}]`} required>
+                          <span style={{ fontWeight: "500" }}>{file.name}</span>
+                          <small style={{ color: "var(--text-muted)" }}>
+                            ({formatFileSize(file.size)})
+                          </small>
+                          <select
+                            className="document-type-select"
+                            name={`document_types[${index}]`}
+                            required
+                          >
                             <option value="">Select Type</option>
                             <option value="FIR">FIR</option>
                             <option value="Petition">Petition</option>
@@ -587,7 +674,9 @@ export default function CreateCase() {
                             <option value="Affidavit">Affidavit</option>
                             <option value="Contract">Contract</option>
                             <option value="Identity">Identity Proof</option>
-                            <option value="Financial">Financial Document</option>
+                            <option value="Financial">
+                              Financial Document
+                            </option>
                             <option value="Other">Other</option>
                           </select>
                         </div>
@@ -605,20 +694,42 @@ export default function CreateCase() {
                 </div>
 
                 {/* Senior Advocate */}
-                <div style={{ marginBottom: '2rem' }}>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--text-primary)' }}>
-                    <i className="fas fa-user-graduate"></i> Senior Advocate (Lead)
+                <div style={{ marginBottom: "2rem" }}>
+                  <h4
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    <i className="fas fa-user-graduate"></i> Senior Advocate
+                    (Lead)
                   </h4>
                   <div className="list-item">
                     <div className="form-grid">
                       <div className="form-group">
-                        <label className="form-label">Senior Advocate <span className="required">*</span></label>
-                        <select className="form-select" name="senior_advocate" required>
+                        <label className="form-label">
+                          Senior Advocate <span className="required">*</span>
+                        </label>
+                        <select
+                          className="form-select"
+                          name="senior_advocate"
+                          required
+                        >
                           <option value="">Select Senior Advocate</option>
-                          <option value="priya_sharma">Priya Sharma - Senior Advocate (Criminal Law)</option>
-                          <option value="rajesh_kumar">Rajesh Kumar - Senior Advocate (Corporate Law)</option>
-                          <option value="anil_verma">Anil Verma - Senior Advocate (Civil Law)</option>
-                          <option value="kavita_singh">Kavita Singh - Senior Advocate (Family Law)</option>
+                          <option value="priya_sharma">
+                            Priya Sharma - Senior Advocate (Criminal Law)
+                          </option>
+                          <option value="rajesh_kumar">
+                            Rajesh Kumar - Senior Advocate (Corporate Law)
+                          </option>
+                          <option value="anil_verma">
+                            Anil Verma - Senior Advocate (Civil Law)
+                          </option>
+                          <option value="kavita_singh">
+                            Kavita Singh - Senior Advocate (Family Law)
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -633,22 +744,22 @@ export default function CreateCase() {
                   <span className="section-title">Notes & Instructions</span>
                 </div>
                 <div className="form-grid">
-                  <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <div className="form-group" style={{ gridColumn: "1 / -1" }}>
                     <label className="form-label">Internal Notes</label>
                     <textarea
                       className="form-textarea"
                       name="internal_notes"
                       placeholder="Notes for advocate's eyes only"
-                      style={{ minHeight: '120px' }}
+                      style={{ minHeight: "120px" }}
                     ></textarea>
                   </div>
-                  <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <div className="form-group" style={{ gridColumn: "1 / -1" }}>
                     <label className="form-label">Client Instructions</label>
                     <textarea
                       className="form-textarea"
                       name="client_instructions"
                       placeholder="Instructions from client about how to proceed"
-                      style={{ minHeight: '120px' }}
+                      style={{ minHeight: "120px" }}
                     ></textarea>
                   </div>
                 </div>
@@ -657,7 +768,11 @@ export default function CreateCase() {
 
             {/* Form Actions */}
             <div className="form-actions">
-              <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={handleCancel}
+              >
                 <i className="fas fa-times"></i>
                 Cancel
               </button>

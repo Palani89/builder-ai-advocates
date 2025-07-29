@@ -22,7 +22,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="stylesheet" href="client/global.css" />
 
     <style>
@@ -459,7 +459,10 @@
               </span>
             </nav>
             <h1 class="page-title">
-              <i class="fas fa-gavel" style="color: var(--primary); margin-right: 0.75rem;"></i>
+              <i
+                class="fas fa-gavel"
+                style="color: var(--primary); margin-right: 0.75rem"
+              ></i>
               Create New Hearing
             </h1>
             <p class="page-subtitle">
@@ -468,7 +471,10 @@
           </div>
 
           <div class="page-actions">
-            <button class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+            <button
+              class="btn btn-secondary"
+              onclick="window.location.href='calendar.html'"
+            >
               <i class="fas fa-arrow-left"></i>
               Back to Calendar
             </button>
@@ -486,25 +492,54 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Related Case <span class="required">*</span></label>
-                  <select class="form-select" name="case_id" id="caseSelect" required>
+                  <label class="form-label"
+                    >Related Case <span class="required">*</span></label
+                  >
+                  <select
+                    class="form-select"
+                    name="case_id"
+                    id="caseSelect"
+                    required
+                  >
                     <option value="">Select Case</option>
                     <option value="1">State vs. John Doe - CC/1234/2024</option>
-                    <option value="2">Smith Property Dispute - CS/5678/2024</option>
-                    <option value="3">ABC vs. XYZ Industries - CS/9876/2024</option>
+                    <option value="2">
+                      Smith Property Dispute - CS/5678/2024
+                    </option>
+                    <option value="3">
+                      ABC vs. XYZ Industries - CS/9876/2024
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Case Title</label>
-                  <input type="text" class="form-input" name="case_title" id="caseTitle" readonly>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="case_title"
+                    id="caseTitle"
+                    readonly
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Case Type</label>
-                  <input type="text" class="form-input" name="case_type" id="caseType" readonly>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="case_type"
+                    id="caseType"
+                    readonly
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Case Number</label>
-                  <input type="text" class="form-input" name="case_number" id="caseNumber" readonly>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="case_number"
+                    id="caseNumber"
+                    readonly
+                  />
                 </div>
               </div>
             </div>
@@ -517,12 +552,26 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Hearing Date <span class="required">*</span></label>
-                  <input type="date" class="form-input" name="hearing_date" required>
+                  <label class="form-label"
+                    >Hearing Date <span class="required">*</span></label
+                  >
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="hearing_date"
+                    required
+                  />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Hearing Time <span class="required">*</span></label>
-                  <input type="time" class="form-input" name="hearing_time" required>
+                  <label class="form-label"
+                    >Hearing Time <span class="required">*</span></label
+                  >
+                  <input
+                    type="time"
+                    class="form-input"
+                    name="hearing_time"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Expected Duration</label>
@@ -536,14 +585,18 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Hearing Type <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Hearing Type <span class="required">*</span></label
+                  >
                   <select class="form-select" name="hearing_type" required>
                     <option value="">Select Hearing Type</option>
                     <option value="Initial Hearing">Initial Hearing</option>
                     <option value="Status Update">Status Update</option>
                     <option value="Evidence">Evidence Presentation</option>
                     <option value="Bail Application">Bail Application</option>
-                    <option value="Witness Examination">Witness Examination</option>
+                    <option value="Witness Examination">
+                      Witness Examination
+                    </option>
                     <option value="Arguments">Arguments</option>
                     <option value="Judgment">Judgment</option>
                     <option value="Appeal Hearing">Appeal Hearing</option>
@@ -562,20 +615,43 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Court Name <span class="required">*</span></label>
-                  <input type="text" class="form-input" name="court_name" placeholder="e.g., Delhi District Court" required>
+                  <label class="form-label"
+                    >Court Name <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="court_name"
+                    placeholder="e.g., Delhi District Court"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Court Hall/Room No.</label>
-                  <input type="text" class="form-input" name="court_room" placeholder="e.g., Court Room 7">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="court_room"
+                    placeholder="e.g., Court Room 7"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Bench/Judge Name</label>
-                  <input type="text" class="form-input" name="judge_name" placeholder="e.g., Hon'ble Justice XYZ">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="judge_name"
+                    placeholder="e.g., Hon'ble Justice XYZ"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Court Address</label>
-                  <textarea class="form-textarea" name="court_address" rows="2" placeholder="Full court address for reference..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="court_address"
+                    rows="2"
+                    placeholder="Full court address for reference..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -604,7 +680,9 @@
                   <select class="form-select" name="hearing_status">
                     <option value="Scheduled">Scheduled</option>
                     <option value="Confirmed">Confirmed</option>
-                    <option value="Pending Confirmation">Pending Confirmation</option>
+                    <option value="Pending Confirmation">
+                      Pending Confirmation
+                    </option>
                     <option value="Adjourned">Adjourned</option>
                     <option value="Completed">Completed</option>
                     <option value="Cancelled">Cancelled</option>
@@ -621,7 +699,11 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">Next Hearing Date</label>
-                  <input type="date" class="form-input" name="next_hearing_date">
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="next_hearing_date"
+                  />
                 </div>
               </div>
             </div>
@@ -637,15 +719,28 @@
                   <label class="form-label">Lead Advocate</label>
                   <select class="form-select" name="lead_advocate">
                     <option value="">Select Lead Advocate</option>
-                    <option value="priya_sharma">Priya Sharma (Senior Advocate)</option>
-                    <option value="rajesh_kumar">Rajesh Kumar (Senior Advocate)</option>
-                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
-                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
+                    <option value="priya_sharma">
+                      Priya Sharma (Senior Advocate)
+                    </option>
+                    <option value="rajesh_kumar">
+                      Rajesh Kumar (Senior Advocate)
+                    </option>
+                    <option value="amit_jain">
+                      Amit Jain (Junior Advocate)
+                    </option>
+                    <option value="neha_gupta">
+                      Neha Gupta (Junior Advocate)
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Appeared By</label>
-                  <input type="text" class="form-input" name="appeared_by" placeholder="Lawyer name who will appear">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="appeared_by"
+                    placeholder="Lawyer name who will appear"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Junior Advocates</label>
@@ -658,7 +753,12 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">Opposing Counsel</label>
-                  <input type="text" class="form-input" name="opposing_counsel" placeholder="Name of opposing lawyer/firm">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="opposing_counsel"
+                    placeholder="Name of opposing lawyer/firm"
+                  />
                 </div>
               </div>
             </div>
@@ -670,20 +770,35 @@
                 <span class="section-title">Hearing Agenda & Preparation</span>
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Hearing Agenda</label>
-                  <textarea class="form-textarea" name="agenda" rows="4" placeholder="What will be presented/discussed in this hearing?
+                  <textarea
+                    class="form-textarea"
+                    name="agenda"
+                    rows="4"
+                    placeholder="What will be presented/discussed in this hearing?
 • Point 1
 • Point 2
-• Point 3"></textarea>
+• Point 3"
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Documents to Present</label>
-                  <textarea class="form-textarea" name="documents_to_present" rows="3" placeholder="List documents that will be presented or discussed..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="documents_to_present"
+                    rows="3"
+                    placeholder="List documents that will be presented or discussed..."
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Preparation Notes</label>
-                  <textarea class="form-textarea" name="preparation_notes" rows="3" placeholder="What needs to be prepared before this hearing?"></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="preparation_notes"
+                    rows="3"
+                    placeholder="What needs to be prepared before this hearing?"
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -695,17 +810,32 @@
                 <span class="section-title">Expected Outcomes & Strategy</span>
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Expected Outcome</label>
-                  <textarea class="form-textarea" name="expected_outcome" rows="3" placeholder="What do you expect to achieve in this hearing?"></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="expected_outcome"
+                    rows="3"
+                    placeholder="What do you expect to achieve in this hearing?"
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Legal Strategy</label>
-                  <textarea class="form-textarea" name="legal_strategy" rows="3" placeholder="Brief outline of the legal strategy for this hearing..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="legal_strategy"
+                    rows="3"
+                    placeholder="Brief outline of the legal strategy for this hearing..."
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Contingency Plans</label>
-                  <textarea class="form-textarea" name="contingency_plans" rows="3" placeholder="Alternative approaches if primary strategy doesn't work..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="contingency_plans"
+                    rows="3"
+                    placeholder="Alternative approaches if primary strategy doesn't work..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -714,7 +844,9 @@
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-comments section-icon"></i>
-                <span class="section-title">Client Communication & Updates</span>
+                <span class="section-title"
+                  >Client Communication & Updates</span
+                >
               </div>
               <div class="form-grid">
                 <div class="form-group">
@@ -730,12 +862,19 @@
                   <select class="form-select" name="client_attendance">
                     <option value="required">Client presence required</option>
                     <option value="optional">Client presence optional</option>
-                    <option value="not_required">Client presence not required</option>
+                    <option value="not_required">
+                      Client presence not required
+                    </option>
                   </select>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Client Instructions</label>
-                  <textarea class="form-textarea" name="client_instructions" rows="3" placeholder="Any specific instructions from the client for this hearing..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="client_instructions"
+                    rows="3"
+                    placeholder="Any specific instructions from the client for this hearing..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -789,16 +928,28 @@
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-sticky-note section-icon"></i>
-                <span class="section-title">Additional Notes & Instructions</span>
+                <span class="section-title"
+                  >Additional Notes & Instructions</span
+                >
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Internal Notes</label>
-                  <textarea class="form-textarea" name="internal_notes" rows="3" placeholder="Private notes for the legal team..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="internal_notes"
+                    rows="3"
+                    placeholder="Private notes for the legal team..."
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Special Instructions</label>
-                  <textarea class="form-textarea" name="special_instructions" rows="3" placeholder="Any special arrangements or instructions for this hearing..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="special_instructions"
+                    rows="3"
+                    placeholder="Any special arrangements or instructions for this hearing..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -806,15 +957,27 @@
 
           <!-- Form Actions -->
           <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="window.location.href='calendar.html'"
+            >
               <i class="fas fa-times"></i>
               Cancel
             </button>
-            <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="saveDraft()"
+            >
               <i class="fas fa-save"></i>
               Save as Draft
             </button>
-            <button type="submit" class="btn btn-primary" form="createHearingForm">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              form="createHearingForm"
+            >
               <i class="fas fa-gavel"></i>
               Create Hearing
             </button>
@@ -854,11 +1017,11 @@
         // Set default date to today
         const today = new Date();
         today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-        $('input[name="hearing_date"]').val(today.toISOString().split('T')[0]);
+        $('input[name="hearing_date"]').val(today.toISOString().split("T")[0]);
 
         // Set default time to current hour
         const currentHour = new Date().getHours();
-        const defaultTime = String(currentHour).padStart(2, '0') + ':00';
+        const defaultTime = String(currentHour).padStart(2, "0") + ":00";
         $('input[name="hearing_time"]').val(defaultTime);
 
         // Navigation
@@ -881,7 +1044,7 @@
         });
 
         // Auto-populate case details when case is selected
-        $('#caseSelect').on('change', function() {
+        $("#caseSelect").on("change", function () {
           const caseId = $(this).val();
           if (caseId) {
             populateCaseDetails(caseId);
@@ -892,33 +1055,33 @@
       function populateCaseDetails(caseId) {
         // Sample case data mapping
         const caseData = {
-          '1': { 
-            title: 'State vs. John Doe', 
-            type: 'Criminal', 
-            number: 'CC/1234/2024',
-            court: 'District Court, Delhi',
-            judge: 'Hon\'ble Justice A.K. Sharma'
+          1: {
+            title: "State vs. John Doe",
+            type: "Criminal",
+            number: "CC/1234/2024",
+            court: "District Court, Delhi",
+            judge: "Hon'ble Justice A.K. Sharma",
           },
-          '2': { 
-            title: 'Smith Property Dispute', 
-            type: 'Civil', 
-            number: 'CS/5678/2024',
-            court: 'High Court, Delhi',
-            judge: 'Hon\'ble Justice B.K. Patel'
+          2: {
+            title: "Smith Property Dispute",
+            type: "Civil",
+            number: "CS/5678/2024",
+            court: "High Court, Delhi",
+            judge: "Hon'ble Justice B.K. Patel",
           },
-          '3': { 
-            title: 'ABC vs. XYZ Industries', 
-            type: 'Commercial', 
-            number: 'CS/9876/2024',
-            court: 'Commercial Court, Delhi',
-            judge: 'Hon\'ble Justice C.D. Singh'
-          }
+          3: {
+            title: "ABC vs. XYZ Industries",
+            type: "Commercial",
+            number: "CS/9876/2024",
+            court: "Commercial Court, Delhi",
+            judge: "Hon'ble Justice C.D. Singh",
+          },
         };
 
         if (caseData[caseId]) {
-          $('#caseTitle').val(caseData[caseId].title);
-          $('#caseType').val(caseData[caseId].type);
-          $('#caseNumber').val(caseData[caseId].number);
+          $("#caseTitle").val(caseData[caseId].title);
+          $("#caseType").val(caseData[caseId].type);
+          $("#caseNumber").val(caseData[caseId].number);
           $('input[name="court_name"]').val(caseData[caseId].court);
           $('input[name="judge_name"]').val(caseData[caseId].judge);
         }
@@ -926,12 +1089,16 @@
 
       function saveHearing() {
         // Get form data
-        const form = $('#createHearingForm')[0];
+        const form = $("#createHearingForm")[0];
         const formData = new FormData(form);
 
         // Basic validation
-        if (!formData.get('case_id') || !formData.get('hearing_date') || !formData.get('hearing_time')) {
-          alert('Please fill in all required fields');
+        if (
+          !formData.get("case_id") ||
+          !formData.get("hearing_date") ||
+          !formData.get("hearing_time")
+        ) {
+          alert("Please fill in all required fields");
           return;
         }
 
@@ -958,15 +1125,15 @@
 
       function saveDraft() {
         // Save as draft functionality
-        const form = $('#createHearingForm')[0];
+        const form = $("#createHearingForm")[0];
         const formData = new FormData(form);
-        
+
         // Add draft status
         const draftData = {};
         for (let [key, value] of formData.entries()) {
           draftData[key] = value;
         }
-        draftData.status = 'Draft';
+        draftData.status = "Draft";
         draftData.saved_as_draft = new Date().toISOString();
 
         console.log("Draft saved:", draftData);
@@ -974,7 +1141,12 @@
       }
 
       function generateHearingId() {
-        return "HRG_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
+        return (
+          "HRG_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 5).toUpperCase()
+        );
       }
 
       // Side menu functions

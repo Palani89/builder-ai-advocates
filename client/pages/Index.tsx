@@ -11,7 +11,7 @@ export default function Index() {
     // Add event listeners when component mounts
     const handleMenuClick = () => setSideMenuOpen(true);
     const handleOverlayClick = () => setSideMenuOpen(false);
-    
+
     return () => {
       // Cleanup event listeners
     };
@@ -21,8 +21,20 @@ export default function Index() {
   const closeSideMenu = () => setSideMenuOpen(false);
 
   const handleDayClick = (day: number) => {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"];
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     const currentMonthName = currentMonth.split(" ")[0];
     const currentYear = currentMonth.split(" ")[1];
     setSelectedDate(`${currentMonthName} ${day}, ${currentYear}`);
@@ -45,13 +57,13 @@ export default function Index() {
   return (
     <div>
       {/* Side Menu Overlay */}
-      <div 
-        className={`side-menu-overlay ${sideMenuOpen ? 'show' : ''}`} 
+      <div
+        className={`side-menu-overlay ${sideMenuOpen ? "show" : ""}`}
         onClick={closeSideMenu}
       ></div>
 
       {/* Side Menu */}
-      <div className={`side-menu ${sideMenuOpen ? 'open' : ''}`}>
+      <div className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <div className="side-menu-logo">
             <div className="logo-icon">
@@ -59,7 +71,9 @@ export default function Index() {
             </div>
             <div>
               <span className="logo-text">AI Advocates</span>
-              <div className="side-menu-subtitle">Legal Practice Management</div>
+              <div className="side-menu-subtitle">
+                Legal Practice Management
+              </div>
             </div>
           </div>
           <button className="side-menu-close" onClick={closeSideMenu}>
@@ -131,18 +145,18 @@ export default function Index() {
 
                 {/* Breadcrumb */}
                 <nav className="breadcrumb">
-                <Link to="/" className="breadcrumb-item">
-                  <i className="fas fa-home"></i>
-                  Home
-                </Link>
-                <span className="breadcrumb-separator">
-                  <i className="fas fa-chevron-right"></i>
-                </span>
-                <span className="breadcrumb-item active">
-                  <i className="fas fa-calendar"></i>
-                  Calendar
-                </span>
-              </nav>
+                  <Link to="/" className="breadcrumb-item">
+                    <i className="fas fa-home"></i>
+                    Home
+                  </Link>
+                  <span className="breadcrumb-separator">
+                    <i className="fas fa-chevron-right"></i>
+                  </span>
+                  <span className="breadcrumb-item active">
+                    <i className="fas fa-calendar"></i>
+                    Calendar
+                  </span>
+                </nav>
 
                 <p className="page-subtitle">Hearings & Appointments</p>
               </div>
@@ -173,10 +187,10 @@ export default function Index() {
             <div
               className="calendar-note"
               style={{
-                textAlign: 'center',
-                marginBottom: '1rem',
-                fontSize: '0.875rem',
-                color: 'var(--text-secondary)',
+                textAlign: "center",
+                marginBottom: "1rem",
+                fontSize: "0.875rem",
+                color: "var(--text-secondary)",
               }}
             >
               Click on any date to view or add hearings
@@ -197,12 +211,19 @@ export default function Index() {
               <div className="calendar-day other-month">
                 <div className="day-number">31</div>
               </div>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(day => (
-                <div key={day} className="calendar-day" onClick={() => handleDayClick(day)}>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((day) => (
+                <div
+                  key={day}
+                  className="calendar-day"
+                  onClick={() => handleDayClick(day)}
+                >
                   <div className="day-number">{day}</div>
                 </div>
               ))}
-              <div className="calendar-day selected" onClick={() => handleDayClick(15)}>
+              <div
+                className="calendar-day selected"
+                onClick={() => handleDayClick(15)}
+              >
                 <div className="day-number">15</div>
                 <div className="day-events">
                   <div className="event-dot hearing"></div>
@@ -221,16 +242,22 @@ export default function Index() {
                   <div className="event-dot"></div>
                 </div>
               </div>
-              {[18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map(day => (
-                <div key={day} className="calendar-day" onClick={() => handleDayClick(day)}>
-                  <div className="day-number">{day}</div>
-                  {day === 19 && (
-                    <div className="day-events">
-                      <div className="event-dot"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
+              {[18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map(
+                (day) => (
+                  <div
+                    key={day}
+                    className="calendar-day"
+                    onClick={() => handleDayClick(day)}
+                  >
+                    <div className="day-number">{day}</div>
+                    {day === 19 && (
+                      <div className="day-events">
+                        <div className="event-dot"></div>
+                      </div>
+                    )}
+                  </div>
+                ),
+              )}
               <div className="calendar-day other-month">
                 <div className="day-number">1</div>
               </div>
@@ -253,15 +280,15 @@ export default function Index() {
               </div>
 
               <div className="tabs">
-                <button 
-                  className={`tab ${activeTab === 'hearings' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('hearings')}
+                <button
+                  className={`tab ${activeTab === "hearings" ? "active" : ""}`}
+                  onClick={() => setActiveTab("hearings")}
                 >
                   Hearings
                 </button>
-                <button 
-                  className={`tab ${activeTab === 'appointments' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('appointments')}
+                <button
+                  className={`tab ${activeTab === "appointments" ? "active" : ""}`}
+                  onClick={() => setActiveTab("appointments")}
                 >
                   Appointments
                 </button>

@@ -33,13 +33,13 @@ export default function Cases() {
   return (
     <div>
       {/* Side Menu Overlay */}
-      <div 
-        className={`side-menu-overlay ${sideMenuOpen ? 'show' : ''}`} 
+      <div
+        className={`side-menu-overlay ${sideMenuOpen ? "show" : ""}`}
         onClick={closeSideMenu}
       ></div>
 
       {/* Side Menu */}
-      <div className={`side-menu ${sideMenuOpen ? 'open' : ''}`}>
+      <div className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <div className="side-menu-logo">
             <div className="logo-icon">
@@ -47,7 +47,9 @@ export default function Cases() {
             </div>
             <div>
               <span className="logo-text">AI Advocates</span>
-              <div className="side-menu-subtitle">Legal Practice Management</div>
+              <div className="side-menu-subtitle">
+                Legal Practice Management
+              </div>
             </div>
           </div>
           <button className="side-menu-close" onClick={closeSideMenu}>
@@ -131,13 +133,15 @@ export default function Cases() {
                 </span>
               </nav>
 
-              <p className="page-subtitle">Manage your legal cases and proceedings</p>
+              <p className="page-subtitle">
+                Manage your legal cases and proceedings
+              </p>
             </div>
 
             {/* Action Button */}
             <button
               className="add-case-btn"
-              onClick={() => navigate('/create-case')}
+              onClick={() => navigate("/create-case")}
             >
               <i className="fas fa-plus"></i>
               Add New Case
@@ -148,9 +152,9 @@ export default function Cases() {
           <div className="tabs-container">
             <div className="tabs">
               {["Today's", "Upcoming", "Disposed"].map((tab) => (
-                <div 
+                <div
                   key={tab}
-                  className={`tab ${activeTab === tab ? 'active' : ''}`}
+                  className={`tab ${activeTab === tab ? "active" : ""}`}
                   onClick={() => handleTabClick(tab)}
                 >
                   {tab}
@@ -197,7 +201,9 @@ export default function Cases() {
                 </div>
                 <div className="case-detail">
                   <span className="detail-label">Judge</span>
-                  <span className="detail-value">Hon'ble Justice A.K. Sharma</span>
+                  <span className="detail-value">
+                    Hon'ble Justice A.K. Sharma
+                  </span>
                 </div>
                 <div className="case-detail">
                   <span className="detail-label">Next Hearing</span>
@@ -205,36 +211,36 @@ export default function Cases() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.5rem', margin: '1rem 0' }}>
+              <div style={{ display: "flex", gap: "0.5rem", margin: "1rem 0" }}>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Bail
                 </span>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Section 420
                 </span>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Economic Offense
@@ -244,7 +250,7 @@ export default function Cases() {
               <div className="case-actions">
                 <button
                   className="action-btn view-btn"
-                  onClick={() => viewCaseDetails('1')}
+                  onClick={() => viewCaseDetails("1")}
                 >
                   View Details
                 </button>
@@ -276,7 +282,9 @@ export default function Cases() {
                 </div>
                 <div className="case-detail">
                   <span className="detail-label">Judge</span>
-                  <span className="detail-value">Hon'ble Justice B.K. Patel</span>
+                  <span className="detail-value">
+                    Hon'ble Justice B.K. Patel
+                  </span>
                 </div>
                 <div className="case-detail">
                   <span className="detail-label">Next Hearing</span>
@@ -284,36 +292,36 @@ export default function Cases() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.5rem', margin: '1rem 0' }}>
+              <div style={{ display: "flex", gap: "0.5rem", margin: "1rem 0" }}>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Property
                 </span>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Civil Suit
                 </span>
                 <span
                   style={{
-                    padding: '0.25rem 0.75rem',
-                    background: 'var(--background)',
-                    color: 'var(--text-secondary)',
-                    borderRadius: '20px',
-                    fontSize: '0.75rem',
+                    padding: "0.25rem 0.75rem",
+                    background: "var(--background)",
+                    color: "var(--text-secondary)",
+                    borderRadius: "20px",
+                    fontSize: "0.75rem",
                   }}
                 >
                   Injunction
@@ -323,7 +331,7 @@ export default function Cases() {
               <div className="case-actions">
                 <button
                   className="action-btn view-btn"
-                  onClick={() => viewCaseDetails('2')}
+                  onClick={() => viewCaseDetails("2")}
                 >
                   View Details
                 </button>

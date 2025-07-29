@@ -859,157 +859,169 @@
           <!-- Today's Cases Tab -->
           <div class="tab-pane active" id="todays-tab">
             <div class="cases-list">
-          <!-- Case 1 -->
-          <div class="case-card">
-            <div class="case-header">
-              <div>
-                <div class="case-title">State vs. John Doe</div>
-                <div class="case-subtitle">
-                  Client: John Doe | Opponent: State of Delhi
+              <!-- Case 1 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">State vs. John Doe</div>
+                    <div class="case-subtitle">
+                      Client: John Doe | Opponent: State of Delhi
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge active">Active</span>
+                    <span class="status-badge criminal">Criminal</span>
+                  </div>
                 </div>
-              </div>
-              <div class="case-status">
-                <span class="status-badge active">Active</span>
-                <span class="status-badge criminal">Criminal</span>
-              </div>
-            </div>
 
-            <div class="case-details">
-              <div class="case-detail">
-                <span class="detail-label">Court</span>
-                <span class="detail-value">District Court, Delhi</span>
-              </div>
-              <div class="case-detail">
-                <span class="detail-label">Judge</span>
-                <span class="detail-value">Hon'ble Justice A.K. Sharma</span>
-              </div>
-              <div class="case-detail">
-                <span class="detail-label">Next Hearing</span>
-                <span class="detail-value">2024-01-15</span>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Bail</span
-              >
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Section 420</span
-              >
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Economic Offense</span
-              >
-            </div>
-
-            <div class="case-actions">
-              <button
-                class="action-btn view-btn"
-                onclick="viewCaseDetails('1')"
-              >
-                View Details
-              </button>
-              <button class="action-btn dispose-btn" onclick="disposeCase('1')">Dispose Case</button>
-            </div>
-
-            <div class="case-meta">Last updated: 2024-01-10</div>
-          </div>
-
-          <!-- Case 2 -->
-          <div class="case-card">
-            <div class="case-header">
-              <div>
-                <div class="case-title">Smith Property Dispute</div>
-                <div class="case-subtitle">
-                  Client: Mr. Smith | Opponent: ABC Developers
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">District Court, Delhi</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value"
+                      >Hon'ble Justice A.K. Sharma</span
+                    >
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Next Hearing</span>
+                    <span class="detail-value">2024-01-15</span>
+                  </div>
                 </div>
-              </div>
-              <div class="case-status">
-                <span class="status-badge pending">Pending</span>
-                <span class="status-badge civil">Civil</span>
-              </div>
-            </div>
 
-            <div class="case-details">
-              <div class="case-detail">
-                <span class="detail-label">Court</span>
-                <span class="detail-value">High Court, Delhi</span>
-              </div>
-              <div class="case-detail">
-                <span class="detail-label">Judge</span>
-                <span class="detail-value">Hon'ble Justice B.K. Patel</span>
-              </div>
-              <div class="case-detail">
-                <span class="detail-label">Next Hearing</span>
-                <span class="detail-value">2024-01-18</span>
-              </div>
-            </div>
+                <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Bail</span
+                  >
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Section 420</span
+                  >
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Economic Offense</span
+                  >
+                </div>
 
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Property</span
-              >
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Civil Suit</span
-              >
-              <span
-                style="
-                  padding: 0.25rem 0.75rem;
-                  background: var(--background);
-                  color: var(--text-secondary);
-                  border-radius: 20px;
-                  font-size: 0.75rem;
-                "
-                >Injunction</span
-              >
-            </div>
+                <div class="case-actions">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('1')"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('1')"
+                  >
+                    Dispose Case
+                  </button>
+                </div>
 
-            <div class="case-actions">
-              <button
-                class="action-btn view-btn"
-                onclick="viewCaseDetails('2')"
-              >
-                View Details
-              </button>
-              <button class="action-btn dispose-btn" onclick="disposeCase('2')">Dispose Case</button>
-            </div>
+                <div class="case-meta">Last updated: 2024-01-10</div>
+              </div>
 
-            <div class="case-meta">Last updated: 2024-01-08</div>
-          </div>
+              <!-- Case 2 -->
+              <div class="case-card">
+                <div class="case-header">
+                  <div>
+                    <div class="case-title">Smith Property Dispute</div>
+                    <div class="case-subtitle">
+                      Client: Mr. Smith | Opponent: ABC Developers
+                    </div>
+                  </div>
+                  <div class="case-status">
+                    <span class="status-badge pending">Pending</span>
+                    <span class="status-badge civil">Civil</span>
+                  </div>
+                </div>
+
+                <div class="case-details">
+                  <div class="case-detail">
+                    <span class="detail-label">Court</span>
+                    <span class="detail-value">High Court, Delhi</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Judge</span>
+                    <span class="detail-value">Hon'ble Justice B.K. Patel</span>
+                  </div>
+                  <div class="case-detail">
+                    <span class="detail-label">Next Hearing</span>
+                    <span class="detail-value">2024-01-18</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Property</span
+                  >
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Civil Suit</span
+                  >
+                  <span
+                    style="
+                      padding: 0.25rem 0.75rem;
+                      background: var(--background);
+                      color: var(--text-secondary);
+                      border-radius: 20px;
+                      font-size: 0.75rem;
+                    "
+                    >Injunction</span
+                  >
+                </div>
+
+                <div class="case-actions">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('2')"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('2')"
+                  >
+                    Dispose Case
+                  </button>
+                </div>
+
+                <div class="case-meta">Last updated: 2024-01-08</div>
+              </div>
             </div>
           </div>
 
@@ -1045,10 +1057,18 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('3')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('3')"
+                  >
                     View Details
                   </button>
-                  <button class="action-btn dispose-btn" onclick="disposeCase('3')">Dispose Case</button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('3')"
+                  >
+                    Dispose Case
+                  </button>
                 </div>
                 <div class="case-meta">Last updated: 2024-01-12</div>
               </div>
@@ -1070,7 +1090,9 @@
                 <div class="case-details">
                   <div class="case-detail">
                     <span class="detail-label">Court</span>
-                    <span class="detail-value">Commercial Court, Bangalore</span>
+                    <span class="detail-value"
+                      >Commercial Court, Bangalore</span
+                    >
                   </div>
                   <div class="case-detail">
                     <span class="detail-label">Judge</span>
@@ -1082,10 +1104,18 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('4')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('4')"
+                  >
                     View Details
                   </button>
-                  <button class="action-btn dispose-btn" onclick="disposeCase('4')">Dispose Case</button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('4')"
+                  >
+                    Dispose Case
+                  </button>
                 </div>
                 <div class="case-meta">Last updated: 2024-01-11</div>
               </div>
@@ -1124,10 +1154,18 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('5')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('5')"
+                  >
                     View Details
                   </button>
-                  <button class="action-btn dispose-btn" onclick="disposeCase('5')">Dispose Case</button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('5')"
+                  >
+                    Dispose Case
+                  </button>
                 </div>
                 <div class="case-meta">Last updated: 2024-01-05</div>
               </div>
@@ -1166,7 +1204,10 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('6')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('6')"
+                  >
                     View Details
                   </button>
                   <button class="action-btn archive-btn">Archive Case</button>
@@ -1208,10 +1249,18 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('7')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('7')"
+                  >
                     View Details
                   </button>
-                  <button class="action-btn dispose-btn" onclick="disposeCase('7')">Dispose Case</button>
+                  <button
+                    class="action-btn dispose-btn"
+                    onclick="disposeCase('7')"
+                  >
+                    Dispose Case
+                  </button>
                 </div>
                 <div class="case-meta">Appeal filed: 2024-01-02</div>
               </div>
@@ -1242,7 +1291,9 @@
                   </div>
                   <div class="case-detail">
                     <span class="detail-label">Mediator</span>
-                    <span class="detail-value">Justice (Retd.) A.R. Krishnan</span>
+                    <span class="detail-value"
+                      >Justice (Retd.) A.R. Krishnan</span
+                    >
                   </div>
                   <div class="case-detail">
                     <span class="detail-label">Settlement Date</span>
@@ -1250,7 +1301,10 @@
                   </div>
                 </div>
                 <div class="case-actions">
-                  <button class="action-btn view-btn" onclick="viewCaseDetails('8')">
+                  <button
+                    class="action-btn view-btn"
+                    onclick="viewCaseDetails('8')"
+                  >
                     View Details
                   </button>
                   <button class="action-btn archive-btn">Archive Case</button>
@@ -1332,7 +1386,7 @@
 
         // Logout functionality
         $(".notification-icon").on("click", function () {
-          if ($(this).find('.fa-sign-out-alt').length) {
+          if ($(this).find(".fa-sign-out-alt").length) {
             logoutFromApp();
           }
         });
@@ -1365,7 +1419,11 @@
 
       // Dispose case function
       function disposeCase(caseId) {
-        if (confirm('Are you sure you want to dispose this case? This will mark the case as disposed and move it to the disposed tab.')) {
+        if (
+          confirm(
+            "Are you sure you want to dispose this case? This will mark the case as disposed and move it to the disposed tab.",
+          )
+        ) {
           // Redirect to edit case page with dispose mode
           window.location.href = `create-case.html?mode=edit&id=${caseId}&action=dispose`;
         }

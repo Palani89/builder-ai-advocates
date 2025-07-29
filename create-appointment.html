@@ -22,7 +22,7 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="stylesheet" href="client/global.css" />
 
     <style>
@@ -459,7 +459,10 @@
               </span>
             </nav>
             <h1 class="page-title">
-              <i class="fas fa-calendar-plus" style="color: var(--primary); margin-right: 0.75rem;"></i>
+              <i
+                class="fas fa-calendar-plus"
+                style="color: var(--primary); margin-right: 0.75rem"
+              ></i>
               Create New Appointment
             </h1>
             <p class="page-subtitle">
@@ -468,7 +471,10 @@
           </div>
 
           <div class="page-actions">
-            <button class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+            <button
+              class="btn btn-secondary"
+              onclick="window.location.href='calendar.html'"
+            >
               <i class="fas fa-arrow-left"></i>
               Back to Calendar
             </button>
@@ -486,14 +492,26 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Appointment Title <span class="required">*</span></label>
-                  <input type="text" class="form-input" name="appointment_title" placeholder="e.g., Client Consultation, Document Review" required>
+                  <label class="form-label"
+                    >Appointment Title <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="appointment_title"
+                    placeholder="e.g., Client Consultation, Document Review"
+                    required
+                  />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Appointment Type <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Appointment Type <span class="required">*</span></label
+                  >
                   <select class="form-select" name="appointment_type" required>
                     <option value="">Select Appointment Type</option>
-                    <option value="Client Consultation">Client Consultation</option>
+                    <option value="Client Consultation">
+                      Client Consultation
+                    </option>
                     <option value="Document Review">Document Review</option>
                     <option value="Case Discussion">Case Discussion</option>
                     <option value="Client Meeting">Client Meeting</option>
@@ -532,20 +550,48 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Appointment Date <span class="required">*</span></label>
-                  <input type="date" class="form-input" name="appointment_date" required>
+                  <label class="form-label"
+                    >Appointment Date <span class="required">*</span></label
+                  >
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="appointment_date"
+                    required
+                  />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Start Time <span class="required">*</span></label>
-                  <input type="time" class="form-input" name="start_time" required>
+                  <label class="form-label"
+                    >Start Time <span class="required">*</span></label
+                  >
+                  <input
+                    type="time"
+                    class="form-input"
+                    name="start_time"
+                    required
+                  />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">End Time <span class="required">*</span></label>
-                  <input type="time" class="form-input" name="end_time" required>
+                  <label class="form-label"
+                    >End Time <span class="required">*</span></label
+                  >
+                  <input
+                    type="time"
+                    class="form-input"
+                    name="end_time"
+                    required
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Duration (minutes)</label>
-                  <input type="number" class="form-input" name="duration" placeholder="e.g., 60" min="15" max="480">
+                  <input
+                    type="number"
+                    class="form-input"
+                    name="duration"
+                    placeholder="e.g., 60"
+                    min="15"
+                    max="480"
+                  />
                 </div>
               </div>
             </div>
@@ -558,7 +604,9 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Meeting Location <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Meeting Location <span class="required">*</span></label
+                  >
                   <select class="form-select" name="location_type" required>
                     <option value="">Select Location Type</option>
                     <option value="Office">Office</option>
@@ -571,15 +619,30 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">Specific Address/Details</label>
-                  <textarea class="form-textarea" name="location_details" rows="2" placeholder="Full address or meeting link/details..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="location_details"
+                    rows="2"
+                    placeholder="Full address or meeting link/details..."
+                  ></textarea>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Contact Person</label>
-                  <input type="text" class="form-input" name="contact_person" placeholder="Primary contact for this appointment">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="contact_person"
+                    placeholder="Primary contact for this appointment"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Contact Number</label>
-                  <input type="tel" class="form-input" name="contact_number" placeholder="+91 XXXXX XXXXX">
+                  <input
+                    type="tel"
+                    class="form-input"
+                    name="contact_number"
+                    placeholder="+91 XXXXX XXXXX"
+                  />
                 </div>
               </div>
             </div>
@@ -596,17 +659,31 @@
                   <select class="form-select" name="related_case">
                     <option value="">Select Related Case (Optional)</option>
                     <option value="1">State vs. John Doe - CC/1234/2024</option>
-                    <option value="2">Smith Property Dispute - CS/5678/2024</option>
-                    <option value="3">ABC vs. XYZ Industries - CS/9876/2024</option>
+                    <option value="2">
+                      Smith Property Dispute - CS/5678/2024
+                    </option>
+                    <option value="3">
+                      ABC vs. XYZ Industries - CS/9876/2024
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Client Name</label>
-                  <input type="text" class="form-input" name="client_name" placeholder="Client associated with this appointment">
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="client_name"
+                    placeholder="Client associated with this appointment"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Client Email</label>
-                  <input type="email" class="form-input" name="client_email" placeholder="client@email.com">
+                  <input
+                    type="email"
+                    class="form-input"
+                    name="client_email"
+                    placeholder="client@email.com"
+                  />
                 </div>
                 <div class="form-group">
                   <label class="form-label">Billing Status</label>
@@ -630,28 +707,54 @@
                   <label class="form-label">Lead Advocate</label>
                   <select class="form-select" name="lead_advocate">
                     <option value="">Select Lead Advocate</option>
-                    <option value="priya_sharma">Priya Sharma (Senior Advocate)</option>
-                    <option value="rajesh_kumar">Rajesh Kumar (Senior Advocate)</option>
-                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
-                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
+                    <option value="priya_sharma">
+                      Priya Sharma (Senior Advocate)
+                    </option>
+                    <option value="rajesh_kumar">
+                      Rajesh Kumar (Senior Advocate)
+                    </option>
+                    <option value="amit_jain">
+                      Amit Jain (Junior Advocate)
+                    </option>
+                    <option value="neha_gupta">
+                      Neha Gupta (Junior Advocate)
+                    </option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Additional Team Members</label>
                   <select class="form-select" name="team_members" multiple>
-                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
-                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
-                    <option value="suresh_patel">Suresh Patel (Case Researcher)</option>
+                    <option value="amit_jain">
+                      Amit Jain (Junior Advocate)
+                    </option>
+                    <option value="neha_gupta">
+                      Neha Gupta (Junior Advocate)
+                    </option>
+                    <option value="suresh_patel">
+                      Suresh Patel (Case Researcher)
+                    </option>
                     <option value="ravi_singh">Ravi Singh (Paralegal)</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">External Participants</label>
-                  <textarea class="form-textarea" name="external_participants" rows="2" placeholder="List any external participants (witnesses, experts, etc.)"></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="external_participants"
+                    rows="2"
+                    placeholder="List any external participants (witnesses, experts, etc.)"
+                  ></textarea>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Meeting Organizer</label>
-                  <input type="text" class="form-input" name="organizer" placeholder="Who is organizing this meeting?" value="Current User" readonly>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="organizer"
+                    placeholder="Who is organizing this meeting?"
+                    value="Current User"
+                    readonly
+                  />
                 </div>
               </div>
             </div>
@@ -663,20 +766,35 @@
                 <span class="section-title">Agenda & Additional Notes</span>
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Meeting Agenda</label>
-                  <textarea class="form-textarea" name="agenda" rows="4" placeholder="What will be discussed in this appointment?
+                  <textarea
+                    class="form-textarea"
+                    name="agenda"
+                    rows="4"
+                    placeholder="What will be discussed in this appointment?
 • Point 1
 • Point 2
-• Point 3"></textarea>
+• Point 3"
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Preparation Required</label>
-                  <textarea class="form-textarea" name="preparation" rows="3" placeholder="What needs to be prepared before this meeting?"></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="preparation"
+                    rows="3"
+                    placeholder="What needs to be prepared before this meeting?"
+                  ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
+                <div class="form-group" style="grid-column: 1 / -1">
                   <label class="form-label">Additional Notes</label>
-                  <textarea class="form-textarea" name="notes" rows="3" placeholder="Any additional notes or instructions..."></textarea>
+                  <textarea
+                    class="form-textarea"
+                    name="notes"
+                    rows="3"
+                    placeholder="Any additional notes or instructions..."
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -732,15 +850,27 @@
 
           <!-- Form Actions -->
           <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="window.location.href='calendar.html'"
+            >
               <i class="fas fa-times"></i>
               Cancel
             </button>
-            <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="saveDraft()"
+            >
               <i class="fas fa-save"></i>
               Save as Draft
             </button>
-            <button type="submit" class="btn btn-primary" form="createAppointmentForm">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              form="createAppointmentForm"
+            >
               <i class="fas fa-calendar-plus"></i>
               Create Appointment
             </button>
@@ -780,22 +910,27 @@
         // Set default date to today
         const today = new Date();
         today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-        $('input[name="appointment_date"]').val(today.toISOString().split('T')[0]);
+        $('input[name="appointment_date"]').val(
+          today.toISOString().split("T")[0],
+        );
 
         // Set default start time to current hour
         const currentHour = new Date().getHours();
-        const defaultStartTime = String(currentHour).padStart(2, '0') + ':00';
+        const defaultStartTime = String(currentHour).padStart(2, "0") + ":00";
         $('input[name="start_time"]').val(defaultStartTime);
-        
+
         // Set default end time to 1 hour later
         const endHour = (currentHour + 1) % 24;
-        const defaultEndTime = String(endHour).padStart(2, '0') + ':00';
+        const defaultEndTime = String(endHour).padStart(2, "0") + ":00";
         $('input[name="end_time"]').val(defaultEndTime);
 
         // Calculate duration when times change
-        $('input[name="start_time"], input[name="end_time"]').on('change', function() {
-          calculateDuration();
-        });
+        $('input[name="start_time"], input[name="end_time"]').on(
+          "change",
+          function () {
+            calculateDuration();
+          },
+        );
 
         // Navigation
         $(".nav-item").on("click", function (e) {
@@ -817,7 +952,7 @@
         });
 
         // Auto-populate client details when case is selected
-        $('select[name="related_case"]').on('change', function() {
+        $('select[name="related_case"]').on("change", function () {
           const caseId = $(this).val();
           if (caseId) {
             populateClientDetails(caseId);
@@ -828,11 +963,11 @@
       function calculateDuration() {
         const startTime = $('input[name="start_time"]').val();
         const endTime = $('input[name="end_time"]').val();
-        
+
         if (startTime && endTime) {
-          const start = new Date('2024-01-01 ' + startTime);
-          const end = new Date('2024-01-01 ' + endTime);
-          
+          const start = new Date("2024-01-01 " + startTime);
+          const end = new Date("2024-01-01 " + endTime);
+
           if (end > start) {
             const durationMs = end - start;
             const durationMinutes = Math.round(durationMs / (1000 * 60));
@@ -844,9 +979,9 @@
       function populateClientDetails(caseId) {
         // Sample case data mapping
         const caseData = {
-          '1': { client: 'John Doe', email: 'johndoe@email.com' },
-          '2': { client: 'Mr. Smith', email: 'smith@email.com' },
-          '3': { client: 'ABC Corporation', email: 'contact@abc.com' }
+          1: { client: "John Doe", email: "johndoe@email.com" },
+          2: { client: "Mr. Smith", email: "smith@email.com" },
+          3: { client: "ABC Corporation", email: "contact@abc.com" },
         };
 
         if (caseData[caseId]) {
@@ -857,12 +992,16 @@
 
       function saveAppointment() {
         // Get form data
-        const form = $('#createAppointmentForm')[0];
+        const form = $("#createAppointmentForm")[0];
         const formData = new FormData(form);
 
         // Basic validation
-        if (!formData.get('appointment_title') || !formData.get('appointment_date') || !formData.get('start_time')) {
-          alert('Please fill in all required fields');
+        if (
+          !formData.get("appointment_title") ||
+          !formData.get("appointment_date") ||
+          !formData.get("start_time")
+        ) {
+          alert("Please fill in all required fields");
           return;
         }
 
@@ -889,15 +1028,15 @@
 
       function saveDraft() {
         // Save as draft functionality
-        const form = $('#createAppointmentForm')[0];
+        const form = $("#createAppointmentForm")[0];
         const formData = new FormData(form);
-        
+
         // Add draft status
         const draftData = {};
         for (let [key, value] of formData.entries()) {
           draftData[key] = value;
         }
-        draftData.status = 'Draft';
+        draftData.status = "Draft";
         draftData.saved_as_draft = new Date().toISOString();
 
         console.log("Draft saved:", draftData);
@@ -905,7 +1044,12 @@
       }
 
       function generateAppointmentId() {
-        return "APT_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
+        return (
+          "APT_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 5).toUpperCase()
+        );
       }
 
       // Side menu functions

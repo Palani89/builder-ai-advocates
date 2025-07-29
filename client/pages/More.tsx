@@ -36,13 +36,13 @@ export default function More() {
   return (
     <div>
       {/* Side Menu Overlay */}
-      <div 
-        className={`side-menu-overlay ${sideMenuOpen ? 'show' : ''}`} 
+      <div
+        className={`side-menu-overlay ${sideMenuOpen ? "show" : ""}`}
         onClick={closeSideMenu}
       ></div>
 
       {/* Side Menu */}
-      <div className={`side-menu ${sideMenuOpen ? 'open' : ''}`}>
+      <div className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <div className="side-menu-logo">
             <div className="logo-icon">
@@ -50,7 +50,9 @@ export default function More() {
             </div>
             <div>
               <span className="logo-text">AI Advocates</span>
-              <div className="side-menu-subtitle">Legal Practice Management</div>
+              <div className="side-menu-subtitle">
+                Legal Practice Management
+              </div>
             </div>
           </div>
           <button className="side-menu-close" onClick={closeSideMenu}>
@@ -144,37 +146,55 @@ export default function More() {
           <div className="feature-section">
             <h2 className="section-title">Quick Actions</h2>
             <div className="feature-grid">
-              <div className="feature-card" onClick={() => handleFeatureClick("Add Article")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Add Article")}
+              >
                 <div className="feature-icon primary">
                   <i className="fas fa-file-alt"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Add Article</div>
-                  <div className="feature-description">Create new legal articles</div>
+                  <div className="feature-description">
+                    Create new legal articles
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Add Hearing")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Add Hearing")}
+              >
                 <div className="feature-icon success">
                   <i className="fas fa-calendar-plus"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Add Hearing</div>
-                  <div className="feature-description">Schedule court hearings</div>
+                  <div className="feature-description">
+                    Schedule court hearings
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Create Invoice")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Create Invoice")}
+              >
                 <div className="feature-icon warning">
                   <i className="fas fa-file-invoice"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Create Invoice</div>
-                  <div className="feature-description">Generate client invoices</div>
+                  <div className="feature-description">
+                    Generate client invoices
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Ask AI")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Ask AI")}
+              >
                 <div className="feature-icon blue">
                   <i className="fas fa-robot"></i>
                 </div>
@@ -192,17 +212,25 @@ export default function More() {
           <div className="feature-section">
             <h2 className="section-title">Tools & Resources</h2>
             <div className="tools-grid">
-              <div className="feature-card" onClick={() => handleFeatureClick("Legal Research")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Legal Research")}
+              >
                 <div className="feature-icon error">
                   <i className="fas fa-search"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Legal Research</div>
-                  <div className="feature-description">Case laws & statutes</div>
+                  <div className="feature-description">
+                    Case laws & statutes
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Legal Templates")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Legal Templates")}
+              >
                 <div className="feature-icon purple">
                   <i className="fas fa-file-contract"></i>
                 </div>
@@ -212,7 +240,10 @@ export default function More() {
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("File Upload")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("File Upload")}
+              >
                 <div className="feature-icon indigo">
                   <i className="fas fa-upload"></i>
                 </div>
@@ -228,7 +259,10 @@ export default function More() {
           <div className="feature-section">
             <h2 className="section-title">Settings & Support</h2>
             <div className="tools-grid">
-              <div className="feature-card" onClick={() => handleFeatureClick("Settings")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Settings")}
+              >
                 <div className="feature-icon primary">
                   <i className="fas fa-cog"></i>
                 </div>
@@ -238,7 +272,10 @@ export default function More() {
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Notifications")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Notifications")}
+              >
                 <div className="feature-icon warning">
                   <i className="fas fa-bell"></i>
                 </div>
@@ -248,7 +285,10 @@ export default function More() {
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Privacy & Security")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Privacy & Security")}
+              >
                 <div className="feature-icon pink">
                   <i className="fas fa-shield-alt"></i>
                 </div>
@@ -258,7 +298,10 @@ export default function More() {
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Help & Support")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Help & Support")}
+              >
                 <div className="feature-icon green">
                   <i className="fas fa-question-circle"></i>
                 </div>
@@ -274,43 +317,63 @@ export default function More() {
           <div className="feature-section">
             <h2 className="section-title">Financial & Analytics</h2>
             <div className="feature-grid">
-              <div className="feature-card" onClick={() => handleFeatureClick("Billing & Payments")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Billing & Payments")}
+              >
                 <div className="feature-icon pink">
                   <i className="fas fa-credit-card"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Billing & Payments</div>
-                  <div className="feature-description">Invoice & fee tracking</div>
+                  <div className="feature-description">
+                    Invoice & fee tracking
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Analytics")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Analytics")}
+              >
                 <div className="feature-icon blue">
                   <i className="fas fa-chart-bar"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Analytics</div>
-                  <div className="feature-description">Performance insights</div>
+                  <div className="feature-description">
+                    Performance insights
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Team Analytics")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Team Analytics")}
+              >
                 <div className="feature-icon purple">
                   <i className="fas fa-users"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Team Analytics</div>
-                  <div className="feature-description">Team performance metrics</div>
+                  <div className="feature-description">
+                    Team performance metrics
+                  </div>
                 </div>
               </div>
 
-              <div className="feature-card" onClick={() => handleFeatureClick("Time Tracking")}>
+              <div
+                className="feature-card"
+                onClick={() => handleFeatureClick("Time Tracking")}
+              >
                 <div className="feature-icon orange">
                   <i className="fas fa-clock"></i>
                 </div>
                 <div className="feature-info">
                   <div className="feature-title">Time Tracking</div>
-                  <div className="feature-description">Track billable hours</div>
+                  <div className="feature-description">
+                    Track billable hours
+                  </div>
                 </div>
               </div>
             </div>
