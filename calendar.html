@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item active">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+          <div class="page-header">
+            <div class="page-title-section">
+              <h1>Calendar</h1>
+
+              <!-- Breadcrumb -->
+              <nav class="breadcrumb">
+                <a href="home.html" class="breadcrumb-item">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
+                <span class="breadcrumb-separator">
+                  <i class="fas fa-chevron-right"></i>
+                </span>
+                <span class="breadcrumb-item active">
+                  <i class="fas fa-calendar"></i>
+                  Calendar
+                </span>
+              </nav>
+
+              <p class="page-subtitle">Hearings & Appointments</p>
+            </div>
+          </div>
+
+          <!-- Calendar Navigation -->
+          <div class="calendar-nav">
+            <div class="month-nav">
+              <button class="nav-btn" onclick="previousMonth()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="month-year" id="currentMonth">January 2024</div>
+              <button class="nav-btn" onclick="nextMonth()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="calendar-actions">
+              <button class="action-btn create-appointment-btn" onclick="openCreateAppointmentModal()">
+                Create Appointment
+              </button>
+              <button class="action-btn create-hearing-btn" onclick="openCreateHearingModal()">
+                Create Hearings
+              </button>
+            </div>
+          </div>
+
+          <!-- Calendar Note -->
+          <div
+            class="calendar-note"
+            style="
+              text-align: center;
+              margin-bottom: 1rem;
+              font-size: 0.875rem;
+              color: var(--text-secondary);
+            "
+          >
+            Click on any date to view or add hearings
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid">
+            <!-- Calendar Headers -->
+            <div class="calendar-header">Sun</div>
+            <div class="calendar-header">Mon</div>
+            <div class="calendar-header">Tue</div>
+            <div class="calendar-header">Wed</div>
+            <div class="calendar-header">Thu</div>
+            <div class="calendar-header">Fri</div>
+            <div class="calendar-header">Sat</div>
+
+            <!-- Calendar Days -->
+            <div class="calendar-day other-month">
+              <div class="day-number">31</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(1)">
+              <div class="day-number">1</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(2)">
+              <div class="day-number">2</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(3)">
+              <div class="day-number">3</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(4)">
+              <div class="day-number">4</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(5)">
+              <div class="day-number">5</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(6)">
+              <div class="day-number">6</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(7)">
+              <div class="day-number">7</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(8)">
+              <div class="day-number">8</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(9)">
+              <div class="day-number">9</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(10)">
+              <div class="day-number">10</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(11)">
+              <div class="day-number">11</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(12)">
+              <div class="day-number">12</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(13)">
+              <div class="day-number">13</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(14)">
+              <div class="day-number">14</div>
+            </div>
+            <div class="calendar-day selected" onclick="handleDayClick(15)">
+              <div class="day-number">15</div>
+              <div class="day-events">
+                <div class="event-dot hearing"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(16)">
+              <div class="day-number">16</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+                <div class="event-dot appointment"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(17)">
+              <div class="day-number">17</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(18)">
+              <div class="day-number">18</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(19)">
+              <div class="day-number">19</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(20)">
+              <div class="day-number">20</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(21)">
+              <div class="day-number">21</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(22)">
+              <div class="day-number">22</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(23)">
+              <div class="day-number">23</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(24)">
+              <div class="day-number">24</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(25)">
+              <div class="day-number">25</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(26)">
+              <div class="day-number">26</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(27)">
+              <div class="day-number">27</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(28)">
+              <div class="day-number">28</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(29)">
+              <div class="day-number">29</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(30)">
+              <div class="day-number">30</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(31)">
+              <div class="day-number">31</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">1</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">2</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">3</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Today's Events -->
+          <div class="sidebar-section">
+            <div class="sidebar-header">
+              <div class="sidebar-title">Hearings</div>
+              <div class="date-info" id="selectedDate">January 15, 2024</div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active" onclick="switchTab('hearings')">Hearings</button>
+              <button class="tab" onclick="switchTab('appointments')">Appointments</button>
+            </div>
+
+            <div class="event-list">
+              <!-- Event 1 -->
+              <div class="event-item confirmed">
+                <div class="event-header">
+                  <div class="event-title">State vs. John Doe</div>
+                  <span class="event-status confirmed">Confirmed</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  10:30 AM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  District Court Room 3
+                </div>
+                <div class="event-judge">Hon'ble Justice A.K. Sharma</div>
+                <span class="event-type">Criminal</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+
+              <!-- Event 2 -->
+              <div class="event-item tentative">
+                <div class="event-header">
+                  <div class="event-title">Smith Property Dispute</div>
+                  <span class="event-status tentative">Tentative</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  2:00 PM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  High Court Room 12
+                </div>
+                <div class="event-judge">Hon'ble Justice B.K. Patel</div>
+                <span class="event-type">Civil</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+
+              <!-- Event 3 -->
+              <div class="event-item confirmed">
+                <div class="event-header">
+                  <div class="event-title">ABC Corp Merger</div>
+                  <span class="event-status confirmed">Confirmed</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  11:00 AM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  NCLT Chamber 2
+                </div>
+                <div class="event-judge">Hon'ble Justice C.R. Singh</div>
+                <span class="event-type">Corporate</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item active">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Hearing Modal -->
+    <div class="modal-overlay" id="createHearingModal" style="display: none;">
+      <div class="modal-content create-hearing-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-gavel"></i> Create New Hearing</h3>
+          <button class="modal-close" onclick="closeCreateHearingModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="createHearingForm">
+            <!-- Section 1: Basic Case & Court Info -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-folder section-icon"></i>
+                <h4 class="section-title">✅ Basic Case & Court Info</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Case ID / Reference No. <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="case_id" placeholder="e.g., CC/1234/2024" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Title <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="case_title" placeholder="e.g., Amit Kumar vs State of Karnataka" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Court Name <span class="required">*</span></label>
+                  <select class="form-select" name="court_name" required>
+                    <option value="">Select Court</option>
+                    <option value="Supreme Court of India">Supreme Court of India</option>
+                    <option value="Delhi High Court">Delhi High Court</option>
+                    <option value="Bombay High Court">Bombay High Court</option>
+                    <option value="Madras High Court">Madras High Court</option>
+                    <option value="Calcutta High Court">Calcutta High Court</option>
+                    <option value="Karnataka High Court">Karnataka High Court</option>
+                    <option value="Delhi District Court">Delhi District Court</option>
+                    <option value="Mumbai District Court">Mumbai District Court</option>
+                    <option value="Chennai District Court">Chennai District Court</option>
+                    <option value="Bangalore District Court">Bangalore District Court</option>
+                    <option value="Other">Other (Specify in remarks)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bench / Judge Name</label>
+                  <input type="text" class="form-input" name="judge_name" placeholder="Hon'ble Justice XYZ">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Type <span class="required">*</span></label>
+                  <select class="form-select" name="case_type" required>
+                    <option value="">Select Type</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Criminal">Criminal</option>
+                    <option value="Family">Family</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Constitutional">Constitutional</option>
+                    <option value="Tax">Tax</option>
+                    <option value="Labor">Labor</option>
+                    <option value="Property">Property</option>
+                    <option value="Consumer">Consumer</option>
+                    <option value="Environmental">Environmental</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Stage</label>
+                  <select class="form-select" name="case_stage">
+                    <option value="">Select Stage</option>
+                    <option value="Filing">Filing</option>
+                    <option value="Framing of Charges">Framing of Charges</option>
+                    <option value="Evidence">Evidence</option>
+                    <option value="Cross Examination">Cross Examination</option>
+                    <option value="Argument">Argument</option>
+                    <option value="Final Hearing">Final Hearing</option>
+                    <option value="Judgment">Judgment</option>
+                    <option value="Appeal">Appeal</option>
+                    <option value="Execution">Execution</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Hearing Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-calendar section-icon"></i>
+                <h4 class="section-title">📅 Hearing Details</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Hearing Date <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="hearing_date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="hearing_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Mode <span class="required">*</span></label>
+                  <select class="form-select" name="hearing_mode" required onchange="toggleVCLink(this.value)">
+                    <option value="">Select Mode</option>
+                    <option value="Physical">Physical</option>
+                    <option value="Video Conference">Video Conference</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+                <div class="form-group" id="courtHallGroup">
+                  <label class="form-label">Court Hall No.</label>
+                  <input type="text" class="form-input" name="court_hall" placeholder="e.g., Court Room 7">
+                </div>
+                <div class="form-group" id="vcLinkGroup" style="display: none;">
+                  <label class="form-label">Video Conference Link</label>
+                  <input type="url" class="form-input" name="vc_link" placeholder="https://zoom.us/j/123456789">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Purpose</label>
+                  <select class="form-select" name="hearing_purpose">
+                    <option value="">Select Purpose</option>
+                    <option value="Evidence Submission">Evidence Submission</option>
+                    <option value="Cross Examination">Cross Examination</option>
+                    <option value="Witness Examination">Witness Examination</option>
+                    <option value="Arguments">Arguments</option>
+                    <option value="Bail Application">Bail Application</option>
+                    <option value="Status Report">Status Report</option>
+                    <option value="Interim Order">Interim Order</option>
+                    <option value="Final Arguments">Final Arguments</option>
+                    <option value="Judgment Pronouncement">Judgment Pronouncement</option>
+                    <option value="Case Management">Case Management</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Status</label>
+                  <select class="form-select" name="hearing_status">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Adjourned">Adjourned</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Remarks / Notes</label>
+                  <textarea class="form-textarea" name="remarks" rows="3" placeholder="Additional notes about the hearing..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: People Involved -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-users section-icon"></i>
+                <h4 class="section-title">👥 People Involved</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Petitioner Name(s)</label>
+                  <textarea class="form-textarea" name="petitioners" rows="2" placeholder="Enter petitioner names (one per line)"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Respondent Name(s)</label>
+                  <textarea class="form-textarea" name="respondents" rows="2" placeholder="Enter respondent names (one per line)"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Lead Advocate Name</label>
+                  <input type="text" class="form-input" name="lead_advocate" placeholder="Senior Advocate representing the case">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Opposing Advocate Name(s)</label>
+                  <input type="text" class="form-input" name="opposing_advocates" placeholder="Opposing counsel names">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Witness Name(s) (if applicable)</label>
+                  <textarea class="form-textarea" name="witnesses" rows="2" placeholder="Enter witness names (one per line)"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Optional Features -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-bell section-icon"></i>
+                <h4 class="section-title">🔔 Optional (Automation)</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Enable SMS/WhatsApp Reminder?</label>
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="enable_reminder" value="yes"> Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="enable_reminder" value="no" checked> No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Attach Documents for Hearing?</label>
+                  <div class="file-upload">
+                    <input type="file" name="hearing_documents" multiple accept=".pdf,.doc,.docx,.jpg,.png">
+                    <div class="file-upload-btn">
+                      <i class="fas fa-upload"></i>
+                      Choose Files (PDF, DOC, Images)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateHearingModal()">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveHearing()">
+            <i class="fas fa-save"></i> Create Hearing
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Appointment Modal -->
+    <div class="modal-overlay" id="createAppointmentModal" style="display: none;">
+      <div class="modal-content create-appointment-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-calendar-plus"></i> Create New Appointment</h3>
+          <button class="modal-close" onclick="closeCreateAppointmentModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="createAppointmentForm">
+            <!-- Section 1: Basic Appointment Info -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-info-circle section-icon"></i>
+                <h4 class="section-title">✅ Basic Appointment Info</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment ID</label>
+                  <input type="text" class="form-input" name="appointment_id" readonly placeholder="Auto-generated">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client / Petitioner Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="client_name" placeholder="Full name of client" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Phone Number <span class="required">*</span></label>
+                  <input type="tel" class="form-input" name="client_phone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Email <span class="required">*</span></label>
+                  <input type="email" class="form-input" name="client_email" placeholder="client@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Advocate Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="advocate_name" placeholder="Lead advocate handling appointment" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Related Case ID / Case Title</label>
+                  <input type="text" class="form-input" name="related_case" placeholder="Link to existing case (optional)">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Appointment Purpose <span class="required">*</span></label>
+                  <select class="form-select" name="appointment_purpose" required>
+                    <option value="">Select Purpose</option>
+                    <option value="Legal Consultation">Legal Consultation</option>
+                    <option value="Document Review">Document Review</option>
+                    <option value="Case Update">Case Update</option>
+                    <option value="Contract Drafting">Contract Drafting</option>
+                    <option value="Legal Advice">Legal Advice</option>
+                    <option value="Court Preparation">Court Preparation</option>
+                    <option value="Settlement Discussion">Settlement Discussion</option>
+                    <option value="Document Signing">Document Signing</option>
+                    <option value="Follow-up Meeting">Follow-up Meeting</option>
+                    <option value="Other">Other (Specify in remarks)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Appointment Schedule -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-calendar section-icon"></i>
+                <h4 class="section-title">📅 Appointment Schedule</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment Date <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="appointment_date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Start Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="start_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">End Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="end_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Duration (minutes)</label>
+                  <select class="form-select" name="duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60" selected>60 minutes</option>
+                    <option value="90">90 minutes</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Appointment Status</label>
+                  <select class="form-select" name="appointment_status">
+                    <option value="Scheduled" selected>Scheduled</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="No Show">No Show</option>
+                    <option value="Rescheduled">Rescheduled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mode of Appointment <span class="required">*</span></label>
+                  <select class="form-select" name="appointment_mode" required onchange="toggleAppointmentMode(this.value)">
+                    <option value="">Select Mode</option>
+                    <option value="In-Person">In-Person</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Video Call">Video Call</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Location Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-map-marker-alt section-icon"></i>
+                <h4 class="section-title">📍 Location Details</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" id="meetingLocationGroup">
+                  <label class="form-label">Meeting Location</label>
+                  <select class="form-select" name="meeting_location">
+                    <option value="">Select Location</option>
+                    <option value="Advocate's Office">Advocate's Office</option>
+                    <option value="Court Premises">Court Premises</option>
+                    <option value="Client Location">Client Location</option>
+                    <option value="Other">Other (Specify in remarks)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="advocateOfficeGroup">
+                  <label class="form-label">Advocate's Office Address</label>
+                  <textarea class="form-textarea" name="office_address" rows="2" placeholder="Office address details"></textarea>
+                </div>
+                <div class="form-group" id="courtPremisesGroup" style="display: none;">
+                  <label class="form-label">Court Premises Details</label>
+                  <input type="text" class="form-input" name="court_premises" placeholder="Court name and room details">
+                </div>
+                <div class="form-group" id="clientLocationGroup" style="display: none;">
+                  <label class="form-label">Client Location Address</label>
+                  <textarea class="form-textarea" name="client_location" rows="2" placeholder="Client's address details"></textarea>
+                </div>
+                <div class="form-group" id="vcLinkAppointmentGroup" style="display: none;">
+                  <label class="form-label">Video Call Link</label>
+                  <input type="url" class="form-input" name="vc_link_appointment" placeholder="https://zoom.us/j/123456789 or Meet link">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Additional Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-clipboard section-icon"></i>
+                <h4 class="section-title">📝 Additional Details</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label">Remarks / Notes</label>
+                  <textarea class="form-textarea" name="appointment_remarks" rows="3" placeholder="Questions to be addressed, documents to bring, agenda items, etc."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fee for Appointment</label>
+                  <input type="number" class="form-input" name="appointment_fee" placeholder="0" min="0" step="100">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Payment Status</label>
+                  <select class="form-select" name="payment_status">
+                    <option value="Unpaid" selected>Unpaid</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Partially Paid">Partially Paid</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Attach Documents</label>
+                  <div class="file-upload">
+                    <input type="file" name="appointment_documents" multiple accept=".pdf,.doc,.docx,.jpg,.png">
+                    <div class="file-upload-btn">
+                      <i class="fas fa-upload"></i>
+                      Choose Files (PDF, DOC, Images)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Reminders & Notifications -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-bell section-icon"></i>
+                <h4 class="section-title">🔔 Reminders & Notifications</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Send Reminder To Client?</label>
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="send_reminder" value="yes" checked> Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="send_reminder" value="no"> No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Reminder Time</label>
+                  <select class="form-select" name="reminder_time">
+                    <option value="1 hour before">1 hour before</option>
+                    <option value="2 hours before">2 hours before</option>
+                    <option value="4 hours before">4 hours before</option>
+                    <option value="1 day before" selected>1 day before</option>
+                    <option value="2 days before">2 days before</option>
+                    <option value="1 week before">1 week before</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Notification Mode</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_sms" checked> SMS
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_whatsapp" checked> WhatsApp
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_email" checked> Email
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_inapp"> In-app
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateAppointmentModal()">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveAppointment()">
+            <i class="fas fa-save"></i> Create Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Global variables
+      let currentMonth = "January 2024";
+      let selectedDate = "January 15, 2024";
+      let activeTab = "hearings";
+
+      // Side menu functions
+      function openSideMenu() {
+        document.getElementById("sideMenu").classList.add("open");
+        document.getElementById("sideMenuOverlay").classList.add("show");
+      }
+
+      function closeSideMenu() {
+        document.getElementById("sideMenu").classList.remove("open");
+        document.getElementById("sideMenuOverlay").classList.remove("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Calendar functions
+      function handleDayClick(day) {
+        // Remove selected class from all days
+        document.querySelectorAll('.calendar-day').forEach(dayEl => {
+          dayEl.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked day
+        event.currentTarget.classList.add('selected');
+        
+        // Update selected date
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+        const currentMonthName = currentMonth.split(" ")[0];
+        const currentYear = currentMonth.split(" ")[1];
+        selectedDate = `${currentMonthName} ${day}, ${currentYear}`;
+        
+        document.getElementById('selectedDate').textContent = selectedDate;
+      }
+
+      function switchTab(tab) {
+        // Update active tab
+        activeTab = tab;
+        
+        // Update tab buttons
+        document.querySelectorAll('.tab').forEach(tabEl => {
+          tabEl.classList.remove('active');
+        });
+        
+        event.target.classList.add('active');
+      }
+
+      function previousMonth() {
+        console.log("Previous month");
+        // Implement month navigation logic
+      }
+
+      function nextMonth() {
+        console.log("Next month");
+        // Implement month navigation logic
+      }
+
+      // Create Hearing Modal Functions
+      function openCreateHearingModal() {
+        document.getElementById("createHearingModal").style.display = "flex";
+
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.querySelector('input[name="hearing_date"]').value = tomorrow.toISOString().split('T')[0];
+
+        // Set default time
+        document.querySelector('input[name="hearing_time"]').value = "10:30";
+      }
+
+      function closeCreateHearingModal() {
+        document.getElementById("createHearingModal").style.display = "none";
+        document.getElementById("createHearingForm").reset();
+      }
+
+      function toggleVCLink(mode) {
+        const courtHallGroup = document.getElementById('courtHallGroup');
+        const vcLinkGroup = document.getElementById('vcLinkGroup');
+
+        if (mode === 'Video Conference') {
+          courtHallGroup.style.display = 'none';
+          vcLinkGroup.style.display = 'block';
+        } else if (mode === 'Hybrid') {
+          courtHallGroup.style.display = 'block';
+          vcLinkGroup.style.display = 'block';
+        } else {
+          courtHallGroup.style.display = 'block';
+          vcLinkGroup.style.display = 'none';
+        }
+      }
+
+      function saveHearing() {
+        const form = document.getElementById('createHearingForm');
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = ['case_id', 'case_title', 'court_name', 'case_type', 'hearing_date', 'hearing_time', 'hearing_mode'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (!formData.get(field)) {
+            isValid = false;
+            const input = form.querySelector(`[name="${field}"]`);
+            if (input) {
+              input.style.borderColor = 'var(--error)';
+              setTimeout(() => {
+                input.style.borderColor = '';
+              }, 3000);
+            }
+          }
+        });
+
+        if (!isValid) {
+          alert('Please fill in all required fields marked with *');
+          return;
+        }
+
+        // Create hearing object
+        const hearingData = {
+          id: Date.now(),
+          case_id: formData.get('case_id'),
+          case_title: formData.get('case_title'),
+          court_name: formData.get('court_name'),
+          judge_name: formData.get('judge_name'),
+          case_type: formData.get('case_type'),
+          case_stage: formData.get('case_stage'),
+          hearing_date: formData.get('hearing_date'),
+          hearing_time: formData.get('hearing_time'),
+          hearing_mode: formData.get('hearing_mode'),
+          court_hall: formData.get('court_hall'),
+          vc_link: formData.get('vc_link'),
+          hearing_purpose: formData.get('hearing_purpose'),
+          hearing_status: formData.get('hearing_status'),
+          remarks: formData.get('remarks'),
+          petitioners: formData.get('petitioners'),
+          respondents: formData.get('respondents'),
+          lead_advocate: formData.get('lead_advocate'),
+          opposing_advocates: formData.get('opposing_advocates'),
+          witnesses: formData.get('witnesses'),
+          enable_reminder: formData.get('enable_reminder'),
+          created_at: new Date().toISOString()
+        };
+
+        console.log('Hearing created:', hearingData);
+
+        // In a real application, you would send this data to your backend
+        // For now, we'll just show a success message
+        alert('Hearing created successfully!\n\nCase: ' + hearingData.case_title + '\nDate: ' + hearingData.hearing_date + '\nTime: ' + hearingData.hearing_time + '\nCourt: ' + hearingData.court_name);
+
+        // Close modal and refresh calendar
+        closeCreateHearingModal();
+
+        // You could add the hearing to the calendar display here
+        addHearingToCalendar(hearingData);
+      }
+
+      function addHearingToCalendar(hearingData) {
+        // Add hearing to calendar display
+        const hearingDate = new Date(hearingData.hearing_date);
+        const day = hearingDate.getDate();
+
+        // Find the calendar day element and add event dot
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(dayEl => {
+          const dayNumber = dayEl.querySelector('.day-number');
+          if (dayNumber && parseInt(dayNumber.textContent) === day) {
+            let eventsContainer = dayEl.querySelector('.day-events');
+            if (!eventsContainer) {
+              eventsContainer = document.createElement('div');
+              eventsContainer.className = 'day-events';
+              dayEl.appendChild(eventsContainer);
+            }
+
+            const eventDot = document.createElement('div');
+            eventDot.className = 'event-dot';
+            if (hearingData.case_type === 'Criminal') {
+              eventDot.classList.add('hearing');
+            }
+            eventsContainer.appendChild(eventDot);
+          }
+        });
+      }
+
+      // Create Appointment Modal Functions
+      function openCreateAppointmentModal() {
+        document.getElementById("createAppointmentModal").style.display = "flex";
+
+        // Generate appointment ID
+        const appointmentId = "APT" + Date.now().toString().slice(-6);
+        document.querySelector('input[name="appointment_id"]').value = appointmentId;
+
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.querySelector('input[name="appointment_date"]').value = tomorrow.toISOString().split('T')[0];
+
+        // Set default time
+        document.querySelector('input[name="start_time"]').value = "10:00";
+        document.querySelector('input[name="end_time"]').value = "11:00";
+      }
+
+      function closeCreateAppointmentModal() {
+        document.getElementById("createAppointmentModal").style.display = "none";
+        document.getElementById("createAppointmentForm").reset();
+      }
+
+      function toggleAppointmentMode(mode) {
+        const meetingLocationGroup = document.getElementById('meetingLocationGroup');
+        const advocateOfficeGroup = document.getElementById('advocateOfficeGroup');
+        const courtPremisesGroup = document.getElementById('courtPremisesGroup');
+        const clientLocationGroup = document.getElementById('clientLocationGroup');
+        const vcLinkGroup = document.getElementById('vcLinkAppointmentGroup');
+
+        // Reset all location groups
+        meetingLocationGroup.style.display = 'block';
+        advocateOfficeGroup.style.display = 'block';
+        courtPremisesGroup.style.display = 'none';
+        clientLocationGroup.style.display = 'none';
+        vcLinkGroup.style.display = 'none';
+
+        if (mode === 'Video Call') {
+          meetingLocationGroup.style.display = 'none';
+          advocateOfficeGroup.style.display = 'none';
+          vcLinkGroup.style.display = 'block';
+        } else if (mode === 'Phone') {
+          meetingLocationGroup.style.display = 'none';
+          advocateOfficeGroup.style.display = 'none';
+        }
+      }
+
+      // Handle meeting location change
+      function handleMeetingLocationChange(location) {
+        const advocateOfficeGroup = document.getElementById('advocateOfficeGroup');
+        const courtPremisesGroup = document.getElementById('courtPremisesGroup');
+        const clientLocationGroup = document.getElementById('clientLocationGroup');
+
+        // Hide all location-specific groups
+        advocateOfficeGroup.style.display = 'none';
+        courtPremisesGroup.style.display = 'none';
+        clientLocationGroup.style.display = 'none';
+
+        // Show relevant group based on selection
+        if (location === "Advocate's Office") {
+          advocateOfficeGroup.style.display = 'block';
+        } else if (location === 'Court Premises') {
+          courtPremisesGroup.style.display = 'block';
+        } else if (location === 'Client Location') {
+          clientLocationGroup.style.display = 'block';
+        }
+      }
+
+      function saveAppointment() {
+        const form = document.getElementById('createAppointmentForm');
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = ['client_name', 'client_phone', 'client_email', 'advocate_name', 'appointment_purpose', 'appointment_date', 'start_time', 'end_time', 'appointment_mode'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (!formData.get(field)) {
+            isValid = false;
+            const input = form.querySelector(`[name="${field}"]`);
+            if (input) {
+              input.style.borderColor = 'var(--error)';
+              setTimeout(() => {
+                input.style.borderColor = '';
+              }, 3000);
+            }
+          }
+        });
+
+        if (!isValid) {
+          alert('Please fill in all required fields marked with *');
+          return;
+        }
+
+        // Validate time logic
+        const startTime = formData.get('start_time');
+        const endTime = formData.get('end_time');
+        if (startTime >= endTime) {
+          alert('End time must be after start time');
+          return;
+        }
+
+        // Collect notification preferences
+        const notifications = [];
+        if (form.querySelector('input[name="notification_sms"]').checked) notifications.push('SMS');
+        if (form.querySelector('input[name="notification_whatsapp"]').checked) notifications.push('WhatsApp');
+        if (form.querySelector('input[name="notification_email"]').checked) notifications.push('Email');
+        if (form.querySelector('input[name="notification_inapp"]').checked) notifications.push('In-app');
+
+        // Create appointment object
+        const appointmentData = {
+          id: formData.get('appointment_id'),
+          client_name: formData.get('client_name'),
+          client_phone: formData.get('client_phone'),
+          client_email: formData.get('client_email'),
+          advocate_name: formData.get('advocate_name'),
+          related_case: formData.get('related_case'),
+          appointment_purpose: formData.get('appointment_purpose'),
+          appointment_date: formData.get('appointment_date'),
+          start_time: formData.get('start_time'),
+          end_time: formData.get('end_time'),
+          duration: formData.get('duration'),
+          appointment_status: formData.get('appointment_status'),
+          appointment_mode: formData.get('appointment_mode'),
+          meeting_location: formData.get('meeting_location'),
+          office_address: formData.get('office_address'),
+          court_premises: formData.get('court_premises'),
+          client_location: formData.get('client_location'),
+          vc_link_appointment: formData.get('vc_link_appointment'),
+          appointment_remarks: formData.get('appointment_remarks'),
+          appointment_fee: formData.get('appointment_fee'),
+          payment_status: formData.get('payment_status'),
+          send_reminder: formData.get('send_reminder'),
+          reminder_time: formData.get('reminder_time'),
+          notification_modes: notifications,
+          created_at: new Date().toISOString()
+        };
+
+        console.log('Appointment created:', appointmentData);
+
+        // In a real application, you would send this data to your backend
+        // For now, we'll just show a success message
+        const appointmentDetails = `Appointment ID: ${appointmentData.id}
+Client: ${appointmentData.client_name}
+Date: ${appointmentData.appointment_date}
+Time: ${appointmentData.start_time} - ${appointmentData.end_time}
+Purpose: ${appointmentData.appointment_purpose}
+Mode: ${appointmentData.appointment_mode}
+Advocate: ${appointmentData.advocate_name}`;
+
+        alert('Appointment created successfully!\n\n' + appointmentDetails);
+
+        // Close modal and refresh calendar
+        closeCreateAppointmentModal();
+
+        // Add appointment to calendar display
+        addAppointmentToCalendar(appointmentData);
+      }
+
+      function addAppointmentToCalendar(appointmentData) {
+        // Add appointment to calendar display
+        const appointmentDate = new Date(appointmentData.appointment_date);
+        const day = appointmentDate.getDate();
+
+        // Find the calendar day element and add event dot
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(dayEl => {
+          const dayNumber = dayEl.querySelector('.day-number');
+          if (dayNumber && parseInt(dayNumber.textContent) === day) {
+            let eventsContainer = dayEl.querySelector('.day-events');
+            if (!eventsContainer) {
+              eventsContainer = document.createElement('div');
+              eventsContainer.className = 'day-events';
+              dayEl.appendChild(eventsContainer);
+            }
+
+            const eventDot = document.createElement('div');
+            eventDot.className = 'event-dot appointment';
+            eventsContainer.appendChild(eventDot);
+          }
+        });
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking overlay
+        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+
+        // Close modal when clicking overlay
+        document.getElementById('createHearingModal').addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeCreateHearingModal();
+          }
+        });
+
+        // Close appointment modal when clicking overlay
+        document.getElementById('createAppointmentModal').addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeCreateAppointmentModal();
+          }
+        });
+
+        // Add event listener for meeting location dropdown
+        const meetingLocationSelect = document.querySelector('select[name="meeting_location"]');
+        if (meetingLocationSelect) {
+          meetingLocationSelect.addEventListener('change', function() {
+            handleMeetingLocationChange(this.value);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
