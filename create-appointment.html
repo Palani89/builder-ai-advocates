@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Appointment - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item active">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-info">
+            <nav class="breadcrumb">
+              <span class="breadcrumb-item">Dashboard</span>
+              <span class="breadcrumb-item">Calendar</span>
+              <span class="breadcrumb-item">
+                <i class="fas fa-calendar-plus"></i>
+                Create Appointment
+              </span>
+            </nav>
+            <h1 class="page-title">
+              <i class="fas fa-calendar-plus" style="color: var(--primary); margin-right: 0.75rem;"></i>
+              Create New Appointment
+            </h1>
+            <p class="page-subtitle">
+              Schedule client meetings, consultations, and other appointments
+            </p>
+          </div>
+
+          <div class="page-actions">
+            <button class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+              <i class="fas fa-arrow-left"></i>
+              Back to Calendar
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+          <form id="createAppointmentForm">
+            <!-- Section 1: Basic Appointment Info -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-info-circle section-icon"></i>
+                <span class="section-title">Basic Appointment Information</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment Title <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="appointment_title" placeholder="e.g., Client Consultation, Document Review" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Appointment Type <span class="required">*</span></label>
+                  <select class="form-select" name="appointment_type" required>
+                    <option value="">Select Appointment Type</option>
+                    <option value="Client Consultation">Client Consultation</option>
+                    <option value="Document Review">Document Review</option>
+                    <option value="Case Discussion">Case Discussion</option>
+                    <option value="Client Meeting">Client Meeting</option>
+                    <option value="Witness Interview">Witness Interview</option>
+                    <option value="Legal Research">Legal Research</option>
+                    <option value="Court Visit">Court Visit</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Priority Level</label>
+                  <select class="form-select" name="priority">
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Status</label>
+                  <select class="form-select" name="status">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Tentative">Tentative</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Date & Time Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-clock section-icon"></i>
+                <span class="section-title">Date & Time Details</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment Date <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="appointment_date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Start Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="start_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">End Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="end_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Duration (minutes)</label>
+                  <input type="number" class="form-input" name="duration" placeholder="e.g., 60" min="15" max="480">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Location & Contact -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-map-marker-alt section-icon"></i>
+                <span class="section-title">Location & Contact Details</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Meeting Location <span class="required">*</span></label>
+                  <select class="form-select" name="location_type" required>
+                    <option value="">Select Location Type</option>
+                    <option value="Office">Office</option>
+                    <option value="Court">Court</option>
+                    <option value="Client Location">Client Location</option>
+                    <option value="Video Call">Video Call</option>
+                    <option value="Phone Call">Phone Call</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Specific Address/Details</label>
+                  <textarea class="form-textarea" name="location_details" rows="2" placeholder="Full address or meeting link/details..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contact Person</label>
+                  <input type="text" class="form-input" name="contact_person" placeholder="Primary contact for this appointment">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contact Number</label>
+                  <input type="tel" class="form-input" name="contact_number" placeholder="+91 XXXXX XXXXX">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Case Association -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-file-alt section-icon"></i>
+                <span class="section-title">Case Association (Optional)</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Related Case</label>
+                  <select class="form-select" name="related_case">
+                    <option value="">Select Related Case (Optional)</option>
+                    <option value="1">State vs. John Doe - CC/1234/2024</option>
+                    <option value="2">Smith Property Dispute - CS/5678/2024</option>
+                    <option value="3">ABC vs. XYZ Industries - CS/9876/2024</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Name</label>
+                  <input type="text" class="form-input" name="client_name" placeholder="Client associated with this appointment">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Email</label>
+                  <input type="email" class="form-input" name="client_email" placeholder="client@email.com">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Billing Status</label>
+                  <select class="form-select" name="billing_status">
+                    <option value="Billable">Billable</option>
+                    <option value="Non-Billable">Non-Billable</option>
+                    <option value="Pro Bono">Pro Bono</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Participants & Team -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-users section-icon"></i>
+                <span class="section-title">Participants & Team Members</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Lead Advocate</label>
+                  <select class="form-select" name="lead_advocate">
+                    <option value="">Select Lead Advocate</option>
+                    <option value="priya_sharma">Priya Sharma (Senior Advocate)</option>
+                    <option value="rajesh_kumar">Rajesh Kumar (Senior Advocate)</option>
+                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
+                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Additional Team Members</label>
+                  <select class="form-select" name="team_members" multiple>
+                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
+                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
+                    <option value="suresh_patel">Suresh Patel (Case Researcher)</option>
+                    <option value="ravi_singh">Ravi Singh (Paralegal)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">External Participants</label>
+                  <textarea class="form-textarea" name="external_participants" rows="2" placeholder="List any external participants (witnesses, experts, etc.)"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Meeting Organizer</label>
+                  <input type="text" class="form-input" name="organizer" placeholder="Who is organizing this meeting?" value="Current User" readonly>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 6: Agenda & Notes -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-list section-icon"></i>
+                <span class="section-title">Agenda & Additional Notes</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Meeting Agenda</label>
+                  <textarea class="form-textarea" name="agenda" rows="4" placeholder="What will be discussed in this appointment?
+• Point 1
+• Point 2
+• Point 3"></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Preparation Required</label>
+                  <textarea class="form-textarea" name="preparation" rows="3" placeholder="What needs to be prepared before this meeting?"></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Additional Notes</label>
+                  <textarea class="form-textarea" name="notes" rows="3" placeholder="Any additional notes or instructions..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Reminders & Notifications -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-bell section-icon"></i>
+                <span class="section-title">Reminders & Notifications</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Reminder Time</label>
+                  <select class="form-select" name="reminder_time">
+                    <option value="15">15 minutes before</option>
+                    <option value="30">30 minutes before</option>
+                    <option value="60">1 hour before</option>
+                    <option value="120">2 hours before</option>
+                    <option value="1440">1 day before</option>
+                    <option value="none">No reminder</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Notification Method</label>
+                  <select class="form-select" name="notification_method">
+                    <option value="system">System Notification</option>
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="all">All Methods</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Notify Participants</label>
+                  <select class="form-select" name="notify_participants">
+                    <option value="yes">Yes, notify all participants</option>
+                    <option value="team_only">Team members only</option>
+                    <option value="no">No notifications</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Calendar Integration</label>
+                  <select class="form-select" name="calendar_sync">
+                    <option value="system">System Calendar Only</option>
+                    <option value="google">Sync with Google Calendar</option>
+                    <option value="outlook">Sync with Outlook</option>
+                    <option value="all">Sync with All Calendars</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+              <i class="fas fa-save"></i>
+              Save as Draft
+            </button>
+            <button type="submit" class="btn btn-primary" form="createAppointmentForm">
+              <i class="fas fa-calendar-plus"></i>
+              Create Appointment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item active">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Set default date to today
+        const today = new Date();
+        today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+        $('input[name="appointment_date"]').val(today.toISOString().split('T')[0]);
+
+        // Set default start time to current hour
+        const currentHour = new Date().getHours();
+        const defaultStartTime = String(currentHour).padStart(2, '0') + ':00';
+        $('input[name="start_time"]').val(defaultStartTime);
+        
+        // Set default end time to 1 hour later
+        const endHour = (currentHour + 1) % 24;
+        const defaultEndTime = String(endHour).padStart(2, '0') + ':00';
+        $('input[name="end_time"]').val(defaultEndTime);
+
+        // Calculate duration when times change
+        $('input[name="start_time"], input[name="end_time"]').on('change', function() {
+          calculateDuration();
+        });
+
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
+        });
+
+        // Form submission
+        $("#createAppointmentForm").on("submit", function (e) {
+          e.preventDefault();
+          saveAppointment();
+        });
+
+        // Auto-populate client details when case is selected
+        $('select[name="related_case"]').on('change', function() {
+          const caseId = $(this).val();
+          if (caseId) {
+            populateClientDetails(caseId);
+          }
+        });
+      });
+
+      function calculateDuration() {
+        const startTime = $('input[name="start_time"]').val();
+        const endTime = $('input[name="end_time"]').val();
+        
+        if (startTime && endTime) {
+          const start = new Date('2024-01-01 ' + startTime);
+          const end = new Date('2024-01-01 ' + endTime);
+          
+          if (end > start) {
+            const durationMs = end - start;
+            const durationMinutes = Math.round(durationMs / (1000 * 60));
+            $('input[name="duration"]').val(durationMinutes);
+          }
+        }
+      }
+
+      function populateClientDetails(caseId) {
+        // Sample case data mapping
+        const caseData = {
+          '1': { client: 'John Doe', email: 'johndoe@email.com' },
+          '2': { client: 'Mr. Smith', email: 'smith@email.com' },
+          '3': { client: 'ABC Corporation', email: 'contact@abc.com' }
+        };
+
+        if (caseData[caseId]) {
+          $('input[name="client_name"]').val(caseData[caseId].client);
+          $('input[name="client_email"]').val(caseData[caseId].email);
+        }
+      }
+
+      function saveAppointment() {
+        // Get form data
+        const form = $('#createAppointmentForm')[0];
+        const formData = new FormData(form);
+
+        // Basic validation
+        if (!formData.get('appointment_title') || !formData.get('appointment_date') || !formData.get('start_time')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Create appointment object
+        const appointmentData = {};
+        for (let [key, value] of formData.entries()) {
+          appointmentData[key] = value;
+        }
+
+        // Add metadata
+        appointmentData.created_by = "current_user_id";
+        appointmentData.created_on = new Date().toISOString();
+        appointmentData.appointment_id = generateAppointmentId();
+
+        // Here you would normally send the data to your backend
+        console.log("Appointment Data:", appointmentData);
+
+        // Show success message
+        alert("Appointment created successfully!");
+
+        // Redirect back to calendar
+        window.location.href = "calendar.html";
+      }
+
+      function saveDraft() {
+        // Save as draft functionality
+        const form = $('#createAppointmentForm')[0];
+        const formData = new FormData(form);
+        
+        // Add draft status
+        const draftData = {};
+        for (let [key, value] of formData.entries()) {
+          draftData[key] = value;
+        }
+        draftData.status = 'Draft';
+        draftData.saved_as_draft = new Date().toISOString();
+
+        console.log("Draft saved:", draftData);
+        alert("Appointment saved as draft!");
+      }
+
+      function generateAppointmentId() {
+        return "APT_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
+      }
+
+      // Side menu functions
+      function openSideMenu() {
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
+    </script>
+  </body>
+</html>
