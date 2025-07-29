@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - AI Advocates</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f1f5f9;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 400px;
+        background: var(--surface);
+        border-radius: 16px;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .app-header {
+        text-align: center;
+        padding: 2rem 2rem 1.5rem;
+        background: var(--surface);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .tagline {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .form-container {
+        padding: 0 2rem 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        background: var(--surface);
+        color: var(--text-primary);
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-input::placeholder {
+        color: var(--text-muted);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .mobile-input-container {
+        display: flex;
+        align-items: center;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+
+      .mobile-input-container:focus-within {
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .country-code {
+        padding: 0.75rem 0.5rem;
+        background: var(--background);
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        border-right: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .mobile-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: none;
+        font-size: 0.875rem;
+        background: transparent;
+        color: var(--text-primary);
+      }
+
+      .mobile-input:focus {
+        outline: none;
+      }
+
+      .input-with-icon {
+        position: relative;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      .input-with-icon .form-input {
+        padding-left: 2.5rem;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .checkbox-input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary);
+        margin-top: 2px;
+      }
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      .checkbox-label a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .checkbox-label a:hover {
+        text-decoration: underline;
+      }
+
+      .primary-button {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: var(--text-primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 1rem;
+      }
+
+      .primary-button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .primary-button:disabled {
+        background: var(--text-muted);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .bottom-link {
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .bottom-link a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .bottom-link a:hover {
+        text-decoration: underline;
+      }
+
+      /* Loading state */
+      .loading {
+        position: relative;
+        color: transparent;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid currentColor;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        color: white;
+      }
+
+      @keyframes spin {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      /* Error states */
+      .form-input.error {
+        border-color: var(--error);
+      }
+
+      .error-message {
+        color: var(--error);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+      }
+
+      /* Success states */
+      .form-input.success {
+        border-color: var(--success);
+      }
+
+      .success-message {
+        color: var(--success);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 480px) {
+        .app-container {
+          max-width: 100%;
+          border-radius: 0;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .app-header {
+          padding: 1.5rem 1.5rem 1rem;
+        }
+
+        .form-container {
+          padding: 0 1.5rem 1.5rem;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .app-container {
+          max-width: 450px;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container fade-in">
+      <div class="app-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <span class="logo-text">AI Advocates</span>
+        </div>
+        <p class="tagline">Join thousands of lawyers modernizing their practice</p>
+      </div>
+
+      <div class="form-container">
+        <form id="signup-form">
+          <!-- Name Fields -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" id="first-name" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" id="last-name" placeholder="Doe" required>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" class="form-input" id="signup-email" placeholder="john.doe@lawfirm.com" required>
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="form-group">
+            <label class="form-label">Mobile Number</label>
+            <div class="mobile-input-container">
+              <div class="country-code">+91</div>
+              <input type="tel" class="mobile-input" id="signup-mobile" placeholder="9876543210" required>
+            </div>
+          </div>
+
+          <!-- Bar Council ID -->
+          <div class="form-group">
+            <label class="form-label">Bar Council ID (Optional)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user-tie input-icon"></i>
+              <input type="text" class="form-input" id="signup-bar-id" placeholder="e.g., DL234/2020">
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-input" id="signup-password" placeholder="Create a strong password" required>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-input" id="confirm-password" placeholder="Confirm your password" required>
+          </div>
+
+          <!-- Terms Checkbox -->
+          <div class="checkbox-group">
+            <input type="checkbox" class="checkbox-input" id="terms-checkbox" required>
+            <label class="checkbox-label" for="terms-checkbox">
+              I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+            </label>
+          </div>
+
+          <button type="submit" class="primary-button">Create Account</button>
+        </form>
+
+        <div class="bottom-link">
+          <span>Already have an account?</span>
+          <a href="index.html">Sign in here</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        // Form validation and submission
+        $('#signup-form').on('submit', function(e) {
+          e.preventDefault();
+          handleSignUp();
+        });
+
+        // Real-time password confirmation validation
+        $('#confirm-password').on('input', function() {
+          const password = $('#signup-password').val();
+          const confirmPassword = $(this).val();
+          
+          if (confirmPassword && password !== confirmPassword) {
+            $(this).addClass('error').removeClass('success');
+            $(this).next('.error-message').remove();
+            $(this).after('<div class="error-message">Passwords do not match</div>');
+          } else if (confirmPassword && password === confirmPassword) {
+            $(this).addClass('success').removeClass('error');
+            $(this).next('.error-message').remove();
+            $(this).after('<div class="success-message">Passwords match</div>');
+          } else {
+            $(this).removeClass('error success');
+            $(this).next('.error-message, .success-message').remove();
+          }
+        });
+
+        // Mobile number validation
+        $('.mobile-input').on('input', function() {
+          const value = $(this).val().replace(/\D/g, '');
+          $(this).val(value);
+          
+          if (value.length === 10) {
+            $(this).closest('.mobile-input-container').addClass('success');
+          } else {
+            $(this).closest('.mobile-input-container').removeClass('success');
+          }
+        });
+
+        // Email validation
+        $('#signup-email').on('blur', function() {
+          const email = $(this).val();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          
+          if (email && !emailRegex.test(email)) {
+            $(this).addClass('error');
+            $(this).next('.error-message').remove();
+            $(this).after('<div class="error-message">Please enter a valid email address</div>');
+          } else {
+            $(this).removeClass('error');
+            $(this).next('.error-message').remove();
+          }
+        });
+      });
+
+      function handleSignUp() {
+        const submitButton = $('#signup-form button[type="submit"]');
+        const termsChecked = $('#terms-checkbox').is(':checked');
+        
+        // Validate required fields
+        let isValid = true;
+        const requiredFields = ['#first-name', '#last-name', '#signup-email', '#signup-mobile', '#signup-password', '#confirm-password'];
+        
+        requiredFields.forEach(field => {
+          if (!$(field).val().trim()) {
+            $(field).addClass('error');
+            isValid = false;
+          } else {
+            $(field).removeClass('error');
+          }
+        });
+
+        // Check password match
+        const password = $('#signup-password').val();
+        const confirmPassword = $('#confirm-password').val();
+        if (password !== confirmPassword) {
+          $('#confirm-password').addClass('error');
+          isValid = false;
+        }
+
+        // Check mobile number length
+        const mobile = $('#signup-mobile').val();
+        if (mobile.length !== 10) {
+          $('#signup-mobile').addClass('error');
+          isValid = false;
+        }
+
+        if (!termsChecked) {
+          alert('Please accept the Terms of Service and Privacy Policy');
+          return;
+        }
+
+        if (!isValid) {
+          alert('Please fill in all required fields correctly');
+          return;
+        }
+
+        // Show loading
+        submitButton.addClass('loading');
+        
+        setTimeout(() => {
+          submitButton.removeClass('loading');
+          alert('Account created successfully! Please check your email for verification.');
+          
+          // Redirect to sign in page
+          window.location.href = 'index.html';
+        }, 2000);
+      }
+
+      // Utility functions
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validateMobile(mobile) {
+        const mobileRegex = /^[6-9]\d{9}$/;
+        return mobileRegex.test(mobile);
+      }
+    </script>
+  </body>
+</html>
