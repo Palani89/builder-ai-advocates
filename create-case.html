@@ -843,7 +843,169 @@
               </div>
             </div>
 
-            <!-- Section 7: Notes -->
+            <!-- Section 7: Case History -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-history section-icon"></i>
+                <span class="section-title">Case History</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Has Previous Case History?</label>
+                <select class="form-select" name="has_history" id="hasHistory">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+
+              <div id="caseHistorySection" style="display: none;">
+                <!-- Previous Advocate Details -->
+                <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                  <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                    <i class="fas fa-user-tie" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    Previous Advocate Details
+                  </h4>
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label class="form-label">Previous Advocate Name</label>
+                      <input type="text" class="form-input" name="prev_advocate_name" placeholder="Full name of previous lawyer">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Advocate Registration No.</label>
+                      <input type="text" class="form-input" name="prev_advocate_reg" placeholder="Bar Council registration number">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Law Firm Name</label>
+                      <input type="text" class="form-input" name="prev_law_firm" placeholder="Name of previous law firm">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Period Handled (From)</label>
+                      <input type="date" class="form-input" name="prev_period_from">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Period Handled (To)</label>
+                      <input type="date" class="form-input" name="prev_period_to">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Reason for Transfer</label>
+                      <select class="form-select" name="transfer_reason">
+                        <option value="">Select Reason</option>
+                        <option value="Client Request">Client Request</option>
+                        <option value="Advocate Unavailable">Advocate Unavailable</option>
+                        <option value="Specialization Required">Specialization Required</option>
+                        <option value="Cost Reasons">Cost Reasons</option>
+                        <option value="Performance Issues">Performance Issues</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-top: 1rem;">
+                    <label class="form-label">Previous Advocate Remarks</label>
+                    <textarea class="form-textarea" name="prev_advocate_remarks" placeholder="Any notes or additional information related to the handover" style="min-height: 80px;"></textarea>
+                  </div>
+                </div>
+
+                <!-- Case History Entries -->
+                <div style="background: var(--background); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                  <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1rem; font-weight: 600;">
+                    <i class="fas fa-clock" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    Historical Events
+                  </h4>
+                  <div id="historyEntries">
+                    <div class="history-entry" style="border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; background: var(--surface);">
+                      <div class="form-grid">
+                        <div class="form-group">
+                          <label class="form-label">Date of Event <span class="required">*</span></label>
+                          <input type="date" class="form-input" name="history_date[]" required>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Event Type <span class="required">*</span></label>
+                          <select class="form-select" name="history_event_type[]" required>
+                            <option value="">Select Event Type</option>
+                            <option value="Hearing">Hearing</option>
+                            <option value="Filing">Filing</option>
+                            <option value="Adjournment">Adjournment</option>
+                            <option value="Evidence Submission">Evidence Submission</option>
+                            <option value="Order Received">Order Received</option>
+                            <option value="Notice Served">Notice Served</option>
+                            <option value="Settlement Discussion">Settlement Discussion</option>
+                            <option value="Appeal Filed">Appeal Filed</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Court Name</label>
+                          <input type="text" class="form-input" name="history_court[]" placeholder="Name of the court">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Judge Name</label>
+                          <input type="text" class="form-input" name="history_judge[]" placeholder="Presiding judge">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Next Hearing Date</label>
+                          <input type="date" class="form-input" name="history_next_hearing[]">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Document Reference Type</label>
+                          <select class="form-select" name="history_doc_type[]">
+                            <option value="">Select Document Type</option>
+                            <option value="Order Copy">Order Copy</option>
+                            <option value="Affidavit">Affidavit</option>
+                            <option value="Submission Note">Submission Note</option>
+                            <option value="Evidence Document">Evidence Document</option>
+                            <option value="Notice">Notice</option>
+                            <option value="Application">Application</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Appeal Status</label>
+                          <select class="form-select" name="history_appeal_status[]">
+                            <option value="Not Applicable">Not Applicable</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Notify Client?</label>
+                          <select class="form-select" name="history_notify_client[]">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group" style="margin-top: 1rem;">
+                        <label class="form-label">Remarks / Summary <span class="required">*</span></label>
+                        <textarea class="form-textarea" name="history_remarks[]" placeholder="Notes, updates, or brief explanation of the event" style="min-height: 80px;" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Order Summary / Decision</label>
+                        <textarea class="form-textarea" name="history_order_summary[]" placeholder="Outcome of the hearing or order (if applicable)" style="min-height: 60px;"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Upload Documents</label>
+                        <div class="file-upload">
+                          <input type="file" name="history_documents[]" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" class="history-file-upload">
+                          <div class="file-upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Choose Files (PDF, DOC, DOCX, JPG, PNG)
+                          </div>
+                        </div>
+                      </div>
+                      <div style="text-align: right; margin-top: 1rem;">
+                        <button type="button" class="btn btn-secondary remove-history-entry" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                          <i class="fas fa-trash"></i> Remove Entry
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" id="addHistoryEntry" class="btn btn-secondary" style="margin-top: 1rem;">
+                    <i class="fas fa-plus"></i> Add Another History Entry
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 8: Notes -->
             <div class="form-section">
               <div class="section-header">
                 <i class="fas fa-sticky-note section-icon"></i>
