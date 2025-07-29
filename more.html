@@ -598,9 +598,9 @@
           </div>
         </div>
         <div class="header-right">
-          <button class="notification-icon">
+          <button class="notification-icon" onclick="openNotifications()">
             <i class="fas fa-bell"></i>
-            <span class="notification-badge">3</span>
+            <span class="notification-badge">5</span>
           </button>
           <div class="user-avatar">A</div>
           <button class="notification-icon" onclick="logoutFromApp()">
@@ -661,27 +661,7 @@
               </div>
             </div>
 
-            <div class="feature-card">
-              <div class="feature-icon warning">
-                <i class="fas fa-file-invoice"></i>
-              </div>
-              <div class="feature-info">
-                <div class="feature-title">Create Invoice</div>
-                <div class="feature-description">Generate client invoices</div>
-              </div>
-            </div>
 
-            <div class="feature-card">
-              <div class="feature-icon blue">
-                <i class="fas fa-robot"></i>
-              </div>
-              <div class="feature-info">
-                <div class="feature-title">Ask AI</div>
-                <div class="feature-description">
-                  Get AI-powered legal assistance
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -725,23 +705,23 @@
         <div class="feature-section">
           <h2 class="section-title">Settings & Support</h2>
           <div class="tools-grid">
-            <div class="feature-card">
+            <div class="feature-card" onclick="openSettings()">
               <div class="feature-icon primary">
                 <i class="fas fa-cog"></i>
               </div>
               <div class="feature-info">
                 <div class="feature-title">Settings</div>
-                <div class="feature-description">App preferences</div>
+                <div class="feature-description">Profile & preferences</div>
               </div>
             </div>
 
-            <div class="feature-card">
+            <div class="feature-card" onclick="openNotifications()">
               <div class="feature-icon warning">
                 <i class="fas fa-bell"></i>
               </div>
               <div class="feature-info">
                 <div class="feature-title">Notifications</div>
-                <div class="feature-description">Alerts & reminders</div>
+                <div class="feature-description">View alerts & reminders</div>
               </div>
             </div>
 
