@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Team - AI Advocates</title>
+    <title>Team - AI Advocates</title>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,10 +20,801 @@
       rel="stylesheet"
     />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="client/global.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .menu-toggle:hover {
+        background: var(--background);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .page-title {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-left: 0.5rem;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .page-title-section h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.75rem 0 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .breadcrumb-item:hover {
+        color: var(--primary);
+      }
+
+      .breadcrumb-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .breadcrumb-separator {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      /* Search and Filters */
+      .search-filters {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .search-box {
+        position: relative;
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        transition: border-color 0.2s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .add-member-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .add-member-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .import-btn {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .import-btn:hover {
+        background: var(--surface);
+        border-color: var(--primary);
+      }
+
+      /* Team Stats */
+      .team-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .stat-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .stat-icon.team {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .stat-icon.advocate {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .stat-icon.lawyer {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .stat-icon.contact {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .stat-info {
+        flex: 1;
+      }
+
+      .stat-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-info p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      /* Team Members Grid */
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .member-card {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .member-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+      }
+
+      .member-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .member-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1.125rem;
+        overflow: hidden;
+      }
+
+      .member-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+
+      .member-info {
+        flex: 1;
+      }
+
+      .member-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .member-role {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .member-specialty {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .member-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .member-status.available {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .member-status.busy {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .member-details {
+        margin-bottom: 1rem;
+      }
+
+      .member-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .member-detail i {
+        color: var(--text-muted);
+        width: 16px;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .stars {
+        color: #fbbf24;
+      }
+
+      .rating-value {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .member-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .action-btn {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .contact-btn {
+        background: var(--text-primary);
+        color: white;
+      }
+
+      .assign-btn {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .side-menu.open {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .side-menu-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .side-menu-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .side-menu-close:hover {
+        background: var(--background);
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+      }
+
+      .side-menu-item.active {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .side-menu-item.logout {
+        color: var(--error);
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+      }
+
+      .side-menu-item.logout:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .side-menu-icon {
+        width: 20px;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .team-stats {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        .search-filters {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .search-box {
+          min-width: auto;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+
+        .page-header > div {
+          width: 100%;
+        }
+
+        .page-header > div:last-child {
+          justify-content: center;
+        }
+
+        .header-right .import-btn {
+          display: none;
+        }
+
+        .stat-card {
+          padding: 1rem;
+          flex-direction: column;
+          text-align: center;
+          gap: 0.75rem;
+        }
+
+        .stat-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+        }
+
+        .stat-info h3 {
+          font-size: 1.25rem;
+        }
+
+        .stat-info p {
+          font-size: 0.8rem;
+        }
+
+        .member-card {
+          padding: 1rem;
+        }
+
+        .member-header {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.75rem;
+        }
+
+        .member-info {
+          text-align: center;
+        }
+
+        .member-actions {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .action-btn {
+          padding: 0.5rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .team-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page-header > div:last-child {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .add-member-btn,
+        .import-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .member-card {
+          padding: 0.75rem;
+        }
+
+        .member-details {
+          margin-bottom: 0.75rem;
+        }
+
+        .member-detail {
+          font-size: 0.8rem;
+          margin-bottom: 0.25rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Side Menu Overlay -->
@@ -78,7 +869,7 @@
       <!-- Header -->
       <div class="header">
         <div class="header-left">
-          <button class="menu-toggle" onclick="openSideMenu()">
+          <button class="menu-toggle">
             <i class="fas fa-bars"></i>
           </button>
           <div class="logo-container">
@@ -94,7 +885,7 @@
             <span class="notification-badge">3</span>
           </button>
           <div class="user-avatar">A</div>
-          <button class="notification-icon" onclick="logoutFromApp()">
+          <button class="notification-icon">
             <i class="fas fa-sign-out-alt"></i>
           </button>
         </div>
@@ -105,7 +896,7 @@
         <!-- Page Header -->
         <div class="page-header">
           <div class="page-title-section">
-            <h1>My Team</h1>
+            <h1>Team</h1>
 
             <!-- Breadcrumb -->
             <nav class="breadcrumb">
@@ -118,93 +909,590 @@
               </span>
               <span class="breadcrumb-item active">
                 <i class="fas fa-users"></i>
-                My Team
+                Team
               </span>
             </nav>
 
-            <p class="page-subtitle">
-              Manage your legal team members and collaborators
-            </p>
+            <p class="page-subtitle">Manage your advocates, lawyers, interns</p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; gap: 1rem; align-items: center">
+            <button class="add-member-btn">
+              <i class="fas fa-plus"></i>
+              Add Team Member
+            </button>
+            <button class="import-btn">Import contact</button>
           </div>
         </div>
 
-        <!-- Coming Soon Content -->
-        <div style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          min-height: 400px;
-          text-align: center;
-          padding: 3rem;
-        ">
-          <div style="
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-          ">
-            <i class="fas fa-users"></i>
+        <!-- Search and Filters -->
+        <div class="search-filters">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search team members by name, role, specialization, or location..."
+            />
           </div>
-          <h2 style="
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-          ">
-            Team Management Coming Soon
-          </h2>
-          <p style="
-            color: var(--text-secondary);
-            font-size: 1rem;
-            max-width: 500px;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-          ">
-            We're working on bringing you comprehensive team management features including 
-            team member profiles, role assignments, case collaborations, and performance tracking.
-          </p>
-          <div style="
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-          ">
-            <a href="cases.html" class="btn btn-primary" style="
-              padding: 0.75rem 2rem;
-              border-radius: 8px;
-              text-decoration: none;
-              display: inline-flex;
-              align-items: center;
-              gap: 0.5rem;
-              background: var(--primary);
-              color: white;
-              border: none;
-              font-size: 0.875rem;
-              font-weight: 500;
-              cursor: pointer;
-              transition: all 0.2s ease;
-            ">
-              <i class="fas fa-file-alt"></i>
-              View Cases
-            </a>
-            <a href="more.html" class="btn btn-secondary" style="
-              padding: 0.75rem 2rem;
-              border-radius: 8px;
-              text-decoration: none;
-              display: inline-flex;
-              align-items: center;
-              gap: 0.5rem;
-              background: var(--surface);
-              color: var(--text-primary);
-              border: 1px solid var(--border);
-              font-size: 0.875rem;
-              font-weight: 500;
-              cursor: pointer;
-              transition: all 0.2s ease;
-            ">
-              <i class="fas fa-th"></i>
-              Explore Features
-            </a>
+        </div>
+
+        <!-- Team Stats -->
+        <div class="team-stats">
+          <div class="stat-card">
+            <div class="stat-icon team">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <h3>7</h3>
+              <p>Total Team Members</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon advocate">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="stat-info">
+              <h3>5</h3>
+              <p>Advocate</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon lawyer">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <div class="stat-info">
+              <h3>5</h3>
+              <p>Lawyers</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon contact">
+              <i class="fas fa-address-book"></i>
+            </div>
+            <div class="stat-info">
+              <h3>1012</h3>
+              <p>My Contacts</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Members Grid -->
+        <div class="team-grid">
+          <!-- New Member with Provided Image -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">
+                <img src="https://cdn.builder.io/o/assets%2Fb570605fd20a438db2e49eaee45edefa%2F5f6ea55dab3f422c901e3a2204e828b2?alt=media&token=7a74ac93-748a-4c84-aac8-389ec0171587&apiKey=b570605fd20a438db2e49eaee45edefa" alt="Team Member" />
+              </div>
+              <div class="member-info">
+                <div class="member-name">Alex Johnson</div>
+                <div class="member-role">Senior Partner</div>
+                <div class="member-specialty">Constitutional Law</div>
+              </div>
+              <span class="member-status available">Available</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 20 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.M Constitutional Law • D001/2004
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Supreme Court of India
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                450 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543200
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                alex.johnson@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-value">5.0</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D001/2004</span>
+              <span>Last Active: Online</span>
+            </div>
+          </div>
+
+          <!-- Member 1 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar">PS</div>
+              <div class="member-info">
+                <div class="member-name">Priya Sharma</div>
+                <div class="member-role">Senior Advocate</div>
+                <div class="member-specialty">Criminal Law</div>
+              </div>
+              <span class="member-status available">Available</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 8 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.M Criminal Law • D123/2015
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Delhi High Court
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                156 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543210
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                priya.sharma@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-value">4.8</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D123/2015</span>
+              <span>Last Active: Today</span>
+            </div>
+          </div>
+
+          <!-- Member 2 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar" style="background: var(--success)">
+                RK
+              </div>
+              <div class="member-info">
+                <div class="member-name">Rajesh Kumar</div>
+                <div class="member-role">Senior Advocate</div>
+                <div class="member-specialty">Corporate Law</div>
+              </div>
+              <span class="member-status busy">Busy</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 12 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.M Corporate Law • D567/2012
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Supreme Court
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                203 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543211
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                rajesh.kumar@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-value">4.9</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D567/2012</span>
+              <span>Last Active: 2 hours ago</span>
+            </div>
+          </div>
+
+          <!-- Member 3 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar" style="background: var(--warning)">
+                AV
+              </div>
+              <div class="member-info">
+                <div class="member-name">Anil Verma</div>
+                <div class="member-role">Senior Advocate</div>
+                <div class="member-specialty">Civil Law</div>
+              </div>
+              <span class="member-status available">Available</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 15 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.M Civil Law • D890/2009
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Delhi District Court
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                301 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543212
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                anil.verma@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-value">4.7</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D890/2009</span>
+              <span>Last Active: 30 mins ago</span>
+            </div>
+          </div>
+
+          <!-- Member 4 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar" style="background: var(--error)">
+                KS
+              </div>
+              <div class="member-info">
+                <div class="member-name">Kavita Singh</div>
+                <div class="member-role">Junior Advocate</div>
+                <div class="member-specialty">Family Law</div>
+              </div>
+              <span class="member-status available">Available</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 3 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.B Family Law • D345/2021
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Family Court
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                45 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543213
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                kavita.singh@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-value">4.2</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D345/2021</span>
+              <span>Last Active: 1 hour ago</span>
+            </div>
+          </div>
+
+          <!-- Member 5 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar" style="background: #8b5cf6">SP</div>
+              <div class="member-info">
+                <div class="member-name">Suresh Patel</div>
+                <div class="member-role">Junior Advocate</div>
+                <div class="member-specialty">Criminal Law</div>
+              </div>
+              <span class="member-status busy">In Court</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 2 Years
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                LL.B Criminal Law • D678/2022
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Sessions Court
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                28 Cases Handled
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543214
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                suresh.patel@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-value">4.0</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: D678/2022</span>
+              <span>Last Active: In Court</span>
+            </div>
+          </div>
+
+          <!-- Member 6 -->
+          <div class="member-card">
+            <div class="member-header">
+              <div class="member-avatar" style="background: #06b6d4">NM</div>
+              <div class="member-info">
+                <div class="member-name">Neha Mehta</div>
+                <div class="member-role">Intern</div>
+                <div class="member-specialty">Corporate Law</div>
+              </div>
+              <span class="member-status available">Available</span>
+            </div>
+
+            <div class="member-details">
+              <div class="member-detail">
+                <i class="fas fa-briefcase"></i>
+                Experience: 6 Months
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-graduation-cap"></i>
+                Final Year LLB • Student
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-building"></i>
+                Law Firm Office
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-gavel"></i>
+                5 Cases Assisted
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-phone"></i>
+                +91 9876543215
+              </div>
+              <div class="member-detail">
+                <i class="fas fa-envelope"></i>
+                neha.mehta@lawfirm.com
+              </div>
+            </div>
+
+            <div class="rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-value">4.1</span>
+            </div>
+
+            <div class="member-actions">
+              <button class="action-btn contact-btn">
+                <i class="fas fa-phone"></i>
+                Contact
+              </button>
+              <button class="action-btn assign-btn">Assign Task</button>
+            </div>
+
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <span>ID: INTERN/2024</span>
+              <span>Last Active: 15 mins ago</span>
+            </div>
           </div>
         </div>
       </div>
@@ -237,25 +1525,69 @@
     </div>
 
     <script>
+      $(document).ready(function () {
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
+        });
+
+        // Add Team Member button
+        $(".add-member-btn").on("click", function () {
+          window.location.href = "add-team-member.html";
+        });
+
+        // Search functionality
+        $(".search-input").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          $(".member-card").each(function () {
+            const memberText = $(this).text().toLowerCase();
+            if (memberText.includes(searchTerm)) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+
+        // Filter functionality
+        $(".filter-dropdown").on("change", function () {
+          // Add filter logic here
+        });
+
+        // Logout functionality
+        $(".fa-sign-out-alt")
+          .parent()
+          .on("click", function () {
+            logoutFromApp();
+          });
+      });
+
       // Side menu functions
       function openSideMenu() {
-        document.getElementById("sideMenu").classList.add("open");
-        document.getElementById("sideMenuOverlay").classList.add("show");
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
       }
 
       function closeSideMenu() {
-        document.getElementById("sideMenu").classList.remove("open");
-        document.getElementById("sideMenuOverlay").classList.remove("show");
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
       }
 
       function logoutFromApp() {
-        alert("Logout functionality would be implemented here");
+        window.location.href = "ai-advocs-webapp.html";
       }
 
-      // Event listeners
-      document.addEventListener('DOMContentLoaded', function() {
-        // Close menu when clicking overlay
-        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
       });
     </script>
   </body>
