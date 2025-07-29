@@ -1083,8 +1083,7 @@
               openNotifications();
               break;
             case "Legal Research":
-              // Open legal research tool
-              alert('Opening Legal Research...');
+              openLegalResearch();
               break;
             case "Add Article":
               window.location.href = "articles.html";
@@ -1093,10 +1092,13 @@
               window.location.href = "create-hearing.html";
               break;
             case "Legal Templates":
-              alert('Opening Legal Templates...');
+              openLegalTemplates();
               break;
             case "File Upload":
-              alert('Opening File Upload...');
+              openFileUpload();
+              break;
+            case "Contacts":
+              openContacts();
               break;
             case "Privacy & Security":
               alert('Opening Privacy & Security...');
