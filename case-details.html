@@ -3120,6 +3120,11 @@
           day: 'numeric'
         });
 
+        const formattedTime = updateDate.toLocaleTimeString('en-IN', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
         const priorityColor = {
           'Low': '#10b981',
           'Medium': '#f59e0b',
@@ -3127,19 +3132,97 @@
           'Urgent': '#dc2626'
         };
 
+        // Build comprehensive timeline description
+        let timelineDescription = `<strong>Type:</strong> ${update.category}<br>`;
+        timelineDescription += `<strong>Priority:</strong> <span style="color: ${priorityColor[update.priority] || '#64748b'}">${update.priority}</span><br>`;
+        timelineDescription += `<strong>Updated by:</strong> ${update.updatedBy}<br><br>`;
+
+        // Add main update notes
+        timelineDescription += `<strong>Update:</strong> ${update.updateNotes}<br>`;
+
+        // Add case status update if applicable
+        if (update.caseStatus) {
+          timelineDescription += `<br><strong>Case Status Changed:</strong> ${update.caseStatus}`;
+        }
+
+        // Add next hearing if updated
+        if (update.nextHearingUpdate) {
+          const hearingDate = new Date(update.nextHearingUpdate);
+          const hearingFormatted = hearingDate.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          timelineDescription += `<br><strong>Next Hearing:</strong> ${hearingFormatted}`;
+          if (update.hearingType) {
+            timelineDescription += ` (${update.hearingType})`;
+          }
+        }
+
+        // Add court order information
+        if (update.courtOrder) {
+          timelineDescription += `<br><strong>Court Order:</strong> ${update.courtOrder}`;
+        }
+
+        // Add document information
+        if (update.documentsSubmitted && update.documentsSubmitted.length > 0) {
+          timelineDescription += `<br><strong>Documents:</strong> ${update.documentsSubmitted.join(', ')}`;
+        }
+
+        // Add evidence status
+        if (update.evidenceStatus) {
+          timelineDescription += `<br><strong>Evidence Status:</strong> ${update.evidenceStatus}`;
+        }
+
+        // Add client communication
+        if (update.clientCommunication) {
+          timelineDescription += `<br><strong>Client Communication:</strong> ${update.clientCommunication}`;
+          if (update.clientNotified === 'Yes') {
+            timelineDescription += ` ✓ Notified`;
+          }
+        }
+
+        // Add financial update
+        if (update.feeUpdate && update.feeAmount) {
+          timelineDescription += `<br><strong>Financial:</strong> ${update.feeUpdate} - ₹${update.feeAmount}`;
+        }
+
+        // Add settlement status
+        if (update.settlementStatus) {
+          timelineDescription += `<br><strong>Settlement:</strong> ${update.settlementStatus}`;
+        }
+
+        // Add next action items
+        if (update.nextSteps) {
+          timelineDescription += `<br><br><strong>Next Actions:</strong><br>${update.nextSteps.replace(/\n/g, '<br>')}`;
+          if (update.actionDeadline) {
+            const deadlineDate = new Date(update.actionDeadline);
+            const deadlineFormatted = deadlineDate.toLocaleDateString('en-IN', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            });
+            timelineDescription += `<br><strong>Deadline:</strong> ${deadlineFormatted}`;
+          }
+          if (update.assignedTo && update.assignedTo !== 'Self') {
+            timelineDescription += `<br><strong>Assigned to:</strong> ${update.assignedTo}`;
+          }
+        }
+
         const newTimelineItem = `
-          <div class="timeline-item">
+          <div class="timeline-item" data-update-id="${update.updateId}">
             <div class="timeline-content">
               <div class="timeline-header">
-                <span class="timeline-title">${update.title}</span>
-                <span class="timeline-date">${formattedDate}</span>
+                <span class="timeline-title">
+                  <i class="fas fa-edit" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                  ${update.title}
+                </span>
+                <span class="timeline-date">${formattedDate} ${formattedTime}</span>
               </div>
-              <div class="timeline-description">
-                ${update.category ? `<strong>Category:</strong> ${update.category}<br>` : ''}
-                <strong>Priority:</strong> <span style="color: ${priorityColor[update.priority] || '#64748b'}">${update.priority}</span><br>
-                <strong>Notes:</strong> ${update.notes}
-                ${update.nextAction ? `<br><strong>Next Action:</strong> ${update.nextAction}` : ''}
-                ${update.documents ? `<br><strong>Documents:</strong> ${update.documents}` : ''}
+              <div class="timeline-description" style="line-height: 1.6;">
+                ${timelineDescription}
               </div>
             </div>
           </div>
@@ -3148,13 +3231,13 @@
         // Add to both full timeline and recent updates
         $('#fullTimeline').prepend(newTimelineItem);
 
-        // Also add to recent updates in overview (limit to 2 items)
+        // Also add to recent updates in overview (limit to 3 items for comprehensive updates)
         const recentUpdatesTimeline = $('.sidebar .timeline');
         recentUpdatesTimeline.prepend(newTimelineItem);
 
-        // Remove oldest item if more than 2
+        // Remove oldest item if more than 3
         const recentItems = recentUpdatesTimeline.find('.timeline-item');
-        if (recentItems.length > 2) {
+        if (recentItems.length > 3) {
           recentItems.last().remove();
         }
       }
