@@ -1,59 +1,888 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Advocates - Legal Practice Management</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Advocates - Your AI-powered legal partner</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #4f46e5, #3730a3);
-            color: white;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f1f5f9;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 400px;
+        background: var(--surface);
+        border-radius: 16px;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .app-header {
+        text-align: center;
+        padding: 2rem 2rem 1.5rem;
+        background: var(--surface);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .tagline {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .form-container {
+        padding: 0 2rem 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        background: var(--surface);
+        color: var(--text-primary);
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-input::placeholder {
+        color: var(--text-muted);
+      }
+
+      .select-dropdown {
+        position: relative;
+      }
+
+      .select-dropdown select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        color: var(--text-primary);
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+      }
+
+      .select-dropdown select:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .login-tabs {
+        display: flex;
+        background: var(--background);
+        border-radius: 8px;
+        padding: 4px;
+        margin-bottom: 1.5rem;
+      }
+
+      .tab-button {
+        flex: 1;
+        padding: 0.5rem 0.75rem;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tab-button.active {
+        background: var(--surface);
+        color: var(--text-primary);
+        box-shadow: var(--shadow);
+      }
+
+      .mobile-input-container {
+        display: flex;
+        align-items: center;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+
+      .mobile-input-container:focus-within {
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .country-code {
+        padding: 0.75rem 0.5rem;
+        background: var(--background);
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        border-right: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .mobile-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: none;
+        font-size: 0.875rem;
+        background: transparent;
+        color: var(--text-primary);
+      }
+
+      .mobile-input:focus {
+        outline: none;
+      }
+
+      .primary-button {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: var(--text-primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 1rem;
+      }
+
+      .primary-button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .primary-button:disabled {
+        background: var(--text-muted);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .secondary-button {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 2px solid var(--border);
+      }
+
+      .secondary-button:hover {
+        background: var(--surface);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .bottom-link {
+        text-align: center;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .bottom-link a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .bottom-link a:hover {
+        text-decoration: underline;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .checkbox-input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary);
+        margin-top: 2px;
+      }
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      .checkbox-label a {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .checkbox-label a:hover {
+        text-decoration: underline;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
-        .loading-container {
-            text-align: center;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+      }
+
+      /* Loading state */
+      .loading {
+        position: relative;
+        color: transparent;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid currentColor;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        color: white;
+      }
+
+      @keyframes spin {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
         }
-        .loading-text {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 480px) {
+        .app-container {
+          max-width: 100%;
+          border-radius: 0;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
-        .spinner {
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+
+        .app-header {
+          padding: 1.5rem 1.5rem 1rem;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .form-container {
+          padding: 0 1.5rem 1.5rem;
         }
+
+        .form-row {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .app-container {
+          max-width: 450px;
+        }
+      }
+
+      /* Error states */
+      .form-input.error {
+        border-color: var(--error);
+      }
+
+      .error-message {
+        color: var(--error);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+      }
+
+      /* Success states */
+      .form-input.success {
+        border-color: var(--success);
+      }
+
+      .success-message {
+        color: var(--success);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+      }
+
+      /* Language dropdown enhanced styles */
+      .language-dropdown {
+        position: relative;
+      }
+
+      .language-dropdown select option {
+        padding: 0.5rem;
+      }
+
+      /* Icon styling */
+      .input-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      .input-with-icon {
+        position: relative;
+      }
+
+      .input-with-icon .form-input {
+        padding-left: 2.5rem;
+      }
     </style>
-</head>
-<body>
-    <div class="loading-container">
-        <div class="logo">⚖️</div>
-        <div class="loading-text">AI Advocates</div>
-        <div class="loading-text">Loading your legal practice management system...</div>
-        <div class="spinner"></div>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sign In Page -->
+      <div id="signin-page" class="page">
+        <div class="app-header">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+          <p class="tagline" data-translate="tagline">
+            Your AI-powered legal partner for modern legal practice
+          </p>
+        </div>
+
+        <div class="form-container">
+          <!-- Language Selection -->
+          <div class="form-group">
+            <label class="form-label" data-translate="preferred-language"
+              >Preferred Language</label
+            >
+            <div class="select-dropdown language-dropdown">
+              <select id="language-select">
+                <option value="en">English</option>
+                <option value="hi">हिंदी (Hindi)</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+                <option value="bn">বাংলা (Bengali)</option>
+                <option value="mr">मराठी (Marathi)</option>
+                <option value="gu">ગુજરાતી (Gujarati)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Login Method Tabs -->
+          <div class="login-tabs">
+            <button
+              class="tab-button active"
+              data-tab="advocate"
+              data-translate="advocate-id"
+            >
+              Advocate ID
+            </button>
+            <button
+              class="tab-button"
+              data-tab="mobile"
+              data-translate="mobile"
+            >
+              Mobile
+            </button>
+            <button class="tab-button" data-tab="email" data-translate="email">
+              Email
+            </button>
+          </div>
+
+          <form id="signin-form">
+            <!-- Advocate ID Tab -->
+            <div id="advocate-tab" class="tab-content">
+              <div class="form-group">
+                <label class="form-label" data-translate="bar-council-id"
+                  >Bar Council ID</label
+                >
+                <div class="input-with-icon">
+                  <i class="fas fa-id-card input-icon"></i>
+                  <input
+                    type="text"
+                    class="form-input"
+                    id="advocate-id"
+                    placeholder="e.g., D/1234/2020"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-translate="password"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-input"
+                  id="advocate-password"
+                  data-translate-placeholder="enter-password"
+                />
+              </div>
+              <button
+                type="submit"
+                class="primary-button"
+                data-translate="sign-in"
+              >
+                Sign In
+              </button>
+            </div>
+
+            <!-- Mobile Tab -->
+            <div id="mobile-tab" class="tab-content hidden">
+              <div class="form-group">
+                <label class="form-label" data-translate="mobile-number"
+                  >Mobile Number</label
+                >
+                <div class="mobile-input-container">
+                  <div class="country-code">
+                    <i class="fas fa-flag"></i>
+                    +91
+                  </div>
+                  <input
+                    type="tel"
+                    class="mobile-input"
+                    id="mobile-number"
+                    data-translate-placeholder="enter-mobile"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="primary-button"
+                data-translate="send-otp"
+              >
+                Send OTP
+              </button>
+            </div>
+
+            <!-- Email Tab -->
+            <div id="email-tab" class="tab-content hidden">
+              <div class="form-group">
+                <label class="form-label" data-translate="email">Email</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input
+                    type="email"
+                    class="form-input"
+                    id="email-address"
+                    placeholder="palaniappan.lakshmanan1989@gmail.com"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-translate="password"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-input"
+                  id="email-password"
+                  data-translate-placeholder="enter-password"
+                />
+              </div>
+              <button
+                type="submit"
+                class="primary-button"
+                data-translate="sign-in"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+
+          <div class="bottom-link">
+            <span data-translate="no-account">Don't have an account?</span>
+            <a href="signup.html" data-translate="sign-up-here"
+              >Sign up here</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- OTP Verification Page -->
+      <div id="otp-page" class="page hidden">
+        <div class="app-header">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+          <p class="tagline" data-translate="otp-tagline">
+            Enter the OTP sent to your mobile number
+          </p>
+        </div>
+
+        <div class="form-container">
+          <form id="otp-form">
+            <div class="form-group">
+              <label class="form-label" data-translate="enter-otp"
+                >Enter OTP</label
+              >
+              <input
+                type="text"
+                class="form-input"
+                id="otp-input"
+                placeholder="123456"
+                maxlength="6"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="primary-button"
+              data-translate="verify-otp"
+            >
+              Verify OTP
+            </button>
+
+            <div class="bottom-link">
+              <span data-translate="didnt-receive">Didn't receive OTP?</span>
+              <a href="#" onclick="resendOTP()" data-translate="resend"
+                >Resend</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Redirect to home page after a short delay
+      // Language translations
+      const translations = {
+        en: {
+          tagline: "Your AI-powered legal partner for modern legal practice",
+          "otp-tagline": "Enter the OTP sent to your mobile number",
+          "preferred-language": "Preferred Language",
+          "advocate-id": "Advocate ID",
+          mobile: "Mobile",
+          email: "Email",
+          "bar-council-id": "Bar Council ID",
+          password: "Password",
+          "mobile-number": "Mobile Number",
+          "sign-in": "Sign In",
+          "send-otp": "Send OTP",
+          "verify-otp": "Verify OTP",
+          "no-account": "Don't have an account?",
+          "sign-up-here": "Sign up here",
+          "enter-password": "Enter your password",
+          "enter-mobile": "Enter 10-digit mobile number",
+          "enter-otp": "Enter OTP",
+          "didnt-receive": "Didn't receive OTP?",
+          resend: "Resend",
+        },
+        hi: {
+          tagline: "आधुनिक कानूनी अभ्यास के लिए आपका AI-संचालित कानूनी साझीदार",
+          "otp-tagline": "आपके मोबाइल नंबर पर भेजा गया OTP दर्ज करें",
+          "preferred-language": "पसंदीदा भाषा",
+          "advocate-id": "अधिवक्ता ID",
+          mobile: "मोबाइल",
+          email: "ईमेल",
+          "bar-council-id": "बार काउंसिल ID",
+          password: "पासवर्ड",
+          "mobile-number": "मोबाइल नंबर",
+          "sign-in": "साइन इन",
+          "send-otp": "OTP भेजें",
+          "verify-otp": "OTP सत्यापित करें",
+          "no-account": "कोई खाता नहीं है?",
+          "sign-up-here": "यहाँ साइन अप करें",
+          "enter-password": "अपना पासवर्ड दर्ज करें",
+          "enter-mobile": "10-अंकीय मोबाइल नंबर दर्ज करें",
+        },
+        // Add more languages as needed
+      };
+
+      let currentLanguage = "en";
+      let currentPage = "signin";
+
+      // Initialize the app
+      $(document).ready(function () {
+        initializeTabs();
+        initializeLanguage();
+        initializeForms();
+
+        // Load saved language preference
+        const savedLanguage = localStorage.getItem("preferred-language");
+        if (savedLanguage) {
+          currentLanguage = savedLanguage;
+          $("#language-select").val(currentLanguage);
+          updateLanguage();
+        }
+      });
+
+      // Tab functionality
+      function initializeTabs() {
+        $(".tab-button").on("click", function () {
+          const tabId = $(this).data("tab");
+
+          // Update active tab
+          $(".tab-button").removeClass("active");
+          $(this).addClass("active");
+
+          // Show corresponding content
+          $(".tab-content").addClass("hidden");
+          $(`#${tabId}-tab`).removeClass("hidden").addClass("fade-in");
+        });
+      }
+
+      // Language functionality
+      function initializeLanguage() {
+        $("#language-select").on("change", function () {
+          currentLanguage = $(this).val();
+          localStorage.setItem("preferred-language", currentLanguage);
+          updateLanguage();
+        });
+      }
+
+      function updateLanguage() {
+        const lang = translations[currentLanguage] || translations.en;
+
+        $("[data-translate]").each(function () {
+          const key = $(this).data("translate");
+          if (lang[key]) {
+            $(this).text(lang[key]);
+          }
+        });
+
+        $("[data-translate-placeholder]").each(function () {
+          const key = $(this).data("translate-placeholder");
+          if (lang[key]) {
+            $(this).attr("placeholder", lang[key]);
+          }
+        });
+      }
+
+      // Form handling
+      function initializeForms() {
+        // Sign in form
+        $("#signin-form").on("submit", function (e) {
+          e.preventDefault();
+          handleSignIn();
+        });
+
+        // OTP form
+        $("#otp-form").on("submit", function (e) {
+          e.preventDefault();
+          handleOTPVerification();
+        });
+
+        // Mobile number validation
+        $(".mobile-input").on("input", function () {
+          const value = $(this).val().replace(/\D/g, "");
+          $(this).val(value);
+
+          if (value.length === 10) {
+            $(this).closest(".mobile-input-container").addClass("success");
+          } else {
+            $(this).closest(".mobile-input-container").removeClass("success");
+          }
+        });
+      }
+
+      function handleSignIn() {
+        const activeTab = $(".tab-button.active").data("tab");
+        const submitButton = $('#signin-form button[type="submit"]');
+
+        // Show loading
+        submitButton.addClass("loading");
+
         setTimeout(() => {
-            window.location.href = 'home.html';
+          submitButton.removeClass("loading");
+
+          if (activeTab === "mobile") {
+            // Show OTP page for mobile login
+            showOTPPage();
+          } else {
+            // For email and advocate ID, redirect directly to home page
+            window.location.href = "home.html";
+          }
         }, 1500);
+      }
+
+      function handleOTPVerification() {
+        const otpValue = $("#otp-input").val();
+        const submitButton = $('#otp-form button[type="submit"]');
+
+        if (otpValue.length !== 6) {
+          alert("Please enter a valid 6-digit OTP");
+          return;
+        }
+
+        // Show loading
+        submitButton.addClass("loading");
+
+        setTimeout(() => {
+          submitButton.removeClass("loading");
+          // Redirect directly to home page
+          window.location.href = "home.html";
+        }, 1500);
+      }
+
+      // Page navigation functions
+      function showSignIn() {
+        $("#otp-page").addClass("hidden");
+        $("#signin-page").removeClass("hidden").addClass("fade-in");
+        currentPage = "signin";
+      }
+
+      function showOTPPage() {
+        $("#signin-page").addClass("hidden");
+        $("#otp-page").removeClass("hidden").addClass("fade-in");
+        currentPage = "otp";
+      }
+
+      function resendOTP() {
+        alert("OTP resent successfully!");
+      }
+
+      // Utility functions
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validateMobile(mobile) {
+        const mobileRegex = /^[6-9]\d{9}$/;
+        return mobileRegex.test(mobile);
+      }
+
+      // Handle back button
+      window.addEventListener("popstate", function (e) {
+        if (currentPage !== "signin") {
+          showSignIn();
+        }
+      });
+
+      // Handle keyboard shortcuts
+      $(document).on("keydown", function (e) {
+        if (e.key === "Enter" && e.target.tagName === "INPUT") {
+          const form = $(e.target).closest("form");
+          if (form.length) {
+            form.submit();
+          }
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
