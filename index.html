@@ -2,24 +2,479 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Advocates - Legal Practice Management</title>
-    
+    <title>Calendar - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    
+
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/client/App.tsx"></script>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="index.html" class="side-menu-item active">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+          <div class="page-header">
+            <div class="page-title-section">
+              <h1>Calendar</h1>
+
+              <!-- Breadcrumb -->
+              <nav class="breadcrumb">
+                <a href="index.html" class="breadcrumb-item">
+                  <i class="fas fa-home"></i>
+                  Home
+                </a>
+                <span class="breadcrumb-separator">
+                  <i class="fas fa-chevron-right"></i>
+                </span>
+                <span class="breadcrumb-item active">
+                  <i class="fas fa-calendar"></i>
+                  Calendar
+                </span>
+              </nav>
+
+              <p class="page-subtitle">Hearings & Appointments</p>
+            </div>
+          </div>
+
+          <!-- Calendar Navigation -->
+          <div class="calendar-nav">
+            <div class="month-nav">
+              <button class="nav-btn" onclick="previousMonth()">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <div class="month-year" id="currentMonth">January 2024</div>
+              <button class="nav-btn" onclick="nextMonth()">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="calendar-actions">
+              <button class="action-btn create-appointment-btn">
+                Create Appointment
+              </button>
+              <button class="action-btn create-hearing-btn">
+                Create Hearings
+              </button>
+            </div>
+          </div>
+
+          <!-- Calendar Note -->
+          <div
+            class="calendar-note"
+            style="
+              text-align: center;
+              margin-bottom: 1rem;
+              font-size: 0.875rem;
+              color: var(--text-secondary);
+            "
+          >
+            Click on any date to view or add hearings
+          </div>
+
+          <!-- Calendar Grid -->
+          <div class="calendar-grid">
+            <!-- Calendar Headers -->
+            <div class="calendar-header">Sun</div>
+            <div class="calendar-header">Mon</div>
+            <div class="calendar-header">Tue</div>
+            <div class="calendar-header">Wed</div>
+            <div class="calendar-header">Thu</div>
+            <div class="calendar-header">Fri</div>
+            <div class="calendar-header">Sat</div>
+
+            <!-- Calendar Days -->
+            <div class="calendar-day other-month">
+              <div class="day-number">31</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(1)">
+              <div class="day-number">1</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(2)">
+              <div class="day-number">2</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(3)">
+              <div class="day-number">3</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(4)">
+              <div class="day-number">4</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(5)">
+              <div class="day-number">5</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(6)">
+              <div class="day-number">6</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(7)">
+              <div class="day-number">7</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(8)">
+              <div class="day-number">8</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(9)">
+              <div class="day-number">9</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(10)">
+              <div class="day-number">10</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(11)">
+              <div class="day-number">11</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(12)">
+              <div class="day-number">12</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(13)">
+              <div class="day-number">13</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(14)">
+              <div class="day-number">14</div>
+            </div>
+            <div class="calendar-day selected" onclick="handleDayClick(15)">
+              <div class="day-number">15</div>
+              <div class="day-events">
+                <div class="event-dot hearing"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(16)">
+              <div class="day-number">16</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+                <div class="event-dot appointment"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(17)">
+              <div class="day-number">17</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(18)">
+              <div class="day-number">18</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(19)">
+              <div class="day-number">19</div>
+              <div class="day-events">
+                <div class="event-dot"></div>
+              </div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(20)">
+              <div class="day-number">20</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(21)">
+              <div class="day-number">21</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(22)">
+              <div class="day-number">22</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(23)">
+              <div class="day-number">23</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(24)">
+              <div class="day-number">24</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(25)">
+              <div class="day-number">25</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(26)">
+              <div class="day-number">26</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(27)">
+              <div class="day-number">27</div>
+            </div>
+
+            <div class="calendar-day" onclick="handleDayClick(28)">
+              <div class="day-number">28</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(29)">
+              <div class="day-number">29</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(30)">
+              <div class="day-number">30</div>
+            </div>
+            <div class="calendar-day" onclick="handleDayClick(31)">
+              <div class="day-number">31</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">1</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">2</div>
+            </div>
+            <div class="calendar-day other-month">
+              <div class="day-number">3</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Today's Events -->
+          <div class="sidebar-section">
+            <div class="sidebar-header">
+              <div class="sidebar-title">Hearings</div>
+              <div class="date-info" id="selectedDate">January 15, 2024</div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active" onclick="switchTab('hearings')">Hearings</button>
+              <button class="tab" onclick="switchTab('appointments')">Appointments</button>
+            </div>
+
+            <div class="event-list">
+              <!-- Event 1 -->
+              <div class="event-item confirmed">
+                <div class="event-header">
+                  <div class="event-title">State vs. John Doe</div>
+                  <span class="event-status confirmed">Confirmed</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  10:30 AM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  District Court Room 3
+                </div>
+                <div class="event-judge">Hon'ble Justice A.K. Sharma</div>
+                <span class="event-type">Criminal</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+
+              <!-- Event 2 -->
+              <div class="event-item tentative">
+                <div class="event-header">
+                  <div class="event-title">Smith Property Dispute</div>
+                  <span class="event-status tentative">Tentative</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  2:00 PM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  High Court Room 12
+                </div>
+                <div class="event-judge">Hon'ble Justice B.K. Patel</div>
+                <span class="event-type">Civil</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+
+              <!-- Event 3 -->
+              <div class="event-item confirmed">
+                <div class="event-header">
+                  <div class="event-title">ABC Corp Merger</div>
+                  <span class="event-status confirmed">Confirmed</span>
+                </div>
+                <div class="event-time">
+                  <i class="fas fa-clock"></i>
+                  11:00 AM
+                </div>
+                <div class="event-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  NCLT Chamber 2
+                </div>
+                <div class="event-judge">Hon'ble Justice C.R. Singh</div>
+                <span class="event-type">Corporate</span>
+                <div class="event-actions">
+                  <button class="details-btn">Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item active">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Global variables
+      let currentMonth = "January 2024";
+      let selectedDate = "January 15, 2024";
+      let activeTab = "hearings";
+
+      // Side menu functions
+      function openSideMenu() {
+        document.getElementById("sideMenu").classList.add("open");
+        document.getElementById("sideMenuOverlay").classList.add("show");
+      }
+
+      function closeSideMenu() {
+        document.getElementById("sideMenu").classList.remove("open");
+        document.getElementById("sideMenuOverlay").classList.remove("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Calendar functions
+      function handleDayClick(day) {
+        // Remove selected class from all days
+        document.querySelectorAll('.calendar-day').forEach(dayEl => {
+          dayEl.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked day
+        event.currentTarget.classList.add('selected');
+        
+        // Update selected date
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+        const currentMonthName = currentMonth.split(" ")[0];
+        const currentYear = currentMonth.split(" ")[1];
+        selectedDate = `${currentMonthName} ${day}, ${currentYear}`;
+        
+        document.getElementById('selectedDate').textContent = selectedDate;
+      }
+
+      function switchTab(tab) {
+        // Update active tab
+        activeTab = tab;
+        
+        // Update tab buttons
+        document.querySelectorAll('.tab').forEach(tabEl => {
+          tabEl.classList.remove('active');
+        });
+        
+        event.target.classList.add('active');
+      }
+
+      function previousMonth() {
+        console.log("Previous month");
+        // Implement month navigation logic
+      }
+
+      function nextMonth() {
+        console.log("Next month");
+        // Implement month navigation logic
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking overlay
+        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+      });
+    </script>
   </body>
 </html>
