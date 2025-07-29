@@ -1067,13 +1067,32 @@
           // Add specific functionality for each feature
           switch (featureTitle) {
             case "Settings":
-              // Navigate to settings page
+              openSettings();
+              break;
+            case "Notifications":
+              openNotifications();
               break;
             case "Legal Research":
               // Open legal research tool
+              alert('Opening Legal Research...');
               break;
             case "Add Article":
               window.location.href = "articles.html";
+              break;
+            case "Add Hearing":
+              window.location.href = "create-hearing.html";
+              break;
+            case "Legal Templates":
+              alert('Opening Legal Templates...');
+              break;
+            case "File Upload":
+              alert('Opening File Upload...');
+              break;
+            case "Privacy & Security":
+              alert('Opening Privacy & Security...');
+              break;
+            case "Help & Support":
+              alert('Opening Help & Support...');
               break;
             // Add more cases as needed
             default:
