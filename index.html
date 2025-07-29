@@ -711,7 +711,7 @@
           "enter-password": "अपना पासवर्ड दर्ज करें",
           "enter-mobile": "10-अंकीय मोबाइल नंबर दर्ज करें",
           "enter-otp": "OTP दर्ज करें",
-          "didnt-receive": "OTP नहीं मिला?",
+          "didnt-receive": "OTP नह���ं मिला?",
           resend: "पुनः भेजें",
         },
         ta: {
@@ -729,7 +729,7 @@
           "verify-otp": "OTP சரிபார்க்க",
           "no-account": "கணக்கு இல்லையா?",
           "sign-up-here": "இங்கே பதிவு செய்யவும்",
-          "enter-password": "உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
+          "enter-password": "உங்கள் கடவு��்சொல்லை உள்ளிடவும்",
           "enter-mobile": "10-இலக்க மொபைல் எண்ணை உள்ளிடவும்",
           "enter-otp": "OTP உள்ளிடவும்",
           "didnt-receive": "OTP கிடைக்கவில்லையா?",
@@ -786,7 +786,7 @@
           email: "ইমেইল",
           "bar-council-id": "বার কাউন্সিল ID",
           password: "পাসওয়ার্ড",
-          "mobile-number": "মোবাইল নম্বর",
+          "mobile-number": "মোবাইল ��ম্বর",
           "sign-in": "সাইন ইন",
           "send-otp": "OTP পাঠান",
           "verify-otp": "OTP যাচাই করুন",
@@ -859,6 +859,7 @@
         $("#language-select").on("change", function () {
           currentLanguage = $(this).val();
           localStorage.setItem("preferred-language", currentLanguage);
+          localStorage.setItem("app-language", currentLanguage); // Global app language
           updateLanguage();
         });
       }
@@ -879,6 +880,12 @@
             $(this).attr("placeholder", lang[key]);
           }
         });
+      }
+
+      // Global language setter for other pages
+      function setGlobalLanguage(language) {
+        localStorage.setItem("app-language", language);
+        localStorage.setItem("preferred-language", language);
       }
 
       // Form handling
