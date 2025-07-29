@@ -1249,6 +1249,21 @@ Advocate: ${appointmentData.advocate_name}`;
             closeCreateHearingModal();
           }
         });
+
+        // Close appointment modal when clicking overlay
+        document.getElementById('createAppointmentModal').addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeCreateAppointmentModal();
+          }
+        });
+
+        // Add event listener for meeting location dropdown
+        const meetingLocationSelect = document.querySelector('select[name="meeting_location"]');
+        if (meetingLocationSelect) {
+          meetingLocationSelect.addEventListener('change', function() {
+            handleMeetingLocationChange(this.value);
+          });
+        }
       });
     </script>
   </body>
