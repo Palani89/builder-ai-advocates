@@ -2639,6 +2639,163 @@
           sendMessage();
         }
       });
+
+      // Edit Case Modal Functions
+      function openEditCaseModal() {
+        // Populate form with current case data
+        $('#editCaseTitle').val($('#caseTitle').text());
+        $('#editCaseNumber').val($('#caseNumber').text());
+        $('#editCourtName').val($('#courtName').text());
+        $('#editJudgeName').val($('#judgeName').text());
+        $('#editSeniorAdvocate').val($('#seniorAdvocate').text());
+        $('#editNextHearing').val('2024-01-15T10:30');
+        $('#editFiledDate').val('2023-12-20');
+
+        // Show modal
+        $('#editCaseModal').show();
+      }
+
+      function closeEditCaseModal() {
+        $('#editCaseModal').hide();
+        $('#editCaseForm')[0].reset();
+      }
+
+      function saveCaseChanges() {
+        const form = $('#editCaseForm')[0];
+        const formData = new FormData(form);
+
+        // Basic validation
+        if (!formData.get('caseTitle') || !formData.get('caseNumber')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Update the page with new values
+        $('#caseTitle').text(formData.get('caseTitle'));
+        $('#caseNumber').text(formData.get('caseNumber'));
+        $('#courtName').text(formData.get('courtName'));
+        $('#judgeName').text(formData.get('judgeName'));
+        $('#seniorAdvocate').text(formData.get('seniorAdvocate'));
+
+        // Update other fields as needed
+        if (formData.get('nextHearing')) {
+          const nextHearingDate = new Date(formData.get('nextHearing'));
+          $('#nextHearing').text(nextHearingDate.toLocaleDateString('en-IN'));
+        }
+
+        if (formData.get('filedDate')) {
+          const filedDate = new Date(formData.get('filedDate'));
+          $('#filedDate').text(filedDate.toLocaleDateString('en-IN'));
+        }
+
+        // Close modal
+        closeEditCaseModal();
+
+        alert('Case details updated successfully!');
+      }
+
+      // Add Update Modal Functions
+      function openAddUpdateModal() {
+        // Set current date/time as default
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        $('#updateDate').val(now.toISOString().slice(0, 16));
+
+        $('#addUpdateModal').show();
+      }
+
+      function closeAddUpdateModal() {
+        $('#addUpdateModal').hide();
+        $('#addUpdateForm')[0].reset();
+      }
+
+      function saveUpdate() {
+        const form = $('#addUpdateForm')[0];
+        const formData = new FormData(form);
+
+        // Basic validation
+        if (!formData.get('updateTitle') || !formData.get('updateNotes')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Create new update object
+        const newUpdate = {
+          title: formData.get('updateTitle'),
+          date: formData.get('updateDate'),
+          category: formData.get('updateCategory'),
+          priority: formData.get('updatePriority'),
+          notes: formData.get('updateNotes'),
+          nextAction: formData.get('nextAction'),
+          documents: formData.get('documentsAttached')
+        };
+
+        // Add to timeline (you can extend this to add to a global updates array)
+        addUpdateToTimeline(newUpdate);
+
+        // Close modal
+        closeAddUpdateModal();
+
+        alert('Update added successfully!');
+      }
+
+      function addUpdateToTimeline(update) {
+        const updateDate = new Date(update.date);
+        const formattedDate = updateDate.toLocaleDateString('en-IN', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+
+        const priorityColor = {
+          'Low': '#10b981',
+          'Medium': '#f59e0b',
+          'High': '#ef4444',
+          'Urgent': '#dc2626'
+        };
+
+        const newTimelineItem = `
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-title">${update.title}</span>
+                <span class="timeline-date">${formattedDate}</span>
+              </div>
+              <div class="timeline-description">
+                ${update.category ? `<strong>Category:</strong> ${update.category}<br>` : ''}
+                <strong>Priority:</strong> <span style="color: ${priorityColor[update.priority] || '#64748b'}">${update.priority}</span><br>
+                <strong>Notes:</strong> ${update.notes}
+                ${update.nextAction ? `<br><strong>Next Action:</strong> ${update.nextAction}` : ''}
+                ${update.documents ? `<br><strong>Documents:</strong> ${update.documents}` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Add to both full timeline and recent updates
+        $('#fullTimeline').prepend(newTimelineItem);
+
+        // Also add to recent updates in overview (limit to 2 items)
+        const recentUpdatesTimeline = $('.sidebar .timeline');
+        recentUpdatesTimeline.prepend(newTimelineItem);
+
+        // Remove oldest item if more than 2
+        const recentItems = recentUpdatesTimeline.find('.timeline-item');
+        if (recentItems.length > 2) {
+          recentItems.last().remove();
+        }
+      }
+
+      // Modal overlay clicks to close
+      $('#editCaseModal, #addUpdateModal').on('click', function(e) {
+        if (e.target === this) {
+          if (this.id === 'editCaseModal') {
+            closeEditCaseModal();
+          } else if (this.id === 'addUpdateModal') {
+            closeAddUpdateModal();
+          }
+        }
+      });
     </script>
   </body>
 </html>
