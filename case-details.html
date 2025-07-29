@@ -2794,6 +2794,156 @@
         }
       }
 
+      // Load case history details
+      function loadCaseHistoryDetails() {
+        // Sample case history data - in reality this would come from your backend
+        const caseHistoryData = {
+          previousAdvocate: {
+            name: "Mr. Rajesh Kumar",
+            registrationNo: "D/1234/2015",
+            lawFirm: "Kumar & Associates",
+            periodFrom: "2023-01-15",
+            periodTo: "2023-11-30",
+            transferReason: "Specialization Required",
+            handoverDate: "2023-12-15",
+            remarks: "Case was transferred due to requirement of specialized expertise in economic offenses. All documents have been properly handed over along with complete case history and client briefing notes."
+          },
+          historicalEvents: [
+            {
+              date: "2023-12-15",
+              eventType: "Case Transfer",
+              court: "District Court, Delhi",
+              judge: "Hon'ble Justice A.K. Sharma",
+              remarks: "Case transferred to current advocate with specialized expertise in economic offense cases",
+              orderSummary: "Transfer order passed with all records handed over",
+              nextHearingDate: "2024-01-15",
+              documentType: "Transfer Order",
+              appealStatus: "Not Applicable",
+              notifyClient: "Yes"
+            },
+            {
+              date: "2023-11-28",
+              eventType: "Hearing",
+              court: "District Court, Delhi",
+              judge: "Hon'ble Justice A.K. Sharma",
+              remarks: "Previous advocate requested transfer due to specialization requirements. Court granted time for proper handover",
+              orderSummary: "Transfer motion allowed, next hearing scheduled after new advocate appointment",
+              nextHearingDate: "2023-12-20",
+              documentType: "Order Copy",
+              appealStatus: "Not Applicable",
+              notifyClient: "Yes"
+            },
+            {
+              date: "2023-10-22",
+              eventType: "Evidence Submission",
+              court: "District Court, Delhi",
+              judge: "Hon'ble Justice A.K. Sharma",
+              remarks: "Key financial documents submitted by prosecution. Defense sought time to analyze complex financial evidence",
+              orderSummary: "Evidence admitted, defense granted 3 weeks to file reply",
+              nextHearingDate: "2023-11-15",
+              documentType: "Evidence Document",
+              appealStatus: "Not Applicable",
+              notifyClient: "Yes"
+            },
+            {
+              date: "2023-09-18",
+              eventType: "Adjournment",
+              court: "District Court, Delhi",
+              judge: "Hon'ble Justice A.K. Sharma",
+              remarks: "Prosecution sought adjournment to gather additional financial records from bank",
+              orderSummary: "Adjournment granted on prosecution's request",
+              nextHearingDate: "2023-10-22",
+              documentType: "Adjournment Order",
+              appealStatus: "Not Applicable",
+              notifyClient: "Yes"
+            },
+            {
+              date: "2023-08-25",
+              eventType: "Filing",
+              court: "District Court, Delhi",
+              judge: "Hon'ble Justice A.K. Sharma",
+              remarks: "Initial bail application filed by previous advocate",
+              orderSummary: "Bail application accepted for hearing",
+              nextHearingDate: "2023-09-18",
+              documentType: "Application",
+              appealStatus: "Not Applicable",
+              notifyClient: "Yes"
+            }
+          ]
+        };
+
+        // Populate previous advocate details
+        if (caseHistoryData.previousAdvocate) {
+          const prev = caseHistoryData.previousAdvocate;
+          $('#prevAdvocateName').text(prev.name);
+          $('#prevAdvocateReg').text(prev.registrationNo);
+          $('#prevLawFirm').text(prev.lawFirm);
+
+          const periodFrom = new Date(prev.periodFrom).toLocaleDateString('en-IN', { year: 'numeric', month: 'short' });
+          const periodTo = new Date(prev.periodTo).toLocaleDateString('en-IN', { year: 'numeric', month: 'short' });
+          $('#prevPeriod').text(`${periodFrom} - ${periodTo}`);
+
+          $('#transferReason').text(prev.transferReason);
+          $('#handoverDate').text(new Date(prev.handoverDate).toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }));
+          $('#handoverRemarks').text(prev.remarks);
+        }
+
+        // Populate historical events timeline
+        if (caseHistoryData.historicalEvents && caseHistoryData.historicalEvents.length > 0) {
+          const timeline = $('#caseHistoryTimeline');
+          timeline.empty();
+
+          caseHistoryData.historicalEvents.forEach(event => {
+            const eventDate = new Date(event.date).toLocaleDateString('en-IN', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            });
+
+            const nextHearingDate = event.nextHearingDate ?
+              new Date(event.nextHearingDate).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              }) : 'N/A';
+
+            const timelineItem = `
+              <div class="timeline-item">
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <span class="timeline-title">${event.eventType}</span>
+                    <span class="timeline-date">${eventDate}</span>
+                  </div>
+                  <div class="timeline-description">
+                    <strong>Court:</strong> ${event.court}<br>
+                    <strong>Judge:</strong> ${event.judge}<br>
+                    <strong>Summary:</strong> ${event.remarks}
+                    ${event.orderSummary ? `<br><strong>Order:</strong> ${event.orderSummary}` : ''}
+                    ${event.nextHearingDate ? `<br><strong>Next Hearing:</strong> ${nextHearingDate}` : ''}
+                    ${event.documentType !== 'Not Applicable' ? `<br><strong>Document Type:</strong> ${event.documentType}` : ''}
+                    ${event.appealStatus !== 'Not Applicable' ? `<br><strong>Appeal Status:</strong> ${event.appealStatus}` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+
+            timeline.append(timelineItem);
+          });
+        } else {
+          // Show message if no case history
+          $('#caseHistoryTimeline').html(`
+            <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+              <i class="fas fa-history" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+              <p>No previous case history available.</p>
+            </div>
+          `);
+        }
+      }
+
       // Modal overlay clicks to close
       $('#addUpdateModal').on('click', function(e) {
         if (e.target === this) {
