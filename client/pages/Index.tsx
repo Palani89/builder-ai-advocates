@@ -338,26 +338,26 @@ export default function Index() {
         {/* Bottom Navigation */}
         <div className="bottom-nav">
           <div className="nav-items">
-            <a href="#" className="nav-item">
+            <Link to="/" className="nav-item">
               <i className="fas fa-home"></i>
               Home
-            </a>
-            <a href="#" className="nav-item">
+            </Link>
+            <Link to="/team" className="nav-item">
               <i className="fas fa-users"></i>
               My Team
-            </a>
-            <a href="#" className="nav-item">
+            </Link>
+            <Link to="/cases" className="nav-item">
               <i className="fas fa-file-alt"></i>
               Cases
-            </a>
-            <a href="#" className="nav-item active">
+            </Link>
+            <Link to="/calendar" className="nav-item active">
               <i className="fas fa-calendar"></i>
               Calendar
-            </a>
-            <a href="#" className="nav-item">
+            </Link>
+            <Link to="/more" className="nav-item">
               <i className="fas fa-th"></i>
               More
-            </a>
+            </Link>
           </div>
         </div>
       </div>
