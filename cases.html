@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cases - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item active">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>Cases</h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="index.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-file-alt"></i>
+                Cases
+              </span>
+            </nav>
+
+            <p class="page-subtitle">Manage your legal cases and proceedings</p>
+          </div>
+
+          <!-- Action Button -->
+          <button class="add-case-btn" onclick="window.location.href='create-case.html'">
+            <i class="fas fa-plus"></i>
+            Add New Case
+          </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab('todays')">Today's</div>
+            <div class="tab" onclick="switchTab('upcoming')">Upcoming</div>
+            <div class="tab" onclick="switchTab('disposed')">Disposed</div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Enter Case Number"
+              oninput="handleSearch(this.value)"
+            />
+          </div>
+        </div>
+
+        <!-- Cases List -->
+        <div class="cases-list">
+          <!-- Case 1 -->
+          <div class="case-card" data-searchable="state vs john doe criminal bail section 420">
+            <div class="case-header">
+              <div>
+                <div class="case-title">State vs. John Doe</div>
+                <div class="case-subtitle">
+                  Client: John Doe | Opponent: State of Delhi
+                </div>
+              </div>
+              <div class="case-status">
+                <span class="status-badge active">Active</span>
+                <span class="status-badge criminal">Criminal</span>
+              </div>
+            </div>
+
+            <div class="case-details">
+              <div class="case-detail">
+                <span class="detail-label">Court</span>
+                <span class="detail-value">District Court, Delhi</span>
+              </div>
+              <div class="case-detail">
+                <span class="detail-label">Judge</span>
+                <span class="detail-value">Hon'ble Justice A.K. Sharma</span>
+              </div>
+              <div class="case-detail">
+                <span class="detail-label">Next Hearing</span>
+                <span class="detail-value">2024-01-15</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
+              <span class="tag">Bail</span>
+              <span class="tag">Section 420</span>
+              <span class="tag">Economic Offense</span>
+            </div>
+
+            <div class="case-actions">
+              <button class="action-btn view-btn" onclick="viewCaseDetails('1')">
+                View Details
+              </button>
+              <button class="action-btn update-btn">Update Case</button>
+            </div>
+
+            <div class="case-meta">Last updated: 2024-01-10</div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="case-card" data-searchable="smith property dispute civil injunction">
+            <div class="case-header">
+              <div>
+                <div class="case-title">Smith Property Dispute</div>
+                <div class="case-subtitle">
+                  Client: Mr. Smith | Opponent: ABC Developers
+                </div>
+              </div>
+              <div class="case-status">
+                <span class="status-badge pending">Pending</span>
+                <span class="status-badge civil">Civil</span>
+              </div>
+            </div>
+
+            <div class="case-details">
+              <div class="case-detail">
+                <span class="detail-label">Court</span>
+                <span class="detail-value">High Court, Delhi</span>
+              </div>
+              <div class="case-detail">
+                <span class="detail-label">Judge</span>
+                <span class="detail-value">Hon'ble Justice B.K. Patel</span>
+              </div>
+              <div class="case-detail">
+                <span class="detail-label">Next Hearing</span>
+                <span class="detail-value">2024-01-18</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem; margin: 1rem 0">
+              <span class="tag">Property</span>
+              <span class="tag">Civil Suit</span>
+              <span class="tag">Injunction</span>
+            </div>
+
+            <div class="case-actions">
+              <button class="action-btn view-btn" onclick="viewCaseDetails('2')">
+                View Details
+              </button>
+              <button class="action-btn update-btn">Update Case</button>
+            </div>
+
+            <div class="case-meta">Last updated: 2024-01-08</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item active">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Global variables
+      let activeTab = 'todays';
+
+      // Side menu functions
+      function openSideMenu() {
+        document.getElementById("sideMenu").classList.add("open");
+        document.getElementById("sideMenuOverlay").classList.add("show");
+      }
+
+      function closeSideMenu() {
+        document.getElementById("sideMenu").classList.remove("open");
+        document.getElementById("sideMenuOverlay").classList.remove("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Tab switching
+      function switchTab(tab) {
+        activeTab = tab;
+        
+        // Update tab buttons
+        document.querySelectorAll('.tab').forEach(tabEl => {
+          tabEl.classList.remove('active');
+        });
+        
+        event.target.classList.add('active');
+        
+        console.log(`Switched to ${tab} tab`);
+      }
+
+      // Search functionality
+      function handleSearch(searchTerm) {
+        const searchTermLower = searchTerm.toLowerCase();
+        const caseCards = document.querySelectorAll('.case-card');
+        
+        caseCards.forEach(card => {
+          const searchableText = card.getAttribute('data-searchable');
+          
+          if (searchableText.includes(searchTermLower)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // View case details
+      function viewCaseDetails(caseId) {
+        window.location.href = `case-details.html?id=${caseId}`;
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking overlay
+        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+      });
+    </script>
+
+    <style>
+      .tag {
+        padding: 0.25rem 0.75rem;
+        background: var(--background);
+        color: var(--text-secondary);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        border: 1px solid var(--border);
+      }
+    </style>
+  </body>
+</html>
