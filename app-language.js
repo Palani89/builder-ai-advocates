@@ -123,7 +123,7 @@ const APP_TRANSLATIONS = {
     "welcome-back": "वापसी पर स्वागत",
     dashboard: "डैशबोर्ड",
     "quick-actions": "त्वरित कार्य",
-    "create-case": "मामला बनाए���",
+    "create-case": "मामला बनाएं",
     "schedule-hearing": "सुनवाई निर्धारित करें",
     "add-appointment": "अपॉइंटमेंट जोड़ें",
     "recent-cases": "हाल के मामले",
@@ -144,7 +144,7 @@ const APP_TRANSLATIONS = {
     "client-name": "मुवक्किल का नाम",
     "case-number": "मामला संख्या",
     "filing-date": "दाखिल करने की तारीख",
-    "case-priority": "मामले की प्राथमिकता",
+    "case-priority": "मामले की प���राथमिकता",
     high: "उच्च",
     medium: "मध्यम",
     low: "कम",
@@ -177,7 +177,7 @@ const APP_TRANSLATIONS = {
     precedents: "पूर्व उदाहरण",
     articles: "लेख",
     "research-documents": "अनुसंधान दस्तावेज",
-    "add-document": "दस्तावेज जोड़ें",
+    "add-document": "दस्तावे�� जोड़ें",
 
     // Legal Templates
     "legal-templates": "कानूनी टेम्प्लेट्स",
@@ -194,6 +194,13 @@ const APP_TRANSLATIONS = {
     "privacy-security": "गोपनीयता और सुरक्षा",
     "billing-payments": "बिलिंग और भुगतान",
     analytics: "विश्लेषिकी",
+
+    // Form fields
+    "first-name": "प्रथम नाम",
+    "last-name": "अंतिम नाम",
+    "email-address": "ईमेल पता",
+    "create-account": "खाता बनाएं",
+    bookmark: "बुकमार्क",
   },
 
   ta: {
