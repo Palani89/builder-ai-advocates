@@ -120,9 +120,9 @@ const APP_TRANSLATIONS = {
     upload: "अपलोड",
 
     // Home Page
-    "welcome-back": "वापसी पर स्वागत",
+    "welcome-back": "व��पसी पर स्वागत",
     dashboard: "डैशबोर्ड",
-    "quick-actions": "त्��रित कार्य",
+    "quick-actions": "त्वरित कार्य",
     "create-case": "मामला बनाएं",
     "schedule-hearing": "सुनवाई निर्धारित करें",
     "add-appointment": "अपॉइंटमेंट जोड़ें",
@@ -144,7 +144,7 @@ const APP_TRANSLATIONS = {
     "client-name": "मुवक्किल का नाम",
     "case-number": "मामला संख्या",
     "filing-date": "दाखिल करने की तारीख",
-    "case-priority": "मामल��� की प्राथमिकता",
+    "case-priority": "मामले की प्राथमिकता",
     high: "उच्च",
     medium: "मध्यम",
     low: "कम",
@@ -205,10 +205,10 @@ const APP_TRANSLATIONS = {
 
   ta: {
     // Common
-    home: "முகப்பு",
+    home: "முகப்ப���",
     team: "எனது குழு",
     cases: "வழக்குகள்",
-    calendar: "நாட���காட்டி",
+    calendar: "நாட்காட்டி",
     more: "மேலும்",
     logout: "வெளியேறு",
     settings: "அமைப்புகள்",
@@ -234,7 +234,7 @@ const APP_TRANSLATIONS = {
     "upcoming-hearings": "வரும் விசாரணைகள்",
     "wallet-balance": "வாலெட் இருப்பு",
     recharge: "ரீசார்ஜ்",
-    "active-cases": "ச���யலில் உள்ள வழக்குகள்",
+    "active-cases": "செயலில் உள்ள வழக்குகள்",
     "completed-cases": "முடிந்த வழக்குகள்",
     "total-earnings": "மொத்த வருமானம்",
     "pending-payments": "நிலுவை பணம்",
@@ -259,7 +259,7 @@ const APP_TRANSLATIONS = {
     "add-member": "உறுப்பினர் சேர்",
     "assign-task": "பணி ஒதுக்கு",
     contact: "தொடர்பு",
-    role: "பாத்திரம��",
+    role: "பாத்திரம்",
     experience: "அனுபவம்",
     specialization: "சிறப்பு",
     availability: "கிடைக்கும் தன்மை",
@@ -319,6 +319,17 @@ const APP_TRANSLATIONS = {
     "completed-cases": "ಪೂರ್ಣಗೊಂಡ ಪ್ರಕರಣಗಳು",
     "total-earnings": "ಒಟ್ಟು ಗಳಿಕೆ",
     "pending-payments": "ಬಾಕಿ ಪಾವತಿಗಳು",
+
+    // Form fields and common elements
+    "first-name": "ಮೊದಲ ಹೆಸರು",
+    "last-name": "ಕೊನೆಯ ಹೆಸರು",
+    "email-address": "ಇಮೇಲ್ ವಿಳಾಸ",
+    "create-account": "ಖಾತೆ ರಚಿಸಿ",
+    bookmark: "ಬುಕ್‌ಮಾರ್ಕ್",
+    "legal-research": "ಕಾನೂನು ಸಂಶೋಧನೆ",
+    "legal-templates": "ಕಾನೂನು ಟೆಂಪ್ಲೇಟ್‌ಗಳು",
+    "assign-task": "ಕಾರ್ಯ ನಿಯೋಜಿಸಿ",
+    contact: "ಸಂಪರ್ಕಿಸಿ",
   },
 
   mr: {
@@ -348,7 +359,7 @@ const APP_TRANSLATIONS = {
     "create-case": "प्रकरण तयार करा",
     "schedule-hearing": "सुनावणी निर्धारित करा",
     "add-appointment": "भेटीची वेळ जोडा",
-    "recent-cases": "अलीकडील प्रकर���े",
+    "recent-cases": "अलीकडील प्रकरणे",
     "upcoming-hearings": "येणाऱ्या सुनावणी",
     "wallet-balance": "वॉलेट शिल्लक",
     recharge: "रीचार्ज",
