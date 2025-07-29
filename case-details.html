@@ -20,11 +20,650 @@
       rel="stylesheet"
     />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="client/global.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .app-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        min-height: 100vh;
+        padding-bottom: 80px;
+      }
+
+      /* Header Styles */
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 2rem 0;
+        gap: 2rem;
+      }
+
+      .page-info {
+        flex: 1;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .breadcrumb {
+        list-style: none;
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item:not(:last-child)::after {
+        content: ">";
+        margin-left: 0.5rem;
+        color: var(--text-muted);
+      }
+
+      .breadcrumb-item:last-child {
+        color: var(--primary);
+        font-weight: 500;
+      }
+
+      .page-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-shrink: 0;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        background: var(--surface);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--border-active);
+        color: var(--primary);
+      }
+
+      .btn-warning {
+        background: var(--warning);
+        color: white;
+      }
+
+      .btn-warning:hover {
+        background: #d97706;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Case Header Card */
+      .case-header-card {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+
+      .case-title-section {
+        flex: 1;
+      }
+
+      .case-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .case-subtitle {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .case-status-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+      }
+
+      .status-badge.active {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .status-badge.pending {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .status-badge.criminal {
+        background: #fecaca;
+        color: #991b1b;
+      }
+
+      .status-badge.civil {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      .tags-container {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background: var(--background);
+        color: var(--text-secondary);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        border: 1px solid var(--border);
+      }
+
+      .case-quick-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        flex-shrink: 0;
+        min-width: 400px;
+      }
+
+      .quick-info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .info-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .info-value {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      /* Tab Navigation */
+      .tab-navigation {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .tab-buttons {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        font-weight: 500;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.875rem;
+      }
+
+      .tab-btn.active {
+        background: var(--primary);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .tab-btn:hover:not(.active) {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      /* Tab Content */
+      .tab-content {
+        min-height: 400px;
+      }
+
+      .tab-pane {
+        display: none;
+      }
+
+      .tab-pane.active {
+        display: block;
+      }
+
+      /* Content Container */
+      .content-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+      }
+
+      .main-details,
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      /* Section Styles */
+      .detail-section {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-icon {
+        width: 20px;
+        height: 20px;
+        color: var(--primary);
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      .section-content {
+        color: var(--text-secondary);
+      }
+
+      .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .detail-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .detail-value {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      /* Document Styles */
+      .document-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .document-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 0.75rem;
+        border: 1px solid var(--border);
+        transition: all 0.2s ease;
+      }
+
+      .document-item:hover {
+        border-color: var(--border-active);
+        box-shadow: var(--shadow);
+      }
+
+      .document-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+      }
+
+      .document-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.5rem;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .document-details {
+        flex: 1;
+      }
+
+      .document-name {
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .document-meta {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .document-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .doc-action-btn {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: var(--surface);
+        color: var(--text-secondary);
+        border-radius: 0.375rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        border: 1px solid var(--border);
+      }
+
+      .doc-action-btn:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      /* Timeline Styles */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0.75rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -0.375rem;
+        top: 0.5rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background: var(--primary);
+        border: 2px solid var(--surface);
+      }
+
+      .timeline-content {
+        background: var(--background);
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border);
+      }
+
+      .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .timeline-title {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .timeline-date {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .timeline-description {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 1rem 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        transition: all 0.2s ease;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        min-width: 60px;
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--primary);
+        background: rgba(79, 70, 229, 0.1);
+      }
+
+      /* Full width containers for non-overview tabs */
+      .documents-container,
+      .timeline-container {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-muted);
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      .empty-state p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .app-container {
+          padding: 0 0.5rem;
+          padding-bottom: 80px;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .page-actions {
+          flex-wrap: wrap;
+        }
+
+        .case-header-card {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .case-quick-info {
+          min-width: auto;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 1rem;
+        }
+
+        .content-container {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .tab-buttons {
+          flex-wrap: wrap;
+        }
+
+        .tab-btn {
+          flex: 1;
+          min-width: 120px;
+        }
+      }
+    </style>
   </head>
+
   <body>
     <div class="app-container">
       <div class="app-content">
@@ -46,7 +685,10 @@
           </div>
 
           <div class="page-actions">
-            <button class="btn btn-secondary" onclick="window.location.href='cases.html'">
+            <button
+              class="btn btn-secondary"
+              onclick="window.location.href='cases.html'"
+            >
               <i class="fas fa-arrow-left"></i>
               Back to Cases
             </button>
@@ -87,11 +729,15 @@
             </div>
             <div class="quick-info-item">
               <span class="info-label">Court</span>
-              <span class="info-value" id="courtName">District Court, Delhi</span>
+              <span class="info-value" id="courtName"
+                >District Court, Delhi</span
+              >
             </div>
             <div class="quick-info-item">
               <span class="info-label">Judge</span>
-              <span class="info-value" id="judgeName">Hon'ble Justice A.K. Sharma</span>
+              <span class="info-value" id="judgeName"
+                >Hon'ble Justice A.K. Sharma</span
+              >
             </div>
             <div class="quick-info-item">
               <span class="info-label">Next Hearing</span>
@@ -162,6 +808,44 @@
                   </div>
                 </div>
 
+                <!-- Parties Involved -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-users section-icon"></i>
+                    <h3 class="section-title">Parties Involved</h3>
+                  </div>
+                  <div class="section-content">
+                    <div class="detail-grid">
+                      <div class="detail-item">
+                        <span class="detail-label">Petitioner/Complainant</span>
+                        <span class="detail-value">State of Delhi</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Respondent/Accused</span>
+                        <span class="detail-value">John Doe</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Client</span>
+                        <span class="detail-value">John Doe</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Client Contact</span>
+                        <span class="detail-value">+91 9876543210</span>
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Client Address</span>
+                        <span class="detail-value"
+                          >123, ABC Colony, Delhi - 110092</span
+                        >
+                      </div>
+                      <div class="detail-item">
+                        <span class="detail-label">Opposite Counsel</span>
+                        <span class="detail-value">Public Prosecutor</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Case Summary -->
                 <div class="detail-section">
                   <div class="section-header">
@@ -225,7 +909,9 @@
                     </div>
                     <div class="detail-item" style="margin-bottom: 1rem">
                       <span class="detail-label">Balance Due</span>
-                      <span class="detail-value" style="color: var(--error)">₹1,00,000</span>
+                      <span class="detail-value" style="color: var(--error)"
+                        >₹1,00,000</span
+                      >
                     </div>
                     <div class="detail-item">
                       <span class="detail-label">Payment Status</span>
@@ -233,237 +919,146 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- Recent Updates -->
+                <div class="detail-section">
+                  <div class="section-header">
+                    <i class="fas fa-clock section-icon"></i>
+                    <h3 class="section-title">Recent Updates</h3>
+                  </div>
+                  <div class="section-content">
+                    <div class="timeline">
+                      <div class="timeline-item">
+                        <div class="timeline-content">
+                          <div class="timeline-header">
+                            <span class="timeline-title">Bail Application Filed</span>
+                            <span class="timeline-date">Dec 22, 2023</span>
+                          </div>
+                          <div class="timeline-description">
+                            Bail application submitted to the court.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-item">
+                        <div class="timeline-content">
+                          <div class="timeline-header">
+                            <span class="timeline-title">FIR Received</span>
+                            <span class="timeline-date">Dec 20, 2023</span>
+                          </div>
+                          <div class="timeline-description">
+                            Copy of FIR obtained from police station.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Hearings Tab -->
+          <!-- Other tabs content would go here -->
+          <!-- For brevity, I'm showing the basic structure -->
           <div class="tab-pane" id="hearings-tab">
-            <div class="hearings-container">
-              <div class="hearings-header">
-                <h2>Case Hearings</h2>
-                <button class="btn btn-primary" onclick="openAddHearingModal()">
-                  <i class="fas fa-plus"></i>
-                  Add Hearing
-                </button>
+            <div class="documents-container">
+              <div class="section-header">
+                <i class="fas fa-calendar section-icon"></i>
+                <h3 class="section-title">Case Hearings</h3>
               </div>
-
-              <div class="hearings-grid">
-                <!-- Upcoming Hearings -->
-                <div class="hearings-section">
-                  <h3 class="section-title">
-                    <i class="fas fa-calendar-plus"></i>
-                    Upcoming Hearings
-                  </h3>
-                  <div class="hearings-list" id="upcomingHearings">
-                    <div class="hearing-item">
-                      <div class="hearing-header">
-                        <div>
-                          <div class="hearing-date">Monday, January 15, 2024</div>
-                          <div style="color: var(--text-secondary); font-size: 0.875rem">10:30 AM</div>
-                        </div>
-                        <span class="hearing-status scheduled">Scheduled</span>
-                      </div>
-                      
-                      <div class="hearing-info">
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Court</div>
-                          <div class="hearing-value">District Court, Delhi</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Room</div>
-                          <div class="hearing-value">Court Room 7</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Judge</div>
-                          <div class="hearing-value">Hon'ble Justice A.K. Sharma</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Type</div>
-                          <div class="hearing-value">Bail Application</div>
-                        </div>
-                      </div>
-                      
-                      <div class="hearing-notes">Bail application to be presented with supporting documents</div>
-                      
-                      <div class="hearing-actions">
-                        <button class="action-btn edit">
-                          <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="action-btn view">
-                          <i class="fas fa-eye"></i> View Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Past Hearings -->
-                <div class="hearings-section">
-                  <h3 class="section-title">
-                    <i class="fas fa-history"></i>
-                    Past Hearings
-                  </h3>
-                  <div class="hearings-list" id="pastHearings">
-                    <div class="hearing-item">
-                      <div class="hearing-header">
-                        <div>
-                          <div class="hearing-date">Wednesday, December 20, 2023</div>
-                          <div style="color: var(--text-secondary); font-size: 0.875rem">11:00 AM</div>
-                        </div>
-                        <span class="hearing-status completed">Completed</span>
-                      </div>
-                      
-                      <div class="hearing-info">
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Court</div>
-                          <div class="hearing-value">District Court, Delhi</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Room</div>
-                          <div class="hearing-value">Court Room 7</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Judge</div>
-                          <div class="hearing-value">Hon'ble Justice A.K. Sharma</div>
-                        </div>
-                        <div class="hearing-detail">
-                          <div class="hearing-label">Type</div>
-                          <div class="hearing-value">Initial Hearing</div>
-                        </div>
-                      </div>
-                      
-                      <div class="hearing-notes">Initial hearing completed successfully. Case registered and next hearing scheduled for bail application.</div>
-                      
-                      <div class="hearing-actions">
-                        <button class="action-btn view">
-                          <i class="fas fa-eye"></i> View Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-calendar-alt"></i>
+                <p>Hearings information will be displayed here</p>
               </div>
             </div>
           </div>
 
-          <!-- Documents Tab -->
           <div class="tab-pane" id="documents-tab">
             <div class="documents-container">
               <div class="section-header">
                 <i class="fas fa-folder section-icon"></i>
                 <h3 class="section-title">All Documents</h3>
-                <button class="btn btn-primary" style="margin-left: auto;">
-                  <i class="fas fa-plus"></i>
-                  Add Document
-                </button>
               </div>
-              <div class="section-content">
-                <div class="document-list" id="allDocuments">
-                  <div class="document-item">
-                    <div class="document-info">
-                      <div class="document-icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </div>
-                      <div class="document-details">
-                        <div class="document-name">FIR Copy</div>
-                        <div class="document-meta">PDF • 2.3 MB • Uploaded 2023-12-20</div>
-                      </div>
+              <div class="document-list">
+                <div class="document-item">
+                  <div class="document-info">
+                    <div class="document-icon">
+                      <i class="fas fa-file-pdf"></i>
                     </div>
-                    <div class="document-actions">
-                      <button class="doc-action-btn" title="Download">
-                        <i class="fas fa-download"></i>
-                      </button>
-                      <button class="doc-action-btn" title="View">
-                        <i class="fas fa-eye"></i>
-                      </button>
+                    <div class="document-details">
+                      <div class="document-name">FIR Copy</div>
+                      <div class="document-meta">PDF • 2.3 MB • Uploaded Dec 20, 2023</div>
                     </div>
                   </div>
+                  <div class="document-actions">
+                    <button class="doc-action-btn" title="Download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="doc-action-btn" title="View">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
 
-                  <div class="document-item">
-                    <div class="document-info">
-                      <div class="document-icon">
-                        <i class="fas fa-file-word"></i>
-                      </div>
-                      <div class="document-details">
-                        <div class="document-name">Bail Application</div>
-                        <div class="document-meta">DOC • 1.8 MB • Uploaded 2023-12-22</div>
-                      </div>
+                <div class="document-item">
+                  <div class="document-info">
+                    <div class="document-icon">
+                      <i class="fas fa-file-word"></i>
                     </div>
-                    <div class="document-actions">
-                      <button class="doc-action-btn" title="Download">
-                        <i class="fas fa-download"></i>
-                      </button>
-                      <button class="doc-action-btn" title="View">
-                        <i class="fas fa-eye"></i>
-                      </button>
+                    <div class="document-details">
+                      <div class="document-name">Bail Application</div>
+                      <div class="document-meta">DOC • 1.8 MB • Uploaded Dec 22, 2023</div>
                     </div>
                   </div>
-
-                  <div class="document-item">
-                    <div class="document-info">
-                      <div class="document-icon">
-                        <i class="fas fa-file-image"></i>
-                      </div>
-                      <div class="document-details">
-                        <div class="document-name">Evidence Photos</div>
-                        <div class="document-meta">JPG • 5.2 MB • Uploaded 2023-12-25</div>
-                      </div>
-                    </div>
-                    <div class="document-actions">
-                      <button class="doc-action-btn" title="Download">
-                        <i class="fas fa-download"></i>
-                      </button>
-                      <button class="doc-action-btn" title="View">
-                        <i class="fas fa-eye"></i>
-                      </button>
-                    </div>
+                  <div class="document-actions">
+                    <button class="doc-action-btn" title="Download">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="doc-action-btn" title="View">
+                      <i class="fas fa-eye"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Timeline Tab -->
           <div class="tab-pane" id="timeline-tab">
             <div class="timeline-container">
               <div class="section-header">
                 <i class="fas fa-history section-icon"></i>
                 <h3 class="section-title">Complete Case Timeline</h3>
               </div>
-              <div class="section-content">
-                <div class="timeline" id="fullTimeline">
-                  <div class="timeline-item">
-                    <div class="timeline-content">
-                      <div class="timeline-header">
-                        <span class="timeline-title">Bail Application Filed</span>
-                        <span class="timeline-date">Dec 22, 2023</span>
-                      </div>
-                      <div class="timeline-description">
-                        Bail application submitted to the court for the accused.
-                      </div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <span class="timeline-title">Bail Application Filed</span>
+                      <span class="timeline-date">Dec 22, 2023</span>
+                    </div>
+                    <div class="timeline-description">
+                      Bail application submitted to the court for the accused.
                     </div>
                   </div>
-                  <div class="timeline-item">
-                    <div class="timeline-content">
-                      <div class="timeline-header">
-                        <span class="timeline-title">FIR Received</span>
-                        <span class="timeline-date">Dec 20, 2023</span>
-                      </div>
-                      <div class="timeline-description">
-                        Copy of FIR obtained from the police station.
-                      </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <span class="timeline-title">FIR Received</span>
+                      <span class="timeline-date">Dec 20, 2023</span>
+                    </div>
+                    <div class="timeline-description">
+                      Copy of FIR obtained from the police station.
                     </div>
                   </div>
-                  <div class="timeline-item">
-                    <div class="timeline-content">
-                      <div class="timeline-header">
-                        <span class="timeline-title">Case Filed</span>
-                        <span class="timeline-date">Dec 18, 2023</span>
-                      </div>
-                      <div class="timeline-description">
-                        Initial case registration and client consultation completed.
-                      </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <span class="timeline-title">Case Filed</span>
+                      <span class="timeline-date">Dec 18, 2023</span>
+                    </div>
+                    <div class="timeline-description">
+                      Initial case registration and client consultation completed.
                     </div>
                   </div>
                 </div>
@@ -471,102 +1066,16 @@
             </div>
           </div>
 
-          <!-- AI Assistant Tab -->
           <div class="tab-pane" id="ai-assistant-tab">
-            <div class="ai-assistant-container">
-              <!-- AI Case Summary Section -->
-              <div class="ai-summary-section">
-                <div class="section-header">
-                  <i class="fas fa-robot section-icon"></i>
-                  <h3 class="section-title">AI Case Summary</h3>
-                  <span class="ai-badge">AI-generated analysis and recommendations</span>
-                </div>
-
-                <div class="ai-summary-content">
-                  <div class="case-summary-card">
-                    <h4>AI Case Summary</h4>
-                    <p class="summary-text">Criminal case involving economic offense under Section 420 IPC. Client seeking anticipatory bail.</p>
-                  </div>
-
-                  <div class="risk-assessment">
-                    <h4>Risk Score</h4>
-                    <div class="risk-score-bar">
-                      <div class="risk-progress" style="width: 65%;"></div>
-                    </div>
-                    <span class="risk-value">65/100</span>
-                  </div>
-
-                  <div class="ai-suggestions">
-                    <div class="suggestion-column">
-                      <h4>Suggested Arguments</h4>
-                      <ul class="suggestion-list">
-                        <li><span class="priority-high">●●●</span> Previous bail precedents in economic offense cases</li>
-                        <li><span class="priority-medium">●●</span> Clear criminal record of the accused</li>
-                        <li><span class="priority-low">●</span> Cooperation with investigation</li>
-                      </ul>
-                    </div>
-
-                    <div class="suggestion-column">
-                      <h4>Suggested Documents</h4>
-                      <ul class="suggestion-list">
-                        <li>• Character witness affidavits</li>
-                        <li>• Property documents for surety</li>
-                        <li>• Employment verification letter</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+            <div class="documents-container">
+              <div class="section-header">
+                <i class="fas fa-robot section-icon"></i>
+                <h3 class="section-title">AI Assistant</h3>
               </div>
-
-              <!-- AI Assistant Chat Section -->
-              <div class="ai-chat-section">
-                <div class="section-header">
-                  <i class="fas fa-comments section-icon"></i>
-                  <h3 class="section-title">AI Assistant Chat</h3>
-                  <span class="ai-badge">Chat with AI for case-specific guidance and analysis</span>
-                </div>
-
-                <div class="chat-container">
-                  <div class="chat-messages" id="chatMessages">
-                    <!-- Initial AI message -->
-                    <div class="message ai-message">
-                      <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                      </div>
-                      <div class="message-content">
-                        <div class="message-text">
-                          Hello! I'm your AI assistant for this case. I can help you with legal research, draft arguments, suggest case strategies, and analyze documents. What would you like to discuss about "State vs. John Doe"?
-                        </div>
-                        <div class="message-time">AI Assistant • Just now</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="chat-input-area">
-                    <div class="quick-actions">
-                      <button class="quick-action-btn" onclick="sendQuickMessage('Analyze Documents')">
-                        <i class="fas fa-file-alt"></i> Analyze Documents
-                      </button>
-                      <button class="quick-action-btn" onclick="sendQuickMessage('Suggest Arguments')">
-                        <i class="fas fa-balance-scale"></i> Suggest Arguments
-                      </button>
-                      <button class="quick-action-btn" onclick="sendQuickMessage('Draft Motion')">
-                        <i class="fas fa-edit"></i> Draft Motion
-                      </button>
-                      <button class="quick-action-btn" onclick="sendQuickMessage('Risk Assessment')">
-                        <i class="fas fa-chart-line"></i> Risk Assessment
-                      </button>
-                    </div>
-
-                    <div class="chat-input-container">
-                      <input type="text" id="chatInput" placeholder="Ask AI about case strategy, legal precedents, document review..." />
-                      <button class="send-btn" onclick="sendMessage()">
-                        <i class="fas fa-paper-plane"></i>
-                        Send
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <div class="empty-state">
+                <i class="fas fa-robot"></i>
+                <p>AI Assistant features will be available here</p>
+                <small>Get AI-powered legal assistance and case analysis</small>
               </div>
             </div>
           </div>
@@ -601,153 +1110,56 @@
     </div>
 
     <script>
-      // Global variables
-      let activeTab = 'overview';
-      let chatMessages = [
-        {
-          type: "ai",
-          text: "Hello! I'm your AI assistant for this case. I can help you with legal research, draft arguments, suggest case strategies, and analyze documents. What would you like to discuss about \"State vs. John Doe\"?",
-          time: "Just now"
-        }
-      ];
-
-      // Tab switching
-      function switchTab(tabName) {
-        activeTab = tabName;
-        
-        // Remove active class from all tabs and panes
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-        
-        // Add active class to selected tab and pane
-        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-        document.getElementById(`${tabName}-tab`).classList.add('active');
-      }
-
-      // AI Chat functions
-      function sendMessage() {
-        const input = document.getElementById('chatInput');
-        const message = input.value.trim();
-
-        if (message) {
-          addUserMessage(message);
-          input.value = '';
-
-          // Simulate AI response after a short delay
-          setTimeout(() => {
-            addAIResponse(message);
-          }, 1000);
-        }
-      }
-
-      function sendQuickMessage(action) {
-        addUserMessage(action);
-
-        // Simulate AI response based on the action
-        setTimeout(() => {
-          let response = '';
-          switch(action) {
-            case 'Analyze Documents':
-              response = 'I\'ve analyzed the case documents. The FIR shows strong evidence, but there are opportunities for defense. The bail application is well-drafted. Would you like me to suggest improvements?';
-              break;
-            case 'Suggest Arguments':
-              response = 'Based on similar cases, I recommend focusing on: 1) Clean criminal record, 2) Cooperation with investigation, 3) Economic hardship if denied bail. Shall I draft detailed arguments?';
-              break;
-            case 'Draft Motion':
-              response = 'I can help draft a bail motion. Key points to include: precedent cases, constitutional rights, and surety arrangements. What specific motion would you like me to prepare?';
-              break;
-            case 'Risk Assessment':
-              response = 'Current risk assessment shows 65/100. Main risks: Economic offense charges. Mitigation factors: Clean record, cooperation. Recommendations: Strong surety, community ties evidence.';
-              break;
-            default:
-              response = 'I\'m here to help with your case. Please let me know what specific assistance you need.';
-          }
-          addAIResponse(response);
-        }, 1500);
-      }
-
-      function addUserMessage(message) {
-        const chatContainer = document.getElementById('chatMessages');
-        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
-
-        const messageHtml = `
-          <div class="message user-message">
-            <div class="message-content">
-              <div class="message-text">${message}</div>
-              <div class="message-time">You • ${timestamp}</div>
-            </div>
-            <div class="message-avatar">
-              <i class="fas fa-user"></i>
-            </div>
-          </div>
-        `;
-
-        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }
-
-      function addAIResponse(message) {
-        const chatContainer = document.getElementById('chatMessages');
-        const timestamp = new Date().toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'});
-
-        // Generate contextual AI responses based on user input
-        let aiResponse = message;
-        if (typeof message === 'string') {
-          if (message.toLowerCase().includes('bail')) {
-            aiResponse = 'Regarding bail prospects: Based on the Section 420 charges, courts typically consider factors like flight risk, criminal history, and community ties. Given the clean record and cooperation shown, I\'d recommend preparing strong surety documentation and character references. Would you like me to draft a bail application outline?';
-          } else if (message.toLowerCase().includes('evidence')) {
-            aiResponse = 'For evidence analysis: The case appears to rely heavily on documentary evidence and witness testimony. I\'ve reviewed the FIR and related documents. The prosecution\'s case has some gaps we can exploit. Shall I provide a detailed evidence analysis with defense strategies?';
-          } else if (message.toLowerCase().includes('precedent') || message.toLowerCase().includes('case law')) {
-            aiResponse = 'Regarding legal precedents: I can find relevant case law for Section 420 IPC cases. Similar economic offense cases have shown favorable outcomes when defendants demonstrate cooperation and have clean records. Would you like me to compile relevant judgments and citations?';
-          } else if (message.toLowerCase().includes('strategy')) {
-            aiResponse = 'For case strategy: I recommend a multi-pronged approach: 1) Challenge evidence admissibility, 2) Emphasize cooperation and clean record, 3) Highlight economic hardship arguments. We should also prepare for anticipatory bail immediately. What aspect would you like me to elaborate on?';
-          } else if (typeof message === 'string') {
-            aiResponse = `I understand you're asking about "${message}". Based on the case details for State vs. John Doe, I can provide specific analysis and recommendations. Could you be more specific about what aspect you'd like me to focus on - legal strategy, document analysis, or case law research?`;
-          }
-        }
-
-        const messageHtml = `
-          <div class="message ai-message">
-            <div class="message-avatar">
-              <i class="fas fa-robot"></i>
-            </div>
-            <div class="message-content">
-              <div class="message-text">${aiResponse}</div>
-              <div class="message-time">AI Assistant • ${timestamp}</div>
-            </div>
-          </div>
-        `;
-
-        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }
-
-      function openAddHearingModal() {
-        alert('Add hearing modal would open here');
-      }
-
-      // Event listeners
-      document.addEventListener('DOMContentLoaded', function() {
+      $(document).ready(function () {
         // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const tab = this.getAttribute('data-tab');
-            switchTab(tab);
-          });
+        $('.tab-btn').on('click', function() {
+          const tab = $(this).data('tab');
+          switchTab(tab);
         });
 
-        // Enter key to send message
-        document.getElementById('chatInput').addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            sendMessage();
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
           }
         });
 
         // Load case details based on URL parameter
+        loadCaseDetails();
+      });
+
+      function switchTab(tabName) {
+        // Remove active class from all tabs and panes
+        $('.tab-btn').removeClass('active');
+        $('.tab-pane').removeClass('active');
+        
+        // Add active class to selected tab and pane
+        $(`.tab-btn[data-tab="${tabName}"]`).addClass('active');
+        $(`#${tabName}-tab`).addClass('active');
+      }
+
+      function loadCaseDetails() {
+        // Get case ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const caseId = urlParams.get('id');
+        const caseId = urlParams.get("id");
+
         if (caseId) {
-          console.log(`Loading case details for case ${caseId}`);
+          // Update page with case-specific data
+          console.log("Loading case details for ID:", caseId);
+        }
+      }
+
+      // Document actions
+      $(document).on('click', '.doc-action-btn', function(e) {
+        e.preventDefault();
+        const action = $(this).attr('title');
+        const documentName = $(this).closest('.document-item').find('.document-name').text();
+
+        if (action === 'Download') {
+          alert(`Downloading ${documentName}...`);
+        } else if (action === 'View') {
+          alert(`Opening ${documentName} for viewing...`);
         }
       });
     </script>
