@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Team - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item active">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="index.html" class="side-menu-item">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>My Team</h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="index.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-users"></i>
+                My Team
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Manage your legal team members and collaborators
+            </p>
+          </div>
+        </div>
+
+        <!-- Coming Soon Content -->
+        <div style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 400px;
+          text-align: center;
+          padding: 3rem;
+        ">
+          <div style="
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+          ">
+            <i class="fas fa-users"></i>
+          </div>
+          <h2 style="
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+          ">
+            Team Management Coming Soon
+          </h2>
+          <p style="
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 500px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+          ">
+            We're working on bringing you comprehensive team management features including 
+            team member profiles, role assignments, case collaborations, and performance tracking.
+          </p>
+          <div style="
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+          ">
+            <a href="cases.html" class="btn btn-primary" style="
+              padding: 0.75rem 2rem;
+              border-radius: 8px;
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              background: var(--primary);
+              color: white;
+              border: none;
+              font-size: 0.875rem;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            ">
+              <i class="fas fa-file-alt"></i>
+              View Cases
+            </a>
+            <a href="more.html" class="btn btn-secondary" style="
+              padding: 0.75rem 2rem;
+              border-radius: 8px;
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              background: var(--surface);
+              color: var(--text-primary);
+              border: 1px solid var(--border);
+              font-size: 0.875rem;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            ">
+              <i class="fas fa-th"></i>
+              Explore Features
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item active">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Side menu functions
+      function openSideMenu() {
+        document.getElementById("sideMenu").classList.add("open");
+        document.getElementById("sideMenuOverlay").classList.add("show");
+      }
+
+      function closeSideMenu() {
+        document.getElementById("sideMenu").classList.remove("open");
+        document.getElementById("sideMenuOverlay").classList.remove("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking overlay
+        document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+      });
+    </script>
+  </body>
+</html>
