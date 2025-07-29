@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Templates - AI Advocates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #6b7280;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --surface-dark: #f1f5f9;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 0.5rem;
+            --radius-sm: 0.25rem;
+            --radius-lg: 0.75rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--surface);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--border);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .search-section {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--surface);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .category-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .templates-list {
+            padding: 1.25rem;
+        }
+
+        .template-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .template-item:last-child {
+            border-bottom: none;
+        }
+
+        .template-info {
+            flex: 1;
+        }
+
+        .template-name {
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .template-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .action-btn.secondary {
+            background: var(--surface-dark);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .action-btn.secondary:hover {
+            background: var(--border);
+        }
+
+        .stats-bar {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stats-info {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .stat-number {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .stats-info {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .template-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                font-size: 0.75rem;
+                padding: 0.375rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <span class="logo-text">AI Advocates</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="more.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to More
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-file-contract"></i>
+                    Legal Templates
+                </h1>
+                <p class="page-subtitle">Access and download professional legal document templates</p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stats-info">
+                    <div class="stat-item">
+                        <i class="fas fa-folder"></i>
+                        <span><span class="stat-number">9</span> Categories</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span><span class="stat-number">45</span> Templates</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-download"></i>
+                        <span>Ready to Download</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-section">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="templateSearch" placeholder="Search templates by name, category, or description...">
+                </div>
+            </div>
+
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Client Onboarding Templates -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="category-title">Client Onboarding Templates</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Engagement Letter</div>
+                                <div class="template-description">Professional client engagement agreement</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('engagement-letter')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('engagement-letter')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Client Intake Form</div>
+                                <div class="template-description">Comprehensive client information collection</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('client-intake')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('client-intake')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Power of Attorney</div>
+                                <div class="template-description">Legal representation authorization</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('power-of-attorney')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('power-of-attorney')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Non-Disclosure Agreement</div>
+                                <div class="template-description">Client confidentiality agreement</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('nda')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('nda')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Management Templates -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="category-title">Case Management Templates</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Case Brief</div>
+                                <div class="template-description">Structured case summary and analysis</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('case-brief')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('case-brief')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Pleadings Format</div>
+                                <div class="template-description">Standard court pleading structure</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('pleadings')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('pleadings')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Case History Sheet</div>
+                                <div class="template-description">Chronological case progression tracker</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('case-history')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('case-history')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Hearing Notes</div>
+                                <div class="template-description">Court hearing documentation template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('hearing-notes')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('hearing-notes')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Court-Related Templates -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="category-title">Court-Related Templates</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Vakalatnama</div>
+                                <div class="template-description">Advocate authorization document</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('vakalatnama')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('vakalatnama')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Affidavit Format</div>
+                                <div class="template-description">Sworn statement document template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('affidavit')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('affidavit')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Legal Notice</div>
+                                <div class="template-description">Formal legal notification template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('legal-notice')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('legal-notice')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Bail Application</div>
+                                <div class="template-description">Criminal bail request format</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('bail-application')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('bail-application')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Writ Petition</div>
+                                <div class="template-description">Constitutional remedy petition</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('writ-petition')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('writ-petition')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Caveat Petition</div>
+                                <div class="template-description">Prior notice application</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('caveat-petition')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('caveat-petition')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contracts & Agreements -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="category-title">Contracts & Agreements</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Sale Agreement</div>
+                                <div class="template-description">Property or goods sale contract</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('sale-agreement')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('sale-agreement')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Lease Agreement</div>
+                                <div class="template-description">Property rental contract template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('lease-agreement')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('lease-agreement')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Employment Contract</div>
+                                <div class="template-description">Employee agreement template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('employment-contract')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('employment-contract')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Service Agreement</div>
+                                <div class="template-description">Professional services contract</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('service-agreement')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('service-agreement')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Partnership Deed</div>
+                                <div class="template-description">Business partnership agreement</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('partnership-deed')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('partnership-deed')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Memorandum of Understanding</div>
+                                <div class="template-description">MOU template for collaborations</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('mou')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('mou')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Family Law Templates -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="category-title">Family Law Templates</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Marriage Registration Affidavit</div>
+                                <div class="template-description">Marriage documentation format</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('marriage-affidavit')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('marriage-affidavit')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Divorce Petition</div>
+                                <div class="template-description">Divorce application template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('divorce-petition')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('divorce-petition')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Child Custody Application</div>
+                                <div class="template-description">Custody petition format</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('child-custody')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('child-custody')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Maintenance Application</div>
+                                <div class="template-description">Alimony petition template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('maintenance-application')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('maintenance-application')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate & Business Law -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="category-title">Corporate & Business Law</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Shareholder Agreement</div>
+                                <div class="template-description">Equity holder agreement template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('shareholder-agreement')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('shareholder-agreement')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">LLP Agreement</div>
+                                <div class="template-description">Limited liability partnership deed</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('llp-agreement')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('llp-agreement')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Board Resolution Format</div>
+                                <div class="template-description">Corporate resolution template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('board-resolution')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('board-resolution')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Trademark Assignment</div>
+                                <div class="template-description">Intellectual property transfer</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('trademark-assignment')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('trademark-assignment')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property & Real Estate -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="category-title">Property & Real Estate</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Gift Deed</div>
+                                <div class="template-description">Property gift transfer document</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('gift-deed')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('gift-deed')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Will and Codicil</div>
+                                <div class="template-description">Testamentary document template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('will-codicil')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('will-codicil')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Partition Deed</div>
+                                <div class="template-description">Property division agreement</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('partition-deed')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('partition-deed')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Sale Deed</div>
+                                <div class="template-description">Property sale transfer document</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('sale-deed')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('sale-deed')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Criminal Law -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="category-title">Criminal Law</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">FIR Quashing Petition</div>
+                                <div class="template-description">FIR cancellation application</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('fir-quashing')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('fir-quashing')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Anticipatory Bail Application</div>
+                                <div class="template-description">Pre-arrest bail petition</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('anticipatory-bail')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('anticipatory-bail')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Complaint Format</div>
+                                <div class="template-description">Criminal complaint template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('complaint-format')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('complaint-format')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Miscellaneous Templates -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="category-title">Miscellaneous Templates</div>
+                    </div>
+                    <div class="templates-list">
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">RTI Application</div>
+                                <div class="template-description">Right to Information request</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('rti-application')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('rti-application')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Consumer Complaint Format</div>
+                                <div class="template-description">Consumer grievance template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('consumer-complaint')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('consumer-complaint')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Application for Certified Copy</div>
+                                <div class="template-description">Court record copy request</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('certified-copy')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('certified-copy')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="template-item">
+                            <div class="template-info">
+                                <div class="template-name">Legal Opinion Format</div>
+                                <div class="template-description">Professional legal advice template</div>
+                            </div>
+                            <div class="template-actions">
+                                <button class="action-btn secondary" onclick="previewTemplate('legal-opinion')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" onclick="downloadTemplate('legal-opinion')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('templateSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const categories = document.querySelectorAll('.category-card');
+            
+            categories.forEach(category => {
+                const categoryTitle = category.querySelector('.category-title').textContent.toLowerCase();
+                const templates = category.querySelectorAll('.template-item');
+                let hasVisibleTemplates = false;
+                
+                templates.forEach(template => {
+                    const templateName = template.querySelector('.template-name').textContent.toLowerCase();
+                    const templateDesc = template.querySelector('.template-description').textContent.toLowerCase();
+                    
+                    if (templateName.includes(searchTerm) || templateDesc.includes(searchTerm) || categoryTitle.includes(searchTerm)) {
+                        template.style.display = 'flex';
+                        hasVisibleTemplates = true;
+                    } else {
+                        template.style.display = 'none';
+                    }
+                });
+                
+                // Hide category if no templates match
+                category.style.display = hasVisibleTemplates ? 'block' : 'none';
+            });
+        });
+
+        // Template actions
+        function previewTemplate(templateId) {
+            alert(`Preview functionality for ${templateId} would open a modal with template preview.`);
+        }
+
+        function downloadTemplate(templateId) {
+            // Simulate file download
+            const link = document.createElement('a');
+            link.href = '#'; // In real implementation, this would be the actual file URL
+            link.download = `${templateId}-template.docx`;
+            
+            // Show download confirmation
+            const templateName = event.target.closest('.template-item').querySelector('.template-name').textContent;
+            alert(`Downloading: ${templateName}\n\nTemplate will be downloaded as a Word document.`);
+            
+            // In real implementation, you would trigger the actual download here
+            // link.click();
+        }
+
+        // Analytics tracking (optional)
+        function trackTemplateDownload(templateId) {
+            console.log(`Template downloaded: ${templateId}`);
+            // Add analytics tracking code here
+        }
+
+        function trackTemplatePreview(templateId) {
+            console.log(`Template previewed: ${templateId}`);
+            // Add analytics tracking code here
+        }
+    </script>
+</body>
+</html>
