@@ -1066,6 +1066,25 @@
 
     <script>
       $(document).ready(function () {
+        // Check if in edit mode
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+        const caseId = urlParams.get('id');
+
+        if (mode === 'edit') {
+          // Switch to edit mode
+          $('#pageTitleText').text('Edit Case');
+          $('#pageIcon').removeClass('fa-plus-circle').addClass('fa-edit');
+          $('#breadcrumbText').text('Edit Case');
+          $('#breadcrumbIcon').removeClass('fa-plus').addClass('fa-edit');
+          $('#pageSubtitle').text('Edit case details and information');
+          $('#submitBtnText').text('Save Updates');
+          document.title = 'Edit Case - AI Advocates';
+
+          // Load case data for editing
+          loadCaseDataForEdit(caseId);
+        }
+
         // Navigation
         $(".nav-item").on("click", function (e) {
           const href = $(this).attr("href");
