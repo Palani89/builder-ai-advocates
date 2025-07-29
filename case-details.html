@@ -1661,7 +1661,7 @@
                       <ul class="suggestion-list">
                         <li><span class="priority-high">●●●</span> Previous bail precedents in economic offense cases</li>
                         <li><span class="priority-medium">●●</span> Clear criminal record of the accused</li>
-                        <li><span class="priority-low">��</span> Cooperation with investigation</li>
+                        <li><span class="priority-low">●</span> Cooperation with investigation</li>
                       </ul>
                     </div>
 
@@ -2654,13 +2654,9 @@
       }
 
       // Modal overlay clicks to close
-      $('#editCaseModal, #addUpdateModal').on('click', function(e) {
+      $('#addUpdateModal').on('click', function(e) {
         if (e.target === this) {
-          if (this.id === 'editCaseModal') {
-            closeEditCaseModal();
-          } else if (this.id === 'addUpdateModal') {
-            closeAddUpdateModal();
-          }
+          closeAddUpdateModal();
         }
       });
     </script>
