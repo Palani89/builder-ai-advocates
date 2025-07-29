@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Hearing - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="client/global.css" />
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <div>
+            <span class="logo-text">AI Advocates</span>
+            <div class="side-menu-subtitle">Legal Practice Management</div>
+          </div>
+        </div>
+        <button class="side-menu-close" onclick="closeSideMenu()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-item">
+          <i class="fas fa-home side-menu-icon"></i>
+          Home
+        </a>
+        <a href="team.html" class="side-menu-item">
+          <i class="fas fa-users side-menu-icon"></i>
+          My Team
+        </a>
+        <a href="cases.html" class="side-menu-item">
+          <i class="fas fa-file-alt side-menu-icon"></i>
+          Cases
+        </a>
+        <a href="calendar.html" class="side-menu-item active">
+          <i class="fas fa-calendar side-menu-icon"></i>
+          Calendar
+        </a>
+        <a href="more.html" class="side-menu-item">
+          <i class="fas fa-th side-menu-icon"></i>
+          More
+        </a>
+        <button class="side-menu-item logout" onclick="logoutFromApp()">
+          <i class="fas fa-sign-out-alt side-menu-icon"></i>
+          Log Out
+        </button>
+      </nav>
+    </div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-info">
+            <nav class="breadcrumb">
+              <span class="breadcrumb-item">Dashboard</span>
+              <span class="breadcrumb-item">Calendar</span>
+              <span class="breadcrumb-item">
+                <i class="fas fa-gavel"></i>
+                Create Hearing
+              </span>
+            </nav>
+            <h1 class="page-title">
+              <i class="fas fa-gavel" style="color: var(--primary); margin-right: 0.75rem;"></i>
+              Create New Hearing
+            </h1>
+            <p class="page-subtitle">
+              Schedule court hearings and proceedings for your cases
+            </p>
+          </div>
+
+          <div class="page-actions">
+            <button class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+              <i class="fas fa-arrow-left"></i>
+              Back to Calendar
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+          <form id="createHearingForm">
+            <!-- Section 1: Basic Case & Court Info -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-gavel section-icon"></i>
+                <span class="section-title">Case & Court Information</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Related Case <span class="required">*</span></label>
+                  <select class="form-select" name="case_id" id="caseSelect" required>
+                    <option value="">Select Case</option>
+                    <option value="1">State vs. John Doe - CC/1234/2024</option>
+                    <option value="2">Smith Property Dispute - CS/5678/2024</option>
+                    <option value="3">ABC vs. XYZ Industries - CS/9876/2024</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Title</label>
+                  <input type="text" class="form-input" name="case_title" id="caseTitle" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Type</label>
+                  <input type="text" class="form-input" name="case_type" id="caseType" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Number</label>
+                  <input type="text" class="form-input" name="case_number" id="caseNumber" readonly>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Hearing Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-calendar-alt section-icon"></i>
+                <span class="section-title">Hearing Date & Time</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Hearing Date <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="hearing_date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="hearing_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Expected Duration</label>
+                  <select class="form-select" name="duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60" selected>1 hour</option>
+                    <option value="90">1.5 hours</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Type <span class="required">*</span></label>
+                  <select class="form-select" name="hearing_type" required>
+                    <option value="">Select Hearing Type</option>
+                    <option value="Initial Hearing">Initial Hearing</option>
+                    <option value="Status Update">Status Update</option>
+                    <option value="Evidence">Evidence Presentation</option>
+                    <option value="Bail Application">Bail Application</option>
+                    <option value="Witness Examination">Witness Examination</option>
+                    <option value="Arguments">Arguments</option>
+                    <option value="Judgment">Judgment</option>
+                    <option value="Appeal Hearing">Appeal Hearing</option>
+                    <option value="Case Management">Case Management</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Court Information -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-university section-icon"></i>
+                <span class="section-title">Court & Venue Details</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Court Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="court_name" placeholder="e.g., Delhi District Court" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Court Hall/Room No.</label>
+                  <input type="text" class="form-input" name="court_room" placeholder="e.g., Court Room 7">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Bench/Judge Name</label>
+                  <input type="text" class="form-input" name="judge_name" placeholder="e.g., Hon'ble Justice XYZ">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Court Address</label>
+                  <textarea class="form-textarea" name="court_address" rows="2" placeholder="Full court address for reference..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Case Stage & Status -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-tasks section-icon"></i>
+                <span class="section-title">Case Stage & Hearing Status</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Case Stage</label>
+                  <select class="form-select" name="case_stage">
+                    <option value="">Select Case Stage</option>
+                    <option value="Pre-trial">Pre-trial</option>
+                    <option value="Trial">Trial</option>
+                    <option value="Post-trial">Post-trial</option>
+                    <option value="Appeal">Appeal</option>
+                    <option value="Settlement">Settlement</option>
+                    <option value="Execution">Execution</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hearing Status</label>
+                  <select class="form-select" name="hearing_status">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Pending Confirmation">Pending Confirmation</option>
+                    <option value="Adjourned">Adjourned</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Priority Level</label>
+                  <select class="form-select" name="priority">
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Next Hearing Date</label>
+                  <input type="date" class="form-input" name="next_hearing_date">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Legal Team & Representation -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-users section-icon"></i>
+                <span class="section-title">Legal Team & Representation</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Lead Advocate</label>
+                  <select class="form-select" name="lead_advocate">
+                    <option value="">Select Lead Advocate</option>
+                    <option value="priya_sharma">Priya Sharma (Senior Advocate)</option>
+                    <option value="rajesh_kumar">Rajesh Kumar (Senior Advocate)</option>
+                    <option value="amit_jain">Amit Jain (Junior Advocate)</option>
+                    <option value="neha_gupta">Neha Gupta (Junior Advocate)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Appeared By</label>
+                  <input type="text" class="form-input" name="appeared_by" placeholder="Lawyer name who will appear">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Junior Advocates</label>
+                  <select class="form-select" name="junior_advocates" multiple>
+                    <option value="amit_jain">Amit Jain</option>
+                    <option value="neha_gupta">Neha Gupta</option>
+                    <option value="suresh_patel">Suresh Patel</option>
+                    <option value="ravi_singh">Ravi Singh</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Opposing Counsel</label>
+                  <input type="text" class="form-input" name="opposing_counsel" placeholder="Name of opposing lawyer/firm">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 6: Hearing Agenda & Preparation -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-list-alt section-icon"></i>
+                <span class="section-title">Hearing Agenda & Preparation</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Hearing Agenda</label>
+                  <textarea class="form-textarea" name="agenda" rows="4" placeholder="What will be presented/discussed in this hearing?
+• Point 1
+• Point 2
+• Point 3"></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Documents to Present</label>
+                  <textarea class="form-textarea" name="documents_to_present" rows="3" placeholder="List documents that will be presented or discussed..."></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Preparation Notes</label>
+                  <textarea class="form-textarea" name="preparation_notes" rows="3" placeholder="What needs to be prepared before this hearing?"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Expected Outcomes & Strategy -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-target section-icon"></i>
+                <span class="section-title">Expected Outcomes & Strategy</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Expected Outcome</label>
+                  <textarea class="form-textarea" name="expected_outcome" rows="3" placeholder="What do you expect to achieve in this hearing?"></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Legal Strategy</label>
+                  <textarea class="form-textarea" name="legal_strategy" rows="3" placeholder="Brief outline of the legal strategy for this hearing..."></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Contingency Plans</label>
+                  <textarea class="form-textarea" name="contingency_plans" rows="3" placeholder="Alternative approaches if primary strategy doesn't work..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 8: Client Communication -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-comments section-icon"></i>
+                <span class="section-title">Client Communication & Updates</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Notify Client</label>
+                  <select class="form-select" name="notify_client">
+                    <option value="yes">Yes, notify client</option>
+                    <option value="no">No notification needed</option>
+                    <option value="after_hearing">Notify after hearing</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Attendance</label>
+                  <select class="form-select" name="client_attendance">
+                    <option value="required">Client presence required</option>
+                    <option value="optional">Client presence optional</option>
+                    <option value="not_required">Client presence not required</option>
+                  </select>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Client Instructions</label>
+                  <textarea class="form-textarea" name="client_instructions" rows="3" placeholder="Any specific instructions from the client for this hearing..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 9: Reminders & Notifications -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-bell section-icon"></i>
+                <span class="section-title">Reminders & Follow-up</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Reminder Time</label>
+                  <select class="form-select" name="reminder_time">
+                    <option value="30">30 minutes before</option>
+                    <option value="60">1 hour before</option>
+                    <option value="120">2 hours before</option>
+                    <option value="1440">1 day before</option>
+                    <option value="2880">2 days before</option>
+                    <option value="none">No reminder</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Auto-generate Tasks</label>
+                  <select class="form-select" name="auto_tasks">
+                    <option value="yes">Yes, create follow-up tasks</option>
+                    <option value="no">No automatic tasks</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Calendar Sync</label>
+                  <select class="form-select" name="calendar_sync">
+                    <option value="system">System Calendar Only</option>
+                    <option value="google">Sync with Google Calendar</option>
+                    <option value="outlook">Sync with Outlook</option>
+                    <option value="all">Sync with All Calendars</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Post-Hearing Follow-up</label>
+                  <select class="form-select" name="followup_required">
+                    <option value="yes">Schedule follow-up meeting</option>
+                    <option value="auto">Auto-schedule based on outcome</option>
+                    <option value="no">No follow-up needed</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 10: Additional Notes -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-sticky-note section-icon"></i>
+                <span class="section-title">Additional Notes & Instructions</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Internal Notes</label>
+                  <textarea class="form-textarea" name="internal_notes" rows="3" placeholder="Private notes for the legal team..."></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label">Special Instructions</label>
+                  <textarea class="form-textarea" name="special_instructions" rows="3" placeholder="Any special arrangements or instructions for this hearing..."></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='calendar.html'">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveDraft()">
+              <i class="fas fa-save"></i>
+              Save as Draft
+            </button>
+            <button type="submit" class="btn btn-primary" form="createHearingForm">
+              <i class="fas fa-gavel"></i>
+              Create Hearing
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item active">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Set default date to today
+        const today = new Date();
+        today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+        $('input[name="hearing_date"]').val(today.toISOString().split('T')[0]);
+
+        // Set default time to current hour
+        const currentHour = new Date().getHours();
+        const defaultTime = String(currentHour).padStart(2, '0') + ':00';
+        $('input[name="hearing_time"]').val(defaultTime);
+
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // Menu toggle
+        $(".menu-toggle").on("click", function () {
+          openSideMenu();
+        });
+
+        // Form submission
+        $("#createHearingForm").on("submit", function (e) {
+          e.preventDefault();
+          saveHearing();
+        });
+
+        // Auto-populate case details when case is selected
+        $('#caseSelect').on('change', function() {
+          const caseId = $(this).val();
+          if (caseId) {
+            populateCaseDetails(caseId);
+          }
+        });
+      });
+
+      function populateCaseDetails(caseId) {
+        // Sample case data mapping
+        const caseData = {
+          '1': { 
+            title: 'State vs. John Doe', 
+            type: 'Criminal', 
+            number: 'CC/1234/2024',
+            court: 'District Court, Delhi',
+            judge: 'Hon\'ble Justice A.K. Sharma'
+          },
+          '2': { 
+            title: 'Smith Property Dispute', 
+            type: 'Civil', 
+            number: 'CS/5678/2024',
+            court: 'High Court, Delhi',
+            judge: 'Hon\'ble Justice B.K. Patel'
+          },
+          '3': { 
+            title: 'ABC vs. XYZ Industries', 
+            type: 'Commercial', 
+            number: 'CS/9876/2024',
+            court: 'Commercial Court, Delhi',
+            judge: 'Hon\'ble Justice C.D. Singh'
+          }
+        };
+
+        if (caseData[caseId]) {
+          $('#caseTitle').val(caseData[caseId].title);
+          $('#caseType').val(caseData[caseId].type);
+          $('#caseNumber').val(caseData[caseId].number);
+          $('input[name="court_name"]').val(caseData[caseId].court);
+          $('input[name="judge_name"]').val(caseData[caseId].judge);
+        }
+      }
+
+      function saveHearing() {
+        // Get form data
+        const form = $('#createHearingForm')[0];
+        const formData = new FormData(form);
+
+        // Basic validation
+        if (!formData.get('case_id') || !formData.get('hearing_date') || !formData.get('hearing_time')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Create hearing object
+        const hearingData = {};
+        for (let [key, value] of formData.entries()) {
+          hearingData[key] = value;
+        }
+
+        // Add metadata
+        hearingData.created_by = "current_user_id";
+        hearingData.created_on = new Date().toISOString();
+        hearingData.hearing_id = generateHearingId();
+
+        // Here you would normally send the data to your backend
+        console.log("Hearing Data:", hearingData);
+
+        // Show success message
+        alert("Hearing created successfully!");
+
+        // Redirect back to calendar
+        window.location.href = "calendar.html";
+      }
+
+      function saveDraft() {
+        // Save as draft functionality
+        const form = $('#createHearingForm')[0];
+        const formData = new FormData(form);
+        
+        // Add draft status
+        const draftData = {};
+        for (let [key, value] of formData.entries()) {
+          draftData[key] = value;
+        }
+        draftData.status = 'Draft';
+        draftData.saved_as_draft = new Date().toISOString();
+
+        console.log("Draft saved:", draftData);
+        alert("Hearing saved as draft!");
+      }
+
+      function generateHearingId() {
+        return "HRG_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5).toUpperCase();
+      }
+
+      // Side menu functions
+      function openSideMenu() {
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
+    </script>
+  </body>
+</html>
