@@ -1140,6 +1140,29 @@
       $("#sideMenuOverlay").on("click", function () {
         closeSideMenu();
       });
+
+      // Notification functions
+      function openNotifications() {
+        $("#notificationModal").css("display", "flex");
+        // Mark notifications as read (optional)
+        $(".notification-badge").text("0").hide();
+      }
+
+      function closeNotifications() {
+        $("#notificationModal").hide();
+      }
+
+      // Settings function
+      function openSettings() {
+        window.location.href = "settings.html";
+      }
+
+      // Close notification modal when clicking overlay
+      $("#notificationModal").on("click", function (e) {
+        if (e.target === this) {
+          closeNotifications();
+        }
+      });
     </script>
   </body>
 </html>
