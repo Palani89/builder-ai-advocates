@@ -131,18 +131,18 @@ export default function Index() {
 
                 {/* Breadcrumb */}
                 <nav className="breadcrumb">
-                  <a href="#" className="breadcrumb-item">
-                    <i className="fas fa-home"></i>
-                    Home
-                  </a>
-                  <span className="breadcrumb-separator">
-                    <i className="fas fa-chevron-right"></i>
-                  </span>
-                  <span className="breadcrumb-item active">
-                    <i className="fas fa-calendar"></i>
-                    Calendar
-                  </span>
-                </nav>
+                <Link to="/" className="breadcrumb-item">
+                  <i className="fas fa-home"></i>
+                  Home
+                </Link>
+                <span className="breadcrumb-separator">
+                  <i className="fas fa-chevron-right"></i>
+                </span>
+                <span className="breadcrumb-item active">
+                  <i className="fas fa-calendar"></i>
+                  Calendar
+                </span>
+              </nav>
 
                 <p className="page-subtitle">Hearings & Appointments</p>
               </div>
