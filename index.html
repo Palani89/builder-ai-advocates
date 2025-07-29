@@ -1055,6 +1055,189 @@
         });
       }
 
+      // Create Appointment Modal Functions
+      function openCreateAppointmentModal() {
+        document.getElementById("createAppointmentModal").style.display = "flex";
+
+        // Generate appointment ID
+        const appointmentId = "APT" + Date.now().toString().slice(-6);
+        document.querySelector('input[name="appointment_id"]').value = appointmentId;
+
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.querySelector('input[name="appointment_date"]').value = tomorrow.toISOString().split('T')[0];
+
+        // Set default time
+        document.querySelector('input[name="start_time"]').value = "10:00";
+        document.querySelector('input[name="end_time"]').value = "11:00";
+      }
+
+      function closeCreateAppointmentModal() {
+        document.getElementById("createAppointmentModal").style.display = "none";
+        document.getElementById("createAppointmentForm").reset();
+      }
+
+      function toggleAppointmentMode(mode) {
+        const meetingLocationGroup = document.getElementById('meetingLocationGroup');
+        const advocateOfficeGroup = document.getElementById('advocateOfficeGroup');
+        const courtPremisesGroup = document.getElementById('courtPremisesGroup');
+        const clientLocationGroup = document.getElementById('clientLocationGroup');
+        const vcLinkGroup = document.getElementById('vcLinkAppointmentGroup');
+
+        // Reset all location groups
+        meetingLocationGroup.style.display = 'block';
+        advocateOfficeGroup.style.display = 'block';
+        courtPremisesGroup.style.display = 'none';
+        clientLocationGroup.style.display = 'none';
+        vcLinkGroup.style.display = 'none';
+
+        if (mode === 'Video Call') {
+          meetingLocationGroup.style.display = 'none';
+          advocateOfficeGroup.style.display = 'none';
+          vcLinkGroup.style.display = 'block';
+        } else if (mode === 'Phone') {
+          meetingLocationGroup.style.display = 'none';
+          advocateOfficeGroup.style.display = 'none';
+        }
+      }
+
+      // Handle meeting location change
+      function handleMeetingLocationChange(location) {
+        const advocateOfficeGroup = document.getElementById('advocateOfficeGroup');
+        const courtPremisesGroup = document.getElementById('courtPremisesGroup');
+        const clientLocationGroup = document.getElementById('clientLocationGroup');
+
+        // Hide all location-specific groups
+        advocateOfficeGroup.style.display = 'none';
+        courtPremisesGroup.style.display = 'none';
+        clientLocationGroup.style.display = 'none';
+
+        // Show relevant group based on selection
+        if (location === "Advocate's Office") {
+          advocateOfficeGroup.style.display = 'block';
+        } else if (location === 'Court Premises') {
+          courtPremisesGroup.style.display = 'block';
+        } else if (location === 'Client Location') {
+          clientLocationGroup.style.display = 'block';
+        }
+      }
+
+      function saveAppointment() {
+        const form = document.getElementById('createAppointmentForm');
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = ['client_name', 'client_phone', 'client_email', 'advocate_name', 'appointment_purpose', 'appointment_date', 'start_time', 'end_time', 'appointment_mode'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (!formData.get(field)) {
+            isValid = false;
+            const input = form.querySelector(`[name="${field}"]`);
+            if (input) {
+              input.style.borderColor = 'var(--error)';
+              setTimeout(() => {
+                input.style.borderColor = '';
+              }, 3000);
+            }
+          }
+        });
+
+        if (!isValid) {
+          alert('Please fill in all required fields marked with *');
+          return;
+        }
+
+        // Validate time logic
+        const startTime = formData.get('start_time');
+        const endTime = formData.get('end_time');
+        if (startTime >= endTime) {
+          alert('End time must be after start time');
+          return;
+        }
+
+        // Collect notification preferences
+        const notifications = [];
+        if (form.querySelector('input[name="notification_sms"]').checked) notifications.push('SMS');
+        if (form.querySelector('input[name="notification_whatsapp"]').checked) notifications.push('WhatsApp');
+        if (form.querySelector('input[name="notification_email"]').checked) notifications.push('Email');
+        if (form.querySelector('input[name="notification_inapp"]').checked) notifications.push('In-app');
+
+        // Create appointment object
+        const appointmentData = {
+          id: formData.get('appointment_id'),
+          client_name: formData.get('client_name'),
+          client_phone: formData.get('client_phone'),
+          client_email: formData.get('client_email'),
+          advocate_name: formData.get('advocate_name'),
+          related_case: formData.get('related_case'),
+          appointment_purpose: formData.get('appointment_purpose'),
+          appointment_date: formData.get('appointment_date'),
+          start_time: formData.get('start_time'),
+          end_time: formData.get('end_time'),
+          duration: formData.get('duration'),
+          appointment_status: formData.get('appointment_status'),
+          appointment_mode: formData.get('appointment_mode'),
+          meeting_location: formData.get('meeting_location'),
+          office_address: formData.get('office_address'),
+          court_premises: formData.get('court_premises'),
+          client_location: formData.get('client_location'),
+          vc_link_appointment: formData.get('vc_link_appointment'),
+          appointment_remarks: formData.get('appointment_remarks'),
+          appointment_fee: formData.get('appointment_fee'),
+          payment_status: formData.get('payment_status'),
+          send_reminder: formData.get('send_reminder'),
+          reminder_time: formData.get('reminder_time'),
+          notification_modes: notifications,
+          created_at: new Date().toISOString()
+        };
+
+        console.log('Appointment created:', appointmentData);
+
+        // In a real application, you would send this data to your backend
+        // For now, we'll just show a success message
+        const appointmentDetails = `Appointment ID: ${appointmentData.id}
+Client: ${appointmentData.client_name}
+Date: ${appointmentData.appointment_date}
+Time: ${appointmentData.start_time} - ${appointmentData.end_time}
+Purpose: ${appointmentData.appointment_purpose}
+Mode: ${appointmentData.appointment_mode}
+Advocate: ${appointmentData.advocate_name}`;
+
+        alert('Appointment created successfully!\n\n' + appointmentDetails);
+
+        // Close modal and refresh calendar
+        closeCreateAppointmentModal();
+
+        // Add appointment to calendar display
+        addAppointmentToCalendar(appointmentData);
+      }
+
+      function addAppointmentToCalendar(appointmentData) {
+        // Add appointment to calendar display
+        const appointmentDate = new Date(appointmentData.appointment_date);
+        const day = appointmentDate.getDate();
+
+        // Find the calendar day element and add event dot
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(dayEl => {
+          const dayNumber = dayEl.querySelector('.day-number');
+          if (dayNumber && parseInt(dayNumber.textContent) === day) {
+            let eventsContainer = dayEl.querySelector('.day-events');
+            if (!eventsContainer) {
+              eventsContainer = document.createElement('div');
+              eventsContainer.className = 'day-events';
+              dayEl.appendChild(eventsContainer);
+            }
+
+            const eventDot = document.createElement('div');
+            eventDot.className = 'event-dot appointment';
+            eventsContainer.appendChild(eventDot);
+          }
+        });
+      }
+
       // Event listeners
       document.addEventListener('DOMContentLoaded', function() {
         // Close menu when clicking overlay
