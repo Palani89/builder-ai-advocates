@@ -814,6 +814,172 @@
           margin-bottom: 0.25rem;
         }
       }
+
+      /* Assignment Modal Styles */
+      .assignment-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .assignment-modal .modal-content {
+        background: var(--surface);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-xl);
+        width: 100%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .assignment-modal .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .assignment-modal .modal-header h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .assignment-modal .modal-close {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-radius: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .assignment-modal .modal-close:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      .assignment-modal .modal-body {
+        padding: 2rem;
+      }
+
+      .assignment-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .assignment-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .assignment-form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .assignment-form-group label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .assignment-form-group input,
+      .assignment-form-group select,
+      .assignment-form-group textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        background: var(--surface);
+      }
+
+      .assignment-form-group input:focus,
+      .assignment-form-group select:focus,
+      .assignment-form-group textarea:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .assignment-form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .assignment-modal .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .assignment-modal .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .assignment-modal .btn-secondary {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+      }
+
+      .assignment-modal .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--border-active);
+        color: var(--primary);
+      }
+
+      .assignment-modal .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .assignment-modal .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      @media (max-width: 768px) {
+        .assignment-form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .assignment-modal .modal-content {
+          margin: 1rem;
+          max-width: calc(100vw - 2rem);
+        }
+      }
     </style>
   </head>
   <body>
