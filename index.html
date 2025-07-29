@@ -686,10 +686,143 @@
         // Implement month navigation logic
       }
 
+      // Create Hearing Modal Functions
+      function openCreateHearingModal() {
+        document.getElementById("createHearingModal").style.display = "flex";
+
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.querySelector('input[name="hearing_date"]').value = tomorrow.toISOString().split('T')[0];
+
+        // Set default time
+        document.querySelector('input[name="hearing_time"]').value = "10:30";
+      }
+
+      function closeCreateHearingModal() {
+        document.getElementById("createHearingModal").style.display = "none";
+        document.getElementById("createHearingForm").reset();
+      }
+
+      function toggleVCLink(mode) {
+        const courtHallGroup = document.getElementById('courtHallGroup');
+        const vcLinkGroup = document.getElementById('vcLinkGroup');
+
+        if (mode === 'Video Conference') {
+          courtHallGroup.style.display = 'none';
+          vcLinkGroup.style.display = 'block';
+        } else if (mode === 'Hybrid') {
+          courtHallGroup.style.display = 'block';
+          vcLinkGroup.style.display = 'block';
+        } else {
+          courtHallGroup.style.display = 'block';
+          vcLinkGroup.style.display = 'none';
+        }
+      }
+
+      function saveHearing() {
+        const form = document.getElementById('createHearingForm');
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = ['case_id', 'case_title', 'court_name', 'case_type', 'hearing_date', 'hearing_time', 'hearing_mode'];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (!formData.get(field)) {
+            isValid = false;
+            const input = form.querySelector(`[name="${field}"]`);
+            if (input) {
+              input.style.borderColor = 'var(--error)';
+              setTimeout(() => {
+                input.style.borderColor = '';
+              }, 3000);
+            }
+          }
+        });
+
+        if (!isValid) {
+          alert('Please fill in all required fields marked with *');
+          return;
+        }
+
+        // Create hearing object
+        const hearingData = {
+          id: Date.now(),
+          case_id: formData.get('case_id'),
+          case_title: formData.get('case_title'),
+          court_name: formData.get('court_name'),
+          judge_name: formData.get('judge_name'),
+          case_type: formData.get('case_type'),
+          case_stage: formData.get('case_stage'),
+          hearing_date: formData.get('hearing_date'),
+          hearing_time: formData.get('hearing_time'),
+          hearing_mode: formData.get('hearing_mode'),
+          court_hall: formData.get('court_hall'),
+          vc_link: formData.get('vc_link'),
+          hearing_purpose: formData.get('hearing_purpose'),
+          hearing_status: formData.get('hearing_status'),
+          remarks: formData.get('remarks'),
+          petitioners: formData.get('petitioners'),
+          respondents: formData.get('respondents'),
+          lead_advocate: formData.get('lead_advocate'),
+          opposing_advocates: formData.get('opposing_advocates'),
+          witnesses: formData.get('witnesses'),
+          enable_reminder: formData.get('enable_reminder'),
+          created_at: new Date().toISOString()
+        };
+
+        console.log('Hearing created:', hearingData);
+
+        // In a real application, you would send this data to your backend
+        // For now, we'll just show a success message
+        alert('Hearing created successfully!\n\nCase: ' + hearingData.case_title + '\nDate: ' + hearingData.hearing_date + '\nTime: ' + hearingData.hearing_time + '\nCourt: ' + hearingData.court_name);
+
+        // Close modal and refresh calendar
+        closeCreateHearingModal();
+
+        // You could add the hearing to the calendar display here
+        addHearingToCalendar(hearingData);
+      }
+
+      function addHearingToCalendar(hearingData) {
+        // Add hearing to calendar display
+        const hearingDate = new Date(hearingData.hearing_date);
+        const day = hearingDate.getDate();
+
+        // Find the calendar day element and add event dot
+        const calendarDays = document.querySelectorAll('.calendar-day');
+        calendarDays.forEach(dayEl => {
+          const dayNumber = dayEl.querySelector('.day-number');
+          if (dayNumber && parseInt(dayNumber.textContent) === day) {
+            let eventsContainer = dayEl.querySelector('.day-events');
+            if (!eventsContainer) {
+              eventsContainer = document.createElement('div');
+              eventsContainer.className = 'day-events';
+              dayEl.appendChild(eventsContainer);
+            }
+
+            const eventDot = document.createElement('div');
+            eventDot.className = 'event-dot';
+            if (hearingData.case_type === 'Criminal') {
+              eventDot.classList.add('hearing');
+            }
+            eventsContainer.appendChild(eventDot);
+          }
+        });
+      }
+
       // Event listeners
       document.addEventListener('DOMContentLoaded', function() {
         // Close menu when clicking overlay
         document.getElementById('sideMenuOverlay').addEventListener('click', closeSideMenu);
+
+        // Close modal when clicking overlay
+        document.getElementById('createHearingModal').addEventListener('click', function(e) {
+          if (e.target === this) {
+            closeCreateHearingModal();
+          }
+        });
       });
     </script>
   </body>
