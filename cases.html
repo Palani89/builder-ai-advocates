@@ -329,6 +329,47 @@
         background: #6b7280;
       }
 
+      /* Responsive Design for Tabs */
+      @media (max-width: 768px) {
+        .tabs {
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .tab {
+          flex: 1;
+          min-width: 80px;
+          text-align: center;
+          font-size: 0.8rem;
+          padding: 0.5rem 0.25rem;
+        }
+
+        .cases-list {
+          flex-direction: column;
+        }
+
+        .case-card {
+          margin-bottom: 1rem;
+        }
+
+        .case-actions {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .action-btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .tab {
+          font-size: 0.7rem;
+          padding: 0.4rem 0.2rem;
+        }
+      }
+
       /* Search */
       .search-container {
         display: flex;
