@@ -623,6 +623,249 @@
       </div>
     </div>
 
+    <!-- Create Appointment Modal -->
+    <div class="modal-overlay" id="createAppointmentModal" style="display: none;">
+      <div class="modal-content create-appointment-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-calendar-plus"></i> Create New Appointment</h3>
+          <button class="modal-close" onclick="closeCreateAppointmentModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="createAppointmentForm">
+            <!-- Section 1: Basic Appointment Info -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-info-circle section-icon"></i>
+                <h4 class="section-title">✅ Basic Appointment Info</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment ID</label>
+                  <input type="text" class="form-input" name="appointment_id" readonly placeholder="Auto-generated">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client / Petitioner Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="client_name" placeholder="Full name of client" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Phone Number <span class="required">*</span></label>
+                  <input type="tel" class="form-input" name="client_phone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Email <span class="required">*</span></label>
+                  <input type="email" class="form-input" name="client_email" placeholder="client@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Advocate Name <span class="required">*</span></label>
+                  <input type="text" class="form-input" name="advocate_name" placeholder="Lead advocate handling appointment" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Related Case ID / Case Title</label>
+                  <input type="text" class="form-input" name="related_case" placeholder="Link to existing case (optional)">
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Appointment Purpose <span class="required">*</span></label>
+                  <select class="form-select" name="appointment_purpose" required>
+                    <option value="">Select Purpose</option>
+                    <option value="Legal Consultation">Legal Consultation</option>
+                    <option value="Document Review">Document Review</option>
+                    <option value="Case Update">Case Update</option>
+                    <option value="Contract Drafting">Contract Drafting</option>
+                    <option value="Legal Advice">Legal Advice</option>
+                    <option value="Court Preparation">Court Preparation</option>
+                    <option value="Settlement Discussion">Settlement Discussion</option>
+                    <option value="Document Signing">Document Signing</option>
+                    <option value="Follow-up Meeting">Follow-up Meeting</option>
+                    <option value="Other">Other (Specify in remarks)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Appointment Schedule -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-calendar section-icon"></i>
+                <h4 class="section-title">📅 Appointment Schedule</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Appointment Date <span class="required">*</span></label>
+                  <input type="date" class="form-input" name="appointment_date" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Start Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="start_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">End Time <span class="required">*</span></label>
+                  <input type="time" class="form-input" name="end_time" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Duration (minutes)</label>
+                  <select class="form-select" name="duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60" selected>60 minutes</option>
+                    <option value="90">90 minutes</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Appointment Status</label>
+                  <select class="form-select" name="appointment_status">
+                    <option value="Scheduled" selected>Scheduled</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="No Show">No Show</option>
+                    <option value="Rescheduled">Rescheduled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Mode of Appointment <span class="required">*</span></label>
+                  <select class="form-select" name="appointment_mode" required onchange="toggleAppointmentMode(this.value)">
+                    <option value="">Select Mode</option>
+                    <option value="In-Person">In-Person</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Video Call">Video Call</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Location Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-map-marker-alt section-icon"></i>
+                <h4 class="section-title">📍 Location Details</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group" id="meetingLocationGroup">
+                  <label class="form-label">Meeting Location</label>
+                  <select class="form-select" name="meeting_location">
+                    <option value="">Select Location</option>
+                    <option value="Advocate's Office">Advocate's Office</option>
+                    <option value="Court Premises">Court Premises</option>
+                    <option value="Client Location">Client Location</option>
+                    <option value="Other">Other (Specify in remarks)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="advocateOfficeGroup">
+                  <label class="form-label">Advocate's Office Address</label>
+                  <textarea class="form-textarea" name="office_address" rows="2" placeholder="Office address details"></textarea>
+                </div>
+                <div class="form-group" id="courtPremisesGroup" style="display: none;">
+                  <label class="form-label">Court Premises Details</label>
+                  <input type="text" class="form-input" name="court_premises" placeholder="Court name and room details">
+                </div>
+                <div class="form-group" id="clientLocationGroup" style="display: none;">
+                  <label class="form-label">Client Location Address</label>
+                  <textarea class="form-textarea" name="client_location" rows="2" placeholder="Client's address details"></textarea>
+                </div>
+                <div class="form-group" id="vcLinkAppointmentGroup" style="display: none;">
+                  <label class="form-label">Video Call Link</label>
+                  <input type="url" class="form-input" name="vc_link_appointment" placeholder="https://zoom.us/j/123456789 or Meet link">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Additional Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-clipboard section-icon"></i>
+                <h4 class="section-title">📝 Additional Details</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label">Remarks / Notes</label>
+                  <textarea class="form-textarea" name="appointment_remarks" rows="3" placeholder="Questions to be addressed, documents to bring, agenda items, etc."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fee for Appointment</label>
+                  <input type="number" class="form-input" name="appointment_fee" placeholder="0" min="0" step="100">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Payment Status</label>
+                  <select class="form-select" name="payment_status">
+                    <option value="Unpaid" selected>Unpaid</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Partially Paid">Partially Paid</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Attach Documents</label>
+                  <div class="file-upload">
+                    <input type="file" name="appointment_documents" multiple accept=".pdf,.doc,.docx,.jpg,.png">
+                    <div class="file-upload-btn">
+                      <i class="fas fa-upload"></i>
+                      Choose Files (PDF, DOC, Images)
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Reminders & Notifications -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-bell section-icon"></i>
+                <h4 class="section-title">🔔 Reminders & Notifications</h4>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Send Reminder To Client?</label>
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="send_reminder" value="yes" checked> Yes
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="send_reminder" value="no"> No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Reminder Time</label>
+                  <select class="form-select" name="reminder_time">
+                    <option value="1 hour before">1 hour before</option>
+                    <option value="2 hours before">2 hours before</option>
+                    <option value="4 hours before">4 hours before</option>
+                    <option value="1 day before" selected>1 day before</option>
+                    <option value="2 days before">2 days before</option>
+                    <option value="1 week before">1 week before</option>
+                  </select>
+                </div>
+                <div class="form-group full-width">
+                  <label class="form-label">Notification Mode</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_sms" checked> SMS
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_whatsapp" checked> WhatsApp
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_email" checked> Email
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="notification_inapp"> In-app
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateAppointmentModal()">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="saveAppointment()">
+            <i class="fas fa-save"></i> Create Appointment
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Global variables
       let currentMonth = "January 2024";
