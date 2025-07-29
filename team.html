@@ -1758,6 +1758,90 @@
       $("#sideMenuOverlay").on("click", function () {
         closeSideMenu();
       });
+
+      // Assignment Modal Functions
+      function openAssignTaskModal(memberName, memberId) {
+        $('#assignmentModal').css('display', 'flex');
+        $('#assignedMemberName').text(memberName);
+        $('#assignedMemberId').val(memberId);
+      }
+
+      function closeAssignTaskModal() {
+        $('#assignmentModal').hide();
+        $('#assignmentForm')[0].reset();
+      }
+
+      function createAssignment() {
+        const form = $('#assignmentForm')[0];
+        const formData = new FormData(form);
+
+        // Basic validation
+        if (!formData.get('selectCase') || !formData.get('taskType') || !formData.get('dueDate')) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        // Create assignment object
+        const assignment = {
+          memberId: formData.get('assignedMemberId'),
+          memberName: $('#assignedMemberName').text(),
+          case: formData.get('selectCase'),
+          taskType: formData.get('taskType'),
+          priority: formData.get('priority'),
+          dueDate: formData.get('dueDate'),
+          taskId: formData.get('taskId') || 'AUTO-' + Date.now(),
+          instructions: formData.get('instructions'),
+          createdBy: 'Current User',
+          createdAt: new Date().toISOString()
+        };
+
+        // Here you would normally send the data to your backend
+        console.log('Assignment created:', assignment);
+
+        // Show success message
+        alert(`Task assigned successfully to ${assignment.memberName}!`);
+
+        // Close modal
+        closeAssignTaskModal();
+      }
+
+      // Contact Member Function
+      function contactMember(phoneNumber, memberName) {
+        if (confirm(`Do you want to call ${memberName} at ${phoneNumber}?`)) {
+          // Initiate phone call
+          window.location.href = `tel:${phoneNumber}`;
+        }
+      }
+
+      // Close assignment modal when clicking overlay
+      $('#assignmentModal').on('click', function(e) {
+        if (e.target === this) {
+          closeAssignTaskModal();
+        }
+      });
+
+      // Add event handlers for all assign task and contact buttons
+      $(document).ready(function() {
+        // Contact button handlers with phone numbers
+        $('.contact-btn').each(function(index) {
+          const phoneNumbers = ['+91 9876543210', '+91 9876543211', '+91 9876543212', '+91 9876543213', '+91 9876543214', '+91 9876543215', '+91 9876543216'];
+          const memberNames = ['Priya Sharma', 'Amit Jain', 'Neha Gupta', 'Suresh Patel', 'Ravi Singh', 'Meera Patel', 'Arjun Kumar'];
+
+          $(this).on('click', function() {
+            contactMember(phoneNumbers[index], memberNames[index]);
+          });
+        });
+
+        // Assign task button handlers
+        $('.assign-btn').each(function(index) {
+          const memberNames = ['Priya Sharma', 'Amit Jain', 'Neha Gupta', 'Suresh Patel', 'Ravi Singh', 'Meera Patel', 'Arjun Kumar'];
+          const memberIds = ['priya_sharma', 'amit_jain', 'neha_gupta', 'suresh_patel', 'ravi_singh', 'meera_patel', 'arjun_kumar'];
+
+          $(this).on('click', function() {
+            openAssignTaskModal(memberNames[index], memberIds[index]);
+          });
+        });
+      });
     </script>
   </body>
 </html>
