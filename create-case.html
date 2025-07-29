@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New Case - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .menu-toggle:hover {
+        background: var(--background);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .page-title-section h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.75rem 0 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .breadcrumb-item:hover {
+        color: var(--primary);
+      }
+
+      .breadcrumb-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .breadcrumb-separator {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      /* Form Styles */
+      .form-container {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+
+      .form-section {
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .form-section:last-child {
+        border-bottom: none;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .section-icon {
+        color: var(--primary);
+        font-size: 1.125rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .required {
+        color: var(--error);
+      }
+
+      .form-input {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        transition: border-color 0.2s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-select {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        cursor: pointer;
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .form-textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .file-upload {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .file-upload input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .file-upload-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: var(--background);
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .file-upload-btn:hover {
+        border-color: var(--primary);
+        background: rgba(79, 70, 229, 0.05);
+      }
+
+      /* Action Buttons */
+      .form-actions {
+        padding: 2rem;
+        background: var(--background);
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--text-muted);
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .form-section {
+          padding: 1.5rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+
+        .form-actions {
+          flex-direction: column;
+          padding: 1.5rem;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .section-title {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>
+              <i class="fas fa-plus-circle"></i>
+              Create New Case
+            </h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="index.html" class="breadcrumb-item">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <a href="cases.html" class="breadcrumb-item">
+                <i class="fas fa-file-alt"></i>
+                Cases
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-plus"></i>
+                Create Case
+              </span>
+            </nav>
+
+            <p class="page-subtitle">
+              Create a new legal case with comprehensive details
+            </p>
+          </div>
+        </div>
+
+        <!-- Case Creation Form -->
+        <div class="form-container">
+          <form id="caseForm">
+            <!-- Section 1: Case Basics -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-folder section-icon"></i>
+                <span class="section-title">Case Basics</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Case Title <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="case_title"
+                    placeholder="e.g., State vs. Ramesh Sharma"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Case Type <span class="required">*</span></label
+                  >
+                  <select class="form-select" name="case_type" required>
+                    <option value="">Select Case Type</option>
+                    <option value="Criminal">Criminal</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Matrimonial">Matrimonial</option>
+                    <option value="Corporate">Corporate</option>
+                    <option value="Property">Property</option>
+                    <option value="Labor">Labor</option>
+                    <option value="Tax">Tax</option>
+                    <option value="Family">Family</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Court Name <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="court_name"
+                    placeholder="e.g., Delhi District Court"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Judge Name</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="judge_name"
+                    placeholder="Hon'ble Justice Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Case Number</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="case_number"
+                    placeholder="e.g., CC/1234/2024"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label"
+                    >Filing Date <span class="required">*</span></label
+                  >
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="filing_date"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Client Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-user section-icon"></i>
+                <span class="section-title">Client Details</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Client Name <span class="required">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="client_name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Type</label>
+                  <select class="form-select" name="client_type">
+                    <option value="">Select Type</option>
+                    <option value="Individual">Individual</option>
+                    <option value="Company">Company</option>
+                    <option value="Organization">Organization</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Phone</label>
+                  <input type="tel" class="form-input" name="client_phone" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Client Email</label>
+                  <input type="email" class="form-input" name="client_email" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Legal Details -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-gavel section-icon"></i>
+                <span class="section-title">Legal Details</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">IPC Sections</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="ipc_sections"
+                    placeholder="e.g., IPC 420, IPC 406"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Acts Involved</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    name="acts"
+                    placeholder="e.g., CrPC, CPC, Indian Evidence Act"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Next Hearing Date</label>
+                  <input
+                    type="date"
+                    class="form-input"
+                    name="next_hearing_date"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Status</label>
+                  <select class="form-select" name="status">
+                    <option value="Active">Active</option>
+                    <option value="Disposed">Disposed</option>
+                    <option value="Appeal Filed">Appeal Filed</option>
+                    <option value="Pending">Pending</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 1.5rem">
+                <label class="form-label">Case Summary</label>
+                <textarea
+                  class="form-textarea"
+                  name="case_summary"
+                  placeholder="Brief description of the case..."
+                  style="min-height: 120px"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Section 4: Documents -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-file section-icon"></i>
+                <span class="section-title">Documents</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Upload Documents</label>
+                <div class="file-upload">
+                  <input
+                    type="file"
+                    name="documents"
+                    multiple
+                    accept=".pdf,.doc,.docx,.jpg,.png,.jpeg"
+                    id="documentUpload"
+                  />
+                  <div class="file-upload-btn">
+                    <i class="fas fa-upload"></i>
+                    Choose Files (PDF, DOC, DOCX, JPG, PNG)
+                  </div>
+                </div>
+                <small
+                  style="
+                    color: var(--text-muted);
+                    margin-top: 0.75rem;
+                    display: block;
+                  "
+                >
+                  Upload case-related documents like FIR, petitions, evidence, etc.
+                </small>
+              </div>
+            </div>
+
+            <!-- Section 5: Team Assignment -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-user-friends section-icon"></i>
+                <span class="section-title">Team Assignment</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label"
+                    >Senior Advocate <span class="required">*</span></label
+                  >
+                  <select class="form-select" name="senior_advocate" required>
+                    <option value="">Select Senior Advocate</option>
+                    <option value="priya_sharma">
+                      Priya Sharma - Senior Advocate (Criminal Law)
+                    </option>
+                    <option value="rajesh_kumar">
+                      Rajesh Kumar - Senior Advocate (Corporate Law)
+                    </option>
+                    <option value="anil_verma">
+                      Anil Verma - Senior Advocate (Civil Law)
+                    </option>
+                    <option value="kavita_singh">
+                      Kavita Singh - Senior Advocate (Family Law)
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Junior Advocate</label>
+                  <select class="form-select" name="junior_advocate">
+                    <option value="">Select Junior Advocate</option>
+                    <option value="amit_jain">
+                      Amit Jain - Junior Advocate (Criminal Law)
+                    </option>
+                    <option value="neha_gupta">
+                      Neha Gupta - Junior Advocate (Civil Law)
+                    </option>
+                    <option value="rohit_sharma">
+                      Rohit Sharma - Junior Advocate (Corporate Law)
+                    </option>
+                    <option value="pooja_verma">
+                      Pooja Verma - Junior Advocate (Tax Law)
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 6: Billing -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-rupee-sign section-icon"></i>
+                <span class="section-title">Billing Information</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Fee Agreed (INR)</label>
+                  <input
+                    type="number"
+                    class="form-input"
+                    name="fee_agreed"
+                    placeholder="Amount in INR"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Payment Status</label>
+                  <select class="form-select" name="payment_status">
+                    <option value="Pending">Pending</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Partial">Partial</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Notes -->
+            <div class="form-section">
+              <div class="section-header">
+                <i class="fas fa-sticky-note section-icon"></i>
+                <span class="section-title">Additional Notes</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Internal Notes</label>
+                <textarea
+                  class="form-textarea"
+                  name="internal_notes"
+                  placeholder="Notes for advocate's eyes only"
+                  style="min-height: 120px"
+                ></textarea>
+              </div>
+            </div>
+          </form>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" form="caseForm">
+              <i class="fas fa-save"></i>
+              Create Case
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item active">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="index.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Navigation
+        $(".nav-item").on("click", function (e) {
+          const href = $(this).attr("href");
+          if (href && href !== "#") {
+            window.location.href = href;
+          }
+        });
+
+        // File upload handling
+        $("#documentUpload").on("change", function () {
+          const files = this.files;
+          if (files.length > 0) {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-check"></i> ${files.length} file(s) selected`,
+              );
+          } else {
+            $(this)
+              .siblings(".file-upload-btn")
+              .html(
+                `<i class="fas fa-upload"></i> Choose Files (PDF, DOC, DOCX, JPG, PNG)`,
+              );
+          }
+        });
+
+        // Cancel button
+        $("#cancelBtn").on("click", function () {
+          if (
+            confirm(
+              "Are you sure you want to cancel? All entered data will be lost.",
+            )
+          ) {
+            window.location.href = "cases.html";
+          }
+        });
+
+        // Form submission
+        $("#caseForm").on("submit", function (e) {
+          e.preventDefault();
+
+          // Collect form data
+          const formData = new FormData(this);
+          const caseData = {};
+
+          // Convert FormData to object
+          for (let [key, value] of formData.entries()) {
+            if (caseData[key]) {
+              if (Array.isArray(caseData[key])) {
+                caseData[key].push(value);
+              } else {
+                caseData[key] = [caseData[key], value];
+              }
+            } else {
+              caseData[key] = value;
+            }
+          }
+
+          // Add metadata
+          caseData.created_by = "current_advocate_id";
+          caseData.created_on = new Date().toISOString();
+          caseData.case_id = generateCaseId();
+
+          // Here you would normally send the data to your backend
+          console.log("Case Data:", caseData);
+
+          // Show success message
+          alert("Case created successfully!");
+
+          // Redirect to cases page
+          window.location.href = "cases.html";
+        });
+      });
+
+      // Generate unique case ID
+      function generateCaseId() {
+        return (
+          "CASE_" +
+          Date.now() +
+          "_" +
+          Math.random().toString(36).substr(2, 5).toUpperCase()
+        );
+      }
+
+      function logoutFromApp() {
+        alert("Logout functionality would be implemented here");
+      }
+    </script>
+  </body>
+</html>
