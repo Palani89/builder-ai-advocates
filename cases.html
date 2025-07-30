@@ -1312,6 +1312,9 @@
 
     <script>
       $(document).ready(function () {
+        // Load and display cases from localStorage
+        loadCasesFromStorage();
+
         // Tab switching
         $(".tab").on("click", function () {
           const tabName = $(this).data("tab");
