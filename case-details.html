@@ -4003,22 +4003,42 @@
           // Store editing hearing ID
           window.editingHearingId = hearingId;
 
-          // Populate form with hearing data
-          $("#hearingDate").val(hearing.date);
-          $("#courtName").val(hearing.courtName);
-          $("#courtRoom").val(hearing.courtRoom);
-          $("#judgeName").val(hearing.judgeName);
-          $("#hearingType").val(hearing.hearingType);
-          $("#caseStage").val(hearing.caseStage);
-          $("#hearingStatus").val(hearing.status);
-          $("#appearedBy").val(hearing.appearedBy);
-          $("#hearingNotes").val(hearing.notes);
-          $("#documentsDiscussed").val(hearing.documentsDiscussed);
-          $("#aiSummary").val(hearing.aiSummary);
-          $("#nextHearingDate").val(hearing.nextHearingDate);
+          // Populate comprehensive form with hearing data (handle both old and new formats)
+          $('input[name="case_id"]').val(hearing.case_id || "");
+          $('input[name="case_title"]').val(hearing.case_title || "");
+          $('select[name="court_name"]').val(hearing.court_name || hearing.courtName || "");
+          $('input[name="judge_name"]').val(hearing.judge_name || hearing.judgeName || "");
+          $('select[name="case_type"]').val(hearing.case_type || "");
+          $('select[name="case_stage"]').val(hearing.case_stage || hearing.caseStage || "");
+
+          // Handle date and time (both old and new formats)
+          if (hearing.hearing_date && hearing.hearing_time) {
+            $('input[name="hearing_date"]').val(hearing.hearing_date);
+            $('input[name="hearing_time"]').val(hearing.hearing_time);
+          } else if (hearing.date) {
+            // Convert old datetime-local format to separate date and time
+            const dateObj = new Date(hearing.date);
+            const date = dateObj.toISOString().split('T')[0];
+            const time = dateObj.toTimeString().slice(0, 5);
+            $('input[name="hearing_date"]').val(date);
+            $('input[name="hearing_time"]').val(time);
+          }
+
+          $('select[name="hearing_mode"]').val(hearing.hearing_mode || "");
+          $('input[name="court_hall"]').val(hearing.court_hall || hearing.courtRoom || "");
+          $('input[name="vc_link"]').val(hearing.vc_link || "");
+          $('select[name="hearing_purpose"]').val(hearing.hearing_purpose || hearing.hearingType || "");
+          $('select[name="hearing_status"]').val(hearing.hearing_status || hearing.status || "");
+          $('textarea[name="remarks"]').val(hearing.remarks || hearing.notes || "");
+
+          // Toggle VC link visibility based on hearing mode
+          const hearingMode = hearing.hearing_mode || "";
+          if (hearingMode) {
+            toggleVCLink(hearingMode);
+          }
 
           // Update modal title and show delete button
-          $(".modal-header h3").text("Edit Hearing");
+          $(".modal-header h3").html('<i class="fas fa-gavel"></i> Edit Hearing');
           $("#deleteHearingBtn").show();
 
           openAddHearingModal();
