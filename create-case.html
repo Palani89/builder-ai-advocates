@@ -3484,15 +3484,19 @@
             localStorage.removeItem('case_form_draft');
             localStorage.removeItem('case_form_draft_timestamp');
 
-            // Reset form
-            resetForm();
-
-            // Show success notification
-            showSuccessNotification(newCase);
-
             // Reset submit button
             $submitBtn.removeClass('loading');
             $submitBtn.find('#submitBtnText').text('Create Case');
+
+            // Store success message for display on cases page
+            localStorage.setItem('case_creation_success', JSON.stringify({
+              message: `Case "${newCase.case_title}" created successfully!`,
+              caseId: newCase.id,
+              timestamp: Date.now()
+            }));
+
+            // Redirect to cases page
+            window.location.href = 'cases.html';
 
           } catch (error) {
             console.error('Failed to create case:', error);
