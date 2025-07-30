@@ -1139,48 +1139,7 @@
           </div>
         </div>
 
-        <!-- Auto-save Indicator -->
-        <div class="auto-save-indicator" id="autoSaveIndicator">
-          <div class="auto-save-spinner" id="autoSaveSpinner" style="display: none;"></div>
-          <i class="fas fa-check-circle auto-save-icon" id="autoSaveIcon" style="display: none;"></i>
-          <i class="fas fa-exclamation-triangle auto-save-error-icon" id="autoSaveErrorIcon" style="display: none;"></i>
-          <span id="autoSaveText">Auto-save enabled</span>
-        </div>
 
-        <!-- Restore Draft Banner -->
-        <div class="restore-draft-banner" id="restoreDraftBanner" style="display: none;">
-          <i class="fas fa-history"></i>
-          <span>Draft found! Would you like to restore your previous work?</span>
-          <button class="btn" onclick="restoreDraft()">Restore</button>
-          <button class="btn" onclick="dismissDraft()">Dismiss</button>
-        </div>
-
-        <!-- Success Notification -->
-        <div class="notification-overlay" id="notificationOverlay"></div>
-        <div class="success-notification" id="successNotification">
-          <div class="success-icon">
-            <i class="fas fa-check"></i>
-          </div>
-          <div class="success-title">Case Created Successfully!</div>
-          <div class="success-message" id="successMessage">
-            Your new case has been created and added to your case list.
-          </div>
-          <div class="success-actions">
-            <button class="btn btn-secondary" onclick="closeNotification()">Close</button>
-            <button class="btn btn-primary" onclick="viewCaseList()">View Cases</button>
-          </div>
-        </div>
-
-        <!-- Auto-save Settings -->
-        <div class="auto-save-settings">
-          <div class="auto-save-toggle">
-            <input type="checkbox" id="autoSaveEnabled" checked>
-            <label for="autoSaveEnabled">Enable Auto-save (every 30 seconds)</label>
-          </div>
-          <div style="margin-left: auto; font-size: 0.75rem; color: var(--text-muted);">
-            <span id="lastSavedTime">Never saved</span>
-          </div>
-        </div>
 
         <!-- Case Creation Form -->
         <div class="form-container">
