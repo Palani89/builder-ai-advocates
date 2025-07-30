@@ -26,407 +26,207 @@
     <link rel="stylesheet" href="client/global.css" />
 
     <style>
-      /* Enhanced Responsive Styles for Create Hearing Form */
+      /* Override global.css main-content for form layout */
+      .main-content {
+        grid-template-columns: 1fr;
+        max-width: none;
+        padding: 1.5rem;
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
 
-      /* Base Layout Improvements */
+      /* Form specific styles */
       .form-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 1.5rem;
-        background: #ffffff;
+        padding: 2rem;
+        background: var(--surface);
         border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
       }
 
-      .form-section {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      /* Enhanced grid system */
+      .form-grid.two-column {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       }
 
-      .section-header {
+      .form-grid.three-column {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .form-grid.four-column {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      /* Full width elements */
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      /* Page header improvements */
+      .page-header {
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
+      }
+
+      .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        margin-bottom: 1.5rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #f3f4f6;
       }
 
-      .section-icon {
-        color: #4f46e5;
-        font-size: 1.125rem;
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 1rem;
       }
 
-      .section-title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #1f2937;
+      .page-actions {
+        margin-top: 1rem;
       }
 
-      /* Form Grid Layout */
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .form-group {
+      /* Form actions sticky positioning */
+      .form-actions {
         display: flex;
-        flex-direction: column;
-        margin-bottom: 1rem;
+        justify-content: flex-end;
+        gap: 1rem;
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--border);
+        margin-top: 2rem;
+        background: var(--surface);
       }
 
-      .form-label {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #374151;
-        margin-bottom: 0.5rem;
-      }
-
-      .form-input,
-      .form-select,
-      .form-textarea {
-        padding: 0.75rem 1rem;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        font-size: 0.875rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        background: #ffffff;
-      }
-
-      .form-input:focus,
-      .form-select:focus,
-      .form-textarea:focus {
-        outline: none;
-        border-color: #4f46e5;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-      }
-
-      .required {
-        color: #ef4444;
-      }
-
-      /* Desktop and Large Tablet Layout */
-      @media (min-width: 768px) {
+      /* Tablet responsiveness */
+      @media (max-width: 1024px) {
         .form-container {
-          padding: 2rem;
+          padding: 1.5rem;
         }
 
         .form-grid.two-column {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr;
         }
 
         .form-grid.three-column {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
 
         .form-grid.four-column {
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
       }
 
-      /* Laptop and Larger Screens */
-      @media (min-width: 1024px) {
-        .page-header {
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .form-container {
-          padding: 2.5rem;
-        }
-
-        .form-section {
-          padding: 2rem;
-        }
-
-        .section-header {
-          margin-bottom: 2rem;
-        }
-      }
-
-      /* Tablet styles */
+      /* Mobile responsiveness */
       @media (max-width: 768px) {
-        .app-container {
-          padding: 0 0.5rem;
-          padding-bottom: 80px;
+        .main-content {
+          padding: 1rem;
+          padding-top: 90px;
+          padding-bottom: 120px;
         }
 
         .form-container {
           padding: 1rem;
-          margin: 0.5rem 0;
+          margin: 0 0.5rem;
           border-radius: 8px;
         }
 
-        .form-section {
-          padding: 1.25rem;
-          margin-bottom: 1rem;
-        }
-
-        .section-header {
-          margin-bottom: 1.25rem;
-        }
-
-        .form-grid {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-
-        .form-group {
-          margin-bottom: 1rem;
-        }
-
         .page-header {
-          flex-direction: column;
-          gap: 1rem;
-          align-items: flex-start;
-          margin: 1rem 0;
-          padding: 0 0.5rem;
-        }
-
-        .page-actions {
-          width: 100%;
-          justify-content: flex-start;
-        }
-      }
-
-      /* Mobile styles */
-      @media (max-width: 640px) {
-        .app-container {
-          padding: 0;
-          padding-bottom: 80px;
-        }
-
-        .header {
-          padding: 0.75rem 1rem;
-        }
-
-        .page-header {
-          margin: 0.75rem;
+          margin-bottom: 1.5rem;
           padding: 0;
         }
 
         .page-title {
-          font-size: 1.375rem;
-          line-height: 1.3;
+          font-size: 1.5rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
         }
 
         .page-subtitle {
           font-size: 0.875rem;
-          margin-top: 0.5rem;
         }
 
-        .breadcrumb {
-          font-size: 0.75rem;
-          flex-wrap: wrap;
-          gap: 0.25rem;
-          margin-bottom: 1rem;
+        .page-actions {
+          margin-top: 1rem;
         }
 
-        .form-container {
-          margin: 0.5rem;
-          padding: 1rem;
-          border-radius: 8px;
+        .page-actions .btn {
+          width: 100%;
+          justify-content: center;
         }
 
-        .form-section {
-          padding: 1rem;
-          margin-bottom: 1rem;
-          border-radius: 6px;
+        .form-grid,
+        .form-grid.two-column,
+        .form-grid.three-column,
+        .form-grid.four-column {
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
 
         .section-header {
-          margin-bottom: 1rem;
-          padding-bottom: 0.75rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+          padding-bottom: 1rem;
         }
 
         .section-title {
           font-size: 1rem;
         }
 
-        .section-icon {
-          font-size: 1rem;
-        }
-
-        .form-grid {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-
-        .form-group {
-          margin-bottom: 1rem;
-        }
-
-        .form-label {
-          font-size: 0.875rem;
-          margin-bottom: 0.5rem;
-        }
-
+        /* Form inputs mobile optimization */
         .form-input,
         .form-select,
         .form-textarea {
-          padding: 0.875rem;
           font-size: 16px; /* Prevents zoom on iOS */
-          border-radius: 6px;
+          padding: 0.875rem;
         }
 
         .form-textarea {
-          min-height: 100px;
-          resize: vertical;
+          min-height: 80px;
         }
 
-        select[multiple] {
-          min-height: 120px;
-          padding: 0.5rem;
-        }
-
+        /* Mobile form actions */
         .form-actions {
           flex-direction: column;
           gap: 0.75rem;
-          padding: 1rem;
           position: sticky;
-          bottom: 0;
-          background: #ffffff;
-          border-top: 1px solid #e5e7eb;
-          margin: 0 -1rem -1rem -1rem;
-          border-radius: 0 0 8px 8px;
-        }
-
-        .primary-button,
-        .secondary-button {
-          width: 100%;
-          padding: 0.875rem 1rem;
-          border-radius: 6px;
-          font-size: 0.875rem;
-          font-weight: 500;
-          transition: all 0.2s;
-        }
-
-        .primary-button {
-          background: #4f46e5;
-          color: #ffffff;
-          border: none;
-        }
-
-        .primary-button:hover {
-          background: #4338ca;
-        }
-
-        .secondary-button {
-          background: #ffffff;
-          color: #6b7280;
-          border: 1px solid #d1d5db;
-        }
-
-        .secondary-button:hover {
-          background: #f9fafb;
-          color: #374151;
-        }
-      }
-
-      /* Form Actions for all screens */
-      .form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        padding: 1.5rem 0;
-        border-top: 1px solid #e5e7eb;
-        margin-top: 2rem;
-      }
-
-      @media (min-width: 641px) {
-        .form-actions {
-          flex-direction: row;
-        }
-
-        .primary-button,
-        .secondary-button {
-          width: auto;
-          min-width: 120px;
-        }
-      }
-
-      /* Enhanced form styling */
-      .form-input[readonly] {
-        background-color: #f9fafb;
-        color: #6b7280;
-      }
-
-      .breadcrumb {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem;
-        color: #6b7280;
-        margin-bottom: 1rem;
-      }
-
-      .breadcrumb-item {
-        text-decoration: none;
-        color: #6b7280;
-        transition: color 0.2s;
-      }
-
-      .breadcrumb-item:hover {
-        color: #4f46e5;
-      }
-
-      .breadcrumb-item.current {
-        color: #374151;
-        font-weight: 500;
-      }
-
-      .breadcrumb-separator {
-        color: #d1d5db;
-      }
           bottom: 80px;
           background: var(--surface);
           border-top: 1px solid var(--border);
-          margin: 0 -0.75rem;
+          margin: 1rem -1rem -1rem -1rem;
+          padding: 1rem;
+          border-radius: 0 0 8px 8px;
           z-index: 10;
         }
 
-        .btn {
+        .form-actions .btn {
           width: 100%;
-          padding: 0.875rem 1rem;
+          padding: 0.875rem;
           font-size: 0.875rem;
           justify-content: center;
         }
-
-        /* Bottom navigation adjustment */
-        .bottom-nav {
-          position: fixed;
-          z-index: 100;
-        }
       }
 
-      /* Mobile styles */
+      /* Small mobile screens */
       @media (max-width: 480px) {
-        .app-container {
-          padding: 0 0.25rem;
-          padding-bottom: 80px;
+        .main-content {
+          padding: 0.5rem;
+          padding-top: 90px;
+          padding-bottom: 120px;
         }
 
-        .header {
-          padding: 0.5rem 0.75rem;
+        .form-container {
+          padding: 0.75rem;
+          margin: 0;
         }
 
-        .header-left {
-          gap: 0.5rem;
-        }
-
-        .logo-text {
-          display: none;
-        }
-
-        .page-header {
-          margin: 0.75rem 0;
-          padding: 0 0.25rem;
+        .form-section {
+          padding: 1rem;
+          margin-bottom: 1rem;
         }
 
         .page-title {
@@ -435,175 +235,68 @@
 
         .page-subtitle {
           font-size: 0.8rem;
-          line-height: 1.4;
-        }
-
-        .breadcrumb-item {
-          font-size: 0.7rem;
-        }
-
-        .page-actions .btn {
-          padding: 0.5rem 0.75rem;
-          font-size: 0.75rem;
-        }
-
-        .form-container {
-          padding: 0.5rem;
-        }
-
-        .form-section {
-          padding: 0.75rem 0.5rem;
-          margin-bottom: 0.75rem;
-        }
-
-        .section-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.25rem;
-          margin-bottom: 0.75rem;
         }
 
         .section-title {
           font-size: 0.9rem;
         }
 
-        .form-grid {
-          gap: 0.75rem;
-        }
-
-        .form-group {
-          margin-bottom: 0.5rem;
-        }
-
         .form-label {
           font-size: 0.8rem;
-          margin-bottom: 0.25rem;
         }
 
         .form-input,
         .form-select,
         .form-textarea {
-          padding: 0.625rem;
-          font-size: 1rem;
-        }
-
-        .form-textarea {
-          min-height: 70px;
-        }
-
-        /* Reduce textarea rows on mobile */
-        .form-textarea[rows="4"] {
-          min-height: 60px;
-        }
-
-        .form-textarea[rows="3"] {
-          min-height: 50px;
-        }
-
-        .form-textarea[rows="2"] {
-          min-height: 40px;
-        }
-
-        /* Form actions on mobile */
-        .form-actions {
-          padding: 0.75rem 0.5rem;
-          gap: 0.5rem;
-          bottom: 80px;
-          margin: 0 -0.5rem;
-        }
-
-        .btn {
           padding: 0.75rem;
-          font-size: 0.8rem;
-        }
-
-        /* Side menu adjustments */
-        .side-menu {
-          width: 280px;
-        }
-
-        .side-menu-header {
-          padding: 1rem;
-        }
-
-        .side-menu-item {
-          padding: 0.75rem 1rem;
-          font-size: 0.875rem;
+          font-size: 16px;
         }
       }
 
-      /* Extra small mobile */
-      @media (max-width: 320px) {
-        .page-title {
-          font-size: 1.1rem;
-        }
-
-        .form-section {
-          padding: 0.5rem;
-        }
-
-        .section-title {
-          font-size: 0.85rem;
-        }
-
-        .form-label {
-          font-size: 0.75rem;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-          padding: 0.5rem;
-          font-size: 0.9rem;
-        }
-
-        .btn {
-          padding: 0.625rem;
-          font-size: 0.75rem;
-        }
-      }
-
-      /* Landscape orientation on mobile */
+      /* Landscape orientation fixes */
       @media (max-height: 500px) and (orientation: landscape) {
         .form-actions {
           position: relative;
           bottom: auto;
-          background: transparent;
-          border-top: none;
           margin: 1rem 0 0 0;
         }
 
-        .app-container {
-          padding-bottom: 0;
+        .main-content {
+          padding-bottom: 1rem;
         }
       }
 
-      /* Focus and interaction improvements for mobile */
-      @media (max-width: 768px) {
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-          transform: none;
-          box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-          border-color: var(--primary);
-        }
+      /* Focus and interaction improvements */
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
 
-        /* Improve touch targets */
+      /* Better touch targets for mobile */
+      @media (max-width: 768px) {
         .btn {
           min-height: 44px;
         }
 
-        select,
-        input,
-        textarea {
+        .form-input,
+        .form-select,
+        .form-textarea {
           min-height: 44px;
         }
 
-        /* Better visibility for required fields */
-        .required {
-          color: #ef4444;
-          font-weight: 600;
+        select[multiple] {
+          min-height: 120px;
         }
+      }
+
+      /* Readonly field styling */
+      .form-input[readonly] {
+        background-color: var(--background);
+        color: var(--text-secondary);
+        cursor: not-allowed;
       }
     </style>
   </head>
@@ -687,18 +380,14 @@
         <div class="page-header">
           <div class="page-info">
             <nav class="breadcrumb">
-              <span class="breadcrumb-item">Dashboard</span>
-              <span class="breadcrumb-item">Calendar</span>
-              <span class="breadcrumb-item">
-                <i class="fas fa-gavel"></i>
-                Create Hearing
-              </span>
+              <a href="home.html" class="breadcrumb-item">Dashboard</a>
+              <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+              <a href="calendar.html" class="breadcrumb-item">Calendar</a>
+              <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+              <span class="breadcrumb-item current">Create Hearing</span>
             </nav>
             <h1 class="page-title">
-              <i
-                class="fas fa-gavel"
-                style="color: var(--primary); margin-right: 0.75rem"
-              ></i>
+              <i class="fas fa-gavel" style="color: var(--primary);"></i>
               Create New Hearing
             </h1>
             <p class="page-subtitle">
@@ -898,7 +587,7 @@
                 <i class="fas fa-tasks section-icon"></i>
                 <span class="section-title">Case Stage & Hearing Status</span>
               </div>
-              <div class="form-grid">
+              <div class="form-grid four-column">
                 <div class="form-group">
                   <label class="form-label">Case Stage</label>
                   <select class="form-select" name="case_stage">
@@ -1006,7 +695,7 @@
                 <span class="section-title">Hearing Agenda & Preparation</span>
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Hearing Agenda</label>
                   <textarea
                     class="form-textarea"
@@ -1018,7 +707,7 @@
 • Point 3"
                   ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Documents to Present</label>
                   <textarea
                     class="form-textarea"
@@ -1027,7 +716,7 @@
                     placeholder="List documents that will be presented or discussed..."
                   ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Preparation Notes</label>
                   <textarea
                     class="form-textarea"
@@ -1046,7 +735,7 @@
                 <span class="section-title">Expected Outcomes & Strategy</span>
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Expected Outcome</label>
                   <textarea
                     class="form-textarea"
@@ -1055,7 +744,7 @@
                     placeholder="What do you expect to achieve in this hearing?"
                   ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Legal Strategy</label>
                   <textarea
                     class="form-textarea"
@@ -1064,7 +753,7 @@
                     placeholder="Brief outline of the legal strategy for this hearing..."
                   ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Contingency Plans</label>
                   <textarea
                     class="form-textarea"
@@ -1084,7 +773,7 @@
                   >Client Communication & Updates</span
                 >
               </div>
-              <div class="form-grid">
+              <div class="form-grid three-column">
                 <div class="form-group">
                   <label class="form-label">Notify Client</label>
                   <select class="form-select" name="notify_client">
@@ -1103,7 +792,7 @@
                     </option>
                   </select>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Client Instructions</label>
                   <textarea
                     class="form-textarea"
@@ -1121,7 +810,7 @@
                 <i class="fas fa-bell section-icon"></i>
                 <span class="section-title">Reminders & Follow-up</span>
               </div>
-              <div class="form-grid">
+              <div class="form-grid four-column">
                 <div class="form-group">
                   <label class="form-label">Reminder Time</label>
                   <select class="form-select" name="reminder_time">
@@ -1169,7 +858,7 @@
                 >
               </div>
               <div class="form-grid">
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Internal Notes</label>
                   <textarea
                     class="form-textarea"
@@ -1178,7 +867,7 @@
                     placeholder="Private notes for the legal team..."
                   ></textarea>
                 </div>
-                <div class="form-group" style="grid-column: 1 / -1">
+                <div class="form-group full-width">
                   <label class="form-label">Special Instructions</label>
                   <textarea
                     class="form-textarea"
@@ -1248,6 +937,7 @@
       </div>
     </div>
 
+    <script src="app-language.js"></script>
     <script>
       $(document).ready(function () {
         // Set default date to today
