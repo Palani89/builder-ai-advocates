@@ -1508,6 +1508,9 @@
         selectedDate = `${currentMonthName} ${day}, ${currentYear}`;
 
         document.getElementById("selectedDate").textContent = selectedDate;
+
+        // Open reminder modal for the clicked date
+        openReminderModal(day, currentMonthName, currentYear);
       }
 
       function switchTab(tab) {
