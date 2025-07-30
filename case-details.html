@@ -2213,7 +2213,7 @@
                           Based on the case details, here's my analysis for bail
                           prospects:
                           <br /><br />
-                          <strong>��� Positive factors:</strong> Clean criminal
+                          <strong>• Positive factors:</strong> Clean criminal
                           record, cooperation with investigation <br /><strong
                             >• Challenges:</strong
                           >
@@ -3666,6 +3666,9 @@
       function editHearing(hearingId) {
         const hearing = hearingsData.find((h) => h.id === hearingId);
         if (hearing) {
+          // Store editing hearing ID
+          window.editingHearingId = hearingId;
+
           // Populate form with hearing data
           $("#hearingDate").val(hearing.date);
           $("#courtName").val(hearing.courtName);
@@ -3680,8 +3683,10 @@
           $("#aiSummary").val(hearing.aiSummary);
           $("#nextHearingDate").val(hearing.nextHearingDate);
 
-          // Update modal title and save function
+          // Update modal title and show delete button
           $(".modal-header h3").text("Edit Hearing");
+          $("#deleteHearingBtn").show();
+
           openAddHearingModal();
         }
       }
