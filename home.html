@@ -2542,10 +2542,90 @@
       // Initialize time on page load
       updateCurrentTime();
 
-      // Function to open create hearing modal (redirects to calendar page with modal)
+      // Function to open create hearing modal
       function openCreateHearingModal() {
-        // Redirect to calendar page where the modal functionality exists
-        window.location.href = 'calendar.html?openModal=hearing';
+        document.getElementById("createHearingModal").style.display = "flex";
+      }
+
+      // Function to close create hearing modal
+      function closeCreateHearingModal() {
+        document.getElementById("createHearingModal").style.display = "none";
+        document.getElementById("createHearingForm").reset();
+        // Reset VC link visibility
+        document.getElementById("vcLinkGroup").style.display = "none";
+        document.getElementById("courtHallGroup").style.display = "block";
+      }
+
+      // Toggle video conference link field
+      function toggleVCLink(hearingMode) {
+        const vcLinkGroup = document.getElementById("vcLinkGroup");
+        const courtHallGroup = document.getElementById("courtHallGroup");
+
+        if (hearingMode === "Video Conference" || hearingMode === "Hybrid") {
+          vcLinkGroup.style.display = "block";
+        } else {
+          vcLinkGroup.style.display = "none";
+        }
+
+        if (hearingMode === "Video Conference") {
+          courtHallGroup.style.display = "none";
+        } else {
+          courtHallGroup.style.display = "block";
+        }
+      }
+
+      // Save hearing function
+      function saveHearing() {
+        const form = document.getElementById("createHearingForm");
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = ["case_id", "case_title", "court_name", "case_type", "hearing_date", "hearing_time", "hearing_mode"];
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          const input = form.querySelector(`[name="${field}"]`);
+          if (!input.value.trim()) {
+            input.style.borderColor = "var(--error)";
+            isValid = false;
+          } else {
+            input.style.borderColor = "var(--border)";
+          }
+        });
+
+        if (!isValid) {
+          alert("Please fill in all required fields marked with *");
+          return;
+        }
+
+        // Simulate saving (in real app, this would be an API call)
+        const hearingData = {
+          id: "HEARING_" + Date.now(),
+          case_id: formData.get("case_id"),
+          case_title: formData.get("case_title"),
+          court_name: formData.get("court_name"),
+          judge_name: formData.get("judge_name"),
+          case_type: formData.get("case_type"),
+          case_stage: formData.get("case_stage"),
+          hearing_date: formData.get("hearing_date"),
+          hearing_time: formData.get("hearing_time"),
+          hearing_mode: formData.get("hearing_mode"),
+          court_hall: formData.get("court_hall"),
+          vc_link: formData.get("vc_link"),
+          hearing_purpose: formData.get("hearing_purpose"),
+          hearing_status: formData.get("hearing_status") || "Scheduled",
+          remarks: formData.get("remarks"),
+          created_at: new Date().toISOString()
+        };
+
+        // Save to localStorage (in real app, save to database)
+        let existingHearings = JSON.parse(localStorage.getItem("hearings_list") || "[]");
+        existingHearings.unshift(hearingData);
+        localStorage.setItem("hearings_list", JSON.stringify(existingHearings));
+
+        // Show success message and close modal
+        alert("Hearing created successfully!");
+        closeCreateHearingModal();
       }
     </script>
   </body>
