@@ -52,17 +52,21 @@
         }
 
         body {
-            font-family: "Inter", sans-serif;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--background);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .app-container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background: var(--background);
         }
 
         /* Header */
