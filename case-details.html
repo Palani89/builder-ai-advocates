@@ -2994,6 +2994,78 @@
       </div>
     </div>
 
+    <!-- Hearing Details View Modal (Read-Only) -->
+    <div class="modal-overlay" id="hearingDetailsModal" style="display: none">
+      <div class="modal-content hearing-details-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-eye"></i> Hearing Details</h3>
+          <button class="modal-close" onclick="closeHearingDetailsModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="details-grid">
+            <div class="detail-row">
+              <label>Date & Time:</label>
+              <span id="detailDateTime" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Court Name:</label>
+              <span id="detailCourtName" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Court Room:</label>
+              <span id="detailCourtRoom" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Judge Name:</label>
+              <span id="detailJudgeName" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Hearing Type:</label>
+              <span id="detailHearingType" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Case Stage:</label>
+              <span id="detailCaseStage" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Status:</label>
+              <span id="detailStatus" class="detail-value status-badge"></span>
+            </div>
+            <div class="detail-row">
+              <label>Appeared By:</label>
+              <span id="detailAppearedBy" class="detail-value"></span>
+            </div>
+            <div class="detail-row">
+              <label>Next Hearing Date:</label>
+              <span id="detailNextHearingDate" class="detail-value"></span>
+            </div>
+            <div class="detail-row full-width">
+              <label>Notes:</label>
+              <div id="detailNotes" class="detail-text"></div>
+            </div>
+            <div class="detail-row full-width">
+              <label>Documents Discussed:</label>
+              <div id="detailDocuments" class="detail-text"></div>
+            </div>
+            <div class="detail-row full-width">
+              <label>AI Summary:</label>
+              <div id="detailAiSummary" class="detail-text"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeHearingDetailsModal()">
+            <i class="fas fa-times"></i> Close
+          </button>
+          <button class="btn btn-primary" onclick="editHearingFromDetails()">
+            <i class="fas fa-edit"></i> Edit Hearing
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Sample hearings data
       let hearingsData = [
