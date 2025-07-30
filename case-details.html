@@ -3786,6 +3786,24 @@
         window.currentViewingHearingId = null;
       }
 
+      // Toggle video conference link field
+      function toggleVCLink(hearingMode) {
+        const vcLinkGroup = document.getElementById("vcLinkGroup");
+        const courtHallGroup = document.getElementById("courtHallGroup");
+
+        if (hearingMode === "Video Conference" || hearingMode === "Hybrid") {
+          vcLinkGroup.style.display = "block";
+        } else {
+          vcLinkGroup.style.display = "none";
+        }
+
+        if (hearingMode === "Video Conference") {
+          courtHallGroup.style.display = "none";
+        } else {
+          courtHallGroup.style.display = "block";
+        }
+      }
+
       function editHearingFromDetails() {
         if (window.currentViewingHearingId) {
           closeHearingDetailsModal();
