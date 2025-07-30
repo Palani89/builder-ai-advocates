@@ -3674,7 +3674,7 @@
       function viewHearingDetails(hearingId) {
         const hearing = hearingsData.find((h) => h.id === hearingId);
         if (hearing) {
-          // Create a detailed view of the hearing
+          // Format date and time
           const hearingDate = new Date(hearing.date);
           const formattedDate = hearingDate.toLocaleDateString("en-IN", {
             weekday: "long",
@@ -3685,30 +3685,36 @@
             minute: "2-digit",
           });
 
-          let details = `
-            <strong>Date & Time:</strong> ${formattedDate}<br>
-            <strong>Court:</strong> ${hearing.courtName}<br>
-            <strong>Room:</strong> ${hearing.courtRoom || "N/A"}<br>
-            <strong>Judge:</strong> ${hearing.judgeName || "N/A"}<br>
-            <strong>Type:</strong> ${hearing.hearingType || "N/A"}<br>
-            <strong>Stage:</strong> ${hearing.caseStage || "N/A"}<br>
-            <strong>Status:</strong> ${hearing.status}<br>
-            <strong>Appeared By:</strong> ${hearing.appearedBy || "N/A"}<br><br>
-          `;
+          // Populate modal fields
+          $("#detailDateTime").text(formattedDate);
+          $("#detailCourtName").text(hearing.courtName || "N/A");
+          $("#detailCourtRoom").text(hearing.courtRoom || "N/A");
+          $("#detailJudgeName").text(hearing.judgeName || "N/A");
+          $("#detailHearingType").text(hearing.hearingType || "N/A");
+          $("#detailCaseStage").text(hearing.caseStage || "N/A");
+          $("#detailAppearedBy").text(hearing.appearedBy || "N/A");
 
-          if (hearing.notes) {
-            details += `<strong>Notes:</strong><br>${hearing.notes}<br><br>`;
-          }
+          // Format next hearing date
+          const nextHearingDate = hearing.nextHearingDate ?
+            new Date(hearing.nextHearingDate).toLocaleDateString("en-IN") : "N/A";
+          $("#detailNextHearingDate").text(nextHearingDate);
 
-          if (hearing.documentsDiscussed) {
-            details += `<strong>Documents Discussed:</strong><br>${hearing.documentsDiscussed}<br><br>`;
-          }
+          // Set status with appropriate badge class
+          const statusElement = $("#detailStatus");
+          statusElement.text(hearing.status);
+          statusElement.removeClass("scheduled completed postponed cancelled");
+          statusElement.addClass(hearing.status.toLowerCase());
 
-          if (hearing.aiSummary) {
-            details += `<strong>AI Summary:</strong><br>${hearing.aiSummary}`;
-          }
+          // Set text fields
+          $("#detailNotes").text(hearing.notes || "No notes available");
+          $("#detailDocuments").text(hearing.documentsDiscussed || "No documents discussed");
+          $("#detailAiSummary").text(hearing.aiSummary || "No AI summary available");
 
-          alert(details);
+          // Store hearing ID for edit functionality
+          window.currentViewingHearingId = hearingId;
+
+          // Show modal
+          $("#hearingDetailsModal").show();
         }
       }
 
