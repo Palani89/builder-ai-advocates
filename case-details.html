@@ -3776,9 +3776,16 @@
       function closeAddHearingModal() {
         $("#addHearingModal").hide();
         $("#addHearingForm")[0].reset();
-        $(".modal-header h3").text("Add New Hearing");
+        $(".modal-header h3").html('<i class="fas fa-gavel"></i> Add New Hearing');
         $("#deleteHearingBtn").hide();
         window.editingHearingId = null;
+
+        // Reset VC link visibility
+        $("#vcLinkGroup").hide();
+        $("#courtHallGroup").show();
+
+        // Reset field border colors
+        $(".form-input, .form-select").css("border-color", "var(--border)");
       }
 
       function closeHearingDetailsModal() {
