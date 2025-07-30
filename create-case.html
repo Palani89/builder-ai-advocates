@@ -3252,6 +3252,106 @@
         closeNotification();
       });
 
+      // Save as Draft button event handler
+      $('#saveDraftBtn').on('click', function() {
+        saveDraft();
+      });
+
+      // Collect form data function
+      function collectFormData() {
+        const formData = new FormData(document.getElementById('caseForm'));
+        const caseData = {};
+
+        // Convert FormData to object
+        for (let [key, value] of formData.entries()) {
+          if (caseData[key]) {
+            if (Array.isArray(caseData[key])) {
+              caseData[key].push(value);
+            } else {
+              caseData[key] = [caseData[key], value];
+            }
+          } else {
+            caseData[key] = value;
+          }
+        }
+
+        return caseData;
+      }
+
+      // Save as Draft functionality
+      function saveDraft() {
+        const $saveDraftBtn = $('#saveDraftBtn');
+
+        // Show loading state
+        $saveDraftBtn.addClass('loading');
+        $saveDraftBtn.html('<i class="fas fa-spinner fa-spin"></i> Saving Draft...');
+
+        try {
+          // Collect form data
+          const draftData = collectFormData();
+
+          // Add draft metadata
+          const draft = {
+            ...draftData,
+            id: 'DRAFT_' + Date.now(),
+            created_at: new Date().toISOString(),
+            last_updated: new Date().toISOString(),
+            is_draft: true,
+            draft_name: draftData.case_title || 'Untitled Draft'
+          };
+
+          // Save draft to localStorage
+          saveDraftToStorage(draft);
+
+          // Show success feedback
+          setTimeout(() => {
+            $saveDraftBtn.removeClass('loading');
+            $saveDraftBtn.html('<i class="fas fa-check"></i> Draft Saved');
+            $saveDraftBtn.addClass('btn-success').removeClass('btn-secondary');
+
+            // Reset button after 2 seconds
+            setTimeout(() => {
+              $saveDraftBtn.removeClass('btn-success').addClass('btn-secondary');
+              $saveDraftBtn.html('<i class="fas fa-file-alt"></i> Save as Draft');
+            }, 2000);
+          }, 1000);
+
+        } catch (error) {
+          console.error('Failed to save draft:', error);
+          alert('Failed to save draft. Please try again.');
+
+          // Reset button
+          $saveDraftBtn.removeClass('loading');
+          $saveDraftBtn.html('<i class="fas fa-file-alt"></i> Save as Draft');
+        }
+      }
+
+      function saveDraftToStorage(draftData) {
+        // Get existing drafts from localStorage
+        let existingDrafts = JSON.parse(localStorage.getItem('case_drafts') || '[]');
+
+        // Check if this is an update to an existing draft
+        const existingIndex = existingDrafts.findIndex(draft =>
+          draft.draft_name === draftData.draft_name && draft.is_draft
+        );
+
+        if (existingIndex !== -1) {
+          // Update existing draft
+          existingDrafts[existingIndex] = draftData;
+        } else {
+          // Add new draft to the beginning of the list
+          existingDrafts.unshift(draftData);
+        }
+
+        // Limit to 10 drafts to prevent storage overflow
+        if (existingDrafts.length > 10) {
+          existingDrafts = existingDrafts.slice(0, 10);
+        }
+
+        // Save back to localStorage
+        localStorage.setItem('case_drafts', JSON.stringify(existingDrafts));
+      }
+
 
     </script>
   </body>
