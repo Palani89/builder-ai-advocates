@@ -3624,6 +3624,34 @@
         }
       }
 
+      function deleteHearing() {
+        if (!window.editingHearingId) {
+          alert("No hearing selected for deletion");
+          return;
+        }
+
+        if (confirm("Are you sure you want to delete this hearing? This action cannot be undone.")) {
+          // Find and remove the hearing from hearingsData
+          const index = hearingsData.findIndex(h => h.id === window.editingHearingId);
+          if (index !== -1) {
+            hearingsData.splice(index, 1);
+
+            // Update localStorage
+            localStorage.setItem('hearingsData', JSON.stringify(hearingsData));
+
+            // Refresh hearing display
+            loadHearings();
+
+            // Close modal
+            closeAddHearingModal();
+
+            alert("Hearing deleted successfully");
+          } else {
+            alert("Hearing not found");
+          }
+        }
+      }
+
       function saveHearing() {
         const form = $("#addHearingForm")[0];
         const formData = new FormData(form);
