@@ -220,6 +220,15 @@
   background: var(--border);
 }
 
+.set-reminder-btn {
+  background: var(--warning);
+  color: white;
+}
+
+.set-reminder-btn:hover {
+  background: #d97706;
+}
+
 .notification-icon {
   position: relative;
   background: none;
