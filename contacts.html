@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global Language Support -->
+    <script src="app-language.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4c4cdd;
+        --primary-dark: #3d3cb8;
+        --primary-light: #6666e3;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4c4cdd;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .page-title-section h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.75rem 0 1.5rem 0;
+        font-size: 0.875rem;
+      }
+
+      .breadcrumb-item {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .breadcrumb-item:hover {
+        color: var(--primary);
+      }
+
+      .breadcrumb-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .breadcrumb-separator {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      /* Search and Filters */
+      .search-filters {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .search-box {
+        position: relative;
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        transition: border-color 0.2s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--surface);
+        border-color: var(--primary);
+      }
+
+      /* Stats Cards */
+      .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .stat-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+      }
+
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .stat-icon.contact {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .stat-icon.imported {
+        background: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+      }
+
+      .stat-info {
+        flex: 1;
+      }
+
+      .stat-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-info p {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      /* Contacts Grid */
+      .contacts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .contact-card {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+
+      .contact-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+      }
+
+      .contact-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--success);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1.125rem;
+        flex-shrink: 0;
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .contact-specialty {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .contact-experience {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .contact-details {
+        margin-bottom: 1rem;
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-detail i {
+        color: var(--text-muted);
+        width: 16px;
+      }
+
+      .contact-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .action-btn {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .contact-btn {
+        background: var(--text-primary);
+        color: white;
+      }
+
+      .contact-btn:hover {
+        background: var(--text-secondary);
+      }
+
+      .email-btn {
+        background: var(--primary);
+        color: white;
+      }
+
+      .email-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+      }
+
+      .empty-state i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+      }
+
+      .empty-state h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-secondary);
+      }
+
+      .empty-state p {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .contacts-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .search-filters {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .search-box {
+          min-width: auto;
+        }
+
+        .page-header {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="notification-icon" onclick="openNotifications()">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="user-avatar">A</div>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-title-section">
+            <h1>Imported Contacts</h1>
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+              <a href="more.html" class="breadcrumb-item">
+                <i class="fas fa-th"></i>
+                More
+              </a>
+              <span class="breadcrumb-separator">
+                <i class="fas fa-chevron-right"></i>
+              </span>
+              <span class="breadcrumb-item active">
+                <i class="fas fa-address-book"></i>
+                Contacts
+              </span>
+            </nav>
+
+            <p class="page-subtitle">Manage your imported lawyer and advocate contacts</p>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: center">
+            <button class="btn btn-secondary" onclick="clearAllContacts()">
+              <i class="fas fa-trash"></i>
+              Clear All
+            </button>
+            <button class="btn btn-primary" onclick="goToTeamPage()">
+              <i class="fas fa-plus"></i>
+              Import More
+            </button>
+          </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-filters">
+          <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-input"
+              id="searchInput"
+              placeholder="Search contacts by name, specialization, or email..."
+            />
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+          <div class="stat-card">
+            <div class="stat-icon contact">
+              <i class="fas fa-address-book"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalContacts">0</h3>
+              <p>Total Imported Contacts</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon imported">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="advocateContacts">0</h3>
+              <p>Advocates & Lawyers</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contacts Grid -->
+        <div class="contacts-grid" id="contactsGrid">
+          <!-- Contacts will be loaded here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <i class="fas fa-address-book"></i>
+          <h3>No Contacts Found</h3>
+          <p>You haven't imported any contacts yet. Import contacts from the Team page to get started.</p>
+          <button class="btn btn-primary" onclick="goToTeamPage()">
+            <i class="fas fa-upload"></i>
+            Import Contacts
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        loadContacts();
+        
+        // Search functionality
+        $("#searchInput").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          filterContacts(searchTerm);
+        });
+      });
+
+      function loadContacts() {
+        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+        
+        // Update stats
+        $("#totalContacts").text(contacts.length);
+        $("#advocateContacts").text(contacts.length);
+        
+        if (contacts.length === 0) {
+          $("#emptyState").show();
+          $("#contactsGrid").hide();
+          return;
+        }
+        
+        $("#emptyState").hide();
+        $("#contactsGrid").show();
+        
+        // Generate contact cards
+        let contactsHtml = '';
+        contacts.forEach((contact, index) => {
+          const initials = contact.Name ? contact.Name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : '??';
+          const avatarColors = ['var(--primary)', 'var(--success)', 'var(--warning)', 'var(--error)', '#8b5cf6', '#06b6d4'];
+          const avatarColor = avatarColors[index % avatarColors.length];
+          
+          contactsHtml += `
+            <div class="contact-card" data-contact='${JSON.stringify(contact)}'>
+              <div class="contact-header">
+                <div class="contact-avatar" style="background: ${avatarColor}">
+                  ${initials}
+                </div>
+                <div class="contact-info">
+                  <div class="contact-name">${contact.Name || 'Unknown'}</div>
+                  <div class="contact-specialty">${contact.Specialization || 'General Practice'}</div>
+                  <div class="contact-experience">Experience: ${contact.Experience || 'Not specified'}</div>
+                </div>
+              </div>
+
+              <div class="contact-details">
+                <div class="contact-detail">
+                  <i class="fas fa-envelope"></i>
+                  ${contact.Email || 'No email provided'}
+                </div>
+                <div class="contact-detail">
+                  <i class="fas fa-phone"></i>
+                  ${contact.Phone || 'No phone provided'}
+                </div>
+              </div>
+
+              <div class="contact-actions">
+                <button class="action-btn email-btn" onclick="contactPerson('${contact.Email}')">
+                  <i class="fas fa-envelope"></i>
+                  Email
+                </button>
+                <button class="action-btn contact-btn" onclick="callPerson('${contact.Phone}')">
+                  <i class="fas fa-phone"></i>
+                  Call
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        
+        $("#contactsGrid").html(contactsHtml);
+      }
+
+      function filterContacts(searchTerm) {
+        $(".contact-card").each(function() {
+          const contactData = $(this).attr('data-contact');
+          const contact = JSON.parse(contactData);
+          const searchableText = `${contact.Name} ${contact.Email} ${contact.Specialization}`.toLowerCase();
+          
+          if (searchableText.includes(searchTerm)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+
+      function contactPerson(email) {
+        if (email && email !== 'No email provided') {
+          window.open(`mailto:${email}`, '_blank');
+        } else {
+          alert('No email address available for this contact');
+        }
+      }
+
+      function callPerson(phone) {
+        if (phone && phone !== 'No phone provided') {
+          window.open(`tel:${phone}`, '_blank');
+        } else {
+          alert('No phone number available for this contact');
+        }
+      }
+
+      function clearAllContacts() {
+        if (confirm('Are you sure you want to clear all imported contacts? This action cannot be undone.')) {
+          localStorage.removeItem('importedContacts');
+          loadContacts();
+          alert('All contacts have been cleared successfully.');
+        }
+      }
+
+      function goToTeamPage() {
+        window.location.href = 'team.html';
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+
+      function logoutFromApp() {
+        window.location.href = 'index.html';
+      }
+
+      function openNotifications() {
+        alert('Notifications feature coming soon!');
+      }
+    </script>
+  </body>
+</html>
