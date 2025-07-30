@@ -1466,6 +1466,27 @@
       function logoutFromApp() {
         window.location.href = "index.html";
       }
+
+      // Court Board Functionality
+      function updateCurrentTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-IN', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        });
+        const currentTimeElement = document.getElementById('current-time');
+        if (currentTimeElement) {
+          currentTimeElement.textContent = timeString;
+        }
+      }
+
+      // Update time every second
+      setInterval(updateCurrentTime, 1000);
+
+      // Initialize time on page load
+      updateCurrentTime();
     </script>
   </body>
 </html>
