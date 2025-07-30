@@ -3090,6 +3090,247 @@
         $('select[name="payment_status"]').val(caseData.payment_status);
         $('textarea[name="internal_notes"]').val(caseData.internal_notes);
       }
+
+      // Auto-save functionality
+      let autoSaveInterval;
+      let autoSaveEnabled = true;
+      let lastSaveTime = null;
+
+      function initializeAutoSave() {
+        // Check for existing draft
+        checkForExistingDraft();
+
+        // Set up auto-save interval
+        setupAutoSaveInterval();
+
+        // Monitor form changes
+        monitorFormChanges();
+
+        // Handle auto-save toggle
+        $('#autoSaveEnabled').on('change', function() {
+          autoSaveEnabled = $(this).is(':checked');
+          if (autoSaveEnabled) {
+            setupAutoSaveInterval();
+            updateAutoSaveIndicator('enabled', 'Auto-save enabled');
+          } else {
+            clearInterval(autoSaveInterval);
+            updateAutoSaveIndicator('disabled', 'Auto-save disabled');
+          }
+        });
+      }
+
+      function checkForExistingDraft() {
+        const draftData = localStorage.getItem('case_form_draft');
+        const draftTimestamp = localStorage.getItem('case_form_draft_timestamp');
+
+        if (draftData && draftTimestamp) {
+          const draftAge = Date.now() - parseInt(draftTimestamp);
+          const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+
+          if (draftAge < maxAge) {
+            $('#restoreDraftBanner').show();
+          } else {
+            // Remove old draft
+            localStorage.removeItem('case_form_draft');
+            localStorage.removeItem('case_form_draft_timestamp');
+          }
+        }
+      }
+
+      function setupAutoSaveInterval() {
+        if (autoSaveInterval) {
+          clearInterval(autoSaveInterval);
+        }
+
+        autoSaveInterval = setInterval(() => {
+          if (autoSaveEnabled) {
+            autoSaveForm();
+          }
+        }, 30000); // Save every 30 seconds
+      }
+
+      function monitorFormChanges() {
+        let formChanged = false;
+
+        // Monitor all form inputs for changes
+        $('#caseForm input, #caseForm select, #caseForm textarea').on('input change', function() {
+          formChanged = true;
+
+          // Debounced auto-save on change (wait for user to stop typing)
+          clearTimeout(window.changeTimeout);
+          window.changeTimeout = setTimeout(() => {
+            if (autoSaveEnabled && formChanged) {
+              autoSaveForm();
+              formChanged = false;
+            }
+          }, 2000); // Save 2 seconds after user stops typing
+        });
+      }
+
+      function autoSaveForm() {
+        if (!autoSaveEnabled) return;
+
+        updateAutoSaveIndicator('saving', 'Saving...');
+
+        try {
+          const formData = collectFormData();
+
+          // Save to localStorage
+          localStorage.setItem('case_form_draft', JSON.stringify(formData));
+          localStorage.setItem('case_form_draft_timestamp', Date.now().toString());
+
+          lastSaveTime = new Date();
+          updateAutoSaveIndicator('saved', 'Saved');
+          updateLastSavedTime();
+
+          // In a real application, you would also save to the server
+          // saveToServer(formData);
+
+        } catch (error) {
+          console.error('Auto-save failed:', error);
+          updateAutoSaveIndicator('error', 'Save failed');
+        }
+      }
+
+      function collectFormData() {
+        const formData = {};
+
+        // Collect all form inputs
+        $('#caseForm input, #caseForm select, #caseForm textarea').each(function() {
+          const $field = $(this);
+          const name = $field.attr('name');
+
+          if (name) {
+            if ($field.attr('type') === 'checkbox') {
+              formData[name] = $field.is(':checked');
+            } else if ($field.attr('type') === 'radio') {
+              if ($field.is(':checked')) {
+                formData[name] = $field.val();
+              }
+            } else {
+              formData[name] = $field.val();
+            }
+          }
+        });
+
+        return formData;
+      }
+
+      function restoreDraft() {
+        const draftData = localStorage.getItem('case_form_draft');
+
+        if (draftData) {
+          try {
+            const formData = JSON.parse(draftData);
+
+            // Populate form with draft data
+            Object.keys(formData).forEach(name => {
+              const $field = $(`[name="${name}"]`);
+
+              if ($field.length > 0) {
+                if ($field.attr('type') === 'checkbox') {
+                  $field.prop('checked', formData[name]);
+                } else if ($field.attr('type') === 'radio') {
+                  $field.filter(`[value="${formData[name]}"]`).prop('checked', true);
+                } else {
+                  $field.val(formData[name]);
+                }
+              }
+            });
+
+            $('#restoreDraftBanner').hide();
+            updateAutoSaveIndicator('restored', 'Draft restored');
+
+            // Auto-save the restored data
+            setTimeout(() => {
+              autoSaveForm();
+            }, 1000);
+
+          } catch (error) {
+            console.error('Failed to restore draft:', error);
+            dismissDraft();
+          }
+        }
+      }
+
+      function dismissDraft() {
+        localStorage.removeItem('case_form_draft');
+        localStorage.removeItem('case_form_draft_timestamp');
+        $('#restoreDraftBanner').hide();
+      }
+
+      function updateAutoSaveIndicator(status, message) {
+        const $indicator = $('#autoSaveIndicator');
+        const $spinner = $('#autoSaveSpinner');
+        const $icon = $('#autoSaveIcon');
+        const $errorIcon = $('#autoSaveErrorIcon');
+        const $text = $('#autoSaveText');
+
+        // Reset classes
+        $indicator.removeClass('saving saved error').addClass('show');
+
+        // Hide all icons
+        $spinner.hide();
+        $icon.hide();
+        $errorIcon.hide();
+
+        switch (status) {
+          case 'saving':
+            $indicator.addClass('saving');
+            $spinner.show();
+            break;
+          case 'saved':
+          case 'restored':
+            $indicator.addClass('saved');
+            $icon.show();
+            break;
+          case 'error':
+            $indicator.addClass('error');
+            $errorIcon.show();
+            break;
+          case 'enabled':
+            $icon.show();
+            break;
+          case 'disabled':
+            $indicator.removeClass('show');
+            return;
+        }
+
+        $text.text(message);
+
+        // Auto-hide after 3 seconds (except for saving state)
+        if (status !== 'saving' && status !== 'enabled') {
+          setTimeout(() => {
+            $indicator.removeClass('show');
+          }, 3000);
+        }
+      }
+
+      function updateLastSavedTime() {
+        if (lastSaveTime) {
+          const timeString = lastSaveTime.toLocaleTimeString();
+          $('#lastSavedTime').text(`Last saved: ${timeString}`);
+        }
+      }
+
+      // Initialize auto-save when document is ready
+      $(document).ready(function() {
+        // Delay initialization to ensure all form elements are ready
+        setTimeout(() => {
+          initializeAutoSave();
+        }, 1000);
+      });
+
+      // Save before page unload
+      $(window).on('beforeunload', function() {
+        if (autoSaveEnabled) {
+          autoSaveForm();
+        }
+      });
+
+      // Expose functions globally for button clicks
+      window.restoreDraft = restoreDraft;
+      window.dismissDraft = dismissDraft;
     </script>
   </body>
 </html>
