@@ -1386,6 +1386,147 @@
       function viewCaseDetails(caseId) {
         window.location.href = `case-details.html?id=${caseId}`;
       }
+
+      // Load cases from localStorage and display them
+      function loadCasesFromStorage() {
+        const cases = JSON.parse(localStorage.getItem('cases_list') || '[]');
+
+        if (cases.length > 0) {
+          // Clear existing static cases and add new ones
+          displayCases(cases);
+        }
+      }
+
+      function displayCases(cases) {
+        // Get today's date for filtering
+        const today = new Date().toISOString().split('T')[0];
+
+        // Clear all tab contents except the static cases (keep them as examples)
+        // We'll add new cases to the top of each relevant tab
+
+        cases.forEach(caseData => {
+          const caseCard = createCaseCard(caseData);
+
+          // Add to appropriate tabs based on status and dates
+          if (caseData.status === 'Active') {
+            $('#todays-tab .cases-list').prepend(caseCard);
+          } else if (caseData.status === 'Pending') {
+            $('#pending-tab .cases-list').prepend(caseCard.clone());
+          } else if (caseData.status === 'Disposed') {
+            $('#disposed-tab .cases-list').prepend(caseCard.clone());
+          } else if (caseData.status === 'Appeal Filed') {
+            $('#appealed-tab .cases-list').prepend(caseCard.clone());
+          } else if (caseData.status === 'Settled') {
+            $('#settled-tab .cases-list').prepend(caseCard.clone());
+          }
+
+          // Also add to upcoming if there's a next hearing date in the future
+          if (caseData.next_hearing_date && caseData.next_hearing_date > today) {
+            $('#upcoming-tab .cases-list').prepend(caseCard.clone());
+          }
+        });
+      }
+
+      function createCaseCard(caseData) {
+        const caseTypeClass = getCaseTypeClass(caseData.case_type);
+        const statusClass = getStatusClass(caseData.status);
+
+        return $(`
+          <div class="case-card">
+            <div class="case-header">
+              <div>
+                <div class="case-title">${caseData.case_title || 'Untitled Case'}</div>
+                <div class="case-subtitle">
+                  Client: ${caseData.client_name || 'N/A'} | Court: ${caseData.court_name || 'N/A'}
+                </div>
+              </div>
+              <div class="case-badges">
+                <span class="status-badge ${statusClass}">${caseData.status || 'Active'}</span>
+                <span class="status-badge ${caseTypeClass}">${caseData.case_type || 'General'}</span>
+              </div>
+            </div>
+            <div class="case-details">
+              <div class="case-detail-item">
+                <span class="detail-label">Court:</span>
+                <span class="detail-value">${caseData.court_name || 'N/A'}</span>
+              </div>
+              <div class="case-detail-item">
+                <span class="detail-label">Judge:</span>
+                <span class="detail-value">${caseData.judge_name || 'N/A'}</span>
+              </div>
+              <div class="case-detail-item">
+                <span class="detail-label">Next Hearing:</span>
+                <span class="detail-value">${formatDate(caseData.next_hearing_date) || 'Not scheduled'}</span>
+              </div>
+              <div class="case-detail-item">
+                <span class="detail-label">Case Number:</span>
+                <span class="detail-value">${caseData.case_number || 'Not assigned'}</span>
+              </div>
+              <div class="case-detail-item">
+                <span class="detail-label">Filing Date:</span>
+                <span class="detail-value">${formatDate(caseData.filing_date) || 'N/A'}</span>
+              </div>
+            </div>
+            <div class="case-actions">
+              <button class="btn btn-outline btn-sm" onclick="viewCaseDetails('${caseData.id}')">
+                View Details
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="editCase('${caseData.id}')">
+                Edit
+              </button>
+              ${caseData.status === 'Active' ? `
+                <button class="btn btn-warning btn-sm" onclick="disposeCase('${caseData.id}')">
+                  Dispose
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `);
+      }
+
+      function getCaseTypeClass(caseType) {
+        const typeMap = {
+          'Criminal': 'criminal',
+          'Civil': 'civil',
+          'Commercial': 'commercial',
+          'Family': 'family',
+          'Labor': 'labor',
+          'Corporate': 'commercial',
+          'Property': 'civil',
+          'Tax': 'commercial',
+          'Matrimonial': 'family'
+        };
+        return typeMap[caseType] || 'civil';
+      }
+
+      function getStatusClass(status) {
+        const statusMap = {
+          'Active': 'active',
+          'Pending': 'pending',
+          'Disposed': 'disposed',
+          'Appeal Filed': 'appealed',
+          'Settled': 'settled'
+        };
+        return statusMap[status] || 'active';
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) return null;
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-IN', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      }
+
+      function editCase(caseId) {
+        window.location.href = `create-case.html?mode=edit&id=${caseId}`;
+      }
+
+      function disposeCase(caseId) {
+        window.location.href = `create-case.html?mode=edit&action=dispose&id=${caseId}`;
+      }
     </script>
   </body>
 </html>
