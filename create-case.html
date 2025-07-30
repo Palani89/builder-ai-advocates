@@ -625,6 +625,121 @@
         color: var(--error);
       }
 
+      /* Auto-save Styles */
+      .auto-save-indicator {
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: var(--shadow-lg);
+        z-index: 50;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      .auto-save-indicator.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .auto-save-indicator.saving {
+        border-color: var(--warning);
+        background: rgba(245, 158, 11, 0.05);
+      }
+
+      .auto-save-indicator.saved {
+        border-color: var(--success);
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .auto-save-indicator.error {
+        border-color: var(--error);
+        background: rgba(239, 68, 68, 0.05);
+      }
+
+      .auto-save-spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--border);
+        border-top: 2px solid var(--warning);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .auto-save-icon {
+        color: var(--success);
+      }
+
+      .auto-save-error-icon {
+        color: var(--error);
+      }
+
+      .auto-save-settings {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+
+      .auto-save-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+
+      .auto-save-toggle input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--primary);
+      }
+
+      .restore-draft-banner {
+        position: fixed;
+        top: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: var(--shadow-lg);
+        z-index: 100;
+        font-size: 0.875rem;
+      }
+
+      .restore-draft-banner .btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+      }
+
+      .restore-draft-banner .btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
       /* Side Menu */
       .side-menu {
         position: fixed;
