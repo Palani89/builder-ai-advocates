@@ -1977,6 +1977,20 @@ Advocate: ${appointmentData.advocate_name}`;
         document.getElementById("reminderForm").reset();
       }
 
+      // Function to open reminder modal without specific date (for general case reminders)
+      function openSetCaseReminderModal() {
+        document.getElementById("reminderModal").style.display = "flex";
+
+        // Set today's date as default
+        const today = new Date();
+        const formattedDate = today.toISOString().split("T")[0];
+        document.getElementById("reminderDate").value = formattedDate;
+
+        // Set default reminder message for general case reminder
+        const defaultMessage = `Dear [Client Name], this is a reminder about your case [Case Title]. Please ensure you are available for the upcoming hearing and have all necessary documents ready. Contact us if you have any questions.`;
+        document.querySelector('textarea[name="reminder_message"]').value = defaultMessage;
+      }
+
       function handleReminderTimingChange(timing) {
         const customTimingGroup = document.getElementById("customTimingGroup");
         if (timing === "custom") {
