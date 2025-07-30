@@ -2627,6 +2627,15 @@
         alert("Hearing created successfully!");
         closeCreateHearingModal();
       }
+
+      // Close modal when clicking outside
+      $(document).ready(function() {
+        $("#createHearingModal").on("click", function(e) {
+          if (e.target === this) {
+            closeCreateHearingModal();
+          }
+        });
+      });
     </script>
   </body>
 </html>
