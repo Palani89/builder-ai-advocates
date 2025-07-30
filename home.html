@@ -1226,133 +1226,246 @@
 
         <!-- Board Content -->
         <div id="board-content" class="tab-content">
-          <div class="court-board-container">
-            <!-- Main Active Cases -->
-            <div class="active-cases-row">
-              <!-- Case CR-24 -->
-              <div class="court-case-card">
-                <div class="case-header">
-                  <div class="case-number">CR-24</div>
-                  <div class="case-status active">Active</div>
-                </div>
-                <div class="judge-info">Hon'ble Justice R. Mehra</div>
+          <div class="board-header">
+            <div class="board-title-section">
+              <div class="board-icon">⚖️</div>
+              <div class="board-title-info">
+                <h2>Live Court Display Board</h2>
+                <p>Real-time case status across all courtrooms</p>
+              </div>
+              <div class="board-meta">
+                <span class="last-updated-text">Last updated: 10:45:34</span>
+                <button class="refresh-btn">
+                  <i class="fas fa-sync-alt"></i>
+                  Refresh
+                </button>
+              </div>
+            </div>
 
-                <div class="current-case">
-                  <div class="progress-indicator">
-                    <span class="progress-dot active"></span>
-                    <span class="progress-text">In Progress</span>
-                    <span class="case-id">#12</span>
-                  </div>
-                  <div class="case-title">State vs. Raj Kumar</div>
-                  <div class="case-details-row">
-                    <span class="case-meta">Case: CR A/43/2023</span>
-                    <span class="case-meta">Stage: Arguments</span>
-                  </div>
-                  <div class="case-details-row">
-                    <span class="case-meta">Started: 10:30 AM</span>
-                    <span class="case-meta">Duration: 45 mins</span>
-                  </div>
-                  <div class="advocate-info">Advocate: Adv. Sharma</div>
+            <div class="board-filters">
+              <div class="filter-group">
+                <label>Court Room</label>
+                <select class="filter-select">
+                  <option>All Court Rooms</option>
+                  <option>CR-24</option>
+                  <option>CR-12</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label>Judge</label>
+                <select class="filter-select">
+                  <option>All Judges</option>
+                  <option>Justice R. Mehra</option>
+                  <option>Sh. A.K. Singh</option>
+                </select>
+              </div>
+              <div class="auto-refresh-toggle">
+                <div class="toggle-wrapper">
+                  <input type="checkbox" id="auto-refresh" checked>
+                  <label for="auto-refresh" class="toggle-label">
+                    <span class="toggle-switch"></span>
+                  </label>
                 </div>
+                <span class="toggle-text">Auto-refresh (ON)</span>
+              </div>
+            </div>
+          </div>
 
-                <div class="next-cases">
-                  <h4>Next Cases (2)</h4>
-                  <div class="next-case-item">
-                    <div class="case-details">
-                      <span class="case-number">#13</span>
-                      <span class="case-name">Smith Property Dispute</span>
-                      <span class="advocate">Adv. Verma</span>
-                    </div>
-                    <div class="case-time">11:15 AM</div>
-                  </div>
-                  <div class="next-case-item">
-                    <div class="case-details">
-                      <span class="case-number">#14</span>
-                      <span class="case-name">ABC Corp vs XYZ Ltd</span>
-                      <span class="advocate">Adv. Jain</span>
-                    </div>
-                    <div class="case-time">12:00 PM</div>
-                  </div>
-                </div>
+          <div class="board-statistics">
+            <div class="stat-item">
+              <div class="stat-icon active-courts">
+                <i class="fas fa-building"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Active Courts</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon in-progress">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Cases in Progress</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon disposed">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Disposed Today</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon adjourned">
+                <i class="fas fa-calendar-times"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Adjourned</div>
+              </div>
+            </div>
+          </div>
 
-                <div class="disposed-cases">
-                  <h4>Disposed Today (1)</h4>
-                  <div class="disposed-item">
-                    <span class="case-number">#11</span>
-                    <span class="case-name">Matrimonial Dispute</span>
-                    <span class="case-time">10:15 AM</span>
-                  </div>
+          <div class="courts-container">
+            <!-- Court CR-24 -->
+            <div class="court-card">
+              <div class="court-header">
+                <div class="court-info">
+                  <div class="court-number">CR-24</div>
+                  <div class="court-status active">Active</div>
                 </div>
-
-                <div class="adjourned-cases">
-                  <h4>Adjourned Cases (1)</h4>
-                  <div class="adjourned-item">
-                    <span class="case-number">#10</span>
-                    <span class="case-name">Tax Assessment Appeal</span>
-                    <span class="case-status-badge pending">Jan 20, 2024</span>
-                    <div class="case-note">Document submission pending</div>
-                  </div>
-                </div>
+                <div class="judge-name">Hon'ble Justice R. Mehra</div>
               </div>
 
-              <!-- Case CR-12 -->
-              <div class="court-case-card">
-                <div class="case-header">
-                  <div class="case-number">CR-12</div>
-                  <div class="case-status active">Active</div>
+              <div class="current-case-section">
+                <div class="progress-status">
+                  <span class="progress-dot active"></span>
+                  <span class="progress-text">In Progress</span>
+                  <span class="case-number-badge">#12</span>
                 </div>
-                <div class="judge-info">Hon'ble Sh. A.K. Singh</div>
-
-                <div class="current-case">
-                  <div class="progress-indicator">
-                    <span class="progress-dot active"></span>
-                    <span class="progress-text">In Progress</span>
-                    <span class="case-id">#8</span>
+                <div class="case-title">State vs. Raj Kumar</div>
+                <div class="case-info-grid">
+                  <div class="case-info-item">
+                    <span class="label">Case:</span>
+                    <span class="value">CR A/43/2023</span>
                   </div>
-                  <div class="case-title">Bank Recovery Case</div>
-                  <div class="case-details-row">
-                    <span class="case-meta">Case: OMP/67/2023</span>
-                    <span class="case-meta">Stage: Evidence</span>
+                  <div class="case-info-item">
+                    <span class="label">Stage:</span>
+                    <span class="value">Arguments</span>
                   </div>
-                  <div class="case-details-row">
-                    <span class="case-meta">Started: 11:00 AM</span>
-                    <span class="case-meta">Duration: 30 mins</span>
+                  <div class="case-info-item">
+                    <span class="label">Started:</span>
+                    <span class="value">10:30 AM</span>
                   </div>
-                  <div class="advocate-info">Advocate: Adv. Gupta</div>
+                  <div class="case-info-item">
+                    <span class="label">Duration:</span>
+                    <span class="value">45 mins</span>
+                  </div>
                 </div>
+                <div class="advocate-info">Advocate: Adv. Sharma</div>
+              </div>
 
-                <div class="next-cases">
-                  <h4>Next Cases (1)</h4>
-                  <div class="next-case-item">
-                    <div class="case-details">
-                      <span class="case-number">#9</span>
-                      <span class="case-name">Employment Termination Case</span>
-                      <span class="advocate">Adv. Patel</span>
+              <div class="case-sections">
+                <div class="case-section">
+                  <h4>Next Cases (2)</h4>
+                  <div class="case-list">
+                    <div class="case-item-compact">
+                      <div class="item-number">#13</div>
+                      <div class="item-details">
+                        <div class="item-name">Smith Property Dispute</div>
+                        <div class="item-advocate">Adv. Verma</div>
+                      </div>
+                      <div class="item-time">11:15 AM</div>
                     </div>
-                    <div class="case-time">11:30 AM</div>
+                    <div class="case-item-compact">
+                      <div class="item-number">#14</div>
+                      <div class="item-details">
+                        <div class="item-name">ABC Corp vs XYZ Ltd</div>
+                        <div class="item-advocate">Adv. Jain</div>
+                      </div>
+                      <div class="item-time">12:00 PM</div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="disposed-cases">
+                <div class="case-section">
                   <h4>Disposed Today (1)</h4>
-                  <div class="disposed-item">
-                    <span class="case-number">#7</span>
-                    <span class="case-name">Contract Dispute</span>
-                    <span class="case-time">10:45 AM</span>
+                  <div class="case-list">
+                    <div class="case-item-compact disposed">
+                      <div class="item-number">#11</div>
+                      <div class="item-details">
+                        <div class="item-name">Matrimonial Dispute</div>
+                      </div>
+                      <div class="item-time">10:15 AM</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="case-section">
+                  <h4>Adjourned Cases (1)</h4>
+                  <div class="case-list">
+                    <div class="case-item-compact adjourned">
+                      <div class="item-number">#10</div>
+                      <div class="item-details">
+                        <div class="item-name">Tax Assessment Appeal</div>
+                        <div class="item-note">Document submission pending</div>
+                      </div>
+                      <div class="item-date">Jan 20, 2024</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Board Footer -->
-            <div class="board-footer">
-              <div class="last-updated">
-                <i class="fas fa-sync-alt"></i>
-                Last Updated: <span id="current-time"></span>
+            <!-- Court CR-12 -->
+            <div class="court-card">
+              <div class="court-header">
+                <div class="court-info">
+                  <div class="court-number">CR-12</div>
+                  <div class="court-status active">Active</div>
+                </div>
+                <div class="judge-name">Hon'ble Sh. A.K. Singh</div>
               </div>
-              <div class="board-status">
-                <span class="status-indicator live"></span>
-                Live Court Display Board
+
+              <div class="current-case-section">
+                <div class="progress-status">
+                  <span class="progress-dot active"></span>
+                  <span class="progress-text">In Progress</span>
+                  <span class="case-number-badge">#8</span>
+                </div>
+                <div class="case-title">Bank Recovery Case</div>
+                <div class="case-info-grid">
+                  <div class="case-info-item">
+                    <span class="label">Case:</span>
+                    <span class="value">OMP/67/2023</span>
+                  </div>
+                  <div class="case-info-item">
+                    <span class="label">Stage:</span>
+                    <span class="value">Evidence</span>
+                  </div>
+                  <div class="case-info-item">
+                    <span class="label">Started:</span>
+                    <span class="value">11:00 AM</span>
+                  </div>
+                  <div class="case-info-item">
+                    <span class="label">Duration:</span>
+                    <span class="value">30 mins</span>
+                  </div>
+                </div>
+                <div class="advocate-info">Advocate: Adv. Gupta</div>
+              </div>
+
+              <div class="case-sections">
+                <div class="case-section">
+                  <h4>Next Cases (1)</h4>
+                  <div class="case-list">
+                    <div class="case-item-compact">
+                      <div class="item-number">#9</div>
+                      <div class="item-details">
+                        <div class="item-name">Employment Termination Case</div>
+                        <div class="item-advocate">Adv. Patel</div>
+                      </div>
+                      <div class="item-time">11:30 AM</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="case-section">
+                  <h4>Disposed Today (1)</h4>
+                  <div class="case-list">
+                    <div class="case-item-compact disposed">
+                      <div class="item-number">#7</div>
+                      <div class="item-details">
+                        <div class="item-name">Contract Dispute</div>
+                      </div>
+                      <div class="item-time">10:45 AM</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
