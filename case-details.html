@@ -3662,33 +3662,57 @@
           return;
         }
 
-        // Create new hearing object
-        const newHearing = {
-          id: hearingsData.length + 1,
-          date: formData.get("hearingDate"),
-          courtName: formData.get("courtName"),
-          courtRoom: formData.get("courtRoom"),
-          judgeName: formData.get("judgeName"),
-          hearingType: formData.get("hearingType"),
-          caseStage: formData.get("caseStage"),
-          status: formData.get("hearingStatus"),
-          appearedBy: formData.get("appearedBy"),
-          notes: formData.get("hearingNotes"),
-          documentsDiscussed: formData.get("documentsDiscussed"),
-          aiSummary: formData.get("aiSummary"),
-          nextHearingDate: formData.get("nextHearingDate"),
-        };
+        if (window.editingHearingId) {
+          // Update existing hearing
+          const hearing = hearingsData.find(h => h.id === window.editingHearingId);
+          if (hearing) {
+            hearing.date = formData.get("hearingDate");
+            hearing.courtName = formData.get("courtName");
+            hearing.courtRoom = formData.get("courtRoom");
+            hearing.judgeName = formData.get("judgeName");
+            hearing.hearingType = formData.get("hearingType");
+            hearing.caseStage = formData.get("caseStage");
+            hearing.status = formData.get("hearingStatus");
+            hearing.appearedBy = formData.get("appearedBy");
+            hearing.notes = formData.get("hearingNotes");
+            hearing.documentsDiscussed = formData.get("documentsDiscussed");
+            hearing.aiSummary = formData.get("aiSummary");
+            hearing.nextHearingDate = formData.get("nextHearingDate");
 
-        // Add to hearings data
-        hearingsData.push(newHearing);
+            alert("Hearing updated successfully!");
+          }
+        } else {
+          // Create new hearing object
+          const newHearing = {
+            id: hearingsData.length + 1,
+            date: formData.get("hearingDate"),
+            courtName: formData.get("courtName"),
+            courtRoom: formData.get("courtRoom"),
+            judgeName: formData.get("judgeName"),
+            hearingType: formData.get("hearingType"),
+            caseStage: formData.get("caseStage"),
+            status: formData.get("hearingStatus"),
+            appearedBy: formData.get("appearedBy"),
+            notes: formData.get("hearingNotes"),
+            documentsDiscussed: formData.get("documentsDiscussed"),
+            aiSummary: formData.get("aiSummary"),
+            nextHearingDate: formData.get("nextHearingDate"),
+          };
+
+          // Add to hearings data
+          hearingsData.push(newHearing);
+
+          alert("Hearing added successfully!");
+        }
+
+        // Update localStorage
+        localStorage.setItem('hearingsData', JSON.stringify(hearingsData));
 
         // Reload hearings
         loadHearings();
 
         // Close modal
         closeAddHearingModal();
-
-        alert("Hearing added successfully!");
       }
 
       function editHearing(hearingId) {
