@@ -1893,6 +1893,204 @@ Advocate: ${appointmentData.advocate_name}`;
         });
       }
 
+      // Reminder Modal Functions
+      function openReminderModal(day, month, year) {
+        document.getElementById("reminderModal").style.display = "flex";
+
+        // Set the reminder date to the clicked date
+        const monthIndex = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ].indexOf(month);
+
+        const selectedDate = new Date(year, monthIndex, day);
+        const formattedDate = selectedDate.toISOString().split('T')[0];
+
+        document.getElementById("reminderDate").value = formattedDate;
+
+        // Set default reminder message
+        const defaultMessage = `Dear [Name], this is a reminder about your case [Case Title] scheduled for hearing on ${month} ${day}, ${year} at [Time] in [Court Name]. Please be available and bring all necessary documents. Contact us for any queries.`;
+        document.querySelector('textarea[name="reminder_message"]').value = defaultMessage;
+      }
+
+      function closeReminderModal() {
+        document.getElementById("reminderModal").style.display = "none";
+        document.getElementById("reminderForm").reset();
+      }
+
+      function handleReminderTimingChange(timing) {
+        const customTimingGroup = document.getElementById("customTimingGroup");
+        if (timing === "custom") {
+          customTimingGroup.style.display = "block";
+        } else {
+          customTimingGroup.style.display = "none";
+        }
+      }
+
+      function saveReminder() {
+        const form = document.getElementById("reminderForm");
+        const formData = new FormData(form);
+
+        // Basic validation
+        const requiredFields = [
+          "case_reference",
+          "court_name",
+          "petitioner_name",
+          "petitioner_phone"
+        ];
+        let isValid = true;
+
+        requiredFields.forEach((field) => {
+          if (!formData.get(field)) {
+            isValid = false;
+            const input = form.querySelector(`[name="${field}"]`);
+            if (input) {
+              input.style.borderColor = "var(--error)";
+              setTimeout(() => {
+                input.style.borderColor = "";
+              }, 3000);
+            }
+          }
+        });
+
+        // Check if at least one notification method is selected
+        const notificationMethods = [];
+        if (form.querySelector('input[name="notification_sms"]').checked) notificationMethods.push("SMS");
+        if (form.querySelector('input[name="notification_whatsapp"]').checked) notificationMethods.push("WhatsApp");
+        if (form.querySelector('input[name="notification_email"]').checked) notificationMethods.push("Email");
+        if (form.querySelector('input[name="notification_inapp"]').checked) notificationMethods.push("In-app");
+
+        if (notificationMethods.length === 0) {
+          alert("Please select at least one notification method");
+          return;
+        }
+
+        if (!isValid) {
+          alert("Please fill in all required fields marked with *");
+          return;
+        }
+
+        // Collect additional options
+        const additionalOptions = [];
+        if (form.querySelector('input[name="include_court_address"]').checked) additionalOptions.push("Court Address");
+        if (form.querySelector('input[name="include_documents_needed"]').checked) additionalOptions.push("Documents Needed");
+        if (form.querySelector('input[name="include_advocate_contact"]').checked) additionalOptions.push("Advocate Contact");
+        if (form.querySelector('input[name="include_dress_code"]').checked) additionalOptions.push("Dress Code");
+
+        // Calculate reminder date
+        const hearingDate = new Date(formData.get("reminder_date"));
+        const reminderTiming = formData.get("reminder_timing");
+        let reminderDate = new Date(hearingDate);
+
+        switch(reminderTiming) {
+          case "1_day":
+            reminderDate.setDate(reminderDate.getDate() - 1);
+            break;
+          case "2_days":
+            reminderDate.setDate(reminderDate.getDate() - 2);
+            break;
+          case "3_days":
+            reminderDate.setDate(reminderDate.getDate() - 3);
+            break;
+          case "1_week":
+            reminderDate.setDate(reminderDate.getDate() - 7);
+            break;
+          case "custom":
+            const customDays = parseInt(formData.get("custom_days")) || 3;
+            reminderDate.setDate(reminderDate.getDate() - customDays);
+            break;
+        }
+
+        // Create reminder object
+        const reminderData = {
+          id: "REM_" + Date.now(),
+          hearing_date: formData.get("reminder_date"),
+          reminder_date: reminderDate.toISOString().split('T')[0],
+          reminder_time: formData.get("reminder_time"),
+          case_reference: formData.get("case_reference"),
+          court_name: formData.get("court_name"),
+          hearing_time: formData.get("hearing_time"),
+          reminder_message: formData.get("reminder_message"),
+          petitioner: {
+            name: formData.get("petitioner_name"),
+            phone: formData.get("petitioner_phone"),
+            email: formData.get("petitioner_email")
+          },
+          client: {
+            name: formData.get("client_name"),
+            phone: formData.get("client_phone"),
+            email: formData.get("client_email")
+          },
+          notification_methods: notificationMethods,
+          reminder_timing: reminderTiming,
+          custom_days: formData.get("custom_days"),
+          repeat_reminder: formData.get("repeat_reminder"),
+          priority_level: formData.get("priority_level"),
+          additional_options: additionalOptions,
+          additional_notes: formData.get("additional_notes"),
+          created_at: new Date().toISOString()
+        };
+
+        console.log("Reminder created:", reminderData);
+
+        // Create success message
+        const timingText = reminderTiming === "custom" ?
+          `${formData.get("custom_days")} days before` :
+          reminderTiming.replace("_", " ");
+
+        const successMessage = `Reminder set successfully!
+
+Case: ${reminderData.case_reference}
+Hearing Date: ${reminderData.hearing_date}
+Reminder Date: ${reminderData.reminder_date}
+Timing: ${timingText}
+Notification Methods: ${notificationMethods.join(", ")}
+Recipients: ${reminderData.petitioner.name}${reminderData.client.name ? ', ' + reminderData.client.name : ''}
+
+The reminder will be sent via ${notificationMethods.join(", ")} to notify about the upcoming court hearing.`;
+
+        alert(successMessage);
+
+        // Close modal
+        closeReminderModal();
+
+        // Add reminder indicator to calendar
+        addReminderToCalendar(reminderData);
+      }
+
+      function addReminderToCalendar(reminderData) {
+        // Add reminder indicator to calendar display
+        const hearingDate = new Date(reminderData.hearing_date);
+        const day = hearingDate.getDate();
+
+        // Find the calendar day element and add reminder indicator
+        const calendarDays = document.querySelectorAll(".calendar-day");
+        calendarDays.forEach((dayEl) => {
+          const dayNumber = dayEl.querySelector(".day-number");
+          if (dayNumber && parseInt(dayNumber.textContent) === day) {
+            // Add a small reminder bell icon
+            const reminderIcon = document.createElement("div");
+            reminderIcon.style.cssText = `
+              position: absolute;
+              top: 2px;
+              right: 2px;
+              font-size: 8px;
+              color: var(--warning);
+              background: rgba(245, 158, 11, 0.1);
+              border-radius: 50%;
+              width: 12px;
+              height: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            `;
+            reminderIcon.innerHTML = '<i class="fas fa-bell"></i>';
+            reminderIcon.title = "Reminder set for this date";
+            dayEl.appendChild(reminderIcon);
+          }
+        });
+      }
+
       // Event listeners
       document.addEventListener("DOMContentLoaded", function () {
         // Close menu when clicking overlay
