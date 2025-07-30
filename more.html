@@ -1257,19 +1257,7 @@
 
       // Contacts function
       function openContacts() {
-        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
-
-        if (contacts.length === 0) {
-          alert(
-            "No imported contacts found.\n\nTo import contacts:\n1. Go to Team page\n2. Click 'Import contact' button\n3. Upload CSV file or use dummy data\n\nRedirecting to team page...",
-          );
-          window.location.href = "team.html";
-          return;
-        }
-
-        // Show contacts modal
-        loadContactsList(contacts);
-        $("#contactsModal").css("display", "flex");
+        window.location.href = "contacts.html";
       }
 
       function closeContacts() {
