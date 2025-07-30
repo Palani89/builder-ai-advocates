@@ -3287,53 +3287,93 @@
         </div>
         <div class="modal-body">
           <div class="details-grid">
-            <div class="detail-row">
-              <label>Date & Time:</label>
-              <span id="detailDateTime" class="detail-value"></span>
+            <!-- Basic Case Information -->
+            <div class="detail-section">
+              <h4 class="detail-section-title">
+                <i class="fas fa-folder"></i> Case Information
+              </h4>
+              <div class="detail-row">
+                <label>Case ID:</label>
+                <span id="detailCaseId" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Case Title:</label>
+                <span id="detailCaseTitle" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Case Type:</label>
+                <span id="detailCaseType" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Case Stage:</label>
+                <span id="detailCaseStage" class="detail-value"></span>
+              </div>
             </div>
-            <div class="detail-row">
-              <label>Court Name:</label>
-              <span id="detailCourtName" class="detail-value"></span>
+
+            <!-- Court & Hearing Details -->
+            <div class="detail-section">
+              <h4 class="detail-section-title">
+                <i class="fas fa-gavel"></i> Court & Hearing Details
+              </h4>
+              <div class="detail-row">
+                <label>Date & Time:</label>
+                <span id="detailDateTime" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Court Name:</label>
+                <span id="detailCourtName" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Judge Name:</label>
+                <span id="detailJudgeName" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Court Hall/Room:</label>
+                <span id="detailCourtRoom" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Hearing Mode:</label>
+                <span id="detailHearingMode" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Video Conference Link:</label>
+                <span id="detailVCLink" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Hearing Purpose:</label>
+                <span id="detailHearingPurpose" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Status:</label>
+                <span id="detailStatus" class="detail-value status-badge"></span>
+              </div>
+              <div class="detail-row">
+                <label>Appeared By:</label>
+                <span id="detailAppearedBy" class="detail-value"></span>
+              </div>
+              <div class="detail-row">
+                <label>Next Hearing Date:</label>
+                <span id="detailNextHearingDate" class="detail-value"></span>
+              </div>
             </div>
-            <div class="detail-row">
-              <label>Court Room:</label>
-              <span id="detailCourtRoom" class="detail-value"></span>
-            </div>
-            <div class="detail-row">
-              <label>Judge Name:</label>
-              <span id="detailJudgeName" class="detail-value"></span>
-            </div>
-            <div class="detail-row">
-              <label>Hearing Type:</label>
-              <span id="detailHearingType" class="detail-value"></span>
-            </div>
-            <div class="detail-row">
-              <label>Case Stage:</label>
-              <span id="detailCaseStage" class="detail-value"></span>
-            </div>
-            <div class="detail-row">
-              <label>Status:</label>
-              <span id="detailStatus" class="detail-value status-badge"></span>
-            </div>
-            <div class="detail-row">
-              <label>Appeared By:</label>
-              <span id="detailAppearedBy" class="detail-value"></span>
-            </div>
-            <div class="detail-row">
-              <label>Next Hearing Date:</label>
-              <span id="detailNextHearingDate" class="detail-value"></span>
-            </div>
-            <div class="detail-row full-width">
-              <label>Notes:</label>
-              <div id="detailNotes" class="detail-text"></div>
-            </div>
-            <div class="detail-row full-width">
-              <label>Documents Discussed:</label>
-              <div id="detailDocuments" class="detail-text"></div>
-            </div>
-            <div class="detail-row full-width">
-              <label>AI Summary:</label>
-              <div id="detailAiSummary" class="detail-text"></div>
+
+            <!-- Additional Notes -->
+            <div class="detail-section">
+              <h4 class="detail-section-title">
+                <i class="fas fa-sticky-note"></i> Additional Information
+              </h4>
+              <div class="detail-row full-width">
+                <label>Notes/Remarks:</label>
+                <div id="detailNotes" class="detail-text"></div>
+              </div>
+              <div class="detail-row full-width">
+                <label>Documents Discussed:</label>
+                <div id="detailDocuments" class="detail-text"></div>
+              </div>
+              <div class="detail-row full-width">
+                <label>AI Summary:</label>
+                <div id="detailAiSummary" class="detail-text"></div>
+              </div>
             </div>
           </div>
         </div>
