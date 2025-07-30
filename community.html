@@ -851,32 +851,18 @@
 
             <!-- Feed -->
             <div class="feed">
-                <!-- Create Post -->
-                <div class="create-post">
-                    <div class="create-post-header">
-                        <div class="user-avatar">AP</div>
-                        <div class="create-post-input">
-                            <textarea class="post-textarea" placeholder="Share your recent case, legal insight, or ask for advice from fellow lawyers..."></textarea>
+                <!-- Add Post Button -->
+                <div class="add-post-section">
+                    <div class="add-post-card">
+                        <div class="add-post-header">
+                            <div class="user-avatar">AP</div>
+                            <div class="add-post-prompt">
+                                <span>Share your legal insights with the community...</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="post-actions">
-                        <div class="post-options">
-                            <button class="post-option" onclick="attachDocument()">
-                                <i class="fas fa-file-alt"></i>
-                                <span>Document</span>
-                            </button>
-                            <button class="post-option" onclick="tagLawyers()">
-                                <i class="fas fa-user-tag"></i>
-                                <span>Tag Lawyers</span>
-                            </button>
-                            <button class="post-option" onclick="addHashtags()">
-                                <i class="fas fa-hashtag"></i>
-                                <span>Tags</span>
-                            </button>
-                        </div>
-                        <button class="btn btn-primary" onclick="publishPost()">
-                            <i class="fas fa-share"></i>
-                            Share Post
+                        <button class="btn btn-primary add-post-btn" onclick="openCreatePostModal()">
+                            <i class="fas fa-plus"></i>
+                            Create New Post
                         </button>
                     </div>
                 </div>
