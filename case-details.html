@@ -2383,20 +2383,34 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              onclick="closeAddHearingModal()"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="saveHearing()"
-            >
-              Save Hearing
-            </button>
+            <div class="modal-footer-left">
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="deleteHearingBtn"
+                onclick="deleteHearing()"
+                style="display: none;"
+              >
+                <i class="fas fa-trash"></i>
+                Delete Hearing
+              </button>
+            </div>
+            <div class="modal-footer-right">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="closeAddHearingModal()"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="saveHearing()"
+              >
+                Save Hearing
+              </button>
+            </div>
           </div>
         </div>
       </div>
