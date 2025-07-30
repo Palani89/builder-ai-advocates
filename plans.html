@@ -180,7 +180,11 @@
 
       /* Current Plan */
       .current-plan {
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
         color: white;
         padding: 1.5rem;
         border-radius: 12px;
@@ -439,14 +443,17 @@
         <div class="page-header">
           <h1 class="page-title">Choose Your Plan</h1>
           <p class="page-subtitle">
-            Upgrade your legal practice with our comprehensive plans designed for every need
+            Upgrade your legal practice with our comprehensive plans designed
+            for every need
           </p>
         </div>
 
         <!-- Current Plan -->
         <div class="current-plan">
           <h3>Current Plan: Gold</h3>
-          <p>You're currently on the Gold plan. Upgrade to unlock more features!</p>
+          <p>
+            You're currently on the Gold plan. Upgrade to unlock more features!
+          </p>
         </div>
 
         <!-- Plans Grid -->
@@ -457,9 +464,7 @@
               <i class="fas fa-medal"></i>
             </div>
             <h3 class="plan-name">Silver</h3>
-            <div class="plan-price">
-              <span class="currency">₹</span>999
-            </div>
+            <div class="plan-price"><span class="currency">₹</span>999</div>
             <div class="plan-period">per month</div>
             <ul class="plan-features">
               <li>
@@ -487,7 +492,10 @@
                 Basic reporting
               </li>
             </ul>
-            <button class="plan-btn primary" onclick="selectPlan('silver', 999)">
+            <button
+              class="plan-btn primary"
+              onclick="selectPlan('silver', 999)"
+            >
               Upgrade to Silver
             </button>
           </div>
@@ -498,9 +506,7 @@
               <i class="fas fa-crown"></i>
             </div>
             <h3 class="plan-name">Gold</h3>
-            <div class="plan-price">
-              <span class="currency">₹</span>1999
-            </div>
+            <div class="plan-price"><span class="currency">₹</span>1999</div>
             <div class="plan-period">per month</div>
             <ul class="plan-features">
               <li>
@@ -532,9 +538,7 @@
                 AI legal research
               </li>
             </ul>
-            <button class="plan-btn current" disabled>
-              Current Plan
-            </button>
+            <button class="plan-btn current" disabled>Current Plan</button>
           </div>
 
           <!-- Platinum Plan -->
@@ -543,9 +547,7 @@
               <i class="fas fa-gem"></i>
             </div>
             <h3 class="plan-name">Platinum</h3>
-            <div class="plan-price">
-              <span class="currency">₹</span>3999
-            </div>
+            <div class="plan-price"><span class="currency">₹</span>3999</div>
             <div class="plan-period">per month</div>
             <ul class="plan-features">
               <li>
@@ -581,7 +583,10 @@
                 Custom integrations
               </li>
             </ul>
-            <button class="plan-btn primary" onclick="selectPlan('platinum', 3999)">
+            <button
+              class="plan-btn primary"
+              onclick="selectPlan('platinum', 3999)"
+            >
               Upgrade to Platinum
             </button>
           </div>
@@ -622,32 +627,63 @@
 
       function selectPlan(planName, price) {
         // Store selected plan details
-        localStorage.setItem('selectedPlan', JSON.stringify({
-          name: planName,
-          price: price,
-          type: 'plan'
-        }));
-        
+        localStorage.setItem(
+          "selectedPlan",
+          JSON.stringify({
+            name: planName,
+            price: price,
+            type: "plan",
+          }),
+        );
+
         // Redirect to payment gateway
-        window.location.href = 'payment.html';
+        window.location.href = "payment.html";
       }
 
       // Update current plan display based on user's actual plan
-      $(document).ready(function() {
-        const currentPlan = localStorage.getItem('userPlan') || 'Gold';
-        $('.current-plan h3').text(`Current Plan: ${currentPlan}`);
-        
+      $(document).ready(function () {
+        const currentPlan = localStorage.getItem("userPlan") || "Gold";
+        $(".current-plan h3").text(`Current Plan: ${currentPlan}`);
+
         // Update button states based on current plan
-        if (currentPlan === 'Silver') {
+        if (currentPlan === "Silver") {
           // Update Silver to current, others to upgrade
-          $('.plan-card').eq(0).find('.plan-btn').removeClass('primary').addClass('current').text('Current Plan').prop('disabled', true);
-          $('.plan-card').eq(1).find('.plan-btn').removeClass('current').addClass('primary').text('Upgrade to Gold').prop('disabled', false);
-          $('.plan-card').eq(2).find('.plan-btn').text('Upgrade to Platinum');
-        } else if (currentPlan === 'Platinum') {
+          $(".plan-card")
+            .eq(0)
+            .find(".plan-btn")
+            .removeClass("primary")
+            .addClass("current")
+            .text("Current Plan")
+            .prop("disabled", true);
+          $(".plan-card")
+            .eq(1)
+            .find(".plan-btn")
+            .removeClass("current")
+            .addClass("primary")
+            .text("Upgrade to Gold")
+            .prop("disabled", false);
+          $(".plan-card").eq(2).find(".plan-btn").text("Upgrade to Platinum");
+        } else if (currentPlan === "Platinum") {
           // Update Platinum to current, others to upgrade
-          $('.plan-card').eq(2).find('.plan-btn').removeClass('primary').addClass('current').text('Current Plan').prop('disabled', true);
-          $('.plan-card').eq(1).find('.plan-btn').removeClass('current').addClass('secondary').text('Downgrade to Gold').prop('disabled', false);
-          $('.plan-card').eq(0).find('.plan-btn').addClass('secondary').text('Downgrade to Silver');
+          $(".plan-card")
+            .eq(2)
+            .find(".plan-btn")
+            .removeClass("primary")
+            .addClass("current")
+            .text("Current Plan")
+            .prop("disabled", true);
+          $(".plan-card")
+            .eq(1)
+            .find(".plan-btn")
+            .removeClass("current")
+            .addClass("secondary")
+            .text("Downgrade to Gold")
+            .prop("disabled", false);
+          $(".plan-card")
+            .eq(0)
+            .find(".plan-btn")
+            .addClass("secondary")
+            .text("Downgrade to Silver");
         }
       });
     </script>

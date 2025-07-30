@@ -2424,8 +2424,12 @@
                         Supreme Court of India
                       </option>
                       <option value="Delhi High Court">Delhi High Court</option>
-                      <option value="Bombay High Court">Bombay High Court</option>
-                      <option value="Madras High Court">Madras High Court</option>
+                      <option value="Bombay High Court">
+                        Bombay High Court
+                      </option>
+                      <option value="Madras High Court">
+                        Madras High Court
+                      </option>
                       <option value="Calcutta High Court">
                         Calcutta High Court
                       </option>
@@ -2483,7 +2487,9 @@
                         Framing of Charges
                       </option>
                       <option value="Evidence">Evidence</option>
-                      <option value="Cross Examination">Cross Examination</option>
+                      <option value="Cross Examination">
+                        Cross Examination
+                      </option>
                       <option value="Argument">Argument</option>
                       <option value="Final Hearing">Final Hearing</option>
                       <option value="Judgment">Judgment</option>
@@ -2548,7 +2554,11 @@
                       placeholder="e.g., Court Room 7"
                     />
                   </div>
-                  <div class="form-group" id="vcLinkGroup" style="display: none">
+                  <div
+                    class="form-group"
+                    id="vcLinkGroup"
+                    style="display: none"
+                  >
                     <label class="form-label">Video Conference Link</label>
                     <input
                       type="url"
@@ -2564,7 +2574,9 @@
                       <option value="Evidence Submission">
                         Evidence Submission
                       </option>
-                      <option value="Cross Examination">Cross Examination</option>
+                      <option value="Cross Examination">
+                        Cross Examination
+                      </option>
                       <option value="Witness Examination">
                         Witness Examination
                       </option>
@@ -3376,7 +3388,10 @@
               </div>
               <div class="detail-row">
                 <label>Status:</label>
-                <span id="detailStatus" class="detail-value status-badge"></span>
+                <span
+                  id="detailStatus"
+                  class="detail-value status-badge"
+                ></span>
               </div>
               <div class="detail-row">
                 <label>Appeared By:</label>
@@ -3847,7 +3862,9 @@
       function closeAddHearingModal() {
         $("#addHearingModal").hide();
         $("#addHearingForm")[0].reset();
-        $(".modal-header h3").html('<i class="fas fa-gavel"></i> Add New Hearing');
+        $(".modal-header h3").html(
+          '<i class="fas fa-gavel"></i> Add New Hearing',
+        );
         $("#deleteHearingBtn").hide();
         window.editingHearingId = null;
 
@@ -3976,7 +3993,9 @@
 
         if (window.editingHearingId) {
           // Update existing hearing
-          const index = hearingsData.findIndex(h => h.id === window.editingHearingId);
+          const index = hearingsData.findIndex(
+            (h) => h.id === window.editingHearingId,
+          );
           if (index !== -1) {
             hearingsData[index] = { ...hearingsData[index], ...hearingData };
             alert("Hearing updated successfully!");
@@ -4006,10 +4025,16 @@
           // Populate comprehensive form with hearing data (handle both old and new formats)
           $('input[name="case_id"]').val(hearing.case_id || "");
           $('input[name="case_title"]').val(hearing.case_title || "");
-          $('select[name="court_name"]').val(hearing.court_name || hearing.courtName || "");
-          $('input[name="judge_name"]').val(hearing.judge_name || hearing.judgeName || "");
+          $('select[name="court_name"]').val(
+            hearing.court_name || hearing.courtName || "",
+          );
+          $('input[name="judge_name"]').val(
+            hearing.judge_name || hearing.judgeName || "",
+          );
           $('select[name="case_type"]').val(hearing.case_type || "");
-          $('select[name="case_stage"]').val(hearing.case_stage || hearing.caseStage || "");
+          $('select[name="case_stage"]').val(
+            hearing.case_stage || hearing.caseStage || "",
+          );
 
           // Handle date and time (both old and new formats)
           if (hearing.hearing_date && hearing.hearing_time) {
@@ -4018,18 +4043,26 @@
           } else if (hearing.date) {
             // Convert old datetime-local format to separate date and time
             const dateObj = new Date(hearing.date);
-            const date = dateObj.toISOString().split('T')[0];
+            const date = dateObj.toISOString().split("T")[0];
             const time = dateObj.toTimeString().slice(0, 5);
             $('input[name="hearing_date"]').val(date);
             $('input[name="hearing_time"]').val(time);
           }
 
           $('select[name="hearing_mode"]').val(hearing.hearing_mode || "");
-          $('input[name="court_hall"]').val(hearing.court_hall || hearing.courtRoom || "");
+          $('input[name="court_hall"]').val(
+            hearing.court_hall || hearing.courtRoom || "",
+          );
           $('input[name="vc_link"]').val(hearing.vc_link || "");
-          $('select[name="hearing_purpose"]').val(hearing.hearing_purpose || hearing.hearingType || "");
-          $('select[name="hearing_status"]').val(hearing.hearing_status || hearing.status || "");
-          $('textarea[name="remarks"]').val(hearing.remarks || hearing.notes || "");
+          $('select[name="hearing_purpose"]').val(
+            hearing.hearing_purpose || hearing.hearingType || "",
+          );
+          $('select[name="hearing_status"]').val(
+            hearing.hearing_status || hearing.status || "",
+          );
+          $('textarea[name="remarks"]').val(
+            hearing.remarks || hearing.notes || "",
+          );
 
           // Toggle VC link visibility based on hearing mode
           const hearingMode = hearing.hearing_mode || "";
@@ -4038,7 +4071,9 @@
           }
 
           // Update modal title and show delete button
-          $(".modal-header h3").html('<i class="fas fa-gavel"></i> Edit Hearing');
+          $(".modal-header h3").html(
+            '<i class="fas fa-gavel"></i> Edit Hearing',
+          );
           $("#deleteHearingBtn").show();
 
           openAddHearingModal();
@@ -4053,7 +4088,9 @@
 
           if (hearing.hearing_date && hearing.hearing_time) {
             // New format with separate date and time
-            const dateTime = new Date(`${hearing.hearing_date}T${hearing.hearing_time}`);
+            const dateTime = new Date(
+              `${hearing.hearing_date}T${hearing.hearing_time}`,
+            );
             formattedDate = dateTime.toLocaleDateString("en-IN", {
               weekday: "long",
               year: "numeric",
@@ -4079,23 +4116,35 @@
           $("#detailCaseId").text(hearing.case_id || "N/A");
           $("#detailCaseTitle").text(hearing.case_title || "N/A");
           $("#detailCaseType").text(hearing.case_type || "N/A");
-          $("#detailCaseStage").text(hearing.case_stage || hearing.caseStage || "N/A");
+          $("#detailCaseStage").text(
+            hearing.case_stage || hearing.caseStage || "N/A",
+          );
 
           // Populate court & hearing details
           $("#detailDateTime").text(formattedDate);
-          $("#detailCourtName").text(hearing.court_name || hearing.courtName || "N/A");
-          $("#detailJudgeName").text(hearing.judge_name || hearing.judgeName || "N/A");
-          $("#detailCourtRoom").text(hearing.court_hall || hearing.courtRoom || "N/A");
+          $("#detailCourtName").text(
+            hearing.court_name || hearing.courtName || "N/A",
+          );
+          $("#detailJudgeName").text(
+            hearing.judge_name || hearing.judgeName || "N/A",
+          );
+          $("#detailCourtRoom").text(
+            hearing.court_hall || hearing.courtRoom || "N/A",
+          );
           $("#detailHearingMode").text(hearing.hearing_mode || "N/A");
           $("#detailVCLink").text(hearing.vc_link || "N/A");
-          $("#detailHearingPurpose").text(hearing.hearing_purpose || hearing.hearingType || "N/A");
+          $("#detailHearingPurpose").text(
+            hearing.hearing_purpose || hearing.hearingType || "N/A",
+          );
           $("#detailAppearedBy").text(hearing.appearedBy || "N/A");
 
           // Status with appropriate badge class
           const status = hearing.hearing_status || hearing.status || "N/A";
           const statusElement = $("#detailStatus");
           statusElement.text(status);
-          statusElement.removeClass("scheduled completed postponed cancelled adjourned");
+          statusElement.removeClass(
+            "scheduled completed postponed cancelled adjourned",
+          );
           statusElement.addClass(status.toLowerCase());
 
           // Format next hearing date
@@ -4105,7 +4154,9 @@
           $("#detailNextHearingDate").text(nextHearingDate);
 
           // Set text fields
-          $("#detailNotes").text(hearing.remarks || hearing.notes || "No notes available");
+          $("#detailNotes").text(
+            hearing.remarks || hearing.notes || "No notes available",
+          );
           $("#detailDocuments").text(
             hearing.documentsDiscussed || "No documents discussed",
           );

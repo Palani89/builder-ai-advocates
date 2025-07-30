@@ -530,9 +530,7 @@
             </div>
             <div class="credit-amount">1,000</div>
             <div class="credit-label">AI Credits</div>
-            <div class="credit-price">
-              <span class="currency">₹</span>499
-            </div>
+            <div class="credit-price"><span class="currency">₹</span>499</div>
             <div class="credit-savings">Save 10%</div>
             <ul class="credit-features">
               <li>
@@ -568,9 +566,7 @@
             </div>
             <div class="credit-amount">2,000</div>
             <div class="credit-label">AI Credits</div>
-            <div class="credit-price">
-              <span class="currency">₹</span>899
-            </div>
+            <div class="credit-price"><span class="currency">₹</span>899</div>
             <div class="credit-savings">Save 25%</div>
             <ul class="credit-features">
               <li>
@@ -610,9 +606,7 @@
             </div>
             <div class="credit-amount">3,000</div>
             <div class="credit-label">AI Credits</div>
-            <div class="credit-price">
-              <span class="currency">₹</span>1,199
-            </div>
+            <div class="credit-price"><span class="currency">₹</span>1,199</div>
             <div class="credit-savings">Save 40%</div>
             <ul class="credit-features">
               <li>
@@ -685,21 +679,24 @@
 
       function purchaseCredits(credits, price) {
         // Store selected credits details
-        localStorage.setItem('selectedPlan', JSON.stringify({
-          name: `${credits} AI Credits`,
-          price: price,
-          credits: credits,
-          type: 'credits'
-        }));
-        
+        localStorage.setItem(
+          "selectedPlan",
+          JSON.stringify({
+            name: `${credits} AI Credits`,
+            price: price,
+            credits: credits,
+            type: "credits",
+          }),
+        );
+
         // Redirect to payment gateway
-        window.location.href = 'payment.html';
+        window.location.href = "payment.html";
       }
 
       // Update current credits display
-      $(document).ready(function() {
-        const currentCredits = localStorage.getItem('userCredits') || '2450';
-        $('#currentCredits').text(parseInt(currentCredits).toLocaleString());
+      $(document).ready(function () {
+        const currentCredits = localStorage.getItem("userCredits") || "2450";
+        $("#currentCredits").text(parseInt(currentCredits).toLocaleString());
       });
     </script>
   </body>

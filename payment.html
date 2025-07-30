@@ -377,7 +377,9 @@
           <span class="logo-text">AI Advocates</span>
         </div>
         <h1 class="payment-title">Secure Payment</h1>
-        <p class="payment-subtitle">Complete your purchase safely and securely</p>
+        <p class="payment-subtitle">
+          Complete your purchase safely and securely
+        </p>
       </div>
 
       <!-- Payment Content -->
@@ -416,7 +418,10 @@
               Payment Method
             </h4>
             <div class="payment-methods">
-              <div class="payment-method selected" onclick="selectPaymentMethod('card')">
+              <div
+                class="payment-method selected"
+                onclick="selectPaymentMethod('card')"
+              >
                 <i class="fas fa-credit-card"></i>
                 <div class="method-name">Credit/Debit Card</div>
               </div>
@@ -424,11 +429,17 @@
                 <i class="fab fa-google-pay"></i>
                 <div class="method-name">UPI</div>
               </div>
-              <div class="payment-method" onclick="selectPaymentMethod('netbanking')">
+              <div
+                class="payment-method"
+                onclick="selectPaymentMethod('netbanking')"
+              >
                 <i class="fas fa-university"></i>
                 <div class="method-name">Net Banking</div>
               </div>
-              <div class="payment-method" onclick="selectPaymentMethod('wallet')">
+              <div
+                class="payment-method"
+                onclick="selectPaymentMethod('wallet')"
+              >
                 <i class="fas fa-wallet"></i>
                 <div class="method-name">Wallet</div>
               </div>
@@ -473,11 +484,7 @@
               </div>
               <div class="form-group full-width">
                 <label class="form-label">Cardholder Name</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  placeholder="John Doe"
-                />
+                <input type="text" class="form-input" placeholder="John Doe" />
               </div>
             </div>
           </div>
@@ -499,11 +506,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">City</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  placeholder="New Delhi"
-                />
+                <input type="text" class="form-input" placeholder="New Delhi" />
               </div>
               <div class="form-group">
                 <label class="form-label">State</label>
@@ -538,7 +541,8 @@
           <div class="security-info">
             <i class="fas fa-shield-alt"></i>
             <div class="text">
-              Your payment information is encrypted and secure. We use industry-standard SSL encryption.
+              Your payment information is encrypted and secure. We use
+              industry-standard SSL encryption.
             </div>
           </div>
 
@@ -548,7 +552,11 @@
               <i class="fas fa-arrow-left"></i>
               Back
             </button>
-            <button class="btn btn-primary" onclick="processPayment()" id="payBtn">
+            <button
+              class="btn btn-primary"
+              onclick="processPayment()"
+              id="payBtn"
+            >
               <span id="payText">
                 <i class="fas fa-lock"></i>
                 Pay Now
@@ -564,88 +572,98 @@
     </div>
 
     <script>
-      let selectedPaymentMethod = 'card';
+      let selectedPaymentMethod = "card";
 
-      $(document).ready(function() {
+      $(document).ready(function () {
         // Load order details from localStorage
-        const selectedPlan = JSON.parse(localStorage.getItem('selectedPlan') || '{}');
-        
+        const selectedPlan = JSON.parse(
+          localStorage.getItem("selectedPlan") || "{}",
+        );
+
         if (selectedPlan.name) {
-          $('#orderItem').text(selectedPlan.name);
-          $('#subtotal').text(`₹${selectedPlan.price}`);
-          
+          $("#orderItem").text(selectedPlan.name);
+          $("#subtotal").text(`₹${selectedPlan.price}`);
+
           const taxes = Math.round(selectedPlan.price * 0.18);
           const total = selectedPlan.price + taxes;
-          
-          $('#taxes').text(`₹${taxes}`);
-          $('#totalAmount').text(`₹${total}`);
+
+          $("#taxes").text(`₹${taxes}`);
+          $("#totalAmount").text(`₹${total}`);
         }
       });
 
       function selectPaymentMethod(method) {
         selectedPaymentMethod = method;
-        $('.payment-method').removeClass('selected');
-        $(`.payment-method`).eq(getMethodIndex(method)).addClass('selected');
-        
+        $(".payment-method").removeClass("selected");
+        $(`.payment-method`).eq(getMethodIndex(method)).addClass("selected");
+
         // Show/hide card details based on selection
-        if (method === 'card') {
-          $('#cardDetails').show();
+        if (method === "card") {
+          $("#cardDetails").show();
         } else {
-          $('#cardDetails').hide();
+          $("#cardDetails").hide();
         }
       }
 
       function getMethodIndex(method) {
-        const methods = ['card', 'upi', 'netbanking', 'wallet'];
+        const methods = ["card", "upi", "netbanking", "wallet"];
         return methods.indexOf(method);
       }
 
       function formatCardNumber(input) {
-        let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-        let formattedInputValue = value.match(/.{1,4}/g)?.join(' ') ?? '';
+        let value = input.value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+        let formattedInputValue = value.match(/.{1,4}/g)?.join(" ") ?? "";
         input.value = formattedInputValue;
       }
 
       function formatExpiry(input) {
-        let value = input.value.replace(/\D/g, '');
+        let value = input.value.replace(/\D/g, "");
         if (value.length >= 2) {
-          value = value.substring(0, 2) + '/' + value.substring(2, 4);
+          value = value.substring(0, 2) + "/" + value.substring(2, 4);
         }
         input.value = value;
       }
 
       function processPayment() {
-        const payBtn = $('#payBtn');
-        const payText = $('#payText');
-        const payLoading = $('#payLoading');
-        
+        const payBtn = $("#payBtn");
+        const payText = $("#payText");
+        const payLoading = $("#payLoading");
+
         // Disable button and show loading
-        payBtn.prop('disabled', true);
+        payBtn.prop("disabled", true);
         payText.hide();
         payLoading.show();
-        
+
         // Simulate payment processing
         setTimeout(() => {
           // Get selected plan details
-          const selectedPlan = JSON.parse(localStorage.getItem('selectedPlan') || '{}');
-          
-          if (selectedPlan.type === 'plan') {
+          const selectedPlan = JSON.parse(
+            localStorage.getItem("selectedPlan") || "{}",
+          );
+
+          if (selectedPlan.type === "plan") {
             // Update user's plan
-            localStorage.setItem('userPlan', selectedPlan.name.split(' ')[0]); // Extract plan name
-            alert(`Payment successful! You have been upgraded to the ${selectedPlan.name} plan.`);
-          } else if (selectedPlan.type === 'credits') {
+            localStorage.setItem("userPlan", selectedPlan.name.split(" ")[0]); // Extract plan name
+            alert(
+              `Payment successful! You have been upgraded to the ${selectedPlan.name} plan.`,
+            );
+          } else if (selectedPlan.type === "credits") {
             // Add credits to user's account
-            const currentCredits = parseInt(localStorage.getItem('userCredits') || '2450');
+            const currentCredits = parseInt(
+              localStorage.getItem("userCredits") || "2450",
+            );
             const newCredits = currentCredits + selectedPlan.credits;
-            localStorage.setItem('userCredits', newCredits.toString());
-            alert(`Payment successful! ${selectedPlan.credits} AI credits have been added to your account.`);
+            localStorage.setItem("userCredits", newCredits.toString());
+            alert(
+              `Payment successful! ${selectedPlan.credits} AI credits have been added to your account.`,
+            );
           }
-          
+
           // Clear selected plan
-          localStorage.removeItem('selectedPlan');
-          
+          localStorage.removeItem("selectedPlan");
+
           // Redirect to home page
-          window.location.href = 'home.html';
+          window.location.href = "home.html";
         }, 3000);
       }
 
