@@ -1077,8 +1077,70 @@
       });
 
       function openAddDocumentModal() {
-        alert('Add Legal Document\n\nFeatures:\n• Upload new research documents\n• Categorize by law type\n• Add tags and descriptions\n• Organize by practice area\n\nFunctionality coming soon...');
+        document.getElementById('addDocumentModal').style.display = 'block';
+        // Reset form
+        document.getElementById('documentUploadForm').reset();
+        document.getElementById('selectedFileName').classList.remove('show');
       }
+
+      function closeAddDocumentModal() {
+        document.getElementById('addDocumentModal').style.display = 'none';
+      }
+
+      // File upload handling
+      document.getElementById('documentFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const selectedFileName = document.getElementById('selectedFileName');
+
+        if (file) {
+          const fileSize = (file.size / 1024 / 1024).toFixed(2); // Convert to MB
+          selectedFileName.innerHTML = `
+            <i class="fas fa-file"></i>
+            <strong>${file.name}</strong> (${fileSize} MB)
+          `;
+          selectedFileName.classList.add('show');
+        } else {
+          selectedFileName.classList.remove('show');
+        }
+      });
+
+      // Form submission handling
+      document.getElementById('documentUploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const documentTitle = formData.get('documentTitle');
+        const documentCategory = formData.get('documentCategory');
+        const documentFile = formData.get('documentFile');
+
+        if (!documentFile || documentFile.size === 0) {
+          alert('Please select a file to upload.');
+          return;
+        }
+
+        // Simulate upload process
+        const submitBtn = document.querySelector('.btn-primary');
+        const originalText = submitBtn.innerHTML;
+
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          alert(`Document "${documentTitle}" has been successfully uploaded!\n\nCategory: ${documentCategory}\nFile: ${documentFile.name}\n\nThe document will be processed and added to your research library.`);
+
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          closeAddDocumentModal();
+        }, 2000);
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        const modal = document.getElementById('addDocumentModal');
+        if (e.target === modal) {
+          closeAddDocumentModal();
+        }
+      });
 
       function logoutFromApp() {
         if (confirm("Are you sure you want to log out?")) {
