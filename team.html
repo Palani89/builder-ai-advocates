@@ -2122,6 +2122,24 @@
           });
         });
       });
+
+      // Notification functions
+      function openNotifications() {
+        $("#notificationModal").css("display", "flex");
+        // Mark notifications as read (optional)
+        $(".notification-badge-new").fadeOut();
+      }
+
+      function closeNotifications() {
+        $("#notificationModal").hide();
+      }
+
+      // Close notification modal when clicking overlay
+      $("#notificationModal").on("click", function(e) {
+        if (e.target === this) {
+          closeNotifications();
+        }
+      });
     </script>
 
     <!-- Assignment Modal -->
