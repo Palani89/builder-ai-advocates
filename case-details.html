@@ -3868,6 +3868,12 @@
         }
       });
 
+      $("#hearingDetailsModal").on("click", function (e) {
+        if (e.target === this) {
+          closeHearingDetailsModal();
+        }
+      });
+
       // Document actions
       $(document).on("click", ".doc-action-btn", function (e) {
         e.preventDefault();
