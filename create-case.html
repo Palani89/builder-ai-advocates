@@ -3091,9 +3091,7 @@
             // Save case to localStorage (simulating database save)
             saveCase(newCase);
 
-            // Clear draft after successful creation
-            localStorage.removeItem('case_form_draft');
-            localStorage.removeItem('case_form_draft_timestamp');
+
 
             // Reset submit button
             $submitBtn.removeClass('loading');
