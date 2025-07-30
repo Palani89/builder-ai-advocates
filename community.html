@@ -2030,9 +2030,70 @@
 
         // Close modal when clicking outside
         window.addEventListener('click', function(e) {
-            const modal = document.getElementById('tagLawyersModal');
-            if (e.target === modal) {
+            const tagModal = document.getElementById('tagLawyersModal');
+            const createModal = document.getElementById('createPostModal');
+
+            if (e.target === tagModal) {
                 closeTagModal();
+            }
+            if (e.target === createModal) {
+                closeCreatePostModal();
+            }
+        });
+
+        // Drag and drop for photo upload
+        const photoUploadArea = document.querySelector('.photo-upload-area');
+
+        if (photoUploadArea) {
+            photoUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--primary)';
+                this.style.backgroundColor = 'var(--gradient-light)';
+            });
+
+            photoUploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--border)';
+                this.style.backgroundColor = 'var(--surface-hover)';
+            });
+
+            photoUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--border)';
+                this.style.backgroundColor = 'var(--surface-hover)';
+
+                const files = Array.from(e.dataTransfer.files);
+                const photoInput = document.getElementById('postPhotos');
+
+                // Trigger the change event with the dropped files
+                const dt = new DataTransfer();
+                files.forEach(file => dt.items.add(file));
+                photoInput.files = dt.files;
+
+                // Trigger the change event
+                const event = new Event('change', { bubbles: true });
+                photoInput.dispatchEvent(event);
+            });
+        }
+
+        // Lawyer tagging in create post
+        document.getElementById('tagLawyersInput').addEventListener('input', function() {
+            const value = this.value;
+            if (value.includes('@')) {
+                // Show suggestions for lawyer tagging
+                const suggestions = ['Priya Sharma', 'Dev Mahajan', 'Amit Verma', 'Neha Patel'];
+                const lastWord = value.split(' ').pop();
+                if (lastWord.startsWith('@') && lastWord.length > 1) {
+                    const searchTerm = lastWord.substring(1).toLowerCase();
+                    const matches = suggestions.filter(name =>
+                        name.toLowerCase().includes(searchTerm)
+                    );
+
+                    if (matches.length > 0) {
+                        // You can implement a dropdown here
+                        console.log('Showing suggestions:', matches);
+                    }
+                }
             }
         });
 
