@@ -227,40 +227,70 @@
         }
 
         .stats-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stats-title::before {
+            content: '📊';
+            font-size: 1.125rem;
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.2s ease;
         }
 
         .stat-item:last-child {
             border-bottom: none;
         }
 
+        .stat-item:hover {
+            background: var(--surface-hover);
+            margin: 0 -1rem;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .stat-value {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
+            font-size: 1.1rem;
         }
 
         .trending-topics {
             background: var(--surface);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trending-topics::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
         }
 
         .topic-tag {
