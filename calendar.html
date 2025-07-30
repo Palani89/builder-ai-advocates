@@ -543,6 +543,91 @@
       </div>
     </div>
 
+    <!-- Notification Modal -->
+    <div class="notification-modal" id="notificationModal">
+      <div class="notification-content">
+        <div class="notification-header">
+          <h3>
+            <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning);"></i>
+            Notifications & Reminders
+          </h3>
+          <button class="notification-close" onclick="closeNotifications()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="notification-body">
+          <!-- High Priority Notifications -->
+          <div class="notification-item">
+            <div class="notification-icon-wrapper error">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="notification-details">
+              <div class="notification-title">Urgent: Court Hearing Tomorrow</div>
+              <div class="notification-message">
+                State vs. John Doe case hearing scheduled for tomorrow at 10:30 AM. Ensure all documents are prepared.
+              </div>
+              <div class="notification-time">2 hours ago</div>
+            </div>
+            <div class="notification-badge-new"></div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-icon-wrapper warning">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="notification-details">
+              <div class="notification-title">Payment Reminder</div>
+              <div class="notification-message">
+                Client Mr. Smith has pending payment of ₹1,00,000 for Property Dispute case. Follow up required.
+              </div>
+              <div class="notification-time">5 hours ago</div>
+            </div>
+            <div class="notification-badge-new"></div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-icon-wrapper primary">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="notification-details">
+              <div class="notification-title">Document Submission Deadline</div>
+              <div class="notification-message">
+                Reply submission due for ABC vs. XYZ case by January 30th. 3 days remaining.
+              </div>
+              <div class="notification-time">1 day ago</div>
+            </div>
+            <div class="notification-badge-new"></div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-icon-wrapper success">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="notification-details">
+              <div class="notification-title">Case Update Successful</div>
+              <div class="notification-message">
+                Employment Dispute case status updated to "Under Trial". Next hearing scheduled.
+              </div>
+              <div class="notification-time">2 days ago</div>
+            </div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-icon-wrapper warning">
+              <i class="fas fa-calendar-times"></i>
+            </div>
+            <div class="notification-details">
+              <div class="notification-title">Hearing Adjourned</div>
+              <div class="notification-message">
+                Land Acquisition Appeal hearing has been adjourned. New date to be announced by court.
+              </div>
+              <div class="notification-time">3 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Create Hearing Modal -->
     <div class="modal-overlay" id="createHearingModal" style="display: none">
       <div class="modal-content create-hearing-modal">
