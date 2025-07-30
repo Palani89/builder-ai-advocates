@@ -1098,10 +1098,13 @@
 
     <!-- Contacts Modal -->
     <div class="notification-modal" id="contactsModal">
-      <div class="notification-content" style="max-width: 800px;">
+      <div class="notification-content" style="max-width: 800px">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-address-book" style="margin-right: 0.5rem; color: var(--success);"></i>
+            <i
+              class="fas fa-address-book"
+              style="margin-right: 0.5rem; color: var(--success)"
+            ></i>
             Imported Contacts
           </h3>
           <button class="notification-close" onclick="closeContacts()">
@@ -1265,7 +1268,7 @@
       }
 
       function loadContactsList(contacts) {
-        let contactsHtml = '';
+        let contactsHtml = "";
 
         contacts.forEach((contact, index) => {
           contactsHtml += `
@@ -1274,23 +1277,23 @@
                 <i class="fas fa-user-tie"></i>
               </div>
               <div class="notification-details" style="flex: 1;">
-                <div class="notification-title" style="font-size: 1rem; margin-bottom: 0.5rem;">${contact.Name || 'Unknown'}</div>
+                <div class="notification-title" style="font-size: 1rem; margin-bottom: 0.5rem;">${contact.Name || "Unknown"}</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
                   <div style="font-size: 0.875rem; color: var(--text-secondary);">
                     <i class="fas fa-envelope" style="width: 16px; margin-right: 0.5rem;"></i>
-                    ${contact.Email || 'No email'}
+                    ${contact.Email || "No email"}
                   </div>
                   <div style="font-size: 0.875rem; color: var(--text-secondary);">
                     <i class="fas fa-phone" style="width: 16px; margin-right: 0.5rem;"></i>
-                    ${contact.Phone || 'No phone'}
+                    ${contact.Phone || "No phone"}
                   </div>
                   <div style="font-size: 0.875rem; color: var(--text-secondary);">
                     <i class="fas fa-gavel" style="width: 16px; margin-right: 0.5rem;"></i>
-                    ${contact.Specialization || 'General'}
+                    ${contact.Specialization || "General"}
                   </div>
                   <div style="font-size: 0.875rem; color: var(--text-secondary);">
                     <i class="fas fa-briefcase" style="width: 16px; margin-right: 0.5rem;"></i>
-                    ${contact.Experience || 'Not specified'}
+                    ${contact.Experience || "Not specified"}
                   </div>
                 </div>
                 <div class="notification-time">Contact #${index + 1}</div>
@@ -1307,40 +1310,44 @@
           `;
         });
 
-        if (contactsHtml === '') {
-          contactsHtml = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No contacts found</div>';
+        if (contactsHtml === "") {
+          contactsHtml =
+            '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No contacts found</div>';
         }
 
         $("#contactsList").html(contactsHtml);
       }
 
       function contactPerson(email) {
-        if (email && email !== 'No email') {
-          window.open(`mailto:${email}`, '_blank');
+        if (email && email !== "No email") {
+          window.open(`mailto:${email}`, "_blank");
         } else {
-          alert('No email address available');
+          alert("No email address available");
         }
       }
 
       function callPerson(phone) {
-        if (phone && phone !== 'No phone') {
-          window.open(`tel:${phone}`, '_blank');
+        if (phone && phone !== "No phone") {
+          window.open(`tel:${phone}`, "_blank");
         } else {
-          alert('No phone number available');
+          alert("No phone number available");
         }
       }
 
       // Update contacts description with count
       function updateContactsDescription() {
-        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
-        const description = contacts.length > 0
-          ? `${contacts.length} imported lawyer contacts`
-          : 'Lawyer contacts & directory';
+        const contacts = JSON.parse(
+          localStorage.getItem("importedContacts") || "[]",
+        );
+        const description =
+          contacts.length > 0
+            ? `${contacts.length} imported lawyer contacts`
+            : "Lawyer contacts & directory";
         $("#contactsDescription").text(description);
       }
 
       // Update on page load
-      $(document).ready(function() {
+      $(document).ready(function () {
         updateContactsDescription();
       });
 

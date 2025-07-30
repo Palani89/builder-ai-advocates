@@ -1520,7 +1520,10 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning);"></i>
+            <i
+              class="fas fa-bell"
+              style="margin-right: 0.5rem; color: var(--warning)"
+            ></i>
             Notifications & Reminders
           </h3>
           <button class="notification-close" onclick="closeNotifications()">
@@ -1534,9 +1537,12 @@
               <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="notification-details">
-              <div class="notification-title">Urgent: Court Hearing Tomorrow</div>
+              <div class="notification-title">
+                Urgent: Court Hearing Tomorrow
+              </div>
               <div class="notification-message">
-                State vs. John Doe case hearing scheduled for tomorrow at 10:30 AM. Ensure all documents are prepared.
+                State vs. John Doe case hearing scheduled for tomorrow at 10:30
+                AM. Ensure all documents are prepared.
               </div>
               <div class="notification-time">2 hours ago</div>
             </div>
@@ -1550,7 +1556,8 @@
             <div class="notification-details">
               <div class="notification-title">Payment Reminder</div>
               <div class="notification-message">
-                Client Mr. Smith has pending payment of ₹1,00,000 for Property Dispute case. Follow up required.
+                Client Mr. Smith has pending payment of ₹1,00,000 for Property
+                Dispute case. Follow up required.
               </div>
               <div class="notification-time">5 hours ago</div>
             </div>
@@ -1564,7 +1571,8 @@
             <div class="notification-details">
               <div class="notification-title">Document Submission Deadline</div>
               <div class="notification-message">
-                Reply submission due for ABC vs. XYZ case by January 30th. 3 days remaining.
+                Reply submission due for ABC vs. XYZ case by January 30th. 3
+                days remaining.
               </div>
               <div class="notification-time">1 day ago</div>
             </div>
@@ -1578,7 +1586,8 @@
             <div class="notification-details">
               <div class="notification-title">Case Update Successful</div>
               <div class="notification-message">
-                Employment Dispute case status updated to "Under Trial". Next hearing scheduled.
+                Employment Dispute case status updated to "Under Trial". Next
+                hearing scheduled.
               </div>
               <div class="notification-time">2 days ago</div>
             </div>
@@ -1591,7 +1600,8 @@
             <div class="notification-details">
               <div class="notification-title">Hearing Adjourned</div>
               <div class="notification-message">
-                Land Acquisition Appeal hearing has been adjourned. New date to be announced by court.
+                Land Acquisition Appeal hearing has been adjourned. New date to
+                be announced by court.
               </div>
               <div class="notification-time">3 days ago</div>
             </div>
@@ -1682,7 +1692,7 @@
 
       // Load cases from localStorage and display them
       function loadCasesFromStorage() {
-        const cases = JSON.parse(localStorage.getItem('cases_list') || '[]');
+        const cases = JSON.parse(localStorage.getItem("cases_list") || "[]");
 
         if (cases.length > 0) {
           // Clear existing static cases and add new ones
@@ -1692,30 +1702,33 @@
 
       function displayCases(cases) {
         // Get today's date for filtering
-        const today = new Date().toISOString().split('T')[0];
+        const today = new Date().toISOString().split("T")[0];
 
         // Clear all tab contents except the static cases (keep them as examples)
         // We'll add new cases to the top of each relevant tab
 
-        cases.forEach(caseData => {
+        cases.forEach((caseData) => {
           const caseCard = createCaseCard(caseData);
 
           // Add to appropriate tabs based on status and dates
-          if (caseData.status === 'Active') {
-            $('#todays-tab .cases-list').prepend(caseCard);
-          } else if (caseData.status === 'Pending') {
-            $('#pending-tab .cases-list').prepend(caseCard.clone());
-          } else if (caseData.status === 'Disposed') {
-            $('#disposed-tab .cases-list').prepend(caseCard.clone());
-          } else if (caseData.status === 'Appeal Filed') {
-            $('#appealed-tab .cases-list').prepend(caseCard.clone());
-          } else if (caseData.status === 'Settled') {
-            $('#settled-tab .cases-list').prepend(caseCard.clone());
+          if (caseData.status === "Active") {
+            $("#todays-tab .cases-list").prepend(caseCard);
+          } else if (caseData.status === "Pending") {
+            $("#pending-tab .cases-list").prepend(caseCard.clone());
+          } else if (caseData.status === "Disposed") {
+            $("#disposed-tab .cases-list").prepend(caseCard.clone());
+          } else if (caseData.status === "Appeal Filed") {
+            $("#appealed-tab .cases-list").prepend(caseCard.clone());
+          } else if (caseData.status === "Settled") {
+            $("#settled-tab .cases-list").prepend(caseCard.clone());
           }
 
           // Also add to upcoming if there's a next hearing date in the future
-          if (caseData.next_hearing_date && caseData.next_hearing_date > today) {
-            $('#upcoming-tab .cases-list').prepend(caseCard.clone());
+          if (
+            caseData.next_hearing_date &&
+            caseData.next_hearing_date > today
+          ) {
+            $("#upcoming-tab .cases-list").prepend(caseCard.clone());
           }
         });
       }
@@ -1728,36 +1741,36 @@
           <div class="case-card">
             <div class="case-header">
               <div>
-                <div class="case-title">${caseData.case_title || 'Untitled Case'}</div>
+                <div class="case-title">${caseData.case_title || "Untitled Case"}</div>
                 <div class="case-subtitle">
-                  Client: ${caseData.client_name || 'N/A'} | Court: ${caseData.court_name || 'N/A'}
+                  Client: ${caseData.client_name || "N/A"} | Court: ${caseData.court_name || "N/A"}
                 </div>
               </div>
               <div class="case-badges">
-                <span class="status-badge ${statusClass}">${caseData.status || 'Active'}</span>
-                <span class="status-badge ${caseTypeClass}">${caseData.case_type || 'General'}</span>
+                <span class="status-badge ${statusClass}">${caseData.status || "Active"}</span>
+                <span class="status-badge ${caseTypeClass}">${caseData.case_type || "General"}</span>
               </div>
             </div>
             <div class="case-details">
               <div class="case-detail-item">
                 <span class="detail-label">Court:</span>
-                <span class="detail-value">${caseData.court_name || 'N/A'}</span>
+                <span class="detail-value">${caseData.court_name || "N/A"}</span>
               </div>
               <div class="case-detail-item">
                 <span class="detail-label">Judge:</span>
-                <span class="detail-value">${caseData.judge_name || 'N/A'}</span>
+                <span class="detail-value">${caseData.judge_name || "N/A"}</span>
               </div>
               <div class="case-detail-item">
                 <span class="detail-label">Next Hearing:</span>
-                <span class="detail-value">${formatDate(caseData.next_hearing_date) || 'Not scheduled'}</span>
+                <span class="detail-value">${formatDate(caseData.next_hearing_date) || "Not scheduled"}</span>
               </div>
               <div class="case-detail-item">
                 <span class="detail-label">Case Number:</span>
-                <span class="detail-value">${caseData.case_number || 'Not assigned'}</span>
+                <span class="detail-value">${caseData.case_number || "Not assigned"}</span>
               </div>
               <div class="case-detail-item">
                 <span class="detail-label">Filing Date:</span>
-                <span class="detail-value">${formatDate(caseData.filing_date) || 'N/A'}</span>
+                <span class="detail-value">${formatDate(caseData.filing_date) || "N/A"}</span>
               </div>
             </div>
             <div class="case-actions">
@@ -1767,11 +1780,15 @@
               <button class="btn btn-outline btn-sm" onclick="editCase('${caseData.id}')">
                 Edit
               </button>
-              ${caseData.status === 'Active' ? `
+              ${
+                caseData.status === "Active"
+                  ? `
                 <button class="btn btn-warning btn-sm" onclick="disposeCase('${caseData.id}')">
                   Dispose
                 </button>
-              ` : ''}
+              `
+                  : ""
+              }
             </div>
           </div>
         `);
@@ -1779,37 +1796,37 @@
 
       function getCaseTypeClass(caseType) {
         const typeMap = {
-          'Criminal': 'criminal',
-          'Civil': 'civil',
-          'Commercial': 'commercial',
-          'Family': 'family',
-          'Labor': 'labor',
-          'Corporate': 'commercial',
-          'Property': 'civil',
-          'Tax': 'commercial',
-          'Matrimonial': 'family'
+          Criminal: "criminal",
+          Civil: "civil",
+          Commercial: "commercial",
+          Family: "family",
+          Labor: "labor",
+          Corporate: "commercial",
+          Property: "civil",
+          Tax: "commercial",
+          Matrimonial: "family",
         };
-        return typeMap[caseType] || 'civil';
+        return typeMap[caseType] || "civil";
       }
 
       function getStatusClass(status) {
         const statusMap = {
-          'Active': 'active',
-          'Pending': 'pending',
-          'Disposed': 'disposed',
-          'Appeal Filed': 'appealed',
-          'Settled': 'settled'
+          Active: "active",
+          Pending: "pending",
+          Disposed: "disposed",
+          "Appeal Filed": "appealed",
+          Settled: "settled",
         };
-        return statusMap[status] || 'active';
+        return statusMap[status] || "active";
       }
 
       function formatDate(dateString) {
         if (!dateString) return null;
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-IN', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
+        return date.toLocaleDateString("en-IN", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
         });
       }
 
@@ -1823,7 +1840,7 @@
 
       // Check for success message from case creation
       function checkForSuccessMessage() {
-        const successData = localStorage.getItem('case_creation_success');
+        const successData = localStorage.getItem("case_creation_success");
 
         if (successData) {
           try {
@@ -1836,24 +1853,24 @@
             }
 
             // Remove the success message from storage
-            localStorage.removeItem('case_creation_success');
+            localStorage.removeItem("case_creation_success");
           } catch (error) {
-            console.error('Error parsing success message:', error);
-            localStorage.removeItem('case_creation_success');
+            console.error("Error parsing success message:", error);
+            localStorage.removeItem("case_creation_success");
           }
         }
       }
 
       function showSuccessBanner(message, caseId) {
-        const $banner = $('#successBanner');
-        const $message = $('#successMessage');
+        const $banner = $("#successBanner");
+        const $message = $("#successMessage");
 
         $message.text(message);
-        $banner.addClass('show');
+        $banner.addClass("show");
 
         // Auto-hide after 5 seconds
         setTimeout(() => {
-          $banner.removeClass('show');
+          $banner.removeClass("show");
         }, 5000);
 
         // Highlight the new case if it exists
@@ -1866,7 +1883,7 @@
 
       function highlightNewCase(caseId) {
         // Find the case card with the matching case ID
-        $('.case-card').each(function() {
+        $(".case-card").each(function () {
           const $card = $(this);
           const cardText = $card.text();
 
@@ -1874,23 +1891,23 @@
           if (cardText.includes(caseId)) {
             // Add highlight effect
             $card.css({
-              'animation': 'highlightPulse 2s ease-in-out',
-              'border': '2px solid var(--success)',
-              'background': 'rgba(16, 185, 129, 0.05)'
+              animation: "highlightPulse 2s ease-in-out",
+              border: "2px solid var(--success)",
+              background: "rgba(16, 185, 129, 0.05)",
             });
 
             // Scroll to the case card
             $card[0].scrollIntoView({
-              behavior: 'smooth',
-              block: 'center'
+              behavior: "smooth",
+              block: "center",
             });
 
             // Remove highlight after 3 seconds
             setTimeout(() => {
               $card.css({
-                'animation': '',
-                'border': '',
-                'background': ''
+                animation: "",
+                border: "",
+                background: "",
               });
             }, 3000);
 
@@ -1900,12 +1917,12 @@
       }
 
       function closeSuccessBanner() {
-        $('#successBanner').removeClass('show');
+        $("#successBanner").removeClass("show");
       }
 
       // Add highlight animation keyframes
       function addHighlightStyles() {
-        const style = document.createElement('style');
+        const style = document.createElement("style");
         style.textContent = `
           @keyframes highlightPulse {
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
@@ -1917,7 +1934,7 @@
       }
 
       // Initialize highlight styles
-      $(document).ready(function() {
+      $(document).ready(function () {
         addHighlightStyles();
       });
 
@@ -1936,7 +1953,7 @@
       }
 
       // Close notification modal when clicking overlay
-      $("#notificationModal").on("click", function(e) {
+      $("#notificationModal").on("click", function (e) {
         if (e.target === this) {
           closeNotifications();
         }

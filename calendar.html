@@ -407,7 +407,11 @@
             </div>
 
             <!-- Appointments Tab Content -->
-            <div id="appointments-content" class="tab-content" style="display: none;">
+            <div
+              id="appointments-content"
+              class="tab-content"
+              style="display: none"
+            >
               <div class="event-list">
                 <div class="event-item confirmed appointment-type">
                   <div class="event-header">
@@ -454,11 +458,18 @@
             </div>
 
             <!-- Set Case Reminder Tab Content -->
-            <div id="reminders-content" class="tab-content" style="display: none;">
+            <div
+              id="reminders-content"
+              class="tab-content"
+              style="display: none"
+            >
               <div class="reminder-section">
                 <div class="reminder-header">
                   <h4>Active Case Reminders</h4>
-                  <button class="btn btn-primary" onclick="openSetCaseReminderModal()">
+                  <button
+                    class="btn btn-primary"
+                    onclick="openSetCaseReminderModal()"
+                  >
                     <i class="fas fa-bell"></i>
                     New Reminder
                   </button>
@@ -467,7 +478,9 @@
                 <div class="reminder-list">
                   <div class="reminder-item reminder-type">
                     <div class="reminder-header">
-                      <div class="reminder-title">State vs. John Doe - Hearing Reminder</div>
+                      <div class="reminder-title">
+                        State vs. John Doe - Hearing Reminder
+                      </div>
                       <span class="reminder-status active">Active</span>
                     </div>
                     <div class="reminder-details">
@@ -490,7 +503,9 @@
 
                   <div class="reminder-item reminder-type">
                     <div class="reminder-header">
-                      <div class="reminder-title">ABC Corp Merger - Document Preparation</div>
+                      <div class="reminder-title">
+                        ABC Corp Merger - Document Preparation
+                      </div>
                       <span class="reminder-status active">Active</span>
                     </div>
                     <div class="reminder-details">
@@ -548,7 +563,10 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning);"></i>
+            <i
+              class="fas fa-bell"
+              style="margin-right: 0.5rem; color: var(--warning)"
+            ></i>
             Notifications & Reminders
           </h3>
           <button class="notification-close" onclick="closeNotifications()">
@@ -562,9 +580,12 @@
               <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="notification-details">
-              <div class="notification-title">Urgent: Court Hearing Tomorrow</div>
+              <div class="notification-title">
+                Urgent: Court Hearing Tomorrow
+              </div>
               <div class="notification-message">
-                State vs. John Doe case hearing scheduled for tomorrow at 10:30 AM. Ensure all documents are prepared.
+                State vs. John Doe case hearing scheduled for tomorrow at 10:30
+                AM. Ensure all documents are prepared.
               </div>
               <div class="notification-time">2 hours ago</div>
             </div>
@@ -578,7 +599,8 @@
             <div class="notification-details">
               <div class="notification-title">Payment Reminder</div>
               <div class="notification-message">
-                Client Mr. Smith has pending payment of ₹1,00,000 for Property Dispute case. Follow up required.
+                Client Mr. Smith has pending payment of ₹1,00,000 for Property
+                Dispute case. Follow up required.
               </div>
               <div class="notification-time">5 hours ago</div>
             </div>
@@ -592,7 +614,8 @@
             <div class="notification-details">
               <div class="notification-title">Document Submission Deadline</div>
               <div class="notification-message">
-                Reply submission due for ABC vs. XYZ case by January 30th. 3 days remaining.
+                Reply submission due for ABC vs. XYZ case by January 30th. 3
+                days remaining.
               </div>
               <div class="notification-time">1 day ago</div>
             </div>
@@ -606,7 +629,8 @@
             <div class="notification-details">
               <div class="notification-title">Case Update Successful</div>
               <div class="notification-message">
-                Employment Dispute case status updated to "Under Trial". Next hearing scheduled.
+                Employment Dispute case status updated to "Under Trial". Next
+                hearing scheduled.
               </div>
               <div class="notification-time">2 days ago</div>
             </div>
@@ -619,7 +643,8 @@
             <div class="notification-details">
               <div class="notification-title">Hearing Adjourned</div>
               <div class="notification-message">
-                Land Acquisition Appeal hearing has been adjourned. New date to be announced by court.
+                Land Acquisition Appeal hearing has been adjourned. New date to
+                be announced by court.
               </div>
               <div class="notification-time">3 days ago</div>
             </div>
@@ -2209,22 +2234,25 @@ Advocate: ${appointmentData.advocate_name}`;
 
         // Set default reminder message for general case reminder
         const defaultMessage = `Dear [Client Name], this is a reminder about your case [Case Title]. Please ensure you are available for the upcoming hearing and have all necessary documents ready. Contact us if you have any questions.`;
-        document.querySelector('textarea[name="reminder_message"]').value = defaultMessage;
+        document.querySelector('textarea[name="reminder_message"]').value =
+          defaultMessage;
       }
 
       // Edit and Delete Functions
       function editEvent(eventType, eventId) {
         // In a real application, this would open an edit modal or redirect to edit page
-        alert(`Edit ${eventType} functionality would be implemented here. Event ID: ${eventId}`);
+        alert(
+          `Edit ${eventType} functionality would be implemented here. Event ID: ${eventId}`,
+        );
 
         // Example: Open the appropriate modal based on event type
-        if (eventType === 'hearing') {
+        if (eventType === "hearing") {
           openCreateHearingModal();
           // Pre-populate form with existing data
-        } else if (eventType === 'appointment') {
+        } else if (eventType === "appointment") {
           openCreateAppointmentModal();
           // Pre-populate form with existing data
-        } else if (eventType === 'reminder') {
+        } else if (eventType === "reminder") {
           openSetCaseReminderModal();
           // Pre-populate form with existing data
         }
@@ -2236,7 +2264,9 @@ Advocate: ${appointmentData.advocate_name}`;
           alert(`${eventType} deleted successfully!`);
 
           // Remove the event from the DOM (for demonstration)
-          const eventElement = document.querySelector(`[data-event-id="${eventId}"]`);
+          const eventElement = document.querySelector(
+            `[data-event-id="${eventId}"]`,
+          );
           if (eventElement) {
             eventElement.remove();
           }
@@ -2244,23 +2274,31 @@ Advocate: ${appointmentData.advocate_name}`;
       }
 
       // Add event listeners for edit and delete buttons
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         // Add click handlers for all edit and delete buttons
-        document.addEventListener('click', function(e) {
-          if (e.target.classList.contains('edit-btn')) {
-            const eventItem = e.target.closest('.event-item, .reminder-item');
-            const eventType = eventItem.classList.contains('hearing-type') ? 'hearing' :
-                             eventItem.classList.contains('appointment-type') ? 'appointment' :
-                             eventItem.classList.contains('reminder-type') ? 'reminder' : 'event';
+        document.addEventListener("click", function (e) {
+          if (e.target.classList.contains("edit-btn")) {
+            const eventItem = e.target.closest(".event-item, .reminder-item");
+            const eventType = eventItem.classList.contains("hearing-type")
+              ? "hearing"
+              : eventItem.classList.contains("appointment-type")
+                ? "appointment"
+                : eventItem.classList.contains("reminder-type")
+                  ? "reminder"
+                  : "event";
             const eventId = eventItem.dataset.eventId || Date.now(); // Use timestamp as fallback ID
             editEvent(eventType, eventId);
           }
 
-          if (e.target.classList.contains('delete-btn')) {
-            const eventItem = e.target.closest('.event-item, .reminder-item');
-            const eventType = eventItem.classList.contains('hearing-type') ? 'hearing' :
-                             eventItem.classList.contains('appointment-type') ? 'appointment' :
-                             eventItem.classList.contains('reminder-type') ? 'reminder' : 'event';
+          if (e.target.classList.contains("delete-btn")) {
+            const eventItem = e.target.closest(".event-item, .reminder-item");
+            const eventType = eventItem.classList.contains("hearing-type")
+              ? "hearing"
+              : eventItem.classList.contains("appointment-type")
+                ? "appointment"
+                : eventItem.classList.contains("reminder-type")
+                  ? "reminder"
+                  : "event";
             const eventId = eventItem.dataset.eventId || Date.now(); // Use timestamp as fallback ID
             deleteEvent(eventType, eventId);
           }
@@ -2457,7 +2495,7 @@ The reminder will be sent via ${notificationMethods.join(", ")} to notify about 
       document.addEventListener("DOMContentLoaded", function () {
         // Check URL parameters to auto-open modals
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('openModal') === 'hearing') {
+        if (urlParams.get("openModal") === "hearing") {
           openCreateHearingModal();
         }
 
@@ -2514,11 +2552,13 @@ The reminder will be sent via ${notificationMethods.join(", ")} to notify about 
         }
 
         // Close notification modal when clicking overlay
-        document.getElementById("notificationModal").addEventListener("click", function(e) {
-          if (e.target === this) {
-            closeNotifications();
-          }
-        });
+        document
+          .getElementById("notificationModal")
+          .addEventListener("click", function (e) {
+            if (e.target === this) {
+              closeNotifications();
+            }
+          });
       });
 
       // Notification functions
@@ -2526,7 +2566,7 @@ The reminder will be sent via ${notificationMethods.join(", ")} to notify about 
         document.getElementById("notificationModal").style.display = "flex";
         // Mark notifications as read (optional)
         const badges = document.querySelectorAll(".notification-badge-new");
-        badges.forEach(badge => badge.style.display = "none");
+        badges.forEach((badge) => (badge.style.display = "none"));
       }
 
       function closeNotifications() {

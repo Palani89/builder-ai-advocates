@@ -1856,7 +1856,10 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning);"></i>
+            <i
+              class="fas fa-bell"
+              style="margin-right: 0.5rem; color: var(--warning)"
+            ></i>
             Notifications & Reminders
           </h3>
           <button class="notification-close" onclick="closeNotifications()">
@@ -1870,9 +1873,12 @@
               <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="notification-details">
-              <div class="notification-title">Urgent: Court Hearing Tomorrow</div>
+              <div class="notification-title">
+                Urgent: Court Hearing Tomorrow
+              </div>
               <div class="notification-message">
-                State vs. John Doe case hearing scheduled for tomorrow at 10:30 AM. Ensure all documents are prepared.
+                State vs. John Doe case hearing scheduled for tomorrow at 10:30
+                AM. Ensure all documents are prepared.
               </div>
               <div class="notification-time">2 hours ago</div>
             </div>
@@ -1886,7 +1892,8 @@
             <div class="notification-details">
               <div class="notification-title">Payment Reminder</div>
               <div class="notification-message">
-                Client Mr. Smith has pending payment of ₹1,00,000 for Property Dispute case. Follow up required.
+                Client Mr. Smith has pending payment of ₹1,00,000 for Property
+                Dispute case. Follow up required.
               </div>
               <div class="notification-time">5 hours ago</div>
             </div>
@@ -1900,7 +1907,8 @@
             <div class="notification-details">
               <div class="notification-title">Document Submission Deadline</div>
               <div class="notification-message">
-                Reply submission due for ABC vs. XYZ case by January 30th. 3 days remaining.
+                Reply submission due for ABC vs. XYZ case by January 30th. 3
+                days remaining.
               </div>
               <div class="notification-time">1 day ago</div>
             </div>
@@ -1914,7 +1922,8 @@
             <div class="notification-details">
               <div class="notification-title">Case Update Successful</div>
               <div class="notification-message">
-                Employment Dispute case status updated to "Under Trial". Next hearing scheduled.
+                Employment Dispute case status updated to "Under Trial". Next
+                hearing scheduled.
               </div>
               <div class="notification-time">2 days ago</div>
             </div>
@@ -1927,7 +1936,8 @@
             <div class="notification-details">
               <div class="notification-title">Hearing Adjourned</div>
               <div class="notification-message">
-                Land Acquisition Appeal hearing has been adjourned. New date to be announced by court.
+                Land Acquisition Appeal hearing has been adjourned. New date to
+                be announced by court.
               </div>
               <div class="notification-time">3 days ago</div>
             </div>
@@ -1935,8 +1945,6 @@
         </div>
       </div>
     </div>
-
-
 
     <script>
       $(document).ready(function () {
@@ -1999,16 +2007,16 @@
         window.location.href = "index.html";
       }
 
-
-
       function updateContactsCount() {
-        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+        const contacts = JSON.parse(
+          localStorage.getItem("importedContacts") || "[]",
+        );
         const totalContacts = 1012 + contacts.length; // Base count + imported
-        $('.stat-card .stat-info h3').last().text(totalContacts);
+        $(".stat-card .stat-info h3").last().text(totalContacts);
       }
 
       // Update contacts count on page load
-      $(document).ready(function() {
+      $(document).ready(function () {
         updateContactsCount();
       });
 
@@ -2027,8 +2035,6 @@
           closeNotifications();
         }
       });
-
-
 
       // Close menu when clicking overlay
       $("#sideMenuOverlay").on("click", function () {
@@ -2167,7 +2173,7 @@
       }
 
       // Close notification modal when clicking overlay
-      $("#notificationModal").on("click", function(e) {
+      $("#notificationModal").on("click", function (e) {
         if (e.target === this) {
           closeNotifications();
         }

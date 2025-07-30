@@ -1538,10 +1538,7 @@
                     This Week's: 4
                   </div>
                 </div>
-                <button
-                  class="stat-action"
-                  onclick="openCreateHearingModal()"
-                >
+                <button class="stat-action" onclick="openCreateHearingModal()">
                   Create
                 </button>
               </div>
@@ -2378,7 +2375,10 @@
       <div class="notification-content">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-bell" style="margin-right: 0.5rem; color: var(--warning);"></i>
+            <i
+              class="fas fa-bell"
+              style="margin-right: 0.5rem; color: var(--warning)"
+            ></i>
             Notifications & Reminders
           </h3>
           <button class="notification-close" onclick="closeNotifications()">
@@ -2392,9 +2392,12 @@
               <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="notification-details">
-              <div class="notification-title">Urgent: Court Hearing Tomorrow</div>
+              <div class="notification-title">
+                Urgent: Court Hearing Tomorrow
+              </div>
               <div class="notification-message">
-                State vs. John Doe case hearing scheduled for tomorrow at 10:30 AM. Ensure all documents are prepared.
+                State vs. John Doe case hearing scheduled for tomorrow at 10:30
+                AM. Ensure all documents are prepared.
               </div>
               <div class="notification-time">2 hours ago</div>
             </div>
@@ -2408,7 +2411,8 @@
             <div class="notification-details">
               <div class="notification-title">Payment Reminder</div>
               <div class="notification-message">
-                Client Mr. Smith has pending payment of ₹1,00,000 for Property Dispute case. Follow up required.
+                Client Mr. Smith has pending payment of ₹1,00,000 for Property
+                Dispute case. Follow up required.
               </div>
               <div class="notification-time">5 hours ago</div>
             </div>
@@ -2422,7 +2426,8 @@
             <div class="notification-details">
               <div class="notification-title">Document Submission Deadline</div>
               <div class="notification-message">
-                Reply submission due for ABC vs. XYZ case by January 30th. 3 days remaining.
+                Reply submission due for ABC vs. XYZ case by January 30th. 3
+                days remaining.
               </div>
               <div class="notification-time">1 day ago</div>
             </div>
@@ -2436,7 +2441,8 @@
             <div class="notification-details">
               <div class="notification-title">Case Update Successful</div>
               <div class="notification-message">
-                Employment Dispute case status updated to "Under Trial". Next hearing scheduled.
+                Employment Dispute case status updated to "Under Trial". Next
+                hearing scheduled.
               </div>
               <div class="notification-time">2 days ago</div>
             </div>
@@ -2449,7 +2455,8 @@
             <div class="notification-details">
               <div class="notification-title">Hearing Adjourned</div>
               <div class="notification-message">
-                Land Acquisition Appeal hearing has been adjourned. New date to be announced by court.
+                Land Acquisition Appeal hearing has been adjourned. New date to
+                be announced by court.
               </div>
               <div class="notification-time">3 days ago</div>
             </div>
@@ -2807,10 +2814,18 @@
         const formData = new FormData(form);
 
         // Basic validation
-        const requiredFields = ["case_id", "case_title", "court_name", "case_type", "hearing_date", "hearing_time", "hearing_mode"];
+        const requiredFields = [
+          "case_id",
+          "case_title",
+          "court_name",
+          "case_type",
+          "hearing_date",
+          "hearing_time",
+          "hearing_mode",
+        ];
         let isValid = true;
 
-        requiredFields.forEach(field => {
+        requiredFields.forEach((field) => {
           const input = form.querySelector(`[name="${field}"]`);
           if (!input.value.trim()) {
             input.style.borderColor = "var(--error)";
@@ -2842,11 +2857,13 @@
           hearing_purpose: formData.get("hearing_purpose"),
           hearing_status: formData.get("hearing_status") || "Scheduled",
           remarks: formData.get("remarks"),
-          created_at: new Date().toISOString()
+          created_at: new Date().toISOString(),
         };
 
         // Save to localStorage (in real app, save to database)
-        let existingHearings = JSON.parse(localStorage.getItem("hearings_list") || "[]");
+        let existingHearings = JSON.parse(
+          localStorage.getItem("hearings_list") || "[]",
+        );
         existingHearings.unshift(hearingData);
         localStorage.setItem("hearings_list", JSON.stringify(existingHearings));
 
@@ -2856,15 +2873,15 @@
       }
 
       // Close modal when clicking outside
-      $(document).ready(function() {
-        $("#createHearingModal").on("click", function(e) {
+      $(document).ready(function () {
+        $("#createHearingModal").on("click", function (e) {
           if (e.target === this) {
             closeCreateHearingModal();
           }
         });
 
         // Close notification modal when clicking overlay
-        $("#notificationModal").on("click", function(e) {
+        $("#notificationModal").on("click", function (e) {
           if (e.target === this) {
             closeNotifications();
           }

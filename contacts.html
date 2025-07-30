@@ -623,7 +623,9 @@
               </span>
             </nav>
 
-            <p class="page-subtitle">Manage your imported lawyer and advocate contacts</p>
+            <p class="page-subtitle">
+              Manage your imported lawyer and advocate contacts
+            </p>
           </div>
 
           <div style="display: flex; gap: 1rem; align-items: center">
@@ -680,10 +682,13 @@
         </div>
 
         <!-- Empty State -->
-        <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-state" id="emptyState" style="display: none">
           <i class="fas fa-address-book"></i>
           <h3>No Contacts Found</h3>
-          <p>You haven't imported any contacts yet. Import contacts from the Team page to get started.</p>
+          <p>
+            You haven't imported any contacts yet. Import contacts from the Team
+            page to get started.
+          </p>
           <button class="btn btn-primary" onclick="goToTeamPage()">
             <i class="fas fa-upload"></i>
             Import Contacts
@@ -720,33 +725,99 @@
 
     <!-- CSV Import Modal -->
     <div class="notification-modal" id="csvImportModal">
-      <div class="notification-content" style="max-width: 700px;">
+      <div class="notification-content" style="max-width: 700px">
         <div class="notification-header">
           <h3>
-            <i class="fas fa-file-csv" style="margin-right: 0.5rem; color: var(--primary);"></i>
+            <i
+              class="fas fa-file-csv"
+              style="margin-right: 0.5rem; color: var(--primary)"
+            ></i>
             Import Contacts from CSV
           </h3>
           <button class="notification-close" onclick="closeImportCSV()">
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <div style="padding: 2rem;">
-          <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">CSV File</label>
-            <input type="file" id="csvFileInput" accept=".csv" style="padding: 0.75rem; border: 2px dashed var(--border); border-radius: 0.5rem; background: var(--background); width: 100%; text-align: center; cursor: pointer;">
-            <small style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Upload a CSV file with columns: Name, Email, Phone, Specialization, Experience</small>
+        <div style="padding: 2rem">
+          <div style="margin-bottom: 1.5rem">
+            <label
+              style="
+                display: block;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+                color: var(--text-primary);
+              "
+              >CSV File</label
+            >
+            <input
+              type="file"
+              id="csvFileInput"
+              accept=".csv"
+              style="
+                padding: 0.75rem;
+                border: 2px dashed var(--border);
+                border-radius: 0.5rem;
+                background: var(--background);
+                width: 100%;
+                text-align: center;
+                cursor: pointer;
+              "
+            />
+            <small
+              style="
+                color: var(--text-secondary);
+                font-size: 0.75rem;
+                margin-top: 0.5rem;
+                display: block;
+              "
+              >Upload a CSV file with columns: Name, Email, Phone,
+              Specialization, Experience</small
+            >
           </div>
 
-          <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-primary);">Preview</label>
-            <div id="csvPreview" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; background: var(--background);">
-              <p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>
+          <div style="margin-bottom: 1.5rem">
+            <label
+              style="
+                display: block;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+                color: var(--text-primary);
+              "
+              >Preview</label
+            >
+            <div
+              id="csvPreview"
+              style="
+                max-height: 200px;
+                overflow-y: auto;
+                border: 1px solid var(--border);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                background: var(--background);
+              "
+            >
+              <p
+                style="
+                  color: var(--text-muted);
+                  text-align: center;
+                  font-style: italic;
+                "
+              >
+                No file selected
+              </p>
             </div>
           </div>
 
-          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-            <button class="btn btn-secondary" onclick="closeImportCSV()">Cancel</button>
-            <button class="btn btn-primary" id="importContactsBtn" onclick="importContacts()" disabled>
+          <div style="display: flex; gap: 1rem; justify-content: flex-end">
+            <button class="btn btn-secondary" onclick="closeImportCSV()">
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              id="importContactsBtn"
+              onclick="importContacts()"
+              disabled
+            >
               <i class="fas fa-upload"></i>
               Import Contacts
             </button>
@@ -758,7 +829,7 @@
     <script>
       $(document).ready(function () {
         loadContacts();
-        
+
         // Search functionality
         $("#searchInput").on("input", function () {
           const searchTerm = $(this).val().toLowerCase();
@@ -767,28 +838,43 @@
       });
 
       function loadContacts() {
-        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
-        
+        const contacts = JSON.parse(
+          localStorage.getItem("importedContacts") || "[]",
+        );
+
         // Update stats
         $("#totalContacts").text(contacts.length);
         $("#advocateContacts").text(contacts.length);
-        
+
         if (contacts.length === 0) {
           $("#emptyState").show();
           $("#contactsGrid").hide();
           return;
         }
-        
+
         $("#emptyState").hide();
         $("#contactsGrid").show();
-        
+
         // Generate contact cards
-        let contactsHtml = '';
+        let contactsHtml = "";
         contacts.forEach((contact, index) => {
-          const initials = contact.Name ? contact.Name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : '??';
-          const avatarColors = ['var(--primary)', 'var(--success)', 'var(--warning)', 'var(--error)', '#8b5cf6', '#06b6d4'];
+          const initials = contact.Name
+            ? contact.Name.split(" ")
+                .map((n) => n[0])
+                .join("")
+                .substring(0, 2)
+                .toUpperCase()
+            : "??";
+          const avatarColors = [
+            "var(--primary)",
+            "var(--success)",
+            "var(--warning)",
+            "var(--error)",
+            "#8b5cf6",
+            "#06b6d4",
+          ];
           const avatarColor = avatarColors[index % avatarColors.length];
-          
+
           contactsHtml += `
             <div class="contact-card" data-contact='${JSON.stringify(contact)}'>
               <div class="contact-header">
@@ -796,20 +882,20 @@
                   ${initials}
                 </div>
                 <div class="contact-info">
-                  <div class="contact-name">${contact.Name || 'Unknown'}</div>
-                  <div class="contact-specialty">${contact.Specialization || 'General Practice'}</div>
-                  <div class="contact-experience">Experience: ${contact.Experience || 'Not specified'}</div>
+                  <div class="contact-name">${contact.Name || "Unknown"}</div>
+                  <div class="contact-specialty">${contact.Specialization || "General Practice"}</div>
+                  <div class="contact-experience">Experience: ${contact.Experience || "Not specified"}</div>
                 </div>
               </div>
 
               <div class="contact-details">
                 <div class="contact-detail">
                   <i class="fas fa-envelope"></i>
-                  ${contact.Email || 'No email provided'}
+                  ${contact.Email || "No email provided"}
                 </div>
                 <div class="contact-detail">
                   <i class="fas fa-phone"></i>
-                  ${contact.Phone || 'No phone provided'}
+                  ${contact.Phone || "No phone provided"}
                 </div>
               </div>
 
@@ -826,16 +912,17 @@
             </div>
           `;
         });
-        
+
         $("#contactsGrid").html(contactsHtml);
       }
 
       function filterContacts(searchTerm) {
-        $(".contact-card").each(function() {
-          const contactData = $(this).attr('data-contact');
+        $(".contact-card").each(function () {
+          const contactData = $(this).attr("data-contact");
           const contact = JSON.parse(contactData);
-          const searchableText = `${contact.Name} ${contact.Email} ${contact.Specialization}`.toLowerCase();
-          
+          const searchableText =
+            `${contact.Name} ${contact.Email} ${contact.Specialization}`.toLowerCase();
+
           if (searchableText.includes(searchTerm)) {
             $(this).show();
           } else {
@@ -845,31 +932,35 @@
       }
 
       function contactPerson(email) {
-        if (email && email !== 'No email provided') {
-          window.open(`mailto:${email}`, '_blank');
+        if (email && email !== "No email provided") {
+          window.open(`mailto:${email}`, "_blank");
         } else {
-          alert('No email address available for this contact');
+          alert("No email address available for this contact");
         }
       }
 
       function callPerson(phone) {
-        if (phone && phone !== 'No phone provided') {
-          window.open(`tel:${phone}`, '_blank');
+        if (phone && phone !== "No phone provided") {
+          window.open(`tel:${phone}`, "_blank");
         } else {
-          alert('No phone number available for this contact');
+          alert("No phone number available for this contact");
         }
       }
 
       function clearAllContacts() {
-        if (confirm('Are you sure you want to clear all imported contacts? This action cannot be undone.')) {
-          localStorage.removeItem('importedContacts');
+        if (
+          confirm(
+            "Are you sure you want to clear all imported contacts? This action cannot be undone.",
+          )
+        ) {
+          localStorage.removeItem("importedContacts");
           loadContacts();
-          alert('All contacts have been cleared successfully.');
+          alert("All contacts have been cleared successfully.");
         }
       }
 
       function goToTeamPage() {
-        window.location.href = 'team.html';
+        window.location.href = "team.html";
       }
 
       function goBack() {
@@ -877,11 +968,11 @@
       }
 
       function logoutFromApp() {
-        window.location.href = 'index.html';
+        window.location.href = "index.html";
       }
 
       function openNotifications() {
-        alert('Notifications feature coming soon!');
+        alert("Notifications feature coming soon!");
       }
 
       // CSV Import Functions
@@ -893,7 +984,9 @@
       function closeImportCSV() {
         $("#csvImportModal").hide();
         $("#csvFileInput").val("");
-        $("#csvPreview").html('<p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>');
+        $("#csvPreview").html(
+          '<p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>',
+        );
         $("#importContactsBtn").prop("disabled", true);
       }
 
@@ -912,30 +1005,31 @@ Adv. Anita Roy,anita.roy@lawfirm.com,+91 9876543224,Environmental Law,11 Years
 Adv. Sunil Agarwal,sunil.agarwal@lawfirm.com,+91 9876543225,Banking Law,13 Years`;
 
         // Parse and display preview
-        const lines = dummyData.split('\n');
-        const headers = lines[0].split(',');
+        const lines = dummyData.split("\n");
+        const headers = lines[0].split(",");
 
-        let previewHtml = '<table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">';
-        previewHtml += '<thead><tr>';
-        headers.forEach(header => {
+        let previewHtml =
+          '<table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">';
+        previewHtml += "<thead><tr>";
+        headers.forEach((header) => {
           previewHtml += `<th style="border: 1px solid var(--border); padding: 0.5rem; background: var(--surface); font-weight: 600;">${header}</th>`;
         });
-        previewHtml += '</tr></thead><tbody>';
+        previewHtml += "</tr></thead><tbody>";
 
         for (let i = 1; i <= Math.min(5, lines.length - 1); i++) {
-          const cells = lines[i].split(',');
-          previewHtml += '<tr>';
-          cells.forEach(cell => {
+          const cells = lines[i].split(",");
+          previewHtml += "<tr>";
+          cells.forEach((cell) => {
             previewHtml += `<td style="border: 1px solid var(--border); padding: 0.5rem;">${cell}</td>`;
           });
-          previewHtml += '</tr>';
+          previewHtml += "</tr>";
         }
 
         if (lines.length > 6) {
           previewHtml += `<tr><td colspan="${headers.length}" style="border: 1px solid var(--border); padding: 0.5rem; text-align: center; font-style: italic; color: var(--text-muted);">... and ${lines.length - 6} more contacts</td></tr>`;
         }
 
-        previewHtml += '</tbody></table>';
+        previewHtml += "</tbody></table>";
 
         $("#csvPreview").html(previewHtml);
         $("#importContactsBtn").prop("disabled", false);
@@ -947,33 +1041,36 @@ Adv. Sunil Agarwal,sunil.agarwal@lawfirm.com,+91 9876543225,Banking Law,13 Years
       function importContacts() {
         try {
           const csvData = window.dummyContactsData;
-          const lines = csvData.split('\n');
-          const headers = lines[0].split(',');
+          const lines = csvData.split("\n");
+          const headers = lines[0].split(",");
           const contacts = [];
 
           for (let i = 1; i < lines.length; i++) {
             if (lines[i].trim()) {
-              const cells = lines[i].split(',');
+              const cells = lines[i].split(",");
               const contact = {};
               headers.forEach((header, index) => {
-                contact[header.trim()] = cells[index] ? cells[index].trim() : '';
+                contact[header.trim()] = cells[index]
+                  ? cells[index].trim()
+                  : "";
               });
               contacts.push(contact);
             }
           }
 
           // Store contacts in localStorage
-          const existingContacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+          const existingContacts = JSON.parse(
+            localStorage.getItem("importedContacts") || "[]",
+          );
           const allContacts = [...existingContacts, ...contacts];
-          localStorage.setItem('importedContacts', JSON.stringify(allContacts));
+          localStorage.setItem("importedContacts", JSON.stringify(allContacts));
 
           // Close modal and reload contacts
           closeImportCSV();
           loadContacts();
           alert(`Successfully imported ${contacts.length} contacts!`);
-
         } catch (error) {
-          alert('Error importing contacts: ' + error.message);
+          alert("Error importing contacts: " + error.message);
         }
       }
 

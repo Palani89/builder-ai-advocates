@@ -2411,7 +2411,7 @@
                 class="btn btn-danger"
                 id="deleteHearingBtn"
                 onclick="deleteHearing()"
-                style="display: none;"
+                style="display: none"
               >
                 <i class="fas fa-trash"></i>
                 Delete Hearing
@@ -3172,7 +3172,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeHearingDetailsModal()">
+          <button
+            class="btn btn-secondary"
+            onclick="closeHearingDetailsModal()"
+          >
             <i class="fas fa-times"></i> Close
           </button>
           <button class="btn btn-primary" onclick="editHearingFromDetails()">
@@ -3630,14 +3633,20 @@
           return;
         }
 
-        if (confirm("Are you sure you want to delete this hearing? This action cannot be undone.")) {
+        if (
+          confirm(
+            "Are you sure you want to delete this hearing? This action cannot be undone.",
+          )
+        ) {
           // Find and remove the hearing from hearingsData
-          const index = hearingsData.findIndex(h => h.id === window.editingHearingId);
+          const index = hearingsData.findIndex(
+            (h) => h.id === window.editingHearingId,
+          );
           if (index !== -1) {
             hearingsData.splice(index, 1);
 
             // Update localStorage
-            localStorage.setItem('hearingsData', JSON.stringify(hearingsData));
+            localStorage.setItem("hearingsData", JSON.stringify(hearingsData));
 
             // Refresh hearing display
             loadHearings();
@@ -3664,7 +3673,9 @@
 
         if (window.editingHearingId) {
           // Update existing hearing
-          const hearing = hearingsData.find(h => h.id === window.editingHearingId);
+          const hearing = hearingsData.find(
+            (h) => h.id === window.editingHearingId,
+          );
           if (hearing) {
             hearing.date = formData.get("hearingDate");
             hearing.courtName = formData.get("courtName");
@@ -3706,7 +3717,7 @@
         }
 
         // Update localStorage
-        localStorage.setItem('hearingsData', JSON.stringify(hearingsData));
+        localStorage.setItem("hearingsData", JSON.stringify(hearingsData));
 
         // Reload hearings
         loadHearings();
@@ -3767,8 +3778,9 @@
           $("#detailAppearedBy").text(hearing.appearedBy || "N/A");
 
           // Format next hearing date
-          const nextHearingDate = hearing.nextHearingDate ?
-            new Date(hearing.nextHearingDate).toLocaleDateString("en-IN") : "N/A";
+          const nextHearingDate = hearing.nextHearingDate
+            ? new Date(hearing.nextHearingDate).toLocaleDateString("en-IN")
+            : "N/A";
           $("#detailNextHearingDate").text(nextHearingDate);
 
           // Set status with appropriate badge class
@@ -3779,8 +3791,12 @@
 
           // Set text fields
           $("#detailNotes").text(hearing.notes || "No notes available");
-          $("#detailDocuments").text(hearing.documentsDiscussed || "No documents discussed");
-          $("#detailAiSummary").text(hearing.aiSummary || "No AI summary available");
+          $("#detailDocuments").text(
+            hearing.documentsDiscussed || "No documents discussed",
+          );
+          $("#detailAiSummary").text(
+            hearing.aiSummary || "No AI summary available",
+          );
 
           // Store hearing ID for edit functionality
           window.currentViewingHearingId = hearingId;
