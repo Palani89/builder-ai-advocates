@@ -2344,126 +2344,229 @@
       <div class="modal-overlay" id="addHearingModal" style="display: none">
         <div class="modal-content add-hearing-modal">
           <div class="modal-header">
-            <h3>Add New Hearing</h3>
+            <h3><i class="fas fa-gavel"></i> Add New Hearing</h3>
             <button class="modal-close" onclick="closeAddHearingModal()">
               <i class="fas fa-times"></i>
             </button>
           </div>
           <div class="modal-body">
             <form id="addHearingForm">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="hearingDate">Hearing Date *</label>
-                  <input
-                    type="datetime-local"
-                    id="hearingDate"
-                    name="hearingDate"
-                    required
-                  />
+              <!-- Section 1: Basic Case & Court Info -->
+              <div class="form-section">
+                <div class="section-header">
+                  <i class="fas fa-folder section-icon"></i>
+                  <h4 class="section-title">✅ Basic Case & Court Info</h4>
                 </div>
-                <div class="form-group">
-                  <label for="courtName">Court Name *</label>
-                  <input
-                    type="text"
-                    id="courtName"
-                    name="courtName"
-                    placeholder="e.g. Delhi District Court"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="courtRoom">Court Hall/Room No.</label>
-                  <input
-                    type="text"
-                    id="courtRoom"
-                    name="courtRoom"
-                    placeholder="e.g. Court Room 7"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="judgeName">Bench/Judge Name</label>
-                  <input
-                    type="text"
-                    id="judgeName"
-                    name="judgeName"
-                    placeholder="e.g. Hon'ble Justice XYZ"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="hearingType">Hearing Type</label>
-                  <select id="hearingType" name="hearingType">
-                    <option value="">Select Type</option>
-                    <option value="Status">Status</option>
-                    <option value="Evidence">Evidence</option>
-                    <option value="Bail">Bail</option>
-                    <option value="Arguments">Arguments</option>
-                    <option value="Judgment">Judgment</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="caseStage">Case Stage</label>
-                  <select id="caseStage" name="caseStage">
-                    <option value="">Select Stage</option>
-                    <option value="Pre-trial">Pre-trial</option>
-                    <option value="Trial">Trial</option>
-                    <option value="Post-trial">Post-trial</option>
-                    <option value="Appeal">Appeal</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="hearingStatus">Hearing Status</label>
-                  <select id="hearingStatus" name="hearingStatus">
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Adjourned">Adjourned</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="nextHearingDate">Next Hearing Date</label>
-                  <input
-                    type="datetime-local"
-                    id="nextHearingDate"
-                    name="nextHearingDate"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="appearedBy">Appeared By</label>
-                  <input
-                    type="text"
-                    id="appearedBy"
-                    name="appearedBy"
-                    placeholder="Lawyer name who appeared"
-                  />
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Case ID / Reference No.
+                      <span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="case_id"
+                      placeholder="e.g., CC/1234/2024"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Case Title <span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="case_title"
+                      placeholder="e.g., Amit Kumar vs State of Karnataka"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Court Name <span class="required">*</span></label
+                    >
+                    <select class="form-select" name="court_name" required>
+                      <option value="">Select Court</option>
+                      <option value="Supreme Court of India">
+                        Supreme Court of India
+                      </option>
+                      <option value="Delhi High Court">Delhi High Court</option>
+                      <option value="Bombay High Court">Bombay High Court</option>
+                      <option value="Madras High Court">Madras High Court</option>
+                      <option value="Calcutta High Court">
+                        Calcutta High Court
+                      </option>
+                      <option value="Karnataka High Court">
+                        Karnataka High Court
+                      </option>
+                      <option value="Delhi District Court">
+                        Delhi District Court
+                      </option>
+                      <option value="Mumbai District Court">
+                        Mumbai District Court
+                      </option>
+                      <option value="Chennai District Court">
+                        Chennai District Court
+                      </option>
+                      <option value="Bangalore District Court">
+                        Bangalore District Court
+                      </option>
+                      <option value="Other">Other (Specify in remarks)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Bench / Judge Name</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="judge_name"
+                      placeholder="Hon'ble Justice XYZ"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Case Type <span class="required">*</span></label
+                    >
+                    <select class="form-select" name="case_type" required>
+                      <option value="">Select Type</option>
+                      <option value="Civil">Civil</option>
+                      <option value="Criminal">Criminal</option>
+                      <option value="Family">Family</option>
+                      <option value="Corporate">Corporate</option>
+                      <option value="Constitutional">Constitutional</option>
+                      <option value="Tax">Tax</option>
+                      <option value="Labor">Labor</option>
+                      <option value="Property">Property</option>
+                      <option value="Consumer">Consumer</option>
+                      <option value="Environmental">Environmental</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Case Stage</label>
+                    <select class="form-select" name="case_stage">
+                      <option value="">Select Stage</option>
+                      <option value="Filing">Filing</option>
+                      <option value="Framing of Charges">
+                        Framing of Charges
+                      </option>
+                      <option value="Evidence">Evidence</option>
+                      <option value="Cross Examination">Cross Examination</option>
+                      <option value="Argument">Argument</option>
+                      <option value="Final Hearing">Final Hearing</option>
+                      <option value="Judgment">Judgment</option>
+                      <option value="Appeal">Appeal</option>
+                      <option value="Execution">Execution</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-              <div class="form-group full-width">
-                <label for="hearingNotes">Notes/Outcome</label>
-                <textarea
-                  id="hearingNotes"
-                  name="hearingNotes"
-                  rows="4"
-                  placeholder="What happened during the hearing..."
-                ></textarea>
-              </div>
-              <div class="form-group full-width">
-                <label for="documentsDiscussed">Documents Discussed</label>
-                <textarea
-                  id="documentsDiscussed"
-                  name="documentsDiscussed"
-                  rows="3"
-                  placeholder="List of documents discussed in the hearing..."
-                ></textarea>
-              </div>
-              <div class="form-group full-width">
-                <label for="aiSummary">AI Summary</label>
-                <textarea
-                  id="aiSummary"
-                  name="aiSummary"
-                  rows="3"
-                  placeholder="AI-generated summary of the hearing..."
-                ></textarea>
+
+              <!-- Section 2: Hearing Details -->
+              <div class="form-section">
+                <div class="section-header">
+                  <i class="fas fa-calendar section-icon"></i>
+                  <h4 class="section-title">📅 Hearing Details</h4>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Hearing Date <span class="required">*</span></label
+                    >
+                    <input
+                      type="date"
+                      class="form-input"
+                      name="hearing_date"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Hearing Time <span class="required">*</span></label
+                    >
+                    <input
+                      type="time"
+                      class="form-input"
+                      name="hearing_time"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Hearing Mode <span class="required">*</span></label
+                    >
+                    <select
+                      class="form-select"
+                      name="hearing_mode"
+                      required
+                      onchange="toggleVCLink(this.value)"
+                    >
+                      <option value="">Select Mode</option>
+                      <option value="Physical">Physical</option>
+                      <option value="Video Conference">Video Conference</option>
+                      <option value="Hybrid">Hybrid</option>
+                    </select>
+                  </div>
+                  <div class="form-group" id="courtHallGroup">
+                    <label class="form-label">Court Hall No.</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      name="court_hall"
+                      placeholder="e.g., Court Room 7"
+                    />
+                  </div>
+                  <div class="form-group" id="vcLinkGroup" style="display: none">
+                    <label class="form-label">Video Conference Link</label>
+                    <input
+                      type="url"
+                      class="form-input"
+                      name="vc_link"
+                      placeholder="https://zoom.us/j/123456789"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Hearing Purpose</label>
+                    <select class="form-select" name="hearing_purpose">
+                      <option value="">Select Purpose</option>
+                      <option value="Evidence Submission">
+                        Evidence Submission
+                      </option>
+                      <option value="Cross Examination">Cross Examination</option>
+                      <option value="Witness Examination">
+                        Witness Examination
+                      </option>
+                      <option value="Arguments">Arguments</option>
+                      <option value="Bail Application">Bail Application</option>
+                      <option value="Status Report">Status Report</option>
+                      <option value="Interim Order">Interim Order</option>
+                      <option value="Final Arguments">Final Arguments</option>
+                      <option value="Judgment Pronouncement">
+                        Judgment Pronouncement
+                      </option>
+                      <option value="Case Management">Case Management</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Hearing Status</label>
+                    <select class="form-select" name="hearing_status">
+                      <option value="Scheduled">Scheduled</option>
+                      <option value="Adjourned">Adjourned</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                  <div class="form-group full-width">
+                    <label class="form-label">Remarks / Notes</label>
+                    <textarea
+                      class="form-textarea"
+                      name="remarks"
+                      rows="3"
+                      placeholder="Additional notes about the hearing..."
+                    ></textarea>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -2493,7 +2596,7 @@
                 class="btn btn-primary"
                 onclick="saveHearing()"
               >
-                Save Hearing
+                <i class="fas fa-save"></i> Save Hearing
               </button>
             </div>
           </div>
