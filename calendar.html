@@ -1203,7 +1203,9 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Case Title/Reference <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Case Title/Reference <span class="required">*</span></label
+                  >
                   <input
                     type="text"
                     class="form-input"
@@ -1213,19 +1215,35 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Court Name <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Court Name <span class="required">*</span></label
+                  >
                   <select class="form-select" name="court_name" required>
                     <option value="">Select Court</option>
-                    <option value="Supreme Court of India">Supreme Court of India</option>
+                    <option value="Supreme Court of India">
+                      Supreme Court of India
+                    </option>
                     <option value="Delhi High Court">Delhi High Court</option>
                     <option value="Bombay High Court">Bombay High Court</option>
                     <option value="Madras High Court">Madras High Court</option>
-                    <option value="Calcutta High Court">Calcutta High Court</option>
-                    <option value="Karnataka High Court">Karnataka High Court</option>
-                    <option value="Delhi District Court">Delhi District Court</option>
-                    <option value="Mumbai District Court">Mumbai District Court</option>
-                    <option value="Chennai District Court">Chennai District Court</option>
-                    <option value="Bangalore District Court">Bangalore District Court</option>
+                    <option value="Calcutta High Court">
+                      Calcutta High Court
+                    </option>
+                    <option value="Karnataka High Court">
+                      Karnataka High Court
+                    </option>
+                    <option value="Delhi District Court">
+                      Delhi District Court
+                    </option>
+                    <option value="Mumbai District Court">
+                      Mumbai District Court
+                    </option>
+                    <option value="Chennai District Court">
+                      Chennai District Court
+                    </option>
+                    <option value="Bangalore District Court">
+                      Bangalore District Court
+                    </option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
@@ -1258,7 +1276,9 @@
               </div>
               <div class="form-grid">
                 <div class="form-group">
-                  <label class="form-label">Petitioner Name <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Petitioner Name <span class="required">*</span></label
+                  >
                   <input
                     type="text"
                     class="form-input"
@@ -1268,7 +1288,9 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Petitioner Phone <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Petitioner Phone <span class="required">*</span></label
+                  >
                   <input
                     type="tel"
                     class="form-input"
@@ -1333,7 +1355,11 @@
                     <option value="custom">Custom timing</option>
                   </select>
                 </div>
-                <div class="form-group" id="customTimingGroup" style="display: none">
+                <div
+                  class="form-group"
+                  id="customTimingGroup"
+                  style="display: none"
+                >
                   <label class="form-label">Custom Days Before</label>
                   <input
                     type="number"
@@ -1357,18 +1383,28 @@
                   </select>
                 </div>
                 <div class="form-group full-width">
-                  <label class="form-label">Notification Methods <span class="required">*</span></label>
+                  <label class="form-label"
+                    >Notification Methods <span class="required">*</span></label
+                  >
                   <div class="checkbox-group">
                     <label class="checkbox-label">
                       <input type="checkbox" name="notification_sms" checked />
                       SMS
                     </label>
                     <label class="checkbox-label">
-                      <input type="checkbox" name="notification_whatsapp" checked />
+                      <input
+                        type="checkbox"
+                        name="notification_whatsapp"
+                        checked
+                      />
                       WhatsApp
                     </label>
                     <label class="checkbox-label">
-                      <input type="checkbox" name="notification_email" checked />
+                      <input
+                        type="checkbox"
+                        name="notification_email"
+                        checked
+                      />
                       Email
                     </label>
                     <label class="checkbox-label">
@@ -1408,15 +1444,27 @@
                   <label class="form-label">Include in Message</label>
                   <div class="checkbox-group">
                     <label class="checkbox-label">
-                      <input type="checkbox" name="include_court_address" checked />
+                      <input
+                        type="checkbox"
+                        name="include_court_address"
+                        checked
+                      />
                       Court Address
                     </label>
                     <label class="checkbox-label">
-                      <input type="checkbox" name="include_documents_needed" checked />
+                      <input
+                        type="checkbox"
+                        name="include_documents_needed"
+                        checked
+                      />
                       Documents Needed
                     </label>
                     <label class="checkbox-label">
-                      <input type="checkbox" name="include_advocate_contact" checked />
+                      <input
+                        type="checkbox"
+                        name="include_advocate_contact"
+                        checked
+                      />
                       Advocate Contact Details
                     </label>
                     <label class="checkbox-label">
@@ -1899,18 +1947,29 @@ Advocate: ${appointmentData.advocate_name}`;
 
         // Set the reminder date to the clicked date
         const monthIndex = [
-          "January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
         ].indexOf(month);
 
         const selectedDate = new Date(year, monthIndex, day);
-        const formattedDate = selectedDate.toISOString().split('T')[0];
+        const formattedDate = selectedDate.toISOString().split("T")[0];
 
         document.getElementById("reminderDate").value = formattedDate;
 
         // Set default reminder message
         const defaultMessage = `Dear [Name], this is a reminder about your case [Case Title] scheduled for hearing on ${month} ${day}, ${year} at [Time] in [Court Name]. Please be available and bring all necessary documents. Contact us for any queries.`;
-        document.querySelector('textarea[name="reminder_message"]').value = defaultMessage;
+        document.querySelector('textarea[name="reminder_message"]').value =
+          defaultMessage;
       }
 
       function closeReminderModal() {
@@ -1936,7 +1995,7 @@ Advocate: ${appointmentData.advocate_name}`;
           "case_reference",
           "court_name",
           "petitioner_name",
-          "petitioner_phone"
+          "petitioner_phone",
         ];
         let isValid = true;
 
@@ -1955,10 +2014,14 @@ Advocate: ${appointmentData.advocate_name}`;
 
         // Check if at least one notification method is selected
         const notificationMethods = [];
-        if (form.querySelector('input[name="notification_sms"]').checked) notificationMethods.push("SMS");
-        if (form.querySelector('input[name="notification_whatsapp"]').checked) notificationMethods.push("WhatsApp");
-        if (form.querySelector('input[name="notification_email"]').checked) notificationMethods.push("Email");
-        if (form.querySelector('input[name="notification_inapp"]').checked) notificationMethods.push("In-app");
+        if (form.querySelector('input[name="notification_sms"]').checked)
+          notificationMethods.push("SMS");
+        if (form.querySelector('input[name="notification_whatsapp"]').checked)
+          notificationMethods.push("WhatsApp");
+        if (form.querySelector('input[name="notification_email"]').checked)
+          notificationMethods.push("Email");
+        if (form.querySelector('input[name="notification_inapp"]').checked)
+          notificationMethods.push("In-app");
 
         if (notificationMethods.length === 0) {
           alert("Please select at least one notification method");
@@ -1972,17 +2035,25 @@ Advocate: ${appointmentData.advocate_name}`;
 
         // Collect additional options
         const additionalOptions = [];
-        if (form.querySelector('input[name="include_court_address"]').checked) additionalOptions.push("Court Address");
-        if (form.querySelector('input[name="include_documents_needed"]').checked) additionalOptions.push("Documents Needed");
-        if (form.querySelector('input[name="include_advocate_contact"]').checked) additionalOptions.push("Advocate Contact");
-        if (form.querySelector('input[name="include_dress_code"]').checked) additionalOptions.push("Dress Code");
+        if (form.querySelector('input[name="include_court_address"]').checked)
+          additionalOptions.push("Court Address");
+        if (
+          form.querySelector('input[name="include_documents_needed"]').checked
+        )
+          additionalOptions.push("Documents Needed");
+        if (
+          form.querySelector('input[name="include_advocate_contact"]').checked
+        )
+          additionalOptions.push("Advocate Contact");
+        if (form.querySelector('input[name="include_dress_code"]').checked)
+          additionalOptions.push("Dress Code");
 
         // Calculate reminder date
         const hearingDate = new Date(formData.get("reminder_date"));
         const reminderTiming = formData.get("reminder_timing");
         let reminderDate = new Date(hearingDate);
 
-        switch(reminderTiming) {
+        switch (reminderTiming) {
           case "1_day":
             reminderDate.setDate(reminderDate.getDate() - 1);
             break;
@@ -2005,7 +2076,7 @@ Advocate: ${appointmentData.advocate_name}`;
         const reminderData = {
           id: "REM_" + Date.now(),
           hearing_date: formData.get("reminder_date"),
-          reminder_date: reminderDate.toISOString().split('T')[0],
+          reminder_date: reminderDate.toISOString().split("T")[0],
           reminder_time: formData.get("reminder_time"),
           case_reference: formData.get("case_reference"),
           court_name: formData.get("court_name"),
@@ -2014,12 +2085,12 @@ Advocate: ${appointmentData.advocate_name}`;
           petitioner: {
             name: formData.get("petitioner_name"),
             phone: formData.get("petitioner_phone"),
-            email: formData.get("petitioner_email")
+            email: formData.get("petitioner_email"),
           },
           client: {
             name: formData.get("client_name"),
             phone: formData.get("client_phone"),
-            email: formData.get("client_email")
+            email: formData.get("client_email"),
           },
           notification_methods: notificationMethods,
           reminder_timing: reminderTiming,
@@ -2028,15 +2099,16 @@ Advocate: ${appointmentData.advocate_name}`;
           priority_level: formData.get("priority_level"),
           additional_options: additionalOptions,
           additional_notes: formData.get("additional_notes"),
-          created_at: new Date().toISOString()
+          created_at: new Date().toISOString(),
         };
 
         console.log("Reminder created:", reminderData);
 
         // Create success message
-        const timingText = reminderTiming === "custom" ?
-          `${formData.get("custom_days")} days before` :
-          reminderTiming.replace("_", " ");
+        const timingText =
+          reminderTiming === "custom"
+            ? `${formData.get("custom_days")} days before`
+            : reminderTiming.replace("_", " ");
 
         const successMessage = `Reminder set successfully!
 
@@ -2045,7 +2117,7 @@ Hearing Date: ${reminderData.hearing_date}
 Reminder Date: ${reminderData.reminder_date}
 Timing: ${timingText}
 Notification Methods: ${notificationMethods.join(", ")}
-Recipients: ${reminderData.petitioner.name}${reminderData.client.name ? ', ' + reminderData.client.name : ''}
+Recipients: ${reminderData.petitioner.name}${reminderData.client.name ? ", " + reminderData.client.name : ""}
 
 The reminder will be sent via ${notificationMethods.join(", ")} to notify about the upcoming court hearing.`;
 

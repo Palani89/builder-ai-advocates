@@ -719,7 +719,10 @@
         background: var(--primary);
       }
 
-      .toggle-wrapper input[type="checkbox"]:checked + .toggle-label .toggle-switch {
+      .toggle-wrapper
+        input[type="checkbox"]:checked
+        + .toggle-label
+        .toggle-switch {
         transform: translateX(16px);
       }
 
@@ -1388,7 +1391,7 @@
               </div>
               <div class="auto-refresh-toggle">
                 <div class="toggle-wrapper">
-                  <input type="checkbox" id="auto-refresh" checked>
+                  <input type="checkbox" id="auto-refresh" checked />
                   <label for="auto-refresh" class="toggle-label">
                     <span class="toggle-switch"></span>
                   </label>
@@ -2035,13 +2038,13 @@
       // Court Board Functionality
       function updateCurrentTime() {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('en-IN', {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: true
+        const timeString = now.toLocaleTimeString("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
         });
-        const currentTimeElement = document.getElementById('current-time');
+        const currentTimeElement = document.getElementById("current-time");
         if (currentTimeElement) {
           currentTimeElement.textContent = timeString;
         }
