@@ -1172,6 +1172,134 @@
         </div>
     </div>
 
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="modal">
+        <div class="modal-content create-post-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-edit"></i>
+                    Create New Post
+                </h3>
+                <button class="modal-close" onclick="closeCreatePostModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createPostForm">
+                    <div class="form-group">
+                        <label class="form-label">Post Title *</label>
+                        <input type="text" id="postTitle" class="form-input" placeholder="Enter an engaging title for your post..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Content *</label>
+                        <textarea id="postContent" class="form-textarea" rows="6" placeholder="Share your legal insights, case details, or ask for advice from fellow lawyers..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Upload Photos</label>
+                        <div class="photo-upload-area" onclick="document.getElementById('postPhotos').click()">
+                            <input type="file" id="postPhotos" multiple accept="image/*" style="display: none;">
+                            <div class="upload-content">
+                                <i class="fas fa-camera"></i>
+                                <p>Click to add photos or drag and drop</p>
+                                <small>Support: JPG, PNG, GIF (Max 5 photos, 10MB each)</small>
+                            </div>
+                        </div>
+                        <div id="selectedPhotos" class="selected-photos"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select id="postCategory" class="form-select">
+                                <option value="">Select Category</option>
+                                <option value="case-update">Case Update</option>
+                                <option value="legal-opinion">Legal Opinion</option>
+                                <option value="judgment-analysis">Judgment Analysis</option>
+                                <option value="legal-news">Legal News</option>
+                                <option value="question">Question</option>
+                                <option value="discussion">Discussion</option>
+                                <option value="achievement">Achievement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Practice Area</label>
+                            <select id="postPracticeArea" class="form-select">
+                                <option value="">Select Practice Area</option>
+                                <option value="constitutional">Constitutional Law</option>
+                                <option value="corporate">Corporate Law</option>
+                                <option value="criminal">Criminal Law</option>
+                                <option value="family">Family Law</option>
+                                <option value="civil">Civil Law</option>
+                                <option value="tax">Tax Law</option>
+                                <option value="intellectual-property">Intellectual Property</option>
+                                <option value="labour">Labour Law</option>
+                                <option value="environmental">Environmental Law</option>
+                                <option value="cyber">Cyber Law</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <input type="text" id="postTags" class="form-input" placeholder="Enter hashtags separated by commas (e.g., SupremeCourt, ConstitutionalLaw, Privacy)">
+                        <small>Help others discover your post with relevant hashtags</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tag Lawyers (Optional)</label>
+                        <div class="tag-lawyers-container">
+                            <input type="text" id="tagLawyersInput" class="form-input" placeholder="Search and tag lawyers...">
+                            <div id="taggedLawyers" class="tagged-lawyers"></div>
+                        </div>
+                    </div>
+
+                    <div class="privacy-settings">
+                        <div class="privacy-header">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Privacy Settings</span>
+                        </div>
+                        <div class="privacy-options">
+                            <label class="radio-option">
+                                <input type="radio" name="privacy" value="public" checked>
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Public</strong>
+                                    <small>Visible to all lawyers in the community</small>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="privacy" value="connections">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Connections Only</strong>
+                                    <small>Visible only to your network</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeCreatePostModal()">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" onclick="previewPost()">
+                    <i class="fas fa-eye"></i>
+                    Preview
+                </button>
+                <button type="submit" form="createPostForm" class="btn btn-primary btn-gradient">
+                    <i class="fas fa-paper-plane"></i>
+                    Publish Post
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Tag Lawyers Modal -->
     <div id="tagLawyersModal" class="modal">
         <div class="modal-content">
