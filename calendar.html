@@ -2165,6 +2165,12 @@ The reminder will be sent via ${notificationMethods.join(", ")} to notify about 
 
       // Event listeners
       document.addEventListener("DOMContentLoaded", function () {
+        // Check URL parameters to auto-open modals
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('openModal') === 'hearing') {
+          openCreateHearingModal();
+        }
+
         // Close menu when clicking overlay
         document
           .getElementById("sideMenuOverlay")
