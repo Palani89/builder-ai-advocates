@@ -2125,6 +2125,25 @@ The reminder will be sent via ${notificationMethods.join(", ")} to notify about 
             handleMeetingLocationChange(this.value);
           });
         }
+
+        // Close reminder modal when clicking overlay
+        document
+          .getElementById("reminderModal")
+          .addEventListener("click", function (e) {
+            if (e.target === this) {
+              closeReminderModal();
+            }
+          });
+
+        // Add event listener for reminder timing dropdown
+        const reminderTimingSelect = document.querySelector(
+          'select[name="reminder_timing"]',
+        );
+        if (reminderTimingSelect) {
+          reminderTimingSelect.addEventListener("change", function () {
+            handleReminderTimingChange(this.value);
+          });
+        }
       });
     </script>
   </body>
