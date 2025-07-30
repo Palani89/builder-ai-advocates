@@ -1233,7 +1233,7 @@
               <i class="fas fa-plus"></i>
               <span data-lang="add-member">Add Team Member</span>
             </button>
-            <button class="import-btn">Import contact</button>
+            <button class="import-btn" onclick="openImportCSV()">Import contact</button>
           </div>
         </div>
 
@@ -1937,6 +1937,42 @@
       </div>
     </div>
 
+    <!-- CSV Import Modal -->
+    <div class="assignment-modal" id="csvImportModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>
+            <i class="fas fa-file-csv" style="margin-right: 0.5rem;"></i>
+            Import Contacts from CSV
+          </h3>
+          <button class="modal-close" onclick="closeImportCSV()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="assignment-form-group full-width">
+            <label>CSV File</label>
+            <input type="file" id="csvFileInput" accept=".csv" style="padding: 0.75rem; border: 2px dashed var(--border); border-radius: 0.5rem; background: var(--background); text-align: center; cursor: pointer;">
+            <small style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Upload a CSV file with columns: Name, Email, Phone, Specialization, Experience</small>
+          </div>
+
+          <div class="assignment-form-group full-width" style="margin-top: 1rem;">
+            <label>Preview</label>
+            <div id="csvPreview" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; background: var(--background);">
+              <p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeImportCSV()">Cancel</button>
+          <button class="btn btn-primary" id="importContactsBtn" onclick="importContacts()" disabled>
+            <i class="fas fa-upload"></i>
+            Import Contacts
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       $(document).ready(function () {
         // Navigation
@@ -1997,6 +2033,135 @@
       function logoutFromApp() {
         window.location.href = "index.html";
       }
+
+      // CSV Import Functions
+      function openImportCSV() {
+        $("#csvImportModal").css("display", "flex");
+        loadDummyContacts();
+      }
+
+      function closeImportCSV() {
+        $("#csvImportModal").hide();
+        $("#csvFileInput").val("");
+        $("#csvPreview").html('<p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>');
+        $("#importContactsBtn").prop("disabled", true);
+      }
+
+      function loadDummyContacts() {
+        // Create dummy CSV data for lawyers and advocates
+        const dummyData = `Name,Email,Phone,Specialization,Experience
+Adv. Ramesh Kumar,ramesh.kumar@lawfirm.com,+91 9876543216,Criminal Law,12 Years
+Adv. Sunita Patel,sunita.patel@lawfirm.com,+91 9876543217,Family Law,8 Years
+Adv. Vikram Singh,vikram.singh@lawfirm.com,+91 9876543218,Corporate Law,15 Years
+Adv. Meera Gupta,meera.gupta@lawfirm.com,+91 9876543219,Civil Law,10 Years
+Adv. Arjun Reddy,arjun.reddy@lawfirm.com,+91 9876543220,Constitutional Law,18 Years
+Adv. Priya Sharma,priya.sharma@advocates.com,+91 9876543221,Tax Law,6 Years
+Adv. Kiran Joshi,kiran.joshi@lawfirm.com,+91 9876543222,Property Law,14 Years
+Adv. Rajat Verma,rajat.verma@lawfirm.com,+91 9876543223,Labour Law,9 Years
+Adv. Anita Roy,anita.roy@lawfirm.com,+91 9876543224,Environmental Law,11 Years
+Adv. Sunil Agarwal,sunil.agarwal@lawfirm.com,+91 9876543225,Banking Law,13 Years`;
+
+        // Parse and display preview
+        const lines = dummyData.split('\n');
+        const headers = lines[0].split(',');
+
+        let previewHtml = '<table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">';
+        previewHtml += '<thead><tr>';
+        headers.forEach(header => {
+          previewHtml += `<th style="border: 1px solid var(--border); padding: 0.5rem; background: var(--surface); font-weight: 600;">${header}</th>`;
+        });
+        previewHtml += '</tr></thead><tbody>';
+
+        for (let i = 1; i <= Math.min(5, lines.length - 1); i++) {
+          const cells = lines[i].split(',');
+          previewHtml += '<tr>';
+          cells.forEach(cell => {
+            previewHtml += `<td style="border: 1px solid var(--border); padding: 0.5rem;">${cell}</td>`;
+          });
+          previewHtml += '</tr>';
+        }
+
+        if (lines.length > 6) {
+          previewHtml += `<tr><td colspan="${headers.length}" style="border: 1px solid var(--border); padding: 0.5rem; text-align: center; font-style: italic; color: var(--text-muted);">... and ${lines.length - 6} more contacts</td></tr>`;
+        }
+
+        previewHtml += '</tbody></table>';
+
+        $("#csvPreview").html(previewHtml);
+        $("#importContactsBtn").prop("disabled", false);
+
+        // Store dummy data for import
+        window.dummyContactsData = dummyData;
+      }
+
+      function importContacts() {
+        try {
+          const csvData = window.dummyContactsData;
+          const lines = csvData.split('\n');
+          const headers = lines[0].split(',');
+          const contacts = [];
+
+          for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim()) {
+              const cells = lines[i].split(',');
+              const contact = {};
+              headers.forEach((header, index) => {
+                contact[header.trim()] = cells[index] ? cells[index].trim() : '';
+              });
+              contacts.push(contact);
+            }
+          }
+
+          // Store contacts in localStorage
+          const existingContacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+          const allContacts = [...existingContacts, ...contacts];
+          localStorage.setItem('importedContacts', JSON.stringify(allContacts));
+
+          // Update contacts count
+          updateContactsCount();
+
+          // Close modal and show success
+          closeImportCSV();
+          alert(`Successfully imported ${contacts.length} contacts!\n\nContacts are now available in the More section.`);
+
+        } catch (error) {
+          alert('Error importing contacts: ' + error.message);
+        }
+      }
+
+      function updateContactsCount() {
+        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+        const totalContacts = 1012 + contacts.length; // Base count + imported
+        $('.stat-card .stat-info h3').last().text(totalContacts);
+      }
+
+      // Update contacts count on page load
+      $(document).ready(function() {
+        updateContactsCount();
+      });
+
+      // Notification functions
+      function openNotifications() {
+        $("#notificationModal").css("display", "flex");
+      }
+
+      function closeNotifications() {
+        $("#notificationModal").hide();
+      }
+
+      // Close notification modal when clicking overlay
+      $("#notificationModal").on("click", function (e) {
+        if (e.target === this) {
+          closeNotifications();
+        }
+      });
+
+      // Close CSV modal when clicking overlay
+      $("#csvImportModal").on("click", function (e) {
+        if (e.target === this) {
+          closeImportCSV();
+        }
+      });
 
       // Close menu when clicking overlay
       $("#sideMenuOverlay").on("click", function () {
