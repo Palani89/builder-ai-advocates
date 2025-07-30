@@ -1593,6 +1593,109 @@
       function disposeCase(caseId) {
         window.location.href = `create-case.html?mode=edit&action=dispose&id=${caseId}`;
       }
+
+      // Check for success message from case creation
+      function checkForSuccessMessage() {
+        const successData = localStorage.getItem('case_creation_success');
+
+        if (successData) {
+          try {
+            const success = JSON.parse(successData);
+            const messageAge = Date.now() - success.timestamp;
+
+            // Show message if it's less than 10 seconds old
+            if (messageAge < 10000) {
+              showSuccessBanner(success.message, success.caseId);
+            }
+
+            // Remove the success message from storage
+            localStorage.removeItem('case_creation_success');
+          } catch (error) {
+            console.error('Error parsing success message:', error);
+            localStorage.removeItem('case_creation_success');
+          }
+        }
+      }
+
+      function showSuccessBanner(message, caseId) {
+        const $banner = $('#successBanner');
+        const $message = $('#successMessage');
+
+        $message.text(message);
+        $banner.addClass('show');
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+          $banner.removeClass('show');
+        }, 5000);
+
+        // Highlight the new case if it exists
+        if (caseId) {
+          setTimeout(() => {
+            highlightNewCase(caseId);
+          }, 1000); // Give time for cases to load
+        }
+      }
+
+      function highlightNewCase(caseId) {
+        // Find the case card with the matching case ID
+        $('.case-card').each(function() {
+          const $card = $(this);
+          const cardText = $card.text();
+
+          // Check if this card contains the case ID
+          if (cardText.includes(caseId)) {
+            // Add highlight effect
+            $card.css({
+              'animation': 'highlightPulse 2s ease-in-out',
+              'border': '2px solid var(--success)',
+              'background': 'rgba(16, 185, 129, 0.05)'
+            });
+
+            // Scroll to the case card
+            $card[0].scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+
+            // Remove highlight after 3 seconds
+            setTimeout(() => {
+              $card.css({
+                'animation': '',
+                'border': '',
+                'background': ''
+              });
+            }, 3000);
+
+            return false; // Break the loop
+          }
+        });
+      }
+
+      function closeSuccessBanner() {
+        $('#successBanner').removeClass('show');
+      }
+
+      // Add highlight animation keyframes
+      function addHighlightStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes highlightPulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // Initialize highlight styles
+      $(document).ready(function() {
+        addHighlightStyles();
+      });
+
+      // Expose function globally
+      window.closeSuccessBanner = closeSuccessBanner;
     </script>
   </body>
 </html>
