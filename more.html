@@ -859,7 +859,7 @@
               </div>
               <div class="feature-info">
                 <div class="feature-title">Contacts</div>
-                <div class="feature-description">
+                <div class="feature-description" id="contactsDescription">
                   Lawyer contacts & directory
                 </div>
               </div>
@@ -1096,6 +1096,24 @@
       </div>
     </div>
 
+    <!-- Contacts Modal -->
+    <div class="notification-modal" id="contactsModal">
+      <div class="notification-content" style="max-width: 800px;">
+        <div class="notification-header">
+          <h3>
+            <i class="fas fa-address-book" style="margin-right: 0.5rem; color: var(--success);"></i>
+            Imported Contacts
+          </h3>
+          <button class="notification-close" onclick="closeContacts()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="notification-body" id="contactsList">
+          <!-- Contacts will be loaded here -->
+        </div>
+      </div>
+    </div>
+
     <script>
       $(document).ready(function () {
         // Feature card click handling
@@ -1239,12 +1257,111 @@
 
       // Contacts function
       function openContacts() {
-        alert(
-          "Contacts Directory\n\nFeatures:\n• View all lawyer contacts\n• Add new contacts\n• Import contacts from CSV\n• Contact management\n\nRedirecting to contacts page...",
-        );
-        // For now, redirect to team page as it has contact functionality
-        window.location.href = "team.html";
+        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+
+        if (contacts.length === 0) {
+          alert(
+            "No imported contacts found.\n\nTo import contacts:\n1. Go to Team page\n2. Click 'Import contact' button\n3. Upload CSV file or use dummy data\n\nRedirecting to team page...",
+          );
+          window.location.href = "team.html";
+          return;
+        }
+
+        // Show contacts modal
+        loadContactsList(contacts);
+        $("#contactsModal").css("display", "flex");
       }
+
+      function closeContacts() {
+        $("#contactsModal").hide();
+      }
+
+      function loadContactsList(contacts) {
+        let contactsHtml = '';
+
+        contacts.forEach((contact, index) => {
+          contactsHtml += `
+            <div class="notification-item" style="align-items: flex-start;">
+              <div class="notification-icon-wrapper success">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="notification-details" style="flex: 1;">
+                <div class="notification-title" style="font-size: 1rem; margin-bottom: 0.5rem;">${contact.Name || 'Unknown'}</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                    <i class="fas fa-envelope" style="width: 16px; margin-right: 0.5rem;"></i>
+                    ${contact.Email || 'No email'}
+                  </div>
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                    <i class="fas fa-phone" style="width: 16px; margin-right: 0.5rem;"></i>
+                    ${contact.Phone || 'No phone'}
+                  </div>
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                    <i class="fas fa-gavel" style="width: 16px; margin-right: 0.5rem;"></i>
+                    ${contact.Specialization || 'General'}
+                  </div>
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                    <i class="fas fa-briefcase" style="width: 16px; margin-right: 0.5rem;"></i>
+                    ${contact.Experience || 'Not specified'}
+                  </div>
+                </div>
+                <div class="notification-time">Contact #${index + 1}</div>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-left: 1rem;">
+                <button onclick="contactPerson('${contact.Email}')" style="padding: 0.5rem; border: none; border-radius: 0.25rem; background: var(--primary); color: white; cursor: pointer; font-size: 0.875rem;">
+                  <i class="fas fa-envelope"></i>
+                </button>
+                <button onclick="callPerson('${contact.Phone}')" style="padding: 0.5rem; border: none; border-radius: 0.25rem; background: var(--success); color: white; cursor: pointer; font-size: 0.875rem;">
+                  <i class="fas fa-phone"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        if (contactsHtml === '') {
+          contactsHtml = '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No contacts found</div>';
+        }
+
+        $("#contactsList").html(contactsHtml);
+      }
+
+      function contactPerson(email) {
+        if (email && email !== 'No email') {
+          window.open(`mailto:${email}`, '_blank');
+        } else {
+          alert('No email address available');
+        }
+      }
+
+      function callPerson(phone) {
+        if (phone && phone !== 'No phone') {
+          window.open(`tel:${phone}`, '_blank');
+        } else {
+          alert('No phone number available');
+        }
+      }
+
+      // Update contacts description with count
+      function updateContactsDescription() {
+        const contacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+        const description = contacts.length > 0
+          ? `${contacts.length} imported lawyer contacts`
+          : 'Lawyer contacts & directory';
+        $("#contactsDescription").text(description);
+      }
+
+      // Update on page load
+      $(document).ready(function() {
+        updateContactsDescription();
+      });
+
+      // Close contacts modal when clicking overlay
+      $("#contactsModal").on("click", function (e) {
+        if (e.target === this) {
+          closeContacts();
+        }
+      });
     </script>
   </body>
 </html>
