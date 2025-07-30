@@ -1826,6 +1826,87 @@
             }
         }
 
+        // Create Post Modal functionality
+        function openCreatePostModal() {
+            document.getElementById('createPostModal').style.display = 'block';
+            // Reset form
+            document.getElementById('createPostForm').reset();
+            document.getElementById('selectedPhotos').innerHTML = '';
+            document.getElementById('taggedLawyers').innerHTML = '';
+        }
+
+        function closeCreatePostModal() {
+            document.getElementById('createPostModal').style.display = 'none';
+        }
+
+        function previewPost() {
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const category = document.getElementById('postCategory').value;
+            const practiceArea = document.getElementById('postPracticeArea').value;
+
+            if (!title || !content) {
+                alert('Please fill in the title and content before previewing.');
+                return;
+            }
+
+            alert(`Post Preview:\n\nTitle: ${title}\nCategory: ${category}\nPractice Area: ${practiceArea}\n\nContent: ${content.substring(0, 200)}${content.length > 200 ? '...' : ''}`);
+        }
+
+        // Photo upload handling
+        document.getElementById('postPhotos').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            const selectedPhotos = document.getElementById('selectedPhotos');
+
+            files.forEach((file, index) => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = 'photo-preview';
+                    photoDiv.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <button class="photo-remove" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    selectedPhotos.appendChild(photoDiv);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('createPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const category = document.getElementById('postCategory').value;
+            const practiceArea = document.getElementById('postPracticeArea').value;
+            const tags = document.getElementById('postTags').value;
+            const privacy = document.querySelector('input[name="privacy"]:checked').value;
+
+            // Simulate post creation
+            const submitBtn = document.querySelector('.btn-gradient');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                alert(`Post "${title}" has been published successfully!\n\nCategory: ${category}\nPractice Area: ${practiceArea}\nPrivacy: ${privacy}\nTags: ${tags}\n\nYour post is now visible to the community.`);
+
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                closeCreatePostModal();
+            }, 2500);
+        });
+
         // Post creation functionality
         function attachDocument() {
             alert('Document attachment feature coming soon!\n\n• Upload case documents\n• Attach legal briefs\n• Share court orders\n• Add evidence files');
