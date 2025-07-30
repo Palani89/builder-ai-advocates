@@ -2213,7 +2213,7 @@
                           Based on the case details, here's my analysis for bail
                           prospects:
                           <br /><br />
-                          <strong>• Positive factors:</strong> Clean criminal
+                          <strong>��� Positive factors:</strong> Clean criminal
                           record, cooperation with investigation <br /><strong
                             >• Challenges:</strong
                           >
@@ -3607,6 +3607,21 @@
       function closeAddHearingModal() {
         $("#addHearingModal").hide();
         $("#addHearingForm")[0].reset();
+        $(".modal-header h3").text("Add New Hearing");
+        $("#deleteHearingBtn").hide();
+        window.editingHearingId = null;
+      }
+
+      function closeHearingDetailsModal() {
+        $("#hearingDetailsModal").hide();
+        window.currentViewingHearingId = null;
+      }
+
+      function editHearingFromDetails() {
+        if (window.currentViewingHearingId) {
+          closeHearingDetailsModal();
+          editHearing(window.currentViewingHearingId);
+        }
       }
 
       function saveHearing() {
