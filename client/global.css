@@ -14,9 +14,9 @@
 
   :root {
     /* AI Advocates Color Palette */
-    --primary: #4f46e5;
-    --primary-dark: #3730a3;
-    --primary-light: #6366f1;
+    --primary: #4C4CDD;
+    --primary-dark: #3d3cb8;
+    --primary-light: #6666e3;
     --secondary: #10b981;
     --background: #f8fafc;
     --surface: #ffffff;
@@ -24,7 +24,7 @@
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
     --border: #e2e8f0;
-    --border-active: #4f46e5;
+    --border-active: #4C4CDD;
     --success: #10b981;
     --error: #ef4444;
     --warning: #f59e0b;
