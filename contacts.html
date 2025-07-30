@@ -883,6 +883,106 @@
       function openNotifications() {
         alert('Notifications feature coming soon!');
       }
+
+      // CSV Import Functions
+      function openImportCSV() {
+        $("#csvImportModal").css("display", "flex");
+        loadDummyContacts();
+      }
+
+      function closeImportCSV() {
+        $("#csvImportModal").hide();
+        $("#csvFileInput").val("");
+        $("#csvPreview").html('<p style="color: var(--text-muted); text-align: center; font-style: italic;">No file selected</p>');
+        $("#importContactsBtn").prop("disabled", true);
+      }
+
+      function loadDummyContacts() {
+        // Create dummy CSV data for lawyers and advocates
+        const dummyData = `Name,Email,Phone,Specialization,Experience
+Adv. Ramesh Kumar,ramesh.kumar@lawfirm.com,+91 9876543216,Criminal Law,12 Years
+Adv. Sunita Patel,sunita.patel@lawfirm.com,+91 9876543217,Family Law,8 Years
+Adv. Vikram Singh,vikram.singh@lawfirm.com,+91 9876543218,Corporate Law,15 Years
+Adv. Meera Gupta,meera.gupta@lawfirm.com,+91 9876543219,Civil Law,10 Years
+Adv. Arjun Reddy,arjun.reddy@lawfirm.com,+91 9876543220,Constitutional Law,18 Years
+Adv. Priya Sharma,priya.sharma@advocates.com,+91 9876543221,Tax Law,6 Years
+Adv. Kiran Joshi,kiran.joshi@lawfirm.com,+91 9876543222,Property Law,14 Years
+Adv. Rajat Verma,rajat.verma@lawfirm.com,+91 9876543223,Labour Law,9 Years
+Adv. Anita Roy,anita.roy@lawfirm.com,+91 9876543224,Environmental Law,11 Years
+Adv. Sunil Agarwal,sunil.agarwal@lawfirm.com,+91 9876543225,Banking Law,13 Years`;
+
+        // Parse and display preview
+        const lines = dummyData.split('\n');
+        const headers = lines[0].split(',');
+
+        let previewHtml = '<table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">';
+        previewHtml += '<thead><tr>';
+        headers.forEach(header => {
+          previewHtml += `<th style="border: 1px solid var(--border); padding: 0.5rem; background: var(--surface); font-weight: 600;">${header}</th>`;
+        });
+        previewHtml += '</tr></thead><tbody>';
+
+        for (let i = 1; i <= Math.min(5, lines.length - 1); i++) {
+          const cells = lines[i].split(',');
+          previewHtml += '<tr>';
+          cells.forEach(cell => {
+            previewHtml += `<td style="border: 1px solid var(--border); padding: 0.5rem;">${cell}</td>`;
+          });
+          previewHtml += '</tr>';
+        }
+
+        if (lines.length > 6) {
+          previewHtml += `<tr><td colspan="${headers.length}" style="border: 1px solid var(--border); padding: 0.5rem; text-align: center; font-style: italic; color: var(--text-muted);">... and ${lines.length - 6} more contacts</td></tr>`;
+        }
+
+        previewHtml += '</tbody></table>';
+
+        $("#csvPreview").html(previewHtml);
+        $("#importContactsBtn").prop("disabled", false);
+
+        // Store dummy data for import
+        window.dummyContactsData = dummyData;
+      }
+
+      function importContacts() {
+        try {
+          const csvData = window.dummyContactsData;
+          const lines = csvData.split('\n');
+          const headers = lines[0].split(',');
+          const contacts = [];
+
+          for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim()) {
+              const cells = lines[i].split(',');
+              const contact = {};
+              headers.forEach((header, index) => {
+                contact[header.trim()] = cells[index] ? cells[index].trim() : '';
+              });
+              contacts.push(contact);
+            }
+          }
+
+          // Store contacts in localStorage
+          const existingContacts = JSON.parse(localStorage.getItem('importedContacts') || '[]');
+          const allContacts = [...existingContacts, ...contacts];
+          localStorage.setItem('importedContacts', JSON.stringify(allContacts));
+
+          // Close modal and reload contacts
+          closeImportCSV();
+          loadContacts();
+          alert(`Successfully imported ${contacts.length} contacts!`);
+
+        } catch (error) {
+          alert('Error importing contacts: ' + error.message);
+        }
+      }
+
+      // Close CSV modal when clicking overlay
+      $("#csvImportModal").on("click", function (e) {
+        if (e.target === this) {
+          closeImportCSV();
+        }
+      });
     </script>
   </body>
 </html>
