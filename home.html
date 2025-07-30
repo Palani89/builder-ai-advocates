@@ -1187,12 +1187,23 @@
 
       .modal-footer {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
         padding: 1.5rem 2rem;
         border-top: 1px solid var(--border);
         background: var(--background);
         border-radius: 0 0 1rem 1rem;
+      }
+
+      .modal-footer-left {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .modal-footer-right {
+        display: flex;
+        gap: 1rem;
       }
 
       /* Form Styles for Modal */
