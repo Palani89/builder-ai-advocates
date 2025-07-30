@@ -1,1997 +1,2196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Community - AI Advocates</title>
-    
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Global Language Support -->
     <script src="app-language.js"></script>
-    
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #8b5cf6;
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-light: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            --secondary: #10b981;
-            --background: #ffffff;
-            --surface: #ffffff;
-            --surface-hover: #f8fafc;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            --border: #e2e8f0;
-            --border-light: #f7fafc;
-            --border-active: #6366f1;
-            --success: #48bb78;
-            --error: #f56565;
-            --warning: #ed8936;
-            --accent: #9f7aea;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-premium: 0 32px 64px rgba(0, 0, 0, 0.12);
-        }
+      :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #8b5cf6;
+        --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-light: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+        --secondary: #10b981;
+        --background: #ffffff;
+        --surface: #ffffff;
+        --surface-hover: #f8fafc;
+        --text-primary: #1a202c;
+        --text-secondary: #4a5568;
+        --text-muted: #718096;
+        --border: #e2e8f0;
+        --border-light: #f7fafc;
+        --border-active: #6366f1;
+        --success: #48bb78;
+        --error: #f56565;
+        --warning: #ed8936;
+        --accent: #9f7aea;
+        --shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+        --shadow-md:
+          0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        --shadow-lg:
+          0 10px 15px -3px rgba(0, 0, 0, 0.08),
+          0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        --shadow-xl:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-premium: 0 32px 64px rgba(0, 0, 0, 0.12);
+      }
 
-        body {
-            font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--background);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
 
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background: var(--background);
-        }
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background: var(--background);
+      }
 
-        /* Header */
-        .header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
 
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
 
-        .menu-toggle:hover {
-            background: var(--background);
-        }
+      .menu-toggle:hover {
+        background: var(--background);
+      }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-        .logo-icon {
-            width: 2rem;
-            height: 2rem;
-            background: var(--primary);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+      .logo-icon {
+        width: 2rem;
+        height: 2rem;
+        background: var(--primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
 
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+      .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
 
-        .back-btn {
-            background: var(--background);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
-        }
+      .back-btn {
+        background: var(--background);
+        border: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        color: var(--text-primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+      }
 
-        .back-btn:hover {
-            background: var(--border);
-        }
+      .back-btn:hover {
+        background: var(--border);
+      }
 
-        .notification-icon {
-            background: none;
-            border: none;
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            position: relative;
-        }
+      .notification-icon {
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+        position: relative;
+      }
 
-        .notification-icon:hover {
-            background: var(--background);
-            color: var(--text-primary);
-        }
+      .notification-icon:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
 
-        .notification-badge {
-            position: absolute;
-            top: 0.25rem;
-            right: 0.25rem;
-            background: var(--error);
-            color: white;
-            font-size: 0.75rem;
-            padding: 0.125rem 0.375rem;
-            border-radius: 0.75rem;
-            min-width: 1rem;
-            text-align: center;
-        }
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.75rem;
+        padding: 0.125rem 0.375rem;
+        border-radius: 0.75rem;
+        min-width: 1rem;
+        text-align: center;
+      }
 
-        /* Main Content */
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        display: flex;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 3rem;
+        padding: 3rem 2rem;
+        background: var(--background);
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .community-stats {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .community-stats::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient);
+      }
+
+      .community-stats:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .stats-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .stats-title::before {
+        content: "📊";
+        font-size: 1.125rem;
+      }
+
+      .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-light);
+        transition: all 0.2s ease;
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .stat-item:hover {
+        background: var(--surface-hover);
+        margin: 0 -1rem;
+        padding: 1rem;
+        border-radius: 12px;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .stat-value {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.1rem;
+      }
+
+      .trending-topics {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .trending-topics::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+      }
+
+      .topic-tag {
+        display: inline-block;
+        background: var(--gradient-light);
+        color: var(--primary-dark);
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin: 0.25rem;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .topic-tag::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient);
+        transition: left 0.3s ease;
+        z-index: -1;
+      }
+
+      .topic-tag:hover::before {
+        left: 0;
+      }
+
+      .topic-tag:hover {
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Feed */
+      .feed {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      /* Add Post Section */
+      .add-post-section {
+        margin-bottom: 2rem;
+      }
+
+      .add-post-card {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .add-post-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient);
+      }
+
+      .add-post-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .add-post-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex: 1;
+      }
+
+      .add-post-prompt {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .add-post-btn {
+        flex-shrink: 0;
+        background: var(--gradient);
+        border: none;
+        padding: 0.875rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .add-post-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Create Post Modal */
+      .create-post-modal {
+        max-width: 700px;
+        max-height: 90vh;
+        overflow: hidden;
+      }
+
+      .modal-body {
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: 2rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .photo-upload-area {
+        border: 2px dashed var(--border);
+        border-radius: 16px;
+        padding: 3rem 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: var(--surface-hover);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo-upload-area::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-light);
+        transition: left 0.3s ease;
+      }
+
+      .photo-upload-area:hover::before {
+        left: 0;
+      }
+
+      .photo-upload-area:hover {
+        border-color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      .upload-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .upload-content i {
+        font-size: 3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .photo-upload-area:hover .upload-content i {
+        transform: scale(1.1);
+      }
+
+      .upload-content p {
+        margin: 1rem 0 0.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+      }
+
+      .upload-content small {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .selected-photos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .photo-preview {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+      }
+
+      .photo-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-remove {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+      }
+
+      .privacy-settings {
+        background: var(--surface-hover);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .privacy-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .privacy-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+      }
+
+      .radio-option:hover {
+        background: var(--surface);
+        border-color: var(--border);
+      }
+
+      .radio-custom {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        position: relative;
+        transition: all 0.2s ease;
+      }
+
+      .radio-option input[type="radio"]:checked + .radio-custom {
+        border-color: var(--primary);
+        background: var(--primary);
+      }
+
+      .radio-option input[type="radio"]:checked + .radio-custom::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+      }
+
+      .radio-content strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+      }
+
+      .radio-content small {
+        color: var(--text-secondary);
+      }
+
+      .tagged-lawyers {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .tagged-lawyer {
+        background: var(--gradient-light);
+        color: var(--primary-dark);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .tagged-lawyer .remove-tag {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 0.75rem;
+        padding: 0;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .tagged-lawyer .remove-tag:hover {
+        background: var(--error);
+        color: white;
+      }
+
+      /* Post Images */
+      .post-images {
+        margin: 1rem 0;
+      }
+
+      .post-image-single {
+        width: 100%;
+        max-height: 400px;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+
+      .post-image-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 0.5rem;
+        max-height: 400px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      .post-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .post-image:hover {
+        transform: scale(1.02);
+      }
+
+      .post-image-grid .post-image:first-child {
+        grid-row: 1 / -1;
+      }
+
+      .create-post {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .create-post-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .user-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+
+      .create-post-input {
+        flex: 1;
+      }
+
+      .post-textarea {
+        width: 100%;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        font-size: 0.875rem;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 80px;
+        transition: border-color 0.2s;
+      }
+
+      .post-textarea:focus {
+        outline: none;
+        border-color: var(--border-active);
+      }
+
+      .post-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .post-options {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .post-option {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .post-option:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      .btn {
+        padding: 0.875rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        box-shadow: var(--shadow-md);
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-gradient {
+        background: var(--gradient);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-gradient::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transition: left 0.3s ease;
+      }
+
+      .btn-gradient:hover::before {
+        left: 100%;
+      }
+
+      .btn-gradient:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+
+      .btn-secondary:hover {
+        background: var(--surface-hover);
+        border-color: var(--primary);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Form Styles */
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background: var(--surface);
+        color: var(--text-primary);
+      }
+
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.6;
+      }
+
+      .form-group small {
+        display: block;
+        margin-top: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+      }
+
+      /* Posts */
+      .post {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+      }
+
+      .post:hover {
+        box-shadow: var(--shadow-md);
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-user-info {
+        flex: 1;
+      }
+
+      .post-username {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .post-meta {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .post-menu {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+
+      .post-menu:hover {
+        background: var(--background);
+      }
+
+      .post-content {
+        margin-bottom: 1rem;
+      }
+
+      .post-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .post-text {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .post-tag {
+        background: var(--background);
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        text-decoration: none;
+        border: 1px solid var(--border);
+      }
+
+      .post-tag:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .post-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .post-actions-bar {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .post-action {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+        font-size: 0.875rem;
+      }
+
+      .post-action:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      .post-action.liked {
+        color: var(--error);
+      }
+
+      .post-action.liked:hover {
+        color: var(--error);
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      .post-stats-text {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      /* Comments */
+      .comments-section {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .comment {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .comment-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--secondary), #059669);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .comment-content {
+        flex: 1;
+        background: var(--background);
+        border-radius: 8px;
+        padding: 0.75rem;
+      }
+
+      .comment-user {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .comment-text {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+
+      .comment-meta {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .comment-action {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 0.8rem;
+        padding: 0.25rem 0;
+      }
+
+      .comment-action:hover {
+        color: var(--text-secondary);
+      }
+
+      .add-comment {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .comment-input {
+        flex: 1;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+      }
+
+      .comment-input:focus {
+        outline: none;
+        border-color: var(--border-active);
+      }
+
+      .comment-submit {
+        background: var(--primary);
+        border: none;
+        color: white;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+
+      .comment-submit:hover {
+        background: var(--primary-dark);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: var(--surface);
+        margin: 5% auto;
+        padding: 0;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: var(--shadow-xl);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 12px 12px 0 0;
+      }
+
+      .modal-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+      }
+
+      .modal-close:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .tag-input-container {
+        position: relative;
+      }
+
+      .tag-suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        box-shadow: var(--shadow-lg);
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 10;
+        display: none;
+      }
+
+      .tag-suggestion {
+        padding: 0.75rem;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border);
+        transition: background-color 0.2s;
+      }
+
+      .tag-suggestion:hover {
+        background: var(--background);
+      }
+
+      .tag-suggestion:last-child {
+        border-bottom: none;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
         .main-content {
-            flex: 1;
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            gap: 3rem;
-            padding: 3rem 2rem;
-            background: var(--background);
+          flex-direction: column;
+          padding: 1rem;
+          gap: 1rem;
         }
 
-        /* Sidebar */
         .sidebar {
-            width: 360px;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+          width: 100%;
+          order: 2;
         }
 
-        .community-stats {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .community-stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .community-stats:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stats-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .stats-title::before {
-            content: '📊';
-            font-size: 1.125rem;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-light);
-            transition: all 0.2s ease;
-        }
-
-        .stat-item:last-child {
-            border-bottom: none;
-        }
-
-        .stat-item:hover {
-            background: var(--surface-hover);
-            margin: 0 -1rem;
-            padding: 1rem;
-            border-radius: 12px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .stat-value {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .trending-topics {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .trending-topics::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
-        }
-
-        .topic-tag {
-            display: inline-block;
-            background: var(--gradient-light);
-            color: var(--primary-dark);
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin: 0.25rem;
-            text-decoration: none;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .topic-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .topic-tag:hover::before {
-            left: 0;
-        }
-
-        .topic-tag:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Feed */
         .feed {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Add Post Section */
-        .add-post-section {
-            margin-bottom: 2rem;
-        }
-
-        .add-post-card {
-            background: var(--surface);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .add-post-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .add-post-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .add-post-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex: 1;
-        }
-
-        .add-post-prompt {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .add-post-btn {
-            flex-shrink: 0;
-            background: var(--gradient);
-            border: none;
-            padding: 0.875rem 2rem;
-            border-radius: 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .add-post-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Create Post Modal */
-        .create-post-modal {
-            max-width: 700px;
-            max-height: 90vh;
-            overflow: hidden;
-        }
-
-        .modal-body {
-            max-height: 70vh;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .photo-upload-area {
-            border: 2px dashed var(--border);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--surface-hover);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .photo-upload-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-light);
-            transition: left 0.3s ease;
-        }
-
-        .photo-upload-area:hover::before {
-            left: 0;
-        }
-
-        .photo-upload-area:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .upload-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .upload-content i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .photo-upload-area:hover .upload-content i {
-            transform: scale(1.1);
-        }
-
-        .upload-content p {
-            margin: 1rem 0 0.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .upload-content small {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .selected-photos {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .photo-preview {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-remove {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-        }
-
-        .privacy-settings {
-            background: var(--surface-hover);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .privacy-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .privacy-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-            padding: 1rem;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
-        }
-
-        .radio-option:hover {
-            background: var(--surface);
-            border-color: var(--border);
-        }
-
-        .radio-custom {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid var(--border);
-            position: relative;
-            transition: all 0.2s ease;
-        }
-
-        .radio-option input[type="radio"]:checked + .radio-custom {
-            border-color: var(--primary);
-            background: var(--primary);
-        }
-
-        .radio-option input[type="radio"]:checked + .radio-custom::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: white;
-        }
-
-        .radio-content strong {
-            display: block;
-            margin-bottom: 0.25rem;
-            color: var(--text-primary);
-        }
-
-        .radio-content small {
-            color: var(--text-secondary);
-        }
-
-        .tagged-lawyers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .tagged-lawyer {
-            background: var(--gradient-light);
-            color: var(--primary-dark);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tagged-lawyer .remove-tag {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.75rem;
-            padding: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .tagged-lawyer .remove-tag:hover {
-            background: var(--error);
-            color: white;
-        }
-
-        /* Post Images */
-        .post-images {
-            margin: 1rem 0;
-        }
-
-        .post-image-single {
-            width: 100%;
-            max-height: 400px;
-            overflow: hidden;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .post-image-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 0.5rem;
-            max-height: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        .post-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .post-image:hover {
-            transform: scale(1.02);
-        }
-
-        .post-image-grid .post-image:first-child {
-            grid-row: 1 / -1;
-        }
-
-        .create-post {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .create-post-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .user-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.125rem;
-        }
-
-        .create-post-input {
-            flex: 1;
-        }
-
-        .post-textarea {
-            width: 100%;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            font-size: 0.875rem;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 80px;
-            transition: border-color 0.2s;
-        }
-
-        .post-textarea:focus {
-            outline: none;
-            border-color: var(--border-active);
+          order: 1;
         }
 
         .post-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: stretch;
         }
 
         .post-options {
-            display: flex;
-            gap: 1rem;
+          justify-content: center;
         }
 
-        .post-option {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .header-left {
+          gap: 0.5rem;
         }
 
-        .post-option:hover {
-            background: var(--background);
-            color: var(--text-primary);
+        .logo-text {
+          display: none;
         }
-
-        .btn {
-            padding: 0.875rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-gradient {
-            background: var(--gradient);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-            transition: left 0.3s ease;
-        }
-
-        .btn-gradient:hover::before {
-            left: 100%;
-        }
-
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-
-        .btn-secondary:hover {
-            background: var(--surface-hover);
-            border-color: var(--primary);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            background: var(--surface);
-            color: var(--text-primary);
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-            line-height: 1.6;
-        }
-
-        .form-group small {
-            display: block;
-            margin-top: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        /* Posts */
-        .post {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-        }
-
-        .post:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-user-info {
-            flex: 1;
-        }
-
-        .post-username {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .post-meta {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .post-menu {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .post-menu:hover {
-            background: var(--background);
-        }
-
-        .post-content {
-            margin-bottom: 1rem;
-        }
-
-        .post-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .post-text {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .post-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-tag {
-            background: var(--background);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            text-decoration: none;
-            border: 1px solid var(--border);
-        }
-
-        .post-tag:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .post-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .post-actions-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .post-action {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            font-size: 0.875rem;
-        }
-
-        .post-action:hover {
-            background: var(--background);
-            color: var(--text-primary);
-        }
-
-        .post-action.liked {
-            color: var(--error);
-        }
-
-        .post-action.liked:hover {
-            color: var(--error);
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .post-stats-text {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Comments */
-        .comments-section {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .comment {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .comment-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), #059669);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .comment-content {
-            flex: 1;
-            background: var(--background);
-            border-radius: 8px;
-            padding: 0.75rem;
-        }
-
-        .comment-user {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .comment-text {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.5;
-        }
-
-        .comment-meta {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .comment-action {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.8rem;
-            padding: 0.25rem 0;
-        }
-
-        .comment-action:hover {
-            color: var(--text-secondary);
-        }
-
-        .add-comment {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .comment-input {
-            flex: 1;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            transition: border-color 0.2s;
-        }
-
-        .comment-input:focus {
-            outline: none;
-            border-color: var(--border-active);
-        }
-
-        .comment-submit {
-            background: var(--primary);
-            border: none;
-            color: white;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .comment-submit:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: var(--surface);
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: var(--shadow-xl);
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .modal-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.25rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-        }
-
-        .modal-close:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.875rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--border-active);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .tag-input-container {
-            position: relative;
-        }
-
-        .tag-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            box-shadow: var(--shadow-lg);
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
-        }
-
-        .tag-suggestion {
-            padding: 0.75rem;
-            cursor: pointer;
-            border-bottom: 1px solid var(--border);
-            transition: background-color 0.2s;
-        }
-
-        .tag-suggestion:hover {
-            background: var(--background);
-        }
-
-        .tag-suggestion:last-child {
-            border-bottom: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-                padding: 1rem;
-                gap: 1rem;
-            }
-
-            .sidebar {
-                width: 100%;
-                order: 2;
-            }
-
-            .feed {
-                order: 1;
-            }
-
-            .post-actions {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
-            }
-
-            .post-options {
-                justify-content: center;
-            }
-
-            .header-left {
-                gap: 0.5rem;
-            }
-
-            .logo-text {
-                display: none;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-left">
-                <button class="menu-toggle" onclick="openSideMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <span class="logo-text">AI Advocates</span>
-                </div>
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
             </div>
-            <div class="header-right">
-                <a href="more.html" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to More
-                </a>
-                <button class="notification-icon" onclick="openNotifications()">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </button>
-                <button class="notification-icon" onclick="logoutFromApp()">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="more.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to More
+          </a>
+          <button class="notification-icon" onclick="openNotifications()">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Community Stats -->
+          <div class="community-stats">
+            <h3 class="stats-title">Community Stats</h3>
+            <div class="stat-item">
+              <span class="stat-label">Active Lawyers</span>
+              <span class="stat-value">2,450</span>
             </div>
+            <div class="stat-item">
+              <span class="stat-label">Posts Today</span>
+              <span class="stat-value">156</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Cases Shared</span>
+              <span class="stat-value">1,287</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Expert Opinions</span>
+              <span class="stat-value">834</span>
+            </div>
+          </div>
+
+          <!-- Trending Topics -->
+          <div class="trending-topics">
+            <h3 class="stats-title">Trending Topics</h3>
+            <a href="#" class="topic-tag">#ConstitutionalLaw</a>
+            <a href="#" class="topic-tag">#CyberCrime</a>
+            <a href="#" class="topic-tag">#CorporateGovernance</a>
+            <a href="#" class="topic-tag">#IntellectualProperty</a>
+            <a href="#" class="topic-tag">#LandmarkJudgment</a>
+            <a href="#" class="topic-tag">#LegalTech</a>
+            <a href="#" class="topic-tag">#HumanRights</a>
+            <a href="#" class="topic-tag">#EnvironmentalLaw</a>
+            <a href="#" class="topic-tag">#FamilyLaw</a>
+            <a href="#" class="topic-tag">#TaxLaw</a>
+          </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Community Stats -->
-                <div class="community-stats">
-                    <h3 class="stats-title">Community Stats</h3>
-                    <div class="stat-item">
-                        <span class="stat-label">Active Lawyers</span>
-                        <span class="stat-value">2,450</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Posts Today</span>
-                        <span class="stat-value">156</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Cases Shared</span>
-                        <span class="stat-value">1,287</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Expert Opinions</span>
-                        <span class="stat-value">834</span>
-                    </div>
+        <!-- Feed -->
+        <div class="feed">
+          <!-- Add Post Button -->
+          <div class="add-post-section">
+            <div class="add-post-card">
+              <div class="add-post-header">
+                <div class="user-avatar">AP</div>
+                <div class="add-post-prompt">
+                  <span>Share your legal insights with the community...</span>
                 </div>
+              </div>
+              <button
+                class="btn btn-primary add-post-btn"
+                onclick="openCreatePostModal()"
+              >
+                <i class="fas fa-plus"></i>
+                Create New Post
+              </button>
+            </div>
+          </div>
 
-                <!-- Trending Topics -->
-                <div class="trending-topics">
-                    <h3 class="stats-title">Trending Topics</h3>
-                    <a href="#" class="topic-tag">#ConstitutionalLaw</a>
-                    <a href="#" class="topic-tag">#CyberCrime</a>
-                    <a href="#" class="topic-tag">#CorporateGovernance</a>
-                    <a href="#" class="topic-tag">#IntellectualProperty</a>
-                    <a href="#" class="topic-tag">#LandmarkJudgment</a>
-                    <a href="#" class="topic-tag">#LegalTech</a>
-                    <a href="#" class="topic-tag">#HumanRights</a>
-                    <a href="#" class="topic-tag">#EnvironmentalLaw</a>
-                    <a href="#" class="topic-tag">#FamilyLaw</a>
-                    <a href="#" class="topic-tag">#TaxLaw</a>
+          <!-- Sample Posts -->
+          <div class="post">
+            <div class="post-header">
+              <div class="user-avatar">RK</div>
+              <div class="post-user-info">
+                <div class="post-username">Rajesh Kumar, Senior Advocate</div>
+                <div class="post-meta">2 hours ago • Supreme Court</div>
+              </div>
+              <button class="post-menu">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+            <div class="post-content">
+              <div class="post-title">
+                Landmark Judgment: Privacy Rights vs. National Security
+              </div>
+              <div class="post-text">
+                Just concluded a significant case at the Supreme Court regarding
+                the balance between individual privacy rights and national
+                security concerns. The Court upheld the principle that
+                fundamental rights cannot be completely suspended even in
+                matters of national security.
+                <br /><br />
+                Key takeaways: • Proportionality test must be applied • Due
+                process cannot be bypassed • Judicial oversight is mandatory
+                <br /><br />
+                This sets an important precedent for future cases involving
+                surveillance and privacy. Would love to hear thoughts from
+                fellow constitutional lawyers.
+                <br /><br />
+                <span style="color: var(--primary)"
+                  >@PriyaSharma @DevMahajan</span
+                >
+              </div>
+              <div class="post-images">
+                <div class="post-image-grid">
+                  <img
+                    src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=400&fit=crop"
+                    alt="Supreme Court building"
+                    class="post-image"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop"
+                    alt="Legal documents"
+                    class="post-image"
+                  />
                 </div>
+              </div>
+              <div class="post-tags">
+                <a href="#" class="post-tag">#ConstitutionalLaw</a>
+                <a href="#" class="post-tag">#Privacy</a>
+                <a href="#" class="post-tag">#SupremeCourt</a>
+                <a href="#" class="post-tag">#LandmarkJudgment</a>
+              </div>
+            </div>
+            <div class="post-stats">
+              <div class="post-actions-bar">
+                <button class="post-action liked" onclick="toggleLike(this)">
+                  <i class="fas fa-heart"></i>
+                  <span>48</span>
+                </button>
+                <button class="post-action" onclick="toggleComments(this)">
+                  <i class="fas fa-comment"></i>
+                  <span>12</span>
+                </button>
+                <button class="post-action" onclick="sharePost(this)">
+                  <i class="fas fa-share"></i>
+                  <span>6</span>
+                </button>
+              </div>
+              <div class="post-stats-text">Viewed by 324 lawyers</div>
             </div>
 
-            <!-- Feed -->
-            <div class="feed">
-                <!-- Add Post Button -->
-                <div class="add-post-section">
-                    <div class="add-post-card">
-                        <div class="add-post-header">
-                            <div class="user-avatar">AP</div>
-                            <div class="add-post-prompt">
-                                <span>Share your legal insights with the community...</span>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary add-post-btn" onclick="openCreatePostModal()">
-                            <i class="fas fa-plus"></i>
-                            Create New Post
-                        </button>
-                    </div>
+            <!-- Comments Section -->
+            <div class="comments-section" style="display: none">
+              <div class="comment">
+                <div class="comment-avatar">PS</div>
+                <div class="comment-content">
+                  <div class="comment-user">Priya Sharma, Advocate</div>
+                  <div class="comment-text">
+                    Excellent analysis! This judgment will definitely impact how
+                    we approach privacy cases going forward. The proportionality
+                    test aspect is particularly noteworthy.
+                  </div>
+                  <div class="comment-meta">
+                    <button class="comment-action">Like</button>
+                    <button class="comment-action">Reply</button>
+                    <span class="comment-action">1 hour ago</span>
+                  </div>
                 </div>
+              </div>
 
-                <!-- Sample Posts -->
-                <div class="post">
-                    <div class="post-header">
-                        <div class="user-avatar">RK</div>
-                        <div class="post-user-info">
-                            <div class="post-username">Rajesh Kumar, Senior Advocate</div>
-                            <div class="post-meta">2 hours ago • Supreme Court</div>
-                        </div>
-                        <button class="post-menu">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-title">Landmark Judgment: Privacy Rights vs. National Security</div>
-                        <div class="post-text">
-                            Just concluded a significant case at the Supreme Court regarding the balance between individual privacy rights and national security concerns. The Court upheld the principle that fundamental rights cannot be completely suspended even in matters of national security.
-                            <br><br>
-                            Key takeaways:
-                            • Proportionality test must be applied
-                            • Due process cannot be bypassed
-                            • Judicial oversight is mandatory
-                            <br><br>
-                            This sets an important precedent for future cases involving surveillance and privacy. Would love to hear thoughts from fellow constitutional lawyers.
-                            <br><br>
-                            <span style="color: var(--primary);">@PriyaSharma @DevMahajan</span>
-                        </div>
-                        <div class="post-images">
-                            <div class="post-image-grid">
-                                <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=600&h=400&fit=crop" alt="Supreme Court building" class="post-image">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop" alt="Legal documents" class="post-image">
-                            </div>
-                        </div>
-                        <div class="post-tags">
-                            <a href="#" class="post-tag">#ConstitutionalLaw</a>
-                            <a href="#" class="post-tag">#Privacy</a>
-                            <a href="#" class="post-tag">#SupremeCourt</a>
-                            <a href="#" class="post-tag">#LandmarkJudgment</a>
-                        </div>
-                    </div>
-                    <div class="post-stats">
-                        <div class="post-actions-bar">
-                            <button class="post-action liked" onclick="toggleLike(this)">
-                                <i class="fas fa-heart"></i>
-                                <span>48</span>
-                            </button>
-                            <button class="post-action" onclick="toggleComments(this)">
-                                <i class="fas fa-comment"></i>
-                                <span>12</span>
-                            </button>
-                            <button class="post-action" onclick="sharePost(this)">
-                                <i class="fas fa-share"></i>
-                                <span>6</span>
-                            </button>
-                        </div>
-                        <div class="post-stats-text">
-                            Viewed by 324 lawyers
-                        </div>
-                    </div>
-                    
-                    <!-- Comments Section -->
-                    <div class="comments-section" style="display: none;">
-                        <div class="comment">
-                            <div class="comment-avatar">PS</div>
-                            <div class="comment-content">
-                                <div class="comment-user">Priya Sharma, Advocate</div>
-                                <div class="comment-text">Excellent analysis! This judgment will definitely impact how we approach privacy cases going forward. The proportionality test aspect is particularly noteworthy.</div>
-                                <div class="comment-meta">
-                                    <button class="comment-action">Like</button>
-                                    <button class="comment-action">Reply</button>
-                                    <span class="comment-action">1 hour ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="comment">
-                            <div class="comment-avatar">DM</div>
-                            <div class="comment-content">
-                                <div class="comment-user">Dev Mahajan, Senior Counsel</div>
-                                <div class="comment-text">Thanks for tagging me, Rajesh. Could you share the case citation? This will be valuable for my upcoming privacy litigation. 📚</div>
-                                <div class="comment-meta">
-                                    <button class="comment-action">Like</button>
-                                    <button class="comment-action">Reply</button>
-                                    <span class="comment-action">45 minutes ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="add-comment">
-                            <div class="user-avatar" style="width: 32px; height: 32px; font-size: 0.875rem;">AP</div>
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
+              <div class="comment">
+                <div class="comment-avatar">DM</div>
+                <div class="comment-content">
+                  <div class="comment-user">Dev Mahajan, Senior Counsel</div>
+                  <div class="comment-text">
+                    Thanks for tagging me, Rajesh. Could you share the case
+                    citation? This will be valuable for my upcoming privacy
+                    litigation. 📚
+                  </div>
+                  <div class="comment-meta">
+                    <button class="comment-action">Like</button>
+                    <button class="comment-action">Reply</button>
+                    <span class="comment-action">45 minutes ago</span>
+                  </div>
                 </div>
+              </div>
 
-                <div class="post">
-                    <div class="post-header">
-                        <div class="user-avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">SM</div>
-                        <div class="post-user-info">
-                            <div class="post-username">Sarah Mathews, Corporate Lawyer</div>
-                            <div class="post-meta">4 hours ago • Delhi High Court</div>
-                        </div>
-                        <button class="post-menu">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-title">Corporate Governance: New SEBI Guidelines Impact</div>
-                        <div class="post-text">
-                            SEBI's new corporate governance guidelines have significant implications for listed companies. Just finished advising a major client on compliance requirements.
-                            <br><br>
-                            Key changes:
-                            • Enhanced board independence requirements
-                            • Stricter related party transaction norms
-                            • Improved disclosure standards
-                            <br><br>
-                            Companies need to start preparing for implementation. Happy to discuss specific compliance strategies.
-                        </div>
-                        <div class="post-images">
-                            <div class="post-image-single">
-                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop" alt="Corporate meeting" class="post-image">
-                            </div>
-                        </div>
-                        <div class="post-tags">
-                            <a href="#" class="post-tag">#CorporateGovernance</a>
-                            <a href="#" class="post-tag">#SEBI</a>
-                            <a href="#" class="post-tag">#Compliance</a>
-                            <a href="#" class="post-tag">#CorporateLaw</a>
-                        </div>
-                    </div>
-                    <div class="post-stats">
-                        <div class="post-actions-bar">
-                            <button class="post-action" onclick="toggleLike(this)">
-                                <i class="far fa-heart"></i>
-                                <span>23</span>
-                            </button>
-                            <button class="post-action" onclick="toggleComments(this)">
-                                <i class="fas fa-comment"></i>
-                                <span>8</span>
-                            </button>
-                            <button class="post-action" onclick="sharePost(this)">
-                                <i class="fas fa-share"></i>
-                                <span>4</span>
-                            </button>
-                        </div>
-                        <div class="post-stats-text">
-                            Viewed by 187 lawyers
-                        </div>
-                    </div>
-                    
-                    <!-- Comments Section -->
-                    <div class="comments-section" style="display: none;">
-                        <div class="add-comment">
-                            <div class="user-avatar" style="width: 32px; height: 32px; font-size: 0.875rem;">AP</div>
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
+              <div class="add-comment">
+                <div
+                  class="user-avatar"
+                  style="width: 32px; height: 32px; font-size: 0.875rem"
+                >
+                  AP
                 </div>
-
-                <div class="post">
-                    <div class="post-header">
-                        <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">VT</div>
-                        <div class="post-user-info">
-                            <div class="post-username">Vikram Tiwari, Criminal Lawyer</div>
-                            <div class="post-meta">6 hours ago • Sessions Court</div>
-                        </div>
-                        <button class="post-menu">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-title">Successfully Defended Client in Cybercrime Case</div>
-                        <div class="post-text">
-                            Great day in court! Successfully defended my client against cybercrime charges. The case involved complex digital evidence analysis and blockchain transactions.
-                            <br><br>
-                            The prosecution's evidence had several gaps in the chain of custody for digital evidence. Our technical expert testimony on blockchain analysis was crucial.
-                            <br><br>
-                            Key learning: Always challenge the authenticity and integrity of digital evidence in cybercrime cases.
-                            <br><br>
-                            <span style="color: var(--primary);">@TechLawExperts @CyberCrimeLawyers</span>
-                        </div>
-                        <div class="post-images">
-                            <div class="post-image-single">
-                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop" alt="Cybersecurity concept" class="post-image">
-                            </div>
-                        </div>
-                        <div class="post-tags">
-                            <a href="#" class="post-tag">#CyberCrime</a>
-                            <a href="#" class="post-tag">#DigitalEvidence</a>
-                            <a href="#" class="post-tag">#Blockchain</a>
-                            <a href="#" class="post-tag">#CriminalLaw</a>
-                        </div>
-                    </div>
-                    <div class="post-stats">
-                        <div class="post-actions-bar">
-                            <button class="post-action" onclick="toggleLike(this)">
-                                <i class="far fa-heart"></i>
-                                <span>67</span>
-                            </button>
-                            <button class="post-action" onclick="toggleComments(this)">
-                                <i class="fas fa-comment"></i>
-                                <span>15</span>
-                            </button>
-                            <button class="post-action" onclick="sharePost(this)">
-                                <i class="fas fa-share"></i>
-                                <span>9</span>
-                            </button>
-                        </div>
-                        <div class="post-stats-text">
-                            Viewed by 445 lawyers
-                        </div>
-                    </div>
-                    
-                    <!-- Comments Section -->
-                    <div class="comments-section" style="display: none;">
-                        <div class="add-comment">
-                            <div class="user-avatar" style="width: 32px; height: 32px; font-size: 0.875rem;">AP</div>
-                            <input type="text" class="comment-input" placeholder="Add a comment...">
-                            <button class="comment-submit">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <input
+                  type="text"
+                  class="comment-input"
+                  placeholder="Add a comment..."
+                />
+                <button class="comment-submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
             </div>
+          </div>
+
+          <div class="post">
+            <div class="post-header">
+              <div
+                class="user-avatar"
+                style="background: linear-gradient(135deg, #f59e0b, #d97706)"
+              >
+                SM
+              </div>
+              <div class="post-user-info">
+                <div class="post-username">Sarah Mathews, Corporate Lawyer</div>
+                <div class="post-meta">4 hours ago • Delhi High Court</div>
+              </div>
+              <button class="post-menu">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+            <div class="post-content">
+              <div class="post-title">
+                Corporate Governance: New SEBI Guidelines Impact
+              </div>
+              <div class="post-text">
+                SEBI's new corporate governance guidelines have significant
+                implications for listed companies. Just finished advising a
+                major client on compliance requirements.
+                <br /><br />
+                Key changes: • Enhanced board independence requirements •
+                Stricter related party transaction norms • Improved disclosure
+                standards
+                <br /><br />
+                Companies need to start preparing for implementation. Happy to
+                discuss specific compliance strategies.
+              </div>
+              <div class="post-images">
+                <div class="post-image-single">
+                  <img
+                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop"
+                    alt="Corporate meeting"
+                    class="post-image"
+                  />
+                </div>
+              </div>
+              <div class="post-tags">
+                <a href="#" class="post-tag">#CorporateGovernance</a>
+                <a href="#" class="post-tag">#SEBI</a>
+                <a href="#" class="post-tag">#Compliance</a>
+                <a href="#" class="post-tag">#CorporateLaw</a>
+              </div>
+            </div>
+            <div class="post-stats">
+              <div class="post-actions-bar">
+                <button class="post-action" onclick="toggleLike(this)">
+                  <i class="far fa-heart"></i>
+                  <span>23</span>
+                </button>
+                <button class="post-action" onclick="toggleComments(this)">
+                  <i class="fas fa-comment"></i>
+                  <span>8</span>
+                </button>
+                <button class="post-action" onclick="sharePost(this)">
+                  <i class="fas fa-share"></i>
+                  <span>4</span>
+                </button>
+              </div>
+              <div class="post-stats-text">Viewed by 187 lawyers</div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section" style="display: none">
+              <div class="add-comment">
+                <div
+                  class="user-avatar"
+                  style="width: 32px; height: 32px; font-size: 0.875rem"
+                >
+                  AP
+                </div>
+                <input
+                  type="text"
+                  class="comment-input"
+                  placeholder="Add a comment..."
+                />
+                <button class="comment-submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="post">
+            <div class="post-header">
+              <div
+                class="user-avatar"
+                style="background: linear-gradient(135deg, #10b981, #059669)"
+              >
+                VT
+              </div>
+              <div class="post-user-info">
+                <div class="post-username">Vikram Tiwari, Criminal Lawyer</div>
+                <div class="post-meta">6 hours ago • Sessions Court</div>
+              </div>
+              <button class="post-menu">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+            <div class="post-content">
+              <div class="post-title">
+                Successfully Defended Client in Cybercrime Case
+              </div>
+              <div class="post-text">
+                Great day in court! Successfully defended my client against
+                cybercrime charges. The case involved complex digital evidence
+                analysis and blockchain transactions.
+                <br /><br />
+                The prosecution's evidence had several gaps in the chain of
+                custody for digital evidence. Our technical expert testimony on
+                blockchain analysis was crucial.
+                <br /><br />
+                Key learning: Always challenge the authenticity and integrity of
+                digital evidence in cybercrime cases.
+                <br /><br />
+                <span style="color: var(--primary)"
+                  >@TechLawExperts @CyberCrimeLawyers</span
+                >
+              </div>
+              <div class="post-images">
+                <div class="post-image-single">
+                  <img
+                    src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop"
+                    alt="Cybersecurity concept"
+                    class="post-image"
+                  />
+                </div>
+              </div>
+              <div class="post-tags">
+                <a href="#" class="post-tag">#CyberCrime</a>
+                <a href="#" class="post-tag">#DigitalEvidence</a>
+                <a href="#" class="post-tag">#Blockchain</a>
+                <a href="#" class="post-tag">#CriminalLaw</a>
+              </div>
+            </div>
+            <div class="post-stats">
+              <div class="post-actions-bar">
+                <button class="post-action" onclick="toggleLike(this)">
+                  <i class="far fa-heart"></i>
+                  <span>67</span>
+                </button>
+                <button class="post-action" onclick="toggleComments(this)">
+                  <i class="fas fa-comment"></i>
+                  <span>15</span>
+                </button>
+                <button class="post-action" onclick="sharePost(this)">
+                  <i class="fas fa-share"></i>
+                  <span>9</span>
+                </button>
+              </div>
+              <div class="post-stats-text">Viewed by 445 lawyers</div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section" style="display: none">
+              <div class="add-comment">
+                <div
+                  class="user-avatar"
+                  style="width: 32px; height: 32px; font-size: 0.875rem"
+                >
+                  AP
+                </div>
+                <input
+                  type="text"
+                  class="comment-input"
+                  placeholder="Add a comment..."
+                />
+                <button class="comment-submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Create Post Modal -->
     <div id="createPostModal" class="modal">
-        <div class="modal-content create-post-modal">
-            <div class="modal-header">
-                <h3 class="modal-title">
-                    <i class="fas fa-edit"></i>
-                    Create New Post
-                </h3>
-                <button class="modal-close" onclick="closeCreatePostModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="createPostForm">
-                    <div class="form-group">
-                        <label class="form-label">Post Title *</label>
-                        <input type="text" id="postTitle" class="form-input" placeholder="Enter an engaging title for your post..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Content *</label>
-                        <textarea id="postContent" class="form-textarea" rows="6" placeholder="Share your legal insights, case details, or ask for advice from fellow lawyers..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Upload Photos</label>
-                        <div class="photo-upload-area" onclick="document.getElementById('postPhotos').click()">
-                            <input type="file" id="postPhotos" multiple accept="image/*" style="display: none;">
-                            <div class="upload-content">
-                                <i class="fas fa-camera"></i>
-                                <p>Click to add photos or drag and drop</p>
-                                <small>Support: JPG, PNG, GIF (Max 5 photos, 10MB each)</small>
-                            </div>
-                        </div>
-                        <div id="selectedPhotos" class="selected-photos"></div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Category</label>
-                            <select id="postCategory" class="form-select">
-                                <option value="">Select Category</option>
-                                <option value="case-update">Case Update</option>
-                                <option value="legal-opinion">Legal Opinion</option>
-                                <option value="judgment-analysis">Judgment Analysis</option>
-                                <option value="legal-news">Legal News</option>
-                                <option value="question">Question</option>
-                                <option value="discussion">Discussion</option>
-                                <option value="achievement">Achievement</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Practice Area</label>
-                            <select id="postPracticeArea" class="form-select">
-                                <option value="">Select Practice Area</option>
-                                <option value="constitutional">Constitutional Law</option>
-                                <option value="corporate">Corporate Law</option>
-                                <option value="criminal">Criminal Law</option>
-                                <option value="family">Family Law</option>
-                                <option value="civil">Civil Law</option>
-                                <option value="tax">Tax Law</option>
-                                <option value="intellectual-property">Intellectual Property</option>
-                                <option value="labour">Labour Law</option>
-                                <option value="environmental">Environmental Law</option>
-                                <option value="cyber">Cyber Law</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Tags</label>
-                        <input type="text" id="postTags" class="form-input" placeholder="Enter hashtags separated by commas (e.g., SupremeCourt, ConstitutionalLaw, Privacy)">
-                        <small>Help others discover your post with relevant hashtags</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Tag Lawyers (Optional)</label>
-                        <div class="tag-lawyers-container">
-                            <input type="text" id="tagLawyersInput" class="form-input" placeholder="Search and tag lawyers...">
-                            <div id="taggedLawyers" class="tagged-lawyers"></div>
-                        </div>
-                    </div>
-
-                    <div class="privacy-settings">
-                        <div class="privacy-header">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Privacy Settings</span>
-                        </div>
-                        <div class="privacy-options">
-                            <label class="radio-option">
-                                <input type="radio" name="privacy" value="public" checked>
-                                <span class="radio-custom"></span>
-                                <div class="radio-content">
-                                    <strong>Public</strong>
-                                    <small>Visible to all lawyers in the community</small>
-                                </div>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="privacy" value="connections">
-                                <span class="radio-custom"></span>
-                                <div class="radio-content">
-                                    <strong>Connections Only</strong>
-                                    <small>Visible only to your network</small>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeCreatePostModal()">
-                    Cancel
-                </button>
-                <button type="button" class="btn btn-primary" onclick="previewPost()">
-                    <i class="fas fa-eye"></i>
-                    Preview
-                </button>
-                <button type="submit" form="createPostForm" class="btn btn-primary btn-gradient">
-                    <i class="fas fa-paper-plane"></i>
-                    Publish Post
-                </button>
-            </div>
+      <div class="modal-content create-post-modal">
+        <div class="modal-header">
+          <h3 class="modal-title">
+            <i class="fas fa-edit"></i>
+            Create New Post
+          </h3>
+          <button class="modal-close" onclick="closeCreatePostModal()">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+        <div class="modal-body">
+          <form id="createPostForm">
+            <div class="form-group">
+              <label class="form-label">Post Title *</label>
+              <input
+                type="text"
+                id="postTitle"
+                class="form-input"
+                placeholder="Enter an engaging title for your post..."
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Content *</label>
+              <textarea
+                id="postContent"
+                class="form-textarea"
+                rows="6"
+                placeholder="Share your legal insights, case details, or ask for advice from fellow lawyers..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Upload Photos</label>
+              <div
+                class="photo-upload-area"
+                onclick="document.getElementById('postPhotos').click()"
+              >
+                <input
+                  type="file"
+                  id="postPhotos"
+                  multiple
+                  accept="image/*"
+                  style="display: none"
+                />
+                <div class="upload-content">
+                  <i class="fas fa-camera"></i>
+                  <p>Click to add photos or drag and drop</p>
+                  <small
+                    >Support: JPG, PNG, GIF (Max 5 photos, 10MB each)</small
+                  >
+                </div>
+              </div>
+              <div id="selectedPhotos" class="selected-photos"></div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="postCategory" class="form-select">
+                  <option value="">Select Category</option>
+                  <option value="case-update">Case Update</option>
+                  <option value="legal-opinion">Legal Opinion</option>
+                  <option value="judgment-analysis">Judgment Analysis</option>
+                  <option value="legal-news">Legal News</option>
+                  <option value="question">Question</option>
+                  <option value="discussion">Discussion</option>
+                  <option value="achievement">Achievement</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Practice Area</label>
+                <select id="postPracticeArea" class="form-select">
+                  <option value="">Select Practice Area</option>
+                  <option value="constitutional">Constitutional Law</option>
+                  <option value="corporate">Corporate Law</option>
+                  <option value="criminal">Criminal Law</option>
+                  <option value="family">Family Law</option>
+                  <option value="civil">Civil Law</option>
+                  <option value="tax">Tax Law</option>
+                  <option value="intellectual-property">
+                    Intellectual Property
+                  </option>
+                  <option value="labour">Labour Law</option>
+                  <option value="environmental">Environmental Law</option>
+                  <option value="cyber">Cyber Law</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Tags</label>
+              <input
+                type="text"
+                id="postTags"
+                class="form-input"
+                placeholder="Enter hashtags separated by commas (e.g., SupremeCourt, ConstitutionalLaw, Privacy)"
+              />
+              <small
+                >Help others discover your post with relevant hashtags</small
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Tag Lawyers (Optional)</label>
+              <div class="tag-lawyers-container">
+                <input
+                  type="text"
+                  id="tagLawyersInput"
+                  class="form-input"
+                  placeholder="Search and tag lawyers..."
+                />
+                <div id="taggedLawyers" class="tagged-lawyers"></div>
+              </div>
+            </div>
+
+            <div class="privacy-settings">
+              <div class="privacy-header">
+                <i class="fas fa-shield-alt"></i>
+                <span>Privacy Settings</span>
+              </div>
+              <div class="privacy-options">
+                <label class="radio-option">
+                  <input type="radio" name="privacy" value="public" checked />
+                  <span class="radio-custom"></span>
+                  <div class="radio-content">
+                    <strong>Public</strong>
+                    <small>Visible to all lawyers in the community</small>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="privacy" value="connections" />
+                  <span class="radio-custom"></span>
+                  <div class="radio-content">
+                    <strong>Connections Only</strong>
+                    <small>Visible only to your network</small>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeCreatePostModal()"
+          >
+            Cancel
+          </button>
+          <button type="button" class="btn btn-primary" onclick="previewPost()">
+            <i class="fas fa-eye"></i>
+            Preview
+          </button>
+          <button
+            type="submit"
+            form="createPostForm"
+            class="btn btn-primary btn-gradient"
+          >
+            <i class="fas fa-paper-plane"></i>
+            Publish Post
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Tag Lawyers Modal -->
     <div id="tagLawyersModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Tag Lawyers</h3>
-                <button class="modal-close" onclick="closeTagModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Search Lawyers</label>
-                    <div class="tag-input-container">
-                        <input type="text" class="form-input" id="lawyerSearch" placeholder="Type lawyer name or expertise...">
-                        <div class="tag-suggestions" id="lawyerSuggestions">
-                            <div class="tag-suggestion" onclick="selectLawyer('Priya Sharma', 'Constitutional Law')">
-                                <strong>Priya Sharma</strong><br>
-                                <small>Constitutional Law • Supreme Court</small>
-                            </div>
-                            <div class="tag-suggestion" onclick="selectLawyer('Dev Mahajan', 'Corporate Law')">
-                                <strong>Dev Mahajan</strong><br>
-                                <small>Corporate Law • High Court</small>
-                            </div>
-                            <div class="tag-suggestion" onclick="selectLawyer('Amit Verma', 'Criminal Law')">
-                                <strong>Amit Verma</strong><br>
-                                <small>Criminal Law • Sessions Court</small>
-                            </div>
-                            <div class="tag-suggestion" onclick="selectLawyer('Neha Patel', 'IPR Law')">
-                                <strong>Neha Patel</strong><br>
-                                <small>Intellectual Property • Delhi High Court</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Selected Lawyers</label>
-                    <div id="selectedLawyers" class="post-tags"></div>
-                </div>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Tag Lawyers</h3>
+          <button class="modal-close" onclick="closeTagModal()">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Search Lawyers</label>
+            <div class="tag-input-container">
+              <input
+                type="text"
+                class="form-input"
+                id="lawyerSearch"
+                placeholder="Type lawyer name or expertise..."
+              />
+              <div class="tag-suggestions" id="lawyerSuggestions">
+                <div
+                  class="tag-suggestion"
+                  onclick="selectLawyer('Priya Sharma', 'Constitutional Law')"
+                >
+                  <strong>Priya Sharma</strong><br />
+                  <small>Constitutional Law • Supreme Court</small>
+                </div>
+                <div
+                  class="tag-suggestion"
+                  onclick="selectLawyer('Dev Mahajan', 'Corporate Law')"
+                >
+                  <strong>Dev Mahajan</strong><br />
+                  <small>Corporate Law • High Court</small>
+                </div>
+                <div
+                  class="tag-suggestion"
+                  onclick="selectLawyer('Amit Verma', 'Criminal Law')"
+                >
+                  <strong>Amit Verma</strong><br />
+                  <small>Criminal Law • Sessions Court</small>
+                </div>
+                <div
+                  class="tag-suggestion"
+                  onclick="selectLawyer('Neha Patel', 'IPR Law')"
+                >
+                  <strong>Neha Patel</strong><br />
+                  <small>Intellectual Property • Delhi High Court</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Selected Lawyers</label>
+            <div id="selectedLawyers" class="post-tags"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        $(document).ready(function() {
-            // Initialize the community page
-            console.log('AI Advocates Community loaded');
-        });
+      $(document).ready(function () {
+        // Initialize the community page
+        console.log("AI Advocates Community loaded");
+      });
 
-        // Like functionality
-        function toggleLike(button) {
-            const icon = button.querySelector('i');
-            const count = button.querySelector('span');
-            const currentCount = parseInt(count.textContent);
-            
-            if (button.classList.contains('liked')) {
-                button.classList.remove('liked');
-                icon.className = 'far fa-heart';
-                count.textContent = currentCount - 1;
-            } else {
-                button.classList.add('liked');
-                icon.className = 'fas fa-heart';
-                count.textContent = currentCount + 1;
+      // Like functionality
+      function toggleLike(button) {
+        const icon = button.querySelector("i");
+        const count = button.querySelector("span");
+        const currentCount = parseInt(count.textContent);
+
+        if (button.classList.contains("liked")) {
+          button.classList.remove("liked");
+          icon.className = "far fa-heart";
+          count.textContent = currentCount - 1;
+        } else {
+          button.classList.add("liked");
+          icon.className = "fas fa-heart";
+          count.textContent = currentCount + 1;
+        }
+      }
+
+      // Comments functionality
+      function toggleComments(button) {
+        const post = button.closest(".post");
+        const commentsSection = post.querySelector(".comments-section");
+
+        if (
+          commentsSection.style.display === "none" ||
+          !commentsSection.style.display
+        ) {
+          commentsSection.style.display = "block";
+        } else {
+          commentsSection.style.display = "none";
+        }
+      }
+
+      // Share functionality
+      function sharePost(button) {
+        const post = button.closest(".post");
+        const title = post.querySelector(".post-title").textContent;
+
+        if (navigator.share) {
+          navigator.share({
+            title: title,
+            text: "Check out this legal insight from AI Advocates Community",
+            url: window.location.href,
+          });
+        } else {
+          // Fallback: Copy to clipboard
+          const tempInput = document.createElement("input");
+          tempInput.value = `${title} - ${window.location.href}`;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+
+          alert("Post link copied to clipboard!");
+        }
+      }
+
+      // Create Post Modal functionality
+      function openCreatePostModal() {
+        document.getElementById("createPostModal").style.display = "block";
+        // Reset form
+        document.getElementById("createPostForm").reset();
+        document.getElementById("selectedPhotos").innerHTML = "";
+        document.getElementById("taggedLawyers").innerHTML = "";
+      }
+
+      function closeCreatePostModal() {
+        document.getElementById("createPostModal").style.display = "none";
+      }
+
+      function previewPost() {
+        const title = document.getElementById("postTitle").value;
+        const content = document.getElementById("postContent").value;
+        const category = document.getElementById("postCategory").value;
+        const practiceArea = document.getElementById("postPracticeArea").value;
+
+        if (!title || !content) {
+          alert("Please fill in the title and content before previewing.");
+          return;
+        }
+
+        alert(
+          `Post Preview:\n\nTitle: ${title}\nCategory: ${category}\nPractice Area: ${practiceArea}\n\nContent: ${content.substring(0, 200)}${content.length > 200 ? "..." : ""}`,
+        );
+      }
+
+      // Photo upload handling
+      document
+        .getElementById("postPhotos")
+        .addEventListener("change", function (e) {
+          const files = Array.from(e.target.files);
+          const selectedPhotos = document.getElementById("selectedPhotos");
+
+          files.forEach((file, index) => {
+            if (file.size > 10 * 1024 * 1024) {
+              alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+              return;
             }
-        }
 
-        // Comments functionality
-        function toggleComments(button) {
-            const post = button.closest('.post');
-            const commentsSection = post.querySelector('.comments-section');
-            
-            if (commentsSection.style.display === 'none' || !commentsSection.style.display) {
-                commentsSection.style.display = 'block';
-            } else {
-                commentsSection.style.display = 'none';
-            }
-        }
-
-        // Share functionality
-        function sharePost(button) {
-            const post = button.closest('.post');
-            const title = post.querySelector('.post-title').textContent;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: 'Check out this legal insight from AI Advocates Community',
-                    url: window.location.href
-                });
-            } else {
-                // Fallback: Copy to clipboard
-                const tempInput = document.createElement('input');
-                tempInput.value = `${title} - ${window.location.href}`;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(tempInput);
-                
-                alert('Post link copied to clipboard!');
-            }
-        }
-
-        // Create Post Modal functionality
-        function openCreatePostModal() {
-            document.getElementById('createPostModal').style.display = 'block';
-            // Reset form
-            document.getElementById('createPostForm').reset();
-            document.getElementById('selectedPhotos').innerHTML = '';
-            document.getElementById('taggedLawyers').innerHTML = '';
-        }
-
-        function closeCreatePostModal() {
-            document.getElementById('createPostModal').style.display = 'none';
-        }
-
-        function previewPost() {
-            const title = document.getElementById('postTitle').value;
-            const content = document.getElementById('postContent').value;
-            const category = document.getElementById('postCategory').value;
-            const practiceArea = document.getElementById('postPracticeArea').value;
-
-            if (!title || !content) {
-                alert('Please fill in the title and content before previewing.');
-                return;
-            }
-
-            alert(`Post Preview:\n\nTitle: ${title}\nCategory: ${category}\nPractice Area: ${practiceArea}\n\nContent: ${content.substring(0, 200)}${content.length > 200 ? '...' : ''}`);
-        }
-
-        // Photo upload handling
-        document.getElementById('postPhotos').addEventListener('change', function(e) {
-            const files = Array.from(e.target.files);
-            const selectedPhotos = document.getElementById('selectedPhotos');
-
-            files.forEach((file, index) => {
-                if (file.size > 10 * 1024 * 1024) {
-                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const photoDiv = document.createElement('div');
-                    photoDiv.className = 'photo-preview';
-                    photoDiv.innerHTML = `
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const photoDiv = document.createElement("div");
+              photoDiv.className = "photo-preview";
+              photoDiv.innerHTML = `
                         <img src="${e.target.result}" alt="Preview">
                         <button class="photo-remove" onclick="this.parentElement.remove()">
                             <i class="fas fa-times"></i>
                         </button>
                     `;
-                    selectedPhotos.appendChild(photoDiv);
-                };
-                reader.readAsDataURL(file);
-            });
+              selectedPhotos.appendChild(photoDiv);
+            };
+            reader.readAsDataURL(file);
+          });
         });
 
-        // Form submission handling
-        document.getElementById('createPostForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+      // Form submission handling
+      document
+        .getElementById("createPostForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-            const title = document.getElementById('postTitle').value;
-            const content = document.getElementById('postContent').value;
-            const category = document.getElementById('postCategory').value;
-            const practiceArea = document.getElementById('postPracticeArea').value;
-            const tags = document.getElementById('postTags').value;
-            const privacy = document.querySelector('input[name="privacy"]:checked').value;
+          const title = document.getElementById("postTitle").value;
+          const content = document.getElementById("postContent").value;
+          const category = document.getElementById("postCategory").value;
+          const practiceArea =
+            document.getElementById("postPracticeArea").value;
+          const tags = document.getElementById("postTags").value;
+          const privacy = document.querySelector(
+            'input[name="privacy"]:checked',
+          ).value;
 
-            // Simulate post creation
-            const submitBtn = document.querySelector('.btn-gradient');
-            const originalText = submitBtn.innerHTML;
+          // Simulate post creation
+          const submitBtn = document.querySelector(".btn-gradient");
+          const originalText = submitBtn.innerHTML;
 
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
-            submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+          submitBtn.disabled = true;
 
-            setTimeout(() => {
-                alert(`Post "${title}" has been published successfully!\n\nCategory: ${category}\nPractice Area: ${practiceArea}\nPrivacy: ${privacy}\nTags: ${tags}\n\nYour post is now visible to the community.`);
+          setTimeout(() => {
+            alert(
+              `Post "${title}" has been published successfully!\n\nCategory: ${category}\nPractice Area: ${practiceArea}\nPrivacy: ${privacy}\nTags: ${tags}\n\nYour post is now visible to the community.`,
+            );
 
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                closeCreatePostModal();
-            }, 2500);
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            closeCreatePostModal();
+          }, 2500);
         });
 
-        // Post creation functionality
-        function attachDocument() {
-            alert('Document attachment feature coming soon!\n\n• Upload case documents\n• Attach legal briefs\n• Share court orders\n• Add evidence files');
+      // Post creation functionality
+      function attachDocument() {
+        alert(
+          "Document attachment feature coming soon!\n\n• Upload case documents\n• Attach legal briefs\n• Share court orders\n• Add evidence files",
+        );
+      }
+
+      function tagLawyers() {
+        document.getElementById("tagLawyersModal").style.display = "block";
+        document.getElementById("lawyerSuggestions").style.display = "block";
+      }
+
+      function closeTagModal() {
+        document.getElementById("tagLawyersModal").style.display = "none";
+      }
+
+      function selectLawyer(name, expertise) {
+        const selectedLawyers = document.getElementById("selectedLawyers");
+        const tag = document.createElement("span");
+        tag.className = "post-tag";
+        tag.textContent = `@${name}`;
+        tag.onclick = function () {
+          this.remove();
+        };
+        selectedLawyers.appendChild(tag);
+
+        // Hide suggestions after selection
+        document.getElementById("lawyerSuggestions").style.display = "none";
+      }
+
+      function addHashtags() {
+        const hashtags = prompt(
+          "Enter hashtags (separated by commas):\nExample: ConstitutionalLaw, SupremeCourt, Privacy",
+        );
+        if (hashtags) {
+          alert(
+            `Hashtags added: ${hashtags}\n\nThese will be included in your post for better discoverability.`,
+          );
+        }
+      }
+
+      function publishPost() {
+        const textarea = document.querySelector(".post-textarea");
+        const content = textarea.value.trim();
+
+        if (!content) {
+          alert("Please write something to share with the community.");
+          return;
         }
 
-        function tagLawyers() {
-            document.getElementById('tagLawyersModal').style.display = 'block';
-            document.getElementById('lawyerSuggestions').style.display = 'block';
+        // Simulate post publishing
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          alert(
+            "Your post has been published successfully!\n\nIt will appear in the community feed and notify tagged lawyers.",
+          );
+          textarea.value = "";
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 2000);
+      }
+
+      // Comment submission
+      $(document).on("keypress", ".comment-input", function (e) {
+        if (e.which === 13) {
+          // Enter key
+          const comment = this.value.trim();
+          if (comment) {
+            const commentsSection = this.closest(".comments-section");
+            const newComment = createCommentElement(comment);
+            commentsSection.insertBefore(newComment, this.parentElement);
+            this.value = "";
+          }
         }
+      });
 
-        function closeTagModal() {
-            document.getElementById('tagLawyersModal').style.display = 'none';
+      $(document).on("click", ".comment-submit", function () {
+        const input = this.previousElementSibling;
+        const comment = input.value.trim();
+        if (comment) {
+          const commentsSection = this.closest(".comments-section");
+          const newComment = createCommentElement(comment);
+          commentsSection.insertBefore(newComment, this.parentElement);
+          input.value = "";
         }
+      });
 
-        function selectLawyer(name, expertise) {
-            const selectedLawyers = document.getElementById('selectedLawyers');
-            const tag = document.createElement('span');
-            tag.className = 'post-tag';
-            tag.textContent = `@${name}`;
-            tag.onclick = function() { this.remove(); };
-            selectedLawyers.appendChild(tag);
-            
-            // Hide suggestions after selection
-            document.getElementById('lawyerSuggestions').style.display = 'none';
-        }
-
-        function addHashtags() {
-            const hashtags = prompt('Enter hashtags (separated by commas):\nExample: ConstitutionalLaw, SupremeCourt, Privacy');
-            if (hashtags) {
-                alert(`Hashtags added: ${hashtags}\n\nThese will be included in your post for better discoverability.`);
-            }
-        }
-
-        function publishPost() {
-            const textarea = document.querySelector('.post-textarea');
-            const content = textarea.value.trim();
-            
-            if (!content) {
-                alert('Please write something to share with the community.');
-                return;
-            }
-            
-            // Simulate post publishing
-            const btn = event.target;
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
-            btn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Your post has been published successfully!\n\nIt will appear in the community feed and notify tagged lawyers.');
-                textarea.value = '';
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 2000);
-        }
-
-        // Comment submission
-        $(document).on('keypress', '.comment-input', function(e) {
-            if (e.which === 13) { // Enter key
-                const comment = this.value.trim();
-                if (comment) {
-                    const commentsSection = this.closest('.comments-section');
-                    const newComment = createCommentElement(comment);
-                    commentsSection.insertBefore(newComment, this.parentElement);
-                    this.value = '';
-                }
-            }
-        });
-
-        $(document).on('click', '.comment-submit', function() {
-            const input = this.previousElementSibling;
-            const comment = input.value.trim();
-            if (comment) {
-                const commentsSection = this.closest('.comments-section');
-                const newComment = createCommentElement(comment);
-                commentsSection.insertBefore(newComment, this.parentElement);
-                input.value = '';
-            }
-        });
-
-        function createCommentElement(commentText) {
-            const commentDiv = document.createElement('div');
-            commentDiv.className = 'comment';
-            commentDiv.innerHTML = `
+      function createCommentElement(commentText) {
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "comment";
+        commentDiv.innerHTML = `
                 <div class="comment-avatar">AP</div>
                 <div class="comment-content">
                     <div class="comment-user">Advocate Palaniappan</div>
@@ -2003,114 +2202,122 @@
                     </div>
                 </div>
             `;
-            return commentDiv;
-        }
+        return commentDiv;
+      }
 
-        // Lawyer search functionality
-        $('#lawyerSearch').on('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const suggestions = document.getElementById('lawyerSuggestions');
-            
-            if (searchTerm.length > 0) {
-                suggestions.style.display = 'block';
-                // Filter suggestions based on search term
-                const suggestionElements = suggestions.querySelectorAll('.tag-suggestion');
-                suggestionElements.forEach(suggestion => {
-                    const text = suggestion.textContent.toLowerCase();
-                    if (text.includes(searchTerm)) {
-                        suggestion.style.display = 'block';
-                    } else {
-                        suggestion.style.display = 'none';
-                    }
-                });
+      // Lawyer search functionality
+      $("#lawyerSearch").on("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        const suggestions = document.getElementById("lawyerSuggestions");
+
+        if (searchTerm.length > 0) {
+          suggestions.style.display = "block";
+          // Filter suggestions based on search term
+          const suggestionElements =
+            suggestions.querySelectorAll(".tag-suggestion");
+          suggestionElements.forEach((suggestion) => {
+            const text = suggestion.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+              suggestion.style.display = "block";
             } else {
-                suggestions.style.display = 'none';
+              suggestion.style.display = "none";
             }
+          });
+        } else {
+          suggestions.style.display = "none";
+        }
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", function (e) {
+        const tagModal = document.getElementById("tagLawyersModal");
+        const createModal = document.getElementById("createPostModal");
+
+        if (e.target === tagModal) {
+          closeTagModal();
+        }
+        if (e.target === createModal) {
+          closeCreatePostModal();
+        }
+      });
+
+      // Drag and drop for photo upload
+      const photoUploadArea = document.querySelector(".photo-upload-area");
+
+      if (photoUploadArea) {
+        photoUploadArea.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "var(--primary)";
+          this.style.backgroundColor = "var(--gradient-light)";
         });
 
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            const tagModal = document.getElementById('tagLawyersModal');
-            const createModal = document.getElementById('createPostModal');
-
-            if (e.target === tagModal) {
-                closeTagModal();
-            }
-            if (e.target === createModal) {
-                closeCreatePostModal();
-            }
+        photoUploadArea.addEventListener("dragleave", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "var(--border)";
+          this.style.backgroundColor = "var(--surface-hover)";
         });
 
-        // Drag and drop for photo upload
-        const photoUploadArea = document.querySelector('.photo-upload-area');
+        photoUploadArea.addEventListener("drop", function (e) {
+          e.preventDefault();
+          this.style.borderColor = "var(--border)";
+          this.style.backgroundColor = "var(--surface-hover)";
 
-        if (photoUploadArea) {
-            photoUploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.style.borderColor = 'var(--primary)';
-                this.style.backgroundColor = 'var(--gradient-light)';
-            });
+          const files = Array.from(e.dataTransfer.files);
+          const photoInput = document.getElementById("postPhotos");
 
-            photoUploadArea.addEventListener('dragleave', function(e) {
-                e.preventDefault();
-                this.style.borderColor = 'var(--border)';
-                this.style.backgroundColor = 'var(--surface-hover)';
-            });
+          // Trigger the change event with the dropped files
+          const dt = new DataTransfer();
+          files.forEach((file) => dt.items.add(file));
+          photoInput.files = dt.files;
 
-            photoUploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.style.borderColor = 'var(--border)';
-                this.style.backgroundColor = 'var(--surface-hover)';
+          // Trigger the change event
+          const event = new Event("change", { bubbles: true });
+          photoInput.dispatchEvent(event);
+        });
+      }
 
-                const files = Array.from(e.dataTransfer.files);
-                const photoInput = document.getElementById('postPhotos');
+      // Lawyer tagging in create post
+      document
+        .getElementById("tagLawyersInput")
+        .addEventListener("input", function () {
+          const value = this.value;
+          if (value.includes("@")) {
+            // Show suggestions for lawyer tagging
+            const suggestions = [
+              "Priya Sharma",
+              "Dev Mahajan",
+              "Amit Verma",
+              "Neha Patel",
+            ];
+            const lastWord = value.split(" ").pop();
+            if (lastWord.startsWith("@") && lastWord.length > 1) {
+              const searchTerm = lastWord.substring(1).toLowerCase();
+              const matches = suggestions.filter((name) =>
+                name.toLowerCase().includes(searchTerm),
+              );
 
-                // Trigger the change event with the dropped files
-                const dt = new DataTransfer();
-                files.forEach(file => dt.items.add(file));
-                photoInput.files = dt.files;
-
-                // Trigger the change event
-                const event = new Event('change', { bubbles: true });
-                photoInput.dispatchEvent(event);
-            });
-        }
-
-        // Lawyer tagging in create post
-        document.getElementById('tagLawyersInput').addEventListener('input', function() {
-            const value = this.value;
-            if (value.includes('@')) {
-                // Show suggestions for lawyer tagging
-                const suggestions = ['Priya Sharma', 'Dev Mahajan', 'Amit Verma', 'Neha Patel'];
-                const lastWord = value.split(' ').pop();
-                if (lastWord.startsWith('@') && lastWord.length > 1) {
-                    const searchTerm = lastWord.substring(1).toLowerCase();
-                    const matches = suggestions.filter(name =>
-                        name.toLowerCase().includes(searchTerm)
-                    );
-
-                    if (matches.length > 0) {
-                        // You can implement a dropdown here
-                        console.log('Showing suggestions:', matches);
-                    }
-                }
+              if (matches.length > 0) {
+                // You can implement a dropdown here
+                console.log("Showing suggestions:", matches);
+              }
             }
+          }
         });
 
-        // Header functions
-        function openSideMenu() {
-            alert("Side menu would open here");
-        }
+      // Header functions
+      function openSideMenu() {
+        alert("Side menu would open here");
+      }
 
-        function openNotifications() {
-            alert("Notifications panel would open here");
-        }
+      function openNotifications() {
+        alert("Notifications panel would open here");
+      }
 
-        function logoutFromApp() {
-            if (confirm("Are you sure you want to log out?")) {
-                window.location.href = "index.html";
-            }
+      function logoutFromApp() {
+        if (confirm("Are you sure you want to log out?")) {
+          window.location.href = "index.html";
         }
+      }
     </script>
-</body>
+  </body>
 </html>

@@ -449,7 +449,11 @@
       }
 
       .modal-header {
-        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
         color: white;
         padding: 1.5rem;
         display: flex;
@@ -515,7 +519,9 @@
         border: 2px solid var(--border);
         border-radius: 8px;
         font-size: 0.875rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
         background-color: var(--surface);
       }
 
@@ -966,12 +972,24 @@
           <form id="documentUploadForm" enctype="multipart/form-data">
             <div class="form-group">
               <label for="documentTitle">Document Title *</label>
-              <input type="text" id="documentTitle" name="documentTitle" class="form-input" placeholder="Enter document title" required>
+              <input
+                type="text"
+                id="documentTitle"
+                name="documentTitle"
+                class="form-input"
+                placeholder="Enter document title"
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="documentCategory">Category *</label>
-              <select id="documentCategory" name="documentCategory" class="form-select" required>
+              <select
+                id="documentCategory"
+                name="documentCategory"
+                class="form-select"
+                required
+              >
                 <option value="">Select Category</option>
                 <option value="case-law">Case Law</option>
                 <option value="statute">Statute</option>
@@ -997,19 +1015,33 @@
                 <option value="property">Property Law</option>
                 <option value="constitutional">Constitutional Law</option>
                 <option value="labour">Labour Law</option>
-                <option value="intellectual-property">Intellectual Property</option>
+                <option value="intellectual-property">
+                  Intellectual Property
+                </option>
                 <option value="other">Other</option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="documentFile">Upload Document *</label>
-              <div class="file-upload-area" onclick="document.getElementById('documentFile').click()">
-                <input type="file" id="documentFile" name="documentFile" accept=".pdf,.doc,.docx,.txt" required style="display: none;">
+              <div
+                class="file-upload-area"
+                onclick="document.getElementById('documentFile').click()"
+              >
+                <input
+                  type="file"
+                  id="documentFile"
+                  name="documentFile"
+                  accept=".pdf,.doc,.docx,.txt"
+                  required
+                  style="display: none"
+                />
                 <div class="upload-content">
                   <i class="fas fa-cloud-upload-alt"></i>
                   <p>Click to select file or drag and drop</p>
-                  <small>Supported formats: PDF, DOC, DOCX, TXT (Max 10MB)</small>
+                  <small
+                    >Supported formats: PDF, DOC, DOCX, TXT (Max 10MB)</small
+                  >
                 </div>
               </div>
               <div id="selectedFileName" class="selected-file"></div>
@@ -1017,19 +1049,43 @@
 
             <div class="form-group">
               <label for="documentTags">Tags</label>
-              <input type="text" id="documentTags" name="documentTags" class="form-input" placeholder="Enter tags separated by commas">
-              <small>e.g., landmark case, constitutional, fundamental rights</small>
+              <input
+                type="text"
+                id="documentTags"
+                name="documentTags"
+                class="form-input"
+                placeholder="Enter tags separated by commas"
+              />
+              <small
+                >e.g., landmark case, constitutional, fundamental rights</small
+              >
             </div>
 
             <div class="form-group">
               <label for="documentDescription">Description</label>
-              <textarea id="documentDescription" name="documentDescription" class="form-textarea" rows="3" placeholder="Brief description of the document"></textarea>
+              <textarea
+                id="documentDescription"
+                name="documentDescription"
+                class="form-textarea"
+                rows="3"
+                placeholder="Brief description of the document"
+              ></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeAddDocumentModal()">Cancel</button>
-          <button type="submit" form="documentUploadForm" class="btn btn-primary">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeAddDocumentModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            form="documentUploadForm"
+            class="btn btn-primary"
+          >
             <i class="fas fa-upload"></i> Upload Document
           </button>
         </div>
@@ -1053,18 +1109,33 @@
 
         // Action button handlers
         $(".action-btn.view").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Opening: ${title}\n\nThis would open the document viewer in a real implementation.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Opening: ${title}\n\nThis would open the document viewer in a real implementation.`,
+          );
         });
 
         $(".action-btn.download").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Downloading: ${title}\n\nThis would initiate the download in a real implementation.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Downloading: ${title}\n\nThis would initiate the download in a real implementation.`,
+          );
         });
 
         $(".action-btn.bookmark").on("click", function () {
-          const title = $(this).closest(".research-card").find(".research-title").text();
-          alert(`Bookmarked: ${title}\n\nThis document has been added to your bookmarks.`);
+          const title = $(this)
+            .closest(".research-card")
+            .find(".research-title")
+            .text();
+          alert(
+            `Bookmarked: ${title}\n\nThis document has been added to your bookmarks.`,
+          );
         });
 
         // Navigation
@@ -1077,66 +1148,73 @@
       });
 
       function openAddDocumentModal() {
-        document.getElementById('addDocumentModal').style.display = 'block';
+        document.getElementById("addDocumentModal").style.display = "block";
         // Reset form
-        document.getElementById('documentUploadForm').reset();
-        document.getElementById('selectedFileName').classList.remove('show');
+        document.getElementById("documentUploadForm").reset();
+        document.getElementById("selectedFileName").classList.remove("show");
       }
 
       function closeAddDocumentModal() {
-        document.getElementById('addDocumentModal').style.display = 'none';
+        document.getElementById("addDocumentModal").style.display = "none";
       }
 
       // File upload handling
-      document.getElementById('documentFile').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const selectedFileName = document.getElementById('selectedFileName');
+      document
+        .getElementById("documentFile")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          const selectedFileName = document.getElementById("selectedFileName");
 
-        if (file) {
-          const fileSize = (file.size / 1024 / 1024).toFixed(2); // Convert to MB
-          selectedFileName.innerHTML = `
+          if (file) {
+            const fileSize = (file.size / 1024 / 1024).toFixed(2); // Convert to MB
+            selectedFileName.innerHTML = `
             <i class="fas fa-file"></i>
             <strong>${file.name}</strong> (${fileSize} MB)
           `;
-          selectedFileName.classList.add('show');
-        } else {
-          selectedFileName.classList.remove('show');
-        }
-      });
+            selectedFileName.classList.add("show");
+          } else {
+            selectedFileName.classList.remove("show");
+          }
+        });
 
       // Form submission handling
-      document.getElementById('documentUploadForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+      document
+        .getElementById("documentUploadForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        const formData = new FormData(this);
-        const documentTitle = formData.get('documentTitle');
-        const documentCategory = formData.get('documentCategory');
-        const documentFile = formData.get('documentFile');
+          const formData = new FormData(this);
+          const documentTitle = formData.get("documentTitle");
+          const documentCategory = formData.get("documentCategory");
+          const documentFile = formData.get("documentFile");
 
-        if (!documentFile || documentFile.size === 0) {
-          alert('Please select a file to upload.');
-          return;
-        }
+          if (!documentFile || documentFile.size === 0) {
+            alert("Please select a file to upload.");
+            return;
+          }
 
-        // Simulate upload process
-        const submitBtn = document.querySelector('.btn-primary');
-        const originalText = submitBtn.innerHTML;
+          // Simulate upload process
+          const submitBtn = document.querySelector(".btn-primary");
+          const originalText = submitBtn.innerHTML;
 
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-        submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+          submitBtn.disabled = true;
 
-        setTimeout(() => {
-          alert(`Document "${documentTitle}" has been successfully uploaded!\n\nCategory: ${documentCategory}\nFile: ${documentFile.name}\n\nThe document will be processed and added to your research library.`);
+          setTimeout(() => {
+            alert(
+              `Document "${documentTitle}" has been successfully uploaded!\n\nCategory: ${documentCategory}\nFile: ${documentFile.name}\n\nThe document will be processed and added to your research library.`,
+            );
 
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-          closeAddDocumentModal();
-        }, 2000);
-      });
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            closeAddDocumentModal();
+          }, 2000);
+        });
 
       // Close modal when clicking outside
-      window.addEventListener('click', function(e) {
-        const modal = document.getElementById('addDocumentModal');
+      window.addEventListener("click", function (e) {
+        const modal = document.getElementById("addDocumentModal");
         if (e.target === modal) {
           closeAddDocumentModal();
         }
