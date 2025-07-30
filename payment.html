@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4c4cdd;
+        --primary-dark: #3d3cb8;
+        --primary-light: #6666e3;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4c4cdd;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .payment-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .payment-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .payment-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .payment-subtitle {
+        color: var(--text-secondary);
+      }
+
+      .payment-content {
+        background: var(--surface);
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+      }
+
+      .order-summary {
+        background: var(--background);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .order-summary h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .order-item:last-child {
+        border-bottom: none;
+        font-weight: 600;
+        font-size: 1.125rem;
+        color: var(--primary);
+      }
+
+      .order-label {
+        color: var(--text-secondary);
+      }
+
+      .order-value {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .payment-form {
+        padding: 2rem;
+      }
+
+      .form-section {
+        margin-bottom: 2rem;
+      }
+
+      .form-section h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .form-input {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        background: var(--surface);
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--border-active);
+        box-shadow: 0 0 0 3px rgba(76, 76, 221, 0.1);
+      }
+
+      .form-select {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        background: var(--surface);
+        cursor: pointer;
+      }
+
+      .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .payment-method {
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .payment-method:hover {
+        border-color: var(--primary);
+      }
+
+      .payment-method.selected {
+        border-color: var(--primary);
+        background: rgba(76, 76, 221, 0.05);
+      }
+
+      .payment-method i {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .payment-method .method-name {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .security-info {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .security-info i {
+        color: var(--success);
+        font-size: 1.25rem;
+      }
+
+      .security-info .text {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .payment-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 0.875rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex: 1;
+      }
+
+      .btn-secondary {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 2px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-primary:disabled {
+        background: var(--text-muted);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .loading {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid transparent;
+        border-top: 2px solid currentColor;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .payment-container {
+          padding: 1rem;
+        }
+
+        .payment-form {
+          padding: 1.5rem;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .payment-actions {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="payment-container">
+      <!-- Payment Header -->
+      <div class="payment-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <span class="logo-text">AI Advocates</span>
+        </div>
+        <h1 class="payment-title">Secure Payment</h1>
+        <p class="payment-subtitle">Complete your purchase safely and securely</p>
+      </div>
+
+      <!-- Payment Content -->
+      <div class="payment-content">
+        <!-- Order Summary -->
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div class="order-item">
+            <span class="order-label">Item:</span>
+            <span class="order-value" id="orderItem">Gold Plan</span>
+          </div>
+          <div class="order-item">
+            <span class="order-label">Duration:</span>
+            <span class="order-value">1 Month</span>
+          </div>
+          <div class="order-item">
+            <span class="order-label">Subtotal:</span>
+            <span class="order-value" id="subtotal">₹1,999</span>
+          </div>
+          <div class="order-item">
+            <span class="order-label">Taxes (18% GST):</span>
+            <span class="order-value" id="taxes">₹360</span>
+          </div>
+          <div class="order-item">
+            <span class="order-label">Total Amount:</span>
+            <span class="order-value" id="totalAmount">₹2,359</span>
+          </div>
+        </div>
+
+        <!-- Payment Form -->
+        <div class="payment-form">
+          <!-- Payment Method Selection -->
+          <div class="form-section">
+            <h4>
+              <i class="fas fa-credit-card"></i>
+              Payment Method
+            </h4>
+            <div class="payment-methods">
+              <div class="payment-method selected" onclick="selectPaymentMethod('card')">
+                <i class="fas fa-credit-card"></i>
+                <div class="method-name">Credit/Debit Card</div>
+              </div>
+              <div class="payment-method" onclick="selectPaymentMethod('upi')">
+                <i class="fab fa-google-pay"></i>
+                <div class="method-name">UPI</div>
+              </div>
+              <div class="payment-method" onclick="selectPaymentMethod('netbanking')">
+                <i class="fas fa-university"></i>
+                <div class="method-name">Net Banking</div>
+              </div>
+              <div class="payment-method" onclick="selectPaymentMethod('wallet')">
+                <i class="fas fa-wallet"></i>
+                <div class="method-name">Wallet</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Details -->
+          <div class="form-section" id="cardDetails">
+            <h4>
+              <i class="fas fa-lock"></i>
+              Card Details
+            </h4>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Card Number</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="1234 5678 9012 3456"
+                  maxlength="19"
+                  onkeyup="formatCardNumber(this)"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Expiry Date</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="MM/YY"
+                  maxlength="5"
+                  onkeyup="formatExpiry(this)"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVV</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="123"
+                  maxlength="3"
+                />
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">Cardholder Name</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="John Doe"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Address -->
+          <div class="form-section">
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              Billing Address
+            </h4>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label">Address Line 1</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="123 Main Street"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">City</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="New Delhi"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">State</label>
+                <select class="form-select">
+                  <option value="">Select State</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Mumbai">Maharashtra</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">PIN Code</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="110001"
+                  maxlength="6"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Country</label>
+                <select class="form-select">
+                  <option value="India">India</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Information -->
+          <div class="security-info">
+            <i class="fas fa-shield-alt"></i>
+            <div class="text">
+              Your payment information is encrypted and secure. We use industry-standard SSL encryption.
+            </div>
+          </div>
+
+          <!-- Payment Actions -->
+          <div class="payment-actions">
+            <button class="btn btn-secondary" onclick="goBack()">
+              <i class="fas fa-arrow-left"></i>
+              Back
+            </button>
+            <button class="btn btn-primary" onclick="processPayment()" id="payBtn">
+              <span id="payText">
+                <i class="fas fa-lock"></i>
+                Pay Now
+              </span>
+              <span class="loading" id="payLoading">
+                <div class="spinner"></div>
+                Processing...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedPaymentMethod = 'card';
+
+      $(document).ready(function() {
+        // Load order details from localStorage
+        const selectedPlan = JSON.parse(localStorage.getItem('selectedPlan') || '{}');
+        
+        if (selectedPlan.name) {
+          $('#orderItem').text(selectedPlan.name);
+          $('#subtotal').text(`₹${selectedPlan.price}`);
+          
+          const taxes = Math.round(selectedPlan.price * 0.18);
+          const total = selectedPlan.price + taxes;
+          
+          $('#taxes').text(`₹${taxes}`);
+          $('#totalAmount').text(`₹${total}`);
+        }
+      });
+
+      function selectPaymentMethod(method) {
+        selectedPaymentMethod = method;
+        $('.payment-method').removeClass('selected');
+        $(`.payment-method`).eq(getMethodIndex(method)).addClass('selected');
+        
+        // Show/hide card details based on selection
+        if (method === 'card') {
+          $('#cardDetails').show();
+        } else {
+          $('#cardDetails').hide();
+        }
+      }
+
+      function getMethodIndex(method) {
+        const methods = ['card', 'upi', 'netbanking', 'wallet'];
+        return methods.indexOf(method);
+      }
+
+      function formatCardNumber(input) {
+        let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let formattedInputValue = value.match(/.{1,4}/g)?.join(' ') ?? '';
+        input.value = formattedInputValue;
+      }
+
+      function formatExpiry(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+          value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        input.value = value;
+      }
+
+      function processPayment() {
+        const payBtn = $('#payBtn');
+        const payText = $('#payText');
+        const payLoading = $('#payLoading');
+        
+        // Disable button and show loading
+        payBtn.prop('disabled', true);
+        payText.hide();
+        payLoading.show();
+        
+        // Simulate payment processing
+        setTimeout(() => {
+          // Get selected plan details
+          const selectedPlan = JSON.parse(localStorage.getItem('selectedPlan') || '{}');
+          
+          if (selectedPlan.type === 'plan') {
+            // Update user's plan
+            localStorage.setItem('userPlan', selectedPlan.name.split(' ')[0]); // Extract plan name
+            alert(`Payment successful! You have been upgraded to the ${selectedPlan.name} plan.`);
+          } else if (selectedPlan.type === 'credits') {
+            // Add credits to user's account
+            const currentCredits = parseInt(localStorage.getItem('userCredits') || '2450');
+            const newCredits = currentCredits + selectedPlan.credits;
+            localStorage.setItem('userCredits', newCredits.toString());
+            alert(`Payment successful! ${selectedPlan.credits} AI credits have been added to your account.`);
+          }
+          
+          // Clear selected plan
+          localStorage.removeItem('selectedPlan');
+          
+          // Redirect to home page
+          window.location.href = 'home.html';
+        }, 3000);
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>
