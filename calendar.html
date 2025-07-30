@@ -1676,6 +1676,19 @@
         });
 
         event.target.classList.add("active");
+
+        // Hide all tab content
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.style.display = "none";
+          content.classList.remove("active");
+        });
+
+        // Show selected tab content
+        const activeContent = document.getElementById(tab + "-content");
+        if (activeContent) {
+          activeContent.style.display = "block";
+          activeContent.classList.add("active");
+        }
       }
 
       function previousMonth() {
