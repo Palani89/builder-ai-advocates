@@ -3849,9 +3849,30 @@
         const form = $("#addHearingForm")[0];
         const formData = new FormData(form);
 
-        // Basic validation
-        if (!formData.get("hearingDate") || !formData.get("courtName")) {
-          alert("Please fill in all required fields");
+        // Basic validation - check required fields
+        const requiredFields = [
+          "case_id",
+          "case_title",
+          "court_name",
+          "case_type",
+          "hearing_date",
+          "hearing_time",
+          "hearing_mode",
+        ];
+
+        let isValid = true;
+        requiredFields.forEach((field) => {
+          const input = form.querySelector(`[name="${field}"]`);
+          if (!input.value.trim()) {
+            input.style.borderColor = "var(--error)";
+            isValid = false;
+          } else {
+            input.style.borderColor = "var(--border)";
+          }
+        });
+
+        if (!isValid) {
+          alert("Please fill in all required fields marked with *");
           return;
         }
 
