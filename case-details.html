@@ -4028,25 +4028,55 @@
       function viewHearingDetails(hearingId) {
         const hearing = hearingsData.find((h) => h.id === hearingId);
         if (hearing) {
-          // Format date and time
-          const hearingDate = new Date(hearing.date);
-          const formattedDate = hearingDate.toLocaleDateString("en-IN", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          });
+          // Handle both old and new hearing data formats
+          let formattedDate = "N/A";
 
-          // Populate modal fields
+          if (hearing.hearing_date && hearing.hearing_time) {
+            // New format with separate date and time
+            const dateTime = new Date(`${hearing.hearing_date}T${hearing.hearing_time}`);
+            formattedDate = dateTime.toLocaleDateString("en-IN", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          } else if (hearing.date) {
+            // Old format with combined datetime
+            const hearingDate = new Date(hearing.date);
+            formattedDate = hearingDate.toLocaleDateString("en-IN", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          }
+
+          // Populate case information
+          $("#detailCaseId").text(hearing.case_id || "N/A");
+          $("#detailCaseTitle").text(hearing.case_title || "N/A");
+          $("#detailCaseType").text(hearing.case_type || "N/A");
+          $("#detailCaseStage").text(hearing.case_stage || hearing.caseStage || "N/A");
+
+          // Populate court & hearing details
           $("#detailDateTime").text(formattedDate);
-          $("#detailCourtName").text(hearing.courtName || "N/A");
-          $("#detailCourtRoom").text(hearing.courtRoom || "N/A");
-          $("#detailJudgeName").text(hearing.judgeName || "N/A");
-          $("#detailHearingType").text(hearing.hearingType || "N/A");
-          $("#detailCaseStage").text(hearing.caseStage || "N/A");
+          $("#detailCourtName").text(hearing.court_name || hearing.courtName || "N/A");
+          $("#detailJudgeName").text(hearing.judge_name || hearing.judgeName || "N/A");
+          $("#detailCourtRoom").text(hearing.court_hall || hearing.courtRoom || "N/A");
+          $("#detailHearingMode").text(hearing.hearing_mode || "N/A");
+          $("#detailVCLink").text(hearing.vc_link || "N/A");
+          $("#detailHearingPurpose").text(hearing.hearing_purpose || hearing.hearingType || "N/A");
           $("#detailAppearedBy").text(hearing.appearedBy || "N/A");
+
+          // Status with appropriate badge class
+          const status = hearing.hearing_status || hearing.status || "N/A";
+          const statusElement = $("#detailStatus");
+          statusElement.text(status);
+          statusElement.removeClass("scheduled completed postponed cancelled adjourned");
+          statusElement.addClass(status.toLowerCase());
 
           // Format next hearing date
           const nextHearingDate = hearing.nextHearingDate
@@ -4054,14 +4084,8 @@
             : "N/A";
           $("#detailNextHearingDate").text(nextHearingDate);
 
-          // Set status with appropriate badge class
-          const statusElement = $("#detailStatus");
-          statusElement.text(hearing.status);
-          statusElement.removeClass("scheduled completed postponed cancelled");
-          statusElement.addClass(hearing.status.toLowerCase());
-
           // Set text fields
-          $("#detailNotes").text(hearing.notes || "No notes available");
+          $("#detailNotes").text(hearing.remarks || hearing.notes || "No notes available");
           $("#detailDocuments").text(
             hearing.documentsDiscussed || "No documents discussed",
           );
