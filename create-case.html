@@ -1155,6 +1155,22 @@
           <button class="btn" onclick="dismissDraft()">Dismiss</button>
         </div>
 
+        <!-- Success Notification -->
+        <div class="notification-overlay" id="notificationOverlay"></div>
+        <div class="success-notification" id="successNotification">
+          <div class="success-icon">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="success-title">Case Created Successfully!</div>
+          <div class="success-message" id="successMessage">
+            Your new case has been created and added to your case list.
+          </div>
+          <div class="success-actions">
+            <button class="btn btn-secondary" onclick="closeNotification()">Close</button>
+            <button class="btn btn-primary" onclick="viewCaseList()">View Cases</button>
+          </div>
+        </div>
+
         <!-- Auto-save Settings -->
         <div class="auto-save-settings">
           <div class="auto-save-toggle">
