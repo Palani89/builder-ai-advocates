@@ -328,67 +328,169 @@
               </button>
             </div>
 
-            <div class="event-list">
-              <!-- Event 1 -->
-              <div class="event-item confirmed">
-                <div class="event-header">
-                  <div class="event-title">State vs. John Doe</div>
-                  <span class="event-status confirmed">Confirmed</span>
+            <!-- Activity Tab Content -->
+            <div id="activity-content" class="tab-content active">
+              <div class="event-list">
+                <!-- Event 1 -->
+                <div class="event-item confirmed">
+                  <div class="event-header">
+                    <div class="event-title">State vs. John Doe</div>
+                    <span class="event-status confirmed">Confirmed</span>
+                  </div>
+                  <div class="event-time">
+                    <i class="fas fa-clock"></i>
+                    10:30 AM
+                  </div>
+                  <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    District Court Room 3
+                  </div>
+                  <div class="event-judge">Hon'ble Justice A.K. Sharma</div>
+                  <span class="event-type">Criminal</span>
+                  <div class="event-actions">
+                    <button class="details-btn">Details</button>
+                  </div>
                 </div>
-                <div class="event-time">
-                  <i class="fas fa-clock"></i>
-                  10:30 AM
+
+                <!-- Event 2 -->
+                <div class="event-item tentative">
+                  <div class="event-header">
+                    <div class="event-title">Smith Property Dispute</div>
+                    <span class="event-status tentative">Tentative</span>
+                  </div>
+                  <div class="event-time">
+                    <i class="fas fa-clock"></i>
+                    2:00 PM
+                  </div>
+                  <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    High Court Room 12
+                  </div>
+                  <div class="event-judge">Hon'ble Justice B.K. Patel</div>
+                  <span class="event-type">Civil</span>
+                  <div class="event-actions">
+                    <button class="details-btn">Details</button>
+                  </div>
                 </div>
-                <div class="event-location">
-                  <i class="fas fa-map-marker-alt"></i>
-                  District Court Room 3
-                </div>
-                <div class="event-judge">Hon'ble Justice A.K. Sharma</div>
-                <span class="event-type">Criminal</span>
-                <div class="event-actions">
-                  <button class="details-btn">Details</button>
+
+                <!-- Event 3 -->
+                <div class="event-item confirmed">
+                  <div class="event-header">
+                    <div class="event-title">ABC Corp Merger</div>
+                    <span class="event-status confirmed">Confirmed</span>
+                  </div>
+                  <div class="event-time">
+                    <i class="fas fa-clock"></i>
+                    11:00 AM
+                  </div>
+                  <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    NCLT Chamber 2
+                  </div>
+                  <div class="event-judge">Hon'ble Justice C.R. Singh</div>
+                  <span class="event-type">Corporate</span>
+                  <div class="event-actions">
+                    <button class="details-btn">Details</button>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Event 2 -->
-              <div class="event-item tentative">
-                <div class="event-header">
-                  <div class="event-title">Smith Property Dispute</div>
-                  <span class="event-status tentative">Tentative</span>
+            <!-- Appointments Tab Content -->
+            <div id="appointments-content" class="tab-content" style="display: none;">
+              <div class="event-list">
+                <div class="event-item confirmed">
+                  <div class="event-header">
+                    <div class="event-title">Client Meeting - John Doe</div>
+                    <span class="event-status confirmed">Confirmed</span>
+                  </div>
+                  <div class="event-time">
+                    <i class="fas fa-clock"></i>
+                    3:00 PM
+                  </div>
+                  <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Office Conference Room A
+                  </div>
+                  <div class="event-actions">
+                    <button class="details-btn">Details</button>
+                  </div>
                 </div>
-                <div class="event-time">
-                  <i class="fas fa-clock"></i>
-                  2:00 PM
-                </div>
-                <div class="event-location">
-                  <i class="fas fa-map-marker-alt"></i>
-                  High Court Room 12
-                </div>
-                <div class="event-judge">Hon'ble Justice B.K. Patel</div>
-                <span class="event-type">Civil</span>
-                <div class="event-actions">
-                  <button class="details-btn">Details</button>
+
+                <div class="event-item tentative">
+                  <div class="event-header">
+                    <div class="event-title">Document Review - Smith Case</div>
+                    <span class="event-status tentative">Tentative</span>
+                  </div>
+                  <div class="event-time">
+                    <i class="fas fa-clock"></i>
+                    4:30 PM
+                  </div>
+                  <div class="event-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Office Library
+                  </div>
+                  <div class="event-actions">
+                    <button class="details-btn">Details</button>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Event 3 -->
-              <div class="event-item confirmed">
-                <div class="event-header">
-                  <div class="event-title">ABC Corp Merger</div>
-                  <span class="event-status confirmed">Confirmed</span>
+            <!-- Set Case Reminder Tab Content -->
+            <div id="reminders-content" class="tab-content" style="display: none;">
+              <div class="reminder-section">
+                <div class="reminder-header">
+                  <h4>Active Case Reminders</h4>
+                  <button class="btn btn-primary" onclick="openSetCaseReminderModal()">
+                    <i class="fas fa-bell"></i>
+                    New Reminder
+                  </button>
                 </div>
-                <div class="event-time">
-                  <i class="fas fa-clock"></i>
-                  11:00 AM
-                </div>
-                <div class="event-location">
-                  <i class="fas fa-map-marker-alt"></i>
-                  NCLT Chamber 2
-                </div>
-                <div class="event-judge">Hon'ble Justice C.R. Singh</div>
-                <span class="event-type">Corporate</span>
-                <div class="event-actions">
-                  <button class="details-btn">Details</button>
+
+                <div class="reminder-list">
+                  <div class="reminder-item">
+                    <div class="reminder-header">
+                      <div class="reminder-title">State vs. John Doe - Hearing Reminder</div>
+                      <span class="reminder-status active">Active</span>
+                    </div>
+                    <div class="reminder-details">
+                      <div class="reminder-date">
+                        <i class="fas fa-calendar"></i>
+                        Remind 3 days before hearing (Jan 12, 2024)
+                      </div>
+                      <div class="reminder-methods">
+                        <i class="fas fa-envelope"></i> Email
+                        <i class="fas fa-sms"></i> SMS
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                      </div>
+                    </div>
+                    <div class="reminder-actions">
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </div>
+                  </div>
+
+                  <div class="reminder-item">
+                    <div class="reminder-header">
+                      <div class="reminder-title">ABC Corp Merger - Document Preparation</div>
+                      <span class="reminder-status active">Active</span>
+                    </div>
+                    <div class="reminder-details">
+                      <div class="reminder-date">
+                        <i class="fas fa-calendar"></i>
+                        Remind 1 day before hearing (Jan 10, 2024)
+                      </div>
+                      <div class="reminder-methods">
+                        <i class="fas fa-envelope"></i> Email
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                      </div>
+                    </div>
+                    <div class="reminder-actions">
+                      <button class="edit-btn">Edit</button>
+                      <button class="delete-btn">Delete</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
