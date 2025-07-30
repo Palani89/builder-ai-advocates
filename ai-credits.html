@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Credits - AI Advocates</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global Language Support -->
+    <script src="app-language.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #4c4cdd;
+        --primary-dark: #3d3cb8;
+        --primary-light: #6666e3;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4c4cdd;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .back-btn {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+      }
+
+      .back-btn:hover {
+        background: var(--background);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .page-subtitle {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Current Credits */
+      .current-credits {
+        background: linear-gradient(135deg, var(--success) 0%, #34d399 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .current-credits h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .current-credits .credits-count {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .current-credits p {
+        opacity: 0.9;
+        font-size: 0.9rem;
+      }
+
+      /* Credits Grid */
+      .credits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .credit-card {
+        background: var(--surface);
+        border-radius: 16px;
+        border: 2px solid var(--border);
+        padding: 2rem;
+        position: relative;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .credit-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--primary);
+      }
+
+      .credit-card.popular {
+        border-color: var(--primary);
+        transform: scale(1.05);
+      }
+
+      .credit-card.popular::before {
+        content: "Most Popular";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .credit-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1rem;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .credit-icon.starter {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      }
+
+      .credit-icon.professional {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      }
+
+      .credit-icon.enterprise {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      }
+
+      .credit-amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .credit-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .credit-price {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .credit-price .currency {
+        font-size: 1.25rem;
+        vertical-align: top;
+      }
+
+      .credit-savings {
+        background: var(--success);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+      }
+
+      .credit-features {
+        list-style: none;
+        margin-bottom: 2rem;
+        text-align: left;
+      }
+
+      .credit-features li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .credit-features .check-icon {
+        color: var(--success);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      .credit-btn {
+        width: 100%;
+        padding: 0.875rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: var(--primary);
+        color: white;
+      }
+
+      .credit-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      /* Usage Stats */
+      .usage-stats {
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .usage-stats h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 8px;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+        }
+
+        .credits-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .credit-card.popular {
+          transform: none;
+        }
+
+        .page-title {
+          font-size: 1.75rem;
+        }
+
+        .credit-amount {
+          font-size: 2rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
+            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="user-avatar">A</div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-title">Purchase AI Credits</h1>
+          <p class="page-subtitle">
+            Power your legal research and document generation with AI credits
+          </p>
+        </div>
+
+        <!-- Current Credits -->
+        <div class="current-credits">
+          <h3>Current AI Credits</h3>
+          <div class="credits-count" id="currentCredits">2,450</div>
+          <p>Credits remaining • Resets monthly</p>
+        </div>
+
+        <!-- Usage Stats -->
+        <div class="usage-stats">
+          <h3>
+            <i class="fas fa-chart-line"></i>
+            This Month's Usage
+          </h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">1,250</div>
+              <div class="stat-label">Credits Used</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">85</div>
+              <div class="stat-label">AI Queries</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">24</div>
+              <div class="stat-label">Documents Generated</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Legal Research</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Credits Grid -->
+        <div class="credits-grid">
+          <!-- Starter Pack -->
+          <div class="credit-card">
+            <div class="credit-icon starter">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="credit-amount">1,000</div>
+            <div class="credit-label">AI Credits</div>
+            <div class="credit-price">
+              <span class="currency">₹</span>499
+            </div>
+            <div class="credit-savings">Save 10%</div>
+            <ul class="credit-features">
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                1,000 AI credits
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Perfect for small firms
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Legal document generation
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Basic AI research
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Email support
+              </li>
+            </ul>
+            <button class="credit-btn" onclick="purchaseCredits(1000, 499)">
+              Purchase 1,000 Credits
+            </button>
+          </div>
+
+          <!-- Professional Pack (Popular) -->
+          <div class="credit-card popular">
+            <div class="credit-icon professional">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="credit-amount">2,000</div>
+            <div class="credit-label">AI Credits</div>
+            <div class="credit-price">
+              <span class="currency">₹</span>899
+            </div>
+            <div class="credit-savings">Save 25%</div>
+            <ul class="credit-features">
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                2,000 AI credits
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Ideal for growing practices
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Advanced document generation
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Comprehensive AI research
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Priority support
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Case law analysis
+              </li>
+            </ul>
+            <button class="credit-btn" onclick="purchaseCredits(2000, 899)">
+              Purchase 2,000 Credits
+            </button>
+          </div>
+
+          <!-- Enterprise Pack -->
+          <div class="credit-card">
+            <div class="credit-icon enterprise">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="credit-amount">3,000</div>
+            <div class="credit-label">AI Credits</div>
+            <div class="credit-price">
+              <span class="currency">₹</span>1,199
+            </div>
+            <div class="credit-savings">Save 40%</div>
+            <ul class="credit-features">
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                3,000 AI credits
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Perfect for large firms
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Premium document suite
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Advanced AI research tools
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                24/7 dedicated support
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Custom AI training
+              </li>
+              <li>
+                <i class="fas fa-check check-icon"></i>
+                Bulk document processing
+              </li>
+            </ul>
+            <button class="credit-btn" onclick="purchaseCredits(3000, 1199)">
+              Purchase 3,000 Credits
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <div class="nav-items">
+          <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+          <a href="team.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            My Team
+          </a>
+          <a href="cases.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            Cases
+          </a>
+          <a href="calendar.html" class="nav-item">
+            <i class="fas fa-calendar"></i>
+            Calendar
+          </a>
+          <a href="more.html" class="nav-item">
+            <i class="fas fa-th"></i>
+            More
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+
+      function purchaseCredits(credits, price) {
+        // Store selected credits details
+        localStorage.setItem('selectedPlan', JSON.stringify({
+          name: `${credits} AI Credits`,
+          price: price,
+          credits: credits,
+          type: 'credits'
+        }));
+        
+        // Redirect to payment gateway
+        window.location.href = 'payment.html';
+      }
+
+      // Update current credits display
+      $(document).ready(function() {
+        const currentCredits = localStorage.getItem('userCredits') || '2450';
+        $('#currentCredits').text(parseInt(currentCredits).toLocaleString());
+      });
+    </script>
+  </body>
+</html>
