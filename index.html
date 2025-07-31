@@ -770,6 +770,43 @@
       </div>
     </div>
 
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" data-translate="reset-password">Reset Password</h3>
+          <p class="modal-subtitle" data-translate="reset-password-subtitle">
+            Enter your email address or advocate ID to receive reset instructions
+          </p>
+        </div>
+        <div class="modal-body">
+          <form id="forgot-password-form">
+            <div class="form-group">
+              <label class="form-label" data-translate="email-or-advocate-id">Email or Advocate ID</label>
+              <div class="input-with-icon">
+                <i class="fas fa-envelope input-icon"></i>
+                <input
+                  type="text"
+                  class="form-input"
+                  id="reset-identifier"
+                  placeholder="Enter email or advocate ID"
+                  required
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="primary-button modal-close" onclick="closeForgotPasswordModal()">
+            <span data-translate="cancel">Cancel</span>
+          </button>
+          <button type="submit" form="forgot-password-form" class="primary-button modal-submit">
+            <span data-translate="send-reset-link">Send Reset Link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Comprehensive Language translations
       const translations = {
@@ -819,7 +856,7 @@
           tagline: "நவீன சட்ட நடைமுறைக்கான உங்கள் AI-இயங்கும் சட்ட பங்குதாரர்",
           "otp-tagline":
             "உங்கள் மொபைல் எண்ணுக்கு அனுப்பப்பட்ட OTP ஐ உள்ளிடவும்",
-          "preferred-language": "விருப்பமான மொழி",
+          "preferred-language": "விர���ப்பமான மொழி",
           "advocate-id": "வழக்கறிஞர் அடையாள எண்",
           mobile: "மொபைல்",
           email: "���ின்னஞ்சல்",
@@ -851,11 +888,11 @@
           "send-otp": "OTP ಕಳುಹಿಸಿ",
           "verify-otp": "OTP ಪರಿಶೀಲಿಸಿ",
           "no-account": "ಖಾತೆ ಇಲ್ಲವೇ?",
-          "sign-up-here": "ಇಲ್ಲಿ ಸೈನ��� ಅಪ್ ಮಾಡಿ",
+          "sign-up-here": "ಇಲ್ಲಿ ಸೈನ್ ಅಪ್ ಮಾಡಿ",
           "enter-password": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
           "enter-mobile": "10-ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ",
           "enter-otp": "OTP ನಮೂದಿಸಿ",
-          "didnt-receive": "OTP ಸಿಗಲಿಲ್ಲವೇ?",
+          "didnt-receive": "OTP ಸಿಗಲಿಲ��ಲವೇ?",
           resend: "ಮತ್ತೆ ಕಳುಹಿಸಿ",
         },
         mr: {
@@ -875,12 +912,12 @@
           "sign-up-here": "येथे साइन अप करा",
           "enter-password": "तुमचा पासवर्ड टाका",
           "enter-mobile": "10-अंकी मोबाइल नंबर टाका",
-          "enter-otp": "OTP टाका",
+          "enter-otp": "OTP टाक���",
           "didnt-receive": "OTP मिळाला नाही?",
           resend: "पुन्हा पाठवा",
         },
         bn: {
-          tagline: "আধুনি�� আইনী অনুশীলনের জন্য আপনার AI-চালিত আইনী অংশীদার",
+          tagline: "আধুনি�� আইনী অনুশীলনের জন্য আ��নার AI-চালিত আইনী অংশীদার",
           "otp-tagline": "আপনার মোবাইল নম্বরে পাঠানো OTP লিখুন",
           "preferred-language": "পছন্দের ভাষা",
           "advocate-id": "অ্যাডভোকেট ID",
