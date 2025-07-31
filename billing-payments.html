@@ -1507,6 +1507,307 @@
         </div>
     </div>
 
+    <!-- Create Invoice Modal -->
+    <div id="invoice-modal" class="modal-overlay">
+        <div class="invoice-modal">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-file-invoice"></i>
+                    Create Professional Invoice
+                </h2>
+                <button class="modal-close" onclick="closeInvoiceModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="invoice-form">
+                    <!-- A. Invoice Header -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-building"></i>
+                            Invoice Header
+                        </h3>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Firm Name *</label>
+                                <input type="text" class="form-input" id="firm-name" value="AI Advocates Legal Associates" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Invoice Number *</label>
+                                <input type="text" class="form-input" id="invoice-number" value="INV-2025-001" required>
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label class="form-label">Firm Address *</label>
+                                <textarea class="form-textarea" id="firm-address" required placeholder="Complete address with city, state, and PIN code">123, Legal Plaza, Supreme Court Road
+New Delhi - 110001, India</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" id="firm-phone" placeholder="+91 11 2345 6789">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" id="firm-email" placeholder="contact@aiadvocates.in">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Website</label>
+                                <input type="url" class="form-input" id="firm-website" placeholder="www.aiadvocates.in">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">GSTIN (if registered)</label>
+                                <input type="text" class="form-input" id="gstin" placeholder="07AAFCA1234E1Z5">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Invoice Title</label>
+                                <select class="form-select" id="invoice-title">
+                                    <option value="Tax Invoice">Tax Invoice</option>
+                                    <option value="Professional Invoice">Professional Invoice</option>
+                                    <option value="Legal Services Invoice">Legal Services Invoice</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Invoice Date *</label>
+                                <input type="date" class="form-input" id="invoice-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Due Date *</label>
+                                <input type="date" class="form-input" id="due-date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- B. Client Details -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-user"></i>
+                            Client Details
+                        </h3>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Client Name *</label>
+                                <input type="text" class="form-input" id="client-name" required placeholder="Mr. Ramesh Kumar">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Client GSTIN (if applicable)</label>
+                                <input type="text" class="form-input" id="client-gstin" placeholder="Required for B2B GST invoices">
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label class="form-label">Client Address</label>
+                                <textarea class="form-textarea" id="client-address" placeholder="Client's complete address (optional but recommended)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C. Case/Matter Information -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-gavel"></i>
+                            Case/Matter Information
+                        </h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Case Title/Reference *</label>
+                                <input type="text" class="form-input" id="case-title" required placeholder="Divorce Case – Ramesh vs. Anjali">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Case Number</label>
+                                <input type="text" class="form-input" id="case-number" placeholder="DL-CIV-2025-00234">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Billing Period From</label>
+                                <input type="date" class="form-input" id="billing-from">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Billing Period To</label>
+                                <input type="date" class="form-input" id="billing-to">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- D. Line Item Details -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-list"></i>
+                            Services Rendered
+                        </h3>
+                        <div class="line-items-section">
+                            <div id="line-items-container">
+                                <!-- Header Row -->
+                                <div class="line-item">
+                                    <div class="form-label">Description of Work</div>
+                                    <div class="form-label">Hours</div>
+                                    <div class="form-label">Rate (₹)</div>
+                                    <div class="form-label">Qty</div>
+                                    <div class="form-label">Amount (₹)</div>
+                                    <div class="form-label">Action</div>
+                                </div>
+
+                                <!-- Sample Line Item -->
+                                <div class="line-item">
+                                    <div class="form-group">
+                                        <input type="text" class="form-input" placeholder="Court hearing preparation" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-input hours-input" step="0.1" placeholder="2.5">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="currency-symbol">₹</span>
+                                            <input type="number" class="form-input currency-input rate-input" placeholder="2000">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-input qty-input" value="1" min="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="currency-symbol">₹</span>
+                                            <input type="number" class="form-input currency-input amount-input" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="remove-line-btn" onclick="removeLine(this)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="add-line-btn" onclick="addLineItem()">
+                                <i class="fas fa-plus"></i>
+                                Add Line Item
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- E. Summary Section -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-calculator"></i>
+                            Invoice Summary
+                        </h3>
+                        <div class="summary-section">
+                            <div class="form-grid form-grid-2">
+                                <div class="form-group">
+                                    <label class="form-label">Discount Amount (₹)</label>
+                                    <div class="input-group">
+                                        <span class="currency-symbol">₹</span>
+                                        <input type="number" class="form-input currency-input" id="discount-amount" value="0">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">GST Rate (%)</label>
+                                    <select class="form-select" id="gst-rate">
+                                        <option value="0">0%</option>
+                                        <option value="5">5%</option>
+                                        <option value="12">12%</option>
+                                        <option value="18" selected>18%</option>
+                                        <option value="28">28%</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="summary-row">
+                                <span class="summary-label">Subtotal:</span>
+                                <span class="summary-value" id="subtotal-amount">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Discount:</span>
+                                <span class="summary-value" id="discount-display">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">GST (<span id="gst-percentage">18</span>%):</span>
+                                <span class="summary-value" id="gst-amount">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Total Amount Payable:</span>
+                                <span class="summary-value" id="total-amount">₹0</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Amount in Words</label>
+                            <input type="text" class="form-input" id="amount-words" readonly placeholder="Will be auto-generated">
+                        </div>
+                    </div>
+
+                    <!-- F. Payment Details -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Details
+                        </h3>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Bank Account Name</label>
+                                <input type="text" class="form-input" id="bank-account-name" value="AI Advocates Legal Associates">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bank Name & Branch</label>
+                                <input type="text" class="form-input" id="bank-name" placeholder="HDFC Bank, Connaught Place Branch">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Account Number</label>
+                                <input type="text" class="form-input" id="account-number" placeholder="1234567890123456">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">IFSC Code</label>
+                                <input type="text" class="form-input" id="ifsc-code" placeholder="HDFC0000123">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">UPI ID</label>
+                                <input type="text" class="form-input" id="upi-id" placeholder="aiadvocates@hdfc">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Payment Terms</label>
+                                <select class="form-select" id="payment-terms">
+                                    <option value="Due immediately">Due immediately</option>
+                                    <option value="Due in 7 days" selected>Due in 7 days</option>
+                                    <option value="Due in 15 days">Due in 15 days</option>
+                                    <option value="Due in 30 days">Due in 30 days</option>
+                                    <option value="Due in 45 days">Due in 45 days</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- G. Footer Notes -->
+                    <div class="form-section">
+                        <h3 class="section-title-modal">
+                            <i class="fas fa-sticky-note"></i>
+                            Additional Information
+                        </h3>
+                        <div class="form-grid">
+                            <div class="form-group form-group-full">
+                                <label class="form-label">Declaration</label>
+                                <textarea class="form-textarea" id="declaration">This is a computer-generated invoice and does not require a physical signature. All amounts are in Indian Rupees. Interest @ 24% per annum will be charged on overdue amounts.</textarea>
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label class="form-label">Notes to Client</label>
+                                <textarea class="form-textarea" id="client-notes" placeholder="Any additional terms, disclaimers, or instructions"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" onclick="closeInvoiceModal()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-outline">
+                    <i class="fas fa-eye"></i>
+                    Preview
+                </button>
+                <button type="button" class="btn btn-success" onclick="saveInvoice()">
+                    <i class="fas fa-check"></i>
+                    Create Invoice
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
             // Tab functionality
