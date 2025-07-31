@@ -455,6 +455,102 @@
       .input-with-icon .form-input {
         padding-left: 2.5rem;
       }
+
+      /* Forgot Password Styles */
+      .forgot-password-link {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .forgot-password-link a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .forgot-password-link a:hover {
+        text-decoration: underline;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: var(--surface);
+        margin: 10% auto;
+        padding: 0;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: var(--shadow-xl);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-header {
+        padding: 1.5rem 1.5rem 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-footer {
+        padding: 1rem 1.5rem;
+        display: flex;
+        gap: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .modal-close {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 2px solid var(--border);
+        flex: 1;
+      }
+
+      .modal-close:hover {
+        background: var(--border);
+      }
+
+      .modal-submit {
+        flex: 1;
+      }
     </style>
   </head>
   <body>
@@ -727,7 +823,7 @@
           "advocate-id": "வழக்கறிஞர் அடையாள எண்",
           mobile: "மொபைல்",
           email: "���ின்னஞ்சல்",
-          "bar-council-id": "பார் கவுன்ச���ல் ID",
+          "bar-council-id": "பார் கவுன்சில் ID",
           password: "கடவுச்சொல்",
           "mobile-number": "மொபைல் எண்",
           "sign-in": "உள்நுழைக",
@@ -755,7 +851,7 @@
           "send-otp": "OTP ಕಳುಹಿಸಿ",
           "verify-otp": "OTP ಪರಿಶೀಲಿಸಿ",
           "no-account": "ಖಾತೆ ಇಲ್ಲವೇ?",
-          "sign-up-here": "ಇಲ್ಲಿ ಸೈನ್ ಅಪ್ ಮಾಡಿ",
+          "sign-up-here": "ಇಲ್ಲಿ ಸೈನ��� ಅಪ್ ಮಾಡಿ",
           "enter-password": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
           "enter-mobile": "10-ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ನಮೂದಿಸಿ",
           "enter-otp": "OTP ನಮೂದಿಸಿ",
@@ -784,7 +880,7 @@
           resend: "पुन्हा पाठवा",
         },
         bn: {
-          tagline: "আধুনি�� আইনী অনুশীলনের জন্য আপনার AI-চালিত ���ইনী অংশীদার",
+          tagline: "আধুনি�� আইনী অনুশীলনের জন্য আপনার AI-চালিত আইনী অংশীদার",
           "otp-tagline": "আপনার মোবাইল নম্বরে পাঠানো OTP লিখুন",
           "preferred-language": "পছন্দের ভাষা",
           "advocate-id": "অ্যাডভোকেট ID",
@@ -823,7 +919,7 @@
           "enter-password": "તમારો પાસવર્ડ દાખલ કરો",
           "enter-mobile": "10-અંકનો મોબાઇલ નંબર દાખલ કરો",
           "enter-otp": "OTP દાખલ કરો",
-          "didnt-receive": "OTP ન મળ્ય���?",
+          "didnt-receive": "OTP ન મળ્યો?",
           resend: "ફરીથી મોકલો",
         },
       };
