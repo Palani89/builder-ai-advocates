@@ -2503,6 +2503,282 @@ New Delhi - 110001, India</textarea>
         $('.invoice-modal').on('click', function(e) {
             e.stopPropagation();
         });
+
+        // Invoice Preview Functions
+        function previewInvoice() {
+            // Validate required fields before preview
+            const requiredFields = [
+                '#firm-name', '#invoice-number', '#firm-address', '#invoice-date',
+                '#due-date', '#client-name', '#case-title'
+            ];
+
+            let isValid = true;
+            for (const field of requiredFields) {
+                if (!$(field).val().trim()) {
+                    $(field).focus();
+                    alert('Please fill in all required fields before previewing.');
+                    return;
+                }
+            }
+
+            // Check if at least one line item has description
+            const hasValidLineItem = $('#line-items-container .line-item').slice(1).toArray().some(item => {
+                const description = $(item).find('input[type="text"]').val().trim();
+                return description;
+            });
+
+            if (!hasValidLineItem) {
+                alert('Please add at least one service item before previewing.');
+                return;
+            }
+
+            // Generate preview content
+            generateInvoicePreview();
+
+            // Show preview modal
+            $('#preview-modal').addClass('active');
+            $('body').css('overflow', 'hidden');
+        }
+
+        function closePreviewModal() {
+            $('#preview-modal').removeClass('active');
+            $('body').css('overflow', 'auto');
+        }
+
+        function generateInvoicePreview() {
+            // Collect all form data
+            const firmName = $('#firm-name').val() || 'AI Advocates Legal Associates';
+            const firmAddress = $('#firm-address').val() || '';
+            const firmPhone = $('#firm-phone').val() || '';
+            const firmEmail = $('#firm-email').val() || '';
+            const firmWebsite = $('#firm-website').val() || '';
+            const gstin = $('#gstin').val() || '';
+
+            const invoiceTitle = $('#invoice-title').val() || 'Professional Invoice';
+            const invoiceNumber = $('#invoice-number').val() || '';
+            const invoiceDate = formatDate($('#invoice-date').val());
+            const dueDate = formatDate($('#due-date').val());
+
+            const clientName = $('#client-name').val() || '';
+            const clientAddress = $('#client-address').val() || '';
+            const clientGstin = $('#client-gstin').val() || '';
+
+            const caseTitle = $('#case-title').val() || '';
+            const caseNumber = $('#case-number').val() || '';
+            const billingFrom = formatDate($('#billing-from').val());
+            const billingTo = formatDate($('#billing-to').val());
+
+            // Generate line items table
+            let lineItemsHtml = '';
+            $('#line-items-container .line-item').slice(1).each(function() {
+                const description = $(this).find('input[type="text"]').val().trim();
+                const hours = $(this).find('.hours-input').val() || '';
+                const rate = $(this).find('.rate-input').val() || '';
+                const qty = $(this).find('.qty-input').val() || '';
+                const amount = $(this).find('.amount-input').val() || '0';
+
+                if (description) {
+                    lineItemsHtml += `
+                        <tr>
+                            <td>${description}</td>
+                            <td class="amount-cell">${hours || 'N/A'}</td>
+                            <td class="amount-cell">₹${rate ? parseInt(rate).toLocaleString('en-IN') : 'N/A'}</td>
+                            <td class="amount-cell">${qty || '1'}</td>
+                            <td class="amount-cell">₹${parseInt(amount || 0).toLocaleString('en-IN')}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            // Get summary values
+            const subtotal = $('#subtotal-amount').text();
+            const discount = $('#discount-amount').val() || '0';
+            const gstRate = $('#gst-rate').val() || '18';
+            const gstAmount = $('#gst-amount').text();
+            const totalAmount = $('#total-amount').text();
+            const amountWords = $('#amount-words').val() || '';
+
+            // Payment details
+            const bankAccountName = $('#bank-account-name').val() || '';
+            const bankName = $('#bank-name').val() || '';
+            const accountNumber = $('#account-number').val() || '';
+            const ifscCode = $('#ifsc-code').val() || '';
+            const upiId = $('#upi-id').val() || '';
+            const paymentTerms = $('#payment-terms').val() || '';
+
+            // Footer
+            const declaration = $('#declaration').val() || '';
+            const clientNotes = $('#client-notes').val() || '';
+
+            // Generate complete invoice HTML
+            const invoiceHtml = `
+                <!-- Invoice Header -->
+                <div class="invoice-header-section">
+                    <div class="firm-details">
+                        <div class="firm-name">${firmName}</div>
+                        <div class="firm-address">${firmAddress.replace(/\n/g, '<br>')}</div>
+                        <div class="firm-contact">
+                            ${firmPhone ? `Phone: ${firmPhone}<br>` : ''}
+                            ${firmEmail ? `Email: ${firmEmail}<br>` : ''}
+                            ${firmWebsite ? `Website: ${firmWebsite}<br>` : ''}
+                            ${gstin ? `GSTIN: ${gstin}` : ''}
+                        </div>
+                    </div>
+                    <div class="invoice-meta">
+                        <div class="invoice-title-preview">${invoiceTitle}</div>
+                        <div class="invoice-details-preview">
+                            <div><strong>Invoice #:</strong> ${invoiceNumber}</div>
+                            <div><strong>Date:</strong> ${invoiceDate}</div>
+                            <div><strong>Due Date:</strong> ${dueDate}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Details -->
+                <div class="client-section">
+                    <div class="section-heading">Bill To:</div>
+                    <div class="client-info">
+                        <strong>${clientName}</strong><br>
+                        ${clientAddress ? clientAddress.replace(/\n/g, '<br>') + '<br>' : ''}
+                        ${clientGstin ? `GSTIN: ${clientGstin}` : ''}
+                    </div>
+                </div>
+
+                <!-- Case Information -->
+                ${caseTitle || caseNumber || billingFrom || billingTo ? `
+                <div class="case-section">
+                    <div class="section-heading">Case/Matter Information:</div>
+                    <div class="case-details">
+                        ${caseTitle ? `<div><strong>Case Title:</strong> ${caseTitle}</div>` : ''}
+                        ${caseNumber ? `<div><strong>Case Number:</strong> ${caseNumber}</div>` : ''}
+                        ${billingFrom ? `<div><strong>Billing From:</strong> ${billingFrom}</div>` : ''}
+                        ${billingTo ? `<div><strong>Billing To:</strong> ${billingTo}</div>` : ''}
+                    </div>
+                </div>
+                ` : ''}
+
+                <!-- Services Table -->
+                <div class="section-heading">Services Rendered:</div>
+                <table class="services-table">
+                    <thead>
+                        <tr>
+                            <th>Description of Work</th>
+                            <th>Hours</th>
+                            <th>Rate</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${lineItemsHtml}
+                    </tbody>
+                </table>
+
+                <!-- Summary Section -->
+                <div class="summary-section">
+                    <table class="summary-table">
+                        <tr>
+                            <td><strong>Subtotal:</strong></td>
+                            <td class="amount-cell"><strong>${subtotal}</strong></td>
+                        </tr>
+                        ${discount && discount !== '0' ? `
+                        <tr>
+                            <td><strong>Discount:</strong></td>
+                            <td class="amount-cell"><strong>₹${parseInt(discount).toLocaleString('en-IN')}</strong></td>
+                        </tr>
+                        ` : ''}
+                        <tr>
+                            <td><strong>GST (${gstRate}%):</strong></td>
+                            <td class="amount-cell"><strong>${gstAmount}</strong></td>
+                        </tr>
+                        <tr class="total-row">
+                            <td><strong>Total Amount Payable:</strong></td>
+                            <td class="amount-cell"><strong>${totalAmount}</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                ${amountWords ? `
+                <div class="amount-words">
+                    <strong>Amount in Words:</strong> ${amountWords}
+                </div>
+                ` : ''}
+
+                <!-- Payment Details -->
+                ${bankAccountName || bankName || accountNumber ? `
+                <div class="payment-section">
+                    <div class="section-heading">Payment Details:</div>
+                    <div class="payment-details">
+                        ${bankAccountName ? `<div><strong>Account Name:</strong> ${bankAccountName}</div>` : ''}
+                        ${bankName ? `<div><strong>Bank:</strong> ${bankName}</div>` : ''}
+                        ${accountNumber ? `<div><strong>Account Number:</strong> ${accountNumber}</div>` : ''}
+                        ${ifscCode ? `<div><strong>IFSC Code:</strong> ${ifscCode}</div>` : ''}
+                        ${upiId ? `<div><strong>UPI ID:</strong> ${upiId}</div>` : ''}
+                        ${paymentTerms ? `<div><strong>Payment Terms:</strong> ${paymentTerms}</div>` : ''}
+                    </div>
+                </div>
+                ` : ''}
+
+                <!-- Footer -->
+                <div class="footer-section">
+                    ${declaration ? `
+                    <div class="declaration">
+                        <strong>Declaration:</strong><br>
+                        ${declaration}
+                    </div>
+                    ` : ''}
+
+                    ${clientNotes ? `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Notes:</strong><br>
+                        ${clientNotes}
+                    </div>
+                    ` : ''}
+
+                    <div class="signature-section">
+                        <div style="margin-top: 3rem; border-top: 1px solid #333; width: 200px; margin-left: auto;">
+                            <div style="text-align: center; padding-top: 0.5rem;">
+                                <strong>Authorized Signatory</strong><br>
+                                ${firmName}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('#invoice-preview').html(invoiceHtml);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function printInvoice() {
+            window.print();
+        }
+
+        function saveFromPreview() {
+            closePreviewModal();
+            saveInvoice();
+        }
+
+        // Close preview modal when clicking outside
+        $(document).on('click', '#preview-modal.modal-overlay', function(e) {
+            if (e.target === this) {
+                closePreviewModal();
+            }
+        });
+
+        // Prevent preview modal close when clicking inside
+        $('.preview-modal').on('click', function(e) {
+            e.stopPropagation();
+        });
     </script>
 </body>
 </html>
