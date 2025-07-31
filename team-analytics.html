@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Analytics - AI Advocates</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Global Language Support -->
+    <script src="app-language.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-active: #4f46e5;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --purple: #8b5cf6;
+            --orange: #f97316;
+            --green: #22c55e;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            background: var(--background);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: var(--background);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--border);
+        }
+
+        .notification-icon {
+            background: none;
+            border: none;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .notification-icon:hover {
+            background: var(--background);
+            color: var(--text-primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            background: var(--error);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.75rem;
+            min-width: 1rem;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .page-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-select {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 2.5rem 0.5rem 1rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stat-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: white;
+        }
+
+        .stat-icon.blue { background: var(--info); }
+        .stat-icon.green { background: var(--success); }
+        .stat-icon.purple { background: var(--purple); }
+        .stat-icon.orange { background: var(--orange); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--background);
+            color: var(--text-primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Performance Overview */
+        .search-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            background: var(--background);
+            position: relative;
+        }
+
+        .search-section {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 2.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .advocates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .advocate-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .advocate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .advocate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .advocate-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .advocate-specialty {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .advocate-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.125rem;
+        }
+
+        .star {
+            color: #fbbf24;
+            font-size: 0.875rem;
+        }
+
+        .rating-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .advocate-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-number.green { color: var(--success); }
+        .stat-number.blue { color: var(--info); }
+        .stat-number.orange { color: var(--orange); }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .advocate-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .metric-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .metric-value.green { color: var(--success); }
+        .metric-value.yellow { color: var(--warning); }
+
+        .advocate-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-outline {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--background);
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Attendance Tracking */
+        .attendance-log {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .log-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .log-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--info);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .log-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .log-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .attendance-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .attendee-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.present { background: var(--success); }
+        .status-dot.absent { background: var(--error); }
+
+        .attendee-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .attendee-court {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .attendance-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: right;
+        }
+
+        .attendance-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .attendance-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-present {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+        }
+
+        .status-absent {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        /* Task Analysis */
+        .task-analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .task-section {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .section-icon.blue { background: var(--info); }
+        .section-icon.green { background: var(--success); }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-name {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .task-percentage {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-count {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .activity-count.high { color: var(--text-primary); }
+        .activity-count.completed { color: var(--success); }
+        .activity-count.progress { color: var(--warning); }
+        .activity-count.overdue { color: var(--error); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advocates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advocate-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .advocate-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .advocate-actions {
+                flex-direction: column;
+            }
+
+            .task-analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                padding: 0.25rem;
+            }
+
+            .page-controls {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .header-left {
+                gap: 0.5rem;
+            }
+
+            .logo-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <button class="menu-toggle" onclick="openSideMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <span class="logo-text">AI Advocates</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="more.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to More
+                </a>
+                <button class="notification-icon" onclick="openNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="notification-icon" onclick="logoutFromApp()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Advocate Performance Analytics</h1>
+                <p class="page-subtitle">Track advocate performance, attendance, and case progress</p>
+            </div>
+
+            <!-- Page Controls -->
+            <div class="page-controls">
+                <div></div>
+                <div class="filter-dropdown">
+                    <select class="filter-select">
+                        <option value="30">Last 30 Days</option>
+                        <option value="60">Last 60 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="365">Last Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Total Advocates</div>
+                            <div class="stat-value">247</div>
+                        </div>
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Avg. Attendance Rate</div>
+                            <div class="stat-value" style="color: var(--success);">96.3%</div>
+                        </div>
+                        <div class="stat-icon green">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Avg. Quality Score</div>
+                            <div class="stat-value" style="color: var(--purple);">89.3</div>
+                        </div>
+                        <div class="stat-icon purple">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Active Cases</div>
+                            <div class="stat-value" style="color: var(--orange);">156</div>
+                        </div>
+                        <div class="stat-icon orange">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="performance">Performance Overview</button>
+                <button class="tab-btn" data-tab="attendance">Attendance Tracking</button>
+                <button class="tab-btn" data-tab="tasks">Task Analytics</button>
+            </div>
+
+            <!-- Performance Overview Tab -->
+            <div id="performance-tab" class="tab-content active">
+                <div class="search-section">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search advocates by name or specialization...">
+                </div>
+
+                <div class="advocates-grid">
+                    <!-- Advocate Card 1 -->
+                    <div class="advocate-card">
+                        <div class="advocate-header">
+                            <div class="advocate-info">
+                                <h3>Adv. Priya Sharma</h3>
+                                <div class="advocate-specialty">Criminal Law</div>
+                            </div>
+                            <div class="advocate-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="far fa-star star"></i>
+                                </div>
+                                <span class="rating-value">4.8</span>
+                            </div>
+                        </div>
+
+                        <div class="advocate-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Total Cases</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number green">23</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number blue">133</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                        </div>
+
+                        <div class="advocate-metrics">
+                            <div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Hearing Attendance</span>
+                                    <span class="metric-value green">96.5%</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Draft Quality Score</span>
+                                    <span class="metric-value yellow">87/100</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Avg. Response Time</span>
+                                    <span class="metric-value">2.3 hours</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Last Active</span>
+                                    <span class="metric-value">1/15/2024</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="advocate-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Assign Task</button>
+                        </div>
+                    </div>
+
+                    <!-- Advocate Card 2 -->
+                    <div class="advocate-card">
+                        <div class="advocate-header">
+                            <div class="advocate-info">
+                                <h3>Adv. Rajesh Kumar</h3>
+                                <div class="advocate-specialty">Corporate Law</div>
+                            </div>
+                            <div class="advocate-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="rating-value">4.9</span>
+                            </div>
+                        </div>
+
+                        <div class="advocate-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">203</div>
+                                <div class="stat-label">Total Cases</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number green">31</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number blue">172</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                        </div>
+
+                        <div class="advocate-metrics">
+                            <div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Hearing Attendance</span>
+                                    <span class="metric-value green">94.2%</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Draft Quality Score</span>
+                                    <span class="metric-value green">92/100</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Avg. Response Time</span>
+                                    <span class="metric-value">1.8 hours</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Last Active</span>
+                                    <span class="metric-value">1/15/2024</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="advocate-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Assign Task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Tracking Tab -->
+            <div id="attendance-tab" class="tab-content">
+                <div class="attendance-log">
+                    <div class="log-header">
+                        <div class="log-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <div class="log-title">Daily Attendance Log</div>
+                            <div class="log-subtitle">Court appearance tracking for all advocates</div>
+                        </div>
+                    </div>
+
+                    <div class="attendance-list">
+                        <div class="attendance-item">
+                            <div class="attendee-info">
+                                <div class="status-dot present"></div>
+                                <div class="attendee-details">
+                                    <h4>Adv. Priya Sharma</h4>
+                                    <div class="attendee-court">Delhi High Court</div>
+                                </div>
+                            </div>
+                            <div class="attendance-meta">
+                                <div class="attendance-date">2024-01-15</div>
+                                <div class="attendance-status status-present">Present</div>
+                            </div>
+                        </div>
+
+                        <div class="attendance-item">
+                            <div class="attendee-info">
+                                <div class="status-dot present"></div>
+                                <div class="attendee-details">
+                                    <h4>Adv. Rajesh Kumar</h4>
+                                    <div class="attendee-court">Supreme Court</div>
+                                </div>
+                            </div>
+                            <div class="attendance-meta">
+                                <div class="attendance-date">2024-01-15</div>
+                                <div class="attendance-status status-present">Present</div>
+                            </div>
+                        </div>
+
+                        <div class="attendance-item">
+                            <div class="attendee-info">
+                                <div class="status-dot present"></div>
+                                <div class="attendee-details">
+                                    <h4>Adv. Sunita Patel</h4>
+                                    <div class="attendee-court">Family Court</div>
+                                </div>
+                            </div>
+                            <div class="attendance-meta">
+                                <div class="attendance-date">2024-01-14</div>
+                                <div class="attendance-status status-present">Present</div>
+                            </div>
+                        </div>
+
+                        <div class="attendance-item">
+                            <div class="attendee-info">
+                                <div class="status-dot absent"></div>
+                                <div class="attendee-details">
+                                    <h4>Adv. Priya Sharma</h4>
+                                    <div class="attendee-court">District Court</div>
+                                </div>
+                            </div>
+                            <div class="attendance-meta">
+                                <div class="attendance-date">2024-01-14</div>
+                                <div class="attendance-status status-absent">Absent</div>
+                            </div>
+                        </div>
+
+                        <div class="attendance-item">
+                            <div class="attendee-info">
+                                <div class="status-dot present"></div>
+                                <div class="attendee-details">
+                                    <h4>Adv. Rajesh Kumar</h4>
+                                    <div class="attendee-court">High Court</div>
+                                </div>
+                            </div>
+                            <div class="attendance-meta">
+                                <div class="attendance-date">2024-01-13</div>
+                                <div class="attendance-status status-present">Present</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Analytics Tab -->
+            <div id="tasks-tab" class="tab-content">
+                <div class="task-analysis-grid">
+                    <div class="task-section">
+                        <div class="section-header">
+                            <div class="section-icon blue">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="section-title">Task Completion Rates</div>
+                        </div>
+
+                        <div class="task-list">
+                            <div class="task-item">
+                                <span class="task-name">Document Drafting</span>
+                                <span class="task-percentage">94%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Court Appearances</span>
+                                <span class="task-percentage">96%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Legal Research</span>
+                                <span class="task-percentage">89%</span>
+                            </div>
+                            <div class="task-item">
+                                <span class="task-name">Client Consultations</span>
+                                <span class="task-percentage">92%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="task-section">
+                        <div class="section-header">
+                            <div class="section-icon green">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="section-title">Weekly Activity Summary</div>
+                        </div>
+
+                        <div class="task-list">
+                            <div class="activity-item">
+                                <span class="activity-label">Tasks Assigned</span>
+                                <span class="activity-count high">47</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Tasks Completed</span>
+                                <span class="activity-count completed">43</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Tasks In Progress</span>
+                                <span class="activity-count progress">4</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Overdue Tasks</span>
+                                <span class="activity-count overdue">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Tab functionality
+            $('.tab-btn').on('click', function() {
+                const targetTab = $(this).data('tab');
+                
+                // Update active tab button
+                $('.tab-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                // Show corresponding tab content
+                $('.tab-content').removeClass('active');
+                $(`#${targetTab}-tab`).addClass('active');
+            });
+
+            // Search functionality
+            $('.search-input').on('input', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                $('.advocate-card').each(function() {
+                    const advocateName = $(this).find('h3').text().toLowerCase();
+                    const specialty = $(this).find('.advocate-specialty').text().toLowerCase();
+                    
+                    if (advocateName.includes(searchTerm) || specialty.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            // Filter dropdown
+            $('.filter-select').on('change', function() {
+                const selectedPeriod = $(this).val();
+                console.log('Filter changed to:', selectedPeriod, 'days');
+                // Here you would typically reload data based on the selected period
+            });
+
+            // Simulate real-time updates
+            setInterval(function() {
+                // Update attendance status randomly for demo
+                $('.attendance-item:first-child .attendance-date').text(new Date().toISOString().split('T')[0]);
+            }, 30000);
+        });
+
+        // Header functions
+        function openSideMenu() {
+            alert("Side menu would open here");
+        }
+
+        function openNotifications() {
+            alert("Notifications panel would open here");
+        }
+
+        function logoutFromApp() {
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
