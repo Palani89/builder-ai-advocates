@@ -1857,8 +1857,38 @@ New Delhi - 110001, India</textarea>
 
             // Create Invoice button
             $('.section-header .btn-primary').on('click', function() {
-                alert('Opening invoice creation form...\n\nThis would redirect to a detailed invoice creation page.');
+                openInvoiceModal();
             });
+
+            // Initialize form with current date
+            const today = new Date().toISOString().split('T')[0];
+            $('#invoice-date').val(today);
+
+            // Set due date to 7 days from today
+            const dueDate = new Date();
+            dueDate.setDate(dueDate.getDate() + 7);
+            $('#due-date').val(dueDate.toISOString().split('T')[0]);
+
+            // Line item calculations
+            $(document).on('input', '.hours-input, .rate-input, .qty-input', function() {
+                calculateLineItemAmount($(this).closest('.line-item'));
+                calculateTotals();
+            });
+
+            // Discount and GST calculations
+            $('#discount-amount, #gst-rate').on('input change', function() {
+                calculateTotals();
+                updateGSTPercentage();
+            });
+
+            function updateGSTPercentage() {
+                const gstRate = $('#gst-rate').val();
+                $('#gst-percentage').text(gstRate);
+            }
+
+            // Initialize calculations
+            calculateTotals();
+            updateGSTPercentage();
         });
 
         // Header functions
