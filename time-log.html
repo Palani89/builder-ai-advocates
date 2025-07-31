@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Log Entry - AI Advocates</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Global Language Support -->
+    <script src="app-language.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --border-active: #4f46e5;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:hover {
+            background: var(--background);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: var(--background);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--border);
+        }
+
+        .notification-icon {
+            background: none;
+            border: none;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .notification-icon:hover {
+            background: var(--background);
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .page-title i {
+            color: var(--primary);
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Time Log Form */
+        .time-log-form {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .form-grid-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-label.required::after {
+            content: '*';
+            color: var(--error);
+            margin-left: 0.25rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            background: var(--surface);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--border-active);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-input:disabled {
+            background: var(--background);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--border);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--success);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(22px);
+        }
+
+        .toggle-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Duration Display */
+        .duration-display {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Rate Display */
+        .rate-container {
+            position: relative;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .currency-input {
+            padding-left: 2rem;
+        }
+
+        /* Action Buttons */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: var(--background);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .time-log-form {
+                padding: 1.5rem;
+            }
+
+            .form-grid-2,
+            .form-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <button class="menu-toggle" onclick="openSideMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <span class="logo-text">AI Advocates</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="billing-payments.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Billing
+                </a>
+                <button class="notification-icon" onclick="openNotifications()">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button class="notification-icon" onclick="logoutFromApp()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-clock"></i>
+                    Time Log Entry
+                </h1>
+                <p class="page-subtitle">Record billable time and task details for accurate invoicing</p>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="success-message" class="status-message success">
+                <i class="fas fa-check-circle"></i>
+                <span id="success-text"></span>
+            </div>
+            <div id="error-message" class="status-message error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="error-text"></span>
+            </div>
+
+            <!-- Time Log Form -->
+            <div class="time-log-form">
+                <form id="time-log-form">
+                    <!-- Client & Case Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-user"></i>
+                            Client & Case Information
+                        </h3>
+                        <div class="form-grid form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label required">Client Name</label>
+                                <select class="form-select" id="client-name" required>
+                                    <option value="">Select Client</option>
+                                    <option value="john-doe">John Doe</option>
+                                    <option value="smith-construction">Smith Construction Ltd.</option>
+                                    <option value="abc-corporation">ABC Corporation</option>
+                                    <option value="mary-johnson">Mary Johnson</option>
+                                    <option value="tech-innovations">Tech Innovations Pvt Ltd</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Case Name</label>
+                                <select class="form-select" id="case-name" required disabled>
+                                    <option value="">Select Client First</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Details -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-tasks"></i>
+                            Task Details
+                        </h3>
+                        <div class="form-group form-group-full">
+                            <label class="form-label required">Task Description</label>
+                            <textarea class="form-textarea" id="task-description" required 
+                                placeholder="Describe the work performed (e.g., Research case law, Draft motion, Client consultation, Court appearance)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Time Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-clock"></i>
+                            Time Information
+                        </h3>
+                        <div class="form-grid form-grid-3">
+                            <div class="form-group">
+                                <label class="form-label required">Start Time</label>
+                                <input type="time" class="form-input" id="start-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">End Time</label>
+                                <input type="time" class="form-input" id="end-time" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Duration</label>
+                                <div class="duration-display" id="duration-display">
+                                    <i class="fas fa-stopwatch"></i>
+                                    <span id="duration-text">Select times</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid form-grid-2" style="margin-top: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label required">Date</label>
+                                <input type="date" class="form-input" id="log-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Billable?</label>
+                                <div class="toggle-container">
+                                    <div class="toggle-switch active" id="billable-toggle">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                    <span class="toggle-label" id="billable-label">Yes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-rupee-sign"></i>
+                            Billing Information
+                        </h3>
+                        <div class="form-grid form-grid-3">
+                            <div class="form-group">
+                                <label class="form-label required">Billing Type</label>
+                                <select class="form-select" id="billing-type" required>
+                                    <option value="hourly">Hourly</option>
+                                    <option value="fixed">Fixed Fee</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Rate</label>
+                                <div class="rate-container">
+                                    <span class="currency-symbol">₹</span>
+                                    <input type="number" class="form-input currency-input" id="rate" required 
+                                           placeholder="2000" step="50" min="0">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Total Amount</label>
+                                <div class="duration-display">
+                                    <i class="fas fa-calculator"></i>
+                                    <span id="total-amount">₹0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-undo"></i>
+                            Clear Form
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="saveAndContinue()">
+                            <i class="fas fa-plus"></i>
+                            Save & Add Another
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i>
+                            Save Entry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Set current date
+            const today = new Date().toISOString().split('T')[0];
+            $('#log-date').val(today);
+
+            // Client-Case relationship mapping
+            const clientCases = {
+                'john-doe': [
+                    { value: 'criminal-defense', text: 'State vs. John Doe - Criminal Defense' },
+                    { value: 'appeal-case', text: 'John Doe Appeal - Criminal Appeal' }
+                ],
+                'smith-construction': [
+                    { value: 'property-dispute', text: 'Smith Construction vs. ABC - Property Dispute' },
+                    { value: 'contract-dispute', text: 'Smith Construction - Contract Dispute' }
+                ],
+                'abc-corporation': [
+                    { value: 'corporate-merger', text: 'ABC Corporation - Corporate Merger' },
+                    { value: 'labor-dispute', text: 'ABC Corporation - Labor Dispute' }
+                ],
+                'mary-johnson': [
+                    { value: 'divorce-case', text: 'Mary Johnson vs. Robert Johnson - Divorce' },
+                    { value: 'custody-case', text: 'Mary Johnson - Child Custody' }
+                ],
+                'tech-innovations': [
+                    { value: 'ip-infringement', text: 'Tech Innovations - IP Infringement' },
+                    { value: 'employment-law', text: 'Tech Innovations - Employment Law' }
+                ]
+            };
+
+            // Client selection change handler
+            $('#client-name').on('change', function() {
+                const selectedClient = $(this).val();
+                const caseSelect = $('#case-name');
+                
+                if (selectedClient && clientCases[selectedClient]) {
+                    caseSelect.prop('disabled', false);
+                    caseSelect.html('<option value="">Select Case</option>');
+                    
+                    clientCases[selectedClient].forEach(function(caseItem) {
+                        caseSelect.append(`<option value="${caseItem.value}">${caseItem.text}</option>`);
+                    });
+                } else {
+                    caseSelect.prop('disabled', true);
+                    caseSelect.html('<option value="">Select Client First</option>');
+                }
+                
+                updateRate();
+                calculateTotal();
+            });
+
+            // Auto-fill rate based on client and case
+            $('#case-name').on('change', function() {
+                updateRate();
+                calculateTotal();
+            });
+
+            // Time change handlers
+            $('#start-time, #end-time').on('change', function() {
+                calculateDuration();
+                calculateTotal();
+            });
+
+            // Billing type change handler
+            $('#billing-type').on('change', function() {
+                calculateTotal();
+            });
+
+            // Rate change handler
+            $('#rate').on('input', function() {
+                calculateTotal();
+            });
+
+            // Billable toggle
+            $('#billable-toggle').on('click', function() {
+                $(this).toggleClass('active');
+                const isActive = $(this).hasClass('active');
+                $('#billable-label').text(isActive ? 'Yes' : 'No');
+                calculateTotal();
+            });
+
+            // Form submission
+            $('#time-log-form').on('submit', function(e) {
+                e.preventDefault();
+                saveTimeEntry();
+            });
+        });
+
+        function updateRate() {
+            const client = $('#client-name').val();
+            const caseType = $('#case-name').val();
+            let defaultRate = 2000; // Default rate
+
+            // Set different rates based on client/case type
+            const rateMatrix = {
+                'john-doe': { 'criminal-defense': 2500, 'appeal-case': 3000 },
+                'smith-construction': { 'property-dispute': 2200, 'contract-dispute': 2000 },
+                'abc-corporation': { 'corporate-merger': 4000, 'labor-dispute': 2800 },
+                'mary-johnson': { 'divorce-case': 1800, 'custody-case': 1600 },
+                'tech-innovations': { 'ip-infringement': 3500, 'employment-law': 2400 }
+            };
+
+            if (client && caseType && rateMatrix[client] && rateMatrix[client][caseType]) {
+                defaultRate = rateMatrix[client][caseType];
+            }
+
+            $('#rate').val(defaultRate);
+        }
+
+        function calculateDuration() {
+            const startTime = $('#start-time').val();
+            const endTime = $('#end-time').val();
+            
+            if (startTime && endTime) {
+                const start = new Date(`1970-01-01T${startTime}:00`);
+                const end = new Date(`1970-01-01T${endTime}:00`);
+                
+                if (end > start) {
+                    const diff = end - start;
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    const duration = hours + (minutes / 60);
+                    const durationText = `${hours}h ${minutes}m (${duration.toFixed(2)} hrs)`;
+                    
+                    $('#duration-text').text(durationText);
+                    $('#duration-display').attr('data-duration', duration);
+                } else {
+                    $('#duration-text').text('Invalid time range');
+                    $('#duration-display').attr('data-duration', 0);
+                }
+            } else {
+                $('#duration-text').text('Select times');
+                $('#duration-display').attr('data-duration', 0);
+            }
+        }
+
+        function calculateTotal() {
+            const duration = parseFloat($('#duration-display').attr('data-duration')) || 0;
+            const rate = parseFloat($('#rate').val()) || 0;
+            const billingType = $('#billing-type').val();
+            const isBillable = $('#billable-toggle').hasClass('active');
+            
+            let total = 0;
+            
+            if (isBillable) {
+                if (billingType === 'hourly') {
+                    total = duration * rate;
+                } else if (billingType === 'fixed') {
+                    total = rate;
+                }
+            }
+            
+            $('#total-amount').text(`₹${total.toLocaleString('en-IN')}`);
+        }
+
+        function saveTimeEntry() {
+            // Validate form
+            const requiredFields = ['#client-name', '#case-name', '#task-description', '#start-time', '#end-time', '#log-date', '#billing-type', '#rate'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!$(field).val().trim()) {
+                    showError('Please fill in all required fields.');
+                    $(field).focus();
+                    isValid = false;
+                    return false;
+                }
+            });
+            
+            if (!isValid) return;
+            
+            // Check valid time range
+            const duration = parseFloat($('#duration-display').attr('data-duration')) || 0;
+            if (duration <= 0) {
+                showError('Please enter a valid time range.');
+                return;
+            }
+            
+            // Collect form data
+            const timeEntry = {
+                clientName: $('#client-name option:selected').text(),
+                clientId: $('#client-name').val(),
+                caseName: $('#case-name option:selected').text(),
+                caseId: $('#case-name').val(),
+                taskDescription: $('#task-description').val(),
+                startTime: $('#start-time').val(),
+                endTime: $('#end-time').val(),
+                duration: duration,
+                date: $('#log-date').val(),
+                billingType: $('#billing-type').val(),
+                rate: parseFloat($('#rate').val()),
+                billable: $('#billable-toggle').hasClass('active'),
+                totalAmount: $('#total-amount').text(),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save to localStorage (in real app, this would be sent to server)
+            let timeEntries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+            timeEntries.push(timeEntry);
+            localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
+            
+            showSuccess(`Time entry saved successfully!\n\nClient: ${timeEntry.clientName}\nCase: ${timeEntry.caseName}\nDuration: ${$('#duration-text').text()}\nAmount: ${timeEntry.totalAmount}`);
+            
+            // Redirect back to billing page after 2 seconds
+            setTimeout(() => {
+                window.location.href = 'billing-payments.html';
+            }, 2000);
+        }
+
+        function saveAndContinue() {
+            // Validate and save current entry
+            const requiredFields = ['#client-name', '#case-name', '#task-description', '#start-time', '#end-time', '#log-date', '#billing-type', '#rate'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!$(field).val().trim()) {
+                    showError('Please fill in all required fields.');
+                    $(field).focus();
+                    isValid = false;
+                    return false;
+                }
+            });
+            
+            if (!isValid) return;
+            
+            const duration = parseFloat($('#duration-display').attr('data-duration')) || 0;
+            if (duration <= 0) {
+                showError('Please enter a valid time range.');
+                return;
+            }
+            
+            // Save current entry
+            const timeEntry = {
+                clientName: $('#client-name option:selected').text(),
+                clientId: $('#client-name').val(),
+                caseName: $('#case-name option:selected').text(),
+                caseId: $('#case-name').val(),
+                taskDescription: $('#task-description').val(),
+                startTime: $('#start-time').val(),
+                endTime: $('#end-time').val(),
+                duration: duration,
+                date: $('#log-date').val(),
+                billingType: $('#billing-type').val(),
+                rate: parseFloat($('#rate').val()),
+                billable: $('#billable-toggle').hasClass('active'),
+                totalAmount: $('#total-amount').text(),
+                timestamp: new Date().toISOString()
+            };
+            
+            let timeEntries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+            timeEntries.push(timeEntry);
+            localStorage.setItem('timeEntries', JSON.stringify(timeEntries));
+            
+            showSuccess('Time entry saved! Ready for next entry.');
+            
+            // Clear form for next entry
+            clearForm();
+        }
+
+        function clearForm() {
+            $('#time-log-form')[0].reset();
+            $('#case-name').prop('disabled', true).html('<option value="">Select Client First</option>');
+            $('#duration-text').text('Select times');
+            $('#duration-display').attr('data-duration', 0);
+            $('#total-amount').text('₹0');
+            $('#billable-toggle').addClass('active');
+            $('#billable-label').text('Yes');
+            
+            // Set current date
+            const today = new Date().toISOString().split('T')[0];
+            $('#log-date').val(today);
+            
+            hideMessages();
+        }
+
+        function showSuccess(message) {
+            $('#success-text').text(message);
+            $('#success-message').show();
+            $('#error-message').hide();
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                $('#success-message').hide();
+            }, 5000);
+        }
+
+        function showError(message) {
+            $('#error-text').text(message);
+            $('#error-message').show();
+            $('#success-message').hide();
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                $('#error-message').hide();
+            }, 5000);
+        }
+
+        function hideMessages() {
+            $('#success-message, #error-message').hide();
+        }
+
+        // Header functions
+        function openSideMenu() {
+            alert("Side menu would open here");
+        }
+
+        function openNotifications() {
+            alert("Notifications panel would open here");
+        }
+
+        function logoutFromApp() {
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
