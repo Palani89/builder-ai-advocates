@@ -1,453 +1,469 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Analytics - AI Advocates</title>
-    
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Global Language Support -->
     <script src="app-language.js"></script>
-    
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --primary: #4f46e5;
-            --primary-dark: #3730a3;
-            --primary-light: #6366f1;
-            --secondary: #10b981;
-            --background: #f8fafc;
-            --surface: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border: #e2e8f0;
-            --border-active: #4f46e5;
-            --success: #10b981;
-            --error: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
+      :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #6366f1;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-active: #4f46e5;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --info: #3b82f6;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
 
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--background);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
 
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
-        /* Header */
-        .header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      /* Header */
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
 
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
+      .menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
 
-        .menu-toggle:hover {
-            background: var(--background);
-        }
+      .menu-toggle:hover {
+        background: var(--background);
+      }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-        .logo-icon {
-            width: 2rem;
-            height: 2rem;
-            background: var(--primary);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+      .logo-icon {
+        width: 2rem;
+        height: 2rem;
+        background: var(--primary);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
 
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+      .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
 
-        .back-btn {
-            background: var(--background);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s;
-        }
+      .back-btn {
+        background: var(--background);
+        border: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        color: var(--text-primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+      }
 
-        .back-btn:hover {
-            background: var(--border);
-        }
+      .back-btn:hover {
+        background: var(--border);
+      }
 
-        .notification-icon {
-            background: none;
-            border: none;
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.2s;
-            position: relative;
-        }
+      .notification-icon {
+        background: none;
+        border: none;
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+        position: relative;
+      }
 
-        .notification-icon:hover {
-            background: var(--background);
-            color: var(--text-primary);
-        }
+      .notification-icon:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
 
-        /* Main Content */
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* Page Header */
+      .page-header {
+        margin-bottom: 2rem;
+      }
+
+      .page-title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .page-title i {
+        color: var(--primary);
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 1rem;
+      }
+
+      /* Analytics Cards */
+      .analytics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .analytics-card {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .analytics-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .card-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.125rem;
+        color: white;
+      }
+
+      .card-icon.blue {
+        background: var(--info);
+      }
+      .card-icon.green {
+        background: var(--success);
+      }
+      .card-icon.orange {
+        background: var(--warning);
+      }
+      .card-icon.purple {
+        background: #8b5cf6;
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .metric-change {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .metric-change.positive {
+        color: var(--success);
+      }
+
+      .metric-change.negative {
+        color: var(--error);
+      }
+
+      .chart-placeholder {
+        background: var(--background);
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        padding: 3rem 2rem;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin: 1rem 0;
+      }
+
+      @media (max-width: 768px) {
         .main-content {
-            flex: 1;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
+          padding: 1rem;
         }
 
-        /* Page Header */
-        .page-header {
-            margin-bottom: 2rem;
+        .analytics-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
 
         .page-title {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+          font-size: 1.5rem;
         }
-
-        .page-title i {
-            color: var(--primary);
-        }
-
-        .page-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* Analytics Cards */
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .analytics-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .analytics-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.125rem;
-            color: white;
-        }
-
-        .card-icon.blue { background: var(--info); }
-        .card-icon.green { background: var(--success); }
-        .card-icon.orange { background: var(--warning); }
-        .card-icon.purple { background: #8b5cf6; }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-change {
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .metric-change.positive {
-            color: var(--success);
-        }
-
-        .metric-change.negative {
-            color: var(--error);
-        }
-
-        .chart-placeholder {
-            background: var(--background);
-            border: 1px dashed var(--border);
-            border-radius: 8px;
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin: 1rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 1rem;
-            }
-
-            .analytics-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-container">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-left">
-                <button class="menu-toggle" onclick="openSideMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="logo-container">
-                    <div class="logo-icon">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <span class="logo-text">AI Advocates</span>
-                </div>
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <button class="menu-toggle" onclick="openSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-balance-scale"></i>
             </div>
-            <div class="header-right">
-                <a href="more.html" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to More
-                </a>
-                <button class="notification-icon" onclick="openNotifications()">
-                    <i class="fas fa-bell"></i>
-                </button>
-                <button class="notification-icon" onclick="logoutFromApp()">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
+            <span class="logo-text">AI Advocates</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="more.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to More
+          </a>
+          <button class="notification-icon" onclick="openNotifications()">
+            <i class="fas fa-bell"></i>
+          </button>
+          <button class="notification-icon" onclick="logoutFromApp()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-title">
+            <i class="fas fa-chart-bar"></i>
+            Analytics Dashboard
+          </h1>
+          <p class="page-subtitle">
+            Performance insights and business metrics for your legal practice
+          </p>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title">
-                    <i class="fas fa-chart-bar"></i>
-                    Analytics Dashboard
-                </h1>
-                <p class="page-subtitle">Performance insights and business metrics for your legal practice</p>
+        <!-- Analytics Cards -->
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Total Revenue</div>
+                <div class="metric-value">₹8.5L</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  +12% from last month
+                </div>
+              </div>
+              <div class="card-icon green">
+                <i class="fas fa-rupee-sign"></i>
+              </div>
             </div>
+          </div>
 
-            <!-- Analytics Cards -->
-            <div class="analytics-grid">
-                <div class="analytics-card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Total Revenue</div>
-                            <div class="metric-value">₹8.5L</div>
-                            <div class="metric-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                +12% from last month
-                            </div>
-                        </div>
-                        <div class="card-icon green">
-                            <i class="fas fa-rupee-sign"></i>
-                        </div>
-                    </div>
+          <div class="analytics-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Active Cases</div>
+                <div class="metric-value">47</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  +5 new cases this month
                 </div>
-
-                <div class="analytics-card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Active Cases</div>
-                            <div class="metric-value">47</div>
-                            <div class="metric-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                +5 new cases this month
-                            </div>
-                        </div>
-                        <div class="card-icon blue">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="analytics-card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Client Satisfaction</div>
-                            <div class="metric-value">94%</div>
-                            <div class="metric-change positive">
-                                <i class="fas fa-arrow-up"></i>
-                                +2% from last quarter
-                            </div>
-                        </div>
-                        <div class="card-icon purple">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="analytics-card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Billable Hours</div>
-                            <div class="metric-value">324h</div>
-                            <div class="metric-change negative">
-                                <i class="fas fa-arrow-down"></i>
-                                -3% from last month
-                            </div>
-                        </div>
-                        <div class="card-icon orange">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="card-icon blue">
+                <i class="fas fa-file-alt"></i>
+              </div>
             </div>
+          </div>
 
-            <!-- Charts Section -->
-            <div class="analytics-grid">
-                <div class="analytics-card">
-                    <div class="card-title">Revenue Trends</div>
-                    <div class="chart-placeholder">
-                        📊 Revenue chart over the last 12 months<br>
-                        Shows monthly income, payment patterns, and growth trends
-                    </div>
+          <div class="analytics-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Client Satisfaction</div>
+                <div class="metric-value">94%</div>
+                <div class="metric-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  +2% from last quarter
                 </div>
-
-                <div class="analytics-card">
-                    <div class="card-title">Case Success Rate</div>
-                    <div class="chart-placeholder">
-                        📈 Case outcomes and success rates<br>
-                        Shows won/lost/settled cases by practice area
-                    </div>
-                </div>
-
-                <div class="analytics-card">
-                    <div class="card-title">Client Acquisition</div>
-                    <div class="chart-placeholder">
-                        📋 New client acquisition metrics<br>
-                        Shows referral sources and conversion rates
-                    </div>
-                </div>
-
-                <div class="analytics-card">
-                    <div class="card-title">Time Distribution</div>
-                    <div class="chart-placeholder">
-                        ⏰ Time allocation by practice areas<br>
-                        Shows billable vs non-billable hours breakdown
-                    </div>
-                </div>
+              </div>
+              <div class="card-icon purple">
+                <i class="fas fa-heart"></i>
+              </div>
             </div>
+          </div>
+
+          <div class="analytics-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Billable Hours</div>
+                <div class="metric-value">324h</div>
+                <div class="metric-change negative">
+                  <i class="fas fa-arrow-down"></i>
+                  -3% from last month
+                </div>
+              </div>
+              <div class="card-icon orange">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Charts Section -->
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <div class="card-title">Revenue Trends</div>
+            <div class="chart-placeholder">
+              📊 Revenue chart over the last 12 months<br />
+              Shows monthly income, payment patterns, and growth trends
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <div class="card-title">Case Success Rate</div>
+            <div class="chart-placeholder">
+              📈 Case outcomes and success rates<br />
+              Shows won/lost/settled cases by practice area
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <div class="card-title">Client Acquisition</div>
+            <div class="chart-placeholder">
+              📋 New client acquisition metrics<br />
+              Shows referral sources and conversion rates
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <div class="card-title">Time Distribution</div>
+            <div class="chart-placeholder">
+              ⏰ Time allocation by practice areas<br />
+              Shows billable vs non-billable hours breakdown
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Header functions
-        function openSideMenu() {
-            alert("Side menu would open here");
-        }
+      // Header functions
+      function openSideMenu() {
+        alert("Side menu would open here");
+      }
 
-        function openNotifications() {
-            alert("Notifications panel would open here");
-        }
+      function openNotifications() {
+        alert("Notifications panel would open here");
+      }
 
-        function logoutFromApp() {
-            if (confirm("Are you sure you want to log out?")) {
-                window.location.href = "index.html";
-            }
+      function logoutFromApp() {
+        if (confirm("Are you sure you want to log out?")) {
+          window.location.href = "index.html";
         }
+      }
     </script>
-</body>
+  </body>
 </html>
