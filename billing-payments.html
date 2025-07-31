@@ -1905,6 +1905,281 @@ New Delhi - 110001, India</textarea>
                 window.location.href = "index.html";
             }
         }
+
+        // Invoice Modal Functions
+        function openInvoiceModal() {
+            $('#invoice-modal').addClass('active');
+            $('body').css('overflow', 'hidden');
+        }
+
+        function closeInvoiceModal() {
+            $('#invoice-modal').removeClass('active');
+            $('body').css('overflow', 'auto');
+        }
+
+        // Line Item Management
+        function addLineItem() {
+            const lineItemHtml = `
+                <div class="line-item">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Description of work" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-input hours-input" step="0.1" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="currency-symbol">₹</span>
+                            <input type="number" class="form-input currency-input rate-input" placeholder="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-input qty-input" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="currency-symbol">₹</span>
+                            <input type="number" class="form-input currency-input amount-input" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="remove-line-btn" onclick="removeLine(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            $('#line-items-container').append(lineItemHtml);
+        }
+
+        function removeLine(button) {
+            const lineItem = $(button).closest('.line-item');
+            const lineItemsCount = $('#line-items-container .line-item').length;
+
+            // Don't remove header row and ensure at least one data row remains
+            if (lineItemsCount > 2) {
+                lineItem.remove();
+                calculateTotals();
+            } else {
+                alert('At least one line item is required.');
+            }
+        }
+
+        function calculateLineItemAmount(lineItem) {
+            const hours = parseFloat(lineItem.find('.hours-input').val()) || 0;
+            const rate = parseFloat(lineItem.find('.rate-input').val()) || 0;
+            const qty = parseFloat(lineItem.find('.qty-input').val()) || 1;
+
+            const amount = hours * rate * qty;
+            lineItem.find('.amount-input').val(amount.toFixed(2));
+        }
+
+        function calculateTotals() {
+            let subtotal = 0;
+
+            // Calculate subtotal from all line items
+            $('#line-items-container .line-item').each(function(index) {
+                if (index > 0) { // Skip header row
+                    const amount = parseFloat($(this).find('.amount-input').val()) || 0;
+                    subtotal += amount;
+                }
+            });
+
+            const discount = parseFloat($('#discount-amount').val()) || 0;
+            const gstRate = parseFloat($('#gst-rate').val()) || 0;
+
+            const discountedAmount = subtotal - discount;
+            const gstAmount = (discountedAmount * gstRate) / 100;
+            const totalAmount = discountedAmount + gstAmount;
+
+            // Update display
+            $('#subtotal-amount').text('₹' + subtotal.toLocaleString('en-IN'));
+            $('#discount-display').text('₹' + discount.toLocaleString('en-IN'));
+            $('#gst-amount').text('₹' + gstAmount.toLocaleString('en-IN'));
+            $('#total-amount').text('₹' + totalAmount.toLocaleString('en-IN'));
+
+            // Convert amount to words
+            $('#amount-words').val(numberToWords(totalAmount) + ' Rupees Only');
+        }
+
+        function numberToWords(amount) {
+            if (amount === 0) return 'Zero';
+
+            const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
+                         'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen',
+                         'Seventeen', 'Eighteen', 'Nineteen'];
+
+            const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+            function convertThreeDigits(num) {
+                let result = '';
+
+                if (num >= 100) {
+                    result += ones[Math.floor(num / 100)] + ' Hundred ';
+                    num %= 100;
+                }
+
+                if (num >= 20) {
+                    result += tens[Math.floor(num / 10)] + ' ';
+                    num %= 10;
+                }
+
+                if (num > 0) {
+                    result += ones[num] + ' ';
+                }
+
+                return result;
+            }
+
+            const integerPart = Math.floor(amount);
+            let result = '';
+
+            if (integerPart >= 10000000) { // Crore
+                result += convertThreeDigits(Math.floor(integerPart / 10000000)) + 'Crore ';
+                integerPart %= 10000000;
+            }
+
+            if (integerPart >= 100000) { // Lakh
+                result += convertThreeDigits(Math.floor(integerPart / 100000)) + 'Lakh ';
+                integerPart %= 100000;
+            }
+
+            if (integerPart >= 1000) { // Thousand
+                result += convertThreeDigits(Math.floor(integerPart / 1000)) + 'Thousand ';
+                integerPart %= 1000;
+            }
+
+            if (integerPart > 0) {
+                result += convertThreeDigits(integerPart);
+            }
+
+            return result.trim();
+        }
+
+        function saveInvoice() {
+            // Validate required fields
+            const requiredFields = [
+                '#firm-name', '#invoice-number', '#firm-address', '#invoice-date',
+                '#due-date', '#client-name', '#case-title'
+            ];
+
+            let isValid = true;
+            requiredFields.forEach(field => {
+                if (!$(field).val().trim()) {
+                    $(field).focus();
+                    alert('Please fill in all required fields.');
+                    isValid = false;
+                    return false;
+                }
+            });
+
+            if (!isValid) return;
+
+            // Check if at least one line item has description and amount
+            const hasValidLineItem = $('#line-items-container .line-item').slice(1).toArray().some(item => {
+                const description = $(item).find('input[type="text"]').val().trim();
+                const amount = parseFloat($(item).find('.amount-input').val()) || 0;
+                return description && amount > 0;
+            });
+
+            if (!hasValidLineItem) {
+                alert('Please add at least one valid service item with description and amount.');
+                return;
+            }
+
+            // Collect invoice data
+            const invoiceData = {
+                header: {
+                    firmName: $('#firm-name').val(),
+                    invoiceNumber: $('#invoice-number').val(),
+                    firmAddress: $('#firm-address').val(),
+                    firmPhone: $('#firm-phone').val(),
+                    firmEmail: $('#firm-email').val(),
+                    firmWebsite: $('#firm-website').val(),
+                    gstin: $('#gstin').val(),
+                    invoiceTitle: $('#invoice-title').val(),
+                    invoiceDate: $('#invoice-date').val(),
+                    dueDate: $('#due-date').val()
+                },
+                client: {
+                    name: $('#client-name').val(),
+                    gstin: $('#client-gstin').val(),
+                    address: $('#client-address').val()
+                },
+                case: {
+                    title: $('#case-title').val(),
+                    number: $('#case-number').val(),
+                    billingFrom: $('#billing-from').val(),
+                    billingTo: $('#billing-to').val()
+                },
+                lineItems: [],
+                summary: {
+                    subtotal: $('#subtotal-amount').text(),
+                    discount: $('#discount-amount').val(),
+                    gstRate: $('#gst-rate').val(),
+                    gstAmount: $('#gst-amount').text(),
+                    totalAmount: $('#total-amount').text(),
+                    amountWords: $('#amount-words').val()
+                },
+                payment: {
+                    accountName: $('#bank-account-name').val(),
+                    bankName: $('#bank-name').val(),
+                    accountNumber: $('#account-number').val(),
+                    ifscCode: $('#ifsc-code').val(),
+                    upiId: $('#upi-id').val(),
+                    paymentTerms: $('#payment-terms').val()
+                },
+                footer: {
+                    declaration: $('#declaration').val(),
+                    clientNotes: $('#client-notes').val()
+                }
+            };
+
+            // Collect line items
+            $('#line-items-container .line-item').slice(1).each(function() {
+                const description = $(this).find('input[type="text"]').val().trim();
+                const hours = $(this).find('.hours-input').val();
+                const rate = $(this).find('.rate-input').val();
+                const qty = $(this).find('.qty-input').val();
+                const amount = $(this).find('.amount-input').val();
+
+                if (description) {
+                    invoiceData.lineItems.push({
+                        description,
+                        hours: hours || '',
+                        rate: rate || '',
+                        qty: qty || '',
+                        amount: amount || ''
+                    });
+                }
+            });
+
+            // Show success message
+            alert(`Invoice created successfully!\n\nInvoice Number: ${invoiceData.header.invoiceNumber}\nClient: ${invoiceData.client.name}\nTotal Amount: ${invoiceData.summary.totalAmount}\n\nThe invoice has been saved and can be sent to the client.`);
+
+            // Close modal and refresh the page
+            closeInvoiceModal();
+
+            // Here you would typically send the data to a server
+            console.log('Invoice Data:', invoiceData);
+
+            // Optionally refresh the invoice list or add the new invoice to the display
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+
+        // Close modal when clicking outside
+        $(document).on('click', '.modal-overlay', function(e) {
+            if (e.target === this) {
+                closeInvoiceModal();
+            }
+        });
+
+        // Prevent modal close when clicking inside the modal content
+        $('.invoice-modal').on('click', function(e) {
+            e.stopPropagation();
+        });
     </script>
 </body>
 </html>
