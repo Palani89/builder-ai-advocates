@@ -838,9 +838,15 @@
       });
 
       function loadContacts() {
-        const contacts = JSON.parse(
+        let contacts = JSON.parse(
           localStorage.getItem("importedContacts") || "[]",
         );
+
+        // If no contacts exist, load dummy data
+        if (contacts.length === 0) {
+          contacts = getDummyContacts();
+          localStorage.setItem("importedContacts", JSON.stringify(contacts));
+        }
 
         // Update stats
         $("#totalContacts").text(contacts.length);
