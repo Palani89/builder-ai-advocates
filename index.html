@@ -838,7 +838,7 @@
           "send-reset-link": "Send Reset Link",
         },
         hi: {
-          tagline: "आधुनिक कानूनी अभ्यास के लिए आपका AI-संचालित कानूनी साझीदार",
+          tagline: "आधुनि��� कानूनी अभ्यास के लिए आपका AI-संचालित कानूनी साझीदार",
           "otp-tagline": "आपके मोबाइल नंबर पर भेजा गया OTP दर्ज करें",
           "preferred-language": "पसंदीदा भाषा",
           "advocate-id": "अधिवक्ता ID",
@@ -855,7 +855,7 @@
           "enter-password": "अपना पासवर्ड दर्ज करें",
           "enter-mobile": "10-अं��ीय मोबाइल नंबर दर्ज करें",
           "enter-otp": "OTP दर्ज करें",
-          "didnt-receive": "OTP नह���ं मिला?",
+          "didnt-receive": "OTP नह���ं म��ला?",
           resend: "पुनः भेजें",
         },
         ta: {
@@ -892,7 +892,7 @@
           "mobile-number": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
           "sign-in": "ಸೈನ್ ಇನ್",
           "send-otp": "OTP ಕಳುಹಿಸಿ",
-          "verify-otp": "OTP ಪರಿಶೀಲಿಸಿ",
+          "verify-otp": "OTP ���ರಿಶೀಲಿಸಿ",
           "no-account": "ಖಾತೆ ಇಲ್ಲವೇ?",
           "sign-up-here": "ಇಲ್ಲಿ ಸೈನ್ ಅಪ್ ಮಾಡಿ",
           "enter-password": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ನಮೂದಿಸಿ",
@@ -934,7 +934,7 @@
           "mobile-number": "মোব��ইল ��ম্বর",
           "sign-in": "সাইন ইন",
           "send-otp": "OTP পাঠান",
-          "verify-otp": "OTP যাচাই করুন",
+          "verify-otp": "OTP যাচা��� করুন",
           "no-account": "কোনো অ্যাকাউন্ট নেই?",
           "sign-up-here": "এখানে সাইন আপ করুন",
           "enter-password": "আপনার পাসওয়ার্ড লিখুন",
@@ -1120,6 +1120,50 @@
 
       function resendOTP() {
         alert("OTP resent successfully!");
+      }
+
+      // Forgot Password Modal Functions
+      function openForgotPasswordModal() {
+        document.getElementById('forgotPasswordModal').style.display = 'block';
+      }
+
+      function closeForgotPasswordModal() {
+        document.getElementById('forgotPasswordModal').style.display = 'none';
+      }
+
+      // Handle forgot password form submission
+      $(document).ready(function() {
+        $("#forgot-password-form").on("submit", function(e) {
+          e.preventDefault();
+          handleForgotPassword();
+        });
+
+        // Close modal when clicking outside
+        $(window).on('click', function(event) {
+          if (event.target.id === 'forgotPasswordModal') {
+            closeForgotPasswordModal();
+          }
+        });
+      });
+
+      function handleForgotPassword() {
+        const identifier = $("#reset-identifier").val().trim();
+        const submitButton = $('.modal-submit');
+
+        if (!identifier) {
+          alert("Please enter your email address or advocate ID");
+          return;
+        }
+
+        // Show loading
+        submitButton.addClass("loading");
+
+        setTimeout(() => {
+          submitButton.removeClass("loading");
+          alert(`Password reset instructions have been sent to: ${identifier}\n\nPlease check your email and follow the instructions to reset your password.`);
+          closeForgotPasswordModal();
+          $("#reset-identifier").val(''); // Clear the input
+        }, 1500);
       }
 
       // Utility functions
