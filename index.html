@@ -54,8 +54,15 @@
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
+<<<<<<< HEAD
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
                     url('https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F8d59a30854f4401a8f5171fdc7e0b3ff?format=webp&width=1600') center/cover no-repeat;
+=======
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url("https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F6efc7c3cf07f448abe13dee199752ae6?format=webp&width=1600")
+            center/cover no-repeat;
+>>>>>>> 7c02cf96c8977affba5feda1816041e91f6d9aa0
         color: var(--text-primary);
         line-height: 1.6;
         min-height: 100vh;
@@ -645,7 +652,12 @@
                 Sign In
               </button>
               <div class="forgot-password-link">
-                <a href="#" onclick="openForgotPasswordModal()" data-translate="forgot-password">Forgot Password?</a>
+                <a
+                  href="#"
+                  onclick="openForgotPasswordModal()"
+                  data-translate="forgot-password"
+                  >Forgot Password?</a
+                >
               </div>
             </div>
 
@@ -710,7 +722,12 @@
                 Sign In
               </button>
               <div class="forgot-password-link">
-                <a href="#" onclick="openForgotPasswordModal()" data-translate="forgot-password">Forgot Password?</a>
+                <a
+                  href="#"
+                  onclick="openForgotPasswordModal()"
+                  data-translate="forgot-password"
+                  >Forgot Password?</a
+                >
               </div>
             </div>
           </form>
@@ -774,15 +791,20 @@
     <div id="forgotPasswordModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title" data-translate="reset-password">Reset Password</h3>
+          <h3 class="modal-title" data-translate="reset-password">
+            Reset Password
+          </h3>
           <p class="modal-subtitle" data-translate="reset-password-subtitle">
-            Enter your email address or advocate ID to receive reset instructions
+            Enter your email address or advocate ID to receive reset
+            instructions
           </p>
         </div>
         <div class="modal-body">
           <form id="forgot-password-form">
             <div class="form-group">
-              <label class="form-label" data-translate="email-or-advocate-id">Email or Advocate ID</label>
+              <label class="form-label" data-translate="email-or-advocate-id"
+                >Email or Advocate ID</label
+              >
               <div class="input-with-icon">
                 <i class="fas fa-envelope input-icon"></i>
                 <input
@@ -797,10 +819,18 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="primary-button modal-close" onclick="closeForgotPasswordModal()">
+          <button
+            type="button"
+            class="primary-button modal-close"
+            onclick="closeForgotPasswordModal()"
+          >
             <span data-translate="cancel">Cancel</span>
           </button>
-          <button type="submit" form="forgot-password-form" class="primary-button modal-submit">
+          <button
+            type="submit"
+            form="forgot-password-form"
+            class="primary-button modal-submit"
+          >
             <span data-translate="send-reset-link">Send Reset Link</span>
           </button>
         </div>
@@ -832,9 +862,10 @@
           resend: "Resend",
           "forgot-password": "Forgot Password?",
           "reset-password": "Reset Password",
-          "reset-password-subtitle": "Enter your email address or advocate ID to receive reset instructions",
+          "reset-password-subtitle":
+            "Enter your email address or advocate ID to receive reset instructions",
           "email-or-advocate-id": "Email or Advocate ID",
-          "cancel": "Cancel",
+          cancel: "Cancel",
           "send-reset-link": "Send Reset Link",
         },
         hi: {
@@ -881,9 +912,10 @@
           resend: "மீண்டும் அனுப்பு",
           "forgot-password": "Forgot Password?",
           "reset-password": "Reset Password",
-          "reset-password-subtitle": "Enter your email address or advocate ID to receive reset instructions",
+          "reset-password-subtitle":
+            "Enter your email address or advocate ID to receive reset instructions",
           "email-or-advocate-id": "Email or Advocate ID",
-          "cancel": "Cancel",
+          cancel: "Cancel",
           "send-reset-link": "Send Reset Link",
         },
         kn: {
@@ -972,9 +1004,10 @@
           resend: "ફરીથી મોકલો",
           "forgot-password": "Forgot Password?",
           "reset-password": "Reset Password",
-          "reset-password-subtitle": "Enter your email address or advocate ID to receive reset instructions",
+          "reset-password-subtitle":
+            "Enter your email address or advocate ID to receive reset instructions",
           "email-or-advocate-id": "Email or Advocate ID",
-          "cancel": "Cancel",
+          cancel: "Cancel",
           "send-reset-link": "Send Reset Link",
         },
       };
@@ -1136,23 +1169,23 @@
 
       // Forgot Password Modal Functions
       function openForgotPasswordModal() {
-        document.getElementById('forgotPasswordModal').style.display = 'block';
+        document.getElementById("forgotPasswordModal").style.display = "block";
       }
 
       function closeForgotPasswordModal() {
-        document.getElementById('forgotPasswordModal').style.display = 'none';
+        document.getElementById("forgotPasswordModal").style.display = "none";
       }
 
       // Handle forgot password form submission
-      $(document).ready(function() {
-        $("#forgot-password-form").on("submit", function(e) {
+      $(document).ready(function () {
+        $("#forgot-password-form").on("submit", function (e) {
           e.preventDefault();
           handleForgotPassword();
         });
 
         // Close modal when clicking outside
-        $(window).on('click', function(event) {
-          if (event.target.id === 'forgotPasswordModal') {
+        $(window).on("click", function (event) {
+          if (event.target.id === "forgotPasswordModal") {
             closeForgotPasswordModal();
           }
         });
@@ -1160,7 +1193,7 @@
 
       function handleForgotPassword() {
         const identifier = $("#reset-identifier").val().trim();
-        const submitButton = $('.modal-submit');
+        const submitButton = $(".modal-submit");
 
         if (!identifier) {
           alert("Please enter your email address or advocate ID");
@@ -1172,9 +1205,11 @@
 
         setTimeout(() => {
           submitButton.removeClass("loading");
-          alert(`Password reset instructions have been sent to: ${identifier}\n\nPlease check your email and follow the instructions to reset your password.`);
+          alert(
+            `Password reset instructions have been sent to: ${identifier}\n\nPlease check your email and follow the instructions to reset your password.`,
+          );
           closeForgotPasswordModal();
-          $("#reset-identifier").val(''); // Clear the input
+          $("#reset-identifier").val(""); // Clear the input
         }, 1500);
       }
 
