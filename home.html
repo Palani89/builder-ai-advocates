@@ -3004,13 +3004,25 @@
         });
       });
 
+      // Side menu functions
       function openSideMenu() {
-        alert("Side menu functionality would be implemented here");
+        $("#sideMenu").addClass("open");
+        $("#sideMenuOverlay").addClass("show");
+      }
+
+      function closeSideMenu() {
+        $("#sideMenu").removeClass("open");
+        $("#sideMenuOverlay").removeClass("show");
       }
 
       function logoutFromApp() {
         window.location.href = "index.html";
       }
+
+      // Close menu when clicking overlay
+      $("#sideMenuOverlay").on("click", function () {
+        closeSideMenu();
+      });
 
       // Court Board Functionality
       function updateCurrentTime() {
