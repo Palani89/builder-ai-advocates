@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More - GoldApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #DAA520;
+            --secondary: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .more-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .user-profile-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .user-avatar-large {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .user-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-details {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-status {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .status-badge.verified {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .edit-profile-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .edit-profile-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .more-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .category-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .category-section h3 {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .more-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .more-option {
+            background: var(--background);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .more-option:hover {
+            background: var(--border);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .option-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+        }
+
+        .option-icon.primary {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary-dark);
+        }
+
+        .option-icon.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .option-icon.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .option-icon.info {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .option-icon.purple {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        .option-icon.red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .option-info {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .option-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .option-badge {
+            background: var(--error);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .option-badge.new {
+            background: var(--success);
+        }
+
+        .option-badge.update {
+            background: var(--warning);
+        }
+
+        .settings-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .toggle-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary-dark);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--background);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .app-version {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .more-section {
+                padding: 1rem;
+            }
+
+            .user-profile-section {
+                padding: 1.5rem;
+            }
+
+            .verification-status {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="more-section">
+        <!-- User Profile Section -->
+        <div class="user-profile-section">
+            <div class="user-avatar-large">G</div>
+            <div class="user-name">Guest User</div>
+            <div class="user-details">
+                guest@goldapp.com • +91 98765 43210<br>
+                Member since Jan 2024
+            </div>
+            <div class="verification-status">
+                <div class="status-badge verified">
+                    <i class="fas fa-check-circle"></i> Phone Verified
+                </div>
+                <div class="status-badge verified">
+                    <i class="fas fa-check-circle"></i> KYC Complete
+                </div>
+                <div class="status-badge pending">
+                    <i class="fas fa-clock"></i> Bank Pending
+                </div>
+            </div>
+            <button class="edit-profile-btn" onclick="editProfile()">
+                <i class="fas fa-edit"></i> Edit Profile
+            </button>
+
+            <!-- Quick Stats -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">12.45g</div>
+                    <div class="stat-label">Total Gold</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">48</div>
+                    <div class="stat-label">Transactions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Active SIPs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Referrals</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="more-categories">
+            <!-- Investments -->
+            <div class="category-section">
+                <h3><i class="fas fa-chart-line"></i> Investments</h3>
+                <div class="more-options">
+                    <div class="more-option" onclick="navigateTo('goals')">
+                        <div class="option-icon primary">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Savings Goals</div>
+                            <div class="option-subtitle">Create and track your financial goals</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('chits')">
+                        <div class="option-icon purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Gold Chits</div>
+                            <div class="option-subtitle">Join group savings plans</div>
+                        </div>
+                        <span class="option-badge">2 Active</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('shop')">
+                        <div class="option-icon warning">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Gold Shop</div>
+                            <div class="option-subtitle">Buy jewelry, coins & bars</div>
+                        </div>
+                        <span class="option-badge new">New</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('calculator')">
+                        <div class="option-icon info">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">SIP Calculator</div>
+                            <div class="option-subtitle">Plan your investment returns</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Management -->
+            <div class="category-section">
+                <h3><i class="fas fa-user-cog"></i> Account</h3>
+                <div class="more-options">
+                    <div class="more-option" onclick="navigateTo('profile')">
+                        <div class="option-icon primary">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Profile Settings</div>
+                            <div class="option-subtitle">Manage your personal information</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('kyc')">
+                        <div class="option-icon success">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">KYC Documents</div>
+                            <div class="option-subtitle">Verify your identity</div>
+                        </div>
+                        <span class="option-badge">Verified</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('bank')">
+                        <div class="option-icon info">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Bank Accounts</div>
+                            <div class="option-subtitle">Manage linked bank accounts</div>
+                        </div>
+                        <span class="option-badge update">Update</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('nominee')">
+                        <div class="option-icon purple">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Nominee Details</div>
+                            <div class="option-subtitle">Add or update nominee information</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards & Referrals -->
+            <div class="category-section">
+                <h3><i class="fas fa-gift"></i> Rewards</h3>
+                <div class="more-options">
+                    <div class="more-option" onclick="navigateTo('referrals')">
+                        <div class="option-icon success">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Refer & Earn</div>
+                            <div class="option-subtitle">Invite friends and earn gold rewards</div>
+                        </div>
+                        <span class="option-badge">₹500 Earned</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('rewards')">
+                        <div class="option-icon warning">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Rewards Program</div>
+                            <div class="option-subtitle">Earn points for every transaction</div>
+                        </div>
+                        <span class="option-badge">250 Points</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('offers')">
+                        <div class="option-icon primary">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Special Offers</div>
+                            <div class="option-subtitle">Exclusive deals and discounts</div>
+                        </div>
+                        <span class="option-badge new">3 New</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Services -->
+            <div class="category-section">
+                <h3><i class="fas fa-tools"></i> Tools & Services</h3>
+                <div class="more-options">
+                    <div class="more-option" onclick="navigateTo('certificates')">
+                        <div class="option-icon info">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Purchase Certificates</div>
+                            <div class="option-subtitle">Download gold purchase certificates</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('tax')">
+                        <div class="option-icon warning">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Tax Reports</div>
+                            <div class="option-subtitle">Capital gains and tax statements</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('rates')">
+                        <div class="option-icon primary">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Price Alerts</div>
+                            <div class="option-subtitle">Get notified of price changes</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('gifting')">
+                        <div class="option-icon success">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Gold Gifting</div>
+                            <div class="option-subtitle">Send gold to friends & family</div>
+                        </div>
+                        <span class="option-badge new">New</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- App Settings -->
+            <div class="category-section">
+                <h3><i class="fas fa-cog"></i> Settings</h3>
+                
+                <!-- Notification Settings -->
+                <div class="settings-toggle">
+                    <div class="toggle-info">
+                        <div class="toggle-title">Price Alerts</div>
+                        <div class="toggle-subtitle">Get notified of gold price changes</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-toggle">
+                    <div class="toggle-info">
+                        <div class="toggle-title">SIP Reminders</div>
+                        <div class="toggle-subtitle">Reminders before SIP deductions</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-toggle">
+                    <div class="toggle-info">
+                        <div class="toggle-title">Auto-Save</div>
+                        <div class="toggle-subtitle">Automatic spare change investment</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-toggle">
+                    <div class="toggle-info">
+                        <div class="toggle-title">Marketing Notifications</div>
+                        <div class="toggle-subtitle">Offers and promotional updates</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="more-options" style="margin-top: 1rem;">
+                    <div class="more-option" onclick="navigateTo('security')">
+                        <div class="option-icon red">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Security Settings</div>
+                            <div class="option-subtitle">App lock, biometrics & privacy</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('language')">
+                        <div class="option-icon info">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Language</div>
+                            <div class="option-subtitle">English (Change language)</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div class="category-section">
+                <h3><i class="fas fa-headset"></i> Support</h3>
+                <div class="more-options">
+                    <div class="more-option" onclick="navigateTo('help')">
+                        <div class="option-icon info">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Help & FAQs</div>
+                            <div class="option-subtitle">Common questions and answers</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('contact')">
+                        <div class="option-icon success">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Contact Support</div>
+                            <div class="option-subtitle">Chat, call or email our team</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('feedback')">
+                        <div class="option-icon warning">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">Send Feedback</div>
+                            <div class="option-subtitle">Help us improve the app</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="more-option" onclick="navigateTo('about')">
+                        <div class="option-icon purple">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title">About GoldApp</div>
+                            <div class="option-subtitle">Terms, privacy & app information</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <div class="category-section">
+                <div class="more-options">
+                    <div class="more-option" onclick="logout()" style="color: var(--error);">
+                        <div class="option-icon red">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="option-info">
+                            <div class="option-title" style="color: var(--error);">Log Out</div>
+                            <div class="option-subtitle">Sign out of your account</div>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Version -->
+        <div class="app-version">
+            GoldApp v2.1.0 • Build 2024.01.15<br>
+            © 2024 GoldApp Technologies Pvt. Ltd.
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(section) {
+            console.log('Navigating to:', section);
+            alert('Feature "' + section + '" is coming soon!');
+        }
+
+        function editProfile() {
+            alert('Edit Profile functionality coming soon!');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Logging out...');
+                // Implement logout logic here
+            }
+        }
+
+        // Initialize settings
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('More page loaded');
+        });
+    </script>
+</body>
+</html>
