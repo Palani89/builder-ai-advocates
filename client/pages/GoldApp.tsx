@@ -727,6 +727,13 @@ export default function GoldApp() {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <BuyGoldModal
+        isOpen={buyModalOpen}
+        onClose={() => setBuyModalOpen(false)}
+        goldRate={currentGoldRate}
+      />
     </div>
   );
 }
