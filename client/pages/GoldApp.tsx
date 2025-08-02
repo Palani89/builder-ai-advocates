@@ -12,6 +12,7 @@ export default function GoldApp() {
   const [todaySavings] = useState(45.50);
   const [monthlyTarget] = useState(5000);
   const [currentProgress] = useState(3240);
+  const [buyModalOpen, setBuyModalOpen] = useState(false);
 
   const openSideMenu = () => setSideMenuOpen(true);
   const closeSideMenu = () => setSideMenuOpen(false);
