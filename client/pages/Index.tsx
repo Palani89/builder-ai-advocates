@@ -102,6 +102,10 @@ export default function Index() {
             <i className="fas fa-th side-menu-icon"></i>
             More
           </Link>
+          <Link to="/goldapp" className="side-menu-item">
+            <i className="fas fa-coins side-menu-icon"></i>
+            GoldApp
+          </Link>
           <button className="side-menu-item logout" onClick={logoutFromApp}>
             <i className="fas fa-sign-out-alt side-menu-icon"></i>
             Log Out
