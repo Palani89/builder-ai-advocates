@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BuyGoldModal from "../components/goldapp/BuyGoldModal";
 
 export default function GoldApp() {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
