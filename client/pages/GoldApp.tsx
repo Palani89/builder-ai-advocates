@@ -115,7 +115,7 @@ export default function GoldApp() {
                 <h4>Quick Actions</h4>
               </div>
               <div className="actions-grid">
-                <button className="action-card buy">
+                <button className="action-card buy" onClick={() => setBuyModalOpen(true)}>
                   <div className="action-icon">
                     <i className="fas fa-plus"></i>
                   </div>
