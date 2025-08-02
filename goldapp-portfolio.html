@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - GoldApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFD700;
+            --primary-dark: #DAA520;
+            --secondary: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .portfolio-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .portfolio-header-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .portfolio-header-section h2 {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .portfolio-summary {
+            display: flex;
+            justify-content: center;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            min-width: 300px;
+        }
+
+        .summary-label {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .summary-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .summary-change.positive {
+            color: #10b981;
+        }
+
+        .holdings-section,
+        .investments-section,
+        .goals-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .holdings-section h3,
+        .investments-section h3,
+        .goals-section h3 {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .holdings-list,
+        .investments-list,
+        .goals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .holding-item,
+        .investment-item,
+        .goal-item {
+            background: var(--background);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .holding-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .holding-metal {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .holding-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .holding-icon.gold {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+        }
+
+        .holding-icon.silver {
+            background: rgba(192, 192, 192, 0.1);
+            color: #C0C0C0;
+        }
+
+        .holding-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .holding-quantity {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .holding-value {
+            text-align: right;
+        }
+
+        .holding-amount {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.125rem;
+        }
+
+        .holding-percentage {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .investment-type {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .investment-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .investment-status.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .investment-amount {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-dark);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .goal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .goal-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--background);
+            border-radius: 12px;
+        }
+
+        .goal-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .goal-target {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .chart-placeholder {
+            background: var(--background);
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        .allocation-chart {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .allocation-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .allocation-bar {
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .allocation-bar.gold {
+            background: #FFD700;
+        }
+
+        .allocation-bar.silver {
+            background: #C0C0C0;
+        }
+
+        .allocation-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .allocation-value {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-section {
+                padding: 1rem;
+            }
+
+            .summary-card {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .summary-value {
+                font-size: 2rem;
+            }
+
+            .holding-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-section">
+        <!-- Portfolio Header -->
+        <div class="portfolio-header-section">
+            <h2><i class="fas fa-chart-pie"></i> My Portfolio</h2>
+            <div class="portfolio-summary">
+                <div class="summary-card">
+                    <div class="summary-label">Total Portfolio Value</div>
+                    <div class="summary-value">₹77,812</div>
+                    <div class="summary-change positive">+₹1,240 (1.6%)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="stat-value">12.45g</div>
+                <div class="stat-label">Total Gold</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-value">+1.6%</div>
+                <div class="stat-label">This Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Active SIPs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-target"></i>
+                </div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Active Goals</div>
+            </div>
+        </div>
+
+        <!-- Holdings Breakdown -->
+        <div class="holdings-section">
+            <h3><i class="fas fa-wallet"></i> Holdings Breakdown</h3>
+            <div class="holdings-list">
+                <div class="holding-item">
+                    <div class="holding-metal">
+                        <div class="holding-icon gold">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="holding-info">
+                            <div class="holding-name">Gold</div>
+                            <div class="holding-quantity">12.45g</div>
+                        </div>
+                    </div>
+                    <div class="holding-value">
+                        <div class="holding-amount">₹77,812</div>
+                        <div class="holding-percentage">98.5%</div>
+                    </div>
+                </div>
+                <div class="holding-item">
+                    <div class="holding-metal">
+                        <div class="holding-icon silver">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="holding-info">
+                            <div class="holding-name">Silver</div>
+                            <div class="holding-quantity">15.2g</div>
+                        </div>
+                    </div>
+                    <div class="holding-value">
+                        <div class="holding-amount">₹1,148</div>
+                        <div class="holding-percentage">1.5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Allocation Chart -->
+            <div class="allocation-chart">
+                <div class="allocation-item">
+                    <div class="allocation-bar gold" style="width: 98.5%;"></div>
+                    <div class="allocation-label">Gold</div>
+                    <div class="allocation-value">98.5%</div>
+                </div>
+                <div class="allocation-item">
+                    <div class="allocation-bar silver" style="width: 1.5%;"></div>
+                    <div class="allocation-label">Silver</div>
+                    <div class="allocation-value">1.5%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Investments -->
+        <div class="investments-section">
+            <h3><i class="fas fa-chart-line"></i> Active Investments</h3>
+            <div class="investments-list">
+                <div class="investment-item">
+                    <div class="investment-header">
+                        <div class="investment-type">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Monthly Gold SIP</span>
+                        </div>
+                        <div class="investment-status active">Active</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-amount">₹5,000/month</div>
+                        <div class="investment-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                            <div class="progress-text">9 of 20 months completed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="investment-item">
+                    <div class="investment-header">
+                        <div class="investment-type">
+                            <i class="fas fa-users"></i>
+                            <span>Gold Chit #1245</span>
+                        </div>
+                        <div class="investment-status active">Active</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-amount">₹2,000/month</div>
+                        <div class="investment-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%;"></div>
+                            </div>
+                            <div class="progress-text">3 of 12 months completed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="investment-item">
+                    <div class="investment-header">
+                        <div class="investment-type">
+                            <i class="fas fa-robot"></i>
+                            <span>Auto-Save</span>
+                        </div>
+                        <div class="investment-status active">Active</div>
+                    </div>
+                    <div class="investment-details">
+                        <div class="investment-amount">₹285/week (avg)</div>
+                        <div class="investment-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <div class="progress-text">Continuous investment active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Savings Goals -->
+        <div class="goals-section">
+            <h3><i class="fas fa-bullseye"></i> Savings Goals</h3>
+            <div class="goals-list">
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <div class="goal-icon">💍</div>
+                        <div class="goal-info">
+                            <div class="goal-name">Wedding Ring</div>
+                            <div class="goal-target">Target: 10g Gold</div>
+                        </div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                        <div class="progress-text">7g / 10g (70% completed)</div>
+                    </div>
+                </div>
+
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <div class="goal-icon">🏠</div>
+                        <div class="goal-info">
+                            <div class="goal-name">Home Down Payment</div>
+                            <div class="goal-target">Target: 50g Gold</div>
+                        </div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%;"></div>
+                        </div>
+                        <div class="progress-text">12.5g / 50g (25% completed)</div>
+                    </div>
+                </div>
+
+                <div class="goal-item">
+                    <div class="goal-header">
+                        <div class="goal-icon">🎓</div>
+                        <div class="goal-info">
+                            <div class="goal-name">Education Fund</div>
+                            <div class="goal-target">Target: 25g Gold</div>
+                        </div>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 12%;"></div>
+                        </div>
+                        <div class="progress-text">3g / 25g (12% completed)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Chart Placeholder -->
+        <div class="holdings-section">
+            <h3><i class="fas fa-chart-area"></i> Performance Chart</h3>
+            <div class="chart-placeholder">
+                <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                <h4>Portfolio Performance Chart</h4>
+                <p>Interactive chart showing your portfolio growth over time will be displayed here</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
