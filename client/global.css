@@ -1332,6 +1332,71 @@ input:checked + .toggle-slider:before {
   }
 }
 
+/* GoldApp Modal Styles */
+.rate-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 0.5rem;
+  color: #B8860B;
+  font-weight: 600;
+}
+
+.investment-summary {
+  background: var(--background);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.summary-header {
+  margin-bottom: 1rem;
+}
+
+.summary-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.summary-row.total {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.summary-row span:first-child {
+  color: var(--text-secondary);
+}
+
+.summary-row span:last-child {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.summary-row.total span {
+  color: var(--primary);
+  font-weight: 600;
+}
+
 /* Calendar Event Type Indicators */
 .event-type {
   display: inline-block;
