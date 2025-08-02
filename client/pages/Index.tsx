@@ -389,6 +389,10 @@ export default function Index() {
               <i className="fas fa-th"></i>
               More
             </Link>
+            <Link to="/goldapp" className="nav-item">
+              <i className="fas fa-coins"></i>
+              GoldApp
+            </Link>
           </div>
         </div>
       </div>
