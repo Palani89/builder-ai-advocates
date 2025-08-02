@@ -437,7 +437,7 @@
 }
 
 .portfolio-card {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
   border-radius: 16px;
   padding: 2rem;
   color: white;
@@ -589,15 +589,15 @@
 }
 
 .rate-card.gold {
-  border-left: 4px solid #FFD700;
+  border-left: 4px solid #ffd700;
 }
 
 .rate-card.silver {
-  border-left: 4px solid #C0C0C0;
+  border-left: 4px solid #c0c0c0;
 }
 
 .rate-card.platinum {
-  border-left: 4px solid #E5E4E2;
+  border-left: 4px solid #e5e4e2;
 }
 
 .rate-metal {
@@ -675,7 +675,7 @@
 }
 
 .action-card.chit {
-  border-left: 4px solid #8B5CF6;
+  border-left: 4px solid #8b5cf6;
 }
 
 .action-icon {
@@ -702,7 +702,7 @@
 
 .action-card.chit .action-icon {
   background: rgba(139, 92, 246, 0.1);
-  color: #8B5CF6;
+  color: #8b5cf6;
 }
 
 .action-info {
@@ -1024,12 +1024,12 @@ input:checked + .toggle-slider:before {
 
 .holding-icon.gold {
   background: rgba(255, 215, 0, 0.1);
-  color: #FFD700;
+  color: #ffd700;
 }
 
 .holding-icon.silver {
   background: rgba(192, 192, 192, 0.1);
-  color: #C0C0C0;
+  color: #c0c0c0;
 }
 
 .holding-name {
@@ -1341,7 +1341,7 @@ input:checked + .toggle-slider:before {
   background: rgba(255, 215, 0, 0.1);
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 0.5rem;
-  color: #B8860B;
+  color: #b8860b;
   font-weight: 600;
 }
 

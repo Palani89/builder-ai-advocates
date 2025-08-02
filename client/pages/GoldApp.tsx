@@ -9,7 +9,7 @@ export default function GoldApp() {
   const [currentGoldRate] = useState(6250); // per gram
   const [autoSaveEnabled, setAutoSaveEnabled] = useState(true);
   const [totalValue] = useState(77812.5);
-  const [todaySavings] = useState(45.50);
+  const [todaySavings] = useState(45.5);
   const [monthlyTarget] = useState(5000);
   const [currentProgress] = useState(3240);
   const [buyModalOpen, setBuyModalOpen] = useState(false);
@@ -35,10 +35,16 @@ export default function GoldApp() {
                   </div>
                   <div className="portfolio-info">
                     <h3>Total Portfolio Value</h3>
-                    <div className="portfolio-value">₹{totalValue.toLocaleString()}</div>
+                    <div className="portfolio-value">
+                      ₹{totalValue.toLocaleString()}
+                    </div>
                     <div className="portfolio-details">
-                      <span>{totalGoldHolding}g Gold • ₹{currentGoldRate}/g</span>
-                      <span className="profit-indicator positive">+₹1,240 (1.6%)</span>
+                      <span>
+                        {totalGoldHolding}g Gold • ₹{currentGoldRate}/g
+                      </span>
+                      <span className="profit-indicator positive">
+                        +₹1,240 (1.6%)
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -59,7 +65,9 @@ export default function GoldApp() {
                     <i className="fas fa-chart-line"></i>
                   </div>
                   <div className="stat-info">
-                    <div className="stat-value">{Math.round((currentProgress / monthlyTarget) * 100)}%</div>
+                    <div className="stat-value">
+                      {Math.round((currentProgress / monthlyTarget) * 100)}%
+                    </div>
                     <div className="stat-label">Monthly Target</div>
                   </div>
                 </div>
@@ -115,7 +123,10 @@ export default function GoldApp() {
                 <h4>Quick Actions</h4>
               </div>
               <div className="actions-grid">
-                <button className="action-card buy" onClick={() => setBuyModalOpen(true)}>
+                <button
+                  className="action-card buy"
+                  onClick={() => setBuyModalOpen(true)}
+                >
                   <div className="action-icon">
                     <i className="fas fa-plus"></i>
                   </div>
@@ -190,7 +201,9 @@ export default function GoldApp() {
             <div className="recent-transactions-section">
               <div className="section-header">
                 <h4>Recent Activity</h4>
-                <Link to="#" className="view-all-link">View All</Link>
+                <Link to="#" className="view-all-link">
+                  View All
+                </Link>
               </div>
               <div className="transactions-list">
                 <div className="transaction-item">
@@ -199,7 +212,9 @@ export default function GoldApp() {
                   </div>
                   <div className="transaction-info">
                     <div className="transaction-title">Gold Purchase</div>
-                    <div className="transaction-subtitle">Auto-save • 0.25g</div>
+                    <div className="transaction-subtitle">
+                      Auto-save • 0.25g
+                    </div>
                   </div>
                   <div className="transaction-amount">₹1,562.50</div>
                 </div>
@@ -209,7 +224,9 @@ export default function GoldApp() {
                   </div>
                   <div className="transaction-info">
                     <div className="transaction-title">SIP Investment</div>
-                    <div className="transaction-subtitle">Monthly SIP • 0.80g</div>
+                    <div className="transaction-subtitle">
+                      Monthly SIP • 0.80g
+                    </div>
                   </div>
                   <div className="transaction-amount">₹5,000.00</div>
                 </div>
@@ -219,7 +236,9 @@ export default function GoldApp() {
                   </div>
                   <div className="transaction-info">
                     <div className="transaction-title">Referral Bonus</div>
-                    <div className="transaction-subtitle">Friend joined • 0.02g</div>
+                    <div className="transaction-subtitle">
+                      Friend joined • 0.02g
+                    </div>
                   </div>
                   <div className="transaction-amount">₹125.00</div>
                 </div>
@@ -227,7 +246,7 @@ export default function GoldApp() {
             </div>
           </div>
         );
-      
+
       case "portfolio":
         return (
           <div className="portfolio-section">
@@ -236,7 +255,9 @@ export default function GoldApp() {
               <div className="portfolio-summary">
                 <div className="summary-card total">
                   <div className="summary-label">Total Value</div>
-                  <div className="summary-value">₹{totalValue.toLocaleString()}</div>
+                  <div className="summary-value">
+                    ₹{totalValue.toLocaleString()}
+                  </div>
                   <div className="summary-change positive">+₹1,240 (1.6%)</div>
                 </div>
               </div>
@@ -252,11 +273,15 @@ export default function GoldApp() {
                     </div>
                     <div className="holding-info">
                       <div className="holding-name">Gold</div>
-                      <div className="holding-quantity">{totalGoldHolding}g</div>
+                      <div className="holding-quantity">
+                        {totalGoldHolding}g
+                      </div>
                     </div>
                   </div>
                   <div className="holding-value">
-                    <div className="holding-amount">₹{(totalGoldHolding * currentGoldRate).toLocaleString()}</div>
+                    <div className="holding-amount">
+                      ₹{(totalGoldHolding * currentGoldRate).toLocaleString()}
+                    </div>
                     <div className="holding-percentage">98.5%</div>
                   </div>
                 </div>
@@ -293,7 +318,10 @@ export default function GoldApp() {
                     <div className="investment-amount">₹5,000/month</div>
                     <div className="investment-progress">
                       <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: "45%" }}></div>
+                        <div
+                          className="progress-fill"
+                          style={{ width: "45%" }}
+                        ></div>
                       </div>
                       <div className="progress-text">9 of 20 months</div>
                     </div>
@@ -311,7 +339,10 @@ export default function GoldApp() {
                     <div className="investment-amount">₹2,000/month</div>
                     <div className="investment-progress">
                       <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: "25%" }}></div>
+                        <div
+                          className="progress-fill"
+                          style={{ width: "25%" }}
+                        ></div>
                       </div>
                       <div className="progress-text">3 of 12 months</div>
                     </div>
@@ -333,7 +364,10 @@ export default function GoldApp() {
                   </div>
                   <div className="goal-progress">
                     <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: "70%" }}></div>
+                      <div
+                        className="progress-fill"
+                        style={{ width: "70%" }}
+                      ></div>
                     </div>
                     <div className="progress-text">7g / 10g (70%)</div>
                   </div>
@@ -348,7 +382,10 @@ export default function GoldApp() {
                   </div>
                   <div className="goal-progress">
                     <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: "25%" }}></div>
+                      <div
+                        className="progress-fill"
+                        style={{ width: "25%" }}
+                      ></div>
                     </div>
                     <div className="progress-text">12.5g / 50g (25%)</div>
                   </div>
@@ -380,7 +417,9 @@ export default function GoldApp() {
                   </div>
                   <div className="transaction-info">
                     <div className="transaction-title">Gold Purchase</div>
-                    <div className="transaction-subtitle">Auto-save • UPI Payment</div>
+                    <div className="transaction-subtitle">
+                      Auto-save • UPI Payment
+                    </div>
                   </div>
                   <div className="transaction-amount-details">
                     <div className="transaction-amount">₹1,562.50</div>
@@ -414,7 +453,9 @@ export default function GoldApp() {
                   </div>
                   <div className="transaction-info">
                     <div className="transaction-title">One-time Purchase</div>
-                    <div className="transaction-subtitle">Debit Card Payment</div>
+                    <div className="transaction-subtitle">
+                      Debit Card Payment
+                    </div>
                   </div>
                   <div className="transaction-amount-details">
                     <div className="transaction-amount">₹10,000.00</div>
@@ -456,7 +497,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Savings Goals</div>
-                      <div className="option-subtitle">Create targeted savings</div>
+                      <div className="option-subtitle">
+                        Create targeted savings
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -502,7 +545,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">KYC Documents</div>
-                      <div className="option-subtitle">Verify your identity</div>
+                      <div className="option-subtitle">
+                        Verify your identity
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -512,7 +557,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Bank Details</div>
-                      <div className="option-subtitle">Manage linked accounts</div>
+                      <div className="option-subtitle">
+                        Manage linked accounts
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -528,7 +575,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Refer & Earn</div>
-                      <div className="option-subtitle">Invite friends & get gold</div>
+                      <div className="option-subtitle">
+                        Invite friends & get gold
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -538,7 +587,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">SIP Calculator</div>
-                      <div className="option-subtitle">Plan your investments</div>
+                      <div className="option-subtitle">
+                        Plan your investments
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -548,7 +599,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Certificates</div>
-                      <div className="option-subtitle">Download purchase certificates</div>
+                      <div className="option-subtitle">
+                        Download purchase certificates
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -564,7 +617,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Help & Support</div>
-                      <div className="option-subtitle">Get help & contact us</div>
+                      <div className="option-subtitle">
+                        Get help & contact us
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -584,7 +639,9 @@ export default function GoldApp() {
                     </div>
                     <div className="option-info">
                       <div className="option-title">Security</div>
-                      <div className="option-subtitle">Privacy & security settings</div>
+                      <div className="option-subtitle">
+                        Privacy & security settings
+                      </div>
                     </div>
                     <i className="fas fa-chevron-right"></i>
                   </div>
@@ -616,9 +673,7 @@ export default function GoldApp() {
             </div>
             <div>
               <span className="logo-text">GoldApp</span>
-              <div className="side-menu-subtitle">
-                Digital Gold Investment
-              </div>
+              <div className="side-menu-subtitle">Digital Gold Investment</div>
             </div>
           </div>
           <button className="side-menu-close" onClick={closeSideMenu}>
@@ -627,30 +682,42 @@ export default function GoldApp() {
         </div>
 
         <nav className="side-menu-nav">
-          <button 
+          <button
             className={`side-menu-item ${activeTab === "home" ? "active" : ""}`}
-            onClick={() => {setActiveTab("home"); closeSideMenu();}}
+            onClick={() => {
+              setActiveTab("home");
+              closeSideMenu();
+            }}
           >
             <i className="fas fa-home side-menu-icon"></i>
             Home
           </button>
-          <button 
+          <button
             className={`side-menu-item ${activeTab === "portfolio" ? "active" : ""}`}
-            onClick={() => {setActiveTab("portfolio"); closeSideMenu();}}
+            onClick={() => {
+              setActiveTab("portfolio");
+              closeSideMenu();
+            }}
           >
             <i className="fas fa-chart-pie side-menu-icon"></i>
             Portfolio
           </button>
-          <button 
+          <button
             className={`side-menu-item ${activeTab === "transactions" ? "active" : ""}`}
-            onClick={() => {setActiveTab("transactions"); closeSideMenu();}}
+            onClick={() => {
+              setActiveTab("transactions");
+              closeSideMenu();
+            }}
           >
             <i className="fas fa-exchange-alt side-menu-icon"></i>
             Transactions
           </button>
-          <button 
+          <button
             className={`side-menu-item ${activeTab === "more" ? "active" : ""}`}
-            onClick={() => {setActiveTab("more"); closeSideMenu();}}
+            onClick={() => {
+              setActiveTab("more");
+              closeSideMenu();
+            }}
           >
             <i className="fas fa-th side-menu-icon"></i>
             More
@@ -696,28 +763,28 @@ export default function GoldApp() {
         {/* Bottom Navigation */}
         <div className="bottom-nav">
           <div className="nav-items">
-            <button 
+            <button
               className={`nav-item ${activeTab === "home" ? "active" : ""}`}
               onClick={() => setActiveTab("home")}
             >
               <i className="fas fa-home"></i>
               Home
             </button>
-            <button 
+            <button
               className={`nav-item ${activeTab === "portfolio" ? "active" : ""}`}
               onClick={() => setActiveTab("portfolio")}
             >
               <i className="fas fa-chart-pie"></i>
               Portfolio
             </button>
-            <button 
+            <button
               className={`nav-item ${activeTab === "transactions" ? "active" : ""}`}
               onClick={() => setActiveTab("transactions")}
             >
               <i className="fas fa-exchange-alt"></i>
               Transactions
             </button>
-            <button 
+            <button
               className={`nav-item ${activeTab === "more" ? "active" : ""}`}
               onClick={() => setActiveTab("more")}
             >

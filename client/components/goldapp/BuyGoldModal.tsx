@@ -6,7 +6,11 @@ interface BuyGoldModalProps {
   goldRate: number;
 }
 
-export default function BuyGoldModal({ isOpen, onClose, goldRate }: BuyGoldModalProps) {
+export default function BuyGoldModal({
+  isOpen,
+  onClose,
+  goldRate,
+}: BuyGoldModalProps) {
   const [amount, setAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("upi");
   const [grams, setGrams] = useState(0);
@@ -46,7 +50,9 @@ export default function BuyGoldModal({ isOpen, onClose, goldRate }: BuyGoldModal
             </div>
             <div className="form-grid">
               <div className="form-group">
-                <label className="form-label">Amount (₹) <span className="required">*</span></label>
+                <label className="form-label">
+                  Amount (₹) <span className="required">*</span>
+                </label>
                 <input
                   type="number"
                   className="form-input"
@@ -68,8 +74,7 @@ export default function BuyGoldModal({ isOpen, onClose, goldRate }: BuyGoldModal
               <div className="form-group full-width">
                 <label className="form-label">Current Gold Rate</label>
                 <div className="rate-display">
-                  <i className="fas fa-coins"></i>
-                  ₹{goldRate}/gram
+                  <i className="fas fa-coins"></i>₹{goldRate}/gram
                 </div>
               </div>
             </div>
