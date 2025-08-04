@@ -45,7 +45,8 @@
       .app-container {
         min-height: 100vh;
         background: var(--background);
-        padding-bottom: 100px;
+        display: flex;
+        flex-direction: column;
       }
 
       /* Header */
@@ -56,7 +57,11 @@
         justify-content: space-between;
         align-items: center;
         box-shadow: var(--shadow);
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
       }
 
       .header-left {
@@ -180,11 +185,15 @@
       /* Main Content */
       .main-content {
         padding: 0;
+        flex: 1;
+        overflow-y: auto;
+        margin-top: 80px;
+        margin-bottom: 100px;
       }
 
       /* Rates Card */
       .rates-card {
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        background: var(--white);
         margin: 20px;
         border-radius: 20px;
         padding: 25px;
@@ -192,6 +201,7 @@
         box-shadow: var(--shadow-lg);
         position: relative;
         overflow: hidden;
+        border: 1px solid #E5E5E5;
       }
 
       .last-updated {
@@ -202,34 +212,7 @@
         color: #8B4513;
       }
 
-      .location-tabs {
-        display: flex;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 25px;
-        padding: 5px;
-        margin-bottom: 25px;
-        backdrop-filter: blur(10px);
-      }
 
-      .location-tab {
-        flex: 1;
-        padding: 12px 20px;
-        text-align: center;
-        border: none;
-        background: transparent;
-        color: var(--text-dark);
-        font-weight: 600;
-        font-size: 14px;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .location-tab.active {
-        background: var(--white);
-        color: var(--orange);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      }
 
       .metals-container {
         display: flex;
@@ -473,13 +456,14 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+        background: #0018EB;
         border-radius: 25px 25px 0 0;
         padding: 20px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        z-index: 100;
       }
 
       .nav-item {
