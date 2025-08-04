@@ -15,14 +15,14 @@
     />
     <style>
       :root {
-        --primary-gold: #FFD700;
-        --dark-gold: #B8860B;
-        --orange: #FF8C00;
-        --orange-light: #FFA500;
-        --red: #DC143C;
-        --background: #F5F5F5;
-        --white: #FFFFFF;
-        --text-dark: #2C2C2C;
+        --primary-gold: #ffd700;
+        --dark-gold: #b8860b;
+        --orange: #ff8c00;
+        --orange-light: #ffa500;
+        --red: #dc143c;
+        --background: #f5f5f5;
+        --white: #ffffff;
+        --text-dark: #2c2c2c;
         --text-gray: #666666;
         --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -201,7 +201,7 @@
         box-shadow: var(--shadow-lg);
         position: relative;
         overflow: hidden;
-        border: 1px solid #E5E5E5;
+        border: 1px solid #e5e5e5;
       }
 
       .last-updated {
@@ -209,10 +209,8 @@
         font-size: 14px;
         font-weight: 500;
         margin-bottom: 20px;
-        color: #8B4513;
+        color: #8b4513;
       }
-
-
 
       .metals-container {
         display: flex;
@@ -241,11 +239,11 @@
       }
 
       .metal-icon.gold {
-        background: #DAA520;
+        background: #daa520;
       }
 
       .metal-icon.silver {
-        background: #C0C0C0;
+        background: #c0c0c0;
         color: var(--text-dark);
       }
 
@@ -265,13 +263,13 @@
       }
 
       .price-arrow {
-        color: #22C55E;
+        color: #22c55e;
         font-size: 18px;
       }
 
       .metal-subtitle {
         font-size: 12px;
-        color: #8B4513;
+        color: #8b4513;
         font-weight: 500;
         text-align: center;
         margin-top: 15px;
@@ -285,7 +283,7 @@
         box-shadow: var(--shadow-lg);
         position: relative;
         height: 180px;
-        background: linear-gradient(135deg, #F5DEB3 0%, #DEB887 100%);
+        background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%);
       }
 
       .promo-content {
@@ -299,7 +297,8 @@
       .promo-woman {
         flex: 1;
         height: 140px;
-        background: url('https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F18a6b91fdc5d4b6faba4f8a5a6b18fab?format=webp&width=800') center/cover;
+        background: url("https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F18a6b91fdc5d4b6faba4f8a5a6b18fab?format=webp&width=800")
+          center/cover;
         border-radius: 15px;
         margin-right: 20px;
       }
@@ -342,7 +341,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #D3D3D3;
+        background: #d3d3d3;
         cursor: pointer;
         transition: all 0.3s ease;
       }
@@ -384,7 +383,11 @@
       }
 
       .schemes-card {
-        background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--orange) 0%,
+          var(--orange-light) 100%
+        );
         border-radius: 20px;
         padding: 30px;
         color: var(--white);
@@ -395,19 +398,27 @@
       }
 
       .schemes-card::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -50%;
         right: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
         animation: shimmer 3s infinite;
       }
 
       @keyframes shimmer {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       .schemes-message {
@@ -456,7 +467,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: #0018EB;
+        background: #0018eb;
         border-radius: 25px 25px 0 0;
         padding: 20px;
         display: flex;
@@ -584,7 +595,7 @@
       .form-input {
         width: 100%;
         padding: 15px;
-        border: 2px solid #E5E5E5;
+        border: 2px solid #e5e5e5;
         border-radius: 12px;
         font-size: 16px;
         transition: all 0.3s ease;
@@ -624,12 +635,12 @@
       }
 
       .btn-secondary {
-        background: #F5F5F5;
+        background: #f5f5f5;
         color: var(--text-dark);
       }
 
       .btn-secondary:hover {
-        background: #E5E5E5;
+        background: #e5e5e5;
       }
 
       .hidden {
@@ -741,7 +752,9 @@
       <div class="main-content">
         <!-- Rates Card -->
         <div class="rates-card">
-          <div class="last-updated">Last Updated On : 2025-08-02 10:19:35.103</div>
+          <div class="last-updated">
+            Last Updated On : 2025-08-02 10:19:35.103
+          </div>
 
           <div class="metals-container">
             <div class="metal-item">
@@ -765,7 +778,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="metal-subtitle">22 KT Per Gram</div>
         </div>
 
@@ -794,7 +807,9 @@
             <h2 class="schemes-title">Your Schemes</h2>
             <div class="sync-info">
               <div>Last Sync</div>
-              <div>03-Aug-2025 1:55 PM <i class="fas fa-sync-alt sync-icon"></i></div>
+              <div>
+                03-Aug-2025 1:55 PM <i class="fas fa-sync-alt sync-icon"></i>
+              </div>
             </div>
           </div>
 
@@ -837,25 +852,43 @@
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title">Join Digital Savings Plan</h3>
-          <p class="modal-subtitle">Start your journey towards financial growth</p>
+          <p class="modal-subtitle">
+            Start your journey towards financial growth
+          </p>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label class="form-label">Full Name</label>
-            <input type="text" class="form-input" placeholder="Enter your full name" />
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter your full name"
+            />
           </div>
           <div class="form-group">
             <label class="form-label">Mobile Number</label>
-            <input type="tel" class="form-input" placeholder="Enter mobile number" />
+            <input
+              type="tel"
+              class="form-input"
+              placeholder="Enter mobile number"
+            />
           </div>
           <div class="form-group">
             <label class="form-label">Investment Amount</label>
-            <input type="number" class="form-input" placeholder="Enter amount (min ₹500)" />
+            <input
+              type="number"
+              class="form-input"
+              placeholder="Enter amount (min ₹500)"
+            />
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeSchemesModal()">Cancel</button>
-          <button class="btn btn-primary" onclick="joinScheme()">Join Now</button>
+          <button class="btn btn-secondary" onclick="closeSchemesModal()">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="joinScheme()">
+            Join Now
+          </button>
         </div>
       </div>
     </div>
@@ -883,31 +916,35 @@
       }
 
       // Close modal when clicking outside
-      document.getElementById("schemesModal").addEventListener("click", function (e) {
-        if (e.target === this) {
-          closeSchemesModal();
-        }
-      });
+      document
+        .getElementById("schemesModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeSchemesModal();
+          }
+        });
 
       // Location tab switching
-      document.querySelectorAll('.location-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          document.querySelectorAll('.location-tab').forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
+      document.querySelectorAll(".location-tab").forEach((tab) => {
+        tab.addEventListener("click", function () {
+          document
+            .querySelectorAll(".location-tab")
+            .forEach((t) => t.classList.remove("active"));
+          this.classList.add("active");
         });
       });
 
       // Auto-sync animation
       setInterval(() => {
-        const syncIcon = document.querySelector('.sync-icon');
-        syncIcon.style.animation = 'none';
+        const syncIcon = document.querySelector(".sync-icon");
+        syncIcon.style.animation = "none";
         setTimeout(() => {
-          syncIcon.style.animation = 'spin 1s linear';
+          syncIcon.style.animation = "spin 1s linear";
         }, 10);
       }, 30000);
 
       // Add CSS animation for sync icon
-      const style = document.createElement('style');
+      const style = document.createElement("style");
       style.textContent = `
         @keyframes spin {
           from { transform: rotate(0deg); }
