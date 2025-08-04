@@ -19,6 +19,7 @@
         --primary-dark: #daa520;
         --secondary: #10b981;
         --purple: #6366f1;
+        --purple-dark: #4f46e5;
         --background: #f8fafc;
         --surface: #ffffff;
         --text-primary: #1e293b;
@@ -30,6 +31,12 @@
         --warning: #f59e0b;
         --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --gradient-gold: linear-gradient(135deg, #ffd700, #ffed4e, #ffc107);
+        --gradient-silver: linear-gradient(135deg, #e2e8f0, #cbd5e1, #94a3b8);
+        --gradient-purple: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+        --glass-bg: rgba(255, 255, 255, 0.25);
+        --glass-border: rgba(255, 255, 255, 0.18);
       }
 
       * {
@@ -40,26 +47,29 @@
 
       body {
         font-family: "Inter", sans-serif;
-        background: var(--background);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: var(--text-primary);
         line-height: 1.6;
+        min-height: 100vh;
       }
 
       .app-container {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        background: var(--background);
       }
 
       /* Header */
       .header {
         background: var(--surface);
+        backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-lg);
         position: fixed;
         top: 0;
         left: 0;
@@ -79,37 +89,41 @@
         font-size: 1.25rem;
         color: var(--text-secondary);
         cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 6px;
+        padding: 0.75rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
       }
 
       .menu-toggle:hover {
         background: var(--background);
+        transform: scale(1.05);
       }
 
       .logo-container {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
       }
 
       .logo-icon {
-        width: 32px;
-        height: 32px;
-        background: var(--primary);
-        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: 1rem;
+        font-size: 1.125rem;
         font-weight: bold;
+        box-shadow: var(--shadow-lg);
       }
 
       .logo-text {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.125rem;
+        font-weight: 700;
         color: var(--text-primary);
+        letter-spacing: -0.5px;
       }
 
       .header-right {
@@ -121,153 +135,221 @@
       .notification-icon {
         background: none;
         border: none;
-        font-size: 1.125rem;
+        font-size: 1.25rem;
         color: var(--text-secondary);
         cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 6px;
+        padding: 0.75rem;
+        border-radius: 12px;
         position: relative;
+        transition: all 0.3s ease;
       }
 
       .notification-icon:hover {
         background: var(--background);
+        transform: scale(1.05);
       }
 
       /* Main Content */
       .main-content {
         flex: 1;
-        padding: 1rem;
-        max-width: 600px;
+        padding: 1.5rem;
+        max-width: 1200px;
         margin: 0 auto;
         width: 100%;
-        padding-top: 80px;
-        padding-bottom: 100px;
+        padding-top: 100px;
+        padding-bottom: 120px;
       }
 
       /* User Greeting */
       .user-greeting {
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+        text-align: center;
       }
 
       .greeting-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.25rem;
+        font-size: 2rem;
+        font-weight: 700;
+        background: var(--gradient-purple);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
       }
 
       .account-number {
-        font-size: 0.875rem;
+        font-size: 1rem;
         color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      /* Premium Cards */
+      .premium-card {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-xl);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .premium-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-purple);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .premium-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       }
 
       /* Today's Rates */
       .todays-rates {
-        background: var(--surface);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        box-shadow: var(--shadow);
+        background: var(--gradient-gold);
+        color: white;
+        border: none;
+      }
+
+      .todays-rates::before {
+        background: rgba(255, 255, 255, 0.3);
       }
 
       .rates-header {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        margin-bottom: 0.75rem;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 1rem;
         text-align: right;
+        font-weight: 600;
       }
 
       .rates-container {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
       }
 
       .rate-item {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .rate-item:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.02);
       }
 
       .rate-icon {
-        width: 20px;
-        height: 20px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: bold;
+        color: white;
+        box-shadow: var(--shadow-lg);
       }
 
       .rate-icon.gold {
-        background: #ffd700;
+        background: #ff6b35;
       }
 
       .rate-icon.silver {
-        background: #c0c0c0;
+        background: #4a90e2;
       }
 
       .rate-info {
-        display: flex;
-        flex-direction: column;
+        flex: 1;
       }
 
       .rate-metal {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.25rem;
+      }
+
+      .rate-price-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
 
       .rate-price {
-        font-size: 0.875rem;
-        color: var(--text-primary);
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
       }
 
       .rate-change {
-        font-size: 0.75rem;
-        margin-left: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
       }
 
       .rate-change.positive {
-        color: var(--success);
+        color: #10b981;
       }
 
       .rate-change.negative {
-        color: var(--error);
+        color: #ef4444;
       }
 
       /* Total Investments */
-      .total-investments {
-        background: var(--surface);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        box-shadow: var(--shadow);
-      }
-
       .investments-title {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 700;
         color: var(--text-primary);
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
       }
 
       .investments-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
       }
 
       .investment-item {
         text-align: center;
+        background: var(--background);
+        border-radius: 16px;
+        padding: 1.5rem 1rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .investment-item:hover {
+        border-color: var(--purple);
+        transform: translateY(-2px);
       }
 
       .investment-type {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
         color: var(--text-secondary);
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
       }
 
       .investment-value {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.25rem;
+        font-weight: 700;
         color: var(--text-primary);
       }
 
@@ -275,168 +357,157 @@
       .scheme-tabs {
         display: flex;
         background: var(--background);
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        padding: 0.25rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem;
+        box-shadow: var(--shadow);
       }
 
       .scheme-tab {
         flex: 1;
-        padding: 0.5rem;
+        padding: 0.75rem 1rem;
         text-align: center;
         background: transparent;
         border: none;
-        border-radius: 6px;
+        border-radius: 12px;
         font-size: 0.875rem;
         color: var(--text-secondary);
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
+        font-weight: 600;
       }
 
       .scheme-tab.active {
-        background: var(--surface);
-        color: var(--text-primary);
-        font-weight: 500;
-        box-shadow: var(--shadow);
+        background: var(--gradient-purple);
+        color: white;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
       }
 
-      /* Scheme Card */
+      /* Scheme Cards */
       .scheme-card {
-        background: var(--surface);
-        border-radius: 12px;
-        padding: 1rem;
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 1.5rem;
         margin-bottom: 1.5rem;
-        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
       }
 
       .scheme-card.with-details {
-        border: 1px solid #e2e8f0;
+        background: var(--gradient-purple);
+        color: white;
+        border-color: var(--purple-dark);
       }
 
       .scheme-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.5rem;
         margin-bottom: 1rem;
       }
 
       .scheme-info h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.25rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
       }
 
       .scheme-details {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
+        font-size: 0.875rem;
         margin-bottom: 0.5rem;
+        opacity: 0.9;
       }
 
       .scheme-amount {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.75rem;
       }
 
       .scheme-status {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        background: rgba(239, 68, 68, 0.1);
         color: var(--error);
-        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 0.75rem;
       }
 
       .scheme-links {
         display: flex;
-        gap: 1rem;
-        margin-bottom: 0.5rem;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
       }
 
       .scheme-link {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 0.25rem;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
       }
 
-      .scheme-image {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #ffd700, #ffed4e);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-
-      .scheme-image img {
-        width: 60px;
-        height: auto;
-      }
-
-      .scheme-badge {
-        position: absolute;
-        bottom: -5px;
-        right: -5px;
-        width: 30px;
-        height: 30px;
-        background: var(--primary);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        font-weight: bold;
-        color: var(--text-primary);
+      .scheme-link:hover {
+        color: white;
+        transform: translateX(2px);
       }
 
       /* Buttons */
       .btn {
-        padding: 0.75rem 1.5rem;
+        padding: 0.875rem 1.75rem;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+        justify-content: center;
       }
 
       .btn-primary {
-        background: var(--purple);
+        background: var(--gradient-purple);
         color: white;
+        box-shadow: var(--shadow-lg);
       }
 
       .btn-primary:hover {
-        background: #5b21b6;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
       }
 
       .btn-secondary {
         background: transparent;
         color: var(--purple);
-        border: 1px solid var(--purple);
+        border: 2px solid var(--purple);
       }
 
       .btn-secondary:hover {
         background: var(--purple);
         color: white;
+        transform: translateY(-2px);
       }
 
       .btn-pay {
-        background: var(--purple);
-        color: white;
+        background: var(--gradient-gold);
+        color: var(--text-primary);
         width: 100%;
-        margin-top: 0.5rem;
+        margin-top: 0.75rem;
+        font-weight: 700;
       }
 
       .scheme-buttons {
         display: flex;
-        gap: 0.75rem;
+        gap: 1rem;
       }
 
       .scheme-buttons .btn {
@@ -444,69 +515,80 @@
       }
 
       /* Saving Schemes Section */
-      .saving-schemes {
-        margin-bottom: 1.5rem;
-      }
-
       .section-title {
-        font-size: 1.125rem;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 800;
         color: var(--text-primary);
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        background: var(--gradient-purple);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .schemes-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
       }
 
       .scheme-item {
-        background: linear-gradient(135deg, #fff5e6, #fef3c7);
-        border: 2px solid #fbbf24;
-        border-radius: 12px;
-        padding: 1rem;
+        background: var(--surface);
+        border: 2px solid transparent;
+        border-radius: 20px;
+        padding: 1.5rem;
         position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
       }
 
-      .scheme-item.digi-gold {
-        background: linear-gradient(135deg, #fff5e6, #fef3c7);
-        border-color: #fbbf24;
+      .scheme-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-gold);
+        border-radius: 20px 20px 0 0;
       }
 
-      .scheme-item.silver {
-        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-        border-color: #94a3b8;
+      .scheme-item.digi-gold::before {
+        background: var(--gradient-gold);
+      }
+
+      .scheme-item.silver::before {
+        background: var(--gradient-silver);
+      }
+
+      .scheme-item:hover {
+        border-color: var(--purple);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
       }
 
       .scheme-item h4 {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #92400e;
-        margin-bottom: 0.5rem;
-      }
-
-      .scheme-item.digi-gold h4 {
-        color: #92400e;
-      }
-
-      .scheme-item.silver h4 {
-        color: #475569;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
       }
 
       .scheme-subtitle {
-        font-size: 0.875rem;
+        font-size: 1rem;
         color: var(--text-secondary);
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
       }
 
       .scheme-item-badge {
         position: absolute;
         top: 1rem;
         right: 1rem;
-        width: 40px;
-        height: 40px;
-        background: #fbbf24;
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-gold);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -514,71 +596,284 @@
         font-size: 0.75rem;
         font-weight: bold;
         color: white;
-      }
-
-      .scheme-item.silver .scheme-item-badge {
-        background: #94a3b8;
-      }
-
-      /* Purchase Digital Assets */
-      .purchase-assets {
-        margin-bottom: 1.5rem;
-      }
-
-      .assets-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-      }
-
-      .asset-card {
-        background: var(--background);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .asset-card:hover {
         box-shadow: var(--shadow-lg);
       }
 
+      .scheme-item.silver .scheme-item-badge {
+        background: var(--gradient-silver);
+      }
+
+      /* Purchase Digital Assets */
+      .assets-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .asset-card {
+        background: var(--surface);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .asset-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-gold);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .asset-card:nth-child(2)::before {
+        background: var(--gradient-silver);
+      }
+
+      .asset-card:hover {
+        border-color: var(--purple);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+      }
+
       .asset-icon {
-        width: 40px;
-        height: 40px;
-        margin: 0 auto 0.75rem;
-        background: var(--background);
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1rem;
+        background: var(--gradient-purple);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+        color: white;
+        box-shadow: var(--shadow-lg);
       }
 
       .asset-title {
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.125rem;
+        font-weight: 700;
         color: var(--text-primary);
+        margin-bottom: 0.5rem;
       }
 
       .asset-subtitle {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+      }
+
+      /* Savings Page Specific */
+      .savings-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .savings-card {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 1.5rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .savings-card.gold::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-gold);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .savings-card.silver::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-silver);
+        border-radius: 20px 20px 0 0;
+      }
+
+      .savings-card:hover {
+        border-color: var(--purple);
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .savings-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .savings-card.gold .savings-icon {
+        background: var(--gradient-gold);
+      }
+
+      .savings-card.silver .savings-icon {
+        background: var(--gradient-silver);
+      }
+
+      .savings-amount {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .savings-label {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .savings-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .savings-actions .btn {
+        flex: 1;
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+      }
+
+      /* Profile Page */
+      .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: var(--gradient-purple);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        margin: 0 auto 1rem;
+        box-shadow: var(--shadow-xl);
+        border: 4px solid white;
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-email {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .profile-sections {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .profile-section {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 1.5rem;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .profile-section:hover {
+        border-color: var(--purple);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .profile-section h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .profile-section-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--gradient-purple);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.875rem;
+      }
+
+      .profile-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .profile-info-item {
+        background: var(--background);
+        border-radius: 12px;
+        padding: 1rem;
+      }
+
+      .profile-info-label {
         font-size: 0.875rem;
         color: var(--text-secondary);
-        margin-top: 0.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-info-value {
+        font-size: 1rem;
+        color: var(--text-primary);
+        font-weight: 600;
       }
 
       /* Bottom Navigation */
       .bottom-nav {
         background: var(--surface);
+        backdrop-filter: blur(20px);
         border-top: 1px solid var(--border);
-        padding: 0.75rem;
+        padding: 1rem;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         z-index: 100;
+        box-shadow: var(--shadow-xl);
       }
 
       .nav-items {
@@ -596,22 +891,27 @@
         text-decoration: none;
         color: var(--text-secondary);
         font-size: 0.75rem;
-        font-weight: 500;
-        transition: color 0.2s ease;
+        font-weight: 600;
+        transition: all 0.3s ease;
         cursor: pointer;
         background: none;
         border: none;
+        padding: 0.5rem;
+        border-radius: 12px;
       }
 
       .nav-item.active {
         color: var(--purple);
+        background: rgba(99, 102, 241, 0.1);
+        transform: translateY(-2px);
       }
 
       .nav-item i {
         font-size: 1.25rem;
+        margin-bottom: 0.25rem;
       }
 
-      /* Modal */
+      /* Modal Enhancements */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -619,6 +919,7 @@
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
         z-index: 1000;
         display: none;
         align-items: center;
@@ -632,44 +933,51 @@
 
       .modal-content {
         background: var(--surface);
-        border-radius: 1rem;
-        box-shadow: var(--shadow-lg);
+        border-radius: 20px;
+        box-shadow: var(--shadow-xl);
         width: 100%;
         max-width: 500px;
         max-height: 90vh;
         overflow-y: auto;
+        border: 2px solid var(--glass-border);
       }
 
       .modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
+        padding: 1.5rem;
         border-bottom: 1px solid var(--border);
-        background: var(--background);
-        border-radius: 1rem 1rem 0 0;
+        background: var(--gradient-purple);
+        color: white;
+        border-radius: 20px 20px 0 0;
       }
 
       .modal-header h3 {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--text-primary);
+        font-size: 1.25rem;
+        font-weight: 700;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
       }
 
       .modal-close {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         border: none;
-        background: transparent;
-        color: var(--text-secondary);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
         cursor: pointer;
-        border-radius: 0.25rem;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
       }
 
       .modal-body {
@@ -678,21 +986,28 @@
 
       .form-section {
         margin-bottom: 1.5rem;
-        border: 1px solid var(--border);
-        border-radius: 0.75rem;
+        border: 2px solid var(--border);
+        border-radius: 16px;
         overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .form-section:focus-within {
+        border-color: var(--purple);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
       }
 
       .section-header-form {
         background: var(--background);
-        padding: 0.75rem 1rem;
+        padding: 1rem 1.5rem;
         border-bottom: 1px solid var(--border);
-        font-weight: 600;
+        font-weight: 700;
         color: var(--text-primary);
+        font-size: 0.875rem;
       }
 
       .form-grid {
-        padding: 1rem;
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -706,7 +1021,7 @@
 
       .form-label {
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: 600;
         color: var(--text-primary);
       }
 
@@ -716,81 +1031,126 @@
 
       .form-input,
       .form-select {
-        padding: 0.75rem;
-        border: 1px solid var(--border);
-        border-radius: 0.5rem;
+        padding: 0.875rem 1rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
         font-size: 0.875rem;
         background: var(--surface);
-        transition: border-color 0.2s ease;
+        transition: all 0.3s ease;
+        font-weight: 500;
       }
 
       .form-input:focus,
       .form-select:focus {
         outline: none;
         border-color: var(--purple);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        transform: translateY(-1px);
       }
 
       .projection-section {
         background: var(--background);
-        border-radius: 0.5rem;
-        padding: 1rem;
+        border-radius: 12px;
+        padding: 1.5rem;
         margin-top: 1rem;
+        border: 2px solid var(--border);
       }
 
       .projection-item {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         font-size: 0.875rem;
+        font-weight: 500;
       }
 
       .projection-total {
         display: flex;
         justify-content: space-between;
-        font-weight: 600;
-        padding-top: 0.5rem;
-        border-top: 1px solid var(--border);
+        font-weight: 700;
+        padding-top: 0.75rem;
+        border-top: 2px solid var(--border);
+        font-size: 1rem;
       }
 
       .checkbox-group {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
         margin-top: 1rem;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 12px;
       }
 
       .checkbox-group input[type="checkbox"] {
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
+        accent-color: var(--purple);
       }
 
       .checkbox-group label {
         font-size: 0.875rem;
         color: var(--text-secondary);
+        font-weight: 500;
       }
 
       .modal-footer {
-        padding: 1rem;
+        padding: 1.5rem;
         border-top: 1px solid var(--border);
         background: var(--background);
+        border-radius: 0 0 20px 20px;
       }
 
       .hidden {
         display: none;
       }
 
-      /* Responsive */
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .main-content {
+          max-width: 800px;
+          padding: 1rem;
+          padding-top: 100px;
+          padding-bottom: 120px;
+        }
+
+        .schemes-list {
+          grid-template-columns: 1fr;
+        }
+
+        .savings-overview {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 768px) {
         .main-content {
           padding: 0.75rem;
-          padding-top: 80px;
-          padding-bottom: 100px;
+          padding-top: 90px;
+          padding-bottom: 110px;
+        }
+
+        .header {
+          padding: 0.75rem 1rem;
+        }
+
+        .logo-text {
+          font-size: 1rem;
+        }
+
+        .greeting-title {
+          font-size: 1.5rem;
         }
 
         .rates-container {
-          flex-direction: column;
-          gap: 0.75rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .scheme-header {
+          grid-template-columns: 1fr;
+          text-align: center;
         }
 
         .scheme-buttons {
@@ -800,6 +1160,116 @@
         .assets-grid {
           grid-template-columns: 1fr;
         }
+
+        .savings-actions {
+          flex-direction: column;
+        }
+
+        .profile-info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .investments-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .nav-item {
+          font-size: 0.7rem;
+        }
+
+        .nav-item i {
+          font-size: 1.125rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main-content {
+          padding: 0.5rem;
+          padding-top: 85px;
+          padding-bottom: 100px;
+        }
+
+        .premium-card {
+          padding: 1rem;
+        }
+
+        .greeting-title {
+          font-size: 1.25rem;
+        }
+
+        .section-title {
+          font-size: 1.25rem;
+        }
+
+        .modal-content {
+          margin: 0.5rem;
+          max-width: calc(100vw - 1rem);
+        }
+
+        .form-grid {
+          padding: 1rem;
+        }
+
+        .investments-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .tab-content {
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      /* Investment Options */
+      .investment-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .investment-option {
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .investment-option:hover {
+        border-color: var(--purple);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .investment-option.selected {
+        border-color: var(--purple);
+        background: rgba(99, 102, 241, 0.1);
+      }
+
+      .investment-option-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .investment-option-desc {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
       }
     </style>
   </head>
@@ -829,36 +1299,40 @@
         <div id="homeTab" class="tab-content">
           <!-- User Greeting -->
           <div class="user-greeting">
-            <h1 class="greeting-title">Hi , Sethu</h1>
+            <h1 class="greeting-title">Hi, Sethu</h1>
             <p class="account-number">Acc No: 12345678</p>
           </div>
 
           <!-- Today's Rates -->
-          <div class="todays-rates">
+          <div class="premium-card todays-rates">
             <div class="rates-header">Today's Rate</div>
             <div class="rates-container">
               <div class="rate-item">
-                <div class="rate-icon gold"></div>
+                <div class="rate-icon gold">AU</div>
                 <div class="rate-info">
-                  <div class="rate-metal">GOLD:</div>
+                  <div class="rate-metal">GOLD</div>
+                  <div class="rate-price-container">
+                    <div class="rate-price">RS 9200.00</div>
+                    <div class="rate-change positive">↗</div>
+                  </div>
                 </div>
-                <div class="rate-price">RS 9200.00</div>
-                <div class="rate-change positive">��</div>
               </div>
               <div class="rate-item">
-                <div class="rate-icon silver"></div>
+                <div class="rate-icon silver">AG</div>
                 <div class="rate-info">
-                  <div class="rate-metal">SILVER:</div>
+                  <div class="rate-metal">SILVER</div>
+                  <div class="rate-price-container">
+                    <div class="rate-price">RS 120.00</div>
+                    <div class="rate-change negative">↘</div>
+                  </div>
                 </div>
-                <div class="rate-price">RS 120.00</div>
-                <div class="rate-change negative">↘</div>
               </div>
             </div>
           </div>
 
           <!-- Total Investments -->
-          <div class="total-investments">
-            <h2 class="investments-title">Your Total Investments:</h2>
+          <div class="premium-card">
+            <h2 class="investments-title">Your Total Investments</h2>
             <div class="investments-grid">
               <div class="investment-item">
                 <div class="investment-type">Schemes</div>
@@ -895,11 +1369,11 @@
                     <a href="#" class="scheme-link">View Statement <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
-                <div class="scheme-info" style="text-align: right;">
+                <div class="scheme-info">
                   <div class="scheme-details">Started On: 19/2/2025</div>
                   <div class="scheme-details">Matured On: 19/2/2026</div>
                   <div class="scheme-details">Installment No: 1</div>
-                  <div class="scheme-status">Status: Over Due</div>
+                  <div class="scheme-status">Over Due</div>
                   <div class="scheme-amount">Rs 1,000.00</div>
                   <button class="btn-pay">Pay Now</button>
                 </div>
@@ -908,34 +1382,36 @@
           </div>
 
           <!-- Saving Schemes -->
-          <div class="saving-schemes">
+          <div class="premium-card">
             <h2 class="section-title">Saving Schemes</h2>
             
-            <div class="scheme-item">
-              <h4>Gold Saving Scheme</h4>
-              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
-              <div class="scheme-item-badge">GOLD</div>
-              <div class="scheme-buttons">
-                <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
-                <button class="btn btn-secondary">View Details</button>
+            <div class="schemes-list">
+              <div class="scheme-item">
+                <h4>Gold Saving Scheme</h4>
+                <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+                <div class="scheme-item-badge">GOLD</div>
+                <div class="scheme-buttons">
+                  <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
+                  <button class="btn btn-secondary">View Details</button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Purchase Digital Assets -->
-          <div class="purchase-assets">
+          <div class="premium-card">
             <h2 class="section-title">PURCHASE DIGITAL ASSETS</h2>
             <div class="assets-grid">
-              <div class="asset-card">
+              <div class="asset-card" onclick="openBuyModal('gold')">
                 <div class="asset-icon">
-                  <i class="fas fa-chart-line" style="color: #ffd700;"></i>
+                  <i class="fas fa-coins"></i>
                 </div>
                 <div class="asset-title">BUY</div>
                 <div class="asset-subtitle">GOLD</div>
               </div>
-              <div class="asset-card">
+              <div class="asset-card" onclick="openBuyModal('silver')">
                 <div class="asset-icon">
-                  <i class="fas fa-circle" style="color: #c0c0c0;"></i>
+                  <i class="fas fa-circle"></i>
                 </div>
                 <div class="asset-title">BUY</div>
                 <div class="asset-subtitle">SILVER</div>
@@ -946,18 +1422,81 @@
 
         <!-- Savings Tab -->
         <div id="savingsTab" class="tab-content hidden">
-          <h2 class="section-title">Savings</h2>
-          <p>Savings content will be displayed here.</p>
+          <div class="user-greeting">
+            <h1 class="greeting-title">Your Savings</h1>
+            <p class="account-number">Track your precious metal investments</p>
+          </div>
+
+          <!-- Savings Overview -->
+          <div class="savings-overview">
+            <div class="premium-card savings-card gold">
+              <div class="savings-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="savings-amount">2.45 gms</div>
+              <div class="savings-label">Gold Saved</div>
+              <div class="savings-label">Value: ₹22,540</div>
+              <div class="savings-actions">
+                <button class="btn btn-primary" onclick="openInvestmentModal('gold', 'onetime')">Buy Now</button>
+                <button class="btn btn-secondary" onclick="openInvestmentModal('gold', 'sip')">Start SIP</button>
+              </div>
+            </div>
+
+            <div class="premium-card savings-card silver">
+              <div class="savings-icon">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="savings-amount">15.8 gms</div>
+              <div class="savings-label">Silver Saved</div>
+              <div class="savings-label">Value: ₹1,896</div>
+              <div class="savings-actions">
+                <button class="btn btn-primary" onclick="openInvestmentModal('silver', 'onetime')">Buy Now</button>
+                <button class="btn btn-secondary" onclick="openInvestmentModal('silver', 'sip')">Start SIP</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Savings Activity -->
+          <div class="premium-card">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="transactions-list">
+              <div class="transaction-item">
+                <div class="savings-icon" style="width: 40px; height: 40px; margin-bottom: 0;">
+                  <i class="fas fa-plus" style="font-size: 1rem;"></i>
+                </div>
+                <div class="transaction-info" style="flex: 1; margin-left: 1rem;">
+                  <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Gold Purchase</div>
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">SIP Investment • 0.25g</div>
+                </div>
+                <div style="font-weight: 600; color: var(--text-primary);">₹2,312.50</div>
+              </div>
+              <div class="transaction-item">
+                <div class="savings-card silver" style="width: 40px; height: 40px; margin-bottom: 0; border-radius: 50%;">
+                  <div class="savings-icon" style="width: 100%; height: 100%; margin: 0;">
+                    <i class="fas fa-plus" style="font-size: 1rem;"></i>
+                  </div>
+                </div>
+                <div class="transaction-info" style="flex: 1; margin-left: 1rem;">
+                  <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Silver Purchase</div>
+                  <div style="font-size: 0.875rem; color: var(--text-secondary);">One-time • 2.5g</div>
+                </div>
+                <div style="font-weight: 600; color: var(--text-primary);">₹300.00</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Schemes Tab -->
         <div id="schemesTab" class="tab-content hidden">
-          <h2 class="section-title">Saving Schemes</h2>
+          <div class="user-greeting">
+            <h1 class="greeting-title">Saving Schemes</h1>
+            <p class="account-number">Choose the best scheme for your future</p>
+          </div>
           
           <div class="schemes-list">
             <div class="scheme-item">
               <h4>Gold Saving Scheme</h4>
-              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity with guaranteed returns</p>
               <div class="scheme-item-badge">GOLD</div>
               <div class="scheme-buttons">
                 <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
@@ -967,7 +1506,7 @@
 
             <div class="scheme-item digi-gold">
               <h4>Digi Gold</h4>
-              <p class="scheme-subtitle">SIP DAILY | WEEKLY | MONTHLY</p>
+              <p class="scheme-subtitle">SIP DAILY | WEEKLY | MONTHLY - Flexible investment options</p>
               <div class="scheme-item-badge">GOLD</div>
               <div class="scheme-buttons">
                 <button class="btn btn-primary">Join Now</button>
@@ -977,7 +1516,7 @@
 
             <div class="scheme-item silver">
               <h4>Silver Saving Scheme</h4>
-              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity with silver investments</p>
               <div class="scheme-item-badge">SILVER</div>
               <div class="scheme-buttons">
                 <button class="btn btn-primary">Join Now</button>
@@ -989,8 +1528,121 @@
 
         <!-- Profile Tab -->
         <div id="profileTab" class="tab-content hidden">
-          <h2 class="section-title">Profile</h2>
-          <p>Profile information will be displayed here.</p>
+          <div class="profile-header">
+            <div class="profile-avatar">S</div>
+            <h1 class="profile-name">Sethu Kumaran</h1>
+            <p class="profile-email">sethu.kumaran@email.com</p>
+          </div>
+
+          <div class="profile-sections">
+            <!-- Personal Information -->
+            <div class="profile-section">
+              <h3>
+                <div class="profile-section-icon">
+                  <i class="fas fa-user"></i>
+                </div>
+                Personal Information
+              </h3>
+              <div class="profile-info-grid">
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Full Name</div>
+                  <div class="profile-info-value">Sethu Kumaran</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Account Number</div>
+                  <div class="profile-info-value">12345678</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Phone Number</div>
+                  <div class="profile-info-value">+91 98765 43210</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Email Address</div>
+                  <div class="profile-info-value">sethu.kumaran@email.com</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Date of Birth</div>
+                  <div class="profile-info-value">08/08/1989</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">KYC Status</div>
+                  <div class="profile-info-value" style="color: var(--success);">✓ Verified</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Investment Summary -->
+            <div class="profile-section">
+              <h3>
+                <div class="profile-section-icon">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                Investment Summary
+              </h3>
+              <div class="profile-info-grid">
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Total Gold Holdings</div>
+                  <div class="profile-info-value">2.45 gms</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Total Silver Holdings</div>
+                  <div class="profile-info-value">15.8 gms</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Active Schemes</div>
+                  <div class="profile-info-value">1</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Total Investment Value</div>
+                  <div class="profile-info-value">₹24,436</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Maturity Amount</div>
+                  <div class="profile-info-value">₹85,000</div>
+                </div>
+                <div class="profile-info-item">
+                  <div class="profile-info-label">Potential Profit</div>
+                  <div class="profile-info-value" style="color: var(--success);">₹60,564</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="profile-section">
+              <h3>
+                <div class="profile-section-icon">
+                  <i class="fas fa-cog"></i>
+                </div>
+                Account Settings
+              </h3>
+              <div class="profile-info-grid">
+                <div class="profile-info-item" onclick="editProfile()" style="cursor: pointer;">
+                  <div class="profile-info-label">Edit Profile</div>
+                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="profile-info-item" onclick="changePassword()" style="cursor: pointer;">
+                  <div class="profile-info-label">Change Password</div>
+                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="profile-info-item" onclick="manageNotifications()" style="cursor: pointer;">
+                  <div class="profile-info-label">Notifications</div>
+                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="profile-info-item" onclick="viewDocuments()" style="cursor: pointer;">
+                  <div class="profile-info-label">Documents</div>
+                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="profile-info-item" onclick="contactSupport()" style="cursor: pointer;">
+                  <div class="profile-info-label">Support & Help</div>
+                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="profile-info-item" onclick="logout()" style="cursor: pointer;">
+                  <div class="profile-info-label">Logout</div>
+                  <div class="profile-info-value" style="color: var(--error);"><i class="fas fa-sign-out-alt"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1096,7 +1748,7 @@
           </div>
 
           <div class="form-section">
-            <div class="section-header-form">Projection:</div>
+            <div class="section-header-form">Projection</div>
             <div class="form-grid">
               <div class="projection-section">
                 <div class="projection-item">
@@ -1168,10 +1820,75 @@
       </div>
     </div>
 
+    <!-- Investment Modal -->
+    <div id="investmentModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>
+            <i class="fas fa-coins"></i>
+            <span id="investmentModalTitle">Investment Options</span>
+          </h3>
+          <button class="modal-close" onclick="closeInvestmentModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-section">
+            <div class="section-header-form">Investment Type</div>
+            <div class="form-grid">
+              <div class="investment-options">
+                <div class="investment-option selected" onclick="selectInvestmentType('onetime')">
+                  <div class="investment-option-title">One-time Purchase</div>
+                  <div class="investment-option-desc">Buy immediately</div>
+                </div>
+                <div class="investment-option" onclick="selectInvestmentType('sip')">
+                  <div class="investment-option-title">Start SIP</div>
+                  <div class="investment-option-desc">Recurring investment</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Investment Details</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Amount (₹) <span class="required">*</span></label>
+                <input type="number" class="form-input" placeholder="Enter amount" id="investmentAmount" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Quantity (gms)</label>
+                <input type="number" class="form-input" placeholder="Calculated automatically" id="investmentQuantity" readonly />
+              </div>
+              <div id="sipOptions" class="form-group hidden">
+                <label class="form-label">SIP Frequency</label>
+                <select class="form-select">
+                  <option>Daily</option>
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeInvestmentModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="proceedInvestment()">
+            <i class="fas fa-shopping-cart"></i>
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       let currentTab = "home";
       let currentSchemeTab = "schemes";
       let userHasScheme = false;
+      let currentInvestmentType = "onetime";
+      let currentMetal = "gold";
 
       function showTab(tabName) {
         // Hide all tabs
@@ -1203,7 +1920,6 @@
         event.target.classList.add("active");
 
         currentSchemeTab = tabName;
-        // Here you would show different content based on the tab
       }
 
       function openSchemeSignup() {
@@ -1215,28 +1931,132 @@
       }
 
       function registerScheme() {
-        // Simulate scheme registration
         userHasScheme = true;
         
-        // Show scheme tabs and details
         document.getElementById("schemeTabs").classList.remove("hidden");
         document.getElementById("schemeDetails").classList.remove("hidden");
         
-        // Close modal
         closeSchemeSignup();
         
-        // Update investments to show scheme data
         const schemeInvestment = document.querySelector(".investment-item:first-child .investment-value");
         schemeInvestment.textContent = "Rs 1,000.00";
         
-        // Show success message
         alert("Successfully registered for Gold Chit Savings scheme!");
       }
 
-      // Close modal when clicking outside
+      function openInvestmentModal(metal, type) {
+        currentMetal = metal;
+        currentInvestmentType = type;
+        
+        document.getElementById("investmentModalTitle").textContent = 
+          `${type === 'sip' ? 'Start SIP' : 'Buy'} ${metal.charAt(0).toUpperCase() + metal.slice(1)}`;
+        
+        // Reset form
+        document.getElementById("investmentAmount").value = "";
+        document.getElementById("investmentQuantity").value = "";
+        
+        // Show/hide SIP options
+        const sipOptions = document.getElementById("sipOptions");
+        if (type === 'sip') {
+          sipOptions.classList.remove("hidden");
+        } else {
+          sipOptions.classList.add("hidden");
+        }
+        
+        // Update investment type selection
+        selectInvestmentType(type);
+        
+        document.getElementById("investmentModal").classList.add("show");
+      }
+
+      function closeInvestmentModal() {
+        document.getElementById("investmentModal").classList.remove("show");
+      }
+
+      function selectInvestmentType(type) {
+        currentInvestmentType = type;
+        
+        document.querySelectorAll(".investment-option").forEach(option => {
+          option.classList.remove("selected");
+        });
+        
+        document.querySelector(`[onclick="selectInvestmentType('${type}')"]`).classList.add("selected");
+        
+        const sipOptions = document.getElementById("sipOptions");
+        if (type === 'sip') {
+          sipOptions.classList.remove("hidden");
+        } else {
+          sipOptions.classList.add("hidden");
+        }
+      }
+
+      function proceedInvestment() {
+        const amount = document.getElementById("investmentAmount").value;
+        if (!amount) {
+          alert("Please enter an amount");
+          return;
+        }
+        
+        alert(`Proceeding with ${currentInvestmentType === 'sip' ? 'SIP' : 'one-time'} investment of ₹${amount} in ${currentMetal}`);
+        closeInvestmentModal();
+      }
+
+      function openBuyModal(metal) {
+        openInvestmentModal(metal, 'onetime');
+      }
+
+      // Profile functions
+      function editProfile() {
+        alert("Edit Profile functionality will be implemented");
+      }
+
+      function changePassword() {
+        alert("Change Password functionality will be implemented");
+      }
+
+      function manageNotifications() {
+        alert("Notification settings will be implemented");
+      }
+
+      function viewDocuments() {
+        alert("Document management will be implemented");
+      }
+
+      function contactSupport() {
+        alert("Support system will be implemented");
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          alert("Logging out...");
+        }
+      }
+
+      // Auto-calculate quantity based on amount
+      document.addEventListener("DOMContentLoaded", function() {
+        const amountInput = document.getElementById("investmentAmount");
+        const quantityInput = document.getElementById("investmentQuantity");
+        
+        if (amountInput && quantityInput) {
+          amountInput.addEventListener("input", function() {
+            const amount = parseFloat(this.value) || 0;
+            const rate = currentMetal === 'gold' ? 9200 : 120;
+            const quantity = amount / rate;
+            quantityInput.value = quantity.toFixed(4);
+          });
+        }
+      });
+
+      // Close modals when clicking outside
       document.getElementById("schemeSignupModal").addEventListener("click", function (e) {
         if (e.target === this) {
           closeSchemeSignup();
+        }
+      });
+
+      document.getElementById("investmentModal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          closeInvestmentModal();
         }
       });
 
