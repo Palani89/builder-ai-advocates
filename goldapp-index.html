@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GoldApp - Digital Gold Investment</title>
+    <title>Sri Kumaran Jewellers - Digital Gold Investment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -18,6 +18,7 @@
         --primary: #ffd700;
         --primary-dark: #daa520;
         --secondary: #10b981;
+        --purple: #6366f1;
         --background: #f8fafc;
         --surface: #ffffff;
         --text-primary: #1e293b;
@@ -102,12 +103,13 @@
         justify-content: center;
         color: white;
         font-size: 1rem;
+        font-weight: bold;
       }
 
       .logo-text {
-        font-size: 1.125rem;
+        font-size: 1rem;
         font-weight: 600;
-        color: var(--primary-dark);
+        color: var(--text-primary);
       }
 
       .header-right {
@@ -131,338 +133,95 @@
         background: var(--background);
       }
 
-      .notification-badge {
-        position: absolute;
-        top: 0.25rem;
-        right: 0.25rem;
-        background: var(--error);
-        color: white;
-        font-size: 0.75rem;
-        font-weight: 600;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .user-avatar {
-        width: 32px;
-        height: 32px;
-        background: var(--primary);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      /* Side Menu */
-      .side-menu {
-        position: fixed;
-        top: 0;
-        left: -300px;
-        width: 300px;
-        height: 100vh;
-        background: var(--surface);
-        border-right: 1px solid var(--border);
-        box-shadow: var(--shadow-lg);
-        z-index: 1000;
-        transition: left 0.3s ease;
-        overflow-y: auto;
-      }
-
-      .side-menu.open {
-        left: 0;
-      }
-
-      .side-menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-      }
-
-      .side-menu-overlay.show {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .side-menu-header {
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .side-menu-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .side-menu-close {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: var(--text-secondary);
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 6px;
-      }
-
-      .side-menu-subtitle {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        margin-top: 0.25rem;
-      }
-
-      .side-menu-nav {
-        padding: 1rem 0;
-      }
-
-      .side-menu-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 0.75rem 1.5rem;
-        color: var(--text-primary);
-        text-decoration: none;
-        transition: background-color 0.2s ease;
-        border: none;
-        background: none;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        font-size: 1rem;
-      }
-
-      .side-menu-item:hover {
-        background: var(--background);
-      }
-
-      .side-menu-item.active {
-        background: rgba(255, 215, 0, 0.1);
-        color: var(--primary-dark);
-      }
-
-      .side-menu-item.logout {
-        color: var(--error);
-        border-top: 1px solid var(--border);
-        margin-top: 1rem;
-      }
-
-      .side-menu-icon {
-        width: 20px;
-        text-align: center;
-      }
-
       /* Main Content */
       .main-content {
         flex: 1;
-        padding: 1.5rem;
-        max-width: 1200px;
+        padding: 1rem;
+        max-width: 600px;
         margin: 0 auto;
         width: 100%;
-        padding-top: 100px;
+        padding-top: 80px;
         padding-bottom: 100px;
       }
 
-      .gold-main-section {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
+      /* User Greeting */
+      .user-greeting {
+        margin-bottom: 1rem;
       }
 
-      /* Portfolio Overview */
-      .portfolio-overview {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .portfolio-card {
-        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
-        border-radius: 16px;
-        padding: 2rem;
-        color: white;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .portfolio-header {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-      }
-
-      .portfolio-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-      }
-
-      .portfolio-info h3 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1rem;
-        opacity: 0.9;
-      }
-
-      .portfolio-value {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-      }
-
-      .portfolio-details {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        font-size: 0.875rem;
-        opacity: 0.9;
-      }
-
-      .profit-indicator.positive {
-        color: #10b981;
-      }
-
-      .quick-stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-      }
-
-      .stat-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: all 0.2s ease;
-      }
-
-      .stat-card:hover {
-        box-shadow: var(--shadow-lg);
-      }
-
-      .stat-icon {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 215, 0, 0.1);
-        color: var(--primary-dark);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-      }
-
-      .stat-value {
-        font-size: 1.5rem;
-        font-weight: 700;
+      .greeting-title {
+        font-size: 1.25rem;
+        font-weight: 600;
         color: var(--text-primary);
         margin-bottom: 0.25rem;
       }
 
-      .stat-label {
-        font-size: 0.75rem;
+      .account-number {
+        font-size: 0.875rem;
         color: var(--text-secondary);
       }
 
-      /* Live Rates */
-      .live-rates-section {
+      /* Today's Rates */
+      .todays-rates {
         background: var(--surface);
-        border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1.5rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
       }
 
-      .section-header {
+      .rates-header {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+        text-align: right;
+      }
+
+      .rates-container {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-      }
-
-      .section-header h4 {
-        margin: 0;
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--text-primary);
-      }
-
-      .refresh-time {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-      }
-
-      .rates-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
       }
 
-      .rate-card {
-        background: var(--background);
-        border-radius: 8px;
-        padding: 1rem;
-        text-align: center;
-        transition: all 0.2s ease;
+      .rate-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      .rate-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+      .rate-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
       }
 
-      .rate-card.gold {
-        border-left: 4px solid #ffd700;
+      .rate-icon.gold {
+        background: #ffd700;
       }
 
-      .rate-card.silver {
-        border-left: 4px solid #c0c0c0;
+      .rate-icon.silver {
+        background: #c0c0c0;
       }
 
-      .rate-card.platinum {
-        border-left: 4px solid #e5e4e2;
+      .rate-info {
+        display: flex;
+        flex-direction: column;
       }
 
       .rate-metal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
         font-weight: 600;
         color: var(--text-primary);
       }
 
       .rate-price {
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 0.875rem;
         color: var(--text-primary);
-        margin-bottom: 0.5rem;
       }
 
       .rate-change {
         font-size: 0.75rem;
-        font-weight: 500;
+        margin-left: 0.5rem;
       }
 
       .rate-change.positive {
@@ -473,268 +232,341 @@
         color: var(--error);
       }
 
-      /* Quick Actions */
-      .quick-actions-section {
+      /* Total Investments */
+      .total-investments {
         background: var(--surface);
-        border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1.5rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
       }
 
-      .actions-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-      }
-
-      .action-card {
-        background: var(--background);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
-      }
-
-      .action-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-      }
-
-      .action-card.buy {
-        border-left: 4px solid var(--success);
-      }
-
-      .action-card.sip {
-        border-left: 4px solid var(--primary-dark);
-      }
-
-      .action-card.redeem {
-        border-left: 4px solid var(--warning);
-      }
-
-      .action-card.chit {
-        border-left: 4px solid #8b5cf6;
-      }
-
-      .action-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .investments-title {
         font-size: 1rem;
-        background: rgba(255, 215, 0, 0.1);
-        color: var(--primary-dark);
-      }
-
-      .action-card.buy .action-icon {
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--success);
-      }
-
-      .action-card.redeem .action-icon {
-        background: rgba(245, 158, 11, 0.1);
-        color: var(--warning);
-      }
-
-      .action-card.chit .action-icon {
-        background: rgba(139, 92, 246, 0.1);
-        color: #8b5cf6;
-      }
-
-      .action-title {
         font-weight: 600;
         color: var(--text-primary);
-        margin-bottom: 0.25rem;
-      }
-
-      .action-subtitle {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-      }
-
-      /* Auto Save */
-      .auto-save-section {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-      }
-
-      .auto-save-card {
-        background: var(--background);
-        border-radius: 8px;
-        padding: 1.5rem;
-      }
-
-      .auto-save-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         margin-bottom: 1rem;
       }
 
-      .auto-save-info h4 {
-        margin: 0 0 0.25rem 0;
+      .investments-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .investment-item {
+        text-align: center;
+      }
+
+      .investment-type {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .investment-value {
         font-size: 1rem;
         font-weight: 600;
         color: var(--text-primary);
       }
 
-      .auto-save-info p {
-        margin: 0;
+      /* Scheme Tabs */
+      .scheme-tabs {
+        display: flex;
+        background: var(--background);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        padding: 0.25rem;
+      }
+
+      .scheme-tab {
+        flex: 1;
+        padding: 0.5rem;
+        text-align: center;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
         font-size: 0.875rem;
         color: var(--text-secondary);
-      }
-
-      .toggle-switch {
-        position: relative;
-        display: inline-block;
-        width: 50px;
-        height: 24px;
-      }
-
-      .toggle-switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .toggle-slider {
-        position: absolute;
         cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: 0.3s;
-        border-radius: 24px;
+        transition: all 0.2s ease;
       }
 
-      .toggle-slider:before {
-        position: absolute;
-        content: "";
-        height: 18px;
-        width: 18px;
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        transition: 0.3s;
-        border-radius: 50%;
+      .scheme-tab.active {
+        background: var(--surface);
+        color: var(--text-primary);
+        font-weight: 500;
+        box-shadow: var(--shadow);
       }
 
-      input:checked + .toggle-slider {
-        background-color: var(--primary-dark);
+      /* Scheme Card */
+      .scheme-card {
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
       }
 
-      input:checked + .toggle-slider:before {
-        transform: translateX(26px);
+      .scheme-card.with-details {
+        border: 1px solid #e2e8f0;
       }
 
-      .auto-save-stats {
+      .scheme-header {
         display: flex;
-        gap: 2rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
       }
 
-      .save-stat {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
+      .scheme-info h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
       }
 
-      .save-label {
+      .scheme-details {
         font-size: 0.75rem;
         color: var(--text-secondary);
+        margin-bottom: 0.5rem;
       }
 
-      .save-value {
+      .scheme-amount {
         font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--primary-dark);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
       }
 
-      /* Recent Transactions */
-      .recent-transactions-section {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-      }
-
-      .view-all-link {
-        font-size: 0.875rem;
-        color: var(--primary-dark);
-        text-decoration: none;
+      .scheme-status {
+        font-size: 0.75rem;
+        color: var(--error);
         font-weight: 500;
       }
 
-      .transactions-list {
+      .scheme-links {
         display: flex;
-        flex-direction: column;
         gap: 1rem;
+        margin-bottom: 0.5rem;
       }
 
-      .transaction-item {
-        background: var(--background);
-        border-radius: 8px;
-        padding: 1rem;
+      .scheme-link {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.25rem;
       }
 
-      .transaction-icon {
-        width: 36px;
-        height: 36px;
+      .scheme-image {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ffd700, #ffed4e);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .scheme-image img {
+        width: 60px;
+        height: auto;
+      }
+
+      .scheme-badge {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 30px;
+        height: 30px;
+        background: var(--primary);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: var(--text-primary);
+      }
+
+      /* Buttons */
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
         font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s ease;
       }
 
-      .transaction-icon.buy {
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--success);
+      .btn-primary {
+        background: var(--purple);
+        color: white;
       }
 
-      .transaction-icon.sip {
-        background: rgba(255, 215, 0, 0.1);
-        color: var(--primary-dark);
+      .btn-primary:hover {
+        background: #5b21b6;
       }
 
-      .transaction-icon.referral {
-        background: rgba(245, 158, 11, 0.1);
-        color: var(--warning);
+      .btn-secondary {
+        background: transparent;
+        color: var(--purple);
+        border: 1px solid var(--purple);
       }
 
-      .transaction-info {
+      .btn-secondary:hover {
+        background: var(--purple);
+        color: white;
+      }
+
+      .btn-pay {
+        background: var(--purple);
+        color: white;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      .scheme-buttons {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .scheme-buttons .btn {
         flex: 1;
       }
 
-      .transaction-title {
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.25rem;
-        font-size: 0.875rem;
+      /* Saving Schemes Section */
+      .saving-schemes {
+        margin-bottom: 1.5rem;
       }
 
-      .transaction-subtitle {
-        font-size: 0.75rem;
+      .section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      .schemes-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .scheme-item {
+        background: linear-gradient(135deg, #fff5e6, #fef3c7);
+        border: 2px solid #fbbf24;
+        border-radius: 12px;
+        padding: 1rem;
+        position: relative;
+      }
+
+      .scheme-item.digi-gold {
+        background: linear-gradient(135deg, #fff5e6, #fef3c7);
+        border-color: #fbbf24;
+      }
+
+      .scheme-item.silver {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        border-color: #94a3b8;
+      }
+
+      .scheme-item h4 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 0.5rem;
+      }
+
+      .scheme-item.digi-gold h4 {
+        color: #92400e;
+      }
+
+      .scheme-item.silver h4 {
+        color: #475569;
+      }
+
+      .scheme-subtitle {
+        font-size: 0.875rem;
         color: var(--text-secondary);
+        margin-bottom: 1rem;
       }
 
-      .transaction-amount {
+      .scheme-item-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        background: #fbbf24;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: white;
+      }
+
+      .scheme-item.silver .scheme-item-badge {
+        background: #94a3b8;
+      }
+
+      /* Purchase Digital Assets */
+      .purchase-assets {
+        margin-bottom: 1.5rem;
+      }
+
+      .assets-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .asset-card {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .asset-card:hover {
+        box-shadow: var(--shadow-lg);
+      }
+
+      .asset-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 0.75rem;
+        background: var(--background);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .asset-title {
+        font-size: 1rem;
         font-weight: 600;
         color: var(--text-primary);
+      }
+
+      .asset-subtitle {
         font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
       }
 
       /* Bottom Navigation */
@@ -772,7 +604,7 @@
       }
 
       .nav-item.active {
-        color: var(--primary-dark);
+        color: var(--purple);
       }
 
       .nav-item i {
@@ -812,14 +644,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem 2rem;
+        padding: 1rem;
         border-bottom: 1px solid var(--border);
         background: var(--background);
         border-radius: 1rem 1rem 0 0;
       }
 
       .modal-header h3 {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         font-weight: 600;
         color: var(--text-primary);
         display: flex;
@@ -841,11 +673,11 @@
       }
 
       .modal-body {
-        padding: 2rem;
+        padding: 1.5rem;
       }
 
       .form-section {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         border: 1px solid var(--border);
         border-radius: 0.75rem;
         overflow: hidden;
@@ -853,40 +685,23 @@
 
       .section-header-form {
         background: var(--background);
-        padding: 1rem 1.5rem;
+        padding: 0.75rem 1rem;
         border-bottom: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .section-icon {
-        color: var(--primary-dark);
-        font-size: 1rem;
-      }
-
-      .section-title {
-        font-size: 1rem;
         font-weight: 600;
         color: var(--text-primary);
-        margin: 0;
       }
 
       .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        padding: 1.5rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
 
       .form-group {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-      }
-
-      .form-group.full-width {
-        grid-column: 1 / -1;
       }
 
       .form-label {
@@ -899,7 +714,8 @@
         color: var(--error);
       }
 
-      .form-input {
+      .form-input,
+      .form-select {
         padding: 0.75rem;
         border: 1px solid var(--border);
         border-radius: 0.5rem;
@@ -908,183 +724,101 @@
         transition: border-color 0.2s ease;
       }
 
-      .form-input:focus {
+      .form-input:focus,
+      .form-select:focus {
         outline: none;
-        border-color: var(--primary-dark);
-        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        border-color: var(--purple);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
       }
 
-      .rate-display {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem;
-        background: rgba(255, 215, 0, 0.1);
-        border: 1px solid rgba(255, 215, 0, 0.3);
+      .projection-section {
+        background: var(--background);
         border-radius: 0.5rem;
-        color: var(--primary-dark);
-        font-weight: 600;
+        padding: 1rem;
+        margin-top: 1rem;
       }
 
-      .radio-group {
+      .projection-item {
         display: flex;
-        gap: 1rem;
-        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
       }
 
-      .radio-label {
+      .projection-total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .checkbox-group {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+      }
+
+      .checkbox-group label {
         font-size: 0.875rem;
         color: var(--text-secondary);
-        cursor: pointer;
       }
 
       .modal-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        padding: 1.5rem 2rem;
+        padding: 1rem;
         border-top: 1px solid var(--border);
         background: var(--background);
-      }
-
-      .btn {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.2s ease;
-      }
-
-      .btn-primary {
-        background: var(--primary);
-        color: var(--text-primary);
-      }
-
-      .btn-primary:hover {
-        background: var(--primary-dark);
-      }
-
-      .btn-secondary {
-        background: var(--surface);
-        color: var(--text-primary);
-        border: 1px solid var(--border);
       }
 
       .hidden {
         display: none;
       }
 
-      /* Mobile Responsive */
+      /* Responsive */
       @media (max-width: 768px) {
         .main-content {
-          padding: 1rem;
-          padding-top: 90px;
-          padding-bottom: 90px;
+          padding: 0.75rem;
+          padding-top: 80px;
+          padding-bottom: 100px;
         }
 
-        .portfolio-header {
+        .rates-container {
           flex-direction: column;
-          text-align: center;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
-        .quick-stats-grid {
+        .scheme-buttons {
+          flex-direction: column;
+        }
+
+        .assets-grid {
           grid-template-columns: 1fr;
-        }
-
-        .actions-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .rates-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .portfolio-value {
-          font-size: 2rem;
         }
       }
     </style>
   </head>
   <body>
     <div class="app-container">
-      <!-- Side Menu Overlay -->
-      <div
-        id="sideMenuOverlay"
-        class="side-menu-overlay"
-        onclick="closeSideMenu()"
-      ></div>
-
-      <!-- Side Menu -->
-      <div id="sideMenu" class="side-menu">
-        <div class="side-menu-header">
-          <div class="side-menu-logo">
-            <div class="logo-icon">
-              <i class="fas fa-coins"></i>
-            </div>
-            <div>
-              <span class="logo-text">GoldApp</span>
-              <div class="side-menu-subtitle">Digital Gold Investment</div>
-            </div>
-          </div>
-          <button class="side-menu-close" onclick="closeSideMenu()">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <nav class="side-menu-nav">
-          <button class="side-menu-item active" onclick="showTab('home')">
-            <i class="fas fa-home side-menu-icon"></i>
-            Home
-          </button>
-          <button class="side-menu-item" onclick="showTab('portfolio')">
-            <i class="fas fa-chart-pie side-menu-icon"></i>
-            Portfolio
-          </button>
-          <button class="side-menu-item" onclick="showTab('transactions')">
-            <i class="fas fa-exchange-alt side-menu-icon"></i>
-            Transactions
-          </button>
-          <button class="side-menu-item" onclick="showTab('more')">
-            <i class="fas fa-th side-menu-icon"></i>
-            More
-          </button>
-          <button class="side-menu-item logout" onclick="logout()">
-            <i class="fas fa-sign-out-alt side-menu-icon"></i>
-            Log Out
-          </button>
-        </nav>
-      </div>
-
       <!-- Header -->
       <div class="header">
         <div class="header-left">
-          <button class="menu-toggle" onclick="openSideMenu()">
+          <button class="menu-toggle">
             <i class="fas fa-bars"></i>
           </button>
           <div class="logo-container">
-            <div class="logo-icon">
-              <i class="fas fa-coins"></i>
-            </div>
-            <span class="logo-text">GoldApp</span>
+            <div class="logo-icon">SJ</div>
+            <span class="logo-text">SRI KUMARAN JEWELLERS</span>
           </div>
         </div>
         <div class="header-right">
           <button class="notification-icon">
             <i class="fas fa-bell"></i>
-            <span class="notification-badge">2</span>
-          </button>
-          <div class="user-avatar">G</div>
-          <button class="notification-icon" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
           </button>
         </div>
       </div>
@@ -1093,358 +827,342 @@
       <div class="main-content">
         <!-- Home Tab -->
         <div id="homeTab" class="tab-content">
-          <div class="gold-main-section">
-            <!-- Portfolio Overview -->
-            <div class="portfolio-overview">
-              <div class="portfolio-card">
-                <div class="portfolio-header">
-                  <div class="portfolio-icon">
-                    <i class="fas fa-coins"></i>
-                  </div>
-                  <div class="portfolio-info">
-                    <h3>Total Portfolio Value</h3>
-                    <div class="portfolio-value">₹77,812</div>
-                    <div class="portfolio-details">
-                      <span>12.45g Gold • ₹6,250/g</span>
-                      <span class="profit-indicator positive"
-                        >+₹1,240 (1.6%)</span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- User Greeting -->
+          <div class="user-greeting">
+            <h1 class="greeting-title">Hi , Sethu</h1>
+            <p class="account-number">Acc No: 12345678</p>
+          </div>
 
-              <div class="quick-stats-grid">
-                <div class="stat-card">
-                  <div class="stat-icon">
-                    <i class="fas fa-piggy-bank"></i>
-                  </div>
-                  <div class="stat-info">
-                    <div class="stat-value">₹45.50</div>
-                    <div class="stat-label">Today's Savings</div>
-                  </div>
+          <!-- Today's Rates -->
+          <div class="todays-rates">
+            <div class="rates-header">Today's Rate</div>
+            <div class="rates-container">
+              <div class="rate-item">
+                <div class="rate-icon gold"></div>
+                <div class="rate-info">
+                  <div class="rate-metal">GOLD:</div>
                 </div>
-                <div class="stat-card">
-                  <div class="stat-icon">
-                    <i class="fas fa-chart-line"></i>
-                  </div>
-                  <div class="stat-info">
-                    <div class="stat-value">65%</div>
-                    <div class="stat-label">Monthly Target</div>
-                  </div>
+                <div class="rate-price">RS 9200.00</div>
+                <div class="rate-change positive">��</div>
+              </div>
+              <div class="rate-item">
+                <div class="rate-icon silver"></div>
+                <div class="rate-info">
+                  <div class="rate-metal">SILVER:</div>
                 </div>
-                <div class="stat-card">
-                  <div class="stat-icon">
-                    <i class="fas fa-repeat"></i>
-                  </div>
-                  <div class="stat-info">
-                    <div class="stat-value">3</div>
-                    <div class="stat-label">Active SIPs</div>
-                  </div>
-                </div>
+                <div class="rate-price">RS 120.00</div>
+                <div class="rate-change negative">↘</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Investments -->
+          <div class="total-investments">
+            <h2 class="investments-title">Your Total Investments:</h2>
+            <div class="investments-grid">
+              <div class="investment-item">
+                <div class="investment-type">Schemes</div>
+                <div class="investment-value">Rs 0.00</div>
+              </div>
+              <div class="investment-item">
+                <div class="investment-type">Digital Gold</div>
+                <div class="investment-value">0 gms</div>
+              </div>
+              <div class="investment-item">
+                <div class="investment-type">Digital Silver</div>
+                <div class="investment-value">0 gms</div>
               </div>
             </div>
 
-            <!-- Live Rates -->
-            <div class="live-rates-section">
-              <div class="section-header">
-                <h4>Live Metal Rates</h4>
-                <span class="refresh-time">Updated 2 mins ago</span>
-              </div>
-              <div class="rates-grid">
-                <div class="rate-card gold">
-                  <div class="rate-metal">
-                    <i class="fas fa-coins"></i>
-                    <span>Gold</span>
+            <!-- Scheme Tabs (shown after signup) -->
+            <div id="schemeTabs" class="scheme-tabs hidden">
+              <button class="scheme-tab active" onclick="showSchemeTab('schemes')">Schemes</button>
+              <button class="scheme-tab" onclick="showSchemeTab('digital-gold')">Digital Gold</button>
+              <button class="scheme-tab" onclick="showSchemeTab('digital-silver')">Digital Silver</button>
+            </div>
+
+            <!-- Scheme Details (shown after signup) -->
+            <div id="schemeDetails" class="scheme-card with-details hidden">
+              <div class="scheme-header">
+                <div class="scheme-info">
+                  <h3>Gold Chit Savings</h3>
+                  <div class="scheme-details">16 Months | 22 KT</div>
+                  <div class="scheme-details">Acc ID: 12345678</div>
+                  <div class="scheme-details">Installments Paid: 0/16</div>
+                  <div class="scheme-details">Total Amount Paid: Rs 0.00</div>
+                  <div class="scheme-links">
+                    <a href="#" class="scheme-link">View Nominee <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="scheme-link">View Statement <i class="fas fa-chevron-right"></i></a>
                   </div>
-                  <div class="rate-price">₹6,250/g</div>
-                  <div class="rate-change positive">+₹25 (0.4%)</div>
                 </div>
-                <div class="rate-card silver">
-                  <div class="rate-metal">
-                    <i class="fas fa-circle"></i>
-                    <span>Silver</span>
-                  </div>
-                  <div class="rate-price">₹75.50/g</div>
-                  <div class="rate-change negative">-₹1.20 (-1.6%)</div>
-                </div>
-                <div class="rate-card platinum">
-                  <div class="rate-metal">
-                    <i class="fas fa-gem"></i>
-                    <span>Platinum</span>
-                  </div>
-                  <div class="rate-price">₹2,845/g</div>
-                  <div class="rate-change positive">+₹15 (0.5%)</div>
+                <div class="scheme-info" style="text-align: right;">
+                  <div class="scheme-details">Started On: 19/2/2025</div>
+                  <div class="scheme-details">Matured On: 19/2/2026</div>
+                  <div class="scheme-details">Installment No: 1</div>
+                  <div class="scheme-status">Status: Over Due</div>
+                  <div class="scheme-amount">Rs 1,000.00</div>
+                  <button class="btn-pay">Pay Now</button>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Quick Actions -->
-            <div class="quick-actions-section">
-              <div class="section-header">
-                <h4>Quick Actions</h4>
-              </div>
-              <div class="actions-grid">
-                <button class="action-card buy" onclick="openBuyModal()">
-                  <div class="action-icon">
-                    <i class="fas fa-plus"></i>
-                  </div>
-                  <div class="action-info">
-                    <div class="action-title">Buy Gold</div>
-                    <div class="action-subtitle">One-time purchase</div>
-                  </div>
-                </button>
-                <button class="action-card sip">
-                  <div class="action-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                  </div>
-                  <div class="action-info">
-                    <div class="action-title">Start SIP</div>
-                    <div class="action-subtitle">Recurring investment</div>
-                  </div>
-                </button>
-                <button class="action-card redeem">
-                  <div class="action-icon">
-                    <i class="fas fa-arrow-down"></i>
-                  </div>
-                  <div class="action-info">
-                    <div class="action-title">Redeem</div>
-                    <div class="action-subtitle">Sell your gold</div>
-                  </div>
-                </button>
-                <button class="action-card chit">
-                  <div class="action-icon">
-                    <i class="fas fa-users"></i>
-                  </div>
-                  <div class="action-info">
-                    <div class="action-title">Gold Chits</div>
-                    <div class="action-subtitle">Group savings</div>
-                  </div>
-                </button>
+          <!-- Saving Schemes -->
+          <div class="saving-schemes">
+            <h2 class="section-title">Saving Schemes</h2>
+            
+            <div class="scheme-item">
+              <h4>Gold Saving Scheme</h4>
+              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+              <div class="scheme-item-badge">GOLD</div>
+              <div class="scheme-buttons">
+                <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
+                <button class="btn btn-secondary">View Details</button>
               </div>
             </div>
+          </div>
 
-            <!-- Auto Save -->
-            <div class="auto-save-section">
-              <div class="auto-save-card">
-                <div class="auto-save-header">
-                  <div class="auto-save-info">
-                    <h4>Smart Auto-Save</h4>
-                    <p>Round-off spare change to ₹10</p>
-                  </div>
-                  <div class="toggle-container">
-                    <label class="toggle-switch">
-                      <input type="checkbox" checked id="autoSaveToggle" />
-                      <span class="toggle-slider"></span>
-                    </label>
-                  </div>
+          <!-- Purchase Digital Assets -->
+          <div class="purchase-assets">
+            <h2 class="section-title">PURCHASE DIGITAL ASSETS</h2>
+            <div class="assets-grid">
+              <div class="asset-card">
+                <div class="asset-icon">
+                  <i class="fas fa-chart-line" style="color: #ffd700;"></i>
                 </div>
-                <div class="auto-save-stats">
-                  <div class="save-stat">
-                    <span class="save-label">This Week</span>
-                    <span class="save-value">₹285</span>
-                  </div>
-                  <div class="save-stat">
-                    <span class="save-label">This Month</span>
-                    <span class="save-value">₹1,240</span>
-                  </div>
-                </div>
+                <div class="asset-title">BUY</div>
+                <div class="asset-subtitle">GOLD</div>
               </div>
-            </div>
-
-            <!-- Recent Transactions -->
-            <div class="recent-transactions-section">
-              <div class="section-header">
-                <h4>Recent Activity</h4>
-                <a
-                  href="#"
-                  class="view-all-link"
-                  onclick="showTab('transactions')"
-                  >View All</a
-                >
-              </div>
-              <div class="transactions-list">
-                <div class="transaction-item">
-                  <div class="transaction-icon buy">
-                    <i class="fas fa-plus"></i>
-                  </div>
-                  <div class="transaction-info">
-                    <div class="transaction-title">Gold Purchase</div>
-                    <div class="transaction-subtitle">Auto-save • 0.25g</div>
-                  </div>
-                  <div class="transaction-amount">₹1,562.50</div>
+              <div class="asset-card">
+                <div class="asset-icon">
+                  <i class="fas fa-circle" style="color: #c0c0c0;"></i>
                 </div>
-                <div class="transaction-item">
-                  <div class="transaction-icon sip">
-                    <i class="fas fa-calendar"></i>
-                  </div>
-                  <div class="transaction-info">
-                    <div class="transaction-title">SIP Investment</div>
-                    <div class="transaction-subtitle">Monthly SIP • 0.80g</div>
-                  </div>
-                  <div class="transaction-amount">₹5,000.00</div>
-                </div>
-                <div class="transaction-item">
-                  <div class="transaction-icon referral">
-                    <i class="fas fa-gift"></i>
-                  </div>
-                  <div class="transaction-info">
-                    <div class="transaction-title">Referral Bonus</div>
-                    <div class="transaction-subtitle">
-                      Friend joined • 0.02g
-                    </div>
-                  </div>
-                  <div class="transaction-amount">₹125.00</div>
-                </div>
+                <div class="asset-title">BUY</div>
+                <div class="asset-subtitle">SILVER</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Portfolio Tab -->
-        <div id="portfolioTab" class="tab-content hidden">
-          <h1>Portfolio Section - Coming Soon</h1>
-          <p>Portfolio management features will be available here.</p>
+        <!-- Savings Tab -->
+        <div id="savingsTab" class="tab-content hidden">
+          <h2 class="section-title">Savings</h2>
+          <p>Savings content will be displayed here.</p>
         </div>
 
-        <!-- Transactions Tab -->
-        <div id="transactionsTab" class="tab-content hidden">
-          <h1>Transactions Section - Coming Soon</h1>
-          <p>
-            Transaction history and management features will be available here.
-          </p>
+        <!-- Schemes Tab -->
+        <div id="schemesTab" class="tab-content hidden">
+          <h2 class="section-title">Saving Schemes</h2>
+          
+          <div class="schemes-list">
+            <div class="scheme-item">
+              <h4>Gold Saving Scheme</h4>
+              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+              <div class="scheme-item-badge">GOLD</div>
+              <div class="scheme-buttons">
+                <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
+                <button class="btn btn-secondary">View Details</button>
+              </div>
+            </div>
+
+            <div class="scheme-item digi-gold">
+              <h4>Digi Gold</h4>
+              <p class="scheme-subtitle">SIP DAILY | WEEKLY | MONTHLY</p>
+              <div class="scheme-item-badge">GOLD</div>
+              <div class="scheme-buttons">
+                <button class="btn btn-primary">Join Now</button>
+                <button class="btn btn-secondary">View Details</button>
+              </div>
+            </div>
+
+            <div class="scheme-item silver">
+              <h4>Silver Saving Scheme</h4>
+              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+              <div class="scheme-item-badge">SILVER</div>
+              <div class="scheme-buttons">
+                <button class="btn btn-primary">Join Now</button>
+                <button class="btn btn-secondary">View Details</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- More Tab -->
-        <div id="moreTab" class="tab-content hidden">
-          <h1>More Section - Coming Soon</h1>
-          <p>Additional features and settings will be available here.</p>
+        <!-- Profile Tab -->
+        <div id="profileTab" class="tab-content hidden">
+          <h2 class="section-title">Profile</h2>
+          <p>Profile information will be displayed here.</p>
         </div>
       </div>
 
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-items">
-          <button
-            class="nav-item active"
-            onclick="showTab('home')"
-            id="homeNavBtn"
-          >
+          <button class="nav-item active" onclick="showTab('home')" id="homeNavBtn">
             <i class="fas fa-home"></i>
             Home
           </button>
-          <button
-            class="nav-item"
-            onclick="showTab('portfolio')"
-            id="portfolioNavBtn"
-          >
-            <i class="fas fa-chart-pie"></i>
-            Portfolio
+          <button class="nav-item" onclick="showTab('savings')" id="savingsNavBtn">
+            <i class="fas fa-piggy-bank"></i>
+            Savings
           </button>
-          <button
-            class="nav-item"
-            onclick="showTab('transactions')"
-            id="transactionsNavBtn"
-          >
-            <i class="fas fa-exchange-alt"></i>
-            Transactions
+          <button class="nav-item" onclick="showTab('schemes')" id="schemesNavBtn">
+            <i class="fas fa-chart-bar"></i>
+            Schemes
           </button>
-          <button class="nav-item" onclick="showTab('more')" id="moreNavBtn">
-            <i class="fas fa-th"></i>
-            More
+          <button class="nav-item" onclick="showTab('profile')" id="profileNavBtn">
+            <i class="fas fa-user"></i>
+            Profile
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Buy Gold Modal -->
-    <div id="buyModal" class="modal-overlay">
+    <!-- Scheme Signup Modal -->
+    <div id="schemeSignupModal" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header">
           <h3>
-            <i class="fas fa-plus"></i>
-            Buy Gold
+            <i class="fas fa-coins"></i>
+            Scheme Sign Up
           </h3>
-          <button class="modal-close" onclick="closeBuyModal()">
+          <button class="modal-close" onclick="closeSchemeSignup()">
             <i class="fas fa-times"></i>
           </button>
         </div>
 
         <div class="modal-body">
           <div class="form-section">
-            <div class="section-header-form">
-              <i class="fas fa-coins section-icon"></i>
-              <h4 class="section-title">Investment Details</h4>
-            </div>
+            <div class="section-header-form">Account ID</div>
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label"
-                  >Amount (₹) <span class="required">*</span></label
-                >
-                <input
-                  type="number"
-                  class="form-input"
-                  placeholder="Enter amount"
-                  id="buyAmount"
-                  oninput="calculateGrams()"
-                />
+                <input type="text" class="form-input" value="12345678" readonly />
               </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Branch</div>
+            <div class="form-grid">
               <div class="form-group">
-                <label class="form-label">Gold Quantity (g)</label>
-                <input
-                  type="number"
-                  class="form-input"
-                  placeholder="Enter grams"
-                  id="buyGrams"
-                  readonly
-                />
+                <select class="form-select">
+                  <option>Kumaran -thiruthuvaipoondi</option>
+                </select>
               </div>
-              <div class="form-group full-width">
-                <label class="form-label">Current Gold Rate</label>
-                <div class="rate-display">
-                  <i class="fas fa-coins"></i>
-                  ₹6,250/gram
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Plans</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <select class="form-select">
+                  <option>Gold Chit Savings</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Installments</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <select class="form-select">
+                  <option>16 Months</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Amount</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <select class="form-select">
+                  <option>50000</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Benefits</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <select class="form-select">
+                  <option>Bonus (Rs 5000)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-header-form">Projection:</div>
+            <div class="form-grid">
+              <div class="projection-section">
+                <div class="projection-item">
+                  <span>Total amount to pay</span>
+                  <span>Rs 80,000.00</span>
+                </div>
+                <div class="projection-item">
+                  <span>Bonus (Additional)</span>
+                  <span>Rs 5,000.00</span>
+                </div>
+                <div class="projection-total">
+                  <span>Total Receivables</span>
+                  <span>Rs 85,000.00</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="form-section">
-            <div class="section-header-form">
-              <i class="fas fa-credit-card section-icon"></i>
-              <h4 class="section-title">Payment Method</h4>
-            </div>
+            <div class="section-header-form">Nominee Information</div>
             <div class="form-grid">
-              <div class="form-group full-width">
-                <div class="radio-group">
-                  <label class="radio-label">
-                    <input type="radio" name="payment" value="upi" checked />
-                    <i class="fas fa-mobile-alt"></i>
-                    UPI
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="payment" value="card" />
-                    <i class="fas fa-credit-card"></i>
-                    Debit Card
-                  </label>
-                  <label class="radio-label">
-                    <input type="radio" name="payment" value="netbanking" />
-                    <i class="fas fa-university"></i>
-                    Net Banking
-                  </label>
-                </div>
+              <div class="form-group">
+                <label class="form-label">Nominee Name</label>
+                <input type="text" class="form-input" value="12345678" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Nominee ID Proof</label>
+                <select class="form-select">
+                  <option>PAN</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ID Number</label>
+                <input type="text" class="form-input" value="BMGPP45XX" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">DOB</label>
+                <input type="date" class="form-input" value="1989-08-08" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <textarea class="form-input" rows="3">235, 3rd cross, palaji krupa layout</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Country</label>
+                <input type="text" class="form-input" value="560077" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">State</label>
+                <input type="text" class="form-input" value="560077" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pin code</label>
+                <input type="text" class="form-input" value="560077" />
+              </div>
+              <div class="checkbox-group">
+                <input type="checkbox" id="terms" />
+                <label for="terms">Agree Schemes Terms & conditions</label>
               </div>
             </div>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeBuyModal()">
-            Cancel
-          </button>
-          <button class="btn btn-primary">
-            <i class="fas fa-shopping-cart"></i>
-            Buy Gold
+          <button class="btn btn-primary" onclick="registerScheme()" style="width: 100%;">
+            Register
           </button>
         </div>
       </div>
@@ -1452,16 +1170,8 @@
 
     <script>
       let currentTab = "home";
-
-      function openSideMenu() {
-        document.getElementById("sideMenu").classList.add("open");
-        document.getElementById("sideMenuOverlay").classList.add("show");
-      }
-
-      function closeSideMenu() {
-        document.getElementById("sideMenu").classList.remove("open");
-        document.getElementById("sideMenuOverlay").classList.remove("show");
-      }
+      let currentSchemeTab = "schemes";
+      let userHasScheme = false;
 
       function showTab(tabName) {
         // Hide all tabs
@@ -1473,52 +1183,62 @@
         document.querySelectorAll(".nav-item").forEach((item) => {
           item.classList.remove("active");
         });
-        document.querySelectorAll(".side-menu-item").forEach((item) => {
-          item.classList.remove("active");
-        });
 
         // Show selected tab
         document.getElementById(tabName + "Tab").classList.remove("hidden");
 
-        // Add active class to selected nav items
+        // Add active class to selected nav item
         document.getElementById(tabName + "NavBtn").classList.add("active");
-        document
-          .querySelector(`[onclick="showTab('${tabName}')"].side-menu-item`)
-          .classList.add("active");
 
         currentTab = tabName;
-        closeSideMenu();
       }
 
-      function openBuyModal() {
-        document.getElementById("buyModal").classList.add("show");
+      function showSchemeTab(tabName) {
+        // Remove active class from all scheme tabs
+        document.querySelectorAll(".scheme-tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Add active class to selected tab
+        event.target.classList.add("active");
+
+        currentSchemeTab = tabName;
+        // Here you would show different content based on the tab
       }
 
-      function closeBuyModal() {
-        document.getElementById("buyModal").classList.remove("show");
+      function openSchemeSignup() {
+        document.getElementById("schemeSignupModal").classList.add("show");
       }
 
-      function calculateGrams() {
-        const amount =
-          parseFloat(document.getElementById("buyAmount").value) || 0;
-        const goldRate = 6250;
-        const grams = amount / goldRate;
-        document.getElementById("buyGrams").value = grams.toFixed(4);
+      function closeSchemeSignup() {
+        document.getElementById("schemeSignupModal").classList.remove("show");
       }
 
-      function logout() {
-        alert("Logging out...");
-        // Add logout logic here
+      function registerScheme() {
+        // Simulate scheme registration
+        userHasScheme = true;
+        
+        // Show scheme tabs and details
+        document.getElementById("schemeTabs").classList.remove("hidden");
+        document.getElementById("schemeDetails").classList.remove("hidden");
+        
+        // Close modal
+        closeSchemeSignup();
+        
+        // Update investments to show scheme data
+        const schemeInvestment = document.querySelector(".investment-item:first-child .investment-value");
+        schemeInvestment.textContent = "Rs 1,000.00";
+        
+        // Show success message
+        alert("Successfully registered for Gold Chit Savings scheme!");
       }
 
       // Close modal when clicking outside
-      document
-        .getElementById("buyModal")
-        .addEventListener("click", function (e) {
-          if (e.target === this) {
-            closeBuyModal();
-          }
-        });
+      document.getElementById("schemeSignupModal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          closeSchemeSignup();
+        }
+      });
 
       // Initialize the page
       document.addEventListener("DOMContentLoaded", function () {
