@@ -209,7 +209,9 @@
 
       .premium-card:hover {
         transform: translateY(-5px);
-        box-shadow: var(--shadow-xl), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        box-shadow:
+          var(--shadow-xl),
+          0 25px 50px -12px rgba(0, 0, 0, 0.25);
       }
 
       /* Today's Rates */
@@ -1350,9 +1352,24 @@
 
             <!-- Scheme Tabs (shown after signup) -->
             <div id="schemeTabs" class="scheme-tabs hidden">
-              <button class="scheme-tab active" onclick="showSchemeTab('schemes')">Schemes</button>
-              <button class="scheme-tab" onclick="showSchemeTab('digital-gold')">Digital Gold</button>
-              <button class="scheme-tab" onclick="showSchemeTab('digital-silver')">Digital Silver</button>
+              <button
+                class="scheme-tab active"
+                onclick="showSchemeTab('schemes')"
+              >
+                Schemes
+              </button>
+              <button
+                class="scheme-tab"
+                onclick="showSchemeTab('digital-gold')"
+              >
+                Digital Gold
+              </button>
+              <button
+                class="scheme-tab"
+                onclick="showSchemeTab('digital-silver')"
+              >
+                Digital Silver
+              </button>
             </div>
 
             <!-- Scheme Details (shown after signup) -->
@@ -1365,8 +1382,12 @@
                   <div class="scheme-details">Installments Paid: 0/16</div>
                   <div class="scheme-details">Total Amount Paid: Rs 0.00</div>
                   <div class="scheme-links">
-                    <a href="#" class="scheme-link">View Nominee <i class="fas fa-chevron-right"></i></a>
-                    <a href="#" class="scheme-link">View Statement <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="scheme-link"
+                      >View Nominee <i class="fas fa-chevron-right"></i
+                    ></a>
+                    <a href="#" class="scheme-link"
+                      >View Statement <i class="fas fa-chevron-right"></i
+                    ></a>
                   </div>
                 </div>
                 <div class="scheme-info">
@@ -1384,14 +1405,18 @@
           <!-- Saving Schemes -->
           <div class="premium-card">
             <h2 class="section-title">Saving Schemes</h2>
-            
+
             <div class="schemes-list">
               <div class="scheme-item">
                 <h4>Gold Saving Scheme</h4>
-                <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity</p>
+                <p class="scheme-subtitle">
+                  Get <strong>Bonus</strong> on maturity
+                </p>
                 <div class="scheme-item-badge">GOLD</div>
                 <div class="scheme-buttons">
-                  <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
+                  <button class="btn btn-primary" onclick="openSchemeSignup()">
+                    Join Now
+                  </button>
                   <button class="btn btn-secondary">View Details</button>
                 </div>
               </div>
@@ -1437,8 +1462,18 @@
               <div class="savings-label">Gold Saved</div>
               <div class="savings-label">Value: ₹22,540</div>
               <div class="savings-actions">
-                <button class="btn btn-primary" onclick="openInvestmentModal('gold', 'onetime')">Buy Now</button>
-                <button class="btn btn-secondary" onclick="openInvestmentModal('gold', 'sip')">Start SIP</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="openInvestmentModal('gold', 'onetime')"
+                >
+                  Buy Now
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  onclick="openInvestmentModal('gold', 'sip')"
+                >
+                  Start SIP
+                </button>
               </div>
             </div>
 
@@ -1450,8 +1485,18 @@
               <div class="savings-label">Silver Saved</div>
               <div class="savings-label">Value: ₹1,896</div>
               <div class="savings-actions">
-                <button class="btn btn-primary" onclick="openInvestmentModal('silver', 'onetime')">Buy Now</button>
-                <button class="btn btn-secondary" onclick="openInvestmentModal('silver', 'sip')">Start SIP</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="openInvestmentModal('silver', 'onetime')"
+                >
+                  Buy Now
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  onclick="openInvestmentModal('silver', 'sip')"
+                >
+                  Start SIP
+                </button>
               </div>
             </div>
           </div>
@@ -1461,26 +1506,74 @@
             <h2 class="section-title">Recent Activity</h2>
             <div class="transactions-list">
               <div class="transaction-item">
-                <div class="savings-icon" style="width: 40px; height: 40px; margin-bottom: 0;">
-                  <i class="fas fa-plus" style="font-size: 1rem;"></i>
+                <div
+                  class="savings-icon"
+                  style="width: 40px; height: 40px; margin-bottom: 0"
+                >
+                  <i class="fas fa-plus" style="font-size: 1rem"></i>
                 </div>
-                <div class="transaction-info" style="flex: 1; margin-left: 1rem;">
-                  <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Gold Purchase</div>
-                  <div style="font-size: 0.875rem; color: var(--text-secondary);">SIP Investment • 0.25g</div>
-                </div>
-                <div style="font-weight: 600; color: var(--text-primary);">₹2,312.50</div>
-              </div>
-              <div class="transaction-item">
-                <div class="savings-card silver" style="width: 40px; height: 40px; margin-bottom: 0; border-radius: 50%;">
-                  <div class="savings-icon" style="width: 100%; height: 100%; margin: 0;">
-                    <i class="fas fa-plus" style="font-size: 1rem;"></i>
+                <div
+                  class="transaction-info"
+                  style="flex: 1; margin-left: 1rem"
+                >
+                  <div
+                    style="
+                      font-weight: 600;
+                      color: var(--text-primary);
+                      margin-bottom: 0.25rem;
+                    "
+                  >
+                    Gold Purchase
+                  </div>
+                  <div
+                    style="font-size: 0.875rem; color: var(--text-secondary)"
+                  >
+                    SIP Investment • 0.25g
                   </div>
                 </div>
-                <div class="transaction-info" style="flex: 1; margin-left: 1rem;">
-                  <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Silver Purchase</div>
-                  <div style="font-size: 0.875rem; color: var(--text-secondary);">One-time • 2.5g</div>
+                <div style="font-weight: 600; color: var(--text-primary)">
+                  ₹2,312.50
                 </div>
-                <div style="font-weight: 600; color: var(--text-primary);">₹300.00</div>
+              </div>
+              <div class="transaction-item">
+                <div
+                  class="savings-card silver"
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    margin-bottom: 0;
+                    border-radius: 50%;
+                  "
+                >
+                  <div
+                    class="savings-icon"
+                    style="width: 100%; height: 100%; margin: 0"
+                  >
+                    <i class="fas fa-plus" style="font-size: 1rem"></i>
+                  </div>
+                </div>
+                <div
+                  class="transaction-info"
+                  style="flex: 1; margin-left: 1rem"
+                >
+                  <div
+                    style="
+                      font-weight: 600;
+                      color: var(--text-primary);
+                      margin-bottom: 0.25rem;
+                    "
+                  >
+                    Silver Purchase
+                  </div>
+                  <div
+                    style="font-size: 0.875rem; color: var(--text-secondary)"
+                  >
+                    One-time • 2.5g
+                  </div>
+                </div>
+                <div style="font-weight: 600; color: var(--text-primary)">
+                  ₹300.00
+                </div>
               </div>
             </div>
           </div>
@@ -1492,21 +1585,27 @@
             <h1 class="greeting-title">Saving Schemes</h1>
             <p class="account-number">Choose the best scheme for your future</p>
           </div>
-          
+
           <div class="schemes-list">
             <div class="scheme-item">
               <h4>Gold Saving Scheme</h4>
-              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity with guaranteed returns</p>
+              <p class="scheme-subtitle">
+                Get <strong>Bonus</strong> on maturity with guaranteed returns
+              </p>
               <div class="scheme-item-badge">GOLD</div>
               <div class="scheme-buttons">
-                <button class="btn btn-primary" onclick="openSchemeSignup()">Join Now</button>
+                <button class="btn btn-primary" onclick="openSchemeSignup()">
+                  Join Now
+                </button>
                 <button class="btn btn-secondary">View Details</button>
               </div>
             </div>
 
             <div class="scheme-item digi-gold">
               <h4>Digi Gold</h4>
-              <p class="scheme-subtitle">SIP DAILY | WEEKLY | MONTHLY - Flexible investment options</p>
+              <p class="scheme-subtitle">
+                SIP DAILY | WEEKLY | MONTHLY - Flexible investment options
+              </p>
               <div class="scheme-item-badge">GOLD</div>
               <div class="scheme-buttons">
                 <button class="btn btn-primary">Join Now</button>
@@ -1516,7 +1615,9 @@
 
             <div class="scheme-item silver">
               <h4>Silver Saving Scheme</h4>
-              <p class="scheme-subtitle">Get <strong>Bonus</strong> on maturity with silver investments</p>
+              <p class="scheme-subtitle">
+                Get <strong>Bonus</strong> on maturity with silver investments
+              </p>
               <div class="scheme-item-badge">SILVER</div>
               <div class="scheme-buttons">
                 <button class="btn btn-primary">Join Now</button>
@@ -1566,7 +1667,9 @@
                 </div>
                 <div class="profile-info-item">
                   <div class="profile-info-label">KYC Status</div>
-                  <div class="profile-info-value" style="color: var(--success);">✓ Verified</div>
+                  <div class="profile-info-value" style="color: var(--success)">
+                    ✓ Verified
+                  </div>
                 </div>
               </div>
             </div>
@@ -1602,7 +1705,9 @@
                 </div>
                 <div class="profile-info-item">
                   <div class="profile-info-label">Potential Profit</div>
-                  <div class="profile-info-value" style="color: var(--success);">₹60,564</div>
+                  <div class="profile-info-value" style="color: var(--success)">
+                    ₹60,564
+                  </div>
                 </div>
               </div>
             </div>
@@ -1616,29 +1721,65 @@
                 Account Settings
               </h3>
               <div class="profile-info-grid">
-                <div class="profile-info-item" onclick="editProfile()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="editProfile()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Edit Profile</div>
-                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                  <div class="profile-info-value">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
                 </div>
-                <div class="profile-info-item" onclick="changePassword()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="changePassword()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Change Password</div>
-                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                  <div class="profile-info-value">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
                 </div>
-                <div class="profile-info-item" onclick="manageNotifications()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="manageNotifications()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Notifications</div>
-                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                  <div class="profile-info-value">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
                 </div>
-                <div class="profile-info-item" onclick="viewDocuments()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="viewDocuments()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Documents</div>
-                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                  <div class="profile-info-value">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
                 </div>
-                <div class="profile-info-item" onclick="contactSupport()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="contactSupport()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Support & Help</div>
-                  <div class="profile-info-value"><i class="fas fa-chevron-right"></i></div>
+                  <div class="profile-info-value">
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
                 </div>
-                <div class="profile-info-item" onclick="logout()" style="cursor: pointer;">
+                <div
+                  class="profile-info-item"
+                  onclick="logout()"
+                  style="cursor: pointer"
+                >
                   <div class="profile-info-label">Logout</div>
-                  <div class="profile-info-value" style="color: var(--error);"><i class="fas fa-sign-out-alt"></i></div>
+                  <div class="profile-info-value" style="color: var(--error)">
+                    <i class="fas fa-sign-out-alt"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1649,19 +1790,35 @@
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
         <div class="nav-items">
-          <button class="nav-item active" onclick="showTab('home')" id="homeNavBtn">
+          <button
+            class="nav-item active"
+            onclick="showTab('home')"
+            id="homeNavBtn"
+          >
             <i class="fas fa-home"></i>
             Home
           </button>
-          <button class="nav-item" onclick="showTab('savings')" id="savingsNavBtn">
+          <button
+            class="nav-item"
+            onclick="showTab('savings')"
+            id="savingsNavBtn"
+          >
             <i class="fas fa-piggy-bank"></i>
             Savings
           </button>
-          <button class="nav-item" onclick="showTab('schemes')" id="schemesNavBtn">
+          <button
+            class="nav-item"
+            onclick="showTab('schemes')"
+            id="schemesNavBtn"
+          >
             <i class="fas fa-chart-bar"></i>
             Schemes
           </button>
-          <button class="nav-item" onclick="showTab('profile')" id="profileNavBtn">
+          <button
+            class="nav-item"
+            onclick="showTab('profile')"
+            id="profileNavBtn"
+          >
             <i class="fas fa-user"></i>
             Profile
           </button>
@@ -1687,7 +1844,12 @@
             <div class="section-header-form">Account ID</div>
             <div class="form-grid">
               <div class="form-group">
-                <input type="text" class="form-input" value="12345678" readonly />
+                <input
+                  type="text"
+                  class="form-input"
+                  value="12345678"
+                  readonly
+                />
               </div>
             </div>
           </div>
@@ -1790,7 +1952,9 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Address</label>
-                <textarea class="form-input" rows="3">235, 3rd cross, palaji krupa layout</textarea>
+                <textarea class="form-input" rows="3">
+235, 3rd cross, palaji krupa layout</textarea
+                >
               </div>
               <div class="form-group">
                 <label class="form-label">Country</label>
@@ -1813,7 +1977,11 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary" onclick="registerScheme()" style="width: 100%;">
+          <button
+            class="btn btn-primary"
+            onclick="registerScheme()"
+            style="width: 100%"
+          >
             Register
           </button>
         </div>
@@ -1838,11 +2006,17 @@
             <div class="section-header-form">Investment Type</div>
             <div class="form-grid">
               <div class="investment-options">
-                <div class="investment-option selected" onclick="selectInvestmentType('onetime')">
+                <div
+                  class="investment-option selected"
+                  onclick="selectInvestmentType('onetime')"
+                >
                   <div class="investment-option-title">One-time Purchase</div>
                   <div class="investment-option-desc">Buy immediately</div>
                 </div>
-                <div class="investment-option" onclick="selectInvestmentType('sip')">
+                <div
+                  class="investment-option"
+                  onclick="selectInvestmentType('sip')"
+                >
                   <div class="investment-option-title">Start SIP</div>
                   <div class="investment-option-desc">Recurring investment</div>
                 </div>
@@ -1854,12 +2028,25 @@
             <div class="section-header-form">Investment Details</div>
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label">Amount (₹) <span class="required">*</span></label>
-                <input type="number" class="form-input" placeholder="Enter amount" id="investmentAmount" />
+                <label class="form-label"
+                  >Amount (₹) <span class="required">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-input"
+                  placeholder="Enter amount"
+                  id="investmentAmount"
+                />
               </div>
               <div class="form-group">
                 <label class="form-label">Quantity (gms)</label>
-                <input type="number" class="form-input" placeholder="Calculated automatically" id="investmentQuantity" readonly />
+                <input
+                  type="number"
+                  class="form-input"
+                  placeholder="Calculated automatically"
+                  id="investmentQuantity"
+                  readonly
+                />
               </div>
               <div id="sipOptions" class="form-group hidden">
                 <label class="form-label">SIP Frequency</label>
@@ -1874,7 +2061,9 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeInvestmentModal()">Cancel</button>
+          <button class="btn btn-secondary" onclick="closeInvestmentModal()">
+            Cancel
+          </button>
           <button class="btn btn-primary" onclick="proceedInvestment()">
             <i class="fas fa-shopping-cart"></i>
             Proceed
@@ -1932,40 +2121,42 @@
 
       function registerScheme() {
         userHasScheme = true;
-        
+
         document.getElementById("schemeTabs").classList.remove("hidden");
         document.getElementById("schemeDetails").classList.remove("hidden");
-        
+
         closeSchemeSignup();
-        
-        const schemeInvestment = document.querySelector(".investment-item:first-child .investment-value");
+
+        const schemeInvestment = document.querySelector(
+          ".investment-item:first-child .investment-value",
+        );
         schemeInvestment.textContent = "Rs 1,000.00";
-        
+
         alert("Successfully registered for Gold Chit Savings scheme!");
       }
 
       function openInvestmentModal(metal, type) {
         currentMetal = metal;
         currentInvestmentType = type;
-        
-        document.getElementById("investmentModalTitle").textContent = 
-          `${type === 'sip' ? 'Start SIP' : 'Buy'} ${metal.charAt(0).toUpperCase() + metal.slice(1)}`;
-        
+
+        document.getElementById("investmentModalTitle").textContent =
+          `${type === "sip" ? "Start SIP" : "Buy"} ${metal.charAt(0).toUpperCase() + metal.slice(1)}`;
+
         // Reset form
         document.getElementById("investmentAmount").value = "";
         document.getElementById("investmentQuantity").value = "";
-        
+
         // Show/hide SIP options
         const sipOptions = document.getElementById("sipOptions");
-        if (type === 'sip') {
+        if (type === "sip") {
           sipOptions.classList.remove("hidden");
         } else {
           sipOptions.classList.add("hidden");
         }
-        
+
         // Update investment type selection
         selectInvestmentType(type);
-        
+
         document.getElementById("investmentModal").classList.add("show");
       }
 
@@ -1975,15 +2166,17 @@
 
       function selectInvestmentType(type) {
         currentInvestmentType = type;
-        
-        document.querySelectorAll(".investment-option").forEach(option => {
+
+        document.querySelectorAll(".investment-option").forEach((option) => {
           option.classList.remove("selected");
         });
-        
-        document.querySelector(`[onclick="selectInvestmentType('${type}')"]`).classList.add("selected");
-        
+
+        document
+          .querySelector(`[onclick="selectInvestmentType('${type}')"]`)
+          .classList.add("selected");
+
         const sipOptions = document.getElementById("sipOptions");
-        if (type === 'sip') {
+        if (type === "sip") {
           sipOptions.classList.remove("hidden");
         } else {
           sipOptions.classList.add("hidden");
@@ -1996,13 +2189,15 @@
           alert("Please enter an amount");
           return;
         }
-        
-        alert(`Proceeding with ${currentInvestmentType === 'sip' ? 'SIP' : 'one-time'} investment of ₹${amount} in ${currentMetal}`);
+
+        alert(
+          `Proceeding with ${currentInvestmentType === "sip" ? "SIP" : "one-time"} investment of ₹${amount} in ${currentMetal}`,
+        );
         closeInvestmentModal();
       }
 
       function openBuyModal(metal) {
-        openInvestmentModal(metal, 'onetime');
+        openInvestmentModal(metal, "onetime");
       }
 
       // Profile functions
@@ -2033,14 +2228,14 @@
       }
 
       // Auto-calculate quantity based on amount
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function () {
         const amountInput = document.getElementById("investmentAmount");
         const quantityInput = document.getElementById("investmentQuantity");
-        
+
         if (amountInput && quantityInput) {
-          amountInput.addEventListener("input", function() {
+          amountInput.addEventListener("input", function () {
             const amount = parseFloat(this.value) || 0;
-            const rate = currentMetal === 'gold' ? 9200 : 120;
+            const rate = currentMetal === "gold" ? 9200 : 120;
             const quantity = amount / rate;
             quantityInput.value = quantity.toFixed(4);
           });
@@ -2048,17 +2243,21 @@
       });
 
       // Close modals when clicking outside
-      document.getElementById("schemeSignupModal").addEventListener("click", function (e) {
-        if (e.target === this) {
-          closeSchemeSignup();
-        }
-      });
+      document
+        .getElementById("schemeSignupModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeSchemeSignup();
+          }
+        });
 
-      document.getElementById("investmentModal").addEventListener("click", function (e) {
-        if (e.target === this) {
-          closeInvestmentModal();
-        }
-      });
+      document
+        .getElementById("investmentModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeInvestmentModal();
+          }
+        });
 
       // Initialize the page
       document.addEventListener("DOMContentLoaded", function () {
