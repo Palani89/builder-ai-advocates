@@ -15,28 +15,17 @@
     />
     <style>
       :root {
-        --primary: #ffd700;
-        --primary-dark: #daa520;
-        --secondary: #10b981;
-        --purple: #6366f1;
-        --purple-dark: #4f46e5;
-        --background: #f8fafc;
-        --surface: #ffffff;
-        --text-primary: #1e293b;
-        --text-secondary: #64748b;
-        --text-muted: #94a3b8;
-        --border: #e2e8f0;
-        --success: #10b981;
-        --error: #ef4444;
-        --warning: #f59e0b;
-        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        --gradient-gold: linear-gradient(135deg, #ffd700, #ffed4e, #ffc107);
-        --gradient-silver: linear-gradient(135deg, #e2e8f0, #cbd5e1, #94a3b8);
-        --gradient-purple: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
-        --glass-bg: rgba(255, 255, 255, 0.25);
-        --glass-border: rgba(255, 255, 255, 0.18);
+        --primary-gold: #FFD700;
+        --dark-gold: #B8860B;
+        --orange: #FF8C00;
+        --orange-light: #FFA500;
+        --red: #DC143C;
+        --background: #F5F5F5;
+        --white: #FFFFFF;
+        --text-dark: #2C2C2C;
+        --text-gray: #666666;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
       }
 
       * {
@@ -47,873 +36,505 @@
 
       body {
         font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: var(--text-primary);
+        background: var(--background);
+        color: var(--text-dark);
         line-height: 1.6;
-        min-height: 100vh;
+        overflow-x: hidden;
       }
 
       .app-container {
-        display: flex;
-        flex-direction: column;
         min-height: 100vh;
         background: var(--background);
+        padding-bottom: 100px;
       }
 
       /* Header */
       .header {
-        background: var(--surface);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-        padding: 1rem 1.5rem;
+        background: var(--white);
+        padding: 15px 20px;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        box-shadow: var(--shadow-lg);
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: relative;
       }
 
       .header-left {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 15px;
       }
 
-      .menu-toggle {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: var(--text-secondary);
+      .menu-icon {
+        width: 30px;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         cursor: pointer;
-        padding: 0.75rem;
-        border-radius: 12px;
-        transition: all 0.3s ease;
       }
 
-      .menu-toggle:hover {
-        background: var(--background);
-        transform: scale(1.05);
+      .menu-line {
+        width: 100%;
+        height: 3px;
+        background: var(--orange);
+        border-radius: 2px;
+      }
+
+      .menu-line:nth-child(2) {
+        width: 70%;
+      }
+
+      .menu-line:nth-child(3) {
+        width: 50%;
       }
 
       .logo-container {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
       }
 
-      .logo-icon {
-        width: 40px;
+      .crown-icon {
+        width: 50px;
         height: 40px;
-        background: var(--gradient-gold);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.125rem;
-        font-weight: bold;
-        box-shadow: var(--shadow-lg);
+        background: var(--primary-gold);
+        border-radius: 50% 50% 0 0;
+        position: relative;
+        margin-bottom: 5px;
+      }
+
+      .crown-icon::before {
+        content: "♛";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: var(--dark-gold);
       }
 
       .logo-text {
-        font-size: 1.125rem;
+        background: var(--red);
+        color: var(--white);
+        padding: 8px 20px;
+        border-radius: 15px;
+        font-size: 14px;
         font-weight: 700;
-        color: var(--text-primary);
-        letter-spacing: -0.5px;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .logo-subtitle {
+        font-size: 11px;
+        margin-top: 2px;
       }
 
       .header-right {
         display: flex;
-        align-items: center;
-        gap: 1rem;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 5px;
+      }
+
+      .notification-container {
+        position: relative;
       }
 
       .notification-icon {
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        color: var(--text-secondary);
-        cursor: pointer;
-        padding: 0.75rem;
-        border-radius: 12px;
+        background: var(--orange);
+        color: var(--white);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
         position: relative;
-        transition: all 0.3s ease;
       }
 
-      .notification-icon:hover {
-        background: var(--background);
-        transform: scale(1.05);
+      .notification-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--red);
+        color: var(--white);
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--white);
+      }
+
+      .app-version {
+        color: var(--orange);
+        font-size: 14px;
+        font-weight: 600;
       }
 
       /* Main Content */
       .main-content {
-        flex: 1;
-        padding: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-        padding-top: 100px;
-        padding-bottom: 120px;
+        padding: 0;
       }
 
-      /* User Greeting */
-      .user-greeting {
-        margin-bottom: 2rem;
-        text-align: center;
-      }
-
-      .greeting-title {
-        font-size: 2rem;
-        font-weight: 700;
-        background: var(--gradient-purple);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 0.5rem;
-      }
-
-      .account-number {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-      }
-
-      /* Premium Cards */
-      .premium-card {
-        background: var(--surface);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border);
+      /* Rates Card */
+      .rates-card {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        margin: 20px;
         border-radius: 20px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        box-shadow: var(--shadow-xl);
-        transition: all 0.3s ease;
+        padding: 25px;
+        color: var(--text-dark);
+        box-shadow: var(--shadow-lg);
         position: relative;
         overflow: hidden;
       }
 
-      .premium-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-purple);
-        border-radius: 20px 20px 0 0;
+      .last-updated {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #8B4513;
       }
 
-      .premium-card:hover {
-        transform: translateY(-5px);
-        box-shadow:
-          var(--shadow-xl),
-          0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      }
-
-      /* Today's Rates */
-      .todays-rates {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-      }
-
-      .todays-rates::before {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .rates-header {
-        font-size: 1rem;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 1rem;
-        text-align: right;
-        font-weight: 600;
-      }
-
-      .rates-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .rate-item {
+      .location-tabs {
         display: flex;
-        align-items: center;
-        gap: 1rem;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 25px;
+        padding: 5px;
+        margin-bottom: 25px;
         backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 1rem;
+      }
+
+      .location-tab {
+        flex: 1;
+        padding: 12px 20px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        color: var(--text-dark);
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
         transition: all 0.3s ease;
       }
 
-      .rate-item:hover {
-        background: rgba(255, 255, 255, 0.25);
-        transform: scale(1.02);
+      .location-tab.active {
+        background: var(--white);
+        color: var(--orange);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .rate-icon {
-        width: 32px;
-        height: 32px;
+      .metals-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .metal-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .metal-icon {
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1rem;
+        font-size: 16px;
         font-weight: bold;
-        color: white;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .rate-icon.gold {
-        background: #ff6b35;
-      }
-
-      .rate-icon.silver {
-        background: #4a90e2;
-      }
-
-      .rate-info {
-        flex: 1;
-      }
-
-      .rate-metal {
-        font-size: 1rem;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 0.25rem;
-      }
-
-      .rate-price-container {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .rate-price {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: white;
-      }
-
-      .rate-change {
-        font-size: 1.25rem;
-        font-weight: bold;
-      }
-
-      .rate-change.positive {
-        color: #10b981;
-      }
-
-      .rate-change.negative {
-        color: #ef4444;
-      }
-
-      /* Total Investments */
-      .investments-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 1.5rem;
-        text-align: center;
-      }
-
-      .investments-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .investment-item {
-        text-align: center;
-        background: var(--background);
-        border-radius: 16px;
-        padding: 1.5rem 1rem;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-      }
-
-      .investment-item:hover {
-        border-color: var(--purple);
-        transform: translateY(-2px);
-      }
-
-      .investment-type {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-      }
-
-      .investment-value {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-      }
-
-      /* Scheme Tabs */
-      .scheme-tabs {
-        display: flex;
-        background: var(--background);
-        border-radius: 16px;
-        margin-bottom: 1.5rem;
-        padding: 0.5rem;
+        color: var(--white);
         box-shadow: var(--shadow);
       }
 
-      .scheme-tab {
-        flex: 1;
-        padding: 0.75rem 1rem;
-        text-align: center;
-        background: transparent;
-        border: none;
-        border-radius: 12px;
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
+      .metal-icon.gold {
+        background: #DAA520;
       }
 
-      .scheme-tab.active {
-        background: var(--gradient-purple);
-        color: white;
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-2px);
+      .metal-icon.silver {
+        background: #C0C0C0;
+        color: var(--text-dark);
       }
 
-      /* Scheme Cards */
-      .scheme-card {
-        border: 2px solid var(--border);
-        border-radius: 20px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        transition: all 0.3s ease;
-      }
-
-      .scheme-card.with-details {
-        background: var(--gradient-purple);
-        color: white;
-        border-color: var(--purple-dark);
-      }
-
-      .scheme-header {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .scheme-info h3 {
-        font-size: 1.125rem;
+      .metal-info h3 {
+        font-size: 18px;
         font-weight: 700;
-        margin-bottom: 0.75rem;
+        margin-bottom: 2px;
       }
 
-      .scheme-details {
-        font-size: 0.875rem;
-        margin-bottom: 0.5rem;
-        opacity: 0.9;
-      }
-
-      .scheme-amount {
-        font-size: 1.5rem;
+      .metal-price {
+        font-size: 24px;
         font-weight: 800;
-        margin-bottom: 0.75rem;
-      }
-
-      .scheme-status {
-        font-size: 0.875rem;
-        font-weight: 600;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        background: rgba(239, 68, 68, 0.1);
-        color: var(--error);
-        display: inline-block;
-        margin-bottom: 0.75rem;
-      }
-
-      .scheme-links {
-        display: flex;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .scheme-link {
-        font-size: 0.875rem;
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s ease;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+
+      .price-arrow {
+        color: #22C55E;
+        font-size: 18px;
+      }
+
+      .metal-subtitle {
+        font-size: 12px;
+        color: #8B4513;
         font-weight: 500;
-      }
-
-      .scheme-link:hover {
-        color: white;
-        transform: translateX(2px);
-      }
-
-      /* Buttons */
-      .btn {
-        padding: 0.875rem 1.75rem;
-        border: none;
-        border-radius: 12px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
         text-align: center;
-        justify-content: center;
+        margin-top: 15px;
       }
 
-      .btn-primary {
-        background: var(--gradient-purple);
-        color: white;
+      /* Promotional Banner */
+      .promo-banner {
+        margin: 20px;
+        border-radius: 20px;
+        overflow: hidden;
         box-shadow: var(--shadow-lg);
+        position: relative;
+        height: 180px;
+        background: linear-gradient(135deg, #F5DEB3 0%, #DEB887 100%);
       }
 
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: var(--purple);
-        border: 2px solid var(--purple);
-      }
-
-      .btn-secondary:hover {
-        background: var(--purple);
-        color: white;
-        transform: translateY(-2px);
-      }
-
-      .btn-pay {
-        background: var(--gradient-gold);
-        color: var(--text-primary);
-        width: 100%;
-        margin-top: 0.75rem;
-        font-weight: 700;
-      }
-
-      .scheme-buttons {
+      .promo-content {
         display: flex;
-        gap: 1rem;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
       }
 
-      .scheme-buttons .btn {
+      .promo-woman {
         flex: 1;
+        height: 140px;
+        background: url('https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F18a6b91fdc5d4b6faba4f8a5a6b18fab?format=webp&width=800') center/cover;
+        border-radius: 15px;
+        margin-right: 20px;
       }
 
-      /* Saving Schemes Section */
-      .section-title {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 1.5rem;
-        text-align: center;
-        background: var(--gradient-purple);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .schemes-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .scheme-item {
-        background: var(--surface);
-        border: 2px solid transparent;
-        border-radius: 20px;
-        padding: 1.5rem;
-        position: relative;
-        transition: all 0.3s ease;
-        overflow: hidden;
-      }
-
-      .scheme-item::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-gold);
-        border-radius: 20px 20px 0 0;
-      }
-
-      .scheme-item.digi-gold::before {
-        background: var(--gradient-gold);
-      }
-
-      .scheme-item.silver::before {
-        background: var(--gradient-silver);
-      }
-
-      .scheme-item:hover {
-        border-color: var(--purple);
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .scheme-item h4 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 0.75rem;
-      }
-
-      .scheme-subtitle {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-      }
-
-      .scheme-item-badge {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-        background: var(--gradient-gold);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        font-weight: bold;
-        color: white;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .scheme-item.silver .scheme-item-badge {
-        background: var(--gradient-silver);
-      }
-
-      /* Purchase Digital Assets */
-      .assets-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .asset-card {
-        background: var(--surface);
-        border: 2px solid var(--border);
-        border-radius: 20px;
-        padding: 2rem 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .asset-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-gold);
-        border-radius: 20px 20px 0 0;
-      }
-
-      .asset-card:nth-child(2)::before {
-        background: var(--gradient-silver);
-      }
-
-      .asset-card:hover {
-        border-color: var(--purple);
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .asset-icon {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 1rem;
-        background: var(--gradient-purple);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: white;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .asset-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-      }
-
-      .asset-subtitle {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        font-weight: 600;
-      }
-
-      /* Savings Page Specific */
-      .savings-overview {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-      }
-
-      .savings-card {
-        background: var(--surface);
-        border-radius: 20px;
-        padding: 1.5rem;
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .savings-card.gold::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-gold);
-        border-radius: 20px 20px 0 0;
-      }
-
-      .savings-card.silver::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-silver);
-        border-radius: 20px 20px 0 0;
-      }
-
-      .savings-card:hover {
-        border-color: var(--purple);
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .savings-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: white;
-        margin-bottom: 1rem;
-        box-shadow: var(--shadow-lg);
-      }
-
-      .savings-card.gold .savings-icon {
-        background: var(--gradient-gold);
-      }
-
-      .savings-card.silver .savings-icon {
-        background: var(--gradient-silver);
-      }
-
-      .savings-amount {
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-      }
-
-      .savings-label {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
-
-      .savings-actions {
-        display: flex;
-        gap: 0.75rem;
-      }
-
-      .savings-actions .btn {
-        flex: 1;
-        font-size: 0.8rem;
-        padding: 0.6rem 1rem;
-      }
-
-      /* Profile Page */
-      .profile-header {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-
-      .profile-avatar {
+      .promo-circle {
         width: 120px;
         height: 120px;
-        background: var(--gradient-purple);
+        background: var(--red);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .promo-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-gold);
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .promo-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+
+      .promo-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 15px 0;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #D3D3D3;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: var(--orange);
+        transform: scale(1.3);
+      }
+
+      /* Schemes Section */
+      .schemes-section {
+        margin: 30px 20px 20px;
+      }
+
+      .schemes-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .schemes-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .sync-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 12px;
+        color: var(--text-gray);
+      }
+
+      .sync-icon {
+        color: var(--orange);
+        margin-left: 5px;
+      }
+
+      .schemes-card {
+        background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+        border-radius: 20px;
+        padding: 30px;
+        color: var(--white);
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .schemes-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .schemes-message {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .schemes-subtitle {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .schemes-arrow {
+        width: 50px;
+        height: 50px;
+        border: 2px solid var(--white);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 3rem;
-        color: white;
-        margin: 0 auto 1rem;
-        box-shadow: var(--shadow-xl);
-        border: 4px solid white;
-      }
-
-      .profile-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-      }
-
-      .profile-email {
-        font-size: 1rem;
-        color: var(--text-secondary);
-        font-weight: 500;
-      }
-
-      .profile-sections {
-        display: grid;
-        gap: 1.5rem;
-      }
-
-      .profile-section {
-        background: var(--surface);
-        border-radius: 20px;
-        padding: 1.5rem;
-        border: 2px solid transparent;
+        margin: 0 auto;
+        cursor: pointer;
         transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
       }
 
-      .profile-section:hover {
-        border-color: var(--purple);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+      .schemes-arrow:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 0.2);
       }
 
-      .profile-section h3 {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .profile-section-icon {
-        width: 32px;
-        height: 32px;
-        background: var(--gradient-purple);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 0.875rem;
-      }
-
-      .profile-info-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-      }
-
-      .profile-info-item {
-        background: var(--background);
-        border-radius: 12px;
-        padding: 1rem;
-      }
-
-      .profile-info-label {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-
-      .profile-info-value {
-        font-size: 1rem;
-        color: var(--text-primary);
-        font-weight: 600;
+      .schemes-arrow i {
+        font-size: 20px;
       }
 
       /* Bottom Navigation */
       .bottom-nav {
-        background: var(--surface);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid var(--border);
-        padding: 1rem;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 100;
-        box-shadow: var(--shadow-xl);
-      }
-
-      .nav-items {
+        background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+        border-radius: 25px 25px 0 0;
+        padding: 20px;
         display: flex;
         justify-content: space-around;
-        max-width: 600px;
-        margin: 0 auto;
+        align-items: center;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
       }
 
       .nav-item {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.25rem;
+        color: var(--white);
         text-decoration: none;
-        color: var(--text-secondary);
-        font-size: 0.75rem;
-        font-weight: 600;
         transition: all 0.3s ease;
         cursor: pointer;
         background: none;
         border: none;
-        padding: 0.5rem;
-        border-radius: 12px;
+        padding: 10px;
+        border-radius: 15px;
       }
 
-      .nav-item.active {
-        color: var(--purple);
-        background: rgba(99, 102, 241, 0.1);
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
       }
 
       .nav-item i {
-        font-size: 1.25rem;
-        margin-bottom: 0.25rem;
+        font-size: 24px;
+        margin-bottom: 5px;
       }
 
-      /* Modal Enhancements */
+      .nav-item span {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .nav-center {
+        width: 70px;
+        height: 70px;
+        background: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -25px 0;
+        box-shadow: var(--shadow-lg);
+        color: var(--orange);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-center:hover {
+        transform: scale(1.1);
+      }
+
+      .nav-center i {
+        font-size: 28px;
+      }
+
+      /* Modal */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -921,12 +542,11 @@
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
         z-index: 1000;
         display: none;
         align-items: center;
         justify-content: center;
-        padding: 1rem;
+        padding: 20px;
       }
 
       .modal-overlay.show {
@@ -934,344 +554,173 @@
       }
 
       .modal-content {
-        background: var(--surface);
+        background: var(--white);
         border-radius: 20px;
-        box-shadow: var(--shadow-xl);
+        box-shadow: var(--shadow-lg);
         width: 100%;
-        max-width: 500px;
+        max-width: 400px;
         max-height: 90vh;
         overflow-y: auto;
-        border: 2px solid var(--glass-border);
       }
 
       .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        background: var(--gradient-purple);
-        color: white;
-        border-radius: 20px 20px 0 0;
+        padding: 25px 25px 0;
+        text-align: center;
       }
 
-      .modal-header h3 {
-        font-size: 1.25rem;
+      .modal-title {
+        font-size: 20px;
         font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
+        color: var(--text-dark);
+        margin-bottom: 10px;
       }
 
-      .modal-close {
-        width: 36px;
-        height: 36px;
-        border: none;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        cursor: pointer;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-      }
-
-      .modal-close:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: scale(1.05);
+      .modal-subtitle {
+        font-size: 14px;
+        color: var(--text-gray);
+        margin-bottom: 20px;
       }
 
       .modal-body {
-        padding: 1.5rem;
-      }
-
-      .form-section {
-        margin-bottom: 1.5rem;
-        border: 2px solid var(--border);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
-
-      .form-section:focus-within {
-        border-color: var(--purple);
-        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-      }
-
-      .section-header-form {
-        background: var(--background);
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid var(--border);
-        font-weight: 700;
-        color: var(--text-primary);
-        font-size: 0.875rem;
-      }
-
-      .form-grid {
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        padding: 20px 25px;
       }
 
       .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        margin-bottom: 20px;
       }
 
       .form-label {
-        font-size: 0.875rem;
+        display: block;
+        font-size: 14px;
         font-weight: 600;
-        color: var(--text-primary);
+        color: var(--text-dark);
+        margin-bottom: 8px;
       }
 
-      .required {
-        color: var(--error);
-      }
-
-      .form-input,
-      .form-select {
-        padding: 0.875rem 1rem;
-        border: 2px solid var(--border);
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #E5E5E5;
         border-radius: 12px;
-        font-size: 0.875rem;
-        background: var(--surface);
+        font-size: 16px;
         transition: all 0.3s ease;
-        font-weight: 500;
       }
 
-      .form-input:focus,
-      .form-select:focus {
+      .form-input:focus {
         outline: none;
-        border-color: var(--purple);
-        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-        transform: translateY(-1px);
-      }
-
-      .projection-section {
-        background: var(--background);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-top: 1rem;
-        border: 2px solid var(--border);
-      }
-
-      .projection-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.75rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-      }
-
-      .projection-total {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 700;
-        padding-top: 0.75rem;
-        border-top: 2px solid var(--border);
-        font-size: 1rem;
-      }
-
-      .checkbox-group {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 1rem;
-        padding: 1rem;
-        background: var(--background);
-        border-radius: 12px;
-      }
-
-      .checkbox-group input[type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--purple);
-      }
-
-      .checkbox-group label {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
-        font-weight: 500;
+        border-color: var(--orange);
+        box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
       }
 
       .modal-footer {
-        padding: 1.5rem;
-        border-top: 1px solid var(--border);
-        background: var(--background);
-        border-radius: 0 0 20px 20px;
+        padding: 0 25px 25px;
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        background: var(--orange-light);
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: #F5F5F5;
+        color: var(--text-dark);
+      }
+
+      .btn-secondary:hover {
+        background: #E5E5E5;
       }
 
       .hidden {
-        display: none;
+        display: none !important;
       }
 
-      /* Responsive Design */
-      @media (max-width: 1024px) {
-        .main-content {
-          max-width: 800px;
-          padding: 1rem;
-          padding-top: 100px;
-          padding-bottom: 120px;
-        }
-
-        .schemes-list {
-          grid-template-columns: 1fr;
-        }
-
-        .savings-overview {
-          grid-template-columns: 1fr;
-        }
-      }
-
+      /* Responsive */
       @media (max-width: 768px) {
-        .main-content {
-          padding: 0.75rem;
-          padding-top: 90px;
-          padding-bottom: 110px;
-        }
-
-        .header {
-          padding: 0.75rem 1rem;
-        }
-
-        .logo-text {
-          font-size: 1rem;
-        }
-
-        .greeting-title {
-          font-size: 1.5rem;
-        }
-
-        .rates-container {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-
-        .scheme-header {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .scheme-buttons {
+        .metals-container {
           flex-direction: column;
+          gap: 15px;
         }
 
-        .assets-grid {
-          grid-template-columns: 1fr;
+        .metal-item {
+          justify-content: center;
         }
 
-        .savings-actions {
+        .promo-content {
           flex-direction: column;
+          padding: 15px;
         }
 
-        .profile-info-grid {
-          grid-template-columns: 1fr;
+        .promo-woman {
+          width: 100%;
+          height: 100px;
+          margin: 0 0 15px 0;
         }
 
-        .investments-grid {
-          grid-template-columns: repeat(3, 1fr);
+        .schemes-section {
+          margin: 20px 15px 15px;
         }
 
-        .nav-item {
-          font-size: 0.7rem;
+        .rates-card {
+          margin: 15px;
+          padding: 20px;
         }
 
-        .nav-item i {
-          font-size: 1.125rem;
+        .promo-banner {
+          margin: 15px;
+          height: 160px;
         }
       }
 
       @media (max-width: 480px) {
-        .main-content {
-          padding: 0.5rem;
-          padding-top: 85px;
-          padding-bottom: 100px;
+        .header {
+          padding: 10px 15px;
         }
 
-        .premium-card {
-          padding: 1rem;
+        .logo-text {
+          font-size: 12px;
+          padding: 6px 15px;
         }
 
-        .greeting-title {
-          font-size: 1.25rem;
+        .crown-icon {
+          width: 40px;
+          height: 32px;
         }
 
-        .section-title {
-          font-size: 1.25rem;
+        .metal-price {
+          font-size: 20px;
         }
 
-        .modal-content {
-          margin: 0.5rem;
-          max-width: calc(100vw - 1rem);
+        .schemes-title {
+          font-size: 18px;
         }
 
-        .form-grid {
-          padding: 1rem;
+        .bottom-nav {
+          padding: 15px;
         }
 
-        .investments-grid {
-          grid-template-columns: 1fr;
+        .nav-center {
+          width: 60px;
+          height: 60px;
+          margin: -20px 0;
         }
-      }
-
-      /* Animation */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .tab-content {
-        animation: fadeInUp 0.5s ease-out;
-      }
-
-      /* Investment Options */
-      .investment-options {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .investment-option {
-        background: var(--background);
-        border: 2px solid var(--border);
-        border-radius: 12px;
-        padding: 1rem;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .investment-option:hover {
-        border-color: var(--purple);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-      }
-
-      .investment-option.selected {
-        border-color: var(--purple);
-        background: rgba(99, 102, 241, 0.1);
-      }
-
-      .investment-option-title {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-      }
-
-      .investment-option-desc {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
       }
     </style>
   </head>
@@ -1280,508 +729,101 @@
       <!-- Header -->
       <div class="header">
         <div class="header-left">
-          <button class="menu-toggle">
-            <i class="fas fa-bars"></i>
-          </button>
+          <div class="menu-icon">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+          </div>
           <div class="logo-container">
-            <div class="logo-icon">SJ</div>
-            <span class="logo-text">SRI KUMARAN JEWELLERS</span>
+            <div class="crown-icon"></div>
+            <div class="logo-text">
+              SRI KUMARAN
+              <div class="logo-subtitle">JEWELLERS</div>
+            </div>
           </div>
         </div>
         <div class="header-right">
-          <button class="notification-icon">
-            <i class="fas fa-bell"></i>
-          </button>
+          <div class="notification-container">
+            <div class="notification-icon">
+              <i class="fas fa-bell"></i>
+              <div class="notification-badge">137</div>
+            </div>
+          </div>
+          <div class="app-version">AV:5.0.0</div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="main-content">
-        <!-- Home Tab -->
-        <div id="homeTab" class="tab-content">
-          <!-- User Greeting -->
-          <div class="user-greeting">
-            <h1 class="greeting-title">Hi, Sethu</h1>
-            <p class="account-number">Acc No: 12345678</p>
+        <!-- Rates Card -->
+        <div class="rates-card">
+          <div class="last-updated">Last Updated On : 2025-08-02 10:19:35.103</div>
+          
+          <div class="location-tabs">
+            <button class="location-tab active">TAMIL NADU</button>
+            <button class="location-tab">KERALA</button>
           </div>
 
-          <!-- Today's Rates -->
-          <div class="premium-card todays-rates">
-            <div class="rates-header">Today's Rate</div>
-            <div class="rates-container">
-              <div class="rate-item">
-                <div class="rate-icon gold">AU</div>
-                <div class="rate-info">
-                  <div class="rate-metal">GOLD</div>
-                  <div class="rate-price-container">
-                    <div class="rate-price">RS 9200.00</div>
-                    <div class="rate-change positive">↗</div>
-                  </div>
+          <div class="metals-container">
+            <div class="metal-item">
+              <div class="metal-icon gold">AU</div>
+              <div class="metal-info">
+                <h3>Gold</h3>
+                <div class="metal-price">
+                  ₹ 9290.0
+                  <span class="price-arrow">↗</span>
                 </div>
               </div>
-              <div class="rate-item">
-                <div class="rate-icon silver">AG</div>
-                <div class="rate-info">
-                  <div class="rate-metal">SILVER</div>
-                  <div class="rate-price-container">
-                    <div class="rate-price">RS 120.00</div>
-                    <div class="rate-change negative">↘</div>
-                  </div>
+            </div>
+            <div class="metal-item">
+              <div class="metal-icon silver">AG</div>
+              <div class="metal-info">
+                <h3>Silver</h3>
+                <div class="metal-price">
+                  ₹ 123.0
+                  <span class="price-arrow">↗</span>
                 </div>
               </div>
             </div>
           </div>
+          
+          <div class="metal-subtitle">22 KT Per Gram</div>
+        </div>
 
-          <!-- Total Investments -->
-          <div class="premium-card">
-            <h2 class="investments-title">Your Total Investments</h2>
-            <div class="investments-grid">
-              <div class="investment-item">
-                <div class="investment-type">Schemes</div>
-                <div class="investment-value">Rs 0.00</div>
-              </div>
-              <div class="investment-item">
-                <div class="investment-type">Digital Gold</div>
-                <div class="investment-value">0 gms</div>
-              </div>
-              <div class="investment-item">
-                <div class="investment-type">Digital Silver</div>
-                <div class="investment-value">0 gms</div>
-              </div>
-            </div>
-
-            <!-- Scheme Tabs (shown after signup) -->
-            <div id="schemeTabs" class="scheme-tabs hidden">
-              <button
-                class="scheme-tab active"
-                onclick="showSchemeTab('schemes')"
-              >
-                Schemes
-              </button>
-              <button
-                class="scheme-tab"
-                onclick="showSchemeTab('digital-gold')"
-              >
-                Digital Gold
-              </button>
-              <button
-                class="scheme-tab"
-                onclick="showSchemeTab('digital-silver')"
-              >
-                Digital Silver
-              </button>
-            </div>
-
-            <!-- Scheme Details (shown after signup) -->
-            <div id="schemeDetails" class="scheme-card with-details hidden">
-              <div class="scheme-header">
-                <div class="scheme-info">
-                  <h3>Gold Chit Savings</h3>
-                  <div class="scheme-details">16 Months | 22 KT</div>
-                  <div class="scheme-details">Acc ID: 12345678</div>
-                  <div class="scheme-details">Installments Paid: 0/16</div>
-                  <div class="scheme-details">Total Amount Paid: Rs 0.00</div>
-                  <div class="scheme-links">
-                    <a href="#" class="scheme-link"
-                      >View Nominee <i class="fas fa-chevron-right"></i
-                    ></a>
-                    <a href="#" class="scheme-link"
-                      >View Statement <i class="fas fa-chevron-right"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="scheme-info">
-                  <div class="scheme-details">Started On: 19/2/2025</div>
-                  <div class="scheme-details">Matured On: 19/2/2026</div>
-                  <div class="scheme-details">Installment No: 1</div>
-                  <div class="scheme-status">Over Due</div>
-                  <div class="scheme-amount">Rs 1,000.00</div>
-                  <button class="btn-pay">Pay Now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Saving Schemes -->
-          <div class="premium-card">
-            <h2 class="section-title">Saving Schemes</h2>
-
-            <div class="schemes-list">
-              <div class="scheme-item">
-                <h4>Gold Saving Scheme</h4>
-                <p class="scheme-subtitle">
-                  Get <strong>Bonus</strong> on maturity
-                </p>
-                <div class="scheme-item-badge">GOLD</div>
-                <div class="scheme-buttons">
-                  <button class="btn btn-primary" onclick="openSchemeSignup()">
-                    Join Now
-                  </button>
-                  <button class="btn btn-secondary">View Details</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Purchase Digital Assets -->
-          <div class="premium-card">
-            <h2 class="section-title">PURCHASE DIGITAL ASSETS</h2>
-            <div class="assets-grid">
-              <div class="asset-card" onclick="openBuyModal('gold')">
-                <div class="asset-icon">
-                  <i class="fas fa-coins"></i>
-                </div>
-                <div class="asset-title">BUY</div>
-                <div class="asset-subtitle">GOLD</div>
-              </div>
-              <div class="asset-card" onclick="openBuyModal('silver')">
-                <div class="asset-icon">
-                  <i class="fas fa-circle"></i>
-                </div>
-                <div class="asset-title">BUY</div>
-                <div class="asset-subtitle">SILVER</div>
-              </div>
+        <!-- Promotional Banner -->
+        <div class="promo-banner">
+          <div class="promo-content">
+            <div class="promo-woman"></div>
+            <div class="promo-circle">
+              <div class="promo-title">Aadi</div>
+              <div class="promo-title">Special</div>
+              <div class="promo-subtitle">Sale</div>
             </div>
           </div>
         </div>
 
-        <!-- Savings Tab -->
-        <div id="savingsTab" class="tab-content hidden">
-          <div class="user-greeting">
-            <h1 class="greeting-title">Your Savings</h1>
-            <p class="account-number">Track your precious metal investments</p>
-          </div>
-
-          <!-- Savings Overview -->
-          <div class="savings-overview">
-            <div class="premium-card savings-card gold">
-              <div class="savings-icon">
-                <i class="fas fa-coins"></i>
-              </div>
-              <div class="savings-amount">2.45 gms</div>
-              <div class="savings-label">Gold Saved</div>
-              <div class="savings-label">Value: ₹22,540</div>
-              <div class="savings-actions">
-                <button
-                  class="btn btn-primary"
-                  onclick="openInvestmentModal('gold', 'onetime')"
-                >
-                  Buy Now
-                </button>
-                <button
-                  class="btn btn-secondary"
-                  onclick="openInvestmentModal('gold', 'sip')"
-                >
-                  Start SIP
-                </button>
-              </div>
-            </div>
-
-            <div class="premium-card savings-card silver">
-              <div class="savings-icon">
-                <i class="fas fa-circle"></i>
-              </div>
-              <div class="savings-amount">15.8 gms</div>
-              <div class="savings-label">Silver Saved</div>
-              <div class="savings-label">Value: ₹1,896</div>
-              <div class="savings-actions">
-                <button
-                  class="btn btn-primary"
-                  onclick="openInvestmentModal('silver', 'onetime')"
-                >
-                  Buy Now
-                </button>
-                <button
-                  class="btn btn-secondary"
-                  onclick="openInvestmentModal('silver', 'sip')"
-                >
-                  Start SIP
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Savings Activity -->
-          <div class="premium-card">
-            <h2 class="section-title">Recent Activity</h2>
-            <div class="transactions-list">
-              <div class="transaction-item">
-                <div
-                  class="savings-icon"
-                  style="width: 40px; height: 40px; margin-bottom: 0"
-                >
-                  <i class="fas fa-plus" style="font-size: 1rem"></i>
-                </div>
-                <div
-                  class="transaction-info"
-                  style="flex: 1; margin-left: 1rem"
-                >
-                  <div
-                    style="
-                      font-weight: 600;
-                      color: var(--text-primary);
-                      margin-bottom: 0.25rem;
-                    "
-                  >
-                    Gold Purchase
-                  </div>
-                  <div
-                    style="font-size: 0.875rem; color: var(--text-secondary)"
-                  >
-                    SIP Investment • 0.25g
-                  </div>
-                </div>
-                <div style="font-weight: 600; color: var(--text-primary)">
-                  ₹2,312.50
-                </div>
-              </div>
-              <div class="transaction-item">
-                <div
-                  class="savings-card silver"
-                  style="
-                    width: 40px;
-                    height: 40px;
-                    margin-bottom: 0;
-                    border-radius: 50%;
-                  "
-                >
-                  <div
-                    class="savings-icon"
-                    style="width: 100%; height: 100%; margin: 0"
-                  >
-                    <i class="fas fa-plus" style="font-size: 1rem"></i>
-                  </div>
-                </div>
-                <div
-                  class="transaction-info"
-                  style="flex: 1; margin-left: 1rem"
-                >
-                  <div
-                    style="
-                      font-weight: 600;
-                      color: var(--text-primary);
-                      margin-bottom: 0.25rem;
-                    "
-                  >
-                    Silver Purchase
-                  </div>
-                  <div
-                    style="font-size: 0.875rem; color: var(--text-secondary)"
-                  >
-                    One-time • 2.5g
-                  </div>
-                </div>
-                <div style="font-weight: 600; color: var(--text-primary)">
-                  ₹300.00
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Promo Dots -->
+        <div class="promo-dots">
+          <div class="dot"></div>
+          <div class="dot active"></div>
+          <div class="dot"></div>
         </div>
 
-        <!-- Schemes Tab -->
-        <div id="schemesTab" class="tab-content hidden">
-          <div class="user-greeting">
-            <h1 class="greeting-title">Saving Schemes</h1>
-            <p class="account-number">Choose the best scheme for your future</p>
-          </div>
-
-          <div class="schemes-list">
-            <div class="scheme-item">
-              <h4>Gold Saving Scheme</h4>
-              <p class="scheme-subtitle">
-                Get <strong>Bonus</strong> on maturity with guaranteed returns
-              </p>
-              <div class="scheme-item-badge">GOLD</div>
-              <div class="scheme-buttons">
-                <button class="btn btn-primary" onclick="openSchemeSignup()">
-                  Join Now
-                </button>
-                <button class="btn btn-secondary">View Details</button>
-              </div>
-            </div>
-
-            <div class="scheme-item digi-gold">
-              <h4>Digi Gold</h4>
-              <p class="scheme-subtitle">
-                SIP DAILY | WEEKLY | MONTHLY - Flexible investment options
-              </p>
-              <div class="scheme-item-badge">GOLD</div>
-              <div class="scheme-buttons">
-                <button class="btn btn-primary">Join Now</button>
-                <button class="btn btn-secondary">View Details</button>
-              </div>
-            </div>
-
-            <div class="scheme-item silver">
-              <h4>Silver Saving Scheme</h4>
-              <p class="scheme-subtitle">
-                Get <strong>Bonus</strong> on maturity with silver investments
-              </p>
-              <div class="scheme-item-badge">SILVER</div>
-              <div class="scheme-buttons">
-                <button class="btn btn-primary">Join Now</button>
-                <button class="btn btn-secondary">View Details</button>
-              </div>
+        <!-- Schemes Section -->
+        <div class="schemes-section">
+          <div class="schemes-header">
+            <h2 class="schemes-title">Your Schemes</h2>
+            <div class="sync-info">
+              <div>Last Sync</div>
+              <div>03-Aug-2025 1:55 PM <i class="fas fa-sync-alt sync-icon"></i></div>
             </div>
           </div>
-        </div>
 
-        <!-- Profile Tab -->
-        <div id="profileTab" class="tab-content hidden">
-          <div class="profile-header">
-            <div class="profile-avatar">S</div>
-            <h1 class="profile-name">Sethu Kumaran</h1>
-            <p class="profile-email">sethu.kumaran@email.com</p>
-          </div>
-
-          <div class="profile-sections">
-            <!-- Personal Information -->
-            <div class="profile-section">
-              <h3>
-                <div class="profile-section-icon">
-                  <i class="fas fa-user"></i>
-                </div>
-                Personal Information
-              </h3>
-              <div class="profile-info-grid">
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Full Name</div>
-                  <div class="profile-info-value">Sethu Kumaran</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Account Number</div>
-                  <div class="profile-info-value">12345678</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Phone Number</div>
-                  <div class="profile-info-value">+91 98765 43210</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Email Address</div>
-                  <div class="profile-info-value">sethu.kumaran@email.com</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Date of Birth</div>
-                  <div class="profile-info-value">08/08/1989</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">KYC Status</div>
-                  <div class="profile-info-value" style="color: var(--success)">
-                    ✓ Verified
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Investment Summary -->
-            <div class="profile-section">
-              <h3>
-                <div class="profile-section-icon">
-                  <i class="fas fa-chart-pie"></i>
-                </div>
-                Investment Summary
-              </h3>
-              <div class="profile-info-grid">
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Total Gold Holdings</div>
-                  <div class="profile-info-value">2.45 gms</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Total Silver Holdings</div>
-                  <div class="profile-info-value">15.8 gms</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Active Schemes</div>
-                  <div class="profile-info-value">1</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Total Investment Value</div>
-                  <div class="profile-info-value">₹24,436</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Maturity Amount</div>
-                  <div class="profile-info-value">₹85,000</div>
-                </div>
-                <div class="profile-info-item">
-                  <div class="profile-info-label">Potential Profit</div>
-                  <div class="profile-info-value" style="color: var(--success)">
-                    ₹60,564
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Account Settings -->
-            <div class="profile-section">
-              <h3>
-                <div class="profile-section-icon">
-                  <i class="fas fa-cog"></i>
-                </div>
-                Account Settings
-              </h3>
-              <div class="profile-info-grid">
-                <div
-                  class="profile-info-item"
-                  onclick="editProfile()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Edit Profile</div>
-                  <div class="profile-info-value">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-                <div
-                  class="profile-info-item"
-                  onclick="changePassword()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Change Password</div>
-                  <div class="profile-info-value">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-                <div
-                  class="profile-info-item"
-                  onclick="manageNotifications()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Notifications</div>
-                  <div class="profile-info-value">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-                <div
-                  class="profile-info-item"
-                  onclick="viewDocuments()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Documents</div>
-                  <div class="profile-info-value">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-                <div
-                  class="profile-info-item"
-                  onclick="contactSupport()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Support & Help</div>
-                  <div class="profile-info-value">
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-                <div
-                  class="profile-info-item"
-                  onclick="logout()"
-                  style="cursor: pointer"
-                >
-                  <div class="profile-info-label">Logout</div>
-                  <div class="profile-info-value" style="color: var(--error)">
-                    <i class="fas fa-sign-out-alt"></i>
-                  </div>
-                </div>
-              </div>
+          <div class="schemes-card" onclick="openSchemesModal()">
+            <div class="schemes-message">No Digital Savings Plan found.</div>
+            <div class="schemes-subtitle">Join new plans</div>
+            <div class="schemes-arrow">
+              <i class="fas fa-arrow-right"></i>
             </div>
           </div>
         </div>
@@ -1789,479 +831,115 @@
 
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
-        <div class="nav-items">
-          <button
-            class="nav-item active"
-            onclick="showTab('home')"
-            id="homeNavBtn"
-          >
-            <i class="fas fa-home"></i>
-            Home
-          </button>
-          <button
-            class="nav-item"
-            onclick="showTab('savings')"
-            id="savingsNavBtn"
-          >
-            <i class="fas fa-piggy-bank"></i>
-            Savings
-          </button>
-          <button
-            class="nav-item"
-            onclick="showTab('schemes')"
-            id="schemesNavBtn"
-          >
-            <i class="fas fa-chart-bar"></i>
-            Schemes
-          </button>
-          <button
-            class="nav-item"
-            onclick="showTab('profile')"
-            id="profileNavBtn"
-          >
-            <i class="fas fa-user"></i>
-            Profile
-          </button>
-        </div>
+        <button class="nav-item" onclick="showTab('transactions')">
+          <i class="fas fa-file-alt"></i>
+          <span>History</span>
+        </button>
+        <button class="nav-item" onclick="showTab('savings')">
+          <i class="fas fa-piggy-bank"></i>
+          <span>Savings</span>
+        </button>
+        <button class="nav-center" onclick="showTab('home')">
+          <i class="fas fa-home"></i>
+        </button>
+        <button class="nav-item" onclick="showTab('schemes')">
+          <i class="fas fa-chart-bar"></i>
+          <span>Schemes</span>
+        </button>
+        <button class="nav-item" onclick="showTab('profile')">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </button>
       </div>
     </div>
 
-    <!-- Scheme Signup Modal -->
-    <div id="schemeSignupModal" class="modal-overlay">
+    <!-- Schemes Modal -->
+    <div id="schemesModal" class="modal-overlay">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>
-            <i class="fas fa-coins"></i>
-            Scheme Sign Up
-          </h3>
-          <button class="modal-close" onclick="closeSchemeSignup()">
-            <i class="fas fa-times"></i>
-          </button>
+          <h3 class="modal-title">Join Digital Savings Plan</h3>
+          <p class="modal-subtitle">Start your journey towards financial growth</p>
         </div>
-
         <div class="modal-body">
-          <div class="form-section">
-            <div class="section-header-form">Account ID</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-input"
-                  value="12345678"
-                  readonly
-                />
-              </div>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Enter your full name" />
           </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Branch</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <select class="form-select">
-                  <option>Kumaran -thiruthuvaipoondi</option>
-                </select>
-              </div>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-input" placeholder="Enter mobile number" />
           </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Plans</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <select class="form-select">
-                  <option>Gold Chit Savings</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Installments</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <select class="form-select">
-                  <option>16 Months</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Amount</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <select class="form-select">
-                  <option>50000</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Benefits</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <select class="form-select">
-                  <option>Bonus (Rs 5000)</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Projection</div>
-            <div class="form-grid">
-              <div class="projection-section">
-                <div class="projection-item">
-                  <span>Total amount to pay</span>
-                  <span>Rs 80,000.00</span>
-                </div>
-                <div class="projection-item">
-                  <span>Bonus (Additional)</span>
-                  <span>Rs 5,000.00</span>
-                </div>
-                <div class="projection-total">
-                  <span>Total Receivables</span>
-                  <span>Rs 85,000.00</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Nominee Information</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Nominee Name</label>
-                <input type="text" class="form-input" value="12345678" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Nominee ID Proof</label>
-                <select class="form-select">
-                  <option>PAN</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">ID Number</label>
-                <input type="text" class="form-input" value="BMGPP45XX" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">DOB</label>
-                <input type="date" class="form-input" value="1989-08-08" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Address</label>
-                <textarea class="form-input" rows="3">
-235, 3rd cross, palaji krupa layout</textarea
-                >
-              </div>
-              <div class="form-group">
-                <label class="form-label">Country</label>
-                <input type="text" class="form-input" value="560077" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">State</label>
-                <input type="text" class="form-input" value="560077" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Pin code</label>
-                <input type="text" class="form-input" value="560077" />
-              </div>
-              <div class="checkbox-group">
-                <input type="checkbox" id="terms" />
-                <label for="terms">Agree Schemes Terms & conditions</label>
-              </div>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Investment Amount</label>
+            <input type="number" class="form-input" placeholder="Enter amount (min ₹500)" />
           </div>
         </div>
-
         <div class="modal-footer">
-          <button
-            class="btn btn-primary"
-            onclick="registerScheme()"
-            style="width: 100%"
-          >
-            Register
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Investment Modal -->
-    <div id="investmentModal" class="modal-overlay">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>
-            <i class="fas fa-coins"></i>
-            <span id="investmentModalTitle">Investment Options</span>
-          </h3>
-          <button class="modal-close" onclick="closeInvestmentModal()">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-section">
-            <div class="section-header-form">Investment Type</div>
-            <div class="form-grid">
-              <div class="investment-options">
-                <div
-                  class="investment-option selected"
-                  onclick="selectInvestmentType('onetime')"
-                >
-                  <div class="investment-option-title">One-time Purchase</div>
-                  <div class="investment-option-desc">Buy immediately</div>
-                </div>
-                <div
-                  class="investment-option"
-                  onclick="selectInvestmentType('sip')"
-                >
-                  <div class="investment-option-title">Start SIP</div>
-                  <div class="investment-option-desc">Recurring investment</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="section-header-form">Investment Details</div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label"
-                  >Amount (₹) <span class="required">*</span></label
-                >
-                <input
-                  type="number"
-                  class="form-input"
-                  placeholder="Enter amount"
-                  id="investmentAmount"
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Quantity (gms)</label>
-                <input
-                  type="number"
-                  class="form-input"
-                  placeholder="Calculated automatically"
-                  id="investmentQuantity"
-                  readonly
-                />
-              </div>
-              <div id="sipOptions" class="form-group hidden">
-                <label class="form-label">SIP Frequency</label>
-                <select class="form-select">
-                  <option>Daily</option>
-                  <option>Weekly</option>
-                  <option>Monthly</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-secondary" onclick="closeInvestmentModal()">
-            Cancel
-          </button>
-          <button class="btn btn-primary" onclick="proceedInvestment()">
-            <i class="fas fa-shopping-cart"></i>
-            Proceed
-          </button>
+          <button class="btn btn-secondary" onclick="closeSchemesModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="joinScheme()">Join Now</button>
         </div>
       </div>
     </div>
 
     <script>
       let currentTab = "home";
-      let currentSchemeTab = "schemes";
-      let userHasScheme = false;
-      let currentInvestmentType = "onetime";
-      let currentMetal = "gold";
 
       function showTab(tabName) {
-        // Hide all tabs
-        document.querySelectorAll(".tab-content").forEach((tab) => {
-          tab.classList.add("hidden");
-        });
-
-        // Remove active class from all nav items
-        document.querySelectorAll(".nav-item").forEach((item) => {
-          item.classList.remove("active");
-        });
-
-        // Show selected tab
-        document.getElementById(tabName + "Tab").classList.remove("hidden");
-
-        // Add active class to selected nav item
-        document.getElementById(tabName + "NavBtn").classList.add("active");
-
         currentTab = tabName;
+        // Tab switching logic would go here
+        console.log(`Switching to ${tabName} tab`);
       }
 
-      function showSchemeTab(tabName) {
-        // Remove active class from all scheme tabs
-        document.querySelectorAll(".scheme-tab").forEach((tab) => {
-          tab.classList.remove("active");
-        });
-
-        // Add active class to selected tab
-        event.target.classList.add("active");
-
-        currentSchemeTab = tabName;
+      function openSchemesModal() {
+        document.getElementById("schemesModal").classList.add("show");
       }
 
-      function openSchemeSignup() {
-        document.getElementById("schemeSignupModal").classList.add("show");
+      function closeSchemesModal() {
+        document.getElementById("schemesModal").classList.remove("show");
       }
 
-      function closeSchemeSignup() {
-        document.getElementById("schemeSignupModal").classList.remove("show");
+      function joinScheme() {
+        alert("Scheme registration functionality will be implemented");
+        closeSchemesModal();
       }
 
-      function registerScheme() {
-        userHasScheme = true;
-
-        document.getElementById("schemeTabs").classList.remove("hidden");
-        document.getElementById("schemeDetails").classList.remove("hidden");
-
-        closeSchemeSignup();
-
-        const schemeInvestment = document.querySelector(
-          ".investment-item:first-child .investment-value",
-        );
-        schemeInvestment.textContent = "Rs 1,000.00";
-
-        alert("Successfully registered for Gold Chit Savings scheme!");
-      }
-
-      function openInvestmentModal(metal, type) {
-        currentMetal = metal;
-        currentInvestmentType = type;
-
-        document.getElementById("investmentModalTitle").textContent =
-          `${type === "sip" ? "Start SIP" : "Buy"} ${metal.charAt(0).toUpperCase() + metal.slice(1)}`;
-
-        // Reset form
-        document.getElementById("investmentAmount").value = "";
-        document.getElementById("investmentQuantity").value = "";
-
-        // Show/hide SIP options
-        const sipOptions = document.getElementById("sipOptions");
-        if (type === "sip") {
-          sipOptions.classList.remove("hidden");
-        } else {
-          sipOptions.classList.add("hidden");
-        }
-
-        // Update investment type selection
-        selectInvestmentType(type);
-
-        document.getElementById("investmentModal").classList.add("show");
-      }
-
-      function closeInvestmentModal() {
-        document.getElementById("investmentModal").classList.remove("show");
-      }
-
-      function selectInvestmentType(type) {
-        currentInvestmentType = type;
-
-        document.querySelectorAll(".investment-option").forEach((option) => {
-          option.classList.remove("selected");
-        });
-
-        document
-          .querySelector(`[onclick="selectInvestmentType('${type}')"]`)
-          .classList.add("selected");
-
-        const sipOptions = document.getElementById("sipOptions");
-        if (type === "sip") {
-          sipOptions.classList.remove("hidden");
-        } else {
-          sipOptions.classList.add("hidden");
-        }
-      }
-
-      function proceedInvestment() {
-        const amount = document.getElementById("investmentAmount").value;
-        if (!amount) {
-          alert("Please enter an amount");
-          return;
-        }
-
-        alert(
-          `Proceeding with ${currentInvestmentType === "sip" ? "SIP" : "one-time"} investment of ₹${amount} in ${currentMetal}`,
-        );
-        closeInvestmentModal();
-      }
-
-      function openBuyModal(metal) {
-        openInvestmentModal(metal, "onetime");
-      }
-
-      // Profile functions
-      function editProfile() {
-        alert("Edit Profile functionality will be implemented");
-      }
-
-      function changePassword() {
-        alert("Change Password functionality will be implemented");
-      }
-
-      function manageNotifications() {
-        alert("Notification settings will be implemented");
-      }
-
-      function viewDocuments() {
-        alert("Document management will be implemented");
-      }
-
-      function contactSupport() {
-        alert("Support system will be implemented");
-      }
-
-      function logout() {
-        if (confirm("Are you sure you want to logout?")) {
-          alert("Logging out...");
-        }
-      }
-
-      // Auto-calculate quantity based on amount
-      document.addEventListener("DOMContentLoaded", function () {
-        const amountInput = document.getElementById("investmentAmount");
-        const quantityInput = document.getElementById("investmentQuantity");
-
-        if (amountInput && quantityInput) {
-          amountInput.addEventListener("input", function () {
-            const amount = parseFloat(this.value) || 0;
-            const rate = currentMetal === "gold" ? 9200 : 120;
-            const quantity = amount / rate;
-            quantityInput.value = quantity.toFixed(4);
-          });
+      // Close modal when clicking outside
+      document.getElementById("schemesModal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          closeSchemesModal();
         }
       });
 
-      // Close modals when clicking outside
-      document
-        .getElementById("schemeSignupModal")
-        .addEventListener("click", function (e) {
-          if (e.target === this) {
-            closeSchemeSignup();
-          }
+      // Location tab switching
+      document.querySelectorAll('.location-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.location-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
         });
+      });
 
-      document
-        .getElementById("investmentModal")
-        .addEventListener("click", function (e) {
-          if (e.target === this) {
-            closeInvestmentModal();
-          }
-        });
+      // Auto-sync animation
+      setInterval(() => {
+        const syncIcon = document.querySelector('.sync-icon');
+        syncIcon.style.animation = 'none';
+        setTimeout(() => {
+          syncIcon.style.animation = 'spin 1s linear';
+        }, 10);
+      }, 30000);
 
-      // Initialize the page
+      // Add CSS animation for sync icon
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Initialize
       document.addEventListener("DOMContentLoaded", function () {
-        showTab("home");
+        console.log("Sri Kumaran Jewellers app initialized");
       });
     </script>
   </body>
