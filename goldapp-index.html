@@ -896,6 +896,18 @@
         closeSchemesModal();
       }
 
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          // Clear any stored data
+          localStorage.clear();
+          sessionStorage.clear();
+
+          // Redirect to login page or refresh
+          alert("Logged out successfully!");
+          window.location.reload();
+        }
+      }
+
       // Close modal when clicking outside
       document
         .getElementById("schemesModal")
