@@ -1608,12 +1608,82 @@
       let selectedPayment = "upi";
       let inputType = "amount";
       let selectedFrequency = "monthly";
+      let currentMode = "onetime";
 
       const assetRates = {
         gold: 6285,
         silver: 76.2,
         platinum: 2856,
       };
+
+      // New functions for buy interface
+      function switchAsset(asset) {
+        selectedAsset = asset;
+        calculatePrice();
+      }
+
+      function switchMode(mode) {
+        currentMode = mode;
+
+        // Update button styles
+        const onetimeBtn = document.getElementById('onetimeBtn');
+        const sipBtn = document.getElementById('sipBtn');
+
+        if (mode === 'onetime') {
+          onetimeBtn.style.background = '#7a0f0f';
+          onetimeBtn.style.color = 'white';
+          sipBtn.style.background = '#e5e7eb';
+          sipBtn.style.color = '#6b7280';
+        } else {
+          sipBtn.style.background = '#7a0f0f';
+          sipBtn.style.color = 'white';
+          onetimeBtn.style.background = '#e5e7eb';
+          onetimeBtn.style.color = '#6b7280';
+        }
+
+        calculatePrice();
+      }
+
+      function setGrams(grams) {
+        document.getElementById('gramsInput').value = grams;
+        calculatePrice();
+
+        // Update button styles - remove previous "best" styling and add to selected
+        const buttons = document.querySelectorAll('button[onclick^="setGrams"]');
+        buttons.forEach(btn => {
+          btn.style.position = 'relative';
+          const bestLabel = btn.querySelector('div:last-child');
+          if (bestLabel && bestLabel.textContent === 'Best') {
+            bestLabel.remove();
+          }
+        });
+      }
+
+      function calculatePrice() {
+        const grams = parseFloat(document.getElementById('gramsInput').value) || 0;
+        const rate = assetRates[selectedAsset];
+        const totalPrice = grams * rate;
+
+        // Update displays
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        document.getElementById('finalPrice').textContent = Math.round(totalPrice);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById('projectedReturns').textContent = '₹' + (projectedValue / 100000).toFixed(2) + 'L';
+        document.getElementById('investmentAmount').textContent = '₹' + (totalPrice / 100000).toFixed(2) + 'L';
+        document.getElementById('earningAmount').textContent = '₹' + earning.toFixed(2) + '*';
+      }
+
+      function proceedToPay() {
+        const grams = document.getElementById('gramsInput').value;
+        const totalPrice = document.getElementById('finalPrice').textContent;
+
+        alert(`Proceeding to payment for ${grams}g of ${selectedAsset} worth ₹${totalPrice}`);
+        // In real implementation, this would redirect to payment gateway
+      }
 
       // Tab Management
       function showTab(tabName) {
@@ -2033,7 +2103,7 @@ Your ${selectedFrequency} ${selectedAsset} SIP of ₹${amount} has been set up s
 
 ✅ Start Date: ${startDate}
 ✅ Auto-debit enabled
-�� First investment will be processed on ${startDate}
+✅ First investment will be processed on ${startDate}
 
 You can manage your SIP from the Portfolio section.`);
 
