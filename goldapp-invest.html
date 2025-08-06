@@ -2760,8 +2760,11 @@ You can manage your SIP from the Portfolio section.`);
         alert(feature + " is coming soon!");
       }
 
-      // Navigation function
+      // Enhanced Tab Navigation
       function showTab(tabName) {
+        // Update active state immediately for responsive feedback
+        updateNavActiveState(tabName);
+
         const pageMap = {
           home: "goldapp-enhanced.html",
           invest: "goldapp-invest.html",
@@ -2770,14 +2773,49 @@ You can manage your SIP from the Portfolio section.`);
           more: "goldapp-more.html",
         };
 
+        // Check if tab exists
+        if (!pageMap[tabName]) {
+          console.error(`Tab "${tabName}" not found`);
+          return;
+        }
+
         // Check if we're already on the target page
         const currentPage =
           window.location.pathname.split("/").pop() || "goldapp-invest.html";
         const targetPage = pageMap[tabName];
 
         if (targetPage && currentPage !== targetPage) {
-          window.location.href = pageMap[tabName];
+          setTimeout(() => {
+            window.location.href = targetPage;
+          }, 150);
         }
+      }
+
+      // Update navigation active state
+      function updateNavActiveState(activeTab) {
+        // Remove active class from all nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        // Add active class to current tab
+        const activeNavItem = document.getElementById(`nav-${activeTab}`);
+        if (activeNavItem) {
+          activeNavItem.classList.add('active');
+        }
+      }
+
+      // Get current tab based on current page
+      function getCurrentTab() {
+        const currentPage = window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        const pageToTab = {
+          "goldapp-enhanced.html": "home",
+          "goldapp-invest.html": "invest",
+          "goldapp-chits.html": "chits",
+          "goldapp-portfolio.html": "portfolio",
+          "goldapp-more.html": "more",
+        };
+        return pageToTab[currentPage] || "invest";
       }
 
       // Logout function
