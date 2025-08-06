@@ -1340,34 +1340,8 @@
       function showTab(tabName) {
         if (isLoading) return;
 
-        // Remove active class from all nav items
-        document.querySelectorAll(".nav-item").forEach((item) => {
-          item.classList.remove("active");
-        });
-
-        // Add active class to selected tab
-        const targetTab = document.getElementById(`nav-${tabName}`);
-        if (targetTab) {
-          targetTab.classList.add("active");
-        }
-
-        currentTab = tabName;
-
-        // In a real app, this would load different page content
-        console.log(`Navigating to ${tabName} tab`);
-
-        // Show loading state
-        showLoading();
-
-        // Simulate loading
-        setTimeout(() => {
-          hideLoading();
-
-          // For demo purposes, we'll just show alerts for non-home tabs
-          if (tabName !== "home") {
-            showComingSoon(tabName);
-          }
-        }, 500);
+        // Redirect to goldapp-invest.html for all navigation
+        window.location.href = 'goldapp-invest.html';
       }
 
       // Utility Functions
