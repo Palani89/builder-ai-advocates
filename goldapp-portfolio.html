@@ -715,5 +715,52 @@
         </div>
       </div>
     </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Invest</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('goals')" id="nav-goals">
+          <i class="fas fa-bullseye"></i>
+          <span>Goals</span>
+        </button>
+
+        <button class="nav-item active" onclick="showTab('portfolio')" id="nav-portfolio">
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('rewards')" id="nav-rewards">
+          <i class="fas fa-gift"></i>
+          <span>Rewards</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      function showTab(tabName) {
+        window.location.href = 'goldapp-invest.html';
+      }
+    </script>
   </body>
 </html>
