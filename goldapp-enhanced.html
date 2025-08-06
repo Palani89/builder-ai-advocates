@@ -1648,6 +1648,39 @@
         }, 1000);
       });
 
+      // Side Menu Functions
+      function toggleSideMenu() {
+        const sideMenu = document.querySelector('.side-menu');
+        const overlay = document.querySelector('.side-menu-overlay');
+
+        sideMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      function closeSideMenu() {
+        const sideMenu = document.querySelector('.side-menu');
+        const overlay = document.querySelector('.side-menu-overlay');
+
+        sideMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+
+      function navigateToPage(page) {
+        closeSideMenu();
+        setTimeout(() => {
+          window.location.href = page;
+        }, 300);
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert("Logged out successfully!");
+          window.location.href = "index-landing.html";
+        }
+      }
+
       // Service Worker registration for PWA capabilities
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
