@@ -379,48 +379,31 @@
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const phoneNumber = document.getElementById('phoneNumber').value;
             const password = document.getElementById('password').value;
-            
+
             // Clear previous messages
             document.getElementById('errorMessage').style.display = 'none';
             document.getElementById('successMessage').style.display = 'none';
-            
-            // Validation
-            if (!phoneNumber || !password) {
-                showError('Please fill in all required fields');
+
+            // Minimal validation - just check if something is entered
+            if (!phoneNumber && !password) {
+                showError('Please enter any phone number or password to continue');
                 return;
             }
-            
-            if (!validatePhone(phoneNumber)) {
-                showError('Please enter a valid Indian phone number');
-                return;
-            }
-            
-            if (!isTermsAccepted) {
-                showError('Please accept the Terms and Conditions');
-                return;
-            }
-            
-            // Simulate login process
+
+            // Allow access with any credentials
             const loginBtn = document.getElementById('loginBtn');
             loginBtn.textContent = 'Logging in...';
             loginBtn.disabled = true;
-            
+
             setTimeout(() => {
-                // Check if user exists (simulate with phone number check)
-                if (phoneNumber === '9791439784' && password === 'password123') {
-                    showSuccess('Login successful! Redirecting...');
-                    setTimeout(() => {
-                        window.location.href = 'goldapp-enhanced.html';
-                    }, 1500);
-                } else {
-                    showError('Invalid phone number or password');
-                    loginBtn.textContent = 'Log In';
-                    loginBtn.disabled = false;
-                }
-            }, 1500);
+                showSuccess('Login successful! Welcome to GoldApp');
+                setTimeout(() => {
+                    window.location.href = 'goldapp-enhanced.html';
+                }, 1000);
+            }, 500);
         });
 
         // Auto-format phone number
