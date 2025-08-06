@@ -2857,15 +2857,20 @@
         return pageToTab[currentPage] || "home";
       }
 
-      // Update navigation active state
+      // Update navigation active state with proper cleanup
       function updateNavActiveState(activeTab) {
         console.log(`Updating nav active state to: ${activeTab}`);
 
         try {
-          // Remove active class from all nav items
+          // Clear all states from nav items
           const navItems = document.querySelectorAll('.nav-item');
           navItems.forEach(item => {
             item.classList.remove('active');
+            // Clear any inline styles that might be stuck
+            item.style.removeProperty('background');
+            item.style.removeProperty('color');
+            item.style.removeProperty('transform');
+            item.blur(); // Remove focus to clear hover states
           });
 
           // Add active class to current tab
