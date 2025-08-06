@@ -823,7 +823,7 @@
 
       /* Bottom Navigation */
       .bottom-nav {
-        background: #7A0F0F;
+        background: #7a0f0f;
         backdrop-filter: blur(20px);
         border-top: 1px solid var(--border);
         padding: 0.75rem 1rem;
@@ -867,14 +867,14 @@
       }
 
       .nav-item.active {
-        color: #FFBC00;
+        color: #ffbc00;
         background: rgba(255, 188, 0, 0.1);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(255, 188, 0, 0.2);
       }
 
       .nav-item:hover {
-        color: #FFBC00;
+        color: #ffbc00;
         transform: translateY(-1px);
       }
 
@@ -1080,11 +1080,11 @@
 
       .tab-btn:not(.active):hover {
         background: rgba(122, 15, 15, 0.1);
-        color: #7A0F0F;
+        color: #7a0f0f;
       }
 
       .join-btn:hover {
-        background: #5A0A0A;
+        background: #5a0a0a;
         transform: translateY(-2px);
       }
 
@@ -1118,38 +1118,62 @@
         </div>
 
         <div class="side-menu-nav">
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-enhanced.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-enhanced.html')"
+          >
             <i class="fas fa-home"></i>
             <span>Home</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-invest.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-invest.html')"
+          >
             <i class="fas fa-chart-line"></i>
             <span>Invest</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-portfolio.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-portfolio.html')"
+          >
             <i class="fas fa-chart-pie"></i>
             <span>Portfolio</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-chits.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-chits.html')"
+          >
             <i class="fas fa-users"></i>
             <span>Chits</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-transactions.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-transactions.html')"
+          >
             <i class="fas fa-exchange-alt"></i>
             <span>Transactions</span>
           </button>
 
           <div class="side-menu-section">
             <div class="side-menu-section-title">Account</div>
-            <button class="side-menu-item" onclick="navigateToPage('goldapp-kyc.html')">
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-kyc.html')"
+            >
               <i class="fas fa-file-alt"></i>
               <span>KYC Verification</span>
             </button>
-            <button class="side-menu-item" onclick="navigateToPage('goldapp-sip.html')">
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-sip.html')"
+            >
               <i class="fas fa-calendar-alt"></i>
               <span>SIP Plans</span>
             </button>
-            <button class="side-menu-item" onclick="navigateToPage('goldapp-more.html')">
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-more.html')"
+            >
               <i class="fas fa-cog"></i>
               <span>Settings</span>
             </button>
@@ -1157,11 +1181,17 @@
 
           <div class="side-menu-section">
             <div class="side-menu-section-title">Support</div>
-            <button class="side-menu-item" onclick="showComingSoon('Help Center')">
+            <button
+              class="side-menu-item"
+              onclick="showComingSoon('Help Center')"
+            >
               <i class="fas fa-question-circle"></i>
               <span>Help Center</span>
             </button>
-            <button class="side-menu-item" onclick="alert('Contact Support: +91 98765 43210')">
+            <button
+              class="side-menu-item"
+              onclick="alert('Contact Support: +91 98765 43210')"
+            >
               <i class="fas fa-phone"></i>
               <span>Contact Support</span>
             </button>
@@ -1366,58 +1396,322 @@
         <section class="page-section">
           <div class="schemes-overview">
             <div class="overview-header">
-              <h2 class="overview-title" style="color: #7A0F0F; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Overview</h2>
+              <h2
+                class="overview-title"
+                style="
+                  color: #7a0f0f;
+                  font-size: 1.5rem;
+                  font-weight: 700;
+                  margin-bottom: 1.5rem;
+                "
+              >
+                Overview
+              </h2>
             </div>
 
-            <div class="overview-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: var(--surface); border-radius: 8px; padding: 0.25rem;">
-              <button class="tab-btn active" onclick="switchOverviewTab('schemes')" style="flex: 1; padding: 0.5rem 1rem; background: #7A0F0F; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Schemes</button>
-              <button class="tab-btn" onclick="switchOverviewTab('digital-gold')" style="flex: 1; padding: 0.5rem 1rem; background: transparent; color: var(--text-secondary); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Digital Gold</button>
-              <button class="tab-btn" onclick="switchOverviewTab('digital-silver')" style="flex: 1; padding: 0.5rem 1rem; background: transparent; color: var(--text-secondary); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Digital Silver</button>
+            <div
+              class="overview-tabs"
+              style="
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                background: var(--surface);
+                border-radius: 8px;
+                padding: 0.25rem;
+              "
+            >
+              <button
+                class="tab-btn active"
+                onclick="switchOverviewTab('schemes')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: #7a0f0f;
+                  color: white;
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Schemes
+              </button>
+              <button
+                class="tab-btn"
+                onclick="switchOverviewTab('digital-gold')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: transparent;
+                  color: var(--text-secondary);
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Digital Gold
+              </button>
+              <button
+                class="tab-btn"
+                onclick="switchOverviewTab('digital-silver')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: transparent;
+                  color: var(--text-secondary);
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Digital Silver
+              </button>
             </div>
 
             <div class="overview-content">
               <div class="tab-content active" id="schemes-tab">
-                <div id="no-schemes" class="no-schemes-message" style="text-align: center; padding: 2rem; background: #FFF8F0; border-radius: 12px; border: 2px dashed #E5E7EB;">
-                  <h3 style="color: #7A0F0F; margin-bottom: 0.5rem;">No Active Schemes</h3>
-                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Select a scheme to get started</p>
+                <div
+                  id="no-schemes"
+                  class="no-schemes-message"
+                  style="
+                    text-align: center;
+                    padding: 2rem;
+                    background: #fff8f0;
+                    border-radius: 12px;
+                    border: 2px dashed #e5e7eb;
+                  "
+                >
+                  <h3 style="color: #7a0f0f; margin-bottom: 0.5rem">
+                    No Active Schemes
+                  </h3>
+                  <p
+                    style="color: var(--text-secondary); margin-bottom: 1.5rem"
+                  >
+                    Select a scheme to get started
+                  </p>
                 </div>
 
-                <div id="active-scheme" class="active-scheme-card" style="display: none;">
+                <div
+                  id="active-scheme"
+                  class="active-scheme-card"
+                  style="display: none"
+                >
                   <!-- This will be populated when user registers for a scheme -->
                 </div>
 
-                <div class="scheme-selection" style="margin-top: 1.5rem;">
-                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Select a scheme</h3>
-                  <div class="scheme-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                    <div class="scheme-card" onclick="openSchemeForm('daily')" style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.2s ease;">
-                      <div class="scheme-badge" style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">GOLD</div>
-                      <h4 style="color: var(--text-primary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Daily Saving</h4>
-                      <p style="color: var(--text-secondary); margin-bottom: 1rem;">150 Days Scheme</p>
-                      <button class="join-btn" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Join Now</button>
+                <div class="scheme-selection" style="margin-top: 1.5rem">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem">
+                    Select a scheme
+                  </h3>
+                  <div
+                    class="scheme-cards"
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(
+                        auto-fit,
+                        minmax(280px, 1fr)
+                      );
+                      gap: 1rem;
+                    "
+                  >
+                    <div
+                      class="scheme-card"
+                      onclick="openSchemeForm('daily')"
+                      style="
+                        background: #fff8e7;
+                        border: 2px solid #ffd700;
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      <div
+                        class="scheme-badge"
+                        style="
+                          background: #ffd700;
+                          color: #7a0f0f;
+                          padding: 0.25rem 0.75rem;
+                          border-radius: 4px;
+                          font-size: 0.75rem;
+                          font-weight: 700;
+                          margin-bottom: 1rem;
+                          display: inline-block;
+                        "
+                      >
+                        GOLD
+                      </div>
+                      <h4
+                        style="
+                          color: var(--text-primary);
+                          font-size: 1.125rem;
+                          font-weight: 700;
+                          margin-bottom: 0.5rem;
+                        "
+                      >
+                        Daily Saving
+                      </h4>
+                      <p
+                        style="
+                          color: var(--text-secondary);
+                          margin-bottom: 1rem;
+                        "
+                      >
+                        150 Days Scheme
+                      </p>
+                      <button
+                        class="join-btn"
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          border: none;
+                          padding: 0.75rem 1.5rem;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          cursor: pointer;
+                          transition: all 0.2s ease;
+                        "
+                      >
+                        Join Now
+                      </button>
                     </div>
-                    <div class="scheme-card" onclick="openSchemeForm('monthly')" style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.2s ease;">
-                      <div class="scheme-badge" style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">GOLD</div>
-                      <h4 style="color: var(--text-primary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Monthly Saving</h4>
-                      <p style="color: var(--text-secondary); margin-bottom: 1rem;">16 months, 24 months</p>
-                      <button class="join-btn" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Join Now</button>
+                    <div
+                      class="scheme-card"
+                      onclick="openSchemeForm('monthly')"
+                      style="
+                        background: #fff8e7;
+                        border: 2px solid #ffd700;
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      <div
+                        class="scheme-badge"
+                        style="
+                          background: #ffd700;
+                          color: #7a0f0f;
+                          padding: 0.25rem 0.75rem;
+                          border-radius: 4px;
+                          font-size: 0.75rem;
+                          font-weight: 700;
+                          margin-bottom: 1rem;
+                          display: inline-block;
+                        "
+                      >
+                        GOLD
+                      </div>
+                      <h4
+                        style="
+                          color: var(--text-primary);
+                          font-size: 1.125rem;
+                          font-weight: 700;
+                          margin-bottom: 0.5rem;
+                        "
+                      >
+                        Monthly Saving
+                      </h4>
+                      <p
+                        style="
+                          color: var(--text-secondary);
+                          margin-bottom: 1rem;
+                        "
+                      >
+                        16 months, 24 months
+                      </p>
+                      <button
+                        class="join-btn"
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          border: none;
+                          padding: 0.75rem 1.5rem;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          cursor: pointer;
+                          transition: all 0.2s ease;
+                        "
+                      >
+                        Join Now
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="tab-content" id="digital-gold-tab" style="display: none;">
-                <div class="digital-asset-info" style="text-align: center; padding: 2rem;">
-                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Digital Gold Investment</h3>
-                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Start investing in digital gold with flexible amounts</p>
-                  <button class="invest-btn" onclick="window.location.href='goldapp-invest.html'" style="background: var(--gradient-gold); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Start Investing</button>
+              <div
+                class="tab-content"
+                id="digital-gold-tab"
+                style="display: none"
+              >
+                <div
+                  class="digital-asset-info"
+                  style="text-align: center; padding: 2rem"
+                >
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem">
+                    Digital Gold Investment
+                  </h3>
+                  <p
+                    style="color: var(--text-secondary); margin-bottom: 1.5rem"
+                  >
+                    Start investing in digital gold with flexible amounts
+                  </p>
+                  <button
+                    class="invest-btn"
+                    onclick="window.location.href='goldapp-invest.html'"
+                    style="
+                      background: var(--gradient-gold);
+                      color: white;
+                      border: none;
+                      padding: 1rem 2rem;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      cursor: pointer;
+                    "
+                  >
+                    Start Investing
+                  </button>
                 </div>
               </div>
 
-              <div class="tab-content" id="digital-silver-tab" style="display: none;">
-                <div class="digital-asset-info" style="text-align: center; padding: 2rem;">
-                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Digital Silver Investment</h3>
-                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Diversify your portfolio with digital silver</p>
-                  <button class="invest-btn" onclick="window.location.href='goldapp-invest.html'" style="background: #C0C0C0; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Start Investing</button>
+              <div
+                class="tab-content"
+                id="digital-silver-tab"
+                style="display: none"
+              >
+                <div
+                  class="digital-asset-info"
+                  style="text-align: center; padding: 2rem"
+                >
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem">
+                    Digital Silver Investment
+                  </h3>
+                  <p
+                    style="color: var(--text-secondary); margin-bottom: 1.5rem"
+                  >
+                    Diversify your portfolio with digital silver
+                  </p>
+                  <button
+                    class="invest-btn"
+                    onclick="window.location.href='goldapp-invest.html'"
+                    style="
+                      background: #c0c0c0;
+                      color: white;
+                      border: none;
+                      padding: 1rem 2rem;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      cursor: pointer;
+                    "
+                  >
+                    Start Investing
+                  </button>
                 </div>
               </div>
             </div>
@@ -1619,19 +1913,19 @@
 
       // Side Menu Functions
       function toggleSideMenu() {
-        const sideMenu = document.querySelector('.side-menu');
-        const overlay = document.querySelector('.side-menu-overlay');
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
 
-        sideMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
+        sideMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
       }
 
       function closeSideMenu() {
-        const sideMenu = document.querySelector('.side-menu');
-        const overlay = document.querySelector('.side-menu-overlay');
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
 
-        sideMenu.classList.remove('active');
-        overlay.classList.remove('active');
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
       }
 
       function navigateToPage(page) {
@@ -1653,28 +1947,31 @@
       // Schemes Overview Functions
       function switchOverviewTab(tabName) {
         // Remove active class from all tabs
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-          btn.classList.remove('active');
-          btn.style.background = 'transparent';
-          btn.style.color = 'var(--text-secondary)';
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.style.background = "transparent";
+          btn.style.color = "var(--text-secondary)";
         });
 
         // Hide all tab contents
-        document.querySelectorAll('.tab-content').forEach(content => {
-          content.style.display = 'none';
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.style.display = "none";
         });
 
         // Show selected tab
-        document.getElementById(tabName + '-tab').style.display = 'block';
+        document.getElementById(tabName + "-tab").style.display = "block";
 
         // Style active tab button
-        event.target.classList.add('active');
-        event.target.style.background = '#7A0F0F';
-        event.target.style.color = 'white';
+        event.target.classList.add("active");
+        event.target.style.background = "#7A0F0F";
+        event.target.style.color = "white";
       }
 
       function openSchemeForm(schemeType) {
-        const schemeName = schemeType === 'daily' ? 'Gold Daily Saving Scheme' : 'Gold Monthly Saving Scheme';
+        const schemeName =
+          schemeType === "daily"
+            ? "Gold Daily Saving Scheme"
+            : "Gold Monthly Saving Scheme";
 
         const formHTML = `
           <div class="scheme-form-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;">
@@ -1793,17 +2090,19 @@
           </style>
         `;
 
-        document.body.insertAdjacentHTML('beforeend', formHTML);
+        document.body.insertAdjacentHTML("beforeend", formHTML);
 
-        if (schemeType === 'daily') {
-          document.getElementById('scheme').value = 'Gold Daily Savings';
+        if (schemeType === "daily") {
+          document.getElementById("scheme").value = "Gold Daily Savings";
         }
 
-        document.getElementById('schemeForm').addEventListener('submit', handleSchemeRegistration);
+        document
+          .getElementById("schemeForm")
+          .addEventListener("submit", handleSchemeRegistration);
       }
 
       function closeSchemeForm() {
-        const overlay = document.querySelector('.scheme-form-overlay');
+        const overlay = document.querySelector(".scheme-form-overlay");
         if (overlay) overlay.remove();
       }
 
@@ -1811,45 +2110,53 @@
         e.preventDefault();
 
         const formData = {
-          accountId: '12345678',
-          branch: document.getElementById('branch').value,
-          scheme: document.getElementById('scheme').value,
-          installments: document.getElementById('installments').value,
-          amount: document.getElementById('amount').value,
-          benefits: document.getElementById('benefits').value,
-          nomineeName: document.getElementById('nomineeName').value,
-          nomineeIdProof: document.getElementById('nomineeIdProof').value,
-          idNumber: document.getElementById('idNumber').value,
-          dob: document.getElementById('dob').value,
-          pincode: document.getElementById('pincode').value,
-          address: document.getElementById('address').value,
-          acceptTerms: document.getElementById('acceptTerms').checked
+          accountId: "12345678",
+          branch: document.getElementById("branch").value,
+          scheme: document.getElementById("scheme").value,
+          installments: document.getElementById("installments").value,
+          amount: document.getElementById("amount").value,
+          benefits: document.getElementById("benefits").value,
+          nomineeName: document.getElementById("nomineeName").value,
+          nomineeIdProof: document.getElementById("nomineeIdProof").value,
+          idNumber: document.getElementById("idNumber").value,
+          dob: document.getElementById("dob").value,
+          pincode: document.getElementById("pincode").value,
+          address: document.getElementById("address").value,
+          acceptTerms: document.getElementById("acceptTerms").checked,
         };
 
-        if (!formData.nomineeName || !formData.idNumber || !formData.dob || !formData.pincode || !formData.address) {
-          alert('Please fill in all required fields');
+        if (
+          !formData.nomineeName ||
+          !formData.idNumber ||
+          !formData.dob ||
+          !formData.pincode ||
+          !formData.address
+        ) {
+          alert("Please fill in all required fields");
           return;
         }
 
         if (!formData.acceptTerms) {
-          alert('Please accept the terms and conditions');
+          alert("Please accept the terms and conditions");
           return;
         }
 
-        localStorage.setItem('activeScheme', JSON.stringify(formData));
+        localStorage.setItem("activeScheme", JSON.stringify(formData));
         closeSchemeForm();
         updateHomePageWithActiveScheme(formData);
-        alert('Successfully registered for the scheme!');
+        alert("Successfully registered for the scheme!");
       }
 
       function updateHomePageWithActiveScheme(schemeData) {
-        document.getElementById('no-schemes').style.display = 'none';
-        const activeSchemeCard = document.getElementById('active-scheme');
-        activeSchemeCard.style.display = 'block';
+        document.getElementById("no-schemes").style.display = "none";
+        const activeSchemeCard = document.getElementById("active-scheme");
+        activeSchemeCard.style.display = "block";
 
         const startDate = new Date().toLocaleDateString();
         const maturityDate = new Date();
-        maturityDate.setMonth(maturityDate.getMonth() + parseInt(schemeData.installments));
+        maturityDate.setMonth(
+          maturityDate.getMonth() + parseInt(schemeData.installments),
+        );
 
         activeSchemeCard.innerHTML = `
           <div style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem;">
@@ -1921,33 +2228,39 @@
           </div>
         `;
 
-        document.body.insertAdjacentHTML('beforeend', paymentHTML);
+        document.body.insertAdjacentHTML("beforeend", paymentHTML);
       }
 
       function closePayment() {
-        const overlay = document.querySelector('.payment-overlay');
+        const overlay = document.querySelector(".payment-overlay");
         if (overlay) overlay.remove();
       }
 
       function processPayment(amount) {
         closePayment();
         setTimeout(() => {
-          alert('Payment successful! ₹' + amount + ' has been paid.');
+          alert("Payment successful! ₹" + amount + " has been paid.");
           updateSchemeAfterPayment(amount);
         }, 1000);
       }
 
       function updateSchemeAfterPayment(amount) {
-        const activeScheme = JSON.parse(localStorage.getItem('activeScheme') || '{}');
-        const paidInstallments = (JSON.parse(localStorage.getItem('paidInstallments')) || 0) + 1;
-        const totalPaid = (JSON.parse(localStorage.getItem('totalPaid')) || 0) + parseInt(amount);
+        const activeScheme = JSON.parse(
+          localStorage.getItem("activeScheme") || "{}",
+        );
+        const paidInstallments =
+          (JSON.parse(localStorage.getItem("paidInstallments")) || 0) + 1;
+        const totalPaid =
+          (JSON.parse(localStorage.getItem("totalPaid")) || 0) +
+          parseInt(amount);
 
-        localStorage.setItem('paidInstallments', paidInstallments);
-        localStorage.setItem('totalPaid', totalPaid);
+        localStorage.setItem("paidInstallments", paidInstallments);
+        localStorage.setItem("totalPaid", totalPaid);
 
         if (activeScheme.installments) {
-          const activeSchemeCard = document.getElementById('active-scheme');
-          const remainingInstallments = parseInt(activeScheme.installments) - paidInstallments;
+          const activeSchemeCard = document.getElementById("active-scheme");
+          const remainingInstallments =
+            parseInt(activeScheme.installments) - paidInstallments;
           const nextInstallmentNo = paidInstallments + 1;
 
           activeSchemeCard.innerHTML = `
@@ -1977,16 +2290,20 @@
                 </div>
 
                 <div style="text-align: right;">
-                  ${remainingInstallments > 0 ? `
+                  ${
+                    remainingInstallments > 0
+                      ? `
                     <div style="margin-bottom: 0.5rem;">Installment No: ${nextInstallmentNo}</div>
                     <div style="margin-bottom: 0.5rem; color: #dc2626;">Status: <strong>Over Due</strong></div>
                     <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Rs ${activeScheme.amount}.00</div>
                     <button onclick="makePayment(${activeScheme.amount})" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Pay Now</button>
-                  ` : `
+                  `
+                      : `
                     <div style="margin-bottom: 0.5rem; color: #10b981;">Status: <strong>Completed</strong></div>
                     <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #10b981;">Scheme Completed!</div>
                     <button disabled style="background: #e5e7eb; color: #9ca3af; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600;">All Paid</button>
-                  `}
+                  `
+                  }
                 </div>
               </div>
             </div>
@@ -1995,17 +2312,21 @@
       }
 
       function viewNominee() {
-        const activeScheme = JSON.parse(localStorage.getItem('activeScheme') || '{}');
-        alert(`Nominee Details:\nName: ${activeScheme.nomineeName}\nID: ${activeScheme.idNumber}\nDOB: ${activeScheme.dob}`);
+        const activeScheme = JSON.parse(
+          localStorage.getItem("activeScheme") || "{}",
+        );
+        alert(
+          `Nominee Details:\nName: ${activeScheme.nomineeName}\nID: ${activeScheme.idNumber}\nDOB: ${activeScheme.dob}`,
+        );
       }
 
       function viewStatement() {
-        alert('Statement will be downloaded/viewed here');
+        alert("Statement will be downloaded/viewed here");
       }
 
       // Check if there's an active scheme on page load
       function checkActiveScheme() {
-        const activeScheme = localStorage.getItem('activeScheme');
+        const activeScheme = localStorage.getItem("activeScheme");
         if (activeScheme) {
           const schemeData = JSON.parse(activeScheme);
           updateHomePageWithActiveScheme(schemeData);

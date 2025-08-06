@@ -277,7 +277,7 @@
 
       /* Bottom Navigation */
       .bottom-nav {
-        background: #7A0F0F;
+        background: #7a0f0f;
         backdrop-filter: blur(20px);
         border-top: 1px solid var(--border);
         padding: 0.75rem 1rem;
@@ -321,14 +321,14 @@
       }
 
       .nav-item.active {
-        color: #FFBC00;
+        color: #ffbc00;
         background: rgba(255, 188, 0, 0.1);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(255, 188, 0, 0.2);
       }
 
       .nav-item:hover {
-        color: #FFBC00;
+        color: #ffbc00;
         transform: translateY(-1px);
       }
 
@@ -1057,38 +1057,62 @@
       </div>
 
       <div class="side-menu-nav">
-        <button class="side-menu-item" onclick="navigateToPage('goldapp-enhanced.html')">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-enhanced.html')"
+        >
           <i class="fas fa-home"></i>
           <span>Home</span>
         </button>
-        <button class="side-menu-item" onclick="navigateToPage('goldapp-invest.html')">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-invest.html')"
+        >
           <i class="fas fa-chart-line"></i>
           <span>Digital Asset</span>
         </button>
-        <button class="side-menu-item" onclick="navigateToPage('goldapp-portfolio.html')">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-portfolio.html')"
+        >
           <i class="fas fa-chart-pie"></i>
           <span>Portfolio</span>
         </button>
-        <button class="side-menu-item" onclick="navigateToPage('goldapp-chits.html')">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-chits.html')"
+        >
           <i class="fas fa-users"></i>
           <span>Chits</span>
         </button>
-        <button class="side-menu-item" onclick="navigateToPage('goldapp-transactions.html')">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-transactions.html')"
+        >
           <i class="fas fa-exchange-alt"></i>
           <span>Transactions</span>
         </button>
 
         <div class="side-menu-section">
           <div class="side-menu-section-title">Account</div>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-kyc.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-kyc.html')"
+          >
             <i class="fas fa-file-alt"></i>
             <span>KYC Verification</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-sip.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-sip.html')"
+          >
             <i class="fas fa-calendar-alt"></i>
             <span>SIP Plans</span>
           </button>
-          <button class="side-menu-item" onclick="navigateToPage('goldapp-more.html')">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-more.html')"
+          >
             <i class="fas fa-cog"></i>
             <span>Settings</span>
           </button>
@@ -1096,11 +1120,17 @@
 
         <div class="side-menu-section">
           <div class="side-menu-section-title">Support</div>
-          <button class="side-menu-item" onclick="showComingSoon('Help Center')">
+          <button
+            class="side-menu-item"
+            onclick="showComingSoon('Help Center')"
+          >
             <i class="fas fa-question-circle"></i>
             <span>Help Center</span>
           </button>
-          <button class="side-menu-item" onclick="alert('Contact Support: +91 98765 43210')">
+          <button
+            class="side-menu-item"
+            onclick="alert('Contact Support: +91 98765 43210')"
+          >
             <i class="fas fa-phone"></i>
             <span>Contact Support</span>
           </button>
@@ -2036,19 +2066,19 @@
 
       // Side Menu Functions
       function toggleSideMenu() {
-        const sideMenu = document.querySelector('.side-menu');
-        const overlay = document.querySelector('.side-menu-overlay');
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
 
-        sideMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
+        sideMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
       }
 
       function closeSideMenu() {
-        const sideMenu = document.querySelector('.side-menu');
-        const overlay = document.querySelector('.side-menu-overlay');
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
 
-        sideMenu.classList.remove('active');
-        overlay.classList.remove('active');
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
       }
 
       function navigateToPage(page) {
