@@ -2874,8 +2874,31 @@ You can manage your SIP from the Portfolio section.`);
 
       // Initialize navigation on page load
       document.addEventListener("DOMContentLoaded", function () {
+        console.log("Digital Asset page initialized");
         const currentTab = getCurrentTab();
         updateNavActiveState(currentTab);
+
+        // Add event listeners to prevent stuck states
+        setTimeout(() => {
+          const navItems = document.querySelectorAll('.nav-item');
+
+          navItems.forEach(item => {
+            // Clear hover states when mouse leaves the item
+            item.addEventListener('mouseleave', function() {
+              if (!this.classList.contains('active')) {
+                this.style.removeProperty('background');
+                this.style.removeProperty('color');
+              }
+            });
+
+            // Clear focus states when clicked
+            item.addEventListener('click', function() {
+              setTimeout(() => {
+                this.blur();
+              }, 50);
+            });
+          });
+        }, 100);
       });
     </script>
 
