@@ -2800,17 +2800,12 @@
       let currentTab = "home";
       let isLoading = false;
 
-      // Enhanced Tab Navigation with loading and error handling
+      // Simplified and reliable Tab Navigation
       function showTab(tabName) {
         console.log(`Navigating to tab: ${tabName}`);
 
-        if (isLoading) {
-          console.log('Navigation blocked - loading in progress');
-          return;
-        }
-
-        // Update active state immediately for responsive feedback
-        updateNavActiveState(tabName);
+        // Prevent double clicks
+        if (isLoading) return;
 
         const pageMap = {
           home: "goldapp-enhanced.html",
@@ -2821,36 +2816,31 @@
         };
 
         // Check if tab exists
-        if (!pageMap[tabName]) {
+        const targetPage = pageMap[tabName];
+        if (!targetPage) {
           console.error(`Tab "${tabName}" not found`);
           return;
         }
 
+        // Clear any stuck hover states
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.blur();
+          item.style.background = '';
+          item.style.color = '';
+        });
+
+        // Update active state immediately
+        updateNavActiveState(tabName);
+
         // Check if we're already on the target page
-        const currentPage =
-          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
-        const targetPage = pageMap[tabName];
+        const currentPage = window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
 
-        console.log(`Current page: ${currentPage}, Target page: ${targetPage}`);
+        if (targetPage !== currentPage) {
+          // Set loading state
+          isLoading = true;
 
-        if (targetPage && currentPage !== targetPage) {
-          // Show loading state
-          showLoading();
-
-          // Add slight delay for better UX
-          setTimeout(() => {
-            try {
-              console.log(`Redirecting to: ${targetPage}`);
-              window.location.href = targetPage;
-            } catch (error) {
-              console.error('Navigation error:', error);
-              hideLoading();
-              // Revert to previous active state if navigation fails
-              updateNavActiveState(getCurrentTab());
-            }
-          }, 100);
-        } else {
-          console.log('Already on target page or invalid target');
+          // Navigate immediately - no delays
+          window.location.href = targetPage;
         }
       }
 
