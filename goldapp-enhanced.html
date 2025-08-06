@@ -2457,8 +2457,56 @@
         </section>
       </main>
 
+      <!-- Quick Actions Modal -->
+      <div class="modal-overlay" id="quickActionsModal" onclick="closeQuickActionsModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <button class="close-btn" onclick="closeQuickActionsModal()">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <div class="modal-header">
+            <div class="modal-title">Quick Actions</div>
+            <div class="modal-subtitle">Choose an action to get started</div>
+          </div>
+
+          <div class="popup-actions-grid">
+            <div class="popup-action-card buy" onclick="navigateToPage('goldapp-invest.html'); closeQuickActionsModal();">
+              <div class="popup-action-icon">
+                <i class="fas fa-plus"></i>
+              </div>
+              <div class="popup-action-title">Buy Now</div>
+              <div class="popup-action-subtitle">Instant gold purchase</div>
+            </div>
+
+            <div class="popup-action-card sip" onclick="showSIPSetup(); closeQuickActionsModal();">
+              <div class="popup-action-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="popup-action-title">Start SIP</div>
+              <div class="popup-action-subtitle">Systematic investment</div>
+            </div>
+
+            <div class="popup-action-card save" onclick="toggleAutoSave(); closeQuickActionsModal();">
+              <div class="popup-action-icon">
+                <i class="fas fa-piggy-bank"></i>
+              </div>
+              <div class="popup-action-title">Auto Save</div>
+              <div class="popup-action-subtitle">Save spare change</div>
+            </div>
+
+            <div class="popup-action-card chit" onclick="navigateToPage('goldapp-chits.html'); closeQuickActionsModal();">
+              <div class="popup-action-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="popup-action-title">Join Scheme</div>
+              <div class="popup-action-subtitle">Group savings plan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Floating Action Button -->
-      <button class="fab" onclick="showQuickMenu()">
+      <button class="fab" onclick="openQuickActionsModal()">
         <i class="fas fa-plus"></i>
       </button>
 
