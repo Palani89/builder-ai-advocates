@@ -101,7 +101,12 @@
       .logo-text {
         font-size: 1.5rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #8B0000 100%);
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -1537,26 +1542,37 @@
       <main class="main-content">
         <!-- User Greeting Section -->
         <section class="page-section">
-          <div class="user-greeting-section" style="
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            margin-bottom: 1rem;
-          ">
-            <h2 style="
-              color: #7a0f0f;
-              font-size: 1.75rem;
-              font-weight: 700;
-              margin: 0 0 0.5rem 0;
-            ">Hello, Sri</h2>
-            <p style="
-              color: var(--text-secondary);
-              font-size: 1rem;
-              margin: 0;
-              font-weight: 500;
-            ">Acc No: 12345678</p>
+          <div
+            class="user-greeting-section"
+            style="
+              background: var(--surface);
+              border-radius: 16px;
+              padding: 1.5rem;
+              box-shadow: var(--shadow);
+              border: 1px solid var(--border);
+              margin-bottom: 1rem;
+            "
+          >
+            <h2
+              style="
+                color: #7a0f0f;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin: 0 0 0.5rem 0;
+              "
+            >
+              Hello, Sri
+            </h2>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 1rem;
+                margin: 0;
+                font-weight: 500;
+              "
+            >
+              Acc No: 12345678
+            </p>
           </div>
         </section>
 
@@ -1655,7 +1671,6 @@
             </div>
           </div>
         </section>
-
 
         <!-- Schemes Overview -->
         <section class="page-section">
@@ -2493,7 +2508,11 @@
       </main>
 
       <!-- Quick Actions Modal -->
-      <div class="modal-overlay" id="quickActionsModal" onclick="closeQuickActionsModal(event)">
+      <div
+        class="modal-overlay"
+        id="quickActionsModal"
+        onclick="closeQuickActionsModal(event)"
+      >
         <div class="modal-content" onclick="event.stopPropagation()">
           <button class="close-btn" onclick="closeQuickActionsModal()">
             <i class="fas fa-times"></i>
@@ -2505,7 +2524,10 @@
           </div>
 
           <div class="popup-actions-grid">
-            <div class="popup-action-card buy" onclick="navigateToPage('goldapp-invest.html'); closeQuickActionsModal();">
+            <div
+              class="popup-action-card buy"
+              onclick="navigateToPage('goldapp-invest.html'); closeQuickActionsModal();"
+            >
               <div class="popup-action-icon">
                 <i class="fas fa-plus"></i>
               </div>
@@ -2513,7 +2535,10 @@
               <div class="popup-action-subtitle">Instant gold purchase</div>
             </div>
 
-            <div class="popup-action-card sip" onclick="showSIPSetup(); closeQuickActionsModal();">
+            <div
+              class="popup-action-card sip"
+              onclick="showSIPSetup(); closeQuickActionsModal();"
+            >
               <div class="popup-action-icon">
                 <i class="fas fa-calendar-alt"></i>
               </div>
@@ -2521,7 +2546,10 @@
               <div class="popup-action-subtitle">Systematic investment</div>
             </div>
 
-            <div class="popup-action-card save" onclick="toggleAutoSave(); closeQuickActionsModal();">
+            <div
+              class="popup-action-card save"
+              onclick="toggleAutoSave(); closeQuickActionsModal();"
+            >
               <div class="popup-action-icon">
                 <i class="fas fa-piggy-bank"></i>
               </div>
@@ -2529,7 +2557,10 @@
               <div class="popup-action-subtitle">Save spare change</div>
             </div>
 
-            <div class="popup-action-card chit" onclick="navigateToPage('goldapp-chits.html'); closeQuickActionsModal();">
+            <div
+              class="popup-action-card chit"
+              onclick="navigateToPage('goldapp-chits.html'); closeQuickActionsModal();"
+            >
               <div class="popup-action-icon">
                 <i class="fas fa-users"></i>
               </div>
@@ -2683,16 +2714,16 @@
 
       // Quick Actions Modal Functions
       function openQuickActionsModal() {
-        const modal = document.getElementById('quickActionsModal');
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        const modal = document.getElementById("quickActionsModal");
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
       function closeQuickActionsModal(event) {
         if (event && event.target !== event.currentTarget) return;
-        const modal = document.getElementById('quickActionsModal');
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        const modal = document.getElementById("quickActionsModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
       }
 
       function showQuickMenu() {

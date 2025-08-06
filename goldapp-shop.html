@@ -96,7 +96,12 @@
       .logo-text {
         font-size: 1.5rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #8B0000 100%);
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -188,7 +193,7 @@
       .page-title {
         font-size: 2rem;
         font-weight: 800;
-        color: #7A0F0F;
+        color: #7a0f0f;
         margin-bottom: 0.5rem;
       }
 
@@ -299,7 +304,7 @@
         border-radius: 16px;
         overflow: hidden;
         height: 200px;
-        background: linear-gradient(135deg, #7A0F0F 0%, #B91C1C 100%);
+        background: linear-gradient(135deg, #7a0f0f 0%, #b91c1c 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -321,7 +326,7 @@
 
       .banner-btn {
         background: white;
-        color: #7A0F0F;
+        color: #7a0f0f;
         padding: 0.75rem 2rem;
         border: none;
         border-radius: 25px;
@@ -501,7 +506,7 @@
       }
 
       .buy-now-btn {
-        background: #7A0F0F;
+        background: #7a0f0f;
         color: white;
         border: none;
         border-radius: 8px;
@@ -512,7 +517,7 @@
       }
 
       .buy-now-btn:hover {
-        background: #991B1B;
+        background: #991b1b;
       }
 
       /* Cart Sidebar */
@@ -682,7 +687,7 @@
 
       /* Bottom Navigation */
       .bottom-nav {
-        background: #7A0F0F;
+        background: #7a0f0f;
         backdrop-filter: blur(20px);
         border-top: 1px solid var(--border);
         padding: 0.75rem 1rem;
@@ -726,14 +731,14 @@
       }
 
       .nav-item.active {
-        color: #FFBC00;
+        color: #ffbc00;
         background: rgba(255, 188, 0, 0.1);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(255, 188, 0, 0.2);
       }
 
       .nav-item:hover {
-        color: #FFBC00;
+        color: #ffbc00;
         transform: translateY(-1px);
       }
 
@@ -806,7 +811,7 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
+
       <div class="cart-items" id="cartItems">
         <div class="cart-item">
           <div class="cart-item-image">💎</div>
@@ -814,9 +819,16 @@
             <div class="cart-item-name">Dewdrop Leaf Diamond Ring</div>
             <div class="cart-item-price">₹42,010</div>
             <div class="quantity-controls">
-              <button class="quantity-btn" onclick="updateQuantity('item1', -1)">-</button>
+              <button
+                class="quantity-btn"
+                onclick="updateQuantity('item1', -1)"
+              >
+                -
+              </button>
               <span class="quantity" id="qty-item1">1</span>
-              <button class="quantity-btn" onclick="updateQuantity('item1', 1)">+</button>
+              <button class="quantity-btn" onclick="updateQuantity('item1', 1)">
+                +
+              </button>
             </div>
           </div>
         </div>
@@ -847,7 +859,7 @@
           <button class="wishlist-btn" onclick="openWishlist()">
             <i class="fas fa-heart"></i>
           </button>
-          
+
           <button class="cart-btn" onclick="openCart()">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-badge" id="cartBadge">1</span>
@@ -860,12 +872,12 @@
       <!-- Search Section -->
       <div class="search-section">
         <h1 class="page-title">Gold Shop</h1>
-        
+
         <div class="search-bar">
           <i class="fas fa-search search-icon"></i>
-          <input 
-            type="text" 
-            class="search-input" 
+          <input
+            type="text"
+            class="search-input"
             placeholder="Search for Gold Jewellery, Diamond Jewelry..."
             id="searchInput"
             onkeyup="filterProducts()"
@@ -900,7 +912,9 @@
         <div class="banner-content">
           <h2>For marriages crafted by you</h2>
           <p>TANISHQ RIVAAH Wedding Jewellery</p>
-          <button class="banner-btn" onclick="exploreCollection()">EXPLORE NOW</button>
+          <button class="banner-btn" onclick="exploreCollection()">
+            EXPLORE NOW
+          </button>
         </div>
       </div>
 
@@ -913,14 +927,21 @@
           </a>
         </div>
 
-        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem">
           Express your love this Rakhi with stunning Tanishq jewellery
         </p>
 
         <div class="products-grid" id="productsGrid">
-          <div class="product-card" data-category="rings" onclick="viewProduct('ring1')">
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring1')"
+          >
             <div class="product-image">💎</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('ring1', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring1', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -940,16 +961,26 @@
                 <span class="rating-text">(4.8) 124 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('ring1')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring1')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="product-card" data-category="earrings" onclick="viewProduct('earring1')">
+          <div
+            class="product-card"
+            data-category="earrings"
+            onclick="viewProduct('earring1')"
+          >
             <div class="product-image">✨</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('earring1', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('earring1', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -969,16 +1000,26 @@
                 <span class="rating-text">(4.6) 89 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('earring1')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('earring1')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="product-card" data-category="rings" onclick="viewProduct('ring2')">
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring2')"
+          >
             <div class="product-image">💍</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('ring2', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring2', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -998,16 +1039,26 @@
                 <span class="rating-text">(4.9) 156 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('ring2')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring2')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="product-card" data-category="earrings" onclick="viewProduct('earring2')">
+          <div
+            class="product-card"
+            data-category="earrings"
+            onclick="viewProduct('earring2')"
+          >
             <div class="product-image">🌸</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('earring2', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('earring2', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -1027,16 +1078,26 @@
                 <span class="rating-text">(4.7) 98 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('earring2')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('earring2')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="product-card" data-category="necklaces" onclick="viewProduct('necklace1')">
+          <div
+            class="product-card"
+            data-category="necklaces"
+            onclick="viewProduct('necklace1')"
+          >
             <div class="product-image">📿</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('necklace1', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('necklace1', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -1056,16 +1117,26 @@
                 <span class="rating-text">(4.9) 234 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('necklace1')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('necklace1')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
 
-          <div class="product-card" data-category="rings" onclick="viewProduct('ring3')">
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring3')"
+          >
             <div class="product-image">💎</div>
-            <button class="product-wishlist" onclick="event.stopPropagation(); toggleWishlist('ring3', this)">
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring3', this)"
+            >
               <i class="far fa-heart"></i>
             </button>
             <div class="product-info">
@@ -1085,7 +1156,10 @@
                 <span class="rating-text">(4.8) 178 reviews</span>
               </div>
               <div class="product-actions">
-                <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('ring3')">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring3')"
+                >
                   <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
               </div>
@@ -1114,7 +1188,11 @@
           <span class="nav-badge">2</span>
         </button>
 
-        <button class="nav-item" onclick="showTab('portfolio')" id="nav-portfolio">
+        <button
+          class="nav-item"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
           <i class="fas fa-chart-pie"></i>
           <span>Portfolio</span>
         </button>
@@ -1129,33 +1207,69 @@
     <script>
       let cart = [];
       let wishlist = [];
-      let currentCategory = 'all';
+      let currentCategory = "all";
 
       const products = {
-        ring1: { name: "Dewdrop Leaf Diamond Ring", price: 42010, originalPrice: 45000, image: "💎", category: "rings" },
-        earring1: { name: "Glamorous Floral Diamond Earrings", price: 38187, originalPrice: 42000, image: "✨", category: "earrings" },
-        ring2: { name: "Abstract Embrace Diamond Ring", price: 65262, originalPrice: 70000, image: "💍", category: "rings" },
-        earring2: { name: "Blooming Floral Diamond Earrings", price: 58187, originalPrice: 62000, image: "🌸", category: "earrings" },
-        necklace1: { name: "Royal Heritage Gold Necklace", price: 125000, originalPrice: 135000, image: "📿", category: "necklaces" },
-        ring3: { name: "Elegant Solitaire Diamond Ring", price: 78500, originalPrice: 85000, image: "💎", category: "rings" }
+        ring1: {
+          name: "Dewdrop Leaf Diamond Ring",
+          price: 42010,
+          originalPrice: 45000,
+          image: "💎",
+          category: "rings",
+        },
+        earring1: {
+          name: "Glamorous Floral Diamond Earrings",
+          price: 38187,
+          originalPrice: 42000,
+          image: "✨",
+          category: "earrings",
+        },
+        ring2: {
+          name: "Abstract Embrace Diamond Ring",
+          price: 65262,
+          originalPrice: 70000,
+          image: "💍",
+          category: "rings",
+        },
+        earring2: {
+          name: "Blooming Floral Diamond Earrings",
+          price: 58187,
+          originalPrice: 62000,
+          image: "🌸",
+          category: "earrings",
+        },
+        necklace1: {
+          name: "Royal Heritage Gold Necklace",
+          price: 125000,
+          originalPrice: 135000,
+          image: "📿",
+          category: "necklaces",
+        },
+        ring3: {
+          name: "Elegant Solitaire Diamond Ring",
+          price: 78500,
+          originalPrice: 85000,
+          image: "💎",
+          category: "rings",
+        },
       };
 
       // Cart Functions
       function openCart() {
-        document.querySelector('.cart-sidebar').classList.add('active');
-        document.querySelector('.cart-overlay').classList.add('active');
+        document.querySelector(".cart-sidebar").classList.add("active");
+        document.querySelector(".cart-overlay").classList.add("active");
         updateCartDisplay();
       }
 
       function closeCart() {
-        document.querySelector('.cart-sidebar').classList.remove('active');
-        document.querySelector('.cart-overlay').classList.remove('active');
+        document.querySelector(".cart-sidebar").classList.remove("active");
+        document.querySelector(".cart-overlay").classList.remove("active");
       }
 
       function addToCart(productId) {
         const product = products[productId];
-        const existingItem = cart.find(item => item.id === productId);
-        
+        const existingItem = cart.find((item) => item.id === productId);
+
         if (existingItem) {
           existingItem.quantity += 1;
         } else {
@@ -1164,23 +1278,23 @@
             name: product.name,
             price: product.price,
             image: product.image,
-            quantity: 1
+            quantity: 1,
           });
         }
-        
+
         updateCartBadge();
         updateCartDisplay();
-        
+
         // Show success message
         alert(`${product.name} added to cart!`);
       }
 
       function updateQuantity(itemId, change) {
-        const item = cart.find(item => item.id === itemId);
+        const item = cart.find((item) => item.id === itemId);
         if (item) {
           item.quantity += change;
           if (item.quantity <= 0) {
-            cart = cart.filter(item => item.id !== itemId);
+            cart = cart.filter((item) => item.id !== itemId);
           }
         }
         updateCartBadge();
@@ -1189,21 +1303,25 @@
 
       function updateCartBadge() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById('cartBadge').textContent = totalItems;
-        document.getElementById('cartBadge').style.display = totalItems > 0 ? 'flex' : 'none';
+        document.getElementById("cartBadge").textContent = totalItems;
+        document.getElementById("cartBadge").style.display =
+          totalItems > 0 ? "flex" : "none";
       }
 
       function updateCartDisplay() {
-        const cartItems = document.getElementById('cartItems');
-        const cartTotal = document.getElementById('cartTotal');
-        
+        const cartItems = document.getElementById("cartItems");
+        const cartTotal = document.getElementById("cartTotal");
+
         if (cart.length === 0) {
-          cartItems.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">Your cart is empty</div>';
-          cartTotal.textContent = '₹0';
+          cartItems.innerHTML =
+            '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">Your cart is empty</div>';
+          cartTotal.textContent = "₹0";
           return;
         }
 
-        cartItems.innerHTML = cart.map(item => `
+        cartItems.innerHTML = cart
+          .map(
+            (item) => `
           <div class="cart-item">
             <div class="cart-item-image">${item.image}</div>
             <div class="cart-item-info">
@@ -1216,25 +1334,37 @@
               </div>
             </div>
           </div>
-        `).join('');
+        `,
+          )
+          .join("");
 
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
         cartTotal.textContent = `₹${total.toLocaleString()}`;
       }
 
       function proceedToCheckout() {
         if (cart.length === 0) {
-          alert('Your cart is empty!');
+          alert("Your cart is empty!");
           return;
         }
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        alert(`Proceeding to checkout with total amount: ₹${total.toLocaleString()}\n\nThis will redirect to payment gateway...`);
-        
+
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+        alert(
+          `Proceeding to checkout with total amount: ₹${total.toLocaleString()}\n\nThis will redirect to payment gateway...`,
+        );
+
         // In a real application, this would redirect to the payment page
         // For demo purposes, we'll simulate order placement
         setTimeout(() => {
-          alert(`Order placed successfully! Order ID: #GOL${Date.now()}\n\nYou will receive order confirmation via email.`);
+          alert(
+            `Order placed successfully! Order ID: #GOL${Date.now()}\n\nYou will receive order confirmation via email.`,
+          );
           cart = [];
           updateCartBadge();
           updateCartDisplay();
@@ -1244,16 +1374,16 @@
 
       // Wishlist Functions
       function toggleWishlist(productId, button) {
-        const icon = button.querySelector('i');
-        
+        const icon = button.querySelector("i");
+
         if (wishlist.includes(productId)) {
-          wishlist = wishlist.filter(id => id !== productId);
-          icon.className = 'far fa-heart';
-          button.classList.remove('active');
+          wishlist = wishlist.filter((id) => id !== productId);
+          icon.className = "far fa-heart";
+          button.classList.remove("active");
         } else {
           wishlist.push(productId);
-          icon.className = 'fas fa-heart';
-          button.classList.add('active');
+          icon.className = "fas fa-heart";
+          button.classList.add("active");
         }
       }
 
@@ -1264,54 +1394,62 @@
       // Product Functions
       function viewProduct(productId) {
         const product = products[productId];
-        alert(`Viewing: ${product.name}\nPrice: ₹${product.price.toLocaleString()}\n\nThis would open the product detail page.`);
+        alert(
+          `Viewing: ${product.name}\nPrice: ₹${product.price.toLocaleString()}\n\nThis would open the product detail page.`,
+        );
       }
 
       // Filter Functions
       function filterByCategory(category) {
         currentCategory = category;
-        
+
         // Update active category button
-        document.querySelectorAll('.category-item').forEach(item => {
-          item.classList.remove('active');
+        document.querySelectorAll(".category-item").forEach((item) => {
+          item.classList.remove("active");
         });
-        event.target.closest('.category-item').classList.add('active');
+        event.target.closest(".category-item").classList.add("active");
 
         // Filter products
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'block';
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "block";
           } else {
-            card.style.display = 'none';
+            card.style.display = "none";
           }
         });
       }
 
       function filterProducts() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const productCards = document.querySelectorAll('.product-card');
-        
-        productCards.forEach(card => {
-          const productName = card.querySelector('.product-name').textContent.toLowerCase();
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card) => {
+          const productName = card
+            .querySelector(".product-name")
+            .textContent.toLowerCase();
           const matchesSearch = productName.includes(searchTerm);
-          const matchesCategory = currentCategory === 'all' || card.dataset.category === currentCategory;
-          
+          const matchesCategory =
+            currentCategory === "all" ||
+            card.dataset.category === currentCategory;
+
           if (matchesSearch && matchesCategory) {
-            card.style.display = 'block';
+            card.style.display = "block";
           } else {
-            card.style.display = 'none';
+            card.style.display = "none";
           }
         });
       }
 
       // Other Functions
       function startVoiceSearch() {
-        alert('Voice search feature coming soon!');
+        alert("Voice search feature coming soon!");
       }
 
       function exploreCollection() {
-        alert('Exploring Wedding Collection...');
+        alert("Exploring Wedding Collection...");
       }
 
       // Navigation
@@ -1321,10 +1459,11 @@
           invest: "goldapp-invest.html",
           chits: "goldapp-chits.html",
           portfolio: "goldapp-portfolio.html",
-          shop: "goldapp-shop.html"
+          shop: "goldapp-shop.html",
         };
 
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-shop.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-shop.html";
         const targetPage = pageMap[tabName];
 
         if (targetPage && currentPage !== targetPage) {
@@ -1334,14 +1473,14 @@
 
       // Initialize cart badge
       updateCartBadge();
-      
+
       // Add initial cart item for demo
       cart.push({
-        id: 'ring1',
-        name: 'Dewdrop Leaf Diamond Ring',
+        id: "ring1",
+        name: "Dewdrop Leaf Diamond Ring",
         price: 42010,
-        image: '💎',
-        quantity: 1
+        image: "💎",
+        quantity: 1,
       });
       updateCartBadge();
     </script>
