@@ -2808,9 +2808,13 @@ You can manage your SIP from the Portfolio section.`);
 
       // Update navigation active state
       function updateNavActiveState(activeTab) {
-        // Remove active class from all nav items
+        // Clear all states from nav items
         document.querySelectorAll('.nav-item').forEach(item => {
           item.classList.remove('active');
+          item.style.removeProperty('background');
+          item.style.removeProperty('color');
+          item.style.removeProperty('transform');
+          item.blur();
         });
 
         // Add active class to current tab
