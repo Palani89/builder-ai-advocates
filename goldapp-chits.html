@@ -1720,7 +1720,8 @@
         };
 
         // Check if we're already on the target page
-        const currentPage = window.location.pathname.split('/').pop() || 'goldapp-chits.html';
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-chits.html";
         const targetPage = pageMap[tabName];
 
         if (targetPage && currentPage !== targetPage) {

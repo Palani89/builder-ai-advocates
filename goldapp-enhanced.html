@@ -1302,13 +1302,13 @@
           </button>
 
           <button
-          class="nav-item"
-          onclick="showTab('portfolio')"
-          id="nav-portfolio"
-        >
-          <i class="fas fa-chart-pie"></i>
-          <span>Portfolio</span>
-        </button>
+            class="nav-item"
+            onclick="showTab('portfolio')"
+            id="nav-portfolio"
+          >
+            <i class="fas fa-chart-pie"></i>
+            <span>Portfolio</span>
+          </button>
 
           <button class="nav-item" onclick="showTab('more')" id="nav-more">
             <i class="fas fa-th"></i>
@@ -1335,7 +1335,8 @@
         };
 
         // Check if we're already on the target page
-        const currentPage = window.location.pathname.split('/').pop() || 'goldapp-enhanced.html';
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
         const targetPage = pageMap[tabName];
 
         if (targetPage && currentPage !== targetPage) {

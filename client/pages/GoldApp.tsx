@@ -18,8 +18,9 @@ const GoldApp: React.FC = () => {
     };
 
     // Check if we're already on the target page
-    const currentPage = window.location.pathname.split('/').pop() || 'goldapp-index.html';
-    const targetPage = pageMap[tabName]?.replace('/', '') || '';
+    const currentPage =
+      window.location.pathname.split("/").pop() || "goldapp-index.html";
+    const targetPage = pageMap[tabName]?.replace("/", "") || "";
 
     if (targetPage && currentPage !== targetPage) {
       window.location.href = pageMap[tabName];
