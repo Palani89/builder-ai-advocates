@@ -1071,6 +1071,38 @@
       ::-webkit-scrollbar-thumb:hover {
         background: var(--text-muted);
       }
+
+      /* Schemes Overview Styles */
+      .scheme-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(122, 15, 15, 0.2);
+      }
+
+      .tab-btn:not(.active):hover {
+        background: rgba(122, 15, 15, 0.1);
+        color: #7A0F0F;
+      }
+
+      .join-btn:hover {
+        background: #5A0A0A;
+        transform: translateY(-2px);
+      }
+
+      .invest-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Responsive scheme cards */
+      @media (max-width: 768px) {
+        .scheme-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .overview-tabs {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
