@@ -6,17 +6,17 @@ const GoldApp: React.FC = () => {
 
   const showTab = (tabName: string) => {
     const pageMap: { [key: string]: string } = {
-      'home': '/goldapp-index.html',
-      'invest': '/goldapp-invest.html',
-      'chits': '/goldapp-chits.html',
-      'goals': '/goldapp-invest.html',
-      'portfolio': '/goldapp-portfolio.html',
-      'rewards': '/goldapp-invest.html',
-      'more': '/goldapp-more.html',
-      'transactions': '/goldapp-transactions.html',
-      'schemes': '/goldapp-invest.html',
-      'savings': '/goldapp-invest.html',
-      'profile': '/goldapp-more.html'
+      home: "/goldapp-index.html",
+      invest: "/goldapp-invest.html",
+      chits: "/goldapp-chits.html",
+      goals: "/goldapp-invest.html",
+      portfolio: "/goldapp-portfolio.html",
+      rewards: "/goldapp-invest.html",
+      more: "/goldapp-more.html",
+      transactions: "/goldapp-transactions.html",
+      schemes: "/goldapp-invest.html",
+      savings: "/goldapp-invest.html",
+      profile: "/goldapp-more.html",
     };
 
     if (pageMap[tabName]) {

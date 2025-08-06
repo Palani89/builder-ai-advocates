@@ -888,7 +888,11 @@
           <span>Goals</span>
         </button>
 
-        <button class="nav-item" onclick="showTab('portfolio')" id="nav-portfolio">
+        <button
+          class="nav-item"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
           <i class="fas fa-chart-pie"></i>
           <span>Portfolio</span>
         </button>
@@ -925,13 +929,13 @@
       // Navigation
       function showTab(tabName) {
         const pageMap = {
-          'home': 'goldapp-index.html',
-          'invest': 'goldapp-invest.html',
-          'chits': 'goldapp-chits.html',
-          'goals': 'goldapp-invest.html',
-          'portfolio': 'goldapp-portfolio.html',
-          'rewards': 'goldapp-invest.html',
-          'more': 'goldapp-more.html'
+          home: "goldapp-index.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          goals: "goldapp-invest.html",
+          portfolio: "goldapp-portfolio.html",
+          rewards: "goldapp-invest.html",
+          more: "goldapp-more.html",
         };
 
         if (pageMap[tabName]) {
