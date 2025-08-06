@@ -2100,20 +2100,90 @@
         // Update button styles
         const onetimeBtn = document.getElementById("onetimeBtn");
         const sipBtn = document.getElementById("sipBtn");
+        const onetimeInterface = document.getElementById("onetimeInterface");
+        const sipInterface = document.getElementById("sipInterface");
 
         if (mode === "onetime") {
           onetimeBtn.style.background = "#7a0f0f";
           onetimeBtn.style.color = "white";
           sipBtn.style.background = "#e5e7eb";
           sipBtn.style.color = "#6b7280";
+
+          // Show one time interface, hide SIP interface
+          onetimeInterface.style.display = "block";
+          sipInterface.style.display = "none";
+
+          calculatePrice();
         } else {
           sipBtn.style.background = "#7a0f0f";
           sipBtn.style.color = "white";
           onetimeBtn.style.background = "#e5e7eb";
           onetimeBtn.style.color = "#6b7280";
+
+          // Show SIP interface, hide one time interface
+          onetimeInterface.style.display = "none";
+          sipInterface.style.display = "block";
+
+          calculateSIPReturns();
+        }
+      }
+
+      // SIP specific functions
+      let selectedFrequency = 'daily';
+
+      function selectFrequency(frequency) {
+        selectedFrequency = frequency;
+
+        // Reset all buttons
+        const buttons = ['dailyBtn', 'weeklyBtn', 'monthlyBtn'];
+        buttons.forEach(btnId => {
+          const btn = document.getElementById(btnId);
+          if (btn) {
+            btn.style.border = '1px solid var(--border)';
+            btn.style.color = 'var(--text-secondary)';
+          }
+        });
+
+        // Highlight selected button
+        const selectedBtn = document.getElementById(frequency + 'Btn');
+        if (selectedBtn) {
+          selectedBtn.style.border = '2px solid #7a0f0f';
+          selectedBtn.style.color = '#7a0f0f';
         }
 
-        calculatePrice();
+        calculateSIPReturns();
+      }
+
+      function calculateSIPReturns() {
+        const amount = parseFloat(document.getElementById("sipAmountInput").value) || 100;
+
+        // Calculate based on frequency
+        let dailyAmount, totalInvestment, projectedValue, earning;
+
+        switch(selectedFrequency) {
+          case 'daily':
+            dailyAmount = amount;
+            totalInvestment = amount * 365; // 1 year
+            break;
+          case 'weekly':
+            dailyAmount = amount / 7;
+            totalInvestment = amount * 52; // 1 year
+            break;
+          case 'monthly':
+            dailyAmount = amount / 30;
+            totalInvestment = amount * 12; // 1 year
+            break;
+        }
+
+        // Projected returns (assuming 8% annual return)
+        projectedValue = totalInvestment * 1.08;
+        earning = projectedValue - totalInvestment;
+
+        // Update projected returns display
+        document.getElementById("projectedReturns").textContent = "₹" + projectedValue.toFixed(2);
+        document.getElementById("investmentAmount").textContent = "₹" + totalInvestment.toFixed(2);
+        document.getElementById("earningAmount").textContent = "₹" + earning.toFixed(2) + "*";
+        document.getElementById("finalPrice").textContent = Math.round(totalInvestment);
       }
 
       function setGrams(grams) {
