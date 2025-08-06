@@ -1,806 +1,900 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import BuyGoldModal from "../components/goldapp/BuyGoldModal";
+import React, { useState, useEffect } from 'react';
 
-export default function GoldApp() {
-  const [sideMenuOpen, setSideMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("home");
-  const [totalGoldHolding] = useState(12.45); // grams
-  const [currentGoldRate] = useState(6250); // per gram
-  const [autoSaveEnabled, setAutoSaveEnabled] = useState(true);
-  const [totalValue] = useState(77812.5);
-  const [todaySavings] = useState(45.5);
-  const [monthlyTarget] = useState(5000);
-  const [currentProgress] = useState(3240);
-  const [buyModalOpen, setBuyModalOpen] = useState(false);
+const GoldApp: React.FC = () => {
+  const [currentTab, setCurrentTab] = useState("home");
+  const [showSchemesModal, setShowSchemesModal] = useState(false);
 
-  const openSideMenu = () => setSideMenuOpen(true);
-  const closeSideMenu = () => setSideMenuOpen(false);
-
-  const logoutFromApp = () => {
-    console.log("Logout clicked");
+  const showTab = (tabName: string) => {
+    setCurrentTab(tabName);
+    console.log(`Switching to ${tabName} tab`);
   };
 
-  const renderMainContent = () => {
-    switch (activeTab) {
-      case "home":
-        return (
-          <div className="gold-main-section">
-            {/* Portfolio Overview */}
-            <div className="portfolio-overview">
-              <div className="portfolio-card main-card">
-                <div className="portfolio-header">
-                  <div className="portfolio-icon">
-                    <i className="fas fa-coins"></i>
-                  </div>
-                  <div className="portfolio-info">
-                    <h3>Total Portfolio Value</h3>
-                    <div className="portfolio-value">
-                      ₹{totalValue.toLocaleString()}
-                    </div>
-                    <div className="portfolio-details">
-                      <span>
-                        {totalGoldHolding}g Gold • ₹{currentGoldRate}/g
-                      </span>
-                      <span className="profit-indicator positive">
-                        +₹1,240 (1.6%)
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  const openSchemesModal = () => {
+    setShowSchemesModal(true);
+  };
 
-              <div className="quick-stats-grid">
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-piggy-bank"></i>
-                  </div>
-                  <div className="stat-info">
-                    <div className="stat-value">₹{todaySavings}</div>
-                    <div className="stat-label">Today's Savings</div>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-chart-line"></i>
-                  </div>
-                  <div className="stat-info">
-                    <div className="stat-value">
-                      {Math.round((currentProgress / monthlyTarget) * 100)}%
-                    </div>
-                    <div className="stat-label">Monthly Target</div>
-                  </div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fas fa-repeat"></i>
-                  </div>
-                  <div className="stat-info">
-                    <div className="stat-value">3</div>
-                    <div className="stat-label">Active SIPs</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  const closeSchemesModal = () => {
+    setShowSchemesModal(false);
+  };
 
-            {/* Live Rates */}
-            <div className="live-rates-section">
-              <div className="section-header">
-                <h4>Live Metal Rates</h4>
-                <span className="refresh-time">Updated 2 mins ago</span>
-              </div>
-              <div className="rates-grid">
-                <div className="rate-card gold">
-                  <div className="rate-metal">
-                    <i className="fas fa-coins"></i>
-                    <span>Gold</span>
-                  </div>
-                  <div className="rate-price">₹{currentGoldRate}/g</div>
-                  <div className="rate-change positive">+₹25 (0.4%)</div>
-                </div>
-                <div className="rate-card silver">
-                  <div className="rate-metal">
-                    <i className="fas fa-circle"></i>
-                    <span>Silver</span>
-                  </div>
-                  <div className="rate-price">₹75.50/g</div>
-                  <div className="rate-change negative">-₹1.20 (-1.6%)</div>
-                </div>
-                <div className="rate-card platinum">
-                  <div className="rate-metal">
-                    <i className="fas fa-gem"></i>
-                    <span>Platinum</span>
-                  </div>
-                  <div className="rate-price">₹2,845/g</div>
-                  <div className="rate-change positive">+₹15 (0.5%)</div>
-                </div>
-              </div>
-            </div>
+  const joinScheme = () => {
+    alert("Scheme registration functionality will be implemented");
+    closeSchemesModal();
+  };
 
-            {/* Quick Actions */}
-            <div className="quick-actions-section">
-              <div className="section-header">
-                <h4>Quick Actions</h4>
-              </div>
-              <div className="actions-grid">
-                <button
-                  className="action-card buy"
-                  onClick={() => setBuyModalOpen(true)}
-                >
-                  <div className="action-icon">
-                    <i className="fas fa-plus"></i>
-                  </div>
-                  <div className="action-info">
-                    <div className="action-title">Buy Gold</div>
-                    <div className="action-subtitle">One-time purchase</div>
-                  </div>
-                </button>
-                <button className="action-card sip">
-                  <div className="action-icon">
-                    <i className="fas fa-calendar-alt"></i>
-                  </div>
-                  <div className="action-info">
-                    <div className="action-title">Start SIP</div>
-                    <div className="action-subtitle">Recurring investment</div>
-                  </div>
-                </button>
-                <button className="action-card redeem">
-                  <div className="action-icon">
-                    <i className="fas fa-arrow-down"></i>
-                  </div>
-                  <div className="action-info">
-                    <div className="action-title">Redeem</div>
-                    <div className="action-subtitle">Sell your gold</div>
-                  </div>
-                </button>
-                <button className="action-card chit">
-                  <div className="action-icon">
-                    <i className="fas fa-users"></i>
-                  </div>
-                  <div className="action-info">
-                    <div className="action-title">Gold Chits</div>
-                    <div className="action-subtitle">Group savings</div>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            {/* Auto Save Status */}
-            <div className="auto-save-section">
-              <div className="auto-save-card">
-                <div className="auto-save-header">
-                  <div className="auto-save-info">
-                    <h4>Smart Auto-Save</h4>
-                    <p>Round-off spare change to ₹10</p>
-                  </div>
-                  <div className="toggle-container">
-                    <label className="toggle-switch">
-                      <input
-                        type="checkbox"
-                        checked={autoSaveEnabled}
-                        onChange={(e) => setAutoSaveEnabled(e.target.checked)}
-                      />
-                      <span className="toggle-slider"></span>
-                    </label>
-                  </div>
-                </div>
-                <div className="auto-save-stats">
-                  <div className="save-stat">
-                    <span className="save-label">This Week</span>
-                    <span className="save-value">₹285</span>
-                  </div>
-                  <div className="save-stat">
-                    <span className="save-label">This Month</span>
-                    <span className="save-value">₹1,240</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Recent Transactions */}
-            <div className="recent-transactions-section">
-              <div className="section-header">
-                <h4>Recent Activity</h4>
-                <Link to="#" className="view-all-link">
-                  View All
-                </Link>
-              </div>
-              <div className="transactions-list">
-                <div className="transaction-item">
-                  <div className="transaction-icon buy">
-                    <i className="fas fa-plus"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">Gold Purchase</div>
-                    <div className="transaction-subtitle">
-                      Auto-save • 0.25g
-                    </div>
-                  </div>
-                  <div className="transaction-amount">₹1,562.50</div>
-                </div>
-                <div className="transaction-item">
-                  <div className="transaction-icon sip">
-                    <i className="fas fa-calendar"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">SIP Investment</div>
-                    <div className="transaction-subtitle">
-                      Monthly SIP • 0.80g
-                    </div>
-                  </div>
-                  <div className="transaction-amount">₹5,000.00</div>
-                </div>
-                <div className="transaction-item">
-                  <div className="transaction-icon referral">
-                    <i className="fas fa-gift"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">Referral Bonus</div>
-                    <div className="transaction-subtitle">
-                      Friend joined • 0.02g
-                    </div>
-                  </div>
-                  <div className="transaction-amount">₹125.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "portfolio":
-        return (
-          <div className="portfolio-section">
-            <div className="portfolio-header-section">
-              <h2>My Portfolio</h2>
-              <div className="portfolio-summary">
-                <div className="summary-card total">
-                  <div className="summary-label">Total Value</div>
-                  <div className="summary-value">
-                    ₹{totalValue.toLocaleString()}
-                  </div>
-                  <div className="summary-change positive">+₹1,240 (1.6%)</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="holdings-section">
-              <h3>Holdings Breakdown</h3>
-              <div className="holdings-list">
-                <div className="holding-item">
-                  <div className="holding-metal">
-                    <div className="holding-icon gold">
-                      <i className="fas fa-coins"></i>
-                    </div>
-                    <div className="holding-info">
-                      <div className="holding-name">Gold</div>
-                      <div className="holding-quantity">
-                        {totalGoldHolding}g
-                      </div>
-                    </div>
-                  </div>
-                  <div className="holding-value">
-                    <div className="holding-amount">
-                      ₹{(totalGoldHolding * currentGoldRate).toLocaleString()}
-                    </div>
-                    <div className="holding-percentage">98.5%</div>
-                  </div>
-                </div>
-                <div className="holding-item">
-                  <div className="holding-metal">
-                    <div className="holding-icon silver">
-                      <i className="fas fa-circle"></i>
-                    </div>
-                    <div className="holding-info">
-                      <div className="holding-name">Silver</div>
-                      <div className="holding-quantity">15.2g</div>
-                    </div>
-                  </div>
-                  <div className="holding-value">
-                    <div className="holding-amount">₹1,148</div>
-                    <div className="holding-percentage">1.5%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="investments-section">
-              <h3>Active Investments</h3>
-              <div className="investments-list">
-                <div className="investment-item">
-                  <div className="investment-header">
-                    <div className="investment-type">
-                      <i className="fas fa-calendar-alt"></i>
-                      <span>Monthly SIP</span>
-                    </div>
-                    <div className="investment-status active">Active</div>
-                  </div>
-                  <div className="investment-details">
-                    <div className="investment-amount">₹5,000/month</div>
-                    <div className="investment-progress">
-                      <div className="progress-bar">
-                        <div
-                          className="progress-fill"
-                          style={{ width: "45%" }}
-                        ></div>
-                      </div>
-                      <div className="progress-text">9 of 20 months</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="investment-item">
-                  <div className="investment-header">
-                    <div className="investment-type">
-                      <i className="fas fa-users"></i>
-                      <span>Gold Chit #1245</span>
-                    </div>
-                    <div className="investment-status active">Active</div>
-                  </div>
-                  <div className="investment-details">
-                    <div className="investment-amount">₹2,000/month</div>
-                    <div className="investment-progress">
-                      <div className="progress-bar">
-                        <div
-                          className="progress-fill"
-                          style={{ width: "25%" }}
-                        ></div>
-                      </div>
-                      <div className="progress-text">3 of 12 months</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="goals-section">
-              <h3>Savings Goals</h3>
-              <div className="goals-list">
-                <div className="goal-item">
-                  <div className="goal-header">
-                    <div className="goal-icon">💍</div>
-                    <div className="goal-info">
-                      <div className="goal-name">Wedding Ring</div>
-                      <div className="goal-target">Target: 10g Gold</div>
-                    </div>
-                  </div>
-                  <div className="goal-progress">
-                    <div className="progress-bar">
-                      <div
-                        className="progress-fill"
-                        style={{ width: "70%" }}
-                      ></div>
-                    </div>
-                    <div className="progress-text">7g / 10g (70%)</div>
-                  </div>
-                </div>
-                <div className="goal-item">
-                  <div className="goal-header">
-                    <div className="goal-icon">🏠</div>
-                    <div className="goal-info">
-                      <div className="goal-name">Home Down Payment</div>
-                      <div className="goal-target">Target: 50g Gold</div>
-                    </div>
-                  </div>
-                  <div className="goal-progress">
-                    <div className="progress-bar">
-                      <div
-                        className="progress-fill"
-                        style={{ width: "25%" }}
-                      ></div>
-                    </div>
-                    <div className="progress-text">12.5g / 50g (25%)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "transactions":
-        return (
-          <div className="transactions-section">
-            <div className="transactions-header">
-              <h2>Transaction History</h2>
-              <div className="filter-tabs">
-                <button className="filter-tab active">All</button>
-                <button className="filter-tab">Buy</button>
-                <button className="filter-tab">Sell</button>
-                <button className="filter-tab">SIP</button>
-              </div>
-            </div>
-
-            <div className="transactions-list-full">
-              <div className="transaction-item-full">
-                <div className="transaction-date">Today</div>
-                <div className="transaction-details">
-                  <div className="transaction-icon buy">
-                    <i className="fas fa-plus"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">Gold Purchase</div>
-                    <div className="transaction-subtitle">
-                      Auto-save • UPI Payment
-                    </div>
-                  </div>
-                  <div className="transaction-amount-details">
-                    <div className="transaction-amount">₹1,562.50</div>
-                    <div className="transaction-quantity">0.25g</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="transaction-item-full">
-                <div className="transaction-date">Yesterday</div>
-                <div className="transaction-details">
-                  <div className="transaction-icon sip">
-                    <i className="fas fa-calendar"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">SIP Investment</div>
-                    <div className="transaction-subtitle">Monthly Gold SIP</div>
-                  </div>
-                  <div className="transaction-amount-details">
-                    <div className="transaction-amount">₹5,000.00</div>
-                    <div className="transaction-quantity">0.80g</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="transaction-item-full">
-                <div className="transaction-date">2 days ago</div>
-                <div className="transaction-details">
-                  <div className="transaction-icon buy">
-                    <i className="fas fa-plus"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">One-time Purchase</div>
-                    <div className="transaction-subtitle">
-                      Debit Card Payment
-                    </div>
-                  </div>
-                  <div className="transaction-amount-details">
-                    <div className="transaction-amount">₹10,000.00</div>
-                    <div className="transaction-quantity">1.60g</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="transaction-item-full">
-                <div className="transaction-date">5 days ago</div>
-                <div className="transaction-details">
-                  <div className="transaction-icon sell">
-                    <i className="fas fa-minus"></i>
-                  </div>
-                  <div className="transaction-info">
-                    <div className="transaction-title">Gold Redemption</div>
-                    <div className="transaction-subtitle">Bank Transfer</div>
-                  </div>
-                  <div className="transaction-amount-details">
-                    <div className="transaction-amount">₹3,125.00</div>
-                    <div className="transaction-quantity">0.50g</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case "more":
-        return (
-          <div className="more-section">
-            <div className="more-categories">
-              <div className="category-section">
-                <h3>Investments</h3>
-                <div className="more-options">
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-bullseye"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Savings Goals</div>
-                      <div className="option-subtitle">
-                        Create targeted savings
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-users"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Gold Chits</div>
-                      <div className="option-subtitle">Join group savings</div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-shopping-bag"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Gold Shop</div>
-                      <div className="option-subtitle">Buy jewelry & coins</div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div className="category-section">
-                <h3>Account</h3>
-                <div className="more-options">
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-user"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Profile</div>
-                      <div className="option-subtitle">Manage your profile</div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-file-alt"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">KYC Documents</div>
-                      <div className="option-subtitle">
-                        Verify your identity
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-university"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Bank Details</div>
-                      <div className="option-subtitle">
-                        Manage linked accounts
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div className="category-section">
-                <h3>Tools</h3>
-                <div className="more-options">
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-share-alt"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Refer & Earn</div>
-                      <div className="option-subtitle">
-                        Invite friends & get gold
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-calculator"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">SIP Calculator</div>
-                      <div className="option-subtitle">
-                        Plan your investments
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-certificate"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Certificates</div>
-                      <div className="option-subtitle">
-                        Download purchase certificates
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div className="category-section">
-                <h3>Support</h3>
-                <div className="more-options">
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-headset"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Help & Support</div>
-                      <div className="option-subtitle">
-                        Get help & contact us
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-question-circle"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">FAQs</div>
-                      <div className="option-subtitle">Common questions</div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                  <div className="more-option">
-                    <div className="option-icon">
-                      <i className="fas fa-shield-alt"></i>
-                    </div>
-                    <div className="option-info">
-                      <div className="option-title">Security</div>
-                      <div className="option-subtitle">
-                        Privacy & security settings
-                      </div>
-                    </div>
-                    <i className="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
+  const logout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert("Logged out successfully!");
+      window.location.reload();
     }
   };
 
+  useEffect(() => {
+    // Auto-sync animation
+    const interval = setInterval(() => {
+      const syncIcon = document.querySelector('.sync-icon') as HTMLElement;
+      if (syncIcon) {
+        syncIcon.style.animation = 'none';
+        setTimeout(() => {
+          syncIcon.style.animation = 'spin 1s linear';
+        }, 10);
+      }
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div>
-      {/* Side Menu Overlay */}
-      <div
-        className={`side-menu-overlay ${sideMenuOpen ? "show" : ""}`}
-        onClick={closeSideMenu}
-      ></div>
+    <>
+      <style>{`
+        :root {
+          --primary-gold: #ffd700;
+          --dark-gold: #b8860b;
+          --orange: #ff8c00;
+          --orange-light: #ffa500;
+          --red: #dc143c;
+          --background: #f5f5f5;
+          --white: #ffffff;
+          --text-dark: #2c2c2c;
+          --text-gray: #666666;
+          --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
 
-      {/* Side Menu */}
-      <div className={`side-menu ${sideMenuOpen ? "open" : ""}`}>
-        <div className="side-menu-header">
-          <div className="side-menu-logo">
-            <div className="logo-icon" style={{ background: "#FFD700" }}>
-              <i className="fas fa-coins"></i>
-            </div>
-            <div>
-              <span className="logo-text">GoldApp</span>
-              <div className="side-menu-subtitle">Digital Gold Investment</div>
-            </div>
-          </div>
-          <button className="side-menu-close" onClick={closeSideMenu}>
-            <i className="fas fa-times"></i>
-          </button>
-        </div>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
 
-        <nav className="side-menu-nav">
-          <button
-            className={`side-menu-item ${activeTab === "home" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("home");
-              closeSideMenu();
-            }}
-          >
-            <i className="fas fa-home side-menu-icon"></i>
-            Home
-          </button>
-          <button
-            className={`side-menu-item ${activeTab === "portfolio" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("portfolio");
-              closeSideMenu();
-            }}
-          >
-            <i className="fas fa-chart-pie side-menu-icon"></i>
-            Portfolio
-          </button>
-          <button
-            className={`side-menu-item ${activeTab === "transactions" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("transactions");
-              closeSideMenu();
-            }}
-          >
-            <i className="fas fa-exchange-alt side-menu-icon"></i>
-            Transactions
-          </button>
-          <button
-            className={`side-menu-item ${activeTab === "more" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("more");
-              closeSideMenu();
-            }}
-          >
-            <i className="fas fa-th side-menu-icon"></i>
-            More
-          </button>
-          <button className="side-menu-item logout" onClick={logoutFromApp}>
-            <i className="fas fa-sign-out-alt side-menu-icon"></i>
-            Log Out
-          </button>
-        </nav>
-      </div>
+        body {
+          font-family: "Inter", sans-serif;
+          background: var(--background);
+          color: var(--text-dark);
+          line-height: 1.6;
+          overflow-x: hidden;
+        }
 
-      <div className="app-container">
+        .goldapp-container {
+          min-height: 100vh;
+          background: var(--background);
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Header */
+        .goldapp-header {
+          background: var(--white);
+          padding: 15px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          box-shadow: var(--shadow);
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+        }
+
+        .header-left {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .menu-icon {
+          width: 30px;
+          height: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          cursor: pointer;
+        }
+
+        .menu-line {
+          width: 100%;
+          height: 3px;
+          background: var(--orange);
+          border-radius: 2px;
+        }
+
+        .menu-line:nth-child(2) {
+          width: 70%;
+        }
+
+        .menu-line:nth-child(3) {
+          width: 50%;
+        }
+
+        .logo-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .crown-icon {
+          width: 50px;
+          height: 40px;
+          background: var(--primary-gold);
+          border-radius: 50% 50% 0 0;
+          position: relative;
+          margin-bottom: 5px;
+        }
+
+        .crown-icon::before {
+          content: "♛";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 20px;
+          color: var(--dark-gold);
+        }
+
+        .logo-text {
+          background: var(--red);
+          color: var(--white);
+          padding: 8px 20px;
+          border-radius: 15px;
+          font-size: 14px;
+          font-weight: 700;
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .logo-subtitle {
+          font-size: 11px;
+          margin-top: 2px;
+        }
+
+        .header-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 5px;
+        }
+
+        .notification-container {
+          position: relative;
+        }
+
+        .notification-icon {
+          background: var(--orange);
+          color: var(--white);
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .app-version {
+          color: var(--orange);
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        /* Main Content */
+        .goldapp-main-content {
+          padding: 0;
+          flex: 1;
+          overflow-y: auto;
+          margin-top: 80px;
+          margin-bottom: 100px;
+        }
+
+        /* Rates Card */
+        .rates-card {
+          background: var(--white);
+          margin: 20px;
+          border-radius: 20px;
+          padding: 25px;
+          color: var(--text-dark);
+          box-shadow: var(--shadow-lg);
+          position: relative;
+          overflow: hidden;
+          border: 1px solid #e5e5e5;
+        }
+
+        .last-updated {
+          text-align: center;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 20px;
+          color: #8b4513;
+        }
+
+        .metals-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+        }
+
+        .metal-item {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .metal-icon {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          font-weight: bold;
+          color: var(--white);
+          box-shadow: var(--shadow);
+        }
+
+        .metal-icon.gold {
+          background: #daa520;
+        }
+
+        .metal-icon.silver {
+          background: #c0c0c0;
+          color: var(--text-dark);
+        }
+
+        .metal-info h3 {
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 2px;
+        }
+
+        .metal-price {
+          font-size: 24px;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 5px;
+        }
+
+        .price-arrow {
+          color: #22c55e;
+          font-size: 18px;
+        }
+
+        .metal-subtitle {
+          font-size: 12px;
+          color: #8b4513;
+          font-weight: 500;
+          text-align: center;
+          margin-top: 15px;
+        }
+
+        /* Promotional Banner */
+        .promo-banner {
+          margin: 20px;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: var(--shadow-lg);
+          position: relative;
+          height: 180px;
+          background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%);
+        }
+
+        .promo-content {
+          display: flex;
+          height: 100%;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px;
+        }
+
+        .promo-woman {
+          flex: 1;
+          height: 140px;
+          background: url("https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F18a6b91fdc5d4b6faba4f8a5a6b18fab?format=webp&width=800")
+            center/cover;
+          border-radius: 15px;
+          margin-right: 20px;
+        }
+
+        .promo-circle {
+          width: 120px;
+          height: 120px;
+          background: var(--red);
+          border-radius: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: var(--white);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .promo-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--primary-gold);
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .promo-subtitle {
+          font-size: 14px;
+          font-weight: 600;
+          margin-top: 5px;
+        }
+
+        .promo-dots {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin: 15px 0;
+        }
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #d3d3d3;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .dot.active {
+          background: var(--orange);
+          transform: scale(1.3);
+        }
+
+        /* Schemes Section */
+        .schemes-section {
+          margin: 30px 20px 20px;
+        }
+
+        .schemes-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+
+        .schemes-title {
+          font-size: 22px;
+          font-weight: 700;
+          color: var(--text-dark);
+        }
+
+        .sync-info {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          font-size: 12px;
+          color: var(--text-gray);
+        }
+
+        .sync-icon {
+          color: var(--orange);
+          margin-left: 5px;
+        }
+
+        .schemes-card {
+          background: linear-gradient(
+            135deg,
+            var(--orange) 0%,
+            var(--orange-light) 100%
+          );
+          border-radius: 20px;
+          padding: 30px;
+          color: var(--white);
+          text-align: center;
+          box-shadow: var(--shadow-lg);
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+        }
+
+        .schemes-card::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 70%
+          );
+          animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .schemes-message {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .schemes-subtitle {
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 25px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .schemes-arrow {
+          width: 50px;
+          height: 50px;
+          border: 2px solid var(--white);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          z-index: 1;
+        }
+
+        .schemes-arrow:hover {
+          transform: scale(1.1);
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .schemes-arrow i {
+          font-size: 20px;
+        }
+
+        /* Bottom Navigation */
+        .goldapp-bottom-nav {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: #000000;
+          border-radius: 25px 25px 0 0;
+          padding: 20px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+          z-index: 100;
+        }
+
+        .nav-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          color: var(--white);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          background: none;
+          border: none;
+          padding: 10px;
+          border-radius: 15px;
+        }
+
+        .nav-item:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        .nav-item i {
+          font-size: 24px;
+          margin-bottom: 5px;
+        }
+
+        .nav-item span {
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        .nav-item.home {
+          /* Remove special styling for home */
+        }
+
+        /* Modal */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+
+        .modal-content {
+          background: var(--white);
+          border-radius: 20px;
+          box-shadow: var(--shadow-lg);
+          width: 100%;
+          max-width: 400px;
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+
+        .modal-header {
+          padding: 25px 25px 0;
+          text-align: center;
+        }
+
+        .modal-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: var(--text-dark);
+          margin-bottom: 10px;
+        }
+
+        .modal-subtitle {
+          font-size: 14px;
+          color: var(--text-gray);
+          margin-bottom: 20px;
+        }
+
+        .modal-body {
+          padding: 20px 25px;
+        }
+
+        .form-group {
+          margin-bottom: 20px;
+        }
+
+        .form-label {
+          display: block;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 8px;
+        }
+
+        .form-input {
+          width: 100%;
+          padding: 15px;
+          border: 2px solid #e5e5e5;
+          border-radius: 12px;
+          font-size: 16px;
+          transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+          outline: none;
+          border-color: var(--orange);
+          box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+        .modal-footer {
+          padding: 0 25px 25px;
+          display: flex;
+          gap: 15px;
+        }
+
+        .btn {
+          flex: 1;
+          padding: 15px;
+          border: none;
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+          background: var(--orange);
+          color: var(--white);
+        }
+
+        .btn-primary:hover {
+          background: var(--orange-light);
+          transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+          background: #f5f5f5;
+          color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+          background: #e5e5e5;
+        }
+
+        .hidden {
+          display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .metals-container {
+            flex-direction: column;
+            gap: 15px;
+          }
+
+          .metal-item {
+            justify-content: center;
+          }
+
+          .promo-content {
+            flex-direction: column;
+            padding: 15px;
+          }
+
+          .promo-woman {
+            width: 100%;
+            height: 100px;
+            margin: 0 0 15px 0;
+          }
+
+          .schemes-section {
+            margin: 20px 15px 15px;
+          }
+
+          .rates-card {
+            margin: 15px;
+            padding: 20px;
+          }
+
+          .promo-banner {
+            margin: 15px;
+            height: 160px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .goldapp-header {
+            padding: 10px 15px;
+          }
+
+          .logo-text {
+            font-size: 12px;
+            padding: 6px 15px;
+          }
+
+          .crown-icon {
+            width: 40px;
+            height: 32px;
+          }
+
+          .metal-price {
+            font-size: 20px;
+          }
+
+          .schemes-title {
+            font-size: 18px;
+          }
+
+          .goldapp-bottom-nav {
+            padding: 15px;
+          }
+        }
+      `}</style>
+
+      <div className="goldapp-container">
         {/* Header */}
-        <div className="header">
+        <div className="goldapp-header">
           <div className="header-left">
-            <button className="menu-toggle" onClick={openSideMenu}>
-              <i className="fas fa-bars"></i>
-            </button>
+            <div className="menu-icon">
+              <div className="menu-line"></div>
+              <div className="menu-line"></div>
+              <div className="menu-line"></div>
+            </div>
             <div className="logo-container">
-              <div className="logo-icon" style={{ background: "#FFD700" }}>
-                <i className="fas fa-coins"></i>
+              <div className="crown-icon"></div>
+              <div className="logo-text">
+                SRI KUMARAN
+                <div className="logo-subtitle">JEWELLERS</div>
               </div>
-              <span className="logo-text">GoldApp</span>
             </div>
           </div>
           <div className="header-right">
-            <button className="notification-icon">
-              <i className="fas fa-bell"></i>
-              <span className="notification-badge">2</span>
-            </button>
-            <div className="user-avatar">G</div>
-            <button className="notification-icon" onClick={logoutFromApp}>
-              <i className="fas fa-sign-out-alt"></i>
-            </button>
+            <div className="notification-container">
+              <div className="notification-icon" onClick={logout}>
+                <i className="fas fa-sign-out-alt"></i>
+              </div>
+            </div>
+            <div className="app-version">AV:5.0.0</div>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="main-content gold-app-content">
-          {renderMainContent()}
+        <div className="goldapp-main-content">
+          {/* Rates Card */}
+          <div className="rates-card">
+            <div className="last-updated">
+              Last Updated On : 2025-08-02 10:19:35.103
+            </div>
+
+            <div className="metals-container">
+              <div className="metal-item">
+                <div className="metal-icon gold">AU</div>
+                <div className="metal-info">
+                  <h3>Gold</h3>
+                  <div className="metal-price">
+                    ₹ 9290.0
+                    <span className="price-arrow">↗</span>
+                  </div>
+                </div>
+              </div>
+              <div className="metal-item">
+                <div className="metal-icon silver">AG</div>
+                <div className="metal-info">
+                  <h3>Silver</h3>
+                  <div className="metal-price">
+                    ₹ 123.0
+                    <span className="price-arrow">↗</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="metal-subtitle">22 KT Per Gram</div>
+          </div>
+
+          {/* Promotional Banner */}
+          <div className="promo-banner">
+            <div className="promo-content">
+              <div className="promo-woman"></div>
+              <div className="promo-circle">
+                <div className="promo-title">Aadi</div>
+                <div className="promo-title">Special</div>
+                <div className="promo-subtitle">Sale</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Promo Dots */}
+          <div className="promo-dots">
+            <div className="dot"></div>
+            <div className="dot active"></div>
+            <div className="dot"></div>
+          </div>
+
+          {/* Schemes Section */}
+          <div className="schemes-section">
+            <div className="schemes-header">
+              <h2 className="schemes-title">Your Schemes</h2>
+              <div className="sync-info">
+                <div>Last Sync</div>
+                <div>
+                  03-Aug-2025 1:55 PM <i className="fas fa-sync-alt sync-icon"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className="schemes-card" onClick={openSchemesModal}>
+              <div className="schemes-message">No Digital Savings Plan found.</div>
+              <div className="schemes-subtitle">Join new plans</div>
+              <div className="schemes-arrow">
+                <i className="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Navigation */}
-        <div className="bottom-nav">
-          <div className="nav-items">
-            <button
-              className={`nav-item ${activeTab === "home" ? "active" : ""}`}
-              onClick={() => setActiveTab("home")}
-            >
-              <i className="fas fa-home"></i>
-              Home
-            </button>
-            <button
-              className={`nav-item ${activeTab === "portfolio" ? "active" : ""}`}
-              onClick={() => setActiveTab("portfolio")}
-            >
-              <i className="fas fa-chart-pie"></i>
-              Portfolio
-            </button>
-            <button
-              className={`nav-item ${activeTab === "transactions" ? "active" : ""}`}
-              onClick={() => setActiveTab("transactions")}
-            >
-              <i className="fas fa-exchange-alt"></i>
-              Transactions
-            </button>
-            <button
-              className={`nav-item ${activeTab === "more" ? "active" : ""}`}
-              onClick={() => setActiveTab("more")}
-            >
-              <i className="fas fa-th"></i>
-              More
-            </button>
-          </div>
+        <div className="goldapp-bottom-nav">
+          <button className="nav-item" onClick={() => showTab('transactions')}>
+            <i className="fas fa-file-alt"></i>
+            <span>History</span>
+          </button>
+          <button className="nav-item" onClick={() => showTab('schemes')}>
+            <i className="fas fa-chart-bar"></i>
+            <span>Schemes</span>
+          </button>
+          <button className="nav-item home" onClick={() => showTab('home')}>
+            <i className="fas fa-home"></i>
+            <span>Home</span>
+          </button>
+          <button className="nav-item" onClick={() => showTab('savings')}>
+            <i className="fas fa-piggy-bank"></i>
+            <span>Savings</span>
+          </button>
+          <button className="nav-item" onClick={() => showTab('profile')}>
+            <i className="fas fa-user"></i>
+            <span>Profile</span>
+          </button>
         </div>
       </div>
 
-      {/* Modals */}
-      <BuyGoldModal
-        isOpen={buyModalOpen}
-        onClose={() => setBuyModalOpen(false)}
-        goldRate={currentGoldRate}
-      />
-    </div>
+      {/* Schemes Modal */}
+      {showSchemesModal && (
+        <div className="modal-overlay" onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            closeSchemesModal();
+          }
+        }}>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title">Join Digital Savings Plan</h3>
+              <p className="modal-subtitle">
+                Start your journey towards financial growth
+              </p>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label className="form-label">Full Name</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="Enter your full name"
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Mobile Number</label>
+                <input
+                  type="tel"
+                  className="form-input"
+                  placeholder="Enter mobile number"
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Investment Amount</label>
+                <input
+                  type="number"
+                  className="form-input"
+                  placeholder="Enter amount (min ₹500)"
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" onClick={closeSchemesModal}>
+                Cancel
+              </button>
+              <button className="btn btn-primary" onClick={joinScheme}>
+                Join Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
-}
+};
+
+export default GoldApp;
