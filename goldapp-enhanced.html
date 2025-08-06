@@ -1622,32 +1622,75 @@
                 id="digital-gold-tab"
                 style="display: none"
               >
-                <div
-                  class="digital-asset-info"
-                  style="text-align: center; padding: 2rem"
-                >
-                  <h3 style="color: var(--text-primary); margin-bottom: 1rem">
-                    Digital Gold Investment
-                  </h3>
-                  <p
-                    style="color: var(--text-secondary); margin-bottom: 1.5rem"
-                  >
-                    Start investing in digital gold with flexible amounts
-                  </p>
-                  <button
-                    class="invest-btn"
-                    onclick="window.location.href='goldapp-invest.html'"
-                    style="
-                      background: var(--gradient-gold);
-                      color: white;
-                      border: none;
-                      padding: 1rem 2rem;
-                      border-radius: 8px;
-                      font-weight: 600;
-                      cursor: pointer;
-                    "
-                  >
-                    Start Investing
+                <!-- Gold Buy Interface -->
+                <div style="background: #f9fafb; border-radius: 16px; padding: 2rem; border: 1px solid var(--border);">
+                  <!-- One Time / SIP Toggle -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button id="goldOnetimeBtn" class="toggle-btn active" onclick="switchGoldMode('onetime')" style="flex: 1; padding: 0.75rem 2rem; background: #7a0f0f; color: white; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                      One Time
+                    </button>
+                    <button id="goldSipBtn" class="toggle-btn" onclick="switchGoldMode('sip')" style="flex: 1; padding: 0.75rem 2rem; background: #e5e7eb; color: #6b7280; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                      SIP
+                    </button>
+                  </div>
+
+                  <!-- Grams Input Section -->
+                  <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <span style="font-size: 1.5rem; font-weight: 600; color: #6b7280;">g</span>
+                      <input type="number" id="goldGramsInput" value="10" min="1" oninput="calculateGoldPrice()" style="font-size: 2rem; font-weight: 700; width: 120px; border: none; background: transparent; outline: none; color: var(--text-primary);">
+                    </div>
+                    <div style="background: var(--surface); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #6b7280;">
+                      <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div style="text-align: right;">
+                      <div style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">₹</div>
+                      <div id="goldTotalPrice" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">62850</div>
+                    </div>
+                  </div>
+
+                  <!-- Quick Selection Buttons -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <button onclick="setGoldGrams(10)" style="flex: 1; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; position: relative;">
+                      <div style="font-weight: 600; color: var(--text-primary);">10 gm</div>
+                      <div style="background: #7a0f0f; color: white; font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 4px; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);">Best</div>
+                    </button>
+                    <button onclick="setGoldGrams(20)" style="flex: 1; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">
+                      <div style="font-weight: 600; color: var(--text-primary);">20 gm</div>
+                    </button>
+                    <button onclick="setGoldGrams(50)" style="flex: 1; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">
+                      <div style="font-weight: 600; color: var(--text-primary);">50 gm</div>
+                    </button>
+                  </div>
+
+                  <!-- Projected Returns -->
+                  <div style="background: var(--surface); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: flex; justify-content: space-between;">
+                      <span>Projected 1 year returns</span>
+                      <span id="goldProjectedReturns" style="color: var(--success);">₹69,135</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                      <span style="color: #8b5a2b; font-weight: 500;">Investment: <span id="goldInvestmentAmount">₹62,850</span></span>
+                      <span style="color: #8b5a2b; font-weight: 500;">Earning: <span id="goldEarningAmount">₹6,285*</span></span>
+                    </div>
+                  </div>
+
+                  <!-- Terms & Conditions -->
+                  <div style="margin-bottom: 2rem;">
+                    <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                      <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: #7a0f0f;">
+                      <span style="color: var(--text-primary); font-weight: 500;">Agree Schemes Terms & conditions</span>
+                    </label>
+                  </div>
+
+                  <!-- Final Price -->
+                  <div style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem;">
+                    Rs <span id="goldFinalPrice">62850</span>
+                  </div>
+
+                  <!-- Pay Now Button -->
+                  <button onclick="proceedToGoldPay()" style="width: 100%; padding: 1rem; background: #7a0f0f; color: white; border: none; border-radius: 8px; font-size: 1.125rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                    Pay Now
                   </button>
                 </div>
               </div>
