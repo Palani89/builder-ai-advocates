@@ -2827,6 +2827,12 @@ You can manage your SIP from the Portfolio section.`);
           window.location.href = "index-landing.html";
         }
       }
+
+      // Initialize navigation on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentTab = getCurrentTab();
+        updateNavActiveState(currentTab);
+      });
     </script>
 
     <!-- Bottom Navigation -->
