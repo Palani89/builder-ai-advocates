@@ -1397,15 +1397,16 @@
         if (!targetPage) return;
 
         // Clear hover states
-        document.querySelectorAll('.nav-item').forEach(item => {
+        document.querySelectorAll(".nav-item").forEach((item) => {
           item.blur();
-          item.style.background = '';
-          item.style.color = '';
+          item.style.background = "";
+          item.style.color = "";
         });
 
         updateNavActiveState(tabName);
 
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-more.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-more.html";
         if (targetPage !== currentPage) {
           window.location.href = targetPage;
         }
@@ -1413,22 +1414,23 @@
 
       // Update navigation active state
       function updateNavActiveState(activeTab) {
-        document.querySelectorAll('.nav-item').forEach(item => {
-          item.classList.remove('active');
-          item.style.removeProperty('background');
-          item.style.removeProperty('color');
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.classList.remove("active");
+          item.style.removeProperty("background");
+          item.style.removeProperty("color");
           item.blur();
         });
 
         const activeNavItem = document.getElementById(`nav-${activeTab}`);
         if (activeNavItem) {
-          activeNavItem.classList.add('active');
+          activeNavItem.classList.add("active");
         }
       }
 
       // Get current tab based on current page
       function getCurrentTab() {
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-more.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-more.html";
         const pageToTab = {
           "goldapp-enhanced.html": "home",
           "goldapp-invest.html": "invest",

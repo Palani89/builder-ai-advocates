@@ -2795,17 +2795,18 @@ You can manage your SIP from the Portfolio section.`);
         }
 
         // Clear hover states
-        document.querySelectorAll('.nav-item').forEach(item => {
+        document.querySelectorAll(".nav-item").forEach((item) => {
           item.blur();
-          item.style.background = '';
-          item.style.color = '';
+          item.style.background = "";
+          item.style.color = "";
         });
 
         // Update active state
         updateNavActiveState(tabName);
 
         // Navigate if different page
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-invest.html";
         console.log(`Current: ${currentPage}, Target: ${targetPage}`);
 
         if (targetPage !== currentPage) {
@@ -2813,12 +2814,12 @@ You can manage your SIP from the Portfolio section.`);
           try {
             window.location.href = targetPage;
           } catch (error) {
-            console.error('Navigation error:', error);
+            console.error("Navigation error:", error);
             // Fallback navigation
             window.location.replace(targetPage);
           }
         } else {
-          console.log('Already on target page');
+          console.log("Already on target page");
         }
       }
 
@@ -2828,30 +2829,31 @@ You can manage your SIP from the Portfolio section.`);
 
         try {
           // Clear all states from nav items
-          document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-            item.style.removeProperty('background');
-            item.style.removeProperty('color');
-            item.style.removeProperty('transform');
+          document.querySelectorAll(".nav-item").forEach((item) => {
+            item.classList.remove("active");
+            item.style.removeProperty("background");
+            item.style.removeProperty("color");
+            item.style.removeProperty("transform");
             item.blur();
           });
 
           // Add active class to current tab
           const activeNavItem = document.getElementById(`nav-${activeTab}`);
           if (activeNavItem) {
-            activeNavItem.classList.add('active');
+            activeNavItem.classList.add("active");
             console.log(`Digital Asset: Successfully activated ${activeTab}`);
           } else {
             console.warn(`Digital Asset: Nav item not found: nav-${activeTab}`);
           }
         } catch (error) {
-          console.error('Digital Asset: Error updating nav state:', error);
+          console.error("Digital Asset: Error updating nav state:", error);
         }
       }
 
       // Get current tab based on current page
       function getCurrentTab() {
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-invest.html";
         const pageToTab = {
           "goldapp-enhanced.html": "home",
           "goldapp-invest.html": "invest",
@@ -2880,19 +2882,19 @@ You can manage your SIP from the Portfolio section.`);
 
         // Add event listeners to prevent stuck states
         setTimeout(() => {
-          const navItems = document.querySelectorAll('.nav-item');
+          const navItems = document.querySelectorAll(".nav-item");
 
-          navItems.forEach(item => {
+          navItems.forEach((item) => {
             // Clear hover states when mouse leaves the item
-            item.addEventListener('mouseleave', function() {
-              if (!this.classList.contains('active')) {
-                this.style.removeProperty('background');
-                this.style.removeProperty('color');
+            item.addEventListener("mouseleave", function () {
+              if (!this.classList.contains("active")) {
+                this.style.removeProperty("background");
+                this.style.removeProperty("color");
               }
             });
 
             // Clear focus states when clicked
-            item.addEventListener('click', function() {
+            item.addEventListener("click", function () {
               setTimeout(() => {
                 this.blur();
               }, 50);

@@ -2823,17 +2823,18 @@
         }
 
         // Clear any stuck hover states
-        document.querySelectorAll('.nav-item').forEach(item => {
+        document.querySelectorAll(".nav-item").forEach((item) => {
           item.blur();
-          item.style.background = '';
-          item.style.color = '';
+          item.style.background = "";
+          item.style.color = "";
         });
 
         // Update active state immediately
         updateNavActiveState(tabName);
 
         // Check if we're already on the target page
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
 
         if (targetPage !== currentPage) {
           // Set loading state
@@ -2846,7 +2847,8 @@
 
       // Get current tab based on current page
       function getCurrentTab() {
-        const currentPage = window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
         const pageToTab = {
           "goldapp-enhanced.html": "home",
           "goldapp-invest.html": "invest",
@@ -2863,26 +2865,26 @@
 
         try {
           // Clear all states from nav items
-          const navItems = document.querySelectorAll('.nav-item');
-          navItems.forEach(item => {
-            item.classList.remove('active');
+          const navItems = document.querySelectorAll(".nav-item");
+          navItems.forEach((item) => {
+            item.classList.remove("active");
             // Clear any inline styles that might be stuck
-            item.style.removeProperty('background');
-            item.style.removeProperty('color');
-            item.style.removeProperty('transform');
+            item.style.removeProperty("background");
+            item.style.removeProperty("color");
+            item.style.removeProperty("transform");
             item.blur(); // Remove focus to clear hover states
           });
 
           // Add active class to current tab
           const activeNavItem = document.getElementById(`nav-${activeTab}`);
           if (activeNavItem) {
-            activeNavItem.classList.add('active');
+            activeNavItem.classList.add("active");
             console.log(`Successfully activated nav item: nav-${activeTab}`);
           } else {
             console.warn(`Nav item not found: nav-${activeTab}`);
           }
         } catch (error) {
-          console.error('Error updating nav active state:', error);
+          console.error("Error updating nav active state:", error);
         }
       }
 
@@ -3019,19 +3021,19 @@
 
         // Add event listeners to prevent stuck states
         setTimeout(() => {
-          const navItems = document.querySelectorAll('.nav-item');
+          const navItems = document.querySelectorAll(".nav-item");
 
-          navItems.forEach(item => {
+          navItems.forEach((item) => {
             // Clear hover states when mouse leaves the item
-            item.addEventListener('mouseleave', function() {
-              if (!this.classList.contains('active')) {
-                this.style.removeProperty('background');
-                this.style.removeProperty('color');
+            item.addEventListener("mouseleave", function () {
+              if (!this.classList.contains("active")) {
+                this.style.removeProperty("background");
+                this.style.removeProperty("color");
               }
             });
 
             // Clear focus states when clicked
-            item.addEventListener('click', function() {
+            item.addEventListener("click", function () {
               setTimeout(() => {
                 this.blur();
               }, 50);
