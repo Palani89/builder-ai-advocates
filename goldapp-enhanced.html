@@ -1330,125 +1330,62 @@
           </div>
         </section>
 
-        <!-- AI Suggestions -->
+        <!-- Schemes Overview -->
         <section class="page-section">
-          <div class="ai-suggestions">
-            <div class="ai-header">
-              <div class="ai-avatar">
-                <i class="fas fa-robot"></i>
-              </div>
-              <div>
-                <div class="ai-title">Smart Suggestions</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary)">
-                  AI-powered investment insights
+          <div class="schemes-overview">
+            <div class="overview-header">
+              <h2 class="overview-title" style="color: #7A0F0F; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Overview</h2>
+            </div>
+
+            <div class="overview-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: var(--surface); border-radius: 8px; padding: 0.25rem;">
+              <button class="tab-btn active" onclick="switchOverviewTab('schemes')" style="flex: 1; padding: 0.5rem 1rem; background: #7A0F0F; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Schemes</button>
+              <button class="tab-btn" onclick="switchOverviewTab('digital-gold')" style="flex: 1; padding: 0.5rem 1rem; background: transparent; color: var(--text-secondary); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Digital Gold</button>
+              <button class="tab-btn" onclick="switchOverviewTab('digital-silver')" style="flex: 1; padding: 0.5rem 1rem; background: transparent; color: var(--text-secondary); border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Digital Silver</button>
+            </div>
+
+            <div class="overview-content">
+              <div class="tab-content active" id="schemes-tab">
+                <div id="no-schemes" class="no-schemes-message" style="text-align: center; padding: 2rem; background: #FFF8F0; border-radius: 12px; border: 2px dashed #E5E7EB;">
+                  <h3 style="color: #7A0F0F; margin-bottom: 0.5rem;">No Active Schemes</h3>
+                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Select a scheme to get started</p>
                 </div>
-              </div>
-            </div>
 
-            <div class="ai-suggestion">
-              <div class="suggestion-text">
-                🚀 Gold prices dropped by 1.2% today! This could be a great
-                opportunity to increase your SIP amount or make a one-time
-                purchase.
-              </div>
-              <div class="suggestion-actions">
-                <button class="suggestion-btn primary" onclick="showBuyModal()">
-                  Buy Now
-                </button>
-                <button
-                  class="suggestion-btn secondary"
-                  onclick="increaseSIP()"
-                >
-                  Increase SIP
-                </button>
-              </div>
-            </div>
-
-            <div class="ai-suggestion">
-              <div class="suggestion-text">
-                🎯 You're 75% closer to your "Wedding Ring" goal! Consider
-                adding ₹500 more to reach it faster.
-              </div>
-              <div class="suggestion-actions">
-                <button class="suggestion-btn primary" onclick="addToGoal()">
-                  Add Money
-                </button>
-                <button class="suggestion-btn secondary" onclick="viewGoal()">
-                  View Goal
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Daily Quote -->
-        <section class="page-section">
-          <div class="daily-quote">
-            <div class="quote-text">
-              "The best time to invest in gold was 20 years ago. The second best
-              time is now."
-            </div>
-            <div class="quote-author">- Warren Buffett</div>
-          </div>
-        </section>
-
-        <!-- Recent Transactions -->
-        <section class="page-section">
-          <div class="section-header">
-            <h2 class="section-title">
-              <i class="fas fa-history"></i>
-              Recent Activity
-            </h2>
-            <a href="#" class="view-all-btn" onclick="showTab('transactions')"
-              >View All</a
-            >
-          </div>
-
-          <div class="recent-transactions">
-            <div class="transaction-list">
-              <div class="transaction-item">
-                <div class="transaction-icon buy">
-                  <i class="fas fa-plus"></i>
+                <div id="active-scheme" class="active-scheme-card" style="display: none;">
+                  <!-- This will be populated when user registers for a scheme -->
                 </div>
-                <div class="transaction-info">
-                  <div class="transaction-title">Gold Purchase</div>
-                  <div class="transaction-subtitle">
-                    Today, 2:30 PM • Auto-save
+
+                <div class="scheme-selection" style="margin-top: 1.5rem;">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Select a scheme</h3>
+                  <div class="scheme-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                    <div class="scheme-card" onclick="openSchemeForm('daily')" style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.2s ease;">
+                      <div class="scheme-badge" style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">GOLD</div>
+                      <h4 style="color: var(--text-primary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Daily Saving</h4>
+                      <p style="color: var(--text-secondary); margin-bottom: 1rem;">150 Days Scheme</p>
+                      <button class="join-btn" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Join Now</button>
+                    </div>
+                    <div class="scheme-card" onclick="openSchemeForm('monthly')" style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.2s ease;">
+                      <div class="scheme-badge" style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">GOLD</div>
+                      <h4 style="color: var(--text-primary); font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem;">Monthly Saving</h4>
+                      <p style="color: var(--text-secondary); margin-bottom: 1rem;">16 months, 24 months</p>
+                      <button class="join-btn" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Join Now</button>
+                    </div>
                   </div>
                 </div>
-                <div class="transaction-amount">
-                  <div class="amount-value">₹1,570</div>
-                  <div class="amount-grams">0.25g</div>
+              </div>
+
+              <div class="tab-content" id="digital-gold-tab" style="display: none;">
+                <div class="digital-asset-info" style="text-align: center; padding: 2rem;">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Digital Gold Investment</h3>
+                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Start investing in digital gold with flexible amounts</p>
+                  <button class="invest-btn" onclick="window.location.href='goldapp-invest.html'" style="background: var(--gradient-gold); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Start Investing</button>
                 </div>
               </div>
 
-              <div class="transaction-item">
-                <div class="transaction-icon sip">
-                  <i class="fas fa-calendar"></i>
-                </div>
-                <div class="transaction-info">
-                  <div class="transaction-title">Monthly SIP</div>
-                  <div class="transaction-subtitle">Yesterday, 9:00 AM</div>
-                </div>
-                <div class="transaction-amount">
-                  <div class="amount-value">₹5,000</div>
-                  <div class="amount-grams">0.79g</div>
-                </div>
-              </div>
-
-              <div class="transaction-item">
-                <div class="transaction-icon buy">
-                  <i class="fas fa-gift"></i>
-                </div>
-                <div class="transaction-info">
-                  <div class="transaction-title">Referral Bonus</div>
-                  <div class="transaction-subtitle">
-                    2 days ago • Friend joined
-                  </div>
-                </div>
-                <div class="transaction-amount">
-                  <div class="amount-value">₹125</div>
-                  <div class="amount-grams">0.02g</div>
+              <div class="tab-content" id="digital-silver-tab" style="display: none;">
+                <div class="digital-asset-info" style="text-align: center; padding: 2rem;">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Digital Silver Investment</h3>
+                  <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Diversify your portfolio with digital silver</p>
+                  <button class="invest-btn" onclick="window.location.href='goldapp-invest.html'" style="background: #C0C0C0; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Start Investing</button>
                 </div>
               </div>
             </div>
