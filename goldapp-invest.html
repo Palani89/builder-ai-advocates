@@ -1709,7 +1709,7 @@
               <div class="live-calculator">
                 <div class="calc-row">
                   <span class="calc-label">Investment Amount</span>
-                  <span class="calc-value" id="calcAmount">���5,000</span>
+                  <span class="calc-value" id="calcAmount">₹5,000</span>
                 </div>
                 <div class="calc-row">
                   <span class="calc-label">Gold Quantity</span>
@@ -2696,6 +2696,10 @@ You can manage your SIP from the Portfolio section.`);
 
         // Initialize buy interface
         calculatePrice();
+
+        // Initialize SIP interface
+        selectFrequency('daily');
+        calculateSIPReturns();
         document.getElementById("startDate").min = tomorrow
           .toISOString()
           .split("T")[0];
