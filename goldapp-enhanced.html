@@ -2822,7 +2822,7 @@
       let currentTab = "home";
       let isLoading = false;
 
-      // Tab Navigation
+      // Enhanced Tab Navigation with loading and error handling
       function showTab(tabName) {
         if (isLoading) return;
 
@@ -2837,14 +2837,46 @@
           more: "goldapp-more.html",
         };
 
+        // Check if tab exists
+        if (!pageMap[tabName]) {
+          console.error(`Tab "${tabName}" not found`);
+          return;
+        }
+
         // Check if we're already on the target page
         const currentPage =
           window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
         const targetPage = pageMap[tabName];
 
         if (targetPage && currentPage !== targetPage) {
-          window.location.href = pageMap[tabName];
+          // Show loading state
+          showLoading();
+
+          // Add slight delay for better UX
+          setTimeout(() => {
+            try {
+              window.location.href = targetPage;
+            } catch (error) {
+              console.error('Navigation error:', error);
+              hideLoading();
+              // Revert to previous active state if navigation fails
+              updateNavActiveState(getCurrentTab());
+            }
+          }, 150);
         }
+      }
+
+      // Get current tab based on current page
+      function getCurrentTab() {
+        const currentPage = window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
+        const pageToTab = {
+          "goldapp-enhanced.html": "home",
+          "goldapp-invest.html": "invest",
+          "goldapp-chits.html": "chits",
+          "goldapp-portfolio.html": "portfolio",
+          "goldapp-more.html": "more",
+        };
+        return pageToTab[currentPage] || "home";
       }
 
       // Update navigation active state
