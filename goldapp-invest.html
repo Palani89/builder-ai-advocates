@@ -2824,19 +2824,28 @@ You can manage your SIP from the Portfolio section.`);
 
       // Update navigation active state
       function updateNavActiveState(activeTab) {
-        // Clear all states from nav items
-        document.querySelectorAll('.nav-item').forEach(item => {
-          item.classList.remove('active');
-          item.style.removeProperty('background');
-          item.style.removeProperty('color');
-          item.style.removeProperty('transform');
-          item.blur();
-        });
+        console.log(`Digital Asset: Updating nav active state to ${activeTab}`);
 
-        // Add active class to current tab
-        const activeNavItem = document.getElementById(`nav-${activeTab}`);
-        if (activeNavItem) {
-          activeNavItem.classList.add('active');
+        try {
+          // Clear all states from nav items
+          document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            item.style.removeProperty('background');
+            item.style.removeProperty('color');
+            item.style.removeProperty('transform');
+            item.blur();
+          });
+
+          // Add active class to current tab
+          const activeNavItem = document.getElementById(`nav-${activeTab}`);
+          if (activeNavItem) {
+            activeNavItem.classList.add('active');
+            console.log(`Digital Asset: Successfully activated ${activeTab}`);
+          } else {
+            console.warn(`Digital Asset: Nav item not found: nav-${activeTab}`);
+          }
+        } catch (error) {
+          console.error('Digital Asset: Error updating nav state:', error);
         }
       }
 
