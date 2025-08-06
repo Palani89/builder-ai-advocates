@@ -1241,6 +1241,38 @@
         }
       }
 
+      // Side Menu Functions
+      function toggleSideMenu() {
+        const sideMenu = document.querySelector('.side-menu');
+        const overlay = document.querySelector('.side-menu-overlay');
+
+        sideMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      function closeSideMenu() {
+        const sideMenu = document.querySelector('.side-menu');
+        const overlay = document.querySelector('.side-menu-overlay');
+
+        sideMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+
+      function navigateToPage(page) {
+        closeSideMenu();
+        setTimeout(() => {
+          window.location.href = page;
+        }, 300);
+      }
+
+      function openProfile() {
+        alert("Profile page coming soon!");
+      }
+
+      function showComingSoon(feature) {
+        alert(feature + " is coming soon!");
+      }
+
       // Navigation
       function showTab(tabName) {
         const pageMap = {
