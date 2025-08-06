@@ -2871,7 +2871,7 @@
 
       function showComingSoon(feature) {
         alert(
-          `${feature.charAt(0).toUpperCase() + feature.slice(1)} section coming soon! 🚀`,
+          `${feature.charAt(0).toUpperCase() + feature.slice(1)} section coming soon! ��`,
         );
       }
 
@@ -2984,6 +2984,9 @@
       // Initialize app
       document.addEventListener("DOMContentLoaded", function () {
         console.log("GoldApp Enhanced initialized");
+
+        // Initialize navigation active state
+        updateNavActiveState('home');
 
         // Add fade-in animation to sections
         setTimeout(() => {
