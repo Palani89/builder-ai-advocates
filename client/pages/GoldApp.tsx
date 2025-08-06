@@ -5,8 +5,8 @@ const GoldApp: React.FC = () => {
   const [showSchemesModal, setShowSchemesModal] = useState(false);
 
   const showTab = (tabName: string) => {
-    setCurrentTab(tabName);
-    console.log(`Switching to ${tabName} tab`);
+    // Redirect to goldapp-invest.html for all navigation
+    window.location.href = '/goldapp-invest.html';
   };
 
   const openSchemesModal = () => {
