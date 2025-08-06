@@ -1347,6 +1347,31 @@
 
       <!-- Main Content -->
       <main class="main-content">
+        <!-- User Greeting Section -->
+        <section class="page-section">
+          <div class="user-greeting-section" style="
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+          ">
+            <h2 style="
+              color: #7a0f0f;
+              font-size: 1.75rem;
+              font-weight: 700;
+              margin: 0 0 0.5rem 0;
+            ">Hello, Sri</h2>
+            <p style="
+              color: var(--text-secondary);
+              font-size: 1rem;
+              margin: 0;
+              font-weight: 500;
+            ">Acc No: 12345678</p>
+          </div>
+        </section>
+
         <!-- Live Gold Rates Ticker -->
         <section class="page-section">
           <div class="live-rates-ticker">
@@ -1442,51 +1467,6 @@
           </div>
         </section>
 
-        <!-- Quick Actions -->
-        <section class="page-section">
-          <div class="section-header">
-            <h2 class="section-title">
-              <i class="fas fa-bolt"></i>
-              Quick Actions
-            </h2>
-          </div>
-
-          <div class="quick-actions">
-            <div class="actions-grid">
-              <div class="action-card buy" onclick="showTab('invest')">
-                <div class="action-icon">
-                  <i class="fas fa-plus"></i>
-                </div>
-                <div class="action-title">Buy Now</div>
-                <div class="action-subtitle">Instant gold purchase</div>
-              </div>
-
-              <div class="action-card sip" onclick="showSIPSetup()">
-                <div class="action-icon">
-                  <i class="fas fa-calendar-alt"></i>
-                </div>
-                <div class="action-title">Start SIP</div>
-                <div class="action-subtitle">Systematic investment</div>
-              </div>
-
-              <div class="action-card save" onclick="toggleAutoSave()">
-                <div class="action-icon">
-                  <i class="fas fa-piggy-bank"></i>
-                </div>
-                <div class="action-title">Auto Save</div>
-                <div class="action-subtitle">Save spare change</div>
-              </div>
-
-              <div class="action-card chit" onclick="showTab('chits')">
-                <div class="action-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <div class="action-title">Join Scheme</div>
-                <div class="action-subtitle">Group savings plan</div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <!-- Schemes Overview -->
         <section class="page-section">
