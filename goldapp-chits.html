@@ -1708,6 +1708,52 @@
         // Update timer every second for bidding
         setInterval(updateTimer, 1000);
       });
+
+      // Navigation function
+      function showTabNav(tabName) {
+        window.location.href = 'goldapp-invest.html';
+      }
     </script>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTabNav('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showTabNav('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Invest</span>
+        </button>
+
+        <button class="nav-item active" onclick="showTabNav('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button class="nav-item" onclick="showTabNav('goals')" id="nav-goals">
+          <i class="fas fa-bullseye"></i>
+          <span>Goals</span>
+        </button>
+
+        <button class="nav-item" onclick="showTabNav('portfolio')" id="nav-portfolio">
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTabNav('rewards')" id="nav-rewards">
+          <i class="fas fa-gift"></i>
+          <span>Rewards</span>
+        </button>
+
+        <button class="nav-item" onclick="showTabNav('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
   </body>
 </html>
