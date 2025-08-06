@@ -2798,7 +2798,12 @@
 
       // Enhanced Tab Navigation with loading and error handling
       function showTab(tabName) {
-        if (isLoading) return;
+        console.log(`Navigating to tab: ${tabName}`);
+
+        if (isLoading) {
+          console.log('Navigation blocked - loading in progress');
+          return;
+        }
 
         // Update active state immediately for responsive feedback
         updateNavActiveState(tabName);
@@ -2822,6 +2827,8 @@
           window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
         const targetPage = pageMap[tabName];
 
+        console.log(`Current page: ${currentPage}, Target page: ${targetPage}`);
+
         if (targetPage && currentPage !== targetPage) {
           // Show loading state
           showLoading();
@@ -2829,6 +2836,7 @@
           // Add slight delay for better UX
           setTimeout(() => {
             try {
+              console.log(`Redirecting to: ${targetPage}`);
               window.location.href = targetPage;
             } catch (error) {
               console.error('Navigation error:', error);
@@ -2836,7 +2844,9 @@
               // Revert to previous active state if navigation fails
               updateNavActiveState(getCurrentTab());
             }
-          }, 150);
+          }, 100);
+        } else {
+          console.log('Already on target page or invalid target');
         }
       }
 
