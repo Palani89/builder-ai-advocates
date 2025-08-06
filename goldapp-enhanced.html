@@ -2865,15 +2865,25 @@
 
       // Update navigation active state
       function updateNavActiveState(activeTab) {
-        // Remove active class from all nav items
-        document.querySelectorAll('.nav-item').forEach(item => {
-          item.classList.remove('active');
-        });
+        console.log(`Updating nav active state to: ${activeTab}`);
 
-        // Add active class to current tab
-        const activeNavItem = document.getElementById(`nav-${activeTab}`);
-        if (activeNavItem) {
-          activeNavItem.classList.add('active');
+        try {
+          // Remove active class from all nav items
+          const navItems = document.querySelectorAll('.nav-item');
+          navItems.forEach(item => {
+            item.classList.remove('active');
+          });
+
+          // Add active class to current tab
+          const activeNavItem = document.getElementById(`nav-${activeTab}`);
+          if (activeNavItem) {
+            activeNavItem.classList.add('active');
+            console.log(`Successfully activated nav item: nav-${activeTab}`);
+          } else {
+            console.warn(`Nav item not found: nav-${activeTab}`);
+          }
+        } catch (error) {
+          console.error('Error updating nav active state:', error);
         }
       }
 
