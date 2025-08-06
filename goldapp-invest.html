@@ -2775,8 +2775,10 @@ You can manage your SIP from the Portfolio section.`);
         alert(feature + " is coming soon!");
       }
 
-      // Simplified Tab Navigation
+      // Enhanced Tab Navigation
       function showTab(tabName) {
+        console.log(`Digital Asset page: Navigating to ${tabName}`);
+
         const pageMap = {
           home: "goldapp-enhanced.html",
           invest: "goldapp-invest.html",
@@ -2787,7 +2789,10 @@ You can manage your SIP from the Portfolio section.`);
 
         // Check if tab exists
         const targetPage = pageMap[tabName];
-        if (!targetPage) return;
+        if (!targetPage) {
+          console.error(`Target page not found for tab: ${tabName}`);
+          return;
+        }
 
         // Clear hover states
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -2801,8 +2806,19 @@ You can manage your SIP from the Portfolio section.`);
 
         // Navigate if different page
         const currentPage = window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        console.log(`Current: ${currentPage}, Target: ${targetPage}`);
+
         if (targetPage !== currentPage) {
-          window.location.href = targetPage;
+          console.log(`Navigating from Digital Asset to ${targetPage}`);
+          try {
+            window.location.href = targetPage;
+          } catch (error) {
+            console.error('Navigation error:', error);
+            // Fallback navigation
+            window.location.replace(targetPage);
+          }
+        } else {
+          console.log('Already on target page');
         }
       }
 
