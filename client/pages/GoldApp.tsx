@@ -6,7 +6,7 @@ const GoldApp: React.FC = () => {
 
   const showTab = (tabName: string) => {
     // Redirect to goldapp-invest.html for all navigation
-    window.location.href = '/goldapp-invest.html';
+    window.location.href = "/goldapp-invest.html";
   };
 
   const openSchemesModal = () => {
