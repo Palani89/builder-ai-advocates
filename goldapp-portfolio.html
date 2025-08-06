@@ -716,6 +716,101 @@
     </style>
   </head>
   <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" onclick="closeSideMenu()"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">GoldApp</div>
+        <div class="side-menu-subtitle">Digital Gold Investment</div>
+      </div>
+
+      <div class="side-menu-nav">
+        <button class="side-menu-item" onclick="navigateToPage('goldapp-enhanced.html')">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+        <button class="side-menu-item" onclick="navigateToPage('goldapp-invest.html')">
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+        <button class="side-menu-item" onclick="navigateToPage('goldapp-portfolio.html')">
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+        <button class="side-menu-item" onclick="navigateToPage('goldapp-chits.html')">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+        </button>
+        <button class="side-menu-item" onclick="navigateToPage('goldapp-transactions.html')">
+          <i class="fas fa-exchange-alt"></i>
+          <span>Transactions</span>
+        </button>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Account</div>
+          <button class="side-menu-item" onclick="navigateToPage('goldapp-kyc.html')">
+            <i class="fas fa-file-alt"></i>
+            <span>KYC Verification</span>
+          </button>
+          <button class="side-menu-item" onclick="navigateToPage('goldapp-sip.html')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>SIP Plans</span>
+          </button>
+          <button class="side-menu-item" onclick="navigateToPage('goldapp-more.html')">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </button>
+        </div>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Support</div>
+          <button class="side-menu-item" onclick="showComingSoon('Help Center')">
+            <i class="fas fa-question-circle"></i>
+            <span>Help Center</span>
+          </button>
+          <button class="side-menu-item" onclick="alert('Contact Support: +91 98765 43210')">
+            <i class="fas fa-phone"></i>
+            <span>Contact Support</span>
+          </button>
+          <button class="side-menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <button class="hamburger-menu" onclick="toggleSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="logo-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <span class="logo-text">GoldApp</span>
+        </div>
+
+        <div class="header-actions">
+          <button class="signout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+
+          <div class="user-profile" onclick="openProfile()">
+            <div class="user-avatar">AK</div>
+            <div class="user-info">
+              <div class="user-name">Akash Kumar</div>
+              <div class="user-status">KYC Verified</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <div class="portfolio-section">
       <!-- Portfolio Header -->
       <div class="portfolio-header-section">
