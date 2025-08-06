@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const GoldApp: React.FC = () => {
   const [currentTab, setCurrentTab] = useState("home");
@@ -34,11 +34,11 @@ const GoldApp: React.FC = () => {
   useEffect(() => {
     // Auto-sync animation
     const interval = setInterval(() => {
-      const syncIcon = document.querySelector('.sync-icon') as HTMLElement;
+      const syncIcon = document.querySelector(".sync-icon") as HTMLElement;
       if (syncIcon) {
-        syncIcon.style.animation = 'none';
+        syncIcon.style.animation = "none";
         setTimeout(() => {
-          syncIcon.style.animation = 'spin 1s linear';
+          syncIcon.style.animation = "spin 1s linear";
         }, 10);
       }
     }, 30000);
@@ -802,13 +802,16 @@ const GoldApp: React.FC = () => {
               <div className="sync-info">
                 <div>Last Sync</div>
                 <div>
-                  03-Aug-2025 1:55 PM <i className="fas fa-sync-alt sync-icon"></i>
+                  03-Aug-2025 1:55 PM{" "}
+                  <i className="fas fa-sync-alt sync-icon"></i>
                 </div>
               </div>
             </div>
 
             <div className="schemes-card" onClick={openSchemesModal}>
-              <div className="schemes-message">No Digital Savings Plan found.</div>
+              <div className="schemes-message">
+                No Digital Savings Plan found.
+              </div>
               <div className="schemes-subtitle">Join new plans</div>
               <div className="schemes-arrow">
                 <i className="fas fa-arrow-right"></i>
@@ -819,23 +822,23 @@ const GoldApp: React.FC = () => {
 
         {/* Bottom Navigation */}
         <div className="goldapp-bottom-nav">
-          <button className="nav-item" onClick={() => showTab('transactions')}>
+          <button className="nav-item" onClick={() => showTab("transactions")}>
             <i className="fas fa-file-alt"></i>
             <span>History</span>
           </button>
-          <button className="nav-item" onClick={() => showTab('schemes')}>
+          <button className="nav-item" onClick={() => showTab("schemes")}>
             <i className="fas fa-chart-bar"></i>
             <span>Schemes</span>
           </button>
-          <button className="nav-item home" onClick={() => showTab('home')}>
+          <button className="nav-item home" onClick={() => showTab("home")}>
             <i className="fas fa-home"></i>
             <span>Home</span>
           </button>
-          <button className="nav-item" onClick={() => showTab('savings')}>
+          <button className="nav-item" onClick={() => showTab("savings")}>
             <i className="fas fa-piggy-bank"></i>
             <span>Savings</span>
           </button>
-          <button className="nav-item" onClick={() => showTab('profile')}>
+          <button className="nav-item" onClick={() => showTab("profile")}>
             <i className="fas fa-user"></i>
             <span>Profile</span>
           </button>
@@ -844,11 +847,14 @@ const GoldApp: React.FC = () => {
 
       {/* Schemes Modal */}
       {showSchemesModal && (
-        <div className="modal-overlay" onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            closeSchemesModal();
-          }
-        }}>
+        <div
+          className="modal-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeSchemesModal();
+            }
+          }}
+        >
           <div className="modal-content">
             <div className="modal-header">
               <h3 className="modal-title">Join Digital Savings Plan</h3>
