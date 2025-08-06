@@ -1121,24 +1121,16 @@
       @media (max-width: 768px) {
         .main-content {
           padding: 1rem;
+          margin-top: 70px;
+          margin-bottom: 90px;
         }
 
-        .portfolio-header {
-          flex-direction: column;
-          text-align: center;
+        .header {
+          padding: 0.75rem 1rem;
         }
 
-        .portfolio-value {
-          font-size: 2rem;
-        }
-
-        .rates-grid,
-        .actions-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .user-info {
-          display: none;
+        .header-content {
+          padding: 0;
         }
 
         .logo-text {
@@ -1146,12 +1138,219 @@
           letter-spacing: 0.5px;
         }
 
-        .fab {
-          bottom: 120px;
-          right: 1rem;
-          width: 50px;
-          height: 50px;
+        .signout-btn {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+
+        /* User greeting section mobile */
+        .user-greeting-section {
+          padding: 1rem !important;
+          margin-bottom: 1rem !important;
+          border-radius: 12px !important;
+        }
+
+        .user-greeting-section h2 {
+          font-size: 1.5rem !important;
+          margin-bottom: 0.25rem !important;
+        }
+
+        .user-greeting-section p {
+          font-size: 0.875rem !important;
+        }
+
+        /* Live rates mobile */
+        .live-rates-ticker {
+          padding: 1rem;
+          border-radius: 12px;
+          margin-bottom: 1rem;
+        }
+
+        .rates-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+        }
+
+        .rate-card {
+          padding: 1rem;
+          border-radius: 8px;
+        }
+
+        .rate-header {
+          margin-bottom: 0.75rem;
+        }
+
+        .rate-icon {
+          width: 32px;
+          height: 32px;
+          font-size: 1rem;
+        }
+
+        .rate-name {
+          font-size: 0.875rem;
+        }
+
+        .rate-price {
           font-size: 1.25rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .rate-change {
+          font-size: 0.75rem;
+        }
+
+        /* Portfolio overview mobile */
+        .portfolio-overview {
+          padding: 1.5rem;
+          border-radius: 16px;
+          margin-bottom: 1rem;
+        }
+
+        .portfolio-header {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+          text-align: left;
+          margin-bottom: 1.5rem;
+        }
+
+        .portfolio-title {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .portfolio-value {
+          font-size: 1.75rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .portfolio-change {
+          font-size: 0.875rem;
+        }
+
+        .portfolio-header button {
+          padding: 0.5rem 1rem !important;
+          font-size: 0.875rem !important;
+          border-radius: 6px !important;
+        }
+
+        .portfolio-stats {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
+        }
+
+        .stat-item {
+          text-align: center;
+        }
+
+        .stat-label {
+          font-size: 0.75rem;
+          opacity: 0.9;
+          margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+          font-size: 1.125rem;
+          font-weight: 700;
+        }
+
+        /* Overview section mobile */
+        .schemes-overview {
+          padding: 1rem;
+        }
+
+        .overview-title {
+          font-size: 1.25rem !important;
+          margin-bottom: 1rem !important;
+        }
+
+        .overview-tabs {
+          flex-direction: row !important;
+          gap: 0.25rem !important;
+        }
+
+        .tab-btn {
+          padding: 0.5rem 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Scheme card mobile */
+        .scheme-cards {
+          grid-template-columns: 1fr !important;
+          gap: 1rem;
+        }
+
+        .scheme-card {
+          padding: 1.25rem !important;
+          border-radius: 12px;
+        }
+
+        .scheme-badge {
+          font-size: 0.7rem !important;
+          padding: 0.25rem 0.5rem !important;
+        }
+
+        .scheme-card h4 {
+          font-size: 1rem !important;
+        }
+
+        .scheme-card p {
+          font-size: 0.875rem !important;
+        }
+
+        .join-btn {
+          padding: 0.625rem 1.25rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Bottom navigation mobile */
+        .bottom-nav {
+          padding: 0.5rem 0.75rem;
+          height: auto;
+        }
+
+        .nav-items {
+          max-width: 100%;
+          gap: 0;
+        }
+
+        .nav-item {
+          flex: 1;
+          min-width: auto;
+          max-width: none;
+          padding: 0.5rem 0.25rem;
+          font-size: 0.7rem;
+        }
+
+        .nav-item i {
+          font-size: 1.125rem;
+          margin-bottom: 0.125rem;
+        }
+
+        .nav-item span {
+          font-size: 0.65rem;
+        }
+
+        .nav-badge {
+          top: 0.125rem;
+          right: 0.125rem;
+          font-size: 0.55rem;
+          width: 12px;
+          height: 12px;
+        }
+
+        /* FAB mobile */
+        .fab {
+          bottom: 100px;
+          right: 1rem;
+          width: 56px;
+          height: 56px;
+          font-size: 1.25rem;
+          box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        .user-info {
+          display: none;
         }
 
         /* Mobile styles for schemes overview section */
@@ -2325,7 +2524,7 @@
                           margin-bottom: 0.25rem;
                         "
                       >
-                        ₹
+                        ���
                       </div>
                       <div
                         id="silverTotalPrice"
