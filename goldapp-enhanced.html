@@ -2642,7 +2642,26 @@
         showTab("goals");
       }
 
+      // Quick Actions Modal Functions
+      function openQuickActionsModal() {
+        const modal = document.getElementById('quickActionsModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeQuickActionsModal(event) {
+        if (event && event.target !== event.currentTarget) return;
+        const modal = document.getElementById('quickActionsModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
       function showQuickMenu() {
+        openQuickActionsModal();
+      }
+
+      // Legacy function kept for compatibility
+      function showQuickMenuOld() {
         console.log("Opening quick menu");
         const actions = [
           "Buy Gold",
