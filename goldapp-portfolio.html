@@ -1144,9 +1144,6 @@
       }
 
       function showTab(tabName) {
-        // Update active state immediately for responsive feedback
-        updateNavActiveState(tabName);
-
         const pageMap = {
           home: "goldapp-enhanced.html",
           invest: "goldapp-invest.html",
@@ -1155,32 +1152,33 @@
           more: "goldapp-more.html",
         };
 
-        // Check if tab exists
-        if (!pageMap[tabName]) {
-          console.error(`Tab "${tabName}" not found`);
-          return;
-        }
-
-        // Check if we're already on the target page
-        const currentPage =
-          window.location.pathname.split("/").pop() || "goldapp-portfolio.html";
         const targetPage = pageMap[tabName];
+        if (!targetPage) return;
 
-        if (targetPage && currentPage !== targetPage) {
-          setTimeout(() => {
-            window.location.href = targetPage;
-          }, 150);
+        // Clear hover states
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.blur();
+          item.style.background = '';
+          item.style.color = '';
+        });
+
+        updateNavActiveState(tabName);
+
+        const currentPage = window.location.pathname.split("/").pop() || "goldapp-portfolio.html";
+        if (targetPage !== currentPage) {
+          window.location.href = targetPage;
         }
       }
 
       // Update navigation active state
       function updateNavActiveState(activeTab) {
-        // Remove active class from all nav items
         document.querySelectorAll('.nav-item').forEach(item => {
           item.classList.remove('active');
+          item.style.removeProperty('background');
+          item.style.removeProperty('color');
+          item.blur();
         });
 
-        // Add active class to current tab
         const activeNavItem = document.getElementById(`nav-${activeTab}`);
         if (activeNavItem) {
           activeNavItem.classList.add('active');
