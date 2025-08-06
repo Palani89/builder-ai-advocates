@@ -6,7 +6,7 @@ const GoldApp: React.FC = () => {
 
   const showTab = (tabName: string) => {
     const pageMap: { [key: string]: string } = {
-      home: "/goldapp-index.html",
+      home: "/goldapp-enhanced.html",
       invest: "/goldapp-invest.html",
       chits: "/goldapp-chits.html",
       portfolio: "/goldapp-portfolio.html",
@@ -17,7 +17,11 @@ const GoldApp: React.FC = () => {
       profile: "/goldapp-more.html",
     };
 
-    if (pageMap[tabName]) {
+    // Check if we're already on the target page
+    const currentPage = window.location.pathname.split('/').pop() || 'goldapp-index.html';
+    const targetPage = pageMap[tabName]?.replace('/', '') || '';
+
+    if (targetPage && currentPage !== targetPage) {
       window.location.href = pageMap[tabName];
     }
   };
