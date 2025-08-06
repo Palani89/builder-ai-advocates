@@ -927,6 +927,157 @@
         box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
       }
 
+      /* Quick Actions Modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        box-shadow: var(--shadow-xl);
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .close-btn:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      /* Quick Actions Grid */
+      .popup-actions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .popup-action-card {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .popup-action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
+      }
+
+      .popup-action-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin: 0 auto 1rem;
+        transition: all 0.2s ease;
+      }
+
+      .popup-action-card.buy .popup-action-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .popup-action-card.sip .popup-action-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--info);
+      }
+
+      .popup-action-card.save .popup-action-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .popup-action-card.chit .popup-action-icon {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .popup-action-card:hover .popup-action-icon {
+        transform: scale(1.1);
+      }
+
+      .popup-action-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .popup-action-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
       /* Daily Quote */
       .daily-quote {
         background: linear-gradient(135deg, var(--info) 0%, #8b5cf6 100%);
@@ -1954,7 +2105,7 @@
                       >
                       <span style="color: #8b5a2b; font-weight: 500"
                         >Earning:
-                        <span id="goldEarningAmount">₹6,285*</span></span
+                        <span id="goldEarningAmount">��6,285*</span></span
                       >
                     </div>
                   </div>
