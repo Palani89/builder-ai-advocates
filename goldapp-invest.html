@@ -1269,7 +1269,7 @@
                 <i class="fas fa-coins"></i>
               </div>
               <div class="asset-name">Gold SIP</div>
-              <div class="asset-price">₹6,285/g</div>
+              <div class="asset-price">���6,285/g</div>
               <div class="asset-change positive">+0.56% today</div>
             </div>
 
@@ -1713,10 +1713,248 @@
           return;
         }
 
-        alert(
-          `Setting up ${selectedFrequency} ${selectedAsset} SIP of ₹${amount} starting ${startDate}...`,
-        );
-        // In real app, this would set up the SIP
+        // Hide the current invest content and show SIP setup
+        loadSIPSetup(amount, startDate);
+      }
+
+      function loadSIPSetup(amount, startDate) {
+        // Create SIP setup modal/overlay content
+        const sipContent = `
+          <div class="sip-setup-overlay" id="sipSetupOverlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+          ">
+            <div class="sip-setup-content" style="
+              background: var(--surface);
+              border-radius: 16px;
+              padding: 2rem;
+              max-width: 500px;
+              width: 90%;
+              max-height: 80vh;
+              overflow-y: auto;
+              box-shadow: var(--shadow-xl);
+              animation: slideIn 0.3s ease;
+            ">
+              <!-- SIP Setup Header -->
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="
+                  width: 60px;
+                  height: 60px;
+                  background: var(--gradient-gold);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-size: 1.5rem;
+                  margin: 0 auto 1rem;
+                ">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                  SIP Setup Confirmation
+                </h2>
+                <p style="color: var(--text-secondary);">
+                  Review your SIP details and complete the setup
+                </p>
+              </div>
+
+              <!-- SIP Details Summary -->
+              <div style="
+                background: var(--background);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+              ">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                  SIP Details
+                </h3>
+                <div style="display: grid; gap: 1rem;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Asset:</span>
+                    <span style="font-weight: 600; text-transform: capitalize;">${selectedAsset}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Amount:</span>
+                    <span style="font-weight: 600;">₹${amount}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Frequency:</span>
+                    <span style="font-weight: 600; text-transform: capitalize;">${selectedFrequency}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Start Date:</span>
+                    <span style="font-weight: 600;">${startDate}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
+                    <span style="color: var(--text-secondary);">Expected Annual Returns:</span>
+                    <span style="font-weight: 600; color: var(--success);">8-12%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                  Auto-Debit Method
+                </h3>
+                <div style="display: grid; gap: 1rem;">
+                  <div onclick="selectSIPPayment('upi')" style="
+                    background: var(--background);
+                    border: 2px solid var(--primary);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  ">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <div style="
+                        width: 40px;
+                        height: 40px;
+                        background: rgba(255, 215, 0, 0.1);
+                        color: var(--primary-dark);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1rem;
+                      ">
+                        <i class="fas fa-mobile-alt"></i>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">UPI AutoPay</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Automatic deduction via UPI</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div onclick="selectSIPPayment('bank')" style="
+                    background: var(--background);
+                    border: 2px solid var(--border);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  ">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <div style="
+                        width: 40px;
+                        height: 40px;
+                        background: rgba(255, 215, 0, 0.1);
+                        color: var(--primary-dark);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1rem;
+                      ">
+                        <i class="fas fa-university"></i>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Bank Mandate</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Direct debit from bank account</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 1rem;">
+                <button onclick="closeSIPSetup()" style="
+                  flex: 1;
+                  padding: 1rem;
+                  background: var(--background);
+                  color: var(--text-primary);
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-weight: 500;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                ">
+                  Cancel
+                </button>
+                <button onclick="confirmSIPSetup()" style="
+                  flex: 2;
+                  padding: 1rem;
+                  background: var(--gradient-gold);
+                  color: white;
+                  border: none;
+                  border-radius: 8px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                ">
+                  <i class="fas fa-check"></i> Confirm SIP Setup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <style>
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes slideIn {
+              from { transform: translateY(-50px); opacity: 0; }
+              to { transform: translateY(0); opacity: 1; }
+            }
+          </style>
+        `;
+
+        // Add the SIP setup to the page
+        document.body.insertAdjacentHTML('beforeend', sipContent);
+      }
+
+      function closeSIPSetup() {
+        const overlay = document.getElementById('sipSetupOverlay');
+        if (overlay) {
+          overlay.remove();
+        }
+      }
+
+      function selectSIPPayment(method) {
+        // Remove active class from all payment methods
+        document.querySelectorAll('#sipSetupOverlay [onclick*="selectSIPPayment"]').forEach(el => {
+          el.style.borderColor = 'var(--border)';
+        });
+
+        // Add active class to selected method
+        event.currentTarget.style.borderColor = 'var(--primary)';
+      }
+
+      function confirmSIPSetup() {
+        const amount = document.getElementById("sipAmount").value;
+        const startDate = document.getElementById("startDate").value;
+
+        // Show success message
+        alert(`🎉 SIP Setup Successful!
+
+Your ${selectedFrequency} ${selectedAsset} SIP of ₹${amount} has been set up successfully.
+
+✅ Start Date: ${startDate}
+✅ Auto-debit enabled
+✅ First investment will be processed on ${startDate}
+
+You can manage your SIP from the Portfolio section.`);
+
+        // Close the SIP setup
+        closeSIPSetup();
+
+        // Optionally redirect to portfolio or show SIP in the current view
+        setTimeout(() => {
+          alert("Redirecting to Portfolio to view your new SIP...");
+          window.location.href = "goldapp-portfolio.html";
+        }, 2000);
       }
 
       function goBack() {
