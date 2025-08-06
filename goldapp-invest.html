@@ -1322,137 +1322,217 @@
               border: 1px solid var(--border);
             "
           >
-            <!-- Grams Input Section -->
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: 2rem;
-                margin-bottom: 2rem;
-              "
-            >
-              <div style="display: flex; align-items: center; gap: 1rem">
-                <span
-                  style="font-size: 1.5rem; font-weight: 600; color: #6b7280"
-                  >g</span
+            <!-- One Time Interface -->
+            <div id="onetimeInterface">
+              <!-- Grams Input Section -->
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  margin-bottom: 2rem;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 1rem">
+                  <span
+                    style="font-size: 1.5rem; font-weight: 600; color: #6b7280"
+                    >g</span
+                  >
+                  <input
+                    type="number"
+                    id="gramsInput"
+                    value="10"
+                    min="1"
+                    oninput="calculatePrice()"
+                    style="
+                      font-size: 2rem;
+                      font-weight: 700;
+                      width: 120px;
+                      border: none;
+                      background: transparent;
+                      outline: none;
+                      color: var(--text-primary);
+                    "
+                  />
+                </div>
+                <div
+                  style="
+                    background: var(--surface);
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #6b7280;
+                  "
                 >
+                  <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div style="text-align: right">
+                  <div
+                    style="
+                      color: #6b7280;
+                      font-size: 0.875rem;
+                      margin-bottom: 0.25rem;
+                    "
+                  >
+                    ₹
+                  </div>
+                  <div
+                    id="totalPrice"
+                    style="
+                      font-size: 1.5rem;
+                      font-weight: 700;
+                      color: var(--text-primary);
+                    "
+                  >
+                    105014.89
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Selection Buttons -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                <button
+                  onclick="setGrams(10)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    position: relative;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    10 gm
+                  </div>
+                  <div
+                    style="
+                      background: #7a0f0f;
+                      color: white;
+                      font-size: 0.75rem;
+                      padding: 0.25rem 0.5rem;
+                      border-radius: 4px;
+                      position: absolute;
+                      bottom: -8px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                    "
+                  >
+                    Best
+                  </div>
+                </button>
+                <button
+                  onclick="setGrams(20)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    20 gm
+                  </div>
+                </button>
+                <button
+                  onclick="setGrams(50)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    50 gm
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- SIP Interface -->
+            <div id="sipInterface" style="display: none;">
+              <!-- Amount Input Section -->
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="color: #6b7280; font-size: 1rem; margin-bottom: 0.5rem;">₹</div>
                 <input
                   type="number"
-                  id="gramsInput"
-                  value="10"
-                  min="1"
-                  oninput="calculatePrice()"
+                  id="sipAmountInput"
+                  value="100"
+                  min="10"
+                  oninput="calculateSIPReturns()"
                   style="
-                    font-size: 2rem;
+                    font-size: 3rem;
                     font-weight: 700;
-                    width: 120px;
+                    width: 200px;
                     border: none;
                     background: transparent;
                     outline: none;
                     color: var(--text-primary);
+                    text-align: center;
                   "
                 />
               </div>
-              <div
-                style="
-                  background: var(--surface);
-                  border-radius: 50%;
-                  width: 40px;
-                  height: 40px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: #6b7280;
-                "
-              >
-                <i class="fas fa-exchange-alt"></i>
-              </div>
-              <div style="text-align: right">
-                <div
-                  style="
-                    color: #6b7280;
-                    font-size: 0.875rem;
-                    margin-bottom: 0.25rem;
-                  "
-                >
-                  ₹
-                </div>
-                <div
-                  id="totalPrice"
-                  style="
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    color: var(--text-primary);
-                  "
-                >
-                  105014.89
-                </div>
-              </div>
-            </div>
 
-            <!-- Quick Selection Buttons -->
-            <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
-              <button
-                onclick="setGrams(10)"
-                style="
-                  flex: 1;
-                  padding: 1rem;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: 8px;
-                  cursor: pointer;
-                  position: relative;
-                "
-              >
-                <div style="font-weight: 600; color: var(--text-primary)">
-                  10 gm
-                </div>
-                <div
+              <!-- Frequency Selection -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                <button
+                  id="dailyBtn"
+                  onclick="selectFrequency('daily')"
                   style="
-                    background: #7a0f0f;
-                    color: white;
-                    font-size: 0.75rem;
-                    padding: 0.25rem 0.5rem;
-                    border-radius: 4px;
-                    position: absolute;
-                    bottom: -8px;
-                    left: 50%;
-                    transform: translateX(-50%);
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 2px solid #7a0f0f;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: #7a0f0f;
                   "
                 >
-                  Best
-                </div>
-              </button>
-              <button
-                onclick="setGrams(20)"
-                style="
-                  flex: 1;
-                  padding: 1rem;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: 8px;
-                  cursor: pointer;
-                "
-              >
-                <div style="font-weight: 600; color: var(--text-primary)">
-                  20 gm
-                </div>
-              </button>
-              <button
-                onclick="setGrams(50)"
-                style="
-                  flex: 1;
-                  padding: 1rem;
-                  background: var(--surface);
-                  border: 1px solid var(--border);
-                  border-radius: 8px;
-                  cursor: pointer;
-                "
-              >
-                <div style="font-weight: 600; color: var(--text-primary)">
-                  50 gm
-                </div>
-              </button>
+                  Daily
+                </button>
+                <button
+                  id="weeklyBtn"
+                  onclick="selectFrequency('weekly')"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: var(--text-secondary);
+                  "
+                >
+                  Weekly
+                </button>
+                <button
+                  id="monthlyBtn"
+                  onclick="selectFrequency('monthly')"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: var(--text-secondary);
+                  "
+                >
+                  Monthly
+                </button>
+              </div>
             </div>
 
             <!-- Projected Returns -->
@@ -1704,7 +1784,7 @@
             >
           </div>
           <div class="tip-card">
-            <span class="tip-icon">📈</span>
+            <span class="tip-icon">��</span>
             <span class="tip-text"
               >Gold typically performs well during economic uncertainty and
               inflation.</span
