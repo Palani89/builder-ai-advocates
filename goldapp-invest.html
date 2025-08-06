@@ -2126,6 +2126,9 @@ You can manage your SIP from the Portfolio section.`);
         // Set minimum date to tomorrow
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Initialize buy interface
+        calculatePrice();
         document.getElementById("startDate").min = tomorrow
           .toISOString()
           .split("T")[0];
