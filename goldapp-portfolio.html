@@ -43,8 +43,92 @@
         color: var(--text-primary);
         line-height: 1.6;
         padding-top: 80px;
-        padding-bottom: 80px;
+        padding-bottom: 100px;
       }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 0.25rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 12px;
+        position: relative;
+        min-width: 60px;
+        flex: 1;
+        max-width: 80px;
+      }
+
+      .nav-item.active {
+        color: var(--primary-dark);
+        background: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      }
+
+      .nav-item:hover {
+        color: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .nav-item:active {
+        transform: translateY(0);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.6rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      --primary-light: #fff8dc;
 
       .portfolio-section {
         display: flex;
