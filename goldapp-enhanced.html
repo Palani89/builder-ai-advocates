@@ -113,20 +113,35 @@
         gap: 1rem;
       }
 
-      .notification-btn {
-        position: relative;
-        background: var(--background);
+      .hamburger-menu {
+        background: none;
         border: none;
-        border-radius: 12px;
-        padding: 0.75rem;
+        font-size: 1.25rem;
+        color: var(--text-primary);
         cursor: pointer;
+        margin-right: 1rem;
+        padding: 0.5rem;
         transition: all 0.2s ease;
-        color: var(--text-secondary);
       }
 
-      .notification-btn:hover {
-        background: var(--border);
-        transform: translateY(-1px);
+      .hamburger-menu:hover {
+        color: var(--primary-dark);
+      }
+
+      .signout-btn {
+        background: var(--error);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .signout-btn:hover {
+        background: #dc2626;
+        transform: scale(1.05);
       }
 
       .notification-badge {
