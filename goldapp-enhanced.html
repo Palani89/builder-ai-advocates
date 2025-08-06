@@ -1303,39 +1303,35 @@
           font-size: 0.875rem !important;
         }
 
-        /* Bottom navigation mobile */
+        /* Mobile bottom navigation adjustments */
         .bottom-nav {
           padding: 0.5rem 0.75rem;
-          height: auto;
         }
 
         .nav-items {
-          max-width: 100%;
           gap: 0;
         }
 
         .nav-item {
-          flex: 1;
-          min-width: auto;
-          max-width: none;
           padding: 0.5rem 0.25rem;
-          font-size: 0.7rem;
+          font-size: 0.65rem;
+          min-width: 50px;
+          max-width: none;
           -webkit-tap-highlight-color: transparent;
           touch-action: manipulation;
         }
 
         .nav-item:active {
-          transform: scale(0.95);
-          background: rgba(255, 188, 0, 0.2);
+          transform: scale(0.95) translateY(-1px);
         }
 
         .nav-item i {
-          font-size: 1.125rem;
+          font-size: 1.1rem;
           margin-bottom: 0.125rem;
         }
 
         .nav-item span {
-          font-size: 0.65rem;
+          font-size: 0.6rem;
         }
 
         .nav-badge {
