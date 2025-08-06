@@ -722,9 +722,12 @@
 
       .nav-items {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        align-items: center;
         max-width: 600px;
         margin: 0 auto;
+        width: 100%;
+        gap: 0.25rem;
       }
 
       .nav-item {
@@ -743,11 +746,25 @@
         padding: 0.5rem;
         border-radius: 12px;
         position: relative;
+        min-width: 60px;
+        flex: 1;
+        max-width: 80px;
       }
 
       .nav-item.active {
         color: var(--primary-dark);
         background: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      }
+
+      .nav-item:hover {
+        color: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .nav-item:active {
+        transform: translateY(0);
       }
 
       .nav-item i {
@@ -1329,7 +1346,10 @@
         });
 
         // Add active class to selected tab
-        document.getElementById(`nav-${tabName}`).classList.add("active");
+        const targetTab = document.getElementById(`nav-${tabName}`);
+        if (targetTab) {
+          targetTab.classList.add("active");
+        }
 
         currentTab = tabName;
 
