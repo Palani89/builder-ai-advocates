@@ -2524,7 +2524,7 @@
                           margin-bottom: 0.25rem;
                         "
                       >
-                        ���
+                        ₹
                       </div>
                       <div
                         id="silverTotalPrice"
@@ -2823,6 +2823,9 @@
       function showTab(tabName) {
         if (isLoading) return;
 
+        // Update active state immediately for responsive feedback
+        updateNavActiveState(tabName);
+
         const pageMap = {
           home: "goldapp-enhanced.html",
           invest: "goldapp-invest.html",
@@ -2838,6 +2841,20 @@
 
         if (targetPage && currentPage !== targetPage) {
           window.location.href = pageMap[tabName];
+        }
+      }
+
+      // Update navigation active state
+      function updateNavActiveState(activeTab) {
+        // Remove active class from all nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        // Add active class to current tab
+        const activeNavItem = document.getElementById(`nav-${activeTab}`);
+        if (activeNavItem) {
+          activeNavItem.classList.add('active');
         }
       }
 
