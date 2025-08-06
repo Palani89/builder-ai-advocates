@@ -36,7 +36,7 @@
         background: var(--background);
         color: var(--text-primary);
         margin: 0;
-        padding: 0;
+        padding: 0 0 100px 0;
       }
 
       .sip-container {
@@ -520,6 +520,88 @@
         line-height: 1.5;
       }
 
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 0.25rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 12px;
+        position: relative;
+        min-width: 60px;
+        flex: 1;
+        max-width: 80px;
+      }
+
+      .nav-item.active {
+        color: var(--primary-dark);
+        background: rgba(255, 215, 0, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      }
+
+      .nav-item:hover {
+        color: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .nav-item:active {
+        transform: translateY(0);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.6rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       @media (max-width: 768px) {
         .sip-container {
           padding: 1rem;
@@ -949,6 +1031,47 @@
       </div>
     </div>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item active" onclick="showTab('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Invest</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('goals')" id="nav-goals">
+          <i class="fas fa-bullseye"></i>
+          <span>Goals</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('portfolio')" id="nav-portfolio">
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('rewards')" id="nav-rewards">
+          <i class="fas fa-gift"></i>
+          <span>Rewards</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
+
     <script>
       let selectedFrequency = "monthly";
       let selectedPayment = "upi";
@@ -1103,6 +1226,11 @@
           .toISOString()
           .split("T")[0];
       });
+
+      // Navigation
+      function showTab(tabName) {
+        window.location.href = "goldapp-invest.html";
+      }
 
       // Update summary when amount changes
       document
