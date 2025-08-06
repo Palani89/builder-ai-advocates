@@ -3020,8 +3020,9 @@
       document.addEventListener("DOMContentLoaded", function () {
         console.log("GoldApp Enhanced initialized");
 
-        // Initialize navigation active state
-        updateNavActiveState('home');
+        // Initialize navigation active state based on current page
+        const currentTab = getCurrentTab();
+        updateNavActiveState(currentTab);
 
         // Add fade-in animation to sections
         setTimeout(() => {
