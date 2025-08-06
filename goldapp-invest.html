@@ -1791,6 +1791,16 @@
           window.location.href = pageMap[tabName];
         }
       }
+
+      // Logout function
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert("Logged out successfully!");
+          window.location.href = "index-landing.html";
+        }
+      }
     </script>
 
     <!-- Bottom Navigation -->
