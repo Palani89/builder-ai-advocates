@@ -1418,14 +1418,18 @@
       // Navigation function
       function showTab(tabName) {
         const pageMap = {
-          home: "goldapp-index.html",
+          home: "goldapp-enhanced.html",
           invest: "goldapp-invest.html",
           chits: "goldapp-chits.html",
           portfolio: "goldapp-portfolio.html",
           more: "goldapp-more.html",
         };
 
-        if (pageMap[tabName]) {
+        // Check if we're already on the target page
+        const currentPage = window.location.pathname.split('/').pop() || 'goldapp-invest.html';
+        const targetPage = pageMap[tabName];
+
+        if (targetPage && currentPage !== targetPage) {
           window.location.href = pageMap[tabName];
         }
       }
