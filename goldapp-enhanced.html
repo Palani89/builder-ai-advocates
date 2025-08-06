@@ -1745,7 +1745,7 @@
                   <div style="background: var(--surface); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
                     <div style="font-size: 1.125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: flex; justify-content: space-between;">
                       <span>Projected 1 year returns</span>
-                      <span id="silverProjectedReturns" style="color: var(--success);">���838</span>
+                      <span id="silverProjectedReturns" style="color: var(--success);">₹838</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                       <span style="color: #8b5a2b; font-weight: 500;">Investment: <span id="silverInvestmentAmount">₹762</span></span>
@@ -2002,6 +2002,10 @@
         }
       }
 
+      // Asset rates for calculations
+      const goldRate = 6285;
+      const silverRate = 76.2;
+
       // Schemes Overview Functions
       function switchOverviewTab(tabName) {
         // Remove active class from all tabs
@@ -2023,6 +2027,107 @@
         event.target.classList.add("active");
         event.target.style.background = "#7A0F0F";
         event.target.style.color = "white";
+
+        // Initialize calculations for gold/silver tabs
+        if (tabName === 'digital-gold') {
+          setTimeout(() => calculateGoldPrice(), 100);
+        } else if (tabName === 'digital-silver') {
+          setTimeout(() => calculateSilverPrice(), 100);
+        }
+      }
+
+      // Gold buy interface functions
+      function switchGoldMode(mode) {
+        const onetimeBtn = document.getElementById('goldOnetimeBtn');
+        const sipBtn = document.getElementById('goldSipBtn');
+
+        if (mode === 'onetime') {
+          onetimeBtn.style.background = '#7a0f0f';
+          onetimeBtn.style.color = 'white';
+          sipBtn.style.background = '#e5e7eb';
+          sipBtn.style.color = '#6b7280';
+        } else {
+          sipBtn.style.background = '#7a0f0f';
+          sipBtn.style.color = 'white';
+          onetimeBtn.style.background = '#e5e7eb';
+          onetimeBtn.style.color = '#6b7280';
+        }
+      }
+
+      function setGoldGrams(grams) {
+        document.getElementById('goldGramsInput').value = grams;
+        calculateGoldPrice();
+      }
+
+      function calculateGoldPrice() {
+        const grams = parseFloat(document.getElementById('goldGramsInput').value) || 0;
+        const totalPrice = grams * goldRate;
+
+        // Update displays
+        document.getElementById('goldTotalPrice').textContent = totalPrice.toFixed(0);
+        document.getElementById('goldFinalPrice').textContent = totalPrice.toFixed(0);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById('goldProjectedReturns').textContent = '₹' + projectedValue.toFixed(0);
+        document.getElementById('goldInvestmentAmount').textContent = '₹' + totalPrice.toFixed(0);
+        document.getElementById('goldEarningAmount').textContent = '₹' + earning.toFixed(0) + '*';
+      }
+
+      function proceedToGoldPay() {
+        const grams = document.getElementById('goldGramsInput').value;
+        const totalPrice = document.getElementById('goldFinalPrice').textContent;
+
+        alert(`Proceeding to payment for ${grams}g of gold worth ₹${totalPrice}`);
+      }
+
+      // Silver buy interface functions
+      function switchSilverMode(mode) {
+        const onetimeBtn = document.getElementById('silverOnetimeBtn');
+        const sipBtn = document.getElementById('silverSipBtn');
+
+        if (mode === 'onetime') {
+          onetimeBtn.style.background = '#7a0f0f';
+          onetimeBtn.style.color = 'white';
+          sipBtn.style.background = '#e5e7eb';
+          sipBtn.style.color = '#6b7280';
+        } else {
+          sipBtn.style.background = '#7a0f0f';
+          sipBtn.style.color = 'white';
+          onetimeBtn.style.background = '#e5e7eb';
+          onetimeBtn.style.color = '#6b7280';
+        }
+      }
+
+      function setSilverGrams(grams) {
+        document.getElementById('silverGramsInput').value = grams;
+        calculateSilverPrice();
+      }
+
+      function calculateSilverPrice() {
+        const grams = parseFloat(document.getElementById('silverGramsInput').value) || 0;
+        const totalPrice = grams * silverRate;
+
+        // Update displays
+        document.getElementById('silverTotalPrice').textContent = totalPrice.toFixed(0);
+        document.getElementById('silverFinalPrice').textContent = totalPrice.toFixed(0);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById('silverProjectedReturns').textContent = '₹' + projectedValue.toFixed(0);
+        document.getElementById('silverInvestmentAmount').textContent = '₹' + totalPrice.toFixed(0);
+        document.getElementById('silverEarningAmount').textContent = '₹' + earning.toFixed(1) + '*';
+      }
+
+      function proceedToSilverPay() {
+        const grams = document.getElementById('silverGramsInput').value;
+        const totalPrice = document.getElementById('silverFinalPrice').textContent;
+
+        alert(`Proceeding to payment for ${grams}g of silver worth ₹${totalPrice}`);
       }
 
       function openSchemeForm(schemeType) {
