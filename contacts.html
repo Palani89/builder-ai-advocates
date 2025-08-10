@@ -1152,8 +1152,103 @@
     </div>
 
     <script>
+      // Contacts Pagination functionality
+      let currentContactsPage = 1;
+      let contactsItemsPerPage = 10;
+      let totalContactsItems = 45; // This would come from your data source
+      let totalContactsPages = Math.ceil(totalContactsItems / contactsItemsPerPage);
+
+      function changeContactsPage(direction) {
+        if (direction === "next" && currentContactsPage < totalContactsPages) {
+          currentContactsPage++;
+        } else if (direction === "prev" && currentContactsPage > 1) {
+          currentContactsPage--;
+        }
+        updateContactsPagination();
+        loadContactsData();
+      }
+
+      function goToContactsPage(page) {
+        if (page >= 1 && page <= totalContactsPages) {
+          currentContactsPage = page;
+          updateContactsPagination();
+          loadContactsData();
+        }
+      }
+
+      function changeContactsItemsPerPage(newItemsPerPage) {
+        contactsItemsPerPage = parseInt(newItemsPerPage);
+        totalContactsPages = Math.ceil(totalContactsItems / contactsItemsPerPage);
+        currentContactsPage = 1; // Reset to first page
+        updateContactsPagination();
+        loadContactsData();
+      }
+
+      function updateContactsPagination() {
+        // Update pagination info
+        const startItem = (currentContactsPage - 1) * contactsItemsPerPage + 1;
+        const endItem = Math.min(
+          currentContactsPage * contactsItemsPerPage,
+          totalContactsItems
+        );
+        $("#contacts-pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalContactsItems}</strong> contacts`
+        );
+
+        // Update pagination numbers
+        const paginationNumbers = $("#contacts-pagination-numbers");
+        paginationNumbers.empty();
+
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentContactsPage - 2);
+        let endPage = Math.min(totalContactsPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+          startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Previous pages
+        if (startPage > 1) {
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToContactsPage(1)">1</button>`
+          );
+          if (startPage > 2) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Current range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentContactsPage ? "active" : "";
+          paginationNumbers.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToContactsPage(${i})">${i}</button>`
+          );
+        }
+
+        // Next pages
+        if (endPage < totalContactsPages) {
+          if (endPage < totalContactsPages - 1) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToContactsPage(${totalContactsPages})">${totalContactsPages}</button>`
+          );
+        }
+
+        // Update prev/next buttons
+        $(".prev-btn").prop("disabled", currentContactsPage === 1);
+        $(".next-btn").prop("disabled", currentContactsPage === totalContactsPages);
+      }
+
+      function loadContactsData() {
+        // This function would load contacts for the current page
+        // For now, we'll just scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       $(document).ready(function () {
         loadContacts();
+        updateContactsPagination(); // Initialize pagination
 
         // Search functionality
         $("#searchInput").on("input", function () {
