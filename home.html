@@ -3668,7 +3668,118 @@
       // Initialize pagination on page load
       $(document).ready(function() {
         updatePagination();
+        updateHearingsPagination();
       });
+
+      // Hearings Pagination functionality
+      let currentHearingsPage = 1;
+      let hearingsItemsPerPage = 10;
+      let totalHearingsItems = 32; // This would come from your data source
+      let totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+
+      function changeHearingsPage(direction) {
+        if (direction === 'next' && currentHearingsPage < totalHearingsPages) {
+          currentHearingsPage++;
+        } else if (direction === 'prev' && currentHearingsPage > 1) {
+          currentHearingsPage--;
+        }
+        updateHearingsPagination();
+        loadHearingsData();
+      }
+
+      function goToHearingsPage(page) {
+        if (page >= 1 && page <= totalHearingsPages) {
+          currentHearingsPage = page;
+          updateHearingsPagination();
+          loadHearingsData();
+        }
+      }
+
+      function changeHearingsItemsPerPage(newItemsPerPage) {
+        hearingsItemsPerPage = parseInt(newItemsPerPage);
+        totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+        currentHearingsPage = 1; // Reset to first page
+        updateHearingsPagination();
+        loadHearingsData();
+      }
+
+      function updateHearingsPagination() {
+        // Update pagination info
+        const startItem = (currentHearingsPage - 1) * hearingsItemsPerPage + 1;
+        const endItem = Math.min(currentHearingsPage * hearingsItemsPerPage, totalHearingsItems);
+        $('#hearings-pagination-text').html(`Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalHearingsItems}</strong> hearings`);
+
+        // Update previous button
+        $('#hearings-pagination .prev-btn').prop('disabled', currentHearingsPage === 1);
+
+        // Update next button
+        $('#hearings-pagination .next-btn').prop('disabled', currentHearingsPage === totalHearingsPages);
+
+        // Update pagination numbers
+        updateHearingsPaginationNumbers();
+
+        // Update items per page selector
+        $('#hearings-items-per-page').val(hearingsItemsPerPage);
+      }
+
+      function updateHearingsPaginationNumbers() {
+        const numbersContainer = $('#hearings-pagination-numbers');
+        numbersContainer.empty();
+
+        // Calculate page range to show
+        let startPage = Math.max(1, currentHearingsPage - 2);
+        let endPage = Math.min(totalHearingsPages, currentHearingsPage + 2);
+
+        // Adjust range if we're near the beginning or end
+        if (currentHearingsPage <= 3) {
+          endPage = Math.min(5, totalHearingsPages);
+        }
+        if (currentHearingsPage >= totalHearingsPages - 2) {
+          startPage = Math.max(1, totalHearingsPages - 4);
+        }
+
+        // Add first page if not in range
+        if (startPage > 1) {
+          numbersContainer.append(`<button class="pagination-number" onclick="goToHearingsPage(1)">1</button>`);
+          if (startPage > 2) {
+            numbersContainer.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Add page numbers in range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentHearingsPage ? 'active' : '';
+          numbersContainer.append(`<button class="pagination-number ${activeClass}" onclick="goToHearingsPage(${i})">${i}</button>`);
+        }
+
+        // Add last page if not in range
+        if (endPage < totalHearingsPages) {
+          if (endPage < totalHearingsPages - 1) {
+            numbersContainer.append(`<span class="pagination-dots">...</span>`);
+          }
+          numbersContainer.append(`<button class="pagination-number" onclick="goToHearingsPage(${totalHearingsPages})">${totalHearingsPages}</button>`);
+        }
+      }
+
+      function loadHearingsData() {
+        // Simulate loading new hearing data based on current page
+        // In a real application, this would make an API call
+        console.log(`Loading hearings page ${currentHearingsPage} with ${hearingsItemsPerPage} items per page`);
+
+        // Add loading animation
+        $('.hearing-item').fadeTo(200, 0.3);
+
+        // Simulate API delay
+        setTimeout(() => {
+          $('.hearing-item').fadeTo(200, 1);
+
+          // Scroll to top of hearings content
+          document.getElementById('hearings-content').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 300);
+      }
     </script>
   </body>
 </html>
