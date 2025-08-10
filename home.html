@@ -3061,34 +3061,34 @@
 
         <!-- Hearings Content -->
         <div id="hearings-content" class="tab-content">
-          <!-- Search Box -->
+          <!-- Search and Filter Section -->
           <div style="margin-bottom: 1.5rem">
-            <div style="position: relative; width: 100%">
-              <i
-                class="fas fa-search"
-                style="
-                  position: absolute;
-                  left: 1rem;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  color: var(--text-muted);
-                  font-size: 0.875rem;
-                "
-              ></i>
-              <input
-                type="text"
-                placeholder="Search by hearing details, court, time, or case type..."
-                style="
-                  width: 100%;
-                  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-                  border: 1px solid var(--border);
-                  border-radius: 8px;
-                  font-size: 0.875rem;
-                  background: var(--surface);
-                  color: var(--text-primary);
-                "
-                id="hearing-search"
-              />
+            <!-- Search and Date Filter Row -->
+            <div class="search-filter-row">
+              <!-- Search Box -->
+              <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input
+                  type="text"
+                  placeholder="Search by hearing details, court, time, case type, or judge name..."
+                  class="search-input"
+                  id="hearing-search"
+                />
+              </div>
+
+              <!-- Date Filter -->
+              <div class="date-filter-container">
+                <label for="hearing-date" class="date-filter-label">
+                  <i class="fas fa-calendar-alt"></i>
+                  Date:
+                </label>
+                <input
+                  type="date"
+                  id="hearing-date"
+                  class="date-filter-input"
+                  onchange="filterHearingsByDate(this.value)"
+                />
+              </div>
             </div>
           </div>
 
