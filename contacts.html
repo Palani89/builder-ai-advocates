@@ -1156,7 +1156,9 @@
       let currentContactsPage = 1;
       let contactsItemsPerPage = 10;
       let totalContactsItems = 45; // This would come from your data source
-      let totalContactsPages = Math.ceil(totalContactsItems / contactsItemsPerPage);
+      let totalContactsPages = Math.ceil(
+        totalContactsItems / contactsItemsPerPage,
+      );
 
       function changeContactsPage(direction) {
         if (direction === "next" && currentContactsPage < totalContactsPages) {
@@ -1178,7 +1180,9 @@
 
       function changeContactsItemsPerPage(newItemsPerPage) {
         contactsItemsPerPage = parseInt(newItemsPerPage);
-        totalContactsPages = Math.ceil(totalContactsItems / contactsItemsPerPage);
+        totalContactsPages = Math.ceil(
+          totalContactsItems / contactsItemsPerPage,
+        );
         currentContactsPage = 1; // Reset to first page
         updateContactsPagination();
         loadContactsData();
@@ -1189,10 +1193,10 @@
         const startItem = (currentContactsPage - 1) * contactsItemsPerPage + 1;
         const endItem = Math.min(
           currentContactsPage * contactsItemsPerPage,
-          totalContactsItems
+          totalContactsItems,
         );
         $("#contacts-pagination-text").html(
-          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalContactsItems}</strong> contacts`
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalContactsItems}</strong> contacts`,
         );
 
         // Update pagination numbers
@@ -1201,7 +1205,10 @@
 
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentContactsPage - 2);
-        let endPage = Math.min(totalContactsPages, startPage + maxVisiblePages - 1);
+        let endPage = Math.min(
+          totalContactsPages,
+          startPage + maxVisiblePages - 1,
+        );
 
         if (endPage - startPage < maxVisiblePages - 1) {
           startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -1210,10 +1217,12 @@
         // Previous pages
         if (startPage > 1) {
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToContactsPage(1)">1</button>`
+            `<button class="pagination-number" onclick="goToContactsPage(1)">1</button>`,
           );
           if (startPage > 2) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
         }
 
@@ -1221,23 +1230,28 @@
         for (let i = startPage; i <= endPage; i++) {
           const activeClass = i === currentContactsPage ? "active" : "";
           paginationNumbers.append(
-            `<button class="pagination-number ${activeClass}" onclick="goToContactsPage(${i})">${i}</button>`
+            `<button class="pagination-number ${activeClass}" onclick="goToContactsPage(${i})">${i}</button>`,
           );
         }
 
         // Next pages
         if (endPage < totalContactsPages) {
           if (endPage < totalContactsPages - 1) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToContactsPage(${totalContactsPages})">${totalContactsPages}</button>`
+            `<button class="pagination-number" onclick="goToContactsPage(${totalContactsPages})">${totalContactsPages}</button>`,
           );
         }
 
         // Update prev/next buttons
         $(".prev-btn").prop("disabled", currentContactsPage === 1);
-        $(".next-btn").prop("disabled", currentContactsPage === totalContactsPages);
+        $(".next-btn").prop(
+          "disabled",
+          currentContactsPage === totalContactsPages,
+        );
       }
 
       function loadContactsData() {

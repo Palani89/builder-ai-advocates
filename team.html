@@ -2308,10 +2308,10 @@
         const startItem = (currentTeamPage - 1) * teamItemsPerPage + 1;
         const endItem = Math.min(
           currentTeamPage * teamItemsPerPage,
-          totalTeamItems
+          totalTeamItems,
         );
         $("#team-pagination-text").html(
-          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalTeamItems}</strong> members`
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalTeamItems}</strong> members`,
         );
 
         // Update pagination numbers
@@ -2329,10 +2329,12 @@
         // Previous pages
         if (startPage > 1) {
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToTeamPage(1)">1</button>`
+            `<button class="pagination-number" onclick="goToTeamPage(1)">1</button>`,
           );
           if (startPage > 2) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
         }
 
@@ -2340,17 +2342,19 @@
         for (let i = startPage; i <= endPage; i++) {
           const activeClass = i === currentTeamPage ? "active" : "";
           paginationNumbers.append(
-            `<button class="pagination-number ${activeClass}" onclick="goToTeamPage(${i})">${i}</button>`
+            `<button class="pagination-number ${activeClass}" onclick="goToTeamPage(${i})">${i}</button>`,
           );
         }
 
         // Next pages
         if (endPage < totalTeamPages) {
           if (endPage < totalTeamPages - 1) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToTeamPage(${totalTeamPages})">${totalTeamPages}</button>`
+            `<button class="pagination-number" onclick="goToTeamPage(${totalTeamPages})">${totalTeamPages}</button>`,
           );
         }
 

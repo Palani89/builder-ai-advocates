@@ -1498,7 +1498,9 @@
       let currentArticlesPage = 1;
       let articlesItemsPerPage = 10;
       let totalArticlesItems = 45; // This would come from your data source
-      let totalArticlesPages = Math.ceil(totalArticlesItems / articlesItemsPerPage);
+      let totalArticlesPages = Math.ceil(
+        totalArticlesItems / articlesItemsPerPage,
+      );
 
       function changeArticlesPage(direction) {
         if (direction === "next" && currentArticlesPage < totalArticlesPages) {
@@ -1520,7 +1522,9 @@
 
       function changeArticlesItemsPerPage(newItemsPerPage) {
         articlesItemsPerPage = parseInt(newItemsPerPage);
-        totalArticlesPages = Math.ceil(totalArticlesItems / articlesItemsPerPage);
+        totalArticlesPages = Math.ceil(
+          totalArticlesItems / articlesItemsPerPage,
+        );
         currentArticlesPage = 1; // Reset to first page
         updateArticlesPagination();
         loadArticlesData();
@@ -1531,10 +1535,10 @@
         const startItem = (currentArticlesPage - 1) * articlesItemsPerPage + 1;
         const endItem = Math.min(
           currentArticlesPage * articlesItemsPerPage,
-          totalArticlesItems
+          totalArticlesItems,
         );
         $("#articles-pagination-text").html(
-          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalArticlesItems}</strong> articles`
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalArticlesItems}</strong> articles`,
         );
 
         // Update pagination numbers
@@ -1543,7 +1547,10 @@
 
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentArticlesPage - 2);
-        let endPage = Math.min(totalArticlesPages, startPage + maxVisiblePages - 1);
+        let endPage = Math.min(
+          totalArticlesPages,
+          startPage + maxVisiblePages - 1,
+        );
 
         if (endPage - startPage < maxVisiblePages - 1) {
           startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -1552,10 +1559,12 @@
         // Previous pages
         if (startPage > 1) {
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToArticlesPage(1)">1</button>`
+            `<button class="pagination-number" onclick="goToArticlesPage(1)">1</button>`,
           );
           if (startPage > 2) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
         }
 
@@ -1563,23 +1572,28 @@
         for (let i = startPage; i <= endPage; i++) {
           const activeClass = i === currentArticlesPage ? "active" : "";
           paginationNumbers.append(
-            `<button class="pagination-number ${activeClass}" onclick="goToArticlesPage(${i})">${i}</button>`
+            `<button class="pagination-number ${activeClass}" onclick="goToArticlesPage(${i})">${i}</button>`,
           );
         }
 
         // Next pages
         if (endPage < totalArticlesPages) {
           if (endPage < totalArticlesPages - 1) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToArticlesPage(${totalArticlesPages})">${totalArticlesPages}</button>`
+            `<button class="pagination-number" onclick="goToArticlesPage(${totalArticlesPages})">${totalArticlesPages}</button>`,
           );
         }
 
         // Update prev/next buttons
         $(".prev-btn").prop("disabled", currentArticlesPage === 1);
-        $(".next-btn").prop("disabled", currentArticlesPage === totalArticlesPages);
+        $(".next-btn").prop(
+          "disabled",
+          currentArticlesPage === totalArticlesPages,
+        );
       }
 
       function loadArticlesData() {

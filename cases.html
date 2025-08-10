@@ -1541,8 +1541,7 @@
 
           <div class="pagination-info-bottom">
             <span class="pagination-text" id="cases-pagination-text"
-              >Showing <strong>1-10</strong> of
-              <strong>45</strong> cases</span
+              >Showing <strong>1-10</strong> of <strong>45</strong> cases</span
             >
           </div>
         </div>
@@ -2237,10 +2236,10 @@
         const startItem = (currentCasesPage - 1) * casesItemsPerPage + 1;
         const endItem = Math.min(
           currentCasesPage * casesItemsPerPage,
-          totalCasesItems
+          totalCasesItems,
         );
         $("#cases-pagination-text").html(
-          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalCasesItems}</strong> cases`
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalCasesItems}</strong> cases`,
         );
 
         // Update pagination numbers
@@ -2249,7 +2248,10 @@
 
         const maxVisiblePages = 5;
         let startPage = Math.max(1, currentCasesPage - 2);
-        let endPage = Math.min(totalCasesPages, startPage + maxVisiblePages - 1);
+        let endPage = Math.min(
+          totalCasesPages,
+          startPage + maxVisiblePages - 1,
+        );
 
         if (endPage - startPage < maxVisiblePages - 1) {
           startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -2258,10 +2260,12 @@
         // Previous pages
         if (startPage > 1) {
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToCasesPage(1)">1</button>`
+            `<button class="pagination-number" onclick="goToCasesPage(1)">1</button>`,
           );
           if (startPage > 2) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
         }
 
@@ -2269,17 +2273,19 @@
         for (let i = startPage; i <= endPage; i++) {
           const activeClass = i === currentCasesPage ? "active" : "";
           paginationNumbers.append(
-            `<button class="pagination-number ${activeClass}" onclick="goToCasesPage(${i})">${i}</button>`
+            `<button class="pagination-number ${activeClass}" onclick="goToCasesPage(${i})">${i}</button>`,
           );
         }
 
         // Next pages
         if (endPage < totalCasesPages) {
           if (endPage < totalCasesPages - 1) {
-            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+            paginationNumbers.append(
+              `<span class="pagination-dots">...</span>`,
+            );
           }
           paginationNumbers.append(
-            `<button class="pagination-number" onclick="goToCasesPage(${totalCasesPages})">${totalCasesPages}</button>`
+            `<button class="pagination-number" onclick="goToCasesPage(${totalCasesPages})">${totalCasesPages}</button>`,
           );
         }
 
