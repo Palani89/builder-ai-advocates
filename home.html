@@ -3999,7 +3999,9 @@
           // If no date selected, show all hearings
           $(".hearing-item").show();
           totalHearingsItems = 32;
-          totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+          totalHearingsPages = Math.ceil(
+            totalHearingsItems / hearingsItemsPerPage,
+          );
           currentHearingsPage = 1;
           updateHearingsPagination();
           return;
@@ -4026,7 +4028,9 @@
           // Update pagination based on filtered results
           const visibleHearings = $(".hearing-item:visible").length;
           totalHearingsItems = visibleHearings;
-          totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+          totalHearingsPages = Math.ceil(
+            totalHearingsItems / hearingsItemsPerPage,
+          );
           currentHearingsPage = 1;
           updateHearingsPagination();
         }, 300);
