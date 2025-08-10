@@ -3926,6 +3926,94 @@
         });
       }
 
+      // Date filtering functions
+      function filterCasesByDate(selectedDate) {
+        console.log('Filtering cases by date:', selectedDate);
+
+        if (!selectedDate) {
+          // If no date selected, show all cases
+          $('.case-item').show();
+          $('#date-filter-status').text('Showing all cases');
+          return;
+        }
+
+        updateDateFilterStatus(selectedDate);
+
+        // Add loading animation
+        $('.case-item').fadeTo(200, 0.3);
+
+        // Simulate API call to filter cases by date
+        setTimeout(() => {
+          // In a real application, this would filter based on actual case dates
+          // For now, we'll simulate by showing/hiding some cases
+          $('.case-item').each(function(index) {
+            // Simulate some cases matching the selected date
+            if (index % 2 === 0) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+
+          $('.case-item:visible').fadeTo(200, 1);
+
+          // Update pagination based on filtered results
+          const visibleCases = $('.case-item:visible').length;
+          totalItems = visibleCases;
+          totalPages = Math.ceil(totalItems / itemsPerPage);
+          currentPage = 1;
+          updatePagination();
+        }, 300);
+      }
+
+      function resetDateFilter() {
+        $('#cause-list-date').val('');
+        $('#date-filter-status').text('Showing all cases');
+
+        // Show all cases
+        $('.case-item').show();
+
+        // Reset pagination to original state
+        totalItems = 45; // Reset to original total
+        totalPages = Math.ceil(totalItems / itemsPerPage);
+        currentPage = 1;
+        updatePagination();
+      }
+
+      function updateDateFilterStatus(selectedDate) {
+        const date = new Date(selectedDate);
+        const today = new Date();
+
+        // Format date for display
+        const options = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        };
+        const formattedDate = date.toLocaleDateString('en-IN', options);
+
+        // Check if it's today
+        const isToday = date.toDateString() === today.toDateString();
+
+        if (isToday) {
+          $('#date-filter-status').text('Showing cases for today');
+        } else {
+          $('#date-filter-status').text(`Showing cases for ${formattedDate}`);
+        }
+      }
+
+      function filterCases(searchTerm) {
+        $('.case-item').each(function() {
+          const caseText = $(this).text().toLowerCase();
+          if (caseText.includes(searchTerm)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+
       // Hearings Pagination functionality
       let currentHearingsPage = 1;
       let hearingsItemsPerPage = 10;
