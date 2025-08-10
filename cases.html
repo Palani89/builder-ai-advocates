@@ -1804,7 +1804,24 @@
           openSideMenu();
         });
 
-        // Search functionality
+        // Set today's date as default for case date filter
+        const today = new Date().toISOString().split("T")[0];
+        $("#case-date").val(today);
+
+        // New search functionality for updated input
+        $("#case-search-new").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          $(".case-card").each(function () {
+            const caseText = $(this).text().toLowerCase();
+            if (caseText.includes(searchTerm)) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+
+        // Legacy search functionality (keep for backward compatibility)
         $(".search-input").on("input", function () {
           const searchTerm = $(this).val().toLowerCase();
           $(".case-card").each(function () {
