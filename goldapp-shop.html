@@ -1,0 +1,1488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gold Shop - GoldApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ffd700;
+        --primary-dark: #daa520;
+        --primary-light: #fff8dc;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --info: #3b82f6;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        --gradient-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-top: 80px;
+        padding-bottom: 100px;
+      }
+
+      /* Modern Header */
+      .header {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        box-shadow: var(--shadow);
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .cart-btn {
+        position: relative;
+        background: var(--primary);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: white;
+        font-size: 1.25rem;
+      }
+
+      .cart-btn:hover {
+        transform: scale(1.1);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--error);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .wishlist-btn {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .wishlist-btn:hover {
+        color: var(--error);
+      }
+
+      /* Shop Container */
+      .shop-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+
+      /* Search Section */
+      .search-section {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .search-header {
+        display: flex;
+        align-items: center;
+        justify-content: between;
+        margin-bottom: 1rem;
+      }
+
+      .page-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #7a0f0f;
+        margin-bottom: 0.5rem;
+      }
+
+      .search-bar {
+        position: relative;
+        max-width: 500px;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 1rem 1rem 1rem 3rem;
+        border: 2px solid var(--border);
+        border-radius: 25px;
+        font-size: 1rem;
+        background: var(--background);
+        transition: all 0.2s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 1.25rem;
+      }
+
+      .voice-search {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+      }
+
+      .voice-search:hover {
+        color: var(--primary-dark);
+      }
+
+      /* Category Filters */
+      .category-filters {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 80px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .category-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--background);
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .category-item:hover .category-icon {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+
+      .category-item.active .category-icon {
+        border-color: var(--primary);
+        background: var(--primary);
+        color: white;
+      }
+
+      .category-name {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-align: center;
+        color: var(--text-secondary);
+      }
+
+      /* Banner Section */
+      .banner-section {
+        margin-bottom: 2rem;
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 200px;
+        background: linear-gradient(135deg, #7a0f0f 0%, #b91c1c 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+      }
+
+      .banner-content h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .banner-content p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin-bottom: 1rem;
+      }
+
+      .banner-btn {
+        background: white;
+        color: #7a0f0f;
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .banner-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Product Grid */
+      .products-section {
+        margin-bottom: 2rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .view-all-btn {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.875rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: all 0.2s ease;
+      }
+
+      .view-all-btn:hover {
+        color: var(--primary);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .product-card {
+        background: var(--surface);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 220px;
+        background: var(--background);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: var(--primary-dark);
+      }
+
+      .product-wishlist {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: var(--text-secondary);
+      }
+
+      .product-wishlist:hover {
+        background: white;
+        color: var(--error);
+        transform: scale(1.1);
+      }
+
+      .product-wishlist.active {
+        color: var(--error);
+        background: white;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+      }
+
+      .product-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .product-original-price {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        text-decoration: line-through;
+        margin-left: 0.5rem;
+      }
+
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .stars {
+        color: #fbbf24;
+        font-size: 0.875rem;
+      }
+
+      .rating-text {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-left: 0.25rem;
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .add-to-cart-btn {
+        flex: 1;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .add-to-cart-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .buy-now-btn {
+        background: #7a0f0f;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .buy-now-btn:hover {
+        background: #991b1b;
+      }
+
+      /* Cart Sidebar */
+      .cart-sidebar {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        background: var(--surface);
+        box-shadow: var(--shadow-xl);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .cart-sidebar.active {
+        right: 0;
+      }
+
+      .cart-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .cart-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .cart-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .close-cart {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+      }
+
+      .cart-items {
+        padding: 1rem;
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .cart-item-image {
+        width: 60px;
+        height: 60px;
+        background: var(--background);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary-dark);
+      }
+
+      .cart-item-info {
+        flex: 1;
+      }
+
+      .cart-item-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .cart-item-price {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .quantity-btn {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+      }
+
+      .quantity-btn:hover {
+        background: var(--primary);
+        color: white;
+      }
+
+      .quantity {
+        font-size: 0.875rem;
+        font-weight: 600;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      .cart-footer {
+        padding: 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--background);
+      }
+
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkout-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: #7a0f0f;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 0.25rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 0.7rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 12px;
+        position: relative;
+        min-width: 60px;
+        flex: 1;
+        max-width: 80px;
+      }
+
+      .nav-item.active {
+        color: #ffbc00;
+        background: rgba(255, 188, 0, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 188, 0, 0.2);
+      }
+
+      .nav-item:hover {
+        color: #ffbc00;
+        transform: translateY(-1px);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.6rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .shop-container {
+          padding: 1rem;
+        }
+
+        .search-bar {
+          max-width: 100%;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1rem;
+        }
+
+        .cart-sidebar {
+          width: 100%;
+          right: -100%;
+        }
+
+        .category-filters {
+          justify-content: space-between;
+        }
+
+        .category-item {
+          min-width: 70px;
+        }
+
+        .category-icon {
+          width: 50px;
+          height: 50px;
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" onclick="closeCart()"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+      <div class="cart-header">
+        <div class="cart-title">Shopping Cart</div>
+        <button class="close-cart" onclick="closeCart()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="cart-items" id="cartItems">
+        <div class="cart-item">
+          <div class="cart-item-image">💎</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">Dewdrop Leaf Diamond Ring</div>
+            <div class="cart-item-price">₹42,010</div>
+            <div class="quantity-controls">
+              <button
+                class="quantity-btn"
+                onclick="updateQuantity('item1', -1)"
+              >
+                -
+              </button>
+              <span class="quantity" id="qty-item1">1</span>
+              <button class="quantity-btn" onclick="updateQuantity('item1', 1)">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotal">₹42,010</span>
+        </div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">
+          <i class="fas fa-credit-card"></i> Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <span class="logo-text">Golder</span>
+        </div>
+
+        <div class="header-actions">
+          <button class="wishlist-btn" onclick="openWishlist()">
+            <i class="fas fa-heart"></i>
+          </button>
+
+          <button class="cart-btn" onclick="openCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartBadge">1</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="shop-container">
+      <!-- Search Section -->
+      <div class="search-section">
+        <h1 class="page-title">Gold Shop</h1>
+
+        <div class="search-bar">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for Gold Jewellery, Diamond Jewelry..."
+            id="searchInput"
+            onkeyup="filterProducts()"
+          />
+          <button class="voice-search" onclick="startVoiceSearch()">
+            <i class="fas fa-microphone"></i>
+          </button>
+        </div>
+
+        <div class="category-filters">
+          <div class="category-item active" onclick="filterByCategory('all')">
+            <div class="category-icon">🏆</div>
+            <div class="category-name">Daily Wear</div>
+          </div>
+          <div class="category-item" onclick="filterByCategory('rings')">
+            <div class="category-icon">💍</div>
+            <div class="category-name">Latest</div>
+          </div>
+          <div class="category-item" onclick="filterByCategory('earrings')">
+            <div class="category-icon">✨</div>
+            <div class="category-name">New Arrivals</div>
+          </div>
+          <div class="category-item" onclick="filterByCategory('necklaces')">
+            <div class="category-icon">🎁</div>
+            <div class="category-name">Gifting</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner Section -->
+      <div class="banner-section">
+        <div class="banner-content">
+          <h2>For marriages crafted by you</h2>
+          <p>TANISHQ RIVAAH Wedding Jewellery</p>
+          <button class="banner-btn" onclick="exploreCollection()">
+            EXPLORE NOW
+          </button>
+        </div>
+      </div>
+
+      <!-- Featured Products -->
+      <div class="products-section">
+        <div class="section-header">
+          <h2 class="section-title">Rakhi Gifts For Your Sister</h2>
+          <a href="#" class="view-all-btn">
+            View All <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem">
+          Express your love this Rakhi with stunning Tanishq jewellery
+        </p>
+
+        <div class="products-grid" id="productsGrid">
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring1')"
+          >
+            <div class="product-image">💎</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring1', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Dewdrop Leaf Diamond Ring</div>
+              <div class="product-price">
+                ₹42,010
+                <span class="product-original-price">₹45,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text">(4.8) 124 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring1')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="earrings"
+            onclick="viewProduct('earring1')"
+          >
+            <div class="product-image">✨</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('earring1', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Glamorous Floral Diamond Earrings</div>
+              <div class="product-price">
+                ₹38,187
+                <span class="product-original-price">₹42,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="rating-text">(4.6) 89 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('earring1')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring2')"
+          >
+            <div class="product-image">💍</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring2', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Abstract Embrace Diamond Ring</div>
+              <div class="product-price">
+                ₹65,262
+                <span class="product-original-price">₹70,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text">(4.9) 156 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring2')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="earrings"
+            onclick="viewProduct('earring2')"
+          >
+            <div class="product-image">🌸</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('earring2', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Blooming Floral Diamond Earrings</div>
+              <div class="product-price">
+                ₹58,187
+                <span class="product-original-price">₹62,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <span class="rating-text">(4.7) 98 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('earring2')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="necklaces"
+            onclick="viewProduct('necklace1')"
+          >
+            <div class="product-image">📿</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('necklace1', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Royal Heritage Gold Necklace</div>
+              <div class="product-price">
+                ₹125,000
+                <span class="product-original-price">₹135,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text">(4.9) 234 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('necklace1')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="product-card"
+            data-category="rings"
+            onclick="viewProduct('ring3')"
+          >
+            <div class="product-image">💎</div>
+            <button
+              class="product-wishlist"
+              onclick="event.stopPropagation(); toggleWishlist('ring3', this)"
+            >
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="product-info">
+              <div class="product-name">Elegant Solitaire Diamond Ring</div>
+              <div class="product-price">
+                ₹78,500
+                <span class="product-original-price">₹85,000</span>
+              </div>
+              <div class="product-rating">
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+                <span class="rating-text">(4.8) 178 reviews</span>
+              </div>
+              <div class="product-actions">
+                <button
+                  class="add-to-cart-btn"
+                  onclick="event.stopPropagation(); addToCart('ring3')"
+                >
+                  <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button
+          class="nav-item"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item active" onclick="showTab('shop')" id="nav-shop">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Shop</span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      let cart = [];
+      let wishlist = [];
+      let currentCategory = "all";
+
+      const products = {
+        ring1: {
+          name: "Dewdrop Leaf Diamond Ring",
+          price: 42010,
+          originalPrice: 45000,
+          image: "💎",
+          category: "rings",
+        },
+        earring1: {
+          name: "Glamorous Floral Diamond Earrings",
+          price: 38187,
+          originalPrice: 42000,
+          image: "✨",
+          category: "earrings",
+        },
+        ring2: {
+          name: "Abstract Embrace Diamond Ring",
+          price: 65262,
+          originalPrice: 70000,
+          image: "💍",
+          category: "rings",
+        },
+        earring2: {
+          name: "Blooming Floral Diamond Earrings",
+          price: 58187,
+          originalPrice: 62000,
+          image: "🌸",
+          category: "earrings",
+        },
+        necklace1: {
+          name: "Royal Heritage Gold Necklace",
+          price: 125000,
+          originalPrice: 135000,
+          image: "📿",
+          category: "necklaces",
+        },
+        ring3: {
+          name: "Elegant Solitaire Diamond Ring",
+          price: 78500,
+          originalPrice: 85000,
+          image: "💎",
+          category: "rings",
+        },
+      };
+
+      // Cart Functions
+      function openCart() {
+        document.querySelector(".cart-sidebar").classList.add("active");
+        document.querySelector(".cart-overlay").classList.add("active");
+        updateCartDisplay();
+      }
+
+      function closeCart() {
+        document.querySelector(".cart-sidebar").classList.remove("active");
+        document.querySelector(".cart-overlay").classList.remove("active");
+      }
+
+      function addToCart(productId) {
+        const product = products[productId];
+        const existingItem = cart.find((item) => item.id === productId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            id: productId,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+          });
+        }
+
+        updateCartBadge();
+        updateCartDisplay();
+
+        // Show success message
+        alert(`${product.name} added to cart!`);
+      }
+
+      function updateQuantity(itemId, change) {
+        const item = cart.find((item) => item.id === itemId);
+        if (item) {
+          item.quantity += change;
+          if (item.quantity <= 0) {
+            cart = cart.filter((item) => item.id !== itemId);
+          }
+        }
+        updateCartBadge();
+        updateCartDisplay();
+      }
+
+      function updateCartBadge() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById("cartBadge").textContent = totalItems;
+        document.getElementById("cartBadge").style.display =
+          totalItems > 0 ? "flex" : "none";
+      }
+
+      function updateCartDisplay() {
+        const cartItems = document.getElementById("cartItems");
+        const cartTotal = document.getElementById("cartTotal");
+
+        if (cart.length === 0) {
+          cartItems.innerHTML =
+            '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">Your cart is empty</div>';
+          cartTotal.textContent = "₹0";
+          return;
+        }
+
+        cartItems.innerHTML = cart
+          .map(
+            (item) => `
+          <div class="cart-item">
+            <div class="cart-item-image">${item.image}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">₹${item.price.toLocaleString()}</div>
+              <div class="quantity-controls">
+                <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        `,
+          )
+          .join("");
+
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+        cartTotal.textContent = `₹${total.toLocaleString()}`;
+      }
+
+      function proceedToCheckout() {
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+        alert(
+          `Proceeding to checkout with total amount: ₹${total.toLocaleString()}\n\nThis will redirect to payment gateway...`,
+        );
+
+        // In a real application, this would redirect to the payment page
+        // For demo purposes, we'll simulate order placement
+        setTimeout(() => {
+          alert(
+            `Order placed successfully! Order ID: #GOL${Date.now()}\n\nYou will receive order confirmation via email.`,
+          );
+          cart = [];
+          updateCartBadge();
+          updateCartDisplay();
+          closeCart();
+        }, 2000);
+      }
+
+      // Wishlist Functions
+      function toggleWishlist(productId, button) {
+        const icon = button.querySelector("i");
+
+        if (wishlist.includes(productId)) {
+          wishlist = wishlist.filter((id) => id !== productId);
+          icon.className = "far fa-heart";
+          button.classList.remove("active");
+        } else {
+          wishlist.push(productId);
+          icon.className = "fas fa-heart";
+          button.classList.add("active");
+        }
+      }
+
+      function openWishlist() {
+        alert(`You have ${wishlist.length} items in your wishlist!`);
+      }
+
+      // Product Functions
+      function viewProduct(productId) {
+        const product = products[productId];
+        alert(
+          `Viewing: ${product.name}\nPrice: ₹${product.price.toLocaleString()}\n\nThis would open the product detail page.`,
+        );
+      }
+
+      // Filter Functions
+      function filterByCategory(category) {
+        currentCategory = category;
+
+        // Update active category button
+        document.querySelectorAll(".category-item").forEach((item) => {
+          item.classList.remove("active");
+        });
+        event.target.closest(".category-item").classList.add("active");
+
+        // Filter products
+        const productCards = document.querySelectorAll(".product-card");
+        productCards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      function filterProducts() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const productCards = document.querySelectorAll(".product-card");
+
+        productCards.forEach((card) => {
+          const productName = card
+            .querySelector(".product-name")
+            .textContent.toLowerCase();
+          const matchesSearch = productName.includes(searchTerm);
+          const matchesCategory =
+            currentCategory === "all" ||
+            card.dataset.category === currentCategory;
+
+          if (matchesSearch && matchesCategory) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // Other Functions
+      function startVoiceSearch() {
+        alert("Voice search feature coming soon!");
+      }
+
+      function exploreCollection() {
+        alert("Exploring Wedding Collection...");
+      }
+
+      // Navigation
+      function showTab(tabName) {
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          shop: "goldapp-shop.html",
+        };
+
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-shop.html";
+        const targetPage = pageMap[tabName];
+
+        if (targetPage && currentPage !== targetPage) {
+          window.location.href = pageMap[tabName];
+        }
+      }
+
+      // Initialize cart badge
+      updateCartBadge();
+
+      // Add initial cart item for demo
+      cart.push({
+        id: "ring1",
+        name: "Dewdrop Leaf Diamond Ring",
+        price: 42010,
+        image: "💎",
+        quantity: 1,
+      });
+      updateCartBadge();
+    </script>
+  </body>
+</html>

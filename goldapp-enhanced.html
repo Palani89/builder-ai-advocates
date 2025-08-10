@@ -1,0 +1,3626 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golder - Smart Digital Gold Investment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ffd700;
+        --primary-dark: #daa520;
+        --primary-light: #fff8dc;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --info: #3b82f6;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        --gradient-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .app-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Modern Header */
+      .header {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        box-shadow: var(--shadow);
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hamburger-menu {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        cursor: pointer;
+        margin-right: 1rem;
+        padding: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .hamburger-menu:hover {
+        color: var(--primary-dark);
+      }
+
+      .signout-btn {
+        background: var(--error);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .signout-btn:hover {
+        background: #dc2626;
+        transform: scale(1.05);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        box-shadow: var(--shadow-xl);
+        overflow-y: auto;
+      }
+
+      .side-menu.active {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .side-menu-logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+        color: var(--primary-dark);
+      }
+
+      .side-menu-item i {
+        font-size: 1.25rem;
+        width: 24px;
+        text-align: center;
+      }
+
+      .side-menu-section {
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
+      .side-menu-section-title {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .user-profile:hover {
+        background: var(--background);
+      }
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        background: var(--gradient-gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .user-status {
+        font-size: 0.75rem;
+        color: var(--success);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-top: 80px;
+        margin-bottom: 80px;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      /* Home Page Styles */
+      .page-section {
+        margin-bottom: 2rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .view-all-btn {
+        color: var(--primary-dark);
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .view-all-btn:hover {
+        color: var(--primary);
+      }
+
+      /* Live Rates Ticker */
+      .live-rates-ticker {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .ticker-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .live-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--success);
+      }
+
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--success);
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+      }
+
+      .rates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .rate-card {
+        background: var(--background);
+        border-radius: 12px;
+        padding: 1.25rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      .rate-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--border);
+      }
+
+      .rate-card.gold {
+        border-left: 4px solid #ffd700;
+      }
+
+      .rate-card.silver {
+        border-left: 4px solid #c0c0c0;
+      }
+
+      .rate-card.platinum {
+        border-left: 4px solid #e5e4e2;
+      }
+
+      .rate-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .rate-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .rate-icon.gold {
+        background: rgba(255, 215, 0, 0.1);
+        color: #ffd700;
+      }
+
+      .rate-icon.silver {
+        background: rgba(192, 192, 192, 0.1);
+        color: #c0c0c0;
+      }
+
+      .rate-icon.platinum {
+        background: rgba(229, 228, 226, 0.1);
+        color: #e5e4e2;
+      }
+
+      .rate-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .rate-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .rate-change {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .rate-change.positive {
+        color: var(--success);
+      }
+
+      .rate-change.negative {
+        color: var(--error);
+      }
+
+      /* Portfolio Overview */
+      .portfolio-overview {
+        background: var(--gradient-gold);
+        border-radius: 20px;
+        padding: 2rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portfolio-overview::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .portfolio-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .portfolio-title {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+      }
+
+      .portfolio-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      .portfolio-change {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .portfolio-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        opacity: 0.8;
+      }
+
+      /* Quick Actions */
+      .quick-actions {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .action-card {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.25rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
+      }
+
+      .action-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin: 0 auto 1rem;
+        transition: all 0.2s ease;
+      }
+
+      .action-card.buy .action-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .action-card.sip .action-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--info);
+      }
+
+      .action-card.save .action-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .action-card.chit .action-icon {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .action-card:hover .action-icon {
+        transform: scale(1.1);
+      }
+
+      .action-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .action-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      /* AI Suggestions */
+      .ai-suggestions {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ai-suggestions::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--info),
+          var(--primary),
+          var(--success)
+        );
+      }
+
+      .ai-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .ai-avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+      }
+
+      .ai-title {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .ai-suggestion {
+        background: var(--background);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--info);
+      }
+
+      .suggestion-text {
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+      }
+
+      .suggestion-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .suggestion-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .suggestion-btn.primary {
+        background: var(--primary);
+        color: var(--text-primary);
+      }
+
+      .suggestion-btn.secondary {
+        background: var(--background);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+      }
+
+      /* Recent Transactions */
+      .recent-transactions {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      .transaction-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .transaction-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .transaction-item:hover {
+        transform: translateX(4px);
+        box-shadow: var(--shadow);
+      }
+
+      .transaction-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
+      .transaction-icon.buy {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .transaction-icon.sip {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--info);
+      }
+
+      .transaction-icon.sell {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .transaction-info {
+        flex: 1;
+      }
+
+      .transaction-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+      }
+
+      .transaction-subtitle {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
+
+      .transaction-amount {
+        text-align: right;
+      }
+
+      .amount-value {
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .amount-grams {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: #7a0f0f;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        min-height: 70px;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.125rem;
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 0.65rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem 0.25rem;
+        border-radius: 8px;
+        position: relative;
+        flex: 1;
+        min-height: 50px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .nav-item.active {
+        color: #ffbc00 !important;
+        background: rgba(255, 188, 0, 0.1) !important;
+        transform: translateY(-1px);
+      }
+
+      .nav-item:hover:not(.active) {
+        color: #ffbc00;
+        background: rgba(255, 188, 0, 0.05);
+      }
+
+      .nav-item:active:not(.active) {
+        transform: scale(0.95);
+        background: rgba(255, 188, 0, 0.15);
+      }
+
+      .nav-item:focus {
+        outline: none;
+      }
+
+      .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 0.125rem;
+        line-height: 1;
+      }
+
+      .nav-item span {
+        font-size: 0.6rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: #ef4444;
+        color: white;
+        font-size: 0.55rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      /* Floating Action Button */
+      .fab {
+        position: fixed;
+        bottom: 100px;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-gold);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: var(--shadow-xl);
+        transition: all 0.2s ease;
+        z-index: 90;
+      }
+
+      .fab:hover {
+        transform: scale(1.1);
+        box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+      }
+
+      /* Quick Actions Modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        box-shadow: var(--shadow-xl);
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .modal-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .close-btn:hover {
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      /* Quick Actions Grid */
+      .popup-actions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .popup-action-card {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .popup-action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
+      }
+
+      .popup-action-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin: 0 auto 1rem;
+        transition: all 0.2s ease;
+      }
+
+      .popup-action-card.buy .popup-action-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .popup-action-card.sip .popup-action-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--info);
+      }
+
+      .popup-action-card.save .popup-action-icon {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .popup-action-card.chit .popup-action-icon {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .popup-action-card:hover .popup-action-icon {
+        transform: scale(1.1);
+      }
+
+      .popup-action-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .popup-action-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      /* Daily Quote */
+      .daily-quote {
+        background: linear-gradient(135deg, var(--info) 0%, #8b5cf6 100%);
+        border-radius: 16px;
+        padding: 1.5rem;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .daily-quote::before {
+        content: '"';
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        font-size: 4rem;
+        opacity: 0.2;
+        font-family: serif;
+      }
+
+      .quote-text {
+        font-size: 1rem;
+        font-style: italic;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .quote-author {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .main-content {
+          padding: 1rem;
+          margin-top: 70px;
+          margin-bottom: 80px;
+        }
+
+        .header {
+          padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+          padding: 0;
+        }
+
+        .logo-text {
+          font-size: 1.25rem;
+          letter-spacing: 0.5px;
+        }
+
+        .signout-btn {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+
+        /* User greeting section mobile */
+        .user-greeting-section {
+          padding: 1rem !important;
+          margin-bottom: 1rem !important;
+          border-radius: 12px !important;
+        }
+
+        .user-greeting-section h2 {
+          font-size: 1.5rem !important;
+          margin-bottom: 0.25rem !important;
+        }
+
+        .user-greeting-section p {
+          font-size: 0.875rem !important;
+        }
+
+        /* Live rates mobile */
+        .live-rates-ticker {
+          padding: 1rem;
+          border-radius: 12px;
+          margin-bottom: 1rem;
+        }
+
+        .rates-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+        }
+
+        .rate-card {
+          padding: 1rem;
+          border-radius: 8px;
+        }
+
+        .rate-header {
+          margin-bottom: 0.75rem;
+        }
+
+        .rate-icon {
+          width: 32px;
+          height: 32px;
+          font-size: 1rem;
+        }
+
+        .rate-name {
+          font-size: 0.875rem;
+        }
+
+        .rate-price {
+          font-size: 1.25rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .rate-change {
+          font-size: 0.75rem;
+        }
+
+        /* Portfolio overview mobile */
+        .portfolio-overview {
+          padding: 1.5rem;
+          border-radius: 16px;
+          margin-bottom: 1.5rem;
+        }
+
+        .portfolio-header {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+          text-align: left;
+          margin-bottom: 1.5rem;
+        }
+
+        .portfolio-title {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .portfolio-value {
+          font-size: 1.75rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .portfolio-change {
+          font-size: 0.875rem;
+        }
+
+        .portfolio-header button {
+          padding: 0.5rem 1rem !important;
+          font-size: 0.875rem !important;
+          border-radius: 6px !important;
+        }
+
+        .portfolio-stats {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
+        }
+
+        .stat-item {
+          text-align: center;
+        }
+
+        .stat-label {
+          font-size: 0.75rem;
+          opacity: 0.9;
+          margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+          font-size: 1.125rem;
+          font-weight: 700;
+        }
+
+        /* Overview section mobile */
+        .schemes-overview {
+          padding: 1rem;
+        }
+
+        .overview-title {
+          font-size: 1.25rem !important;
+          margin-bottom: 1rem !important;
+        }
+
+        .overview-tabs {
+          flex-direction: row !important;
+          gap: 0.25rem !important;
+        }
+
+        .tab-btn {
+          padding: 0.5rem 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Scheme card mobile */
+        .scheme-cards {
+          grid-template-columns: 1fr !important;
+          gap: 1rem;
+        }
+
+        .scheme-card {
+          padding: 1.25rem !important;
+          border-radius: 12px;
+        }
+
+        .scheme-badge {
+          font-size: 0.7rem !important;
+          padding: 0.25rem 0.5rem !important;
+        }
+
+        .scheme-card h4 {
+          font-size: 1rem !important;
+        }
+
+        .scheme-card p {
+          font-size: 0.875rem !important;
+        }
+
+        .join-btn {
+          padding: 0.625rem 1.25rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Mobile bottom navigation - styles are now consolidated in main CSS */
+
+        /* FAB mobile */
+        .fab {
+          bottom: 85px;
+          right: 1rem;
+          width: 56px;
+          height: 56px;
+          font-size: 1.25rem;
+          box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        }
+
+        .user-info {
+          display: none;
+        }
+
+        /* Mobile styles for schemes overview section */
+        .schemes-overview {
+          padding: 1rem;
+        }
+
+        .overview-title {
+          font-size: 1.25rem !important;
+        }
+
+        .overview-tabs {
+          flex-direction: column !important;
+          gap: 0.25rem !important;
+        }
+
+        .tab-btn {
+          padding: 0.5rem 1rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Mobile styles for digital gold/silver buy interfaces */
+        #digital-gold-tab > div,
+        #digital-silver-tab > div {
+          padding: 1rem !important;
+        }
+
+        /* Toggle buttons */
+        #digital-gold-tab > div > div:first-child,
+        #digital-silver-tab > div > div:first-child {
+          gap: 0.5rem !important;
+        }
+
+        #digital-gold-tab button,
+        #digital-silver-tab button {
+          padding: 0.5rem 1rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Grams input sections */
+        #digital-gold-tab > div > div:nth-child(2),
+        #digital-silver-tab > div > div:nth-child(2) {
+          gap: 1rem !important;
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+
+        #digital-gold-tab input,
+        #digital-silver-tab input {
+          font-size: 1.5rem !important;
+          width: 100px !important;
+        }
+
+        #goldTotalPrice,
+        #silverTotalPrice {
+          font-size: 1.25rem !important;
+        }
+
+        /* Quick selection buttons */
+        #digital-gold-tab > div > div:nth-child(3),
+        #digital-silver-tab > div > div:nth-child(3) {
+          gap: 0.5rem !important;
+        }
+
+        #digital-gold-tab > div > div:nth-child(3) button,
+        #digital-silver-tab > div > div:nth-child(3) button {
+          padding: 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Projected returns */
+        #digital-gold-tab > div > div:nth-child(4),
+        #digital-silver-tab > div > div:nth-child(4) {
+          padding: 1rem !important;
+        }
+
+        #digital-gold-tab > div > div:nth-child(4) > div:first-child,
+        #digital-silver-tab > div > div:nth-child(4) > div:first-child {
+          font-size: 1rem !important;
+          flex-direction: column !important;
+          gap: 0.5rem !important;
+        }
+
+        #digital-gold-tab > div > div:nth-child(4) > div:nth-child(2),
+        #digital-silver-tab > div > div:nth-child(4) > div:nth-child(2) {
+          flex-direction: column !important;
+          gap: 0.5rem !important;
+        }
+
+        /* Terms checkbox */
+        #digital-gold-tab > div > div:nth-child(5) label span,
+        #digital-silver-tab > div > div:nth-child(5) label span {
+          font-size: 0.875rem !important;
+        }
+
+        /* Final price */
+        #digital-gold-tab > div > div:nth-child(6),
+        #digital-silver-tab > div > div:nth-child(6) {
+          font-size: 1.5rem !important;
+        }
+
+        /* Pay Now buttons */
+        #digital-gold-tab > div > button,
+        #digital-silver-tab > div > button {
+          font-size: 1rem !important;
+          padding: 0.875rem !important;
+        }
+
+        /* Scheme cards mobile responsiveness */
+        .scheme-cards {
+          grid-template-columns: 1fr !important;
+        }
+
+        .scheme-card {
+          padding: 1rem !important;
+        }
+
+        .scheme-title {
+          font-size: 1rem !important;
+        }
+
+        .join-btn {
+          padding: 0.625rem 1.25rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Mobile modal styles */
+        .modal-content {
+          margin: 1rem;
+          padding: 1.5rem;
+          max-width: none;
+          width: calc(100% - 2rem);
+        }
+
+        .modal-title {
+          font-size: 1.25rem;
+        }
+
+        .popup-actions-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .popup-action-card {
+          padding: 1.25rem;
+        }
+
+        .popup-action-title {
+          font-size: 0.9rem;
+        }
+
+        .popup-action-subtitle {
+          font-size: 0.75rem;
+        }
+
+        .popup-action-icon {
+          width: 45px;
+          height: 45px;
+          font-size: 1.25rem;
+        }
+      }
+
+      /* Loading States */
+      .loading {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .shimmer {
+        background: linear-gradient(
+          90deg,
+          #f0f0f0 25%,
+          #e0e0e0 50%,
+          #f0f0f0 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+
+      /* Animations */
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .slide-up {
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--background);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+      }
+
+      /* Schemes Overview Styles */
+      .scheme-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(122, 15, 15, 0.2);
+      }
+
+      .tab-btn:not(.active):hover {
+        background: rgba(122, 15, 15, 0.1);
+        color: #7a0f0f;
+      }
+
+      .join-btn:hover {
+        background: #5a0a0a;
+        transform: translateY(-2px);
+      }
+
+      .invest-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Responsive scheme cards */
+      @media (max-width: 768px) {
+        .scheme-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .overview-tabs {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Side Menu Overlay -->
+      <div class="side-menu-overlay" onclick="closeSideMenu()"></div>
+
+      <!-- Side Menu -->
+      <div class="side-menu">
+        <div class="side-menu-header">
+          <div class="side-menu-logo">Golder</div>
+          <div class="side-menu-subtitle">Digital Gold Investment</div>
+        </div>
+
+        <div class="side-menu-nav">
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-enhanced.html')"
+          >
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-invest.html')"
+          >
+            <i class="fas fa-chart-line"></i>
+            <span>Digital Asset</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-portfolio.html')"
+          >
+            <i class="fas fa-chart-pie"></i>
+            <span>Portfolio</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-chits.html')"
+          >
+            <i class="fas fa-users"></i>
+            <span>Chits</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-transactions.html')"
+          >
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transactions</span>
+          </button>
+
+          <div class="side-menu-section">
+            <div class="side-menu-section-title">Account</div>
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-kyc.html')"
+            >
+              <i class="fas fa-file-alt"></i>
+              <span>KYC Verification</span>
+            </button>
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-sip.html')"
+            >
+              <i class="fas fa-calendar-alt"></i>
+              <span>SIP Plans</span>
+            </button>
+            <button
+              class="side-menu-item"
+              onclick="navigateToPage('goldapp-more.html')"
+            >
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </button>
+          </div>
+
+          <div class="side-menu-section">
+            <div class="side-menu-section-title">Support</div>
+            <button
+              class="side-menu-item"
+              onclick="showComingSoon('Help Center')"
+            >
+              <i class="fas fa-question-circle"></i>
+              <span>Help Center</span>
+            </button>
+            <button
+              class="side-menu-item"
+              onclick="alert('Contact Support: +91 98765 43210')"
+            >
+              <i class="fas fa-phone"></i>
+              <span>Contact Support</span>
+            </button>
+            <button class="side-menu-item" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modern Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <button class="hamburger-menu" onclick="toggleSideMenu()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <span class="logo-text">Golder</span>
+          </div>
+
+          <div class="header-actions">
+            <button class="signout-btn" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- User Greeting Section -->
+        <section class="page-section">
+          <div
+            class="user-greeting-section"
+            style="
+              background: var(--surface);
+              border-radius: 16px;
+              padding: 1.5rem;
+              box-shadow: var(--shadow);
+              border: 1px solid var(--border);
+              margin-bottom: 1rem;
+            "
+          >
+            <h2
+              style="
+                color: #7a0f0f;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin: 0 0 0.5rem 0;
+              "
+            >
+              Hello, Sri
+            </h2>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 1rem;
+                margin: 0;
+                font-weight: 500;
+              "
+            >
+              Acc No: 12345678
+            </p>
+          </div>
+        </section>
+
+        <!-- Live Gold Rates Ticker -->
+        <section class="page-section">
+          <div class="live-rates-ticker">
+            <div class="ticker-header">
+              <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span>Live Rates</span>
+              </div>
+              <span style="font-size: 0.8rem; color: var(--text-muted)"
+                >Updated 1 min ago</span
+              >
+            </div>
+
+            <div class="rates-grid">
+              <div class="rate-card gold" onclick="openRateDetails('gold')">
+                <div class="rate-header">
+                  <div class="rate-icon gold">
+                    <i class="fas fa-coins"></i>
+                  </div>
+                  <div class="rate-name">Gold</div>
+                </div>
+                <div class="rate-price">₹6,285/g</div>
+                <div class="rate-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  +₹35 (0.56%)
+                </div>
+              </div>
+
+              <div class="rate-card silver" onclick="openRateDetails('silver')">
+                <div class="rate-header">
+                  <div class="rate-icon silver">
+                    <i class="fas fa-circle"></i>
+                  </div>
+                  <div class="rate-name">Silver</div>
+                </div>
+                <div class="rate-price">₹76.20/g</div>
+                <div class="rate-change negative">
+                  <i class="fas fa-arrow-down"></i>
+                  -₹0.80 (-1.04%)
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Portfolio Overview -->
+        <section class="page-section">
+          <div class="portfolio-overview fade-in">
+            <div class="portfolio-header">
+              <div>
+                <div class="portfolio-title">Total Portfolio Value</div>
+                <div class="portfolio-value">Rs 78,456</div>
+                <div class="portfolio-change">
+                  <i class="fas fa-arrow-up"></i>
+                  +1,285 (1.67%) today
+                </div>
+              </div>
+              <div style="text-align: right">
+                <button
+                  style="
+                    background: #7a0f0f;
+                    border: none;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                  "
+                  onclick="showPortfolioDetails()"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <div class="portfolio-stats">
+              <div class="stat-item">
+                <div class="stat-label">Schemes</div>
+                <div class="stat-value">3</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">SIPs</div>
+                <div class="stat-value">2</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Gold</div>
+                <div class="stat-value">24.2g</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Silver</div>
+                <div class="stat-value">24.2g</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Schemes Overview -->
+        <section class="page-section">
+          <div class="schemes-overview">
+            <div class="overview-header">
+              <h2
+                class="overview-title"
+                style="
+                  color: #7a0f0f;
+                  font-size: 1.5rem;
+                  font-weight: 700;
+                  margin-bottom: 1.5rem;
+                "
+              >
+                Overview
+              </h2>
+            </div>
+
+            <div
+              class="overview-tabs"
+              style="
+                display: flex;
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                background: var(--surface);
+                border-radius: 8px;
+                padding: 0.25rem;
+              "
+            >
+              <button
+                class="tab-btn active"
+                onclick="switchOverviewTab('schemes')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: #7a0f0f;
+                  color: white;
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Schemes
+              </button>
+              <button
+                class="tab-btn"
+                onclick="switchOverviewTab('digital-gold')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: transparent;
+                  color: var(--text-secondary);
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Digital Gold
+              </button>
+              <button
+                class="tab-btn"
+                onclick="switchOverviewTab('digital-silver')"
+                style="
+                  flex: 1;
+                  padding: 0.5rem 1rem;
+                  background: transparent;
+                  color: var(--text-secondary);
+                  border: none;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                "
+              >
+                Digital Silver
+              </button>
+            </div>
+
+            <div class="overview-content">
+              <div class="tab-content active" id="schemes-tab">
+                <div
+                  id="no-schemes"
+                  class="no-schemes-message"
+                  style="
+                    text-align: center;
+                    padding: 2rem;
+                    background: #fff8f0;
+                    border-radius: 12px;
+                    border: 2px dashed #e5e7eb;
+                  "
+                >
+                  <h3 style="color: #7a0f0f; margin-bottom: 0.5rem">
+                    No Active Schemes
+                  </h3>
+                  <p
+                    style="color: var(--text-secondary); margin-bottom: 1.5rem"
+                  >
+                    Select a scheme to get started
+                  </p>
+                </div>
+
+                <div
+                  id="active-scheme"
+                  class="active-scheme-card"
+                  style="display: none"
+                >
+                  <!-- This will be populated when user registers for a scheme -->
+                </div>
+
+                <div class="scheme-selection" style="margin-top: 1.5rem">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem">
+                    Select a scheme
+                  </h3>
+                  <div
+                    class="scheme-cards"
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(
+                        auto-fit,
+                        minmax(280px, 1fr)
+                      );
+                      gap: 1rem;
+                    "
+                  >
+                    <div
+                      class="scheme-card"
+                      onclick="openSchemeForm('daily')"
+                      style="
+                        background: #fff8e7;
+                        border: 2px solid #ffd700;
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      <div
+                        class="scheme-badge"
+                        style="
+                          background: #ffd700;
+                          color: #7a0f0f;
+                          padding: 0.25rem 0.75rem;
+                          border-radius: 4px;
+                          font-size: 0.75rem;
+                          font-weight: 700;
+                          margin-bottom: 1rem;
+                          display: inline-block;
+                        "
+                      >
+                        GOLD
+                      </div>
+                      <h4
+                        style="
+                          color: var(--text-primary);
+                          font-size: 1.125rem;
+                          font-weight: 700;
+                          margin-bottom: 0.5rem;
+                        "
+                      >
+                        Daily Saving
+                      </h4>
+                      <p
+                        style="
+                          color: var(--text-secondary);
+                          margin-bottom: 1rem;
+                        "
+                      >
+                        150 Days Scheme
+                      </p>
+                      <button
+                        class="join-btn"
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          border: none;
+                          padding: 0.75rem 1.5rem;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          cursor: pointer;
+                          transition: all 0.2s ease;
+                        "
+                      >
+                        Join Now
+                      </button>
+                    </div>
+                    <div
+                      class="scheme-card"
+                      onclick="openSchemeForm('monthly')"
+                      style="
+                        background: #fff8e7;
+                        border: 2px solid #ffd700;
+                        border-radius: 12px;
+                        padding: 1.5rem;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      <div
+                        class="scheme-badge"
+                        style="
+                          background: #ffd700;
+                          color: #7a0f0f;
+                          padding: 0.25rem 0.75rem;
+                          border-radius: 4px;
+                          font-size: 0.75rem;
+                          font-weight: 700;
+                          margin-bottom: 1rem;
+                          display: inline-block;
+                        "
+                      >
+                        GOLD
+                      </div>
+                      <h4
+                        style="
+                          color: var(--text-primary);
+                          font-size: 1.125rem;
+                          font-weight: 700;
+                          margin-bottom: 0.5rem;
+                        "
+                      >
+                        Monthly Saving
+                      </h4>
+                      <p
+                        style="
+                          color: var(--text-secondary);
+                          margin-bottom: 1rem;
+                        "
+                      >
+                        16 months, 24 months
+                      </p>
+                      <button
+                        class="join-btn"
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          border: none;
+                          padding: 0.75rem 1.5rem;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          cursor: pointer;
+                          transition: all 0.2s ease;
+                        "
+                      >
+                        Join Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="tab-content"
+                id="digital-gold-tab"
+                style="display: none"
+              >
+                <!-- Gold Buy Interface -->
+                <div
+                  style="
+                    background: #f9fafb;
+                    border-radius: 16px;
+                    padding: 2rem;
+                    border: 1px solid var(--border);
+                  "
+                >
+                  <!-- One Time / SIP Toggle -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                    <button
+                      id="goldOnetimeBtn"
+                      class="toggle-btn active"
+                      onclick="switchGoldMode('onetime')"
+                      style="
+                        flex: 1;
+                        padding: 0.75rem 2rem;
+                        background: #7a0f0f;
+                        color: white;
+                        border: none;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      One Time
+                    </button>
+                    <button
+                      id="goldSipBtn"
+                      class="toggle-btn"
+                      onclick="switchGoldMode('sip')"
+                      style="
+                        flex: 1;
+                        padding: 0.75rem 2rem;
+                        background: #e5e7eb;
+                        color: #6b7280;
+                        border: none;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      SIP
+                    </button>
+                  </div>
+
+                  <!-- Grams Input Section -->
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 2rem;
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 1rem">
+                      <span
+                        style="
+                          font-size: 1.5rem;
+                          font-weight: 600;
+                          color: #6b7280;
+                        "
+                        >g</span
+                      >
+                      <input
+                        type="number"
+                        id="goldGramsInput"
+                        value="10"
+                        min="1"
+                        oninput="calculateGoldPrice()"
+                        style="
+                          font-size: 2rem;
+                          font-weight: 700;
+                          width: 120px;
+                          border: none;
+                          background: transparent;
+                          outline: none;
+                          color: var(--text-primary);
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        background: var(--surface);
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #6b7280;
+                      "
+                    >
+                      <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div style="text-align: right">
+                      <div
+                        style="
+                          color: #6b7280;
+                          font-size: 0.875rem;
+                          margin-bottom: 0.25rem;
+                        "
+                      >
+                        ₹
+                      </div>
+                      <div
+                        id="goldTotalPrice"
+                        style="
+                          font-size: 1.5rem;
+                          font-weight: 700;
+                          color: var(--text-primary);
+                        "
+                      >
+                        62850
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Quick Selection Buttons -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                    <button
+                      onclick="setGoldGrams(10)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                        position: relative;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        10 gm
+                      </div>
+                      <div
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          font-size: 0.75rem;
+                          padding: 0.25rem 0.5rem;
+                          border-radius: 4px;
+                          position: absolute;
+                          bottom: -8px;
+                          left: 50%;
+                          transform: translateX(-50%);
+                        "
+                      >
+                        Best
+                      </div>
+                    </button>
+                    <button
+                      onclick="setGoldGrams(20)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        20 gm
+                      </div>
+                    </button>
+                    <button
+                      onclick="setGoldGrams(50)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        50 gm
+                      </div>
+                    </button>
+                  </div>
+
+                  <!-- Projected Returns -->
+                  <div
+                    style="
+                      background: var(--surface);
+                      border-radius: 12px;
+                      padding: 1.5rem;
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 1.125rem;
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        margin-bottom: 1rem;
+                        display: flex;
+                        justify-content: space-between;
+                      "
+                    >
+                      <span>Projected 1 year returns</span>
+                      <span
+                        id="goldProjectedReturns"
+                        style="color: var(--success)"
+                        >₹69,135</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                      "
+                    >
+                      <span style="color: #8b5a2b; font-weight: 500"
+                        >Investment:
+                        <span id="goldInvestmentAmount">₹62,850</span></span
+                      >
+                      <span style="color: #8b5a2b; font-weight: 500"
+                        >Earning:
+                        <span id="goldEarningAmount">��6,285*</span></span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Terms & Conditions -->
+                  <div style="margin-bottom: 2rem">
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        cursor: pointer;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        style="width: 18px; height: 18px; accent-color: #7a0f0f"
+                      />
+                      <span style="color: var(--text-primary); font-weight: 500"
+                        >Agree Schemes Terms & conditions</span
+                      >
+                    </label>
+                  </div>
+
+                  <!-- Final Price -->
+                  <div
+                    style="
+                      font-size: 2rem;
+                      font-weight: 700;
+                      color: var(--text-primary);
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    Rs <span id="goldFinalPrice">62850</span>
+                  </div>
+
+                  <!-- Pay Now Button -->
+                  <button
+                    onclick="proceedToGoldPay()"
+                    style="
+                      width: 100%;
+                      padding: 1rem;
+                      background: #7a0f0f;
+                      color: white;
+                      border: none;
+                      border-radius: 8px;
+                      font-size: 1.125rem;
+                      font-weight: 600;
+                      cursor: pointer;
+                      transition: all 0.2s ease;
+                    "
+                  >
+                    Pay Now
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="tab-content"
+                id="digital-silver-tab"
+                style="display: none"
+              >
+                <!-- Silver Buy Interface -->
+                <div
+                  style="
+                    background: #f9fafb;
+                    border-radius: 16px;
+                    padding: 2rem;
+                    border: 1px solid var(--border);
+                  "
+                >
+                  <!-- One Time / SIP Toggle -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                    <button
+                      id="silverOnetimeBtn"
+                      class="toggle-btn active"
+                      onclick="switchSilverMode('onetime')"
+                      style="
+                        flex: 1;
+                        padding: 0.75rem 2rem;
+                        background: #7a0f0f;
+                        color: white;
+                        border: none;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      One Time
+                    </button>
+                    <button
+                      id="silverSipBtn"
+                      class="toggle-btn"
+                      onclick="switchSilverMode('sip')"
+                      style="
+                        flex: 1;
+                        padding: 0.75rem 2rem;
+                        background: #e5e7eb;
+                        color: #6b7280;
+                        border: none;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                      "
+                    >
+                      SIP
+                    </button>
+                  </div>
+
+                  <!-- Grams Input Section -->
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 2rem;
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 1rem">
+                      <span
+                        style="
+                          font-size: 1.5rem;
+                          font-weight: 600;
+                          color: #6b7280;
+                        "
+                        >g</span
+                      >
+                      <input
+                        type="number"
+                        id="silverGramsInput"
+                        value="10"
+                        min="1"
+                        oninput="calculateSilverPrice()"
+                        style="
+                          font-size: 2rem;
+                          font-weight: 700;
+                          width: 120px;
+                          border: none;
+                          background: transparent;
+                          outline: none;
+                          color: var(--text-primary);
+                        "
+                      />
+                    </div>
+                    <div
+                      style="
+                        background: var(--surface);
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #6b7280;
+                      "
+                    >
+                      <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div style="text-align: right">
+                      <div
+                        style="
+                          color: #6b7280;
+                          font-size: 0.875rem;
+                          margin-bottom: 0.25rem;
+                        "
+                      >
+                        ₹
+                      </div>
+                      <div
+                        id="silverTotalPrice"
+                        style="
+                          font-size: 1.5rem;
+                          font-weight: 700;
+                          color: var(--text-primary);
+                        "
+                      >
+                        762
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Quick Selection Buttons -->
+                  <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                    <button
+                      onclick="setSilverGrams(10)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                        position: relative;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        10 gm
+                      </div>
+                      <div
+                        style="
+                          background: #7a0f0f;
+                          color: white;
+                          font-size: 0.75rem;
+                          padding: 0.25rem 0.5rem;
+                          border-radius: 4px;
+                          position: absolute;
+                          bottom: -8px;
+                          left: 50%;
+                          transform: translateX(-50%);
+                        "
+                      >
+                        Best
+                      </div>
+                    </button>
+                    <button
+                      onclick="setSilverGrams(20)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        20 gm
+                      </div>
+                    </button>
+                    <button
+                      onclick="setSilverGrams(50)"
+                      style="
+                        flex: 1;
+                        padding: 1rem;
+                        background: var(--surface);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        cursor: pointer;
+                      "
+                    >
+                      <div style="font-weight: 600; color: var(--text-primary)">
+                        50 gm
+                      </div>
+                    </button>
+                  </div>
+
+                  <!-- Projected Returns -->
+                  <div
+                    style="
+                      background: var(--surface);
+                      border-radius: 12px;
+                      padding: 1.5rem;
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 1.125rem;
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        margin-bottom: 1rem;
+                        display: flex;
+                        justify-content: space-between;
+                      "
+                    >
+                      <span>Projected 1 year returns</span>
+                      <span
+                        id="silverProjectedReturns"
+                        style="color: var(--success)"
+                        >₹838</span
+                      >
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                      "
+                    >
+                      <span style="color: #8b5a2b; font-weight: 500"
+                        >Investment:
+                        <span id="silverInvestmentAmount">₹762</span></span
+                      >
+                      <span style="color: #8b5a2b; font-weight: 500"
+                        >Earning:
+                        <span id="silverEarningAmount">₹76.2*</span></span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Terms & Conditions -->
+                  <div style="margin-bottom: 2rem">
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        cursor: pointer;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        checked
+                        style="width: 18px; height: 18px; accent-color: #7a0f0f"
+                      />
+                      <span style="color: var(--text-primary); font-weight: 500"
+                        >Agree Schemes Terms & conditions</span
+                      >
+                    </label>
+                  </div>
+
+                  <!-- Final Price -->
+                  <div
+                    style="
+                      font-size: 2rem;
+                      font-weight: 700;
+                      color: var(--text-primary);
+                      margin-bottom: 2rem;
+                    "
+                  >
+                    Rs <span id="silverFinalPrice">762</span>
+                  </div>
+
+                  <!-- Pay Now Button -->
+                  <button
+                    onclick="proceedToSilverPay()"
+                    style="
+                      width: 100%;
+                      padding: 1rem;
+                      background: #7a0f0f;
+                      color: white;
+                      border: none;
+                      border-radius: 8px;
+                      font-size: 1.125rem;
+                      font-weight: 600;
+                      cursor: pointer;
+                      transition: all 0.2s ease;
+                    "
+                  >
+                    Pay Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Quick Actions Modal -->
+      <div
+        class="modal-overlay"
+        id="quickActionsModal"
+        onclick="closeQuickActionsModal(event)"
+      >
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <button class="close-btn" onclick="closeQuickActionsModal()">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <div class="modal-header">
+            <div class="modal-title">Quick Actions</div>
+            <div class="modal-subtitle">Choose an action to get started</div>
+          </div>
+
+          <div class="popup-actions-grid">
+            <div
+              class="popup-action-card buy"
+              onclick="navigateToPage('goldapp-invest.html'); closeQuickActionsModal();"
+            >
+              <div class="popup-action-icon">
+                <i class="fas fa-plus"></i>
+              </div>
+              <div class="popup-action-title">Buy Now</div>
+              <div class="popup-action-subtitle">Instant gold purchase</div>
+            </div>
+
+            <div
+              class="popup-action-card sip"
+              onclick="showSIPSetup(); closeQuickActionsModal();"
+            >
+              <div class="popup-action-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="popup-action-title">Start SIP</div>
+              <div class="popup-action-subtitle">Systematic investment</div>
+            </div>
+
+            <div
+              class="popup-action-card save"
+              onclick="toggleAutoSave(); closeQuickActionsModal();"
+            >
+              <div class="popup-action-icon">
+                <i class="fas fa-piggy-bank"></i>
+              </div>
+              <div class="popup-action-title">Auto Save</div>
+              <div class="popup-action-subtitle">Save spare change</div>
+            </div>
+
+            <div
+              class="popup-action-card chit"
+              onclick="navigateToPage('goldapp-chits.html'); closeQuickActionsModal();"
+            >
+              <div class="popup-action-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="popup-action-title">Join Scheme</div>
+              <div class="popup-action-subtitle">Group savings plan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Action Button -->
+      <button class="fab" onclick="openQuickActionsModal()">
+        <i class="fas fa-plus"></i>
+      </button>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav">
+        <div class="nav-items">
+          <button
+            class="nav-item active"
+            onclick="showTab('home')"
+            id="nav-home"
+          >
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </button>
+
+          <button class="nav-item" onclick="showTab('invest')" id="nav-invest">
+            <i class="fas fa-chart-line"></i>
+            <span>Digital Asset</span>
+          </button>
+
+          <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+            <i class="fas fa-users"></i>
+            <span>Schemes</span>
+            <span class="nav-badge">2</span>
+          </button>
+
+          <button
+            class="nav-item"
+            onclick="showTab('portfolio')"
+            id="nav-portfolio"
+          >
+            <i class="fas fa-chart-pie"></i>
+            <span>Portfolio</span>
+          </button>
+
+          <button class="nav-item" onclick="showTab('more')" id="nav-more">
+            <i class="fas fa-th"></i>
+            <span>More</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <script>
+      let currentTab = "home";
+      let isLoading = false;
+
+      // Simplified and reliable Tab Navigation
+      function showTab(tabName) {
+        console.log(`Navigating to tab: ${tabName}`);
+
+        // Prevent double clicks
+        if (isLoading) return;
+
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          more: "goldapp-more.html",
+        };
+
+        // Check if tab exists
+        const targetPage = pageMap[tabName];
+        if (!targetPage) {
+          console.error(`Tab "${tabName}" not found`);
+          return;
+        }
+
+        // Clear any stuck hover states
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.blur();
+          item.style.background = "";
+          item.style.color = "";
+        });
+
+        // Update active state immediately
+        updateNavActiveState(tabName);
+
+        // Check if we're already on the target page
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
+
+        if (targetPage !== currentPage) {
+          // Set loading state
+          isLoading = true;
+
+          // Navigate immediately - no delays
+          window.location.href = targetPage;
+        }
+      }
+
+      // Get current tab based on current page
+      function getCurrentTab() {
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-enhanced.html";
+        const pageToTab = {
+          "goldapp-enhanced.html": "home",
+          "goldapp-invest.html": "invest",
+          "goldapp-chits.html": "chits",
+          "goldapp-portfolio.html": "portfolio",
+          "goldapp-more.html": "more",
+        };
+        return pageToTab[currentPage] || "home";
+      }
+
+      // Update navigation active state with proper cleanup
+      function updateNavActiveState(activeTab) {
+        console.log(`Updating nav active state to: ${activeTab}`);
+
+        try {
+          // Clear all states from nav items
+          const navItems = document.querySelectorAll(".nav-item");
+          navItems.forEach((item) => {
+            item.classList.remove("active");
+            // Clear any inline styles that might be stuck
+            item.style.removeProperty("background");
+            item.style.removeProperty("color");
+            item.style.removeProperty("transform");
+            item.blur(); // Remove focus to clear hover states
+          });
+
+          // Add active class to current tab
+          const activeNavItem = document.getElementById(`nav-${activeTab}`);
+          if (activeNavItem) {
+            activeNavItem.classList.add("active");
+            console.log(`Successfully activated nav item: nav-${activeTab}`);
+          } else {
+            console.warn(`Nav item not found: nav-${activeTab}`);
+          }
+        } catch (error) {
+          console.error("Error updating nav active state:", error);
+        }
+      }
+
+      // Utility Functions
+      function showLoading() {
+        isLoading = true;
+        document.querySelector(".main-content").classList.add("loading");
+      }
+
+      function hideLoading() {
+        isLoading = false;
+        document.querySelector(".main-content").classList.remove("loading");
+      }
+
+      function showComingSoon(feature) {
+        alert(
+          `${feature.charAt(0).toUpperCase() + feature.slice(1)} section coming soon! 🚀`,
+        );
+      }
+
+      // Feature Functions
+      function openNotifications() {
+        console.log("Opening notifications");
+        showComingSoon("notifications");
+      }
+
+      function openProfile() {
+        console.log("Opening profile");
+        showComingSoon("profile");
+      }
+
+      function openRateDetails(metal) {
+        console.log(`Opening ${metal} rate details`);
+        showComingSoon(`${metal} rate details`);
+      }
+
+      function showPortfolioDetails() {
+        showTab("portfolio");
+      }
+
+      function showSIPSetup() {
+        console.log("Opening SIP setup");
+        showComingSoon("SIP setup");
+      }
+
+      function toggleAutoSave() {
+        console.log("Toggling auto-save");
+        alert("Auto-save feature toggled! 💰");
+      }
+
+      function navigateToPage(pageName) {
+        window.location.href = pageName;
+      }
+
+      function showBuyModal() {
+        console.log("Opening buy modal");
+        showComingSoon("buy modal");
+      }
+
+      function increaseSIP() {
+        console.log("Increasing SIP");
+        alert("SIP amount increased! 📈");
+      }
+
+      function addToGoal() {
+        console.log("Adding to goal");
+        alert("Money added to goal! 🎯");
+      }
+
+      function viewGoal() {
+        showTab("goals");
+      }
+
+      // Quick Actions Modal Functions
+      function openQuickActionsModal() {
+        const modal = document.getElementById("quickActionsModal");
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeQuickActionsModal(event) {
+        if (event && event.target !== event.currentTarget) return;
+        const modal = document.getElementById("quickActionsModal");
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      function showQuickMenu() {
+        openQuickActionsModal();
+      }
+
+      // Legacy function kept for compatibility
+      function showQuickMenuOld() {
+        console.log("Opening quick menu");
+        const actions = [
+          "Buy Gold",
+          "Start SIP",
+          "Join Chit",
+          "Set Goal",
+          "Refer Friend",
+        ];
+        const choice = prompt(
+          "Quick Actions:\n1. Buy Gold\n2. Start SIP\n3. Join Chit\n4. Set Goal\n5. Refer Friend\n\nEnter number (1-5):",
+        );
+
+        if (choice && choice >= 1 && choice <= 5) {
+          alert(`${actions[choice - 1]} selected! 🚀`);
+        }
+      }
+
+      // Real-time updates simulation
+      function updateRates() {
+        // Simulate real-time rate updates
+        const rates = {
+          gold: { price: 6285, change: 0.56 },
+          silver: { price: 76.2, change: -1.04 },
+          platinum: { price: 2856, change: 0.42 },
+        };
+
+        // In a real app, this would fetch from API
+        console.log("Rates updated:", rates);
+      }
+
+      // Auto-update rates every 30 seconds
+      setInterval(updateRates, 30000);
+
+      // Initialize app
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("GoldApp Enhanced initialized");
+
+        // Initialize navigation active state based on current page
+        const currentTab = getCurrentTab();
+        updateNavActiveState(currentTab);
+
+        // Add event listeners to prevent stuck states
+        setTimeout(() => {
+          const navItems = document.querySelectorAll(".nav-item");
+
+          navItems.forEach((item) => {
+            // Clear hover states when mouse leaves the item
+            item.addEventListener("mouseleave", function () {
+              if (!this.classList.contains("active")) {
+                this.style.removeProperty("background");
+                this.style.removeProperty("color");
+              }
+            });
+
+            // Clear focus states when clicked
+            item.addEventListener("click", function () {
+              setTimeout(() => {
+                this.blur();
+              }, 50);
+            });
+          });
+        }, 100);
+
+        // Add fade-in animation to sections
+        setTimeout(() => {
+          document
+            .querySelectorAll(".page-section")
+            .forEach((section, index) => {
+              setTimeout(() => {
+                section.classList.add("fade-in");
+              }, index * 100);
+            });
+        }, 300);
+
+        // Show welcome message
+        setTimeout(() => {
+          console.log("Welcome to GoldApp Enhanced! 🌟");
+        }, 1000);
+      });
+
+      // Side Menu Functions
+      function toggleSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+
+      function closeSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+
+      function navigateToPage(page) {
+        closeSideMenu();
+        setTimeout(() => {
+          window.location.href = page;
+        }, 300);
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert("Logged out successfully!");
+          window.location.href = "index-landing.html";
+        }
+      }
+
+      // Asset rates for calculations
+      const goldRate = 6285;
+      const silverRate = 76.2;
+
+      // Schemes Overview Functions
+      function switchOverviewTab(tabName) {
+        // Remove active class from all tabs
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove("active");
+          btn.style.background = "transparent";
+          btn.style.color = "var(--text-secondary)";
+        });
+
+        // Hide all tab contents
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.style.display = "none";
+        });
+
+        // Show selected tab
+        document.getElementById(tabName + "-tab").style.display = "block";
+
+        // Style active tab button
+        event.target.classList.add("active");
+        event.target.style.background = "#7A0F0F";
+        event.target.style.color = "white";
+
+        // Initialize calculations for gold/silver tabs
+        if (tabName === "digital-gold") {
+          setTimeout(() => calculateGoldPrice(), 100);
+        } else if (tabName === "digital-silver") {
+          setTimeout(() => calculateSilverPrice(), 100);
+        }
+      }
+
+      // Gold buy interface functions
+      function switchGoldMode(mode) {
+        const onetimeBtn = document.getElementById("goldOnetimeBtn");
+        const sipBtn = document.getElementById("goldSipBtn");
+
+        if (mode === "onetime") {
+          onetimeBtn.style.background = "#7a0f0f";
+          onetimeBtn.style.color = "white";
+          sipBtn.style.background = "#e5e7eb";
+          sipBtn.style.color = "#6b7280";
+        } else {
+          sipBtn.style.background = "#7a0f0f";
+          sipBtn.style.color = "white";
+          onetimeBtn.style.background = "#e5e7eb";
+          onetimeBtn.style.color = "#6b7280";
+        }
+      }
+
+      function setGoldGrams(grams) {
+        document.getElementById("goldGramsInput").value = grams;
+        calculateGoldPrice();
+      }
+
+      function calculateGoldPrice() {
+        const grams =
+          parseFloat(document.getElementById("goldGramsInput").value) || 0;
+        const totalPrice = grams * goldRate;
+
+        // Update displays
+        document.getElementById("goldTotalPrice").textContent =
+          totalPrice.toFixed(0);
+        document.getElementById("goldFinalPrice").textContent =
+          totalPrice.toFixed(0);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById("goldProjectedReturns").textContent =
+          "₹" + projectedValue.toFixed(0);
+        document.getElementById("goldInvestmentAmount").textContent =
+          "₹" + totalPrice.toFixed(0);
+        document.getElementById("goldEarningAmount").textContent =
+          "₹" + earning.toFixed(0) + "*";
+      }
+
+      function proceedToGoldPay() {
+        const grams = document.getElementById("goldGramsInput").value;
+        const totalPrice =
+          document.getElementById("goldFinalPrice").textContent;
+
+        alert(
+          `Proceeding to payment for ${grams}g of gold worth ₹${totalPrice}`,
+        );
+      }
+
+      // Silver buy interface functions
+      function switchSilverMode(mode) {
+        const onetimeBtn = document.getElementById("silverOnetimeBtn");
+        const sipBtn = document.getElementById("silverSipBtn");
+
+        if (mode === "onetime") {
+          onetimeBtn.style.background = "#7a0f0f";
+          onetimeBtn.style.color = "white";
+          sipBtn.style.background = "#e5e7eb";
+          sipBtn.style.color = "#6b7280";
+        } else {
+          sipBtn.style.background = "#7a0f0f";
+          sipBtn.style.color = "white";
+          onetimeBtn.style.background = "#e5e7eb";
+          onetimeBtn.style.color = "#6b7280";
+        }
+      }
+
+      function setSilverGrams(grams) {
+        document.getElementById("silverGramsInput").value = grams;
+        calculateSilverPrice();
+      }
+
+      function calculateSilverPrice() {
+        const grams =
+          parseFloat(document.getElementById("silverGramsInput").value) || 0;
+        const totalPrice = grams * silverRate;
+
+        // Update displays
+        document.getElementById("silverTotalPrice").textContent =
+          totalPrice.toFixed(0);
+        document.getElementById("silverFinalPrice").textContent =
+          totalPrice.toFixed(0);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById("silverProjectedReturns").textContent =
+          "₹" + projectedValue.toFixed(0);
+        document.getElementById("silverInvestmentAmount").textContent =
+          "₹" + totalPrice.toFixed(0);
+        document.getElementById("silverEarningAmount").textContent =
+          "₹" + earning.toFixed(1) + "*";
+      }
+
+      function proceedToSilverPay() {
+        const grams = document.getElementById("silverGramsInput").value;
+        const totalPrice =
+          document.getElementById("silverFinalPrice").textContent;
+
+        alert(
+          `Proceeding to payment for ${grams}g of silver worth ₹${totalPrice}`,
+        );
+      }
+
+      function openSchemeForm(schemeType) {
+        const schemeName =
+          schemeType === "daily"
+            ? "Gold Daily Saving Scheme"
+            : "Gold Monthly Saving Scheme";
+
+        const formHTML = `
+          <div class="scheme-form-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;">
+            <div class="scheme-form-container" style="background: white; border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; animation: slideIn 0.3s ease;">
+              <h2 style="color: #7A0F0F; margin-bottom: 0.5rem;">Scheme Sign Up Form</h2>
+              <p style="color: var(--text-secondary); margin-bottom: 2rem;">${schemeName}</p>
+
+              <form id="schemeForm">
+                <div style="margin-bottom: 1.5rem;">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Scheme Details</h3>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Account ID</label>
+                    <input type="text" value="12345678" readonly style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; background: #f5f5f5;">
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Branch</label>
+                    <select id="branch" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option>Kumaran - Salem</option>
+                      <option>Kumaran - Lirchy</option>
+                      <option>Kumaran - thiruthuraipoondi</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Scheme</label>
+                    <select id="scheme" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option>Gold Monthly Savings</option>
+                      <option>Gold Daily Savings</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Installments</label>
+                    <select id="installments" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option value="16">16</option>
+                      <option value="24">24</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Amount</label>
+                    <select id="amount" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option value="1000">1000</option>
+                      <option value="2000">2000</option>
+                      <option value="5000">5000</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Benefits</label>
+                    <select id="benefits" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option>Bonus (Rs 5000) at maturity</option>
+                      <option>Regular savings benefit</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                  <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Nominee Information</h3>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nominee Name*</label>
+                    <input type="text" id="nomineeName" placeholder="Enter Name" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nominee ID proof*</label>
+                    <select id="nomineeIdProof" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                      <option>PAN</option>
+                      <option>Aadhar</option>
+                      <option>Driving License</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">ID Number*</label>
+                    <input type="text" id="idNumber" placeholder="ID Number" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">DOB*</label>
+                    <input type="date" id="dob" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Pincode*</label>
+                    <input type="text" id="pincode" placeholder="Pincode" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                  </div>
+
+                  <div style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Address*</label>
+                    <textarea id="address" placeholder="Address" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; resize: vertical; min-height: 80px;"></textarea>
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="acceptTerms" style="width: 16px; height: 16px;">
+                    <span>Accept <a href="#" style="color: #7A0F0F;">Terms and Conditions</a></span>
+                  </label>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                  <button type="button" onclick="closeSchemeForm()" style="flex: 1; padding: 1rem; background: #f5f5f5; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">Cancel</button>
+                  <button type="submit" style="flex: 2; padding: 1rem; background: #7A0F0F; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Register to scheme</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <style>
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+          </style>
+        `;
+
+        document.body.insertAdjacentHTML("beforeend", formHTML);
+
+        if (schemeType === "daily") {
+          document.getElementById("scheme").value = "Gold Daily Savings";
+        }
+
+        document
+          .getElementById("schemeForm")
+          .addEventListener("submit", handleSchemeRegistration);
+      }
+
+      function closeSchemeForm() {
+        const overlay = document.querySelector(".scheme-form-overlay");
+        if (overlay) overlay.remove();
+      }
+
+      function handleSchemeRegistration(e) {
+        e.preventDefault();
+
+        const formData = {
+          accountId: "12345678",
+          branch: document.getElementById("branch").value,
+          scheme: document.getElementById("scheme").value,
+          installments: document.getElementById("installments").value,
+          amount: document.getElementById("amount").value,
+          benefits: document.getElementById("benefits").value,
+          nomineeName: document.getElementById("nomineeName").value,
+          nomineeIdProof: document.getElementById("nomineeIdProof").value,
+          idNumber: document.getElementById("idNumber").value,
+          dob: document.getElementById("dob").value,
+          pincode: document.getElementById("pincode").value,
+          address: document.getElementById("address").value,
+          acceptTerms: document.getElementById("acceptTerms").checked,
+        };
+
+        if (
+          !formData.nomineeName ||
+          !formData.idNumber ||
+          !formData.dob ||
+          !formData.pincode ||
+          !formData.address
+        ) {
+          alert("Please fill in all required fields");
+          return;
+        }
+
+        if (!formData.acceptTerms) {
+          alert("Please accept the terms and conditions");
+          return;
+        }
+
+        localStorage.setItem("activeScheme", JSON.stringify(formData));
+        closeSchemeForm();
+        updateHomePageWithActiveScheme(formData);
+        alert("Successfully registered for the scheme!");
+      }
+
+      function updateHomePageWithActiveScheme(schemeData) {
+        document.getElementById("no-schemes").style.display = "none";
+        const activeSchemeCard = document.getElementById("active-scheme");
+        activeSchemeCard.style.display = "block";
+
+        const startDate = new Date().toLocaleDateString();
+        const maturityDate = new Date();
+        maturityDate.setMonth(
+          maturityDate.getMonth() + parseInt(schemeData.installments),
+        );
+
+        activeSchemeCard.innerHTML = `
+          <div style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h3 style="color: var(--text-primary); margin: 0;">
+                <span style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-right: 0.5rem;">GOLD</span>
+                Monthly Saving Scheme (Bonus Benefit)
+              </h3>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.875rem;">
+              <span>Started: ${startDate}</span>
+              <span>Matured: ${maturityDate.toLocaleDateString()}</span>
+              <span>22KT</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <div style="margin-bottom: 0.5rem;">Acc ID: ${schemeData.accountId}</div>
+                <div style="margin-bottom: 0.5rem;">Installments Paid: 0/${schemeData.installments}</div>
+                <div style="margin-bottom: 0.5rem;">Total Amount Paid: Rs 0.00</div>
+                <div style="margin-bottom: 1rem;">
+                  <a href="#" onclick="viewNominee()" style="color: #7A0F0F; text-decoration: none; margin-right: 1rem;">View Nominee ></a>
+                  <a href="#" onclick="viewStatement()" style="color: #7A0F0F; text-decoration: none;">View Statement ></a>
+                </div>
+              </div>
+
+              <div style="text-align: right;">
+                <div style="margin-bottom: 0.5rem;">Installment No: 1</div>
+                <div style="margin-bottom: 0.5rem; color: #dc2626;">Status: <strong>Over Due</strong></div>
+                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Rs ${schemeData.amount}.00</div>
+                <button onclick="makePayment(${schemeData.amount})" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Pay Now</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function makePayment(amount) {
+        const paymentHTML = `
+          <div class="payment-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <div class="payment-container" style="background: white; border-radius: 16px; padding: 2rem; max-width: 400px; width: 90%;">
+              <h2 style="color: #7A0F0F; margin-bottom: 1rem; text-align: center;">Payment Gateway</h2>
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">₹${amount}.00</div>
+                <div style="color: var(--text-secondary);">Scheme Installment Payment</div>
+              </div>
+
+              <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Payment Method</label>
+                <select style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                  <option>UPI</option>
+                  <option>Credit Card</option>
+                  <option>Debit Card</option>
+                  <option>Net Banking</option>
+                </select>
+              </div>
+
+              <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">UPI ID / Card Number</label>
+                <input type="text" placeholder="Enter payment details" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+              </div>
+
+              <div style="display: flex; gap: 1rem;">
+                <button onclick="closePayment()" style="flex: 1; padding: 1rem; background: #f5f5f5; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">Cancel</button>
+                <button onclick="processPayment(${amount})" style="flex: 2; padding: 1rem; background: #7A0F0F; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Pay ₹${amount}</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.body.insertAdjacentHTML("beforeend", paymentHTML);
+      }
+
+      function closePayment() {
+        const overlay = document.querySelector(".payment-overlay");
+        if (overlay) overlay.remove();
+      }
+
+      function processPayment(amount) {
+        closePayment();
+        setTimeout(() => {
+          alert("Payment successful! ₹" + amount + " has been paid.");
+          updateSchemeAfterPayment(amount);
+        }, 1000);
+      }
+
+      function updateSchemeAfterPayment(amount) {
+        const activeScheme = JSON.parse(
+          localStorage.getItem("activeScheme") || "{}",
+        );
+        const paidInstallments =
+          (JSON.parse(localStorage.getItem("paidInstallments")) || 0) + 1;
+        const totalPaid =
+          (JSON.parse(localStorage.getItem("totalPaid")) || 0) +
+          parseInt(amount);
+
+        localStorage.setItem("paidInstallments", paidInstallments);
+        localStorage.setItem("totalPaid", totalPaid);
+
+        if (activeScheme.installments) {
+          const activeSchemeCard = document.getElementById("active-scheme");
+          const remainingInstallments =
+            parseInt(activeScheme.installments) - paidInstallments;
+          const nextInstallmentNo = paidInstallments + 1;
+
+          activeSchemeCard.innerHTML = `
+            <div style="background: #FFF8E7; border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="color: var(--text-primary); margin: 0;">
+                  <span style="background: #FFD700; color: #7A0F0F; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; margin-right: 0.5rem;">GOLD</span>
+                  Monthly Saving Scheme (Bonus Benefit)
+                </h3>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.875rem;">
+                <span>Started: ${new Date().toLocaleDateString()}</span>
+                <span>Matured: ${new Date(Date.now() + parseInt(activeScheme.installments) * 30 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
+                <span>22KT</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                  <div style="margin-bottom: 0.5rem;">Acc ID: ${activeScheme.accountId}</div>
+                  <div style="margin-bottom: 0.5rem;">Installments Paid: ${paidInstallments}/${activeScheme.installments}</div>
+                  <div style="margin-bottom: 0.5rem;">Total Amount Paid: Rs ${totalPaid}.00</div>
+                  <div style="margin-bottom: 1rem;">
+                    <a href="#" onclick="viewNominee()" style="color: #7A0F0F; text-decoration: none; margin-right: 1rem;">View Nominee ></a>
+                    <a href="#" onclick="viewStatement()" style="color: #7A0F0F; text-decoration: none;">View Statement ></a>
+                  </div>
+                </div>
+
+                <div style="text-align: right;">
+                  ${
+                    remainingInstallments > 0
+                      ? `
+                    <div style="margin-bottom: 0.5rem;">Installment No: ${nextInstallmentNo}</div>
+                    <div style="margin-bottom: 0.5rem; color: #dc2626;">Status: <strong>Over Due</strong></div>
+                    <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Rs ${activeScheme.amount}.00</div>
+                    <button onclick="makePayment(${activeScheme.amount})" style="background: #7A0F0F; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">Pay Now</button>
+                  `
+                      : `
+                    <div style="margin-bottom: 0.5rem; color: #10b981;">Status: <strong>Completed</strong></div>
+                    <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #10b981;">Scheme Completed!</div>
+                    <button disabled style="background: #e5e7eb; color: #9ca3af; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600;">All Paid</button>
+                  `
+                  }
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function viewNominee() {
+        const activeScheme = JSON.parse(
+          localStorage.getItem("activeScheme") || "{}",
+        );
+        alert(
+          `Nominee Details:\nName: ${activeScheme.nomineeName}\nID: ${activeScheme.idNumber}\nDOB: ${activeScheme.dob}`,
+        );
+      }
+
+      function viewStatement() {
+        alert("Statement will be downloaded/viewed here");
+      }
+
+      // Check if there's an active scheme on page load
+      function checkActiveScheme() {
+        const activeScheme = localStorage.getItem("activeScheme");
+        if (activeScheme) {
+          const schemeData = JSON.parse(activeScheme);
+          updateHomePageWithActiveScheme(schemeData);
+        }
+      }
+
+      // Add to initialization
+      document.addEventListener("DOMContentLoaded", function () {
+        checkActiveScheme();
+      });
+
+      // Service Worker registration for PWA capabilities
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then(function (registration) {
+              console.log("SW registered: ", registration);
+            })
+            .catch(function (registrationError) {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

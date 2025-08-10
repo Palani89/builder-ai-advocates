@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions - GoldApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ffd700;
+        --primary-dark: #daa520;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        padding-top: 80px;
+        padding-bottom: 100px;
+      }
+
+      .transactions-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+
+      .transactions-header {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .transactions-header h2 {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .filter-tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-tab {
+        padding: 0.5rem 1rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .filter-tab.active,
+      .filter-tab:hover {
+        background: var(--primary);
+        color: var(--text-primary);
+        border-color: var(--primary);
+      }
+
+      .search-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .search-box {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary-dark);
+      }
+
+      .search-btn {
+        padding: 0.75rem 1.5rem;
+        background: var(--primary-dark);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .date-filters {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .date-input {
+        padding: 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 0.875rem;
+      }
+
+      .transactions-summary {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .summary-card {
+        background: var(--background);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .summary-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .summary-icon.buy {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .summary-icon.sell {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .summary-icon.sip {
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--primary-dark);
+      }
+
+      .summary-icon.total {
+        background: rgba(76, 76, 221, 0.1);
+        color: #4c4cdd;
+      }
+
+      .summary-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .summary-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .transactions-list-full {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .transaction-item-full {
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 0;
+      }
+
+      .transaction-item-full:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .transaction-date-group {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .transaction-details {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--background);
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .transaction-details:hover {
+        box-shadow: var(--shadow);
+      }
+
+      .transaction-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
+      .transaction-icon.buy {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .transaction-icon.sip {
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--primary-dark);
+      }
+
+      .transaction-icon.sell {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .transaction-icon.referral {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .transaction-icon.chit {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+      }
+
+      .transaction-info {
+        flex: 1;
+      }
+
+      .transaction-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 0.95rem;
+      }
+
+      .transaction-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .transaction-time {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .transaction-amount-details {
+        text-align: right;
+      }
+
+      .transaction-amount {
+        font-weight: 700;
+        color: var(--text-primary);
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .transaction-amount.negative {
+        color: var(--error);
+      }
+
+      .transaction-amount.positive {
+        color: var(--success);
+      }
+
+      .transaction-quantity {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+      }
+
+      .transaction-status {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+      }
+
+      .transaction-status.success {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .transaction-status.pending {
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--warning);
+      }
+
+      .transaction-status.failed {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--error);
+      }
+
+      .load-more-btn {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--primary-dark);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+      }
+
+      .load-more-btn:hover {
+        background: var(--primary);
+        color: var(--text-primary);
+      }
+
+      .no-transactions {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+      }
+
+      .no-transactions i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 0.25rem;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 0.7rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 12px;
+        position: relative;
+        min-width: 60px;
+        flex: 1;
+        max-width: 80px;
+      }
+
+      .nav-item.active {
+        color: var(--primary-dark);
+        background: rgba(255, 215, 0, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+      }
+
+      .nav-item:hover {
+        color: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .nav-item:active {
+        transform: translateY(0);
+      }
+
+      .nav-item i {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: var(--error);
+        color: white;
+        font-size: 0.6rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @media (max-width: 768px) {
+        .transactions-section {
+          padding: 1rem;
+        }
+
+        .summary-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .transaction-details {
+          flex-direction: column;
+          text-align: center;
+          gap: 0.75rem;
+        }
+
+        .transaction-amount-details {
+          text-align: center;
+        }
+
+        .filter-tabs {
+          justify-content: center;
+        }
+
+        .search-box {
+          flex-direction: column;
+        }
+
+        .date-filters {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="transactions-section">
+      <!-- Transactions Header -->
+      <div class="transactions-header">
+        <h2><i class="fas fa-exchange-alt"></i> Transaction History</h2>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterTransactions('all')">
+            All
+          </button>
+          <button class="filter-tab" onclick="filterTransactions('buy')">
+            Buy
+          </button>
+          <button class="filter-tab" onclick="filterTransactions('sell')">
+            Sell
+          </button>
+          <button class="filter-tab" onclick="filterTransactions('sip')">
+            SIP
+          </button>
+          <button class="filter-tab" onclick="filterTransactions('chit')">
+            Chits
+          </button>
+          <button class="filter-tab" onclick="filterTransactions('referral')">
+            Referrals
+          </button>
+        </div>
+      </div>
+
+      <!-- Search and Filters -->
+      <div class="search-section">
+        <div class="search-box">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search transactions..."
+            id="searchInput"
+          />
+          <button class="search-btn" onclick="searchTransactions()">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+        <div class="date-filters">
+          <label>From:</label>
+          <input type="date" class="date-input" id="fromDate" />
+          <label>To:</label>
+          <input type="date" class="date-input" id="toDate" />
+          <button class="search-btn" onclick="filterByDate()">Apply</button>
+        </div>
+      </div>
+
+      <!-- Transaction Summary -->
+      <div class="transactions-summary">
+        <h3 style="margin-bottom: 1.5rem">
+          <i class="fas fa-chart-bar"></i> Transaction Summary
+        </h3>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-icon total">
+              <i class="fas fa-list"></i>
+            </div>
+            <div class="summary-value">48</div>
+            <div class="summary-label">Total Transactions</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon buy">
+              <i class="fas fa-plus"></i>
+            </div>
+            <div class="summary-value">₹45,280</div>
+            <div class="summary-label">Total Invested</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon sell">
+              <i class="fas fa-minus"></i>
+            </div>
+            <div class="summary-value">₹3,125</div>
+            <div class="summary-label">Total Redeemed</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-icon sip">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="summary-value">₹35,000</div>
+            <div class="summary-label">SIP Investments</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions List -->
+      <div class="transactions-list-full">
+        <h3 style="margin-bottom: 1.5rem">
+          <i class="fas fa-history"></i> Recent Transactions
+        </h3>
+
+        <!-- Today -->
+        <div class="transaction-date-group">
+          <i class="fas fa-calendar-day"></i> Today
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-icon buy">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Gold Purchase</div>
+            <div class="transaction-subtitle">Auto-save round-off</div>
+            <div class="transaction-time">2:30 PM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹1,562.50</div>
+            <div class="transaction-quantity">0.25g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <div class="transaction-details">
+          <div class="transaction-icon buy">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Gold Purchase</div>
+            <div class="transaction-subtitle">Manual investment</div>
+            <div class="transaction-time">10:15 AM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹5,000.00</div>
+            <div class="transaction-quantity">0.80g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <!-- Yesterday -->
+        <div class="transaction-date-group">
+          <i class="fas fa-calendar-day"></i> Yesterday
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-icon sip">
+            <i class="fas fa-calendar"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Monthly Gold SIP</div>
+            <div class="transaction-subtitle">Recurring investment</div>
+            <div class="transaction-time">9:00 AM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹5,000.00</div>
+            <div class="transaction-quantity">0.80g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <div class="transaction-details">
+          <div class="transaction-icon referral">
+            <i class="fas fa-gift"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Referral Bonus</div>
+            <div class="transaction-subtitle">Friend joined via your link</div>
+            <div class="transaction-time">3:45 PM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹125.00</div>
+            <div class="transaction-quantity">0.02g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <!-- 2 days ago -->
+        <div class="transaction-date-group">
+          <i class="fas fa-calendar-day"></i> 2 days ago
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-icon buy">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">One-time Gold Purchase</div>
+            <div class="transaction-subtitle">Debit Card Payment</div>
+            <div class="transaction-time">6:20 PM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹10,000.00</div>
+            <div class="transaction-quantity">1.60g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <div class="transaction-details">
+          <div class="transaction-icon chit">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Gold Chit #1245</div>
+            <div class="transaction-subtitle">Monthly contribution</div>
+            <div class="transaction-time">11:30 AM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹2,000.00</div>
+            <div class="transaction-quantity">0.32g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <!-- 5 days ago -->
+        <div class="transaction-date-group">
+          <i class="fas fa-calendar-day"></i> 5 days ago
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-icon sell">
+            <i class="fas fa-minus"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Gold Redemption</div>
+            <div class="transaction-subtitle">
+              Bank transfer to savings account
+            </div>
+            <div class="transaction-time">1:15 PM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount negative">-₹3,125.00</div>
+            <div class="transaction-quantity">0.50g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <!-- 1 week ago -->
+        <div class="transaction-date-group">
+          <i class="fas fa-calendar-week"></i> 1 week ago
+        </div>
+        <div class="transaction-details">
+          <div class="transaction-icon buy">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Gold Purchase</div>
+            <div class="transaction-subtitle">Auto-save accumulated</div>
+            <div class="transaction-time">8:00 AM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹850.00</div>
+            <div class="transaction-quantity">0.136g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <div class="transaction-details">
+          <div class="transaction-icon sip">
+            <i class="fas fa-calendar"></i>
+          </div>
+          <div class="transaction-info">
+            <div class="transaction-title">Monthly Gold SIP</div>
+            <div class="transaction-subtitle">Recurring investment</div>
+            <div class="transaction-time">9:00 AM</div>
+          </div>
+          <div class="transaction-amount-details">
+            <div class="transaction-amount positive">+₹5,000.00</div>
+            <div class="transaction-quantity">0.82g Gold</div>
+            <div class="transaction-status success">Success</div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <button class="load-more-btn" onclick="loadMoreTransactions()">
+          <i class="fas fa-spinner"></i> Load More Transactions
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Invest</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Chits</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button
+          class="nav-item"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      let currentFilter = "all";
+      let currentPage = 1;
+
+      function filterTransactions(type) {
+        // Remove active class from all tabs
+        document.querySelectorAll(".filter-tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Add active class to clicked tab
+        event.target.classList.add("active");
+
+        currentFilter = type;
+        currentPage = 1;
+
+        // In a real app, this would filter the transactions
+        console.log("Filtering transactions by:", type);
+      }
+
+      function searchTransactions() {
+        const searchTerm = document.getElementById("searchInput").value;
+        console.log("Searching for:", searchTerm);
+        // Implement search logic here
+      }
+
+      function filterByDate() {
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
+        console.log("Filtering from:", fromDate, "to:", toDate);
+        // Implement date filtering logic here
+      }
+
+      function loadMoreTransactions() {
+        currentPage++;
+        console.log("Loading page:", currentPage);
+        // In a real app, this would load more transactions
+
+        // Simulate loading
+        const btn = event.target;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+
+        setTimeout(() => {
+          btn.innerHTML =
+            '<i class="fas fa-spinner"></i> Load More Transactions';
+          // Add more transactions to the list
+        }, 1500);
+      }
+
+      // Navigation
+      function showTab(tabName) {
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          more: "goldapp-more.html",
+        };
+
+        // Check if we're already on the target page
+        const currentPage =
+          window.location.pathname.split("/").pop() ||
+          "goldapp-transactions.html";
+        const targetPage = pageMap[tabName];
+
+        if (targetPage && currentPage !== targetPage) {
+          window.location.href = pageMap[tabName];
+        }
+      }
+
+      // Set default dates (last 30 days)
+      document.addEventListener("DOMContentLoaded", function () {
+        const today = new Date();
+        const lastMonth = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+        document.getElementById("toDate").value = today
+          .toISOString()
+          .split("T")[0];
+        document.getElementById("fromDate").value = lastMonth
+          .toISOString()
+          .split("T")[0];
+      });
+    </script>
+  </body>
+</html>

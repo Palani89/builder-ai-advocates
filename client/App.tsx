@@ -12,6 +12,7 @@ import Cases from "./pages/Cases";
 import CaseDetails from "./pages/CaseDetails";
 import CreateCase from "./pages/CreateCase";
 import Team from "./pages/Team";
+import GoldApp from "./pages/GoldApp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,13 +24,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<GoldApp />} />
+          <Route path="/ai-advocates" element={<Index />} />
           <Route path="/calendar" element={<Index />} />
           <Route path="/more" element={<More />} />
           <Route path="/cases" element={<Cases />} />
           <Route path="/case-details" element={<CaseDetails />} />
           <Route path="/create-case" element={<CreateCase />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/goldapp" element={<GoldApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

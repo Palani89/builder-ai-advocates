@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sri Kumaran Jewellers - Digital Gold Investment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-gold: #ffd700;
+        --dark-gold: #b8860b;
+        --orange: #ff8c00;
+        --orange-light: #ffa500;
+        --red: #dc143c;
+        --background: #f5f5f5;
+        --white: #ffffff;
+        --text-dark: #2c2c2c;
+        --text-gray: #666666;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .app-container {
+        min-height: 100vh;
+        background: var(--background);
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header */
+      .header {
+        background: var(--white);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .menu-icon {
+        width: 30px;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .menu-line {
+        width: 100%;
+        height: 3px;
+        background: var(--orange);
+        border-radius: 2px;
+      }
+
+      .menu-line:nth-child(2) {
+        width: 70%;
+      }
+
+      .menu-line:nth-child(3) {
+        width: 50%;
+      }
+
+      .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .crown-icon {
+        width: 50px;
+        height: 40px;
+        background: var(--primary-gold);
+        border-radius: 50% 50% 0 0;
+        position: relative;
+        margin-bottom: 5px;
+      }
+
+      .crown-icon::before {
+        content: "♛";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: var(--dark-gold);
+      }
+
+      .logo-text {
+        background: var(--red);
+        color: var(--white);
+        padding: 8px 20px;
+        border-radius: 15px;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .logo-subtitle {
+        font-size: 11px;
+        margin-top: 2px;
+      }
+
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 5px;
+      }
+
+      .notification-container {
+        position: relative;
+      }
+
+      .notification-icon {
+        background: var(--orange);
+        color: var(--white);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        position: relative;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--red);
+        color: var(--white);
+        font-size: 10px;
+        font-weight: 700;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--white);
+      }
+
+      .app-version {
+        color: var(--orange);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 0;
+        flex: 1;
+        overflow-y: auto;
+        margin-top: 80px;
+        margin-bottom: 100px;
+      }
+
+      /* Rates Card */
+      .rates-card {
+        background: var(--white);
+        margin: 20px;
+        border-radius: 20px;
+        padding: 25px;
+        color: var(--text-dark);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #e5e5e5;
+      }
+
+      .last-updated {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        color: #8b4513;
+      }
+
+      .metals-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .metal-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .metal-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .metal-icon.gold {
+        background: #daa520;
+      }
+
+      .metal-icon.silver {
+        background: #c0c0c0;
+        color: var(--text-dark);
+      }
+
+      .metal-info h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+
+      .metal-price {
+        font-size: 24px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+
+      .price-arrow {
+        color: #22c55e;
+        font-size: 18px;
+      }
+
+      .metal-subtitle {
+        font-size: 12px;
+        color: #8b4513;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      /* Promotional Banner */
+      .promo-banner {
+        margin: 20px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        height: 180px;
+        background: linear-gradient(135deg, #f5deb3 0%, #deb887 100%);
+      }
+
+      .promo-content {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+      }
+
+      .promo-woman {
+        flex: 1;
+        height: 140px;
+        background: url("https://cdn.builder.io/api/v1/image/assets%2Fb570605fd20a438db2e49eaee45edefa%2F18a6b91fdc5d4b6faba4f8a5a6b18fab?format=webp&width=800")
+          center/cover;
+        border-radius: 15px;
+        margin-right: 20px;
+      }
+
+      .promo-circle {
+        width: 120px;
+        height: 120px;
+        background: var(--red);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .promo-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-gold);
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .promo-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+
+      .promo-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 15px 0;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d3d3d3;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: var(--orange);
+        transform: scale(1.3);
+      }
+
+      /* Schemes Section */
+      .schemes-section {
+        margin: 30px 20px 20px;
+      }
+
+      .schemes-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .schemes-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .sync-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        font-size: 12px;
+        color: var(--text-gray);
+      }
+
+      .sync-icon {
+        color: var(--orange);
+        margin-left: 5px;
+      }
+
+      .schemes-card {
+        background: linear-gradient(
+          135deg,
+          var(--orange) 0%,
+          var(--orange-light) 100%
+        );
+        border-radius: 20px;
+        padding: 30px;
+        color: var(--white);
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .schemes-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .schemes-message {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .schemes-subtitle {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .schemes-arrow {
+        width: 50px;
+        height: 50px;
+        border: 2px solid var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      .schemes-arrow:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .schemes-arrow i {
+        font-size: 20px;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000000;
+        border-radius: 25px 25px 0 0;
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--white);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 10px;
+        border-radius: 15px;
+      }
+
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .nav-item i {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .nav-item span {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .nav-item.home {
+        /* Remove special styling for home */
+      }
+
+      /* Modal */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal-overlay.show {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--white);
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+        max-width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        padding: 25px 25px 0;
+        text-align: center;
+      }
+
+      .modal-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+      }
+
+      .modal-subtitle {
+        font-size: 14px;
+        color: var(--text-gray);
+        margin-bottom: 20px;
+      }
+
+      .modal-body {
+        padding: 20px 25px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e5e5e5;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--orange);
+        box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+      }
+
+      .modal-footer {
+        padding: 0 25px 25px;
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      .btn-primary:hover {
+        background: var(--orange-light);
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: #f5f5f5;
+        color: var(--text-dark);
+      }
+
+      .btn-secondary:hover {
+        background: #e5e5e5;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .metals-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .metal-item {
+          justify-content: center;
+        }
+
+        .promo-content {
+          flex-direction: column;
+          padding: 15px;
+        }
+
+        .promo-woman {
+          width: 100%;
+          height: 100px;
+          margin: 0 0 15px 0;
+        }
+
+        .schemes-section {
+          margin: 20px 15px 15px;
+        }
+
+        .rates-card {
+          margin: 15px;
+          padding: 20px;
+        }
+
+        .promo-banner {
+          margin: 15px;
+          height: 160px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          padding: 10px 15px;
+        }
+
+        .logo-text {
+          font-size: 12px;
+          padding: 6px 15px;
+        }
+
+        .crown-icon {
+          width: 40px;
+          height: 32px;
+        }
+
+        .metal-price {
+          font-size: 20px;
+        }
+
+        .schemes-title {
+          font-size: 18px;
+        }
+
+        .bottom-nav {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <div class="menu-icon">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+          </div>
+          <div class="logo-container">
+            <div class="crown-icon"></div>
+            <div class="logo-text">
+              SRI KUMARAN
+              <div class="logo-subtitle">JEWELLERS</div>
+            </div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="notification-container">
+            <div
+              class="notification-icon"
+              onclick="logout()"
+              style="cursor: pointer"
+            >
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+          </div>
+          <div class="app-version">AV:5.0.0</div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Rates Card -->
+        <div class="rates-card">
+          <div class="last-updated">
+            Last Updated On : 2025-08-02 10:19:35.103
+          </div>
+
+          <div class="metals-container">
+            <div class="metal-item">
+              <div class="metal-icon gold">AU</div>
+              <div class="metal-info">
+                <h3>Gold</h3>
+                <div class="metal-price">
+                  ₹ 9290.0
+                  <span class="price-arrow">↗</span>
+                </div>
+              </div>
+            </div>
+            <div class="metal-item">
+              <div class="metal-icon silver">AG</div>
+              <div class="metal-info">
+                <h3>Silver</h3>
+                <div class="metal-price">
+                  ₹ 123.0
+                  <span class="price-arrow">↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="metal-subtitle">22 KT Per Gram</div>
+        </div>
+
+        <!-- Promotional Banner -->
+        <div class="promo-banner">
+          <div class="promo-content">
+            <div class="promo-woman"></div>
+            <div class="promo-circle">
+              <div class="promo-title">Aadi</div>
+              <div class="promo-title">Special</div>
+              <div class="promo-subtitle">Sale</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Promo Dots -->
+        <div class="promo-dots">
+          <div class="dot"></div>
+          <div class="dot active"></div>
+          <div class="dot"></div>
+        </div>
+
+        <!-- Schemes Section -->
+        <div class="schemes-section">
+          <div class="schemes-header">
+            <h2 class="schemes-title">Your Schemes</h2>
+            <div class="sync-info">
+              <div>Last Sync</div>
+              <div>
+                03-Aug-2025 1:55 PM <i class="fas fa-sync-alt sync-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="schemes-card" onclick="openSchemesModal()">
+            <div class="schemes-message">No Digital Savings Plan found.</div>
+            <div class="schemes-subtitle">Join new plans</div>
+            <div class="schemes-arrow">
+              <i class="fas fa-arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <button class="nav-item" onclick="showTab('transactions')">
+          <i class="fas fa-file-alt"></i>
+          <span>History</span>
+        </button>
+        <button class="nav-item" onclick="showTab('schemes')">
+          <i class="fas fa-chart-bar"></i>
+          <span>Schemes</span>
+        </button>
+        <button class="nav-item home" onclick="showTab('home')">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" onclick="showTab('savings')">
+          <i class="fas fa-piggy-bank"></i>
+          <span>Savings</span>
+        </button>
+        <button class="nav-item" onclick="showTab('profile')">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Schemes Modal -->
+    <div id="schemesModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Join Digital Savings Plan</h3>
+          <p class="modal-subtitle">
+            Start your journey towards financial growth
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter your full name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mobile Number</label>
+            <input
+              type="tel"
+              class="form-input"
+              placeholder="Enter mobile number"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Investment Amount</label>
+            <input
+              type="number"
+              class="form-input"
+              placeholder="Enter amount (min ₹500)"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeSchemesModal()">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="joinScheme()">
+            Join Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentTab = "home";
+
+      function showTab(tabName) {
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          more: "goldapp-more.html",
+        };
+
+        // Check if we're already on the target page
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-index.html";
+        const targetPage = pageMap[tabName];
+
+        if (targetPage && currentPage !== targetPage) {
+          window.location.href = pageMap[tabName];
+        }
+      }
+
+      function openSchemesModal() {
+        document.getElementById("schemesModal").classList.add("show");
+      }
+
+      function closeSchemesModal() {
+        document.getElementById("schemesModal").classList.remove("show");
+      }
+
+      function joinScheme() {
+        alert("Scheme registration functionality will be implemented");
+        closeSchemesModal();
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          // Clear any stored data
+          localStorage.clear();
+          sessionStorage.clear();
+
+          // Redirect to login page or refresh
+          alert("Logged out successfully!");
+          window.location.reload();
+        }
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("schemesModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeSchemesModal();
+          }
+        });
+
+      // Location tab switching
+      document.querySelectorAll(".location-tab").forEach((tab) => {
+        tab.addEventListener("click", function () {
+          document
+            .querySelectorAll(".location-tab")
+            .forEach((t) => t.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // Auto-sync animation
+      setInterval(() => {
+        const syncIcon = document.querySelector(".sync-icon");
+        syncIcon.style.animation = "none";
+        setTimeout(() => {
+          syncIcon.style.animation = "spin 1s linear";
+        }, 10);
+      }, 30000);
+
+      // Add CSS animation for sync icon
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Sri Kumaran Jewellers app initialized");
+      });
+    </script>
+  </body>
+</html>

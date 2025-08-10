@@ -1,0 +1,2946 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Asset - Golder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Include the same CSS variables and base styles from the main page */
+      :root {
+        --primary: #ffd700;
+        --primary-dark: #daa520;
+        --primary-light: #fff8dc;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --info: #3b82f6;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        margin: 0;
+        padding: 80px 0 100px 0;
+        min-height: 100vh;
+      }
+
+      /* Modern Header */
+      .header {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        box-shadow: var(--shadow);
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hamburger-menu {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        cursor: pointer;
+        margin-right: 1rem;
+        padding: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .hamburger-menu:hover {
+        color: var(--primary-dark);
+      }
+
+      .signout-btn {
+        background: var(--error);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .signout-btn:hover {
+        background: #dc2626;
+        transform: scale(1.05);
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .user-profile:hover {
+        background: var(--background);
+      }
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        background: var(--gradient-gold);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .user-status {
+        font-size: 0.75rem;
+        color: var(--success);
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        box-shadow: var(--shadow-xl);
+        overflow-y: auto;
+      }
+
+      .side-menu.active {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .side-menu-logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+        color: var(--primary-dark);
+      }
+
+      .side-menu-item i {
+        font-size: 1.25rem;
+        width: 24px;
+        text-align: center;
+      }
+
+      .side-menu-section {
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
+      .side-menu-section-title {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: #7a0f0f;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        min-height: 70px;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.125rem;
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 0.65rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem 0.25rem;
+        border-radius: 8px;
+        position: relative;
+        flex: 1;
+        min-height: 50px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .nav-item.active {
+        color: #ffbc00 !important;
+        background: rgba(255, 188, 0, 0.1) !important;
+        transform: translateY(-1px);
+      }
+
+      .nav-item:hover:not(.active) {
+        color: #ffbc00;
+        background: rgba(255, 188, 0, 0.05);
+      }
+
+      .nav-item:active:not(.active) {
+        transform: scale(0.95);
+        background: rgba(255, 188, 0, 0.15);
+      }
+
+      .nav-item:focus {
+        outline: none;
+      }
+
+      .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 0.125rem;
+        line-height: 1;
+      }
+
+      .nav-item span {
+        font-size: 0.6rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: #ef4444;
+        color: white;
+        font-size: 0.55rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      .invest-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+      }
+
+      .page-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.125rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .tab-navigation {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 1rem 2rem;
+        background: transparent;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .tab-btn.active {
+        background: var(--gradient-gold);
+        color: white;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Asset Selection */
+      .asset-selection {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .asset-card {
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        position: relative;
+      }
+
+      .asset-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .asset-card.selected {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+
+      .asset-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .asset-icon.gold {
+        background: rgba(255, 215, 0, 0.1);
+        color: #ffd700;
+      }
+
+      .asset-icon.silver {
+        background: rgba(192, 192, 192, 0.1);
+        color: #c0c0c0;
+      }
+
+      .asset-icon.platinum {
+        background: rgba(229, 228, 226, 0.1);
+        color: #e5e4e2;
+      }
+
+      .asset-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .asset-price {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 0.25rem;
+      }
+
+      .asset-change {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .asset-change.positive {
+        color: var(--success);
+      }
+
+      .asset-change.negative {
+        color: var(--error);
+      }
+
+      /* Investment Form */
+      .investment-form {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .input-container {
+        position: relative;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        font-size: 1rem;
+        background: var(--surface);
+        transition: all 0.2s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+      }
+
+      .input-prefix {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .input-prefix + .form-input {
+        padding-left: 2.5rem;
+      }
+
+      .input-suffix {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      .toggle-container {
+        display: flex;
+        background: var(--background);
+        border-radius: 12px;
+        padding: 0.25rem;
+        margin-top: 0.5rem;
+      }
+
+      .toggle-btn {
+        flex: 1;
+        padding: 0.75rem;
+        background: transparent;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .toggle-btn.active {
+        background: var(--surface);
+        color: var(--primary-dark);
+        box-shadow: var(--shadow);
+      }
+
+      .amount-presets {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .preset-btn {
+        padding: 0.75rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .preset-btn:hover,
+      .preset-btn.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      /* Live Calculator */
+      .live-calculator {
+        background: var(--background);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .calc-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .calc-row:last-child {
+        border-bottom: none;
+        font-weight: 700;
+        font-size: 1.125rem;
+        color: var(--primary-dark);
+      }
+
+      .calc-label {
+        color: var(--text-secondary);
+      }
+
+      .calc-value {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      /* SIP Specific Styles */
+      .frequency-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      .frequency-card {
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .frequency-card:hover,
+      .frequency-card.selected {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+
+      .frequency-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .frequency-desc {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
+
+      /* Payment Methods */
+      .payment-section {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .payment-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .payment-card {
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .payment-card:hover,
+      .payment-card.selected {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+
+      .payment-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .payment-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+
+      .payment-name {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .payment-desc {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+
+      /* Action Buttons */
+      .action-section {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: var(--gradient-gold);
+        color: white;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-primary);
+        border: 2px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--background);
+        border-color: var(--primary);
+      }
+
+      .btn-large {
+        padding: 1.25rem 3rem;
+        font-size: 1.125rem;
+      }
+
+      /* Investment Tips */
+      .tips-section {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .tip-card {
+        background: var(--background);
+        border-left: 4px solid var(--info);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .tip-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: var(--info);
+        color: white;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        margin-right: 0.75rem;
+      }
+
+      .tip-text {
+        display: inline;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        line-height: 1.5;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .header {
+          padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+          gap: 0.5rem;
+        }
+
+        .logo-text {
+          font-size: 1.25rem;
+          letter-spacing: 0.5px;
+        }
+
+        .hamburger-menu {
+          margin-right: 0.5rem;
+          padding: 0.25rem;
+        }
+
+        .signout-btn {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+
+        .invest-container {
+          padding: 0.75rem;
+        }
+
+        .page-title {
+          font-size: 2rem !important;
+        }
+
+        .page-subtitle {
+          font-size: 1rem !important;
+        }
+
+        .tab-navigation {
+          flex-direction: column;
+          padding: 0.25rem;
+        }
+
+        .tab-btn {
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+        }
+
+        /* Mobile styles for buy interface */
+        .asset-selection {
+          padding: 1rem !important;
+          margin-bottom: 1rem !important;
+        }
+
+        /* Buy Gold/Silver radio buttons */
+        .asset-selection > div:first-child {
+          gap: 1rem !important;
+          flex-wrap: wrap;
+        }
+
+        .asset-selection label span {
+          font-size: 1rem !important;
+        }
+
+        /* One Time/SIP toggle buttons */
+        .asset-selection > div:nth-child(2) {
+          gap: 0.5rem !important;
+        }
+
+        .asset-selection button {
+          padding: 0.5rem 1rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Main investment card */
+        .asset-selection > div:nth-child(3) {
+          padding: 1rem !important;
+        }
+
+        /* Grams input section */
+        .asset-selection > div:nth-child(3) > div:first-child {
+          gap: 1rem !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:first-child
+          > div:first-child {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:first-child
+          > div:first-child
+          input {
+          font-size: 1.5rem !important;
+          width: 100px !important;
+        }
+
+        .asset-selection > div:nth-child(3) > div:first-child > div:last-child {
+          width: 100%;
+          text-align: center !important;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:first-child
+          > div:last-child
+          > div:last-child {
+          font-size: 1.25rem !important;
+        }
+
+        /* Quick selection buttons */
+        .asset-selection > div:nth-child(3) > div:nth-child(2) {
+          gap: 0.5rem !important;
+        }
+
+        .asset-selection > div:nth-child(3) > div:nth-child(2) button {
+          padding: 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        /* Projected returns section */
+        .asset-selection > div:nth-child(3) > div:nth-child(3) {
+          padding: 1rem !important;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:nth-child(3)
+          > div:first-child {
+          font-size: 1rem !important;
+          flex-direction: column !important;
+          gap: 0.5rem !important;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:nth-child(3)
+          > div:nth-child(2) {
+          flex-direction: column !important;
+          gap: 0.5rem !important;
+        }
+
+        .asset-selection
+          > div:nth-child(3)
+          > div:nth-child(3)
+          > div:nth-child(2)
+          span {
+          font-size: 0.875rem !important;
+        }
+
+        /* Terms checkbox */
+        .asset-selection > div:nth-child(3) > div:nth-child(4) label span {
+          font-size: 0.875rem !important;
+        }
+
+        /* Final price */
+        .asset-selection > div:nth-child(3) > div:nth-child(5) {
+          font-size: 1.5rem !important;
+        }
+
+        /* Pay Now button */
+        .asset-selection > div:nth-child(3) > button {
+          font-size: 1rem !important;
+          padding: 0.875rem !important;
+        }
+
+        /* SIP Interface Mobile Styles */
+        #sipInterface > div:first-child input {
+          font-size: 2rem !important;
+          width: 150px !important;
+        }
+
+        #sipInterface > div:nth-child(2) {
+          gap: 0.5rem !important;
+        }
+
+        #sipInterface > div:nth-child(2) button {
+          padding: 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .asset-grid,
+        .payment-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .frequency-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .action-section {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" onclick="closeSideMenu()"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">Golder</div>
+        <div class="side-menu-subtitle">Digital Gold Investment</div>
+      </div>
+
+      <div class="side-menu-nav">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-enhanced.html')"
+        >
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-invest.html')"
+        >
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-portfolio.html')"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-chits.html')"
+        >
+          <i class="fas fa-users"></i>
+          <span>Schemes</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-transactions.html')"
+        >
+          <i class="fas fa-exchange-alt"></i>
+          <span>Transactions</span>
+        </button>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Account</div>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-kyc.html')"
+          >
+            <i class="fas fa-file-alt"></i>
+            <span>KYC Verification</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-sip.html')"
+          >
+            <i class="fas fa-calendar-alt"></i>
+            <span>SIP Plans</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-more.html')"
+          >
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </button>
+        </div>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Support</div>
+          <button
+            class="side-menu-item"
+            onclick="showComingSoon('Help Center')"
+          >
+            <i class="fas fa-question-circle"></i>
+            <span>Help Center</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="alert('Contact Support: +91 98765 43210')"
+          >
+            <i class="fas fa-phone"></i>
+            <span>Contact Support</span>
+          </button>
+          <button class="side-menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <button class="hamburger-menu" onclick="toggleSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <span class="logo-text">Golder</span>
+        </div>
+
+        <div class="header-actions">
+          <button class="signout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="invest-container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Digital Asset</h1>
+        <p class="page-subtitle">
+          Build wealth through systematic gold & silver investments
+        </p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tab-navigation">
+        <button
+          class="tab-btn active"
+          onclick="showTab('onetime')"
+          id="tab-onetime"
+        >
+          <i class="fas fa-bolt"></i>
+          <span>One-Time Buy</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('sip')" id="tab-sip">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Start SIP</span>
+        </button>
+      </div>
+
+      <!-- One-Time Buy Tab -->
+      <div class="tab-content active" id="content-onetime">
+        <!-- Buy Gold/Silver Selection -->
+        <div
+          class="asset-selection"
+          style="
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+          "
+        >
+          <div style="display: flex; gap: 2rem; margin-bottom: 2rem">
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="assetType"
+                value="gold"
+                checked
+                onchange="switchAsset('gold')"
+                style="width: 20px; height: 20px"
+              />
+              <span
+                style="
+                  font-size: 1.125rem;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                "
+                >Buy Gold</span
+              >
+            </label>
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <input
+                type="radio"
+                name="assetType"
+                value="silver"
+                onchange="switchAsset('silver')"
+                style="width: 20px; height: 20px"
+              />
+              <span
+                style="
+                  font-size: 1.125rem;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                "
+                >Buy Silver</span
+              >
+            </label>
+          </div>
+
+          <!-- One Time / SIP Toggle -->
+          <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+            <button
+              id="onetimeBtn"
+              class="toggle-btn active"
+              onclick="switchMode('onetime')"
+              style="
+                flex: 1;
+                padding: 0.75rem 2rem;
+                background: #7a0f0f;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+              "
+            >
+              One Time
+            </button>
+            <button
+              id="sipBtn"
+              class="toggle-btn"
+              onclick="switchMode('sip')"
+              style="
+                flex: 1;
+                padding: 0.75rem 2rem;
+                background: #e5e7eb;
+                color: #6b7280;
+                border: none;
+                border-radius: 25px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+              "
+            >
+              SIP
+            </button>
+          </div>
+
+          <!-- Main Investment Card -->
+          <div
+            style="
+              background: #f9fafb;
+              border-radius: 16px;
+              padding: 2rem;
+              margin-bottom: 2rem;
+              border: 1px solid var(--border);
+            "
+          >
+            <!-- One Time Interface -->
+            <div id="onetimeInterface">
+              <!-- Grams Input Section -->
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 2rem;
+                  margin-bottom: 2rem;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 1rem">
+                  <span
+                    style="font-size: 1.5rem; font-weight: 600; color: #6b7280"
+                    >g</span
+                  >
+                  <input
+                    type="number"
+                    id="gramsInput"
+                    value="10"
+                    min="1"
+                    oninput="calculatePrice()"
+                    style="
+                      font-size: 2rem;
+                      font-weight: 700;
+                      width: 120px;
+                      border: none;
+                      background: transparent;
+                      outline: none;
+                      color: var(--text-primary);
+                    "
+                  />
+                </div>
+                <div
+                  style="
+                    background: var(--surface);
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #6b7280;
+                  "
+                >
+                  <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div style="text-align: right">
+                  <div
+                    style="
+                      color: #6b7280;
+                      font-size: 0.875rem;
+                      margin-bottom: 0.25rem;
+                    "
+                  >
+                    ₹
+                  </div>
+                  <div
+                    id="totalPrice"
+                    style="
+                      font-size: 1.5rem;
+                      font-weight: 700;
+                      color: var(--text-primary);
+                    "
+                  >
+                    105014.89
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Selection Buttons -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                <button
+                  onclick="setGrams(10)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    position: relative;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    10 gm
+                  </div>
+                  <div
+                    style="
+                      background: #7a0f0f;
+                      color: white;
+                      font-size: 0.75rem;
+                      padding: 0.25rem 0.5rem;
+                      border-radius: 4px;
+                      position: absolute;
+                      bottom: -8px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                    "
+                  >
+                    Best
+                  </div>
+                </button>
+                <button
+                  onclick="setGrams(20)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    20 gm
+                  </div>
+                </button>
+                <button
+                  onclick="setGrams(50)"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 8px;
+                    cursor: pointer;
+                  "
+                >
+                  <div style="font-weight: 600; color: var(--text-primary)">
+                    50 gm
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- SIP Interface -->
+            <div id="sipInterface" style="display: none">
+              <!-- Amount Input Section -->
+              <div style="text-align: center; margin-bottom: 2rem">
+                <div
+                  style="color: #6b7280; font-size: 1rem; margin-bottom: 0.5rem"
+                >
+                  ₹
+                </div>
+                <input
+                  type="number"
+                  id="sipAmountInput"
+                  value="100"
+                  min="10"
+                  oninput="calculateSIPReturns()"
+                  style="
+                    font-size: 3rem;
+                    font-weight: 700;
+                    width: 200px;
+                    border: none;
+                    background: transparent;
+                    outline: none;
+                    color: var(--text-primary);
+                    text-align: center;
+                  "
+                />
+              </div>
+
+              <!-- Frequency Selection -->
+              <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+                <button
+                  id="dailyBtn"
+                  onclick="selectFrequency('daily')"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 2px solid #7a0f0f;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: #7a0f0f;
+                  "
+                >
+                  Daily
+                </button>
+                <button
+                  id="weeklyBtn"
+                  onclick="selectFrequency('weekly')"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: var(--text-secondary);
+                  "
+                >
+                  Weekly
+                </button>
+                <button
+                  id="monthlyBtn"
+                  onclick="selectFrequency('monthly')"
+                  style="
+                    flex: 1;
+                    padding: 1rem;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    color: var(--text-secondary);
+                  "
+                >
+                  Monthly
+                </button>
+              </div>
+            </div>
+
+            <!-- Projected Returns -->
+            <div
+              style="
+                background: var(--surface);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 1.125rem;
+                  font-weight: 600;
+                  color: var(--text-primary);
+                  margin-bottom: 1rem;
+                  display: flex;
+                  justify-content: space-between;
+                "
+              >
+                <span>Projected 1 year returns</span>
+                <span id="projectedReturns" style="color: var(--success)"
+                  >₹1.12L</span
+                >
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  margin-bottom: 0.5rem;
+                "
+              >
+                <span style="color: #8b5a2b; font-weight: 500"
+                  >Investment: <span id="investmentAmount">₹1.02L</span></span
+                >
+                <span style="color: #8b5a2b; font-weight: 500"
+                  >Earning: <span id="earningAmount">₹10,195.62*</span></span
+                >
+              </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div style="margin-bottom: 2rem">
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.75rem;
+                  cursor: pointer;
+                "
+              >
+                <input
+                  type="checkbox"
+                  checked
+                  style="width: 18px; height: 18px; accent-color: #7a0f0f"
+                />
+                <span style="color: var(--text-primary); font-weight: 500"
+                  >Agree Schemes Terms & conditions</span
+                >
+              </label>
+            </div>
+
+            <!-- Final Price -->
+            <div
+              style="
+                font-size: 2rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin-bottom: 2rem;
+              "
+            >
+              Rs <span id="finalPrice">105014</span>
+            </div>
+
+            <!-- Pay Now Button -->
+            <button
+              onclick="proceedToPay()"
+              style="
+                width: 100%;
+                padding: 1rem;
+                background: #7a0f0f;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 1.125rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+              "
+            >
+              Pay Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Investment Form -->
+        <div class="investment-form">
+          <div class="form-grid">
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-calculator"></i>
+                Investment Amount
+              </h3>
+
+              <div class="form-group">
+                <label class="form-label">Enter Amount</label>
+                <div class="toggle-container">
+                  <button
+                    class="toggle-btn active"
+                    onclick="toggleInputType('amount')"
+                  >
+                    Amount (₹)
+                  </button>
+                  <button class="toggle-btn" onclick="toggleInputType('grams')">
+                    Grams (g)
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-container">
+                  <span class="input-prefix">₹</span>
+                  <input
+                    type="number"
+                    class="form-input"
+                    id="investAmount"
+                    placeholder="5000"
+                    min="100"
+                    oninput="calculateInvestment()"
+                  />
+                </div>
+                <div class="amount-presets">
+                  <button class="preset-btn" onclick="setAmount(1000)">
+                    ₹1K
+                  </button>
+                  <button class="preset-btn" onclick="setAmount(5000)">
+                    ₹5K
+                  </button>
+                  <button class="preset-btn" onclick="setAmount(10000)">
+                    ₹10K
+                  </button>
+                  <button class="preset-btn" onclick="setAmount(25000)">
+                    ₹25K
+                  </button>
+                  <button class="preset-btn" onclick="setAmount(50000)">
+                    ₹50K
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                Investment Summary
+              </h3>
+
+              <div class="live-calculator">
+                <div class="calc-row">
+                  <span class="calc-label">Investment Amount</span>
+                  <span class="calc-value" id="calcAmount">₹5,000</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Gold Quantity</span>
+                  <span class="calc-value" id="calcGrams">0.795g</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Current Rate</span>
+                  <span class="calc-value" id="calcRate">₹6,285/g</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">GST (3%)</span>
+                  <span class="calc-value" id="calcGST">₹150</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Total Amount</span>
+                  <span class="calc-value" id="calcTotal">₹5,150</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="payment-section">
+          <h2 class="section-title">
+            <i class="fas fa-credit-card"></i>
+            Payment Method
+          </h2>
+          <div class="payment-grid">
+            <div
+              class="payment-card selected"
+              onclick="selectPayment('upi', this)"
+            >
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="payment-name">UPI</div>
+              </div>
+              <div class="payment-desc">
+                Pay securely using any UPI app. Instant confirmation and gold
+                credit.
+              </div>
+            </div>
+
+            <div class="payment-card" onclick="selectPayment('card', this)">
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="payment-name">Debit/Credit Card</div>
+              </div>
+              <div class="payment-desc">
+                Pay with your bank cards. Secure payment with instant
+                processing.
+              </div>
+            </div>
+
+            <div
+              class="payment-card"
+              onclick="selectPayment('netbanking', this)"
+            >
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-university"></i>
+                </div>
+                <div class="payment-name">Net Banking</div>
+              </div>
+              <div class="payment-desc">
+                Direct payment from your bank account. Safe and reliable.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Investment Tips -->
+        <div class="tips-section">
+          <h2 class="section-title">
+            <i class="fas fa-lightbulb"></i>
+            Investment Tips
+          </h2>
+          <div class="tip-card">
+            <span class="tip-icon">💡</span>
+            <span class="tip-text"
+              >Consider dollar-cost averaging by starting a SIP instead of a
+              large one-time investment.</span
+            >
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">��</span>
+            <span class="tip-text"
+              >Gold typically performs well during economic uncertainty and
+              inflation.</span
+            >
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">🔒</span>
+            <span class="tip-text"
+              >Your digital gold is stored securely with MMTC-PAMP and is 99.99%
+              pure.</span
+            >
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+          <button class="btn btn-secondary" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            Cancel
+          </button>
+          <button class="btn btn-primary btn-large" onclick="proceedToBuy()">
+            <i class="fas fa-shopping-cart"></i>
+            Buy Gold Now
+          </button>
+        </div>
+      </div>
+
+      <!-- SIP Tab -->
+      <div class="tab-content" id="content-sip">
+        <!-- Asset Selection for SIP -->
+        <div class="asset-selection">
+          <h2 class="section-title">
+            <i class="fas fa-coins"></i>
+            Choose Asset for SIP
+          </h2>
+          <div class="asset-grid">
+            <div
+              class="asset-card selected"
+              onclick="selectAsset('gold', this)"
+            >
+              <div class="asset-icon gold">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="asset-name">Gold SIP</div>
+              <div class="asset-price">₹6,285/g</div>
+              <div class="asset-change positive">+0.56% today</div>
+            </div>
+
+            <div class="asset-card" onclick="selectAsset('silver', this)">
+              <div class="asset-icon silver">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="asset-name">Silver SIP</div>
+              <div class="asset-price">₹76.20/g</div>
+              <div class="asset-change negative">-1.04% today</div>
+            </div>
+
+            <div class="asset-card" onclick="selectAsset('platinum', this)">
+              <div class="asset-icon platinum">
+                <i class="fas fa-gem"></i>
+              </div>
+              <div class="asset-name">Platinum SIP</div>
+              <div class="asset-price">₹2,856/g</div>
+              <div class="asset-change positive">+0.42% today</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIP Configuration -->
+        <div class="investment-form">
+          <div class="form-grid">
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-cog"></i>
+                SIP Configuration
+              </h3>
+
+              <div class="form-group">
+                <label class="form-label">Monthly Investment Amount</label>
+                <div class="input-container">
+                  <span class="input-prefix">₹</span>
+                  <input
+                    type="number"
+                    class="form-input"
+                    id="sipAmount"
+                    placeholder="5000"
+                    min="500"
+                    oninput="calculateSIP()"
+                  />
+                </div>
+                <div class="amount-presets">
+                  <button class="preset-btn" onclick="setSIPAmount(500)">
+                    ₹500
+                  </button>
+                  <button class="preset-btn" onclick="setSIPAmount(1000)">
+                    ₹1K
+                  </button>
+                  <button class="preset-btn" onclick="setSIPAmount(2000)">
+                    ₹2K
+                  </button>
+                  <button class="preset-btn" onclick="setSIPAmount(5000)">
+                    ₹5K
+                  </button>
+                  <button class="preset-btn" onclick="setSIPAmount(10000)">
+                    ₹10K
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Investment Frequency</label>
+                <div class="frequency-grid">
+                  <div
+                    class="frequency-card"
+                    onclick="selectFrequency('daily', this)"
+                  >
+                    <div class="frequency-title">Daily</div>
+                    <div class="frequency-desc">Every day</div>
+                  </div>
+                  <div
+                    class="frequency-card"
+                    onclick="selectFrequency('weekly', this)"
+                  >
+                    <div class="frequency-title">Weekly</div>
+                    <div class="frequency-desc">Every week</div>
+                  </div>
+                  <div
+                    class="frequency-card selected"
+                    onclick="selectFrequency('monthly', this)"
+                  >
+                    <div class="frequency-title">Monthly</div>
+                    <div class="frequency-desc">Every month</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Start Date</label>
+                <input type="date" class="form-input" id="startDate" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Duration (Optional)</label>
+                <select class="form-input" id="duration">
+                  <option value="">Perpetual (No end date)</option>
+                  <option value="6">6 months</option>
+                  <option value="12">1 year</option>
+                  <option value="24">2 years</option>
+                  <option value="36">3 years</option>
+                  <option value="60">5 years</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                SIP Projection
+              </h3>
+
+              <div class="live-calculator">
+                <div class="calc-row">
+                  <span class="calc-label">Monthly Investment</span>
+                  <span class="calc-value" id="sipCalcAmount">₹5,000</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Expected Monthly Gold</span>
+                  <span class="calc-value" id="sipCalcGrams">0.795g</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Yearly Investment</span>
+                  <span class="calc-value" id="sipCalcYearly">₹60,000</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Expected Gold (1 Year)</span>
+                  <span class="calc-value" id="sipCalcYearlyGold">9.54g</span>
+                </div>
+                <div class="calc-row">
+                  <span class="calc-label">Maturity Value (5 Years)*</span>
+                  <span class="calc-value" id="sipCalcMaturity">₹3,45,000</span>
+                </div>
+              </div>
+              <p
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  margin-top: 0.5rem;
+                "
+              >
+                *Assuming 8% annual returns
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auto-debit Setup -->
+        <div class="payment-section">
+          <h2 class="section-title">
+            <i class="fas fa-sync-alt"></i>
+            Auto-Debit Setup
+          </h2>
+          <div class="payment-grid">
+            <div
+              class="payment-card selected"
+              onclick="selectPayment('upi-autopay', this)"
+            >
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="payment-name">UPI AutoPay</div>
+              </div>
+              <div class="payment-desc">
+                Set up automatic deduction from your UPI. One-time mandate setup
+                required.
+              </div>
+            </div>
+
+            <div class="payment-card" onclick="selectPayment('emandate', this)">
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-university"></i>
+                </div>
+                <div class="payment-name">Bank E-Mandate</div>
+              </div>
+              <div class="payment-desc">
+                Direct debit from your bank account via NACH mandate.
+              </div>
+            </div>
+
+            <div
+              class="payment-card"
+              onclick="selectPayment('card-autopay', this)"
+            >
+              <div class="payment-header">
+                <div class="payment-icon">
+                  <i class="fas fa-credit-card"></i>
+                </div>
+                <div class="payment-name">Card AutoPay</div>
+              </div>
+              <div class="payment-desc">
+                Automatic charging to your debit/credit card monthly.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIP Benefits -->
+        <div class="tips-section">
+          <h2 class="section-title">
+            <i class="fas fa-star"></i>
+            SIP Benefits
+          </h2>
+          <div class="tip-card">
+            <span class="tip-icon">📊</span>
+            <span class="tip-text"
+              >Rupee Cost Averaging: Buy more when prices are low, less when
+              high, reducing average cost.</span
+            >
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">💪</span>
+            <span class="tip-text"
+              >Disciplined Investing: Automated investments help build wealth
+              systematically.</span
+            >
+          </div>
+          <div class="tip-card">
+            <span class="tip-icon">🎯</span>
+            <span class="tip-text"
+              >Flexible: Pause, increase, or stop your SIP anytime without any
+              penalties.</span
+            >
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+          <button class="btn btn-secondary" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            Cancel
+          </button>
+          <button class="btn btn-primary btn-large" onclick="startSIP()">
+            <i class="fas fa-calendar-check"></i>
+            Start My SIP
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedAsset = "gold";
+      let selectedPayment = "upi";
+      let inputType = "amount";
+      let selectedFrequency = "monthly";
+      let currentMode = "onetime";
+
+      const assetRates = {
+        gold: 6285,
+        silver: 76.2,
+        platinum: 2856,
+      };
+
+      // New functions for buy interface
+      function switchAsset(asset) {
+        selectedAsset = asset;
+        calculatePrice();
+      }
+
+      function switchMode(mode) {
+        currentMode = mode;
+
+        // Update button styles
+        const onetimeBtn = document.getElementById("onetimeBtn");
+        const sipBtn = document.getElementById("sipBtn");
+        const onetimeInterface = document.getElementById("onetimeInterface");
+        const sipInterface = document.getElementById("sipInterface");
+
+        if (mode === "onetime") {
+          onetimeBtn.style.background = "#7a0f0f";
+          onetimeBtn.style.color = "white";
+          sipBtn.style.background = "#e5e7eb";
+          sipBtn.style.color = "#6b7280";
+
+          // Show one time interface, hide SIP interface
+          onetimeInterface.style.display = "block";
+          sipInterface.style.display = "none";
+
+          calculatePrice();
+        } else {
+          sipBtn.style.background = "#7a0f0f";
+          sipBtn.style.color = "white";
+          onetimeBtn.style.background = "#e5e7eb";
+          onetimeBtn.style.color = "#6b7280";
+
+          // Show SIP interface, hide one time interface
+          onetimeInterface.style.display = "none";
+          sipInterface.style.display = "block";
+
+          calculateSIPReturns();
+        }
+      }
+
+      // SIP specific functions
+      let selectedFrequency = "daily";
+
+      function selectFrequency(frequency) {
+        selectedFrequency = frequency;
+
+        // Reset all buttons
+        const buttons = ["dailyBtn", "weeklyBtn", "monthlyBtn"];
+        buttons.forEach((btnId) => {
+          const btn = document.getElementById(btnId);
+          if (btn) {
+            btn.style.border = "1px solid var(--border)";
+            btn.style.color = "var(--text-secondary)";
+          }
+        });
+
+        // Highlight selected button
+        const selectedBtn = document.getElementById(frequency + "Btn");
+        if (selectedBtn) {
+          selectedBtn.style.border = "2px solid #7a0f0f";
+          selectedBtn.style.color = "#7a0f0f";
+        }
+
+        calculateSIPReturns();
+      }
+
+      function calculateSIPReturns() {
+        const amount =
+          parseFloat(document.getElementById("sipAmountInput").value) || 100;
+
+        // Calculate based on frequency
+        let dailyAmount, totalInvestment, projectedValue, earning;
+
+        switch (selectedFrequency) {
+          case "daily":
+            dailyAmount = amount;
+            totalInvestment = amount * 365; // 1 year
+            break;
+          case "weekly":
+            dailyAmount = amount / 7;
+            totalInvestment = amount * 52; // 1 year
+            break;
+          case "monthly":
+            dailyAmount = amount / 30;
+            totalInvestment = amount * 12; // 1 year
+            break;
+        }
+
+        // Projected returns (assuming 8% annual return)
+        projectedValue = totalInvestment * 1.08;
+        earning = projectedValue - totalInvestment;
+
+        // Update projected returns display
+        document.getElementById("projectedReturns").textContent =
+          "₹" + projectedValue.toFixed(2);
+        document.getElementById("investmentAmount").textContent =
+          "₹" + totalInvestment.toFixed(2);
+        document.getElementById("earningAmount").textContent =
+          "₹" + earning.toFixed(2) + "*";
+        document.getElementById("finalPrice").textContent =
+          Math.round(totalInvestment);
+      }
+
+      function setGrams(grams) {
+        document.getElementById("gramsInput").value = grams;
+        calculatePrice();
+
+        // Update button styles - remove previous "best" styling and add to selected
+        const buttons = document.querySelectorAll(
+          'button[onclick^="setGrams"]',
+        );
+        buttons.forEach((btn) => {
+          btn.style.position = "relative";
+          const bestLabel = btn.querySelector("div:last-child");
+          if (bestLabel && bestLabel.textContent === "Best") {
+            bestLabel.remove();
+          }
+        });
+      }
+
+      function calculatePrice() {
+        const grams =
+          parseFloat(document.getElementById("gramsInput").value) || 0;
+        const rate = assetRates[selectedAsset];
+        const totalPrice = grams * rate;
+
+        // Update displays
+        document.getElementById("totalPrice").textContent =
+          totalPrice.toFixed(2);
+        document.getElementById("finalPrice").textContent =
+          Math.round(totalPrice);
+
+        // Calculate projected returns (assuming 10% annual return)
+        const projectedValue = totalPrice * 1.1;
+        const earning = projectedValue - totalPrice;
+
+        document.getElementById("projectedReturns").textContent =
+          "₹" + (projectedValue / 100000).toFixed(2) + "L";
+        document.getElementById("investmentAmount").textContent =
+          "₹" + (totalPrice / 100000).toFixed(2) + "L";
+        document.getElementById("earningAmount").textContent =
+          "₹" + earning.toFixed(2) + "*";
+      }
+
+      function proceedToPay() {
+        const grams = document.getElementById("gramsInput").value;
+        const totalPrice = document.getElementById("finalPrice").textContent;
+
+        alert(
+          `Proceeding to payment for ${grams}g of ${selectedAsset} worth ₹${totalPrice}`,
+        );
+        // In real implementation, this would redirect to payment gateway
+      }
+
+      // Tab Management
+      function showTab(tabName) {
+        // Remove active class from all tabs
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((content) => content.classList.remove("active"));
+
+        // Add active class to selected tab
+        document.getElementById(`tab-${tabName}`).classList.add("active");
+        document.getElementById(`content-${tabName}`).classList.add("active");
+      }
+
+      // Asset Selection
+      function selectAsset(asset, element) {
+        document
+          .querySelectorAll(".asset-card")
+          .forEach((card) => card.classList.remove("selected"));
+        element.classList.add("selected");
+        selectedAsset = asset;
+
+        // Update calculations
+        calculateInvestment();
+        calculateSIP();
+      }
+
+      // Payment Selection
+      function selectPayment(payment, element) {
+        document
+          .querySelectorAll(".payment-card")
+          .forEach((card) => card.classList.remove("selected"));
+        element.classList.add("selected");
+        selectedPayment = payment;
+      }
+
+      // Input Type Toggle
+      function toggleInputType(type) {
+        document
+          .querySelectorAll(".toggle-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        inputType = type;
+
+        const input = document.getElementById("investAmount");
+        const prefix = document.querySelector(".input-prefix");
+
+        if (type === "grams") {
+          prefix.textContent = "g";
+          input.placeholder = "1.0";
+        } else {
+          prefix.textContent = "₹";
+          input.placeholder = "5000";
+        }
+
+        calculateInvestment();
+      }
+
+      // Amount Presets
+      function setAmount(amount) {
+        document
+          .querySelectorAll(".preset-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        document.getElementById("investAmount").value = amount;
+        calculateInvestment();
+      }
+
+      function setSIPAmount(amount) {
+        document
+          .querySelectorAll(".preset-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        document.getElementById("sipAmount").value = amount;
+        calculateSIP();
+      }
+
+      // Frequency Selection
+      function selectFrequency(frequency, element) {
+        document
+          .querySelectorAll(".frequency-card")
+          .forEach((card) => card.classList.remove("selected"));
+        element.classList.add("selected");
+        selectedFrequency = frequency;
+        calculateSIP();
+      }
+
+      // Calculations
+      function calculateInvestment() {
+        const input = document.getElementById("investAmount");
+        const amount = parseFloat(input.value) || 0;
+        const rate = assetRates[selectedAsset];
+
+        let finalAmount, grams;
+
+        if (inputType === "grams") {
+          grams = amount;
+          finalAmount = grams * rate;
+        } else {
+          finalAmount = amount;
+          grams = finalAmount / rate;
+        }
+
+        const gst = finalAmount * 0.03;
+        const total = finalAmount + gst;
+
+        document.getElementById("calcAmount").textContent =
+          `₹${finalAmount.toLocaleString()}`;
+        document.getElementById("calcGrams").textContent =
+          `${grams.toFixed(3)}g`;
+        document.getElementById("calcRate").textContent =
+          `₹${rate.toLocaleString()}/g`;
+        document.getElementById("calcGST").textContent = `₹${gst.toFixed(0)}`;
+        document.getElementById("calcTotal").textContent =
+          `₹${total.toFixed(0)}`;
+      }
+
+      function calculateSIP() {
+        const amount =
+          parseFloat(document.getElementById("sipAmount").value) || 0;
+        const rate = assetRates[selectedAsset];
+        const monthlyGold = amount / rate;
+
+        let frequency = 1;
+        switch (selectedFrequency) {
+          case "daily":
+            frequency = 30;
+            break;
+          case "weekly":
+            frequency = 4;
+            break;
+          case "monthly":
+            frequency = 1;
+            break;
+        }
+
+        const monthlyAmount = amount * frequency;
+        const yearlyAmount = monthlyAmount * 12;
+        const yearlyGold = monthlyGold * 12 * frequency;
+
+        // Assuming 8% annual returns for maturity calculation
+        const maturityValue = yearlyAmount * 5 * 1.08;
+
+        document.getElementById("sipCalcAmount").textContent =
+          `₹${monthlyAmount.toLocaleString()}`;
+        document.getElementById("sipCalcGrams").textContent =
+          `${(monthlyGold * frequency).toFixed(3)}g`;
+        document.getElementById("sipCalcYearly").textContent =
+          `₹${yearlyAmount.toLocaleString()}`;
+        document.getElementById("sipCalcYearlyGold").textContent =
+          `${yearlyGold.toFixed(2)}g`;
+        document.getElementById("sipCalcMaturity").textContent =
+          `₹${maturityValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+      }
+
+      // Action Functions
+      function proceedToBuy() {
+        const amount = document.getElementById("investAmount").value;
+        if (!amount || amount < 100) {
+          alert("Minimum investment amount is ₹100");
+          return;
+        }
+
+        alert(
+          `Processing ${selectedAsset} purchase of ₹${amount} via ${selectedPayment}...`,
+        );
+        // In real app, this would proceed to payment gateway
+      }
+
+      function startSIP() {
+        const amount = document.getElementById("sipAmount").value;
+        const startDate = document.getElementById("startDate").value;
+
+        if (!amount || amount < 500) {
+          alert("Minimum SIP amount is ₹500");
+          return;
+        }
+
+        if (!startDate) {
+          alert("Please select a start date");
+          return;
+        }
+
+        // Hide the current invest content and show SIP setup
+        loadSIPSetup(amount, startDate);
+      }
+
+      function loadSIPSetup(amount, startDate) {
+        // Create SIP setup modal/overlay content
+        const sipContent = `
+          <div class="sip-setup-overlay" id="sipSetupOverlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+          ">
+            <div class="sip-setup-content" style="
+              background: var(--surface);
+              border-radius: 16px;
+              padding: 2rem;
+              max-width: 500px;
+              width: 90%;
+              max-height: 80vh;
+              overflow-y: auto;
+              box-shadow: var(--shadow-xl);
+              animation: slideIn 0.3s ease;
+            ">
+              <!-- SIP Setup Header -->
+              <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="
+                  width: 60px;
+                  height: 60px;
+                  background: var(--gradient-gold);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: white;
+                  font-size: 1.5rem;
+                  margin: 0 auto 1rem;
+                ">
+                  <i class="fas fa-calendar-check"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                  SIP Setup Confirmation
+                </h2>
+                <p style="color: var(--text-secondary);">
+                  Review your SIP details and complete the setup
+                </p>
+              </div>
+
+              <!-- SIP Details Summary -->
+              <div style="
+                background: var(--background);
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+              ">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                  SIP Details
+                </h3>
+                <div style="display: grid; gap: 1rem;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Asset:</span>
+                    <span style="font-weight: 600; text-transform: capitalize;">${selectedAsset}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Amount:</span>
+                    <span style="font-weight: 600;">₹${amount}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Frequency:</span>
+                    <span style="font-weight: 600; text-transform: capitalize;">${selectedFrequency}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--text-secondary);">Start Date:</span>
+                    <span style="font-weight: 600;">${startDate}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
+                    <span style="color: var(--text-secondary);">Expected Annual Returns:</span>
+                    <span style="font-weight: 600; color: var(--success);">8-12%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                  Auto-Debit Method
+                </h3>
+                <div style="display: grid; gap: 1rem;">
+                  <div onclick="selectSIPPayment('upi')" style="
+                    background: var(--background);
+                    border: 2px solid var(--primary);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  ">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <div style="
+                        width: 40px;
+                        height: 40px;
+                        background: rgba(255, 215, 0, 0.1);
+                        color: var(--primary-dark);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1rem;
+                      ">
+                        <i class="fas fa-mobile-alt"></i>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">UPI AutoPay</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Automatic deduction via UPI</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div onclick="selectSIPPayment('bank')" style="
+                    background: var(--background);
+                    border: 2px solid var(--border);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  ">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                      <div style="
+                        width: 40px;
+                        height: 40px;
+                        background: rgba(255, 215, 0, 0.1);
+                        color: var(--primary-dark);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1rem;
+                      ">
+                        <i class="fas fa-university"></i>
+                      </div>
+                      <div>
+                        <div style="font-weight: 600; color: var(--text-primary);">Bank Mandate</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">Direct debit from bank account</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 1rem;">
+                <button onclick="closeSIPSetup()" style="
+                  flex: 1;
+                  padding: 1rem;
+                  background: var(--background);
+                  color: var(--text-primary);
+                  border: 2px solid var(--border);
+                  border-radius: 8px;
+                  font-weight: 500;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                ">
+                  Cancel
+                </button>
+                <button onclick="confirmSIPSetup()" style="
+                  flex: 2;
+                  padding: 1rem;
+                  background: var(--gradient-gold);
+                  color: white;
+                  border: none;
+                  border-radius: 8px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                ">
+                  <i class="fas fa-check"></i> Confirm SIP Setup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <style>
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+            @keyframes slideIn {
+              from { transform: translateY(-50px); opacity: 0; }
+              to { transform: translateY(0); opacity: 1; }
+            }
+          </style>
+        `;
+
+        // Add the SIP setup to the page
+        document.body.insertAdjacentHTML("beforeend", sipContent);
+      }
+
+      function closeSIPSetup() {
+        const overlay = document.getElementById("sipSetupOverlay");
+        if (overlay) {
+          overlay.remove();
+        }
+      }
+
+      function selectSIPPayment(method) {
+        // Remove active class from all payment methods
+        document
+          .querySelectorAll('#sipSetupOverlay [onclick*="selectSIPPayment"]')
+          .forEach((el) => {
+            el.style.borderColor = "var(--border)";
+          });
+
+        // Add active class to selected method
+        event.currentTarget.style.borderColor = "var(--primary)";
+      }
+
+      function confirmSIPSetup() {
+        const amount = document.getElementById("sipAmount").value;
+        const startDate = document.getElementById("startDate").value;
+
+        // Show success message
+        alert(`🎉 SIP Setup Successful!
+
+Your ${selectedFrequency} ${selectedAsset} SIP of ₹${amount} has been set up successfully.
+
+✅ Start Date: ${startDate}
+✅ Auto-debit enabled
+✅ First investment will be processed on ${startDate}
+
+You can manage your SIP from the Portfolio section.`);
+
+        // Close the SIP setup
+        closeSIPSetup();
+
+        // Optionally redirect to portfolio or show SIP in the current view
+        setTimeout(() => {
+          alert("Redirecting to Portfolio to view your new SIP...");
+          window.location.href = "goldapp-portfolio.html";
+        }, 2000);
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set minimum date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Initialize buy interface
+        calculatePrice();
+
+        // Initialize SIP interface
+        selectFrequency("daily");
+        calculateSIPReturns();
+        document.getElementById("startDate").min = tomorrow
+          .toISOString()
+          .split("T")[0];
+        document.getElementById("startDate").value = tomorrow
+          .toISOString()
+          .split("T")[0];
+
+        // Initial calculations
+        calculateInvestment();
+        calculateSIP();
+      });
+
+      // Side Menu Functions
+      function toggleSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+
+      function closeSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+
+      function navigateToPage(page) {
+        closeSideMenu();
+        setTimeout(() => {
+          window.location.href = page;
+        }, 300);
+      }
+
+      function openProfile() {
+        alert("Profile page coming soon!");
+      }
+
+      function showComingSoon(feature) {
+        alert(feature + " is coming soon!");
+      }
+
+      // Enhanced Tab Navigation
+      function showTab(tabName) {
+        console.log(`Digital Asset page: Navigating to ${tabName}`);
+
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          more: "goldapp-more.html",
+        };
+
+        // Check if tab exists
+        const targetPage = pageMap[tabName];
+        if (!targetPage) {
+          console.error(`Target page not found for tab: ${tabName}`);
+          return;
+        }
+
+        // Clear hover states
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.blur();
+          item.style.background = "";
+          item.style.color = "";
+        });
+
+        // Update active state
+        updateNavActiveState(tabName);
+
+        // Navigate if different page
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        console.log(`Current: ${currentPage}, Target: ${targetPage}`);
+
+        if (targetPage !== currentPage) {
+          console.log(`Navigating from Digital Asset to ${targetPage}`);
+          try {
+            window.location.href = targetPage;
+          } catch (error) {
+            console.error("Navigation error:", error);
+            // Fallback navigation
+            window.location.replace(targetPage);
+          }
+        } else {
+          console.log("Already on target page");
+        }
+      }
+
+      // Update navigation active state
+      function updateNavActiveState(activeTab) {
+        console.log(`Digital Asset: Updating nav active state to ${activeTab}`);
+
+        try {
+          // Clear all states from nav items
+          document.querySelectorAll(".nav-item").forEach((item) => {
+            item.classList.remove("active");
+            item.style.removeProperty("background");
+            item.style.removeProperty("color");
+            item.style.removeProperty("transform");
+            item.blur();
+          });
+
+          // Add active class to current tab
+          const activeNavItem = document.getElementById(`nav-${activeTab}`);
+          if (activeNavItem) {
+            activeNavItem.classList.add("active");
+            console.log(`Digital Asset: Successfully activated ${activeTab}`);
+          } else {
+            console.warn(`Digital Asset: Nav item not found: nav-${activeTab}`);
+          }
+        } catch (error) {
+          console.error("Digital Asset: Error updating nav state:", error);
+        }
+      }
+
+      // Get current tab based on current page
+      function getCurrentTab() {
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-invest.html";
+        const pageToTab = {
+          "goldapp-enhanced.html": "home",
+          "goldapp-invest.html": "invest",
+          "goldapp-chits.html": "chits",
+          "goldapp-portfolio.html": "portfolio",
+          "goldapp-more.html": "more",
+        };
+        return pageToTab[currentPage] || "invest";
+      }
+
+      // Logout function
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert("Logged out successfully!");
+          window.location.href = "index-landing.html";
+        }
+      }
+
+      // Initialize navigation on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Digital Asset page initialized");
+        const currentTab = getCurrentTab();
+        updateNavActiveState(currentTab);
+
+        // Add event listeners to prevent stuck states
+        setTimeout(() => {
+          const navItems = document.querySelectorAll(".nav-item");
+
+          navItems.forEach((item) => {
+            // Clear hover states when mouse leaves the item
+            item.addEventListener("mouseleave", function () {
+              if (!this.classList.contains("active")) {
+                this.style.removeProperty("background");
+                this.style.removeProperty("color");
+              }
+            });
+
+            // Clear focus states when clicked
+            item.addEventListener("click", function () {
+              setTimeout(() => {
+                this.blur();
+              }, 50);
+            });
+          });
+        }, 100);
+      });
+    </script>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button
+          class="nav-item active"
+          onclick="showTab('invest')"
+          id="nav-invest"
+        >
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Schemes</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button
+          class="nav-item"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
+  </body>
+</html>

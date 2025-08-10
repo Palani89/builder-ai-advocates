@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Golder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ffd700;
+        --primary-dark: #daa520;
+        --secondary: #10b981;
+        --background: #f8fafc;
+        --surface: #ffffff;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --error: #ef4444;
+        --warning: #f59e0b;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.6;
+        padding-top: 80px;
+        padding-bottom: 100px;
+      }
+
+      /* Modern Header */
+      .header {
+        background: var(--surface);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        box-shadow: var(--shadow);
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #d4af37 0%,
+          #b8860b 50%,
+          #8b0000 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 1px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hamburger-menu {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        cursor: pointer;
+        margin-right: 1rem;
+        padding: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .hamburger-menu:hover {
+        color: var(--primary-dark);
+      }
+
+      .signout-btn {
+        background: var(--error);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: white;
+        font-size: 1rem;
+      }
+
+      .signout-btn:hover {
+        background: #dc2626;
+        transform: scale(1.05);
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+      }
+
+      .user-profile:hover {
+        background: var(--background);
+      }
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .user-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .user-status {
+        font-size: 0.75rem;
+        color: var(--success);
+      }
+
+      /* Side Menu */
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        box-shadow: var(--shadow-xl);
+        overflow-y: auto;
+      }
+
+      .side-menu.active {
+        left: 0;
+      }
+
+      .side-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .side-menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .side-menu-header {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .side-menu-logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .side-menu-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .side-menu-nav {
+        padding: 1rem 0;
+      }
+
+      .side-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .side-menu-item:hover {
+        background: var(--background);
+        color: var(--primary-dark);
+      }
+
+      .side-menu-item i {
+        font-size: 1.25rem;
+        width: 24px;
+        text-align: center;
+      }
+
+      .side-menu-section {
+        border-top: 1px solid var(--border);
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
+      .side-menu-section-title {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        background: #7a0f0f;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        min-height: 70px;
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.125rem;
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 0.65rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0.5rem 0.25rem;
+        border-radius: 8px;
+        position: relative;
+        flex: 1;
+        min-height: 50px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .nav-item.active {
+        color: #ffbc00 !important;
+        background: rgba(255, 188, 0, 0.1) !important;
+        transform: translateY(-1px);
+      }
+
+      .nav-item:hover:not(.active) {
+        color: #ffbc00;
+        background: rgba(255, 188, 0, 0.05);
+      }
+
+      .nav-item:active:not(.active) {
+        transform: scale(0.95);
+        background: rgba(255, 188, 0, 0.15);
+      }
+
+      .nav-item:focus {
+        outline: none;
+      }
+
+      .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 0.125rem;
+        line-height: 1;
+      }
+
+      .nav-item span {
+        font-size: 0.6rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .nav-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: #ef4444;
+        color: white;
+        font-size: 0.55rem;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      --primary-light: #fff8dc;
+
+      .portfolio-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+      }
+
+      .portfolio-header-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+
+      .portfolio-header-section h2 {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .portfolio-summary {
+        display: flex;
+        justify-content: center;
+      }
+
+      .summary-card {
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        color: white;
+        min-width: 300px;
+      }
+
+      .summary-label {
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        opacity: 0.9;
+      }
+
+      .summary-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .summary-change {
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      .summary-change.positive {
+        color: #10b981;
+      }
+
+      .holdings-section,
+      .investments-section,
+      .goals-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .holdings-section h3,
+      .investments-section h3,
+      .goals-section h3 {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.125rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .holdings-list,
+      .investments-list,
+      .goals-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .holding-item,
+      .investment-item,
+      .goal-item {
+        background: var(--background);
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+      }
+
+      .holding-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .holding-metal {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .holding-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .holding-icon.gold {
+        background: rgba(255, 215, 0, 0.1);
+        color: #ffd700;
+      }
+
+      .holding-icon.silver {
+        background: rgba(192, 192, 192, 0.1);
+        color: #c0c0c0;
+      }
+
+      .holding-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+      }
+
+      .holding-quantity {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .holding-value {
+        text-align: right;
+      }
+
+      .holding-amount {
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 1.125rem;
+      }
+
+      .holding-percentage {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .investment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .investment-type {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 1rem;
+      }
+
+      .investment-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .investment-status.active {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+      }
+
+      .investment-amount {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--border);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--primary-dark);
+        transition: width 0.3s ease;
+      }
+
+      .progress-text {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .goal-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .goal-icon {
+        font-size: 2rem;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--background);
+        border-radius: 12px;
+      }
+
+      .goal-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+      }
+
+      .goal-target {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+
+      .stat-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 1rem;
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--primary-dark);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .chart-placeholder {
+        background: var(--background);
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        color: var(--text-muted);
+        margin-top: 1rem;
+      }
+
+      .allocation-chart {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .allocation-item {
+        flex: 1;
+        text-align: center;
+      }
+
+      .allocation-bar {
+        height: 8px;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+      }
+
+      .allocation-bar.gold {
+        background: #ffd700;
+      }
+
+      .allocation-bar.silver {
+        background: #c0c0c0;
+      }
+
+      .allocation-label {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
+
+      .allocation-value {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+          gap: 0.5rem;
+        }
+
+        .logo-text {
+          font-size: 1.25rem;
+          letter-spacing: 0.5px;
+        }
+
+        .hamburger-menu {
+          margin-right: 0.5rem;
+          padding: 0.25rem;
+        }
+
+        .signout-btn {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+
+        .portfolio-section {
+          padding: 1rem;
+        }
+
+        .portfolio-header-section h2 {
+          font-size: 1.25rem;
+        }
+
+        .summary-card {
+          min-width: auto;
+          width: 100%;
+          padding: 1.5rem;
+        }
+
+        .summary-label {
+          font-size: 0.8rem;
+        }
+
+        .summary-value {
+          font-size: 2rem;
+        }
+
+        .summary-change {
+          font-size: 0.8rem;
+        }
+
+        .holdings-section h3,
+        .investments-section h3 {
+          font-size: 1rem;
+        }
+
+        .holding-name {
+          font-size: 0.875rem;
+        }
+
+        .holding-amount {
+          font-size: 1rem;
+        }
+
+        .holding-item {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .investment-type {
+          font-size: 0.875rem;
+        }
+
+        .investment-amount {
+          font-size: 1rem;
+        }
+
+        .progress-text {
+          font-size: 0.8rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-value {
+          font-size: 1.25rem;
+        }
+
+        .stat-label {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Side Menu Overlay -->
+    <div class="side-menu-overlay" onclick="closeSideMenu()"></div>
+
+    <!-- Side Menu -->
+    <div class="side-menu">
+      <div class="side-menu-header">
+        <div class="side-menu-logo">Golder</div>
+        <div class="side-menu-subtitle">Digital Gold Investment</div>
+      </div>
+
+      <div class="side-menu-nav">
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-enhanced.html')"
+        >
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-invest.html')"
+        >
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-portfolio.html')"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-chits.html')"
+        >
+          <i class="fas fa-users"></i>
+          <span>Schemes</span>
+        </button>
+        <button
+          class="side-menu-item"
+          onclick="navigateToPage('goldapp-transactions.html')"
+        >
+          <i class="fas fa-exchange-alt"></i>
+          <span>Transactions</span>
+        </button>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Account</div>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-kyc.html')"
+          >
+            <i class="fas fa-file-alt"></i>
+            <span>KYC Verification</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-sip.html')"
+          >
+            <i class="fas fa-calendar-alt"></i>
+            <span>SIP Plans</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="navigateToPage('goldapp-more.html')"
+          >
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </button>
+        </div>
+
+        <div class="side-menu-section">
+          <div class="side-menu-section-title">Support</div>
+          <button
+            class="side-menu-item"
+            onclick="showComingSoon('Help Center')"
+          >
+            <i class="fas fa-question-circle"></i>
+            <span>Help Center</span>
+          </button>
+          <button
+            class="side-menu-item"
+            onclick="alert('Contact Support: +91 98765 43210')"
+          >
+            <i class="fas fa-phone"></i>
+            <span>Contact Support</span>
+          </button>
+          <button class="side-menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <button class="hamburger-menu" onclick="toggleSideMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <span class="logo-text">Golder</span>
+        </div>
+
+        <div class="header-actions">
+          <button class="signout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="portfolio-section">
+      <!-- Portfolio Header -->
+      <div class="portfolio-header-section">
+        <h2><i class="fas fa-chart-pie"></i> My Portfolio</h2>
+        <div class="portfolio-summary">
+          <div class="summary-card">
+            <div class="summary-label">Total Portfolio Value</div>
+            <div class="summary-value">₹77,812</div>
+            <div class="summary-change positive">+₹1,240 (1.6%)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <div class="stat-value">12.45g</div>
+          <div class="stat-label">Total Gold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-value">+1.6%</div>
+          <div class="stat-label">This Month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Active SIPs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <div class="stat-value">₹78,960</div>
+          <div class="stat-label">Total Value</div>
+        </div>
+      </div>
+
+      <!-- Holdings Breakdown -->
+      <div class="holdings-section">
+        <h3><i class="fas fa-wallet"></i> Holdings Breakdown</h3>
+        <div class="holdings-list">
+          <div class="holding-item">
+            <div class="holding-metal">
+              <div class="holding-icon gold">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="holding-info">
+                <div class="holding-name">Gold</div>
+                <div class="holding-quantity">12.45g</div>
+              </div>
+            </div>
+            <div class="holding-value">
+              <div class="holding-amount">₹77,812</div>
+              <div class="holding-percentage">98.5%</div>
+            </div>
+          </div>
+          <div class="holding-item">
+            <div class="holding-metal">
+              <div class="holding-icon silver">
+                <i class="fas fa-circle"></i>
+              </div>
+              <div class="holding-info">
+                <div class="holding-name">Silver</div>
+                <div class="holding-quantity">15.2g</div>
+              </div>
+            </div>
+            <div class="holding-value">
+              <div class="holding-amount">₹1,148</div>
+              <div class="holding-percentage">1.5%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Allocation Chart -->
+        <div class="allocation-chart">
+          <div class="allocation-item">
+            <div class="allocation-bar gold" style="width: 98.5%"></div>
+            <div class="allocation-label">Gold</div>
+            <div class="allocation-value">98.5%</div>
+          </div>
+          <div class="allocation-item">
+            <div class="allocation-bar silver" style="width: 1.5%"></div>
+            <div class="allocation-label">Silver</div>
+            <div class="allocation-value">1.5%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Investments -->
+      <div class="investments-section">
+        <h3><i class="fas fa-chart-line"></i> Active Investments</h3>
+        <div class="investments-list">
+          <div class="investment-item">
+            <div class="investment-header">
+              <div class="investment-type">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Monthly Gold SIP</span>
+              </div>
+              <div class="investment-status active">Active</div>
+            </div>
+            <div class="investment-details">
+              <div class="investment-amount">₹5,000/month</div>
+              <div class="investment-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 45%"></div>
+                </div>
+                <div class="progress-text">9 of 20 months completed</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="investment-item">
+            <div class="investment-header">
+              <div class="investment-type">
+                <i class="fas fa-users"></i>
+                <span>Gold Chit #1245</span>
+              </div>
+              <div class="investment-status active">Active</div>
+            </div>
+            <div class="investment-details">
+              <div class="investment-amount">₹2,000/month</div>
+              <div class="investment-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 25%"></div>
+                </div>
+                <div class="progress-text">3 of 12 months completed</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="investment-item">
+            <div class="investment-header">
+              <div class="investment-type">
+                <i class="fas fa-robot"></i>
+                <span>Auto-Save</span>
+              </div>
+              <div class="investment-status active">Active</div>
+            </div>
+            <div class="investment-details">
+              <div class="investment-amount">₹285/week (avg)</div>
+              <div class="investment-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <div class="progress-text">Continuous investment active</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <div class="nav-items">
+        <button class="nav-item" onclick="showTab('home')" id="nav-home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('invest')" id="nav-invest">
+          <i class="fas fa-chart-line"></i>
+          <span>Digital Asset</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('chits')" id="nav-chits">
+          <i class="fas fa-users"></i>
+          <span>Schemes</span>
+          <span class="nav-badge">2</span>
+        </button>
+
+        <button
+          class="nav-item active"
+          onclick="showTab('portfolio')"
+          id="nav-portfolio"
+        >
+          <i class="fas fa-chart-pie"></i>
+          <span>Portfolio</span>
+        </button>
+
+        <button class="nav-item" onclick="showTab('more')" id="nav-more">
+          <i class="fas fa-th"></i>
+          <span>More</span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      // Side Menu Functions
+      function toggleSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.toggle("active");
+        overlay.classList.toggle("active");
+      }
+
+      function closeSideMenu() {
+        const sideMenu = document.querySelector(".side-menu");
+        const overlay = document.querySelector(".side-menu-overlay");
+
+        sideMenu.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+
+      function navigateToPage(page) {
+        closeSideMenu();
+        setTimeout(() => {
+          window.location.href = page;
+        }, 300);
+      }
+
+      function openProfile() {
+        alert("Profile page coming soon!");
+      }
+
+      function showComingSoon(feature) {
+        alert(feature + " is coming soon!");
+      }
+
+      function logout() {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.clear();
+          sessionStorage.clear();
+          alert("Logged out successfully!");
+          window.location.href = "index-landing.html";
+        }
+      }
+
+      function showTab(tabName) {
+        const pageMap = {
+          home: "goldapp-enhanced.html",
+          invest: "goldapp-invest.html",
+          chits: "goldapp-chits.html",
+          portfolio: "goldapp-portfolio.html",
+          more: "goldapp-more.html",
+        };
+
+        const targetPage = pageMap[tabName];
+        if (!targetPage) return;
+
+        // Clear hover states
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.blur();
+          item.style.background = "";
+          item.style.color = "";
+        });
+
+        updateNavActiveState(tabName);
+
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-portfolio.html";
+        if (targetPage !== currentPage) {
+          window.location.href = targetPage;
+        }
+      }
+
+      // Update navigation active state
+      function updateNavActiveState(activeTab) {
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.classList.remove("active");
+          item.style.removeProperty("background");
+          item.style.removeProperty("color");
+          item.blur();
+        });
+
+        const activeNavItem = document.getElementById(`nav-${activeTab}`);
+        if (activeNavItem) {
+          activeNavItem.classList.add("active");
+        }
+      }
+
+      // Get current tab based on current page
+      function getCurrentTab() {
+        const currentPage =
+          window.location.pathname.split("/").pop() || "goldapp-portfolio.html";
+        const pageToTab = {
+          "goldapp-enhanced.html": "home",
+          "goldapp-invest.html": "invest",
+          "goldapp-chits.html": "chits",
+          "goldapp-portfolio.html": "portfolio",
+          "goldapp-more.html": "more",
+        };
+        return pageToTab[currentPage] || "portfolio";
+      }
+
+      // Initialize navigation on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const currentTab = getCurrentTab();
+        updateNavActiveState(currentTab);
+      });
+    </script>
+  </body>
+</html>

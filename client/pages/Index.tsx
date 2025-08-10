@@ -102,6 +102,10 @@ export default function Index() {
             <i className="fas fa-th side-menu-icon"></i>
             More
           </Link>
+          <Link to="/goldapp" className="side-menu-item">
+            <i className="fas fa-coins side-menu-icon"></i>
+            GoldApp
+          </Link>
           <button className="side-menu-item logout" onClick={logoutFromApp}>
             <i className="fas fa-sign-out-alt side-menu-icon"></i>
             Log Out
@@ -384,6 +388,10 @@ export default function Index() {
             <Link to="/more" className="nav-item">
               <i className="fas fa-th"></i>
               More
+            </Link>
+            <Link to="/goldapp" className="nav-item">
+              <i className="fas fa-coins"></i>
+              GoldApp
             </Link>
           </div>
         </div>
