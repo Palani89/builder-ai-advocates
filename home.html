@@ -3921,9 +3921,10 @@
         updatePagination();
         updateHearingsPagination();
 
-        // Set today's date as default for cause list date filter
+        // Set today's date as default for cause list and hearing date filters
         const today = new Date().toISOString().split("T")[0];
         $("#cause-list-date").val(today);
+        $("#hearing-date").val(today);
 
         // Add search functionality for hearings
         $("#hearing-search").on("input", function () {
