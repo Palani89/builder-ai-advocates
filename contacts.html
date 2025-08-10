@@ -935,6 +935,72 @@
           </div>
         </div>
 
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <div class="pagination-controls-left">
+            <div class="items-per-page">
+              <label for="contacts-items-per-page">Show:</label>
+              <select
+                id="contacts-items-per-page"
+                class="items-select"
+                onchange="changeContactsItemsPerPage(this.value)"
+              >
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+              <span>contacts per page</span>
+            </div>
+          </div>
+
+          <div class="pagination-controls-right">
+            <div class="pagination">
+              <button
+                class="pagination-btn prev-btn"
+                onclick="changeContactsPage('prev')"
+                disabled
+              >
+                <i class="fas fa-chevron-left"></i>
+                <span class="btn-text">Previous</span>
+              </button>
+
+              <div class="pagination-numbers" id="contacts-pagination-numbers">
+                <button
+                  class="pagination-number active"
+                  onclick="goToContactsPage(1)"
+                >
+                  1
+                </button>
+                <button class="pagination-number" onclick="goToContactsPage(2)">
+                  2
+                </button>
+                <button class="pagination-number" onclick="goToContactsPage(3)">
+                  3
+                </button>
+                <span class="pagination-dots">...</span>
+                <button class="pagination-number" onclick="goToContactsPage(5)">
+                  5
+                </button>
+              </div>
+
+              <button
+                class="pagination-btn next-btn"
+                onclick="changeContactsPage('next')"
+              >
+                <span class="btn-text">Next</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="pagination-info-bottom">
+            <span class="pagination-text" id="contacts-pagination-text"
+              >Showing <strong>1-10</strong> of
+              <strong>45</strong> contacts</span
+            >
+          </div>
+        </div>
+
         <!-- Contacts Grid -->
         <div class="contacts-grid" id="contactsGrid">
           <!-- Contacts will be loaded here -->
