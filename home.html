@@ -3452,6 +3452,121 @@
       function closeNotifications() {
         $("#notificationModal").hide();
       }
+
+      // Pagination functionality
+      let currentPage = 1;
+      let itemsPerPage = 10;
+      let totalItems = 45; // This would come from your data source
+      let totalPages = Math.ceil(totalItems / itemsPerPage);
+
+      function changePage(direction) {
+        if (direction === 'next' && currentPage < totalPages) {
+          currentPage++;
+        } else if (direction === 'prev' && currentPage > 1) {
+          currentPage--;
+        }
+        updatePagination();
+        loadCaseData();
+      }
+
+      function goToPage(page) {
+        if (page >= 1 && page <= totalPages) {
+          currentPage = page;
+          updatePagination();
+          loadCaseData();
+        }
+      }
+
+      function changeItemsPerPage(newItemsPerPage) {
+        itemsPerPage = parseInt(newItemsPerPage);
+        totalPages = Math.ceil(totalItems / itemsPerPage);
+        currentPage = 1; // Reset to first page
+        updatePagination();
+        loadCaseData();
+      }
+
+      function updatePagination() {
+        // Update pagination info
+        const startItem = (currentPage - 1) * itemsPerPage + 1;
+        const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+        $('.pagination-text').html(`Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalItems}</strong> cases`);
+
+        // Update previous button
+        $('.prev-btn').prop('disabled', currentPage === 1);
+
+        // Update next button
+        $('.next-btn').prop('disabled', currentPage === totalPages);
+
+        // Update pagination numbers
+        updatePaginationNumbers();
+
+        // Update items per page selector
+        $('#items-per-page').val(itemsPerPage);
+      }
+
+      function updatePaginationNumbers() {
+        const numbersContainer = $('.pagination-numbers');
+        numbersContainer.empty();
+
+        // Calculate page range to show
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, currentPage + 2);
+
+        // Adjust range if we're near the beginning or end
+        if (currentPage <= 3) {
+          endPage = Math.min(5, totalPages);
+        }
+        if (currentPage >= totalPages - 2) {
+          startPage = Math.max(1, totalPages - 4);
+        }
+
+        // Add first page if not in range
+        if (startPage > 1) {
+          numbersContainer.append(`<button class="pagination-number" onclick="goToPage(1)">1</button>`);
+          if (startPage > 2) {
+            numbersContainer.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Add page numbers in range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentPage ? 'active' : '';
+          numbersContainer.append(`<button class="pagination-number ${activeClass}" onclick="goToPage(${i})">${i}</button>`);
+        }
+
+        // Add last page if not in range
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) {
+            numbersContainer.append(`<span class="pagination-dots">...</span>`);
+          }
+          numbersContainer.append(`<button class="pagination-number" onclick="goToPage(${totalPages})">${totalPages}</button>`);
+        }
+      }
+
+      function loadCaseData() {
+        // Simulate loading new case data based on current page
+        // In a real application, this would make an API call
+        console.log(`Loading page ${currentPage} with ${itemsPerPage} items per page`);
+
+        // Add loading animation
+        $('.case-item').fadeTo(200, 0.3);
+
+        // Simulate API delay
+        setTimeout(() => {
+          $('.case-item').fadeTo(200, 1);
+
+          // Scroll to top of cause list content
+          document.getElementById('cause-list-content').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 300);
+      }
+
+      // Initialize pagination on page load
+      $(document).ready(function() {
+        updatePagination();
+      });
     </script>
   </body>
 </html>
