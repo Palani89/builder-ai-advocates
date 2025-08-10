@@ -1194,14 +1194,30 @@
           </div>
         </div>
 
-        <!-- Search -->
-        <div class="search-container">
-          <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
+        <!-- Search and Filter Section -->
+        <div class="search-filter-row">
+          <!-- Search Box -->
+          <div class="search-box-new">
+            <i class="fas fa-search search-icon-new"></i>
             <input
               type="text"
-              class="search-input"
-              placeholder="Enter Case Number"
+              placeholder="Search by case number, case name, client name, or court name..."
+              class="search-input-new"
+              id="case-search-new"
+            />
+          </div>
+
+          <!-- Date Filter -->
+          <div class="date-filter-container">
+            <label for="case-date" class="date-filter-label">
+              <i class="fas fa-calendar-alt"></i>
+              Date:
+            </label>
+            <input
+              type="date"
+              id="case-date"
+              class="date-filter-input"
+              onchange="filterCasesByDate(this.value)"
             />
           </div>
         </div>
