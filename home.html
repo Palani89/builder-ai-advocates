@@ -1624,19 +1624,38 @@
 
       /* Pagination Styles */
       .pagination-container {
-        margin-top: 2rem;
-        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0;
         border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        background: var(--background);
+        border-radius: 8px;
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
+        flex-wrap: wrap;
       }
 
-      .pagination-info {
+      .pagination-controls-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .pagination-controls-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .pagination-info-bottom {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 1rem;
+        width: 100%;
+        order: 3;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
       }
 
       .pagination-text {
