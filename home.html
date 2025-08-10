@@ -3922,8 +3922,8 @@
         updateHearingsPagination();
 
         // Set today's date as default for cause list date filter
-        const today = new Date().toISOString().split('T')[0];
-        $('#cause-list-date').val(today);
+        const today = new Date().toISOString().split("T")[0];
+        $("#cause-list-date").val(today);
 
         // Add search functionality for hearings
         $("#hearing-search").on("input", function () {
@@ -3951,11 +3951,11 @@
 
       // Date filtering function
       function filterCasesByDate(selectedDate) {
-        console.log('Filtering cases by date:', selectedDate);
+        console.log("Filtering cases by date:", selectedDate);
 
         if (!selectedDate) {
           // If no date selected, show all cases
-          $('.case-item').show();
+          $(".case-item").show();
           totalItems = 45;
           totalPages = Math.ceil(totalItems / itemsPerPage);
           currentPage = 1;
@@ -3964,13 +3964,13 @@
         }
 
         // Add loading animation
-        $('.case-item').fadeTo(200, 0.3);
+        $(".case-item").fadeTo(200, 0.3);
 
         // Simulate API call to filter cases by date
         setTimeout(() => {
           // In a real application, this would filter based on actual case dates
           // For now, we'll simulate by showing/hiding some cases
-          $('.case-item').each(function(index) {
+          $(".case-item").each(function (index) {
             // Simulate some cases matching the selected date
             if (index % 2 === 0) {
               $(this).show();
@@ -3979,10 +3979,10 @@
             }
           });
 
-          $('.case-item:visible').fadeTo(200, 1);
+          $(".case-item:visible").fadeTo(200, 1);
 
           // Update pagination based on filtered results
-          const visibleCases = $('.case-item:visible').length;
+          const visibleCases = $(".case-item:visible").length;
           totalItems = visibleCases;
           totalPages = Math.ceil(totalItems / itemsPerPage);
           currentPage = 1;
@@ -3991,7 +3991,7 @@
       }
 
       function filterCases(searchTerm) {
-        $('.case-item').each(function() {
+        $(".case-item").each(function () {
           const caseText = $(this).text().toLowerCase();
           if (caseText.includes(searchTerm)) {
             $(this).show();
