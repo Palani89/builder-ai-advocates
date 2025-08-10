@@ -3897,10 +3897,21 @@
         updatePagination();
         updateHearingsPagination();
 
+        // Set today's date as default for cause list date filter
+        const today = new Date().toISOString().split('T')[0];
+        $('#cause-list-date').val(today);
+        updateDateFilterStatus(today);
+
         // Add search functionality for hearings
         $("#hearing-search").on("input", function () {
           const searchTerm = $(this).val().toLowerCase();
           filterHearings(searchTerm);
+        });
+
+        // Add search functionality for cause list
+        $("#case-search").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          filterCases(searchTerm);
         });
       });
 
