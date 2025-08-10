@@ -867,6 +867,20 @@
           align-items: stretch;
         }
 
+        .search-filter-row {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .search-box-new {
+          min-width: auto;
+        }
+
+        .date-filter-container {
+          width: 100%;
+          justify-content: center;
+        }
+
         .case-actions {
           flex-direction: column;
         }
@@ -874,6 +888,33 @@
         .page-header {
           flex-direction: column;
           gap: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .search-input-new {
+          padding: 0.75rem 0.75rem 0.75rem 2.25rem;
+          font-size: 0.8rem;
+        }
+
+        .search-icon-new {
+          left: 0.75rem;
+          font-size: 0.8rem;
+        }
+
+        .date-filter-container {
+          padding: 0.5rem 0.75rem;
+          height: auto;
+          min-height: 44px;
+        }
+
+        .date-filter-label {
+          font-size: 0.8rem;
+        }
+
+        .date-filter-input {
+          font-size: 0.8rem;
+          min-width: 120px;
         }
       }
 
