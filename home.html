@@ -2111,9 +2111,10 @@
         <!-- Tab Content -->
         <!-- Cause List Content -->
         <div id="cause-list-content" class="tab-content active">
-          <!-- Search Box -->
+          <!-- Search and Filter Section -->
           <div style="margin-bottom: 1.5rem">
-            <div style="position: relative; width: 100%">
+            <!-- Search Box -->
+            <div style="position: relative; width: 100%; margin-bottom: 1rem">
               <i
                 class="fas fa-search"
                 style="
@@ -2139,6 +2140,29 @@
                 "
                 id="case-search"
               />
+            </div>
+
+            <!-- Date Filter -->
+            <div class="date-filter-container">
+              <div class="date-filter-group">
+                <label for="cause-list-date" class="date-filter-label">
+                  <i class="fas fa-calendar-alt"></i>
+                  Filter by Date:
+                </label>
+                <input
+                  type="date"
+                  id="cause-list-date"
+                  class="date-filter-input"
+                  onchange="filterCasesByDate(this.value)"
+                />
+                <button class="date-filter-btn" onclick="resetDateFilter()">
+                  <i class="fas fa-times"></i>
+                  Clear
+                </button>
+              </div>
+              <div class="date-filter-info">
+                <span id="date-filter-status">Showing cases for today</span>
+              </div>
             </div>
           </div>
 
