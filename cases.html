@@ -2133,6 +2133,9 @@
         const today = new Date().toISOString().split("T")[0];
         $("#case-date").val(today);
 
+        // Initialize pagination
+        updateCasesPagination();
+
         // New search functionality for updated input
         $("#case-search-new").on("input", function () {
           const searchTerm = $(this).val().toLowerCase();
