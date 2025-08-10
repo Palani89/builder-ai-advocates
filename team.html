@@ -1021,6 +1021,59 @@
           font-size: 0.8rem;
           margin-bottom: 0.25rem;
         }
+
+        /* Pagination small screen responsive styles */
+        .pagination-container {
+          gap: 0.75rem;
+          padding: 0.5rem;
+        }
+
+        .pagination {
+          justify-content: space-between;
+          flex-wrap: nowrap;
+        }
+
+        .pagination-numbers {
+          order: 2;
+          flex: 1;
+          justify-content: center;
+          max-width: 150px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .pagination-numbers::-webkit-scrollbar {
+          display: none;
+        }
+
+        .prev-btn {
+          order: 1;
+          min-width: 40px;
+        }
+
+        .next-btn {
+          order: 3;
+          min-width: 40px;
+        }
+
+        .pagination-number {
+          width: 28px;
+          height: 28px;
+          font-size: 0.7rem;
+          flex-shrink: 0;
+        }
+
+        .pagination-btn {
+          padding: 0.5rem;
+          min-width: 40px;
+        }
+
+        .items-per-page {
+          flex-direction: column;
+          gap: 0.25rem;
+          text-align: center;
+        }
       }
 
       /* Assignment Modal Styles */
