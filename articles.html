@@ -1494,9 +1494,104 @@
 
       let currentEditId = null;
 
+      // Articles Pagination functionality
+      let currentArticlesPage = 1;
+      let articlesItemsPerPage = 10;
+      let totalArticlesItems = 45; // This would come from your data source
+      let totalArticlesPages = Math.ceil(totalArticlesItems / articlesItemsPerPage);
+
+      function changeArticlesPage(direction) {
+        if (direction === "next" && currentArticlesPage < totalArticlesPages) {
+          currentArticlesPage++;
+        } else if (direction === "prev" && currentArticlesPage > 1) {
+          currentArticlesPage--;
+        }
+        updateArticlesPagination();
+        loadArticlesData();
+      }
+
+      function goToArticlesPage(page) {
+        if (page >= 1 && page <= totalArticlesPages) {
+          currentArticlesPage = page;
+          updateArticlesPagination();
+          loadArticlesData();
+        }
+      }
+
+      function changeArticlesItemsPerPage(newItemsPerPage) {
+        articlesItemsPerPage = parseInt(newItemsPerPage);
+        totalArticlesPages = Math.ceil(totalArticlesItems / articlesItemsPerPage);
+        currentArticlesPage = 1; // Reset to first page
+        updateArticlesPagination();
+        loadArticlesData();
+      }
+
+      function updateArticlesPagination() {
+        // Update pagination info
+        const startItem = (currentArticlesPage - 1) * articlesItemsPerPage + 1;
+        const endItem = Math.min(
+          currentArticlesPage * articlesItemsPerPage,
+          totalArticlesItems
+        );
+        $("#articles-pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalArticlesItems}</strong> articles`
+        );
+
+        // Update pagination numbers
+        const paginationNumbers = $("#articles-pagination-numbers");
+        paginationNumbers.empty();
+
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentArticlesPage - 2);
+        let endPage = Math.min(totalArticlesPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+          startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Previous pages
+        if (startPage > 1) {
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToArticlesPage(1)">1</button>`
+          );
+          if (startPage > 2) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Current range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentArticlesPage ? "active" : "";
+          paginationNumbers.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToArticlesPage(${i})">${i}</button>`
+          );
+        }
+
+        // Next pages
+        if (endPage < totalArticlesPages) {
+          if (endPage < totalArticlesPages - 1) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToArticlesPage(${totalArticlesPages})">${totalArticlesPages}</button>`
+          );
+        }
+
+        // Update prev/next buttons
+        $(".prev-btn").prop("disabled", currentArticlesPage === 1);
+        $(".next-btn").prop("disabled", currentArticlesPage === totalArticlesPages);
+      }
+
+      function loadArticlesData() {
+        // This function would load articles for the current page
+        // For now, we'll just scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       $(document).ready(function () {
         renderArticles();
         setupEventListeners();
+        updateArticlesPagination(); // Initialize pagination
       });
 
       function setupEventListeners() {
