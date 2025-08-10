@@ -1842,6 +1842,36 @@
         });
       });
 
+      // Date filtering function for cases
+      function filterCasesByDate(selectedDate) {
+        console.log("Filtering cases by date:", selectedDate);
+
+        if (!selectedDate) {
+          // If no date selected, show all cases
+          $(".case-card").show();
+          return;
+        }
+
+        // Add loading animation
+        $(".case-card").fadeTo(200, 0.3);
+
+        // Simulate API call to filter cases by date
+        setTimeout(() => {
+          // In a real application, this would filter based on actual case dates
+          // For now, we'll simulate by showing/hiding some cases
+          $(".case-card").each(function (index) {
+            // Simulate some cases matching the selected date
+            if (index % 2 === 0) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+
+          $(".case-card:visible").fadeTo(200, 1);
+        }, 300);
+      });
+
       // Side menu functions
       function openSideMenu() {
         $("#sideMenu").addClass("open");
