@@ -2857,6 +2857,79 @@
 
         <!-- Hearings Content -->
         <div id="hearings-content" class="tab-content">
+          <!-- Search Box -->
+          <div style="margin-bottom: 1.5rem">
+            <div style="position: relative; width: 100%">
+              <i
+                class="fas fa-search"
+                style="
+                  position: absolute;
+                  left: 1rem;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  color: var(--text-muted);
+                  font-size: 0.875rem;
+                "
+              ></i>
+              <input
+                type="text"
+                placeholder="Search by hearing details, court, time, or case type..."
+                style="
+                  width: 100%;
+                  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+                  border: 1px solid var(--border);
+                  border-radius: 8px;
+                  font-size: 0.875rem;
+                  background: var(--surface);
+                  color: var(--text-primary);
+                "
+                id="hearing-search"
+              />
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-container" id="hearings-pagination">
+            <div class="pagination-controls-left">
+              <div class="items-per-page">
+                <label for="hearings-items-per-page">Show:</label>
+                <select id="hearings-items-per-page" class="items-select" onchange="changeHearingsItemsPerPage(this.value)">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+                <span>hearings per page</span>
+              </div>
+            </div>
+
+            <div class="pagination-controls-right">
+              <div class="pagination">
+                <button class="pagination-btn prev-btn" onclick="changeHearingsPage('prev')" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                  <span class="btn-text">Previous</span>
+                </button>
+
+                <div class="pagination-numbers" id="hearings-pagination-numbers">
+                  <button class="pagination-number active" onclick="goToHearingsPage(1)">1</button>
+                  <button class="pagination-number" onclick="goToHearingsPage(2)">2</button>
+                  <button class="pagination-number" onclick="goToHearingsPage(3)">3</button>
+                  <span class="pagination-dots">...</span>
+                  <button class="pagination-number" onclick="goToHearingsPage(5)">5</button>
+                </div>
+
+                <button class="pagination-btn next-btn" onclick="changeHearingsPage('next')">
+                  <span class="btn-text">Next</span>
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="pagination-info-bottom">
+              <span class="pagination-text" id="hearings-pagination-text">Showing <strong>1-10</strong> of <strong>32</strong> hearings</span>
+            </div>
+          </div>
+
+          <!-- Hearing Items -->
           <div class="hearing-item">
             <div class="hearing-details">
               <h4>State vs. John Doe</h4>
