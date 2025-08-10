@@ -2275,25 +2275,16 @@
 
             <!-- Date Filter -->
             <div class="date-filter-container">
-              <div class="date-filter-group">
-                <label for="cause-list-date" class="date-filter-label">
-                  <i class="fas fa-calendar-alt"></i>
-                  Filter by Date:
-                </label>
-                <input
-                  type="date"
-                  id="cause-list-date"
-                  class="date-filter-input"
-                  onchange="filterCasesByDate(this.value)"
-                />
-                <button class="date-filter-btn" onclick="resetDateFilter()">
-                  <i class="fas fa-times"></i>
-                  Clear
-                </button>
-              </div>
-              <div class="date-filter-info">
-                <span id="date-filter-status">Showing cases for today</span>
-              </div>
+              <label for="cause-list-date" class="date-filter-label">
+                <i class="fas fa-calendar-alt"></i>
+                Date:
+              </label>
+              <input
+                type="date"
+                id="cause-list-date"
+                class="date-filter-input"
+                onchange="filterCasesByDate(this.value)"
+              />
             </div>
           </div>
 
