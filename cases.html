@@ -2197,6 +2197,100 @@
         }, 300);
       }
 
+      // Cases Pagination functionality
+      let currentCasesPage = 1;
+      let casesItemsPerPage = 10;
+      let totalCasesItems = 45; // This would come from your data source
+      let totalCasesPages = Math.ceil(totalCasesItems / casesItemsPerPage);
+
+      function changeCasesPage(direction) {
+        if (direction === "next" && currentCasesPage < totalCasesPages) {
+          currentCasesPage++;
+        } else if (direction === "prev" && currentCasesPage > 1) {
+          currentCasesPage--;
+        }
+        updateCasesPagination();
+        loadCasesData();
+      }
+
+      function goToCasesPage(page) {
+        if (page >= 1 && page <= totalCasesPages) {
+          currentCasesPage = page;
+          updateCasesPagination();
+          loadCasesData();
+        }
+      }
+
+      function changeCasesItemsPerPage(newItemsPerPage) {
+        casesItemsPerPage = parseInt(newItemsPerPage);
+        totalCasesPages = Math.ceil(totalCasesItems / casesItemsPerPage);
+        currentCasesPage = 1; // Reset to first page
+        updateCasesPagination();
+        loadCasesData();
+      }
+
+      function updateCasesPagination() {
+        // Update pagination info
+        const startItem = (currentCasesPage - 1) * casesItemsPerPage + 1;
+        const endItem = Math.min(
+          currentCasesPage * casesItemsPerPage,
+          totalCasesItems
+        );
+        $("#cases-pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalCasesItems}</strong> cases`
+        );
+
+        // Update pagination numbers
+        const paginationNumbers = $("#cases-pagination-numbers");
+        paginationNumbers.empty();
+
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentCasesPage - 2);
+        let endPage = Math.min(totalCasesPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+          startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Previous pages
+        if (startPage > 1) {
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToCasesPage(1)">1</button>`
+          );
+          if (startPage > 2) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Current range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentCasesPage ? "active" : "";
+          paginationNumbers.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToCasesPage(${i})">${i}</button>`
+          );
+        }
+
+        // Next pages
+        if (endPage < totalCasesPages) {
+          if (endPage < totalCasesPages - 1) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToCasesPage(${totalCasesPages})">${totalCasesPages}</button>`
+          );
+        }
+
+        // Update prev/next buttons
+        $(".prev-btn").prop("disabled", currentCasesPage === 1);
+        $(".next-btn").prop("disabled", currentCasesPage === totalCasesPages);
+      }
+
+      function loadCasesData() {
+        // This function would load cases for the current page
+        // For now, we'll just scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       // Side menu functions
       function openSideMenu() {
         $("#sideMenu").addClass("open");
