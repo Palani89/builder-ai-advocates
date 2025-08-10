@@ -2271,6 +2271,100 @@
     </div>
 
     <script>
+      // Team Pagination functionality
+      let currentTeamPage = 1;
+      let teamItemsPerPage = 10;
+      let totalTeamItems = 45; // This would come from your data source
+      let totalTeamPages = Math.ceil(totalTeamItems / teamItemsPerPage);
+
+      function changeTeamPage(direction) {
+        if (direction === "next" && currentTeamPage < totalTeamPages) {
+          currentTeamPage++;
+        } else if (direction === "prev" && currentTeamPage > 1) {
+          currentTeamPage--;
+        }
+        updateTeamPagination();
+        loadTeamData();
+      }
+
+      function goToTeamPage(page) {
+        if (page >= 1 && page <= totalTeamPages) {
+          currentTeamPage = page;
+          updateTeamPagination();
+          loadTeamData();
+        }
+      }
+
+      function changeTeamItemsPerPage(newItemsPerPage) {
+        teamItemsPerPage = parseInt(newItemsPerPage);
+        totalTeamPages = Math.ceil(totalTeamItems / teamItemsPerPage);
+        currentTeamPage = 1; // Reset to first page
+        updateTeamPagination();
+        loadTeamData();
+      }
+
+      function updateTeamPagination() {
+        // Update pagination info
+        const startItem = (currentTeamPage - 1) * teamItemsPerPage + 1;
+        const endItem = Math.min(
+          currentTeamPage * teamItemsPerPage,
+          totalTeamItems
+        );
+        $("#team-pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalTeamItems}</strong> members`
+        );
+
+        // Update pagination numbers
+        const paginationNumbers = $("#team-pagination-numbers");
+        paginationNumbers.empty();
+
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentTeamPage - 2);
+        let endPage = Math.min(totalTeamPages, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage < maxVisiblePages - 1) {
+          startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Previous pages
+        if (startPage > 1) {
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToTeamPage(1)">1</button>`
+          );
+          if (startPage > 2) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+        }
+
+        // Current range
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === currentTeamPage ? "active" : "";
+          paginationNumbers.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToTeamPage(${i})">${i}</button>`
+          );
+        }
+
+        // Next pages
+        if (endPage < totalTeamPages) {
+          if (endPage < totalTeamPages - 1) {
+            paginationNumbers.append(`<span class="pagination-dots">...</span>`);
+          }
+          paginationNumbers.append(
+            `<button class="pagination-number" onclick="goToTeamPage(${totalTeamPages})">${totalTeamPages}</button>`
+          );
+        }
+
+        // Update prev/next buttons
+        $(".prev-btn").prop("disabled", currentTeamPage === 1);
+        $(".next-btn").prop("disabled", currentTeamPage === totalTeamPages);
+      }
+
+      function loadTeamData() {
+        // This function would load team members for the current page
+        // For now, we'll just scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       $(document).ready(function () {
         // Navigation
         $(".nav-item").on("click", function (e) {
