@@ -2147,7 +2147,11 @@
             <div class="pagination-controls-left">
               <div class="items-per-page">
                 <label for="items-per-page">Show:</label>
-                <select id="items-per-page" class="items-select" onchange="changeItemsPerPage(this.value)">
+                <select
+                  id="items-per-page"
+                  class="items-select"
+                  onchange="changeItemsPerPage(this.value)"
+                >
                   <option value="10" selected>10</option>
                   <option value="20">20</option>
                   <option value="50">50</option>
@@ -2158,20 +2162,38 @@
 
             <div class="pagination-controls-right">
               <div class="pagination">
-                <button class="pagination-btn prev-btn" onclick="changePage('prev')" disabled>
+                <button
+                  class="pagination-btn prev-btn"
+                  onclick="changePage('prev')"
+                  disabled
+                >
                   <i class="fas fa-chevron-left"></i>
                   <span class="btn-text">Previous</span>
                 </button>
 
                 <div class="pagination-numbers">
-                  <button class="pagination-number active" onclick="goToPage(1)">1</button>
-                  <button class="pagination-number" onclick="goToPage(2)">2</button>
-                  <button class="pagination-number" onclick="goToPage(3)">3</button>
+                  <button
+                    class="pagination-number active"
+                    onclick="goToPage(1)"
+                  >
+                    1
+                  </button>
+                  <button class="pagination-number" onclick="goToPage(2)">
+                    2
+                  </button>
+                  <button class="pagination-number" onclick="goToPage(3)">
+                    3
+                  </button>
                   <span class="pagination-dots">...</span>
-                  <button class="pagination-number" onclick="goToPage(5)">5</button>
+                  <button class="pagination-number" onclick="goToPage(5)">
+                    5
+                  </button>
                 </div>
 
-                <button class="pagination-btn next-btn" onclick="changePage('next')">
+                <button
+                  class="pagination-btn next-btn"
+                  onclick="changePage('next')"
+                >
                   <span class="btn-text">Next</span>
                   <i class="fas fa-chevron-right"></i>
                 </button>
@@ -2179,7 +2201,10 @@
             </div>
 
             <div class="pagination-info-bottom">
-              <span class="pagination-text">Showing <strong>1-10</strong> of <strong>45</strong> cases</span>
+              <span class="pagination-text"
+                >Showing <strong>1-10</strong> of
+                <strong>45</strong> cases</span
+              >
             </div>
           </div>
 
@@ -2893,7 +2918,11 @@
             <div class="pagination-controls-left">
               <div class="items-per-page">
                 <label for="hearings-items-per-page">Show:</label>
-                <select id="hearings-items-per-page" class="items-select" onchange="changeHearingsItemsPerPage(this.value)">
+                <select
+                  id="hearings-items-per-page"
+                  class="items-select"
+                  onchange="changeHearingsItemsPerPage(this.value)"
+                >
                   <option value="10" selected>10</option>
                   <option value="20">20</option>
                   <option value="50">50</option>
@@ -2904,20 +2933,50 @@
 
             <div class="pagination-controls-right">
               <div class="pagination">
-                <button class="pagination-btn prev-btn" onclick="changeHearingsPage('prev')" disabled>
+                <button
+                  class="pagination-btn prev-btn"
+                  onclick="changeHearingsPage('prev')"
+                  disabled
+                >
                   <i class="fas fa-chevron-left"></i>
                   <span class="btn-text">Previous</span>
                 </button>
 
-                <div class="pagination-numbers" id="hearings-pagination-numbers">
-                  <button class="pagination-number active" onclick="goToHearingsPage(1)">1</button>
-                  <button class="pagination-number" onclick="goToHearingsPage(2)">2</button>
-                  <button class="pagination-number" onclick="goToHearingsPage(3)">3</button>
+                <div
+                  class="pagination-numbers"
+                  id="hearings-pagination-numbers"
+                >
+                  <button
+                    class="pagination-number active"
+                    onclick="goToHearingsPage(1)"
+                  >
+                    1
+                  </button>
+                  <button
+                    class="pagination-number"
+                    onclick="goToHearingsPage(2)"
+                  >
+                    2
+                  </button>
+                  <button
+                    class="pagination-number"
+                    onclick="goToHearingsPage(3)"
+                  >
+                    3
+                  </button>
                   <span class="pagination-dots">...</span>
-                  <button class="pagination-number" onclick="goToHearingsPage(5)">5</button>
+                  <button
+                    class="pagination-number"
+                    onclick="goToHearingsPage(5)"
+                  >
+                    5
+                  </button>
                 </div>
 
-                <button class="pagination-btn next-btn" onclick="changeHearingsPage('next')">
+                <button
+                  class="pagination-btn next-btn"
+                  onclick="changeHearingsPage('next')"
+                >
                   <span class="btn-text">Next</span>
                   <i class="fas fa-chevron-right"></i>
                 </button>
@@ -2925,7 +2984,10 @@
             </div>
 
             <div class="pagination-info-bottom">
-              <span class="pagination-text" id="hearings-pagination-text">Showing <strong>1-10</strong> of <strong>32</strong> hearings</span>
+              <span class="pagination-text" id="hearings-pagination-text"
+                >Showing <strong>1-10</strong> of
+                <strong>32</strong> hearings</span
+              >
             </div>
           </div>
 
@@ -3562,9 +3624,9 @@
       let totalPages = Math.ceil(totalItems / itemsPerPage);
 
       function changePage(direction) {
-        if (direction === 'next' && currentPage < totalPages) {
+        if (direction === "next" && currentPage < totalPages) {
           currentPage++;
-        } else if (direction === 'prev' && currentPage > 1) {
+        } else if (direction === "prev" && currentPage > 1) {
           currentPage--;
         }
         updatePagination();
@@ -3591,23 +3653,25 @@
         // Update pagination info
         const startItem = (currentPage - 1) * itemsPerPage + 1;
         const endItem = Math.min(currentPage * itemsPerPage, totalItems);
-        $('.pagination-text').html(`Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalItems}</strong> cases`);
+        $(".pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalItems}</strong> cases`,
+        );
 
         // Update previous button
-        $('.prev-btn').prop('disabled', currentPage === 1);
+        $(".prev-btn").prop("disabled", currentPage === 1);
 
         // Update next button
-        $('.next-btn').prop('disabled', currentPage === totalPages);
+        $(".next-btn").prop("disabled", currentPage === totalPages);
 
         // Update pagination numbers
         updatePaginationNumbers();
 
         // Update items per page selector
-        $('#items-per-page').val(itemsPerPage);
+        $("#items-per-page").val(itemsPerPage);
       }
 
       function updatePaginationNumbers() {
-        const numbersContainer = $('.pagination-numbers');
+        const numbersContainer = $(".pagination-numbers");
         numbersContainer.empty();
 
         // Calculate page range to show
@@ -3624,7 +3688,9 @@
 
         // Add first page if not in range
         if (startPage > 1) {
-          numbersContainer.append(`<button class="pagination-number" onclick="goToPage(1)">1</button>`);
+          numbersContainer.append(
+            `<button class="pagination-number" onclick="goToPage(1)">1</button>`,
+          );
           if (startPage > 2) {
             numbersContainer.append(`<span class="pagination-dots">...</span>`);
           }
@@ -3632,8 +3698,10 @@
 
         // Add page numbers in range
         for (let i = startPage; i <= endPage; i++) {
-          const activeClass = i === currentPage ? 'active' : '';
-          numbersContainer.append(`<button class="pagination-number ${activeClass}" onclick="goToPage(${i})">${i}</button>`);
+          const activeClass = i === currentPage ? "active" : "";
+          numbersContainer.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToPage(${i})">${i}</button>`,
+          );
         }
 
         // Add last page if not in range
@@ -3641,32 +3709,36 @@
           if (endPage < totalPages - 1) {
             numbersContainer.append(`<span class="pagination-dots">...</span>`);
           }
-          numbersContainer.append(`<button class="pagination-number" onclick="goToPage(${totalPages})">${totalPages}</button>`);
+          numbersContainer.append(
+            `<button class="pagination-number" onclick="goToPage(${totalPages})">${totalPages}</button>`,
+          );
         }
       }
 
       function loadCaseData() {
         // Simulate loading new case data based on current page
         // In a real application, this would make an API call
-        console.log(`Loading page ${currentPage} with ${itemsPerPage} items per page`);
+        console.log(
+          `Loading page ${currentPage} with ${itemsPerPage} items per page`,
+        );
 
         // Add loading animation
-        $('.case-item').fadeTo(200, 0.3);
+        $(".case-item").fadeTo(200, 0.3);
 
         // Simulate API delay
         setTimeout(() => {
-          $('.case-item').fadeTo(200, 1);
+          $(".case-item").fadeTo(200, 1);
 
           // Scroll to top of cause list content
-          document.getElementById('cause-list-content').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          document.getElementById("cause-list-content").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
           });
         }, 300);
       }
 
       // Initialize pagination on page load
-      $(document).ready(function() {
+      $(document).ready(function () {
         updatePagination();
         updateHearingsPagination();
 
@@ -3678,7 +3750,7 @@
       });
 
       function filterHearings(searchTerm) {
-        $('.hearing-item').each(function() {
+        $(".hearing-item").each(function () {
           const hearingText = $(this).text().toLowerCase();
           if (hearingText.includes(searchTerm)) {
             $(this).show();
@@ -3692,12 +3764,14 @@
       let currentHearingsPage = 1;
       let hearingsItemsPerPage = 10;
       let totalHearingsItems = 32; // This would come from your data source
-      let totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+      let totalHearingsPages = Math.ceil(
+        totalHearingsItems / hearingsItemsPerPage,
+      );
 
       function changeHearingsPage(direction) {
-        if (direction === 'next' && currentHearingsPage < totalHearingsPages) {
+        if (direction === "next" && currentHearingsPage < totalHearingsPages) {
           currentHearingsPage++;
-        } else if (direction === 'prev' && currentHearingsPage > 1) {
+        } else if (direction === "prev" && currentHearingsPage > 1) {
           currentHearingsPage--;
         }
         updateHearingsPagination();
@@ -3714,7 +3788,9 @@
 
       function changeHearingsItemsPerPage(newItemsPerPage) {
         hearingsItemsPerPage = parseInt(newItemsPerPage);
-        totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+        totalHearingsPages = Math.ceil(
+          totalHearingsItems / hearingsItemsPerPage,
+        );
         currentHearingsPage = 1; // Reset to first page
         updateHearingsPagination();
         loadHearingsData();
@@ -3723,24 +3799,35 @@
       function updateHearingsPagination() {
         // Update pagination info
         const startItem = (currentHearingsPage - 1) * hearingsItemsPerPage + 1;
-        const endItem = Math.min(currentHearingsPage * hearingsItemsPerPage, totalHearingsItems);
-        $('#hearings-pagination-text').html(`Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalHearingsItems}</strong> hearings`);
+        const endItem = Math.min(
+          currentHearingsPage * hearingsItemsPerPage,
+          totalHearingsItems,
+        );
+        $("#hearings-pagination-text").html(
+          `Showing <strong>${startItem}-${endItem}</strong> of <strong>${totalHearingsItems}</strong> hearings`,
+        );
 
         // Update previous button
-        $('#hearings-pagination .prev-btn').prop('disabled', currentHearingsPage === 1);
+        $("#hearings-pagination .prev-btn").prop(
+          "disabled",
+          currentHearingsPage === 1,
+        );
 
         // Update next button
-        $('#hearings-pagination .next-btn').prop('disabled', currentHearingsPage === totalHearingsPages);
+        $("#hearings-pagination .next-btn").prop(
+          "disabled",
+          currentHearingsPage === totalHearingsPages,
+        );
 
         // Update pagination numbers
         updateHearingsPaginationNumbers();
 
         // Update items per page selector
-        $('#hearings-items-per-page').val(hearingsItemsPerPage);
+        $("#hearings-items-per-page").val(hearingsItemsPerPage);
       }
 
       function updateHearingsPaginationNumbers() {
-        const numbersContainer = $('#hearings-pagination-numbers');
+        const numbersContainer = $("#hearings-pagination-numbers");
         numbersContainer.empty();
 
         // Calculate page range to show
@@ -3757,7 +3844,9 @@
 
         // Add first page if not in range
         if (startPage > 1) {
-          numbersContainer.append(`<button class="pagination-number" onclick="goToHearingsPage(1)">1</button>`);
+          numbersContainer.append(
+            `<button class="pagination-number" onclick="goToHearingsPage(1)">1</button>`,
+          );
           if (startPage > 2) {
             numbersContainer.append(`<span class="pagination-dots">...</span>`);
           }
@@ -3765,8 +3854,10 @@
 
         // Add page numbers in range
         for (let i = startPage; i <= endPage; i++) {
-          const activeClass = i === currentHearingsPage ? 'active' : '';
-          numbersContainer.append(`<button class="pagination-number ${activeClass}" onclick="goToHearingsPage(${i})">${i}</button>`);
+          const activeClass = i === currentHearingsPage ? "active" : "";
+          numbersContainer.append(
+            `<button class="pagination-number ${activeClass}" onclick="goToHearingsPage(${i})">${i}</button>`,
+          );
         }
 
         // Add last page if not in range
@@ -3774,26 +3865,30 @@
           if (endPage < totalHearingsPages - 1) {
             numbersContainer.append(`<span class="pagination-dots">...</span>`);
           }
-          numbersContainer.append(`<button class="pagination-number" onclick="goToHearingsPage(${totalHearingsPages})">${totalHearingsPages}</button>`);
+          numbersContainer.append(
+            `<button class="pagination-number" onclick="goToHearingsPage(${totalHearingsPages})">${totalHearingsPages}</button>`,
+          );
         }
       }
 
       function loadHearingsData() {
         // Simulate loading new hearing data based on current page
         // In a real application, this would make an API call
-        console.log(`Loading hearings page ${currentHearingsPage} with ${hearingsItemsPerPage} items per page`);
+        console.log(
+          `Loading hearings page ${currentHearingsPage} with ${hearingsItemsPerPage} items per page`,
+        );
 
         // Add loading animation
-        $('.hearing-item').fadeTo(200, 0.3);
+        $(".hearing-item").fadeTo(200, 0.3);
 
         // Simulate API delay
         setTimeout(() => {
-          $('.hearing-item').fadeTo(200, 1);
+          $(".hearing-item").fadeTo(200, 1);
 
           // Scroll to top of hearings content
-          document.getElementById('hearings-content').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          document.getElementById("hearings-content").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
           });
         }, 300);
       }
