@@ -719,6 +719,117 @@
           gap: 1rem;
           align-items: stretch;
         }
+
+        /* Pagination responsive styles */
+        .pagination-container {
+          padding: 0.75rem;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .pagination-controls-left,
+        .pagination-controls-right {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .pagination-controls-left {
+          order: 1;
+        }
+
+        .pagination-controls-right {
+          order: 2;
+        }
+
+        .pagination-info-bottom {
+          order: 3;
+          margin-top: 0.75rem;
+        }
+
+        .pagination {
+          gap: 0.25rem;
+        }
+
+        .pagination-btn {
+          padding: 0.5rem 0.75rem;
+          min-width: 70px;
+        }
+
+        .pagination-btn .btn-text {
+          display: none;
+        }
+
+        .pagination-numbers {
+          gap: 0.125rem;
+        }
+
+        .pagination-number {
+          width: 36px;
+          height: 36px;
+          font-size: 0.8rem;
+        }
+
+        .pagination-text {
+          font-size: 0.8rem;
+        }
+
+        .items-per-page {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .pagination-container {
+          gap: 0.75rem;
+          padding: 0.5rem;
+        }
+
+        .pagination {
+          justify-content: space-between;
+          flex-wrap: nowrap;
+        }
+
+        .pagination-numbers {
+          order: 2;
+          flex: 1;
+          justify-content: center;
+          max-width: 150px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+
+        .pagination-numbers::-webkit-scrollbar {
+          display: none;
+        }
+
+        .prev-btn {
+          order: 1;
+          min-width: 40px;
+        }
+
+        .next-btn {
+          order: 3;
+          min-width: 40px;
+        }
+
+        .pagination-number {
+          width: 28px;
+          height: 28px;
+          font-size: 0.7rem;
+          flex-shrink: 0;
+        }
+
+        .pagination-btn {
+          padding: 0.5rem;
+          min-width: 40px;
+        }
+
+        .items-per-page {
+          flex-direction: column;
+          gap: 0.25rem;
+          text-align: center;
+        }
       }
     </style>
   </head>
