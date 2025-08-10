@@ -1345,6 +1345,72 @@
           </div>
         </div>
 
+        <!-- Pagination -->
+        <div class="pagination-container">
+          <div class="pagination-controls-left">
+            <div class="items-per-page">
+              <label for="articles-items-per-page">Show:</label>
+              <select
+                id="articles-items-per-page"
+                class="items-select"
+                onchange="changeArticlesItemsPerPage(this.value)"
+              >
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+              <span>articles per page</span>
+            </div>
+          </div>
+
+          <div class="pagination-controls-right">
+            <div class="pagination">
+              <button
+                class="pagination-btn prev-btn"
+                onclick="changeArticlesPage('prev')"
+                disabled
+              >
+                <i class="fas fa-chevron-left"></i>
+                <span class="btn-text">Previous</span>
+              </button>
+
+              <div class="pagination-numbers" id="articles-pagination-numbers">
+                <button
+                  class="pagination-number active"
+                  onclick="goToArticlesPage(1)"
+                >
+                  1
+                </button>
+                <button class="pagination-number" onclick="goToArticlesPage(2)">
+                  2
+                </button>
+                <button class="pagination-number" onclick="goToArticlesPage(3)">
+                  3
+                </button>
+                <span class="pagination-dots">...</span>
+                <button class="pagination-number" onclick="goToArticlesPage(5)">
+                  5
+                </button>
+              </div>
+
+              <button
+                class="pagination-btn next-btn"
+                onclick="changeArticlesPage('next')"
+              >
+                <span class="btn-text">Next</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="pagination-info-bottom">
+            <span class="pagination-text" id="articles-pagination-text"
+              >Showing <strong>1-10</strong> of
+              <strong>45</strong> articles</span
+            >
+          </div>
+        </div>
+
         <!-- Articles Container -->
         <div class="articles-container">
           <div class="articles-header">
