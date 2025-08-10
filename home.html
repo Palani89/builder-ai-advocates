@@ -3669,7 +3669,24 @@
       $(document).ready(function() {
         updatePagination();
         updateHearingsPagination();
+
+        // Add search functionality for hearings
+        $("#hearing-search").on("input", function () {
+          const searchTerm = $(this).val().toLowerCase();
+          filterHearings(searchTerm);
+        });
       });
+
+      function filterHearings(searchTerm) {
+        $('.hearing-item').each(function() {
+          const hearingText = $(this).text().toLowerCase();
+          if (hearingText.includes(searchTerm)) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
 
       // Hearings Pagination functionality
       let currentHearingsPage = 1;
