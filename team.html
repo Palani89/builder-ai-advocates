@@ -930,6 +930,63 @@
           padding: 0.5rem;
           font-size: 0.8rem;
         }
+
+        /* Pagination responsive styles */
+        .pagination-container {
+          padding: 0.75rem;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .pagination-controls-left,
+        .pagination-controls-right {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .pagination-controls-left {
+          order: 1;
+        }
+
+        .pagination-controls-right {
+          order: 2;
+        }
+
+        .pagination-info-bottom {
+          order: 3;
+          margin-top: 0.75rem;
+        }
+
+        .pagination {
+          gap: 0.25rem;
+        }
+
+        .pagination-btn {
+          padding: 0.5rem 0.75rem;
+          min-width: 70px;
+        }
+
+        .pagination-btn .btn-text {
+          display: none;
+        }
+
+        .pagination-numbers {
+          gap: 0.125rem;
+        }
+
+        .pagination-number {
+          width: 36px;
+          height: 36px;
+          font-size: 0.8rem;
+        }
+
+        .pagination-text {
+          font-size: 0.8rem;
+        }
+
+        .items-per-page {
+          font-size: 0.8rem;
+        }
       }
 
       @media (max-width: 480px) {
