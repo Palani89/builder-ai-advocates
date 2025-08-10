@@ -3949,7 +3949,7 @@
         });
       }
 
-      // Date filtering function
+      // Date filtering function for cases
       function filterCasesByDate(selectedDate) {
         console.log("Filtering cases by date:", selectedDate);
 
@@ -3987,6 +3987,47 @@
           totalPages = Math.ceil(totalItems / itemsPerPage);
           currentPage = 1;
           updatePagination();
+        }, 300);
+      }
+
+      // Date filtering function for hearings
+      function filterHearingsByDate(selectedDate) {
+        console.log("Filtering hearings by date:", selectedDate);
+
+        if (!selectedDate) {
+          // If no date selected, show all hearings
+          $(".hearing-item").show();
+          totalHearingsItems = 32;
+          totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+          currentHearingsPage = 1;
+          updateHearingsPagination();
+          return;
+        }
+
+        // Add loading animation
+        $(".hearing-item").fadeTo(200, 0.3);
+
+        // Simulate API call to filter hearings by date
+        setTimeout(() => {
+          // In a real application, this would filter based on actual hearing dates
+          // For now, we'll simulate by showing/hiding some hearings
+          $(".hearing-item").each(function (index) {
+            // Simulate some hearings matching the selected date
+            if (index % 3 === 0) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+
+          $(".hearing-item:visible").fadeTo(200, 1);
+
+          // Update pagination based on filtered results
+          const visibleHearings = $(".hearing-item:visible").length;
+          totalHearingsItems = visibleHearings;
+          totalHearingsPages = Math.ceil(totalHearingsItems / hearingsItemsPerPage);
+          currentHearingsPage = 1;
+          updateHearingsPagination();
         }, 300);
       }
 
