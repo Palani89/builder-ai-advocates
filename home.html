@@ -1967,6 +1967,44 @@
               Submit property documents
             </div>
           </div>
+
+          <!-- Pagination -->
+          <div class="pagination-container">
+            <div class="pagination-info">
+              <span class="pagination-text">Showing <strong>1-10</strong> of <strong>45</strong> cases</span>
+            </div>
+            <div class="pagination">
+              <button class="pagination-btn prev-btn" onclick="changePage('prev')" disabled>
+                <i class="fas fa-chevron-left"></i>
+                <span class="btn-text">Previous</span>
+              </button>
+
+              <div class="pagination-numbers">
+                <button class="pagination-number active" onclick="goToPage(1)">1</button>
+                <button class="pagination-number" onclick="goToPage(2)">2</button>
+                <button class="pagination-number" onclick="goToPage(3)">3</button>
+                <span class="pagination-dots">...</span>
+                <button class="pagination-number" onclick="goToPage(5)">5</button>
+              </div>
+
+              <button class="pagination-btn next-btn" onclick="changePage('next')">
+                <span class="btn-text">Next</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="pagination-controls">
+              <div class="items-per-page">
+                <label for="items-per-page">Show:</label>
+                <select id="items-per-page" class="items-select" onchange="changeItemsPerPage(this.value)">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+                <span>cases per page</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Board Content -->
